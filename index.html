@@ -145,6 +145,7 @@
   .msg.me{background:var(--gold);color:var(--dusk-deep);align-self:flex-end;border-bottom-right-radius:4px;}
   [dir="rtl"] .msg.bot{border-bottom-left-radius:14px;border-bottom-right-radius:4px;}
   [dir="rtl"] .msg.me{border-bottom-right-radius:14px;border-bottom-left-radius:4px;}
+  .msg.system-notice{align-self:center;max-width:90%;background:rgba(201,166,107,0.14);color:rgba(250,249,247,0.85);border:1px solid rgba(201,166,107,0.3);border-radius:10px;font-size:12px;text-align:center;padding:7px 12px;}
   .chat-input{display:flex;gap:8px;padding:13px;border-top:1px solid rgba(250,249,247,0.08);}
   .chat-input input{flex:1;background:rgba(250,249,247,0.08);border:1px solid rgba(250,249,247,0.12);color:var(--paper);border-radius:10px;padding:10px 13px;font-family:inherit;font-size:13.5px;}
   .chat-input input::placeholder{color:rgba(250,249,247,0.4);}
@@ -165,6 +166,17 @@
   .card.clickable{cursor:pointer;}
   .card .go{display:inline-block;margin-top:9px;font-size:12px;color:var(--gold);font-weight:600;}
   .premium-tag{display:inline-block;background:var(--gold);color:var(--dusk-deep);font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-inline-start:6px;vertical-align:middle;}
+  .modal-locked{background:var(--paper-dim);border:1px dashed rgba(201,166,107,0.5);border-radius:14px;padding:26px 20px;text-align:center;margin:6px 0 4px;}
+  .modal-locked-icon{font-size:30px;margin-bottom:10px;}
+  .modal-locked-text{font-size:13.5px;color:var(--ink);margin:0 0 16px;line-height:1.6;}
+  .modal-locked-btn{background:var(--gold);color:var(--dusk-deep);border:none;border-radius:10px;padding:11px 20px;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;}
+  .checkin-freetext-row{margin-top:18px;}
+  .checkin-divider{display:flex;align-items:center;gap:10px;margin:4px 0 14px;font-size:12px;color:rgba(31,42,58,0.5);}
+  .checkin-divider::before,.checkin-divider::after{content:'';flex:1;height:1px;background:var(--line);}
+  .checkin-freetext-input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:14px;color:var(--ink);resize:none;box-sizing:border-box;}
+  .checkin-freetext-btn{width:100%;margin-top:10px;background:var(--dusk-deep);color:var(--paper);border:none;border-radius:10px;padding:12px;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;}
+  .checkin-freetext-btn:disabled{opacity:0.6;cursor:default;}
+  .checkin-freetext-response{margin-top:14px;background:var(--paper-dim);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.6;color:var(--ink);}
 
   .ex-filters{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:1000px;margin:0 auto 28px;}
   .ex-filters button{font-family:inherit;font-size:12.5px;padding:7px 15px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;opacity:0.65;}
@@ -232,6 +244,16 @@
   .backup-btn{flex:1;background:var(--dusk-deep);color:var(--paper);border:none;border-radius:10px;padding:11px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;}
   .backup-btn-ghost{background:transparent;color:var(--dusk-deep);border:1px solid var(--line);}
   .backup-status{font-size:12px;color:var(--gold);font-weight:600;min-height:16px;margin:4px 0 20px;}
+  .voice-gender-row{display:flex;gap:8px;margin-bottom:20px;}
+  .voice-gender-btn{flex:1;background:transparent;color:var(--dusk-deep);border:1px solid var(--line);border-radius:10px;padding:10px 6px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;}
+  .voice-gender-btn.active{background:var(--dusk-deep);color:var(--paper);border-color:var(--dusk-deep);}
+  .brief-line{font-size:14.5px;color:var(--ink);margin:0 0 10px;line-height:1.6;}
+  .brief-suggest-box{background:var(--paper-dim);border-radius:14px;padding:18px 20px;margin-top:14px;}
+  .brief-suggest-label{font-size:11.5px;color:rgba(31,42,58,0.55);margin:0 0 4px;text-transform:uppercase;letter-spacing:0.3px;}
+  .brief-suggest-title{font-size:16px;font-weight:700;color:var(--dusk-deep);margin:0 0 14px;}
+  .mood-suggest-box{background:var(--paper-dim);border-radius:12px;padding:14px 16px;margin-top:14px;text-align:center;}
+  .mood-suggest-text{font-size:13px;color:var(--ink);margin:0 0 10px;line-height:1.5;}
+  .mood-suggest-btn{background:var(--dusk-deep);color:var(--paper);border:none;border-radius:9px;padding:9px 18px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;}
   .onboarding-box{max-width:420px;text-align:center;}
   .onboarding-icon{font-size:44px;margin-bottom:14px;}
   .onboarding-dots{display:flex;justify-content:center;gap:7px;margin:22px 0 26px;}
@@ -373,6 +395,13 @@
         <p class="prefs-row-desc" data-i18n="prefs_textlarge_desc"></p>
       </div>
     </div>
+    <div class="prefs-section-label" data-i18n="voice_gender_label"></div>
+    <p class="backup-desc" data-i18n="voice_gender_desc"></p>
+    <div class="voice-gender-row">
+      <button class="voice-gender-btn" id="genderBtnMale" onclick="setUserGender('male')" data-i18n="voice_gender_male"></button>
+      <button class="voice-gender-btn" id="genderBtnFemale" onclick="setUserGender('female')" data-i18n="voice_gender_female"></button>
+      <button class="voice-gender-btn" id="genderBtnNone" onclick="setUserGender('')" data-i18n="voice_gender_none"></button>
+    </div>
     <div class="prefs-section-label" data-i18n="progress_label"></div>
     <div class="progress-stats">
       <div class="progress-stat"><div class="ps-num" id="statStreak">0</div><div class="ps-label" data-i18n="progress_streak"></div></div>
@@ -446,6 +475,7 @@
       <button class="voice-toggle" id="voiceToggle" onclick="toggleVoice()">
         <span id="voiceIcon">🔈</span><span id="voiceLabel" data-i18n="voice_off"></span>
       </button>
+      <button class="voice-toggle" id="clearMemoryBtn" onclick="clearChatMemory()" data-i18n="clear_memory_btn"></button>
     </div>
     <div class="chat-log" id="chatLog">
       <div class="msg bot" data-i18n="chat_initial_msg"></div>
@@ -526,6 +556,34 @@
   </div>
 </div>
 
+<div class="prefs-overlay" id="chatConsentModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <div class="prefs-eyebrow" data-i18n="consent_eyebrow"></div>
+    <h2 class="prefs-title" data-i18n="consent_title" style="font-size:24px;"></h2>
+    <p class="prefs-subtitle" data-i18n="consent_text" style="margin-bottom:24px;"></p>
+    <div class="onboarding-actions">
+      <button class="onboarding-next" onclick="acceptChatConsent()" data-i18n="consent_accept"></button>
+      <button class="onboarding-skip" onclick="closeChatConsent()" data-i18n="consent_later"></button>
+    </div>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="dailyBriefModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" onclick="closeDailyBrief()" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="brief_eyebrow"></div>
+    <h2 class="prefs-title" data-i18n="brief_title" style="font-size:24px;"></h2>
+    <div class="brief-line" id="briefStreakLine"></div>
+    <div class="brief-line" id="briefMoodLine"></div>
+    <div class="brief-line" id="briefWordLine"></div>
+    <div class="brief-suggest-box">
+      <p class="brief-suggest-label" data-i18n="brief_suggest_label"></p>
+      <p class="brief-suggest-title" id="briefSuggestTitle"></p>
+      <button class="onboarding-next" id="briefSuggestBtn" onclick="startBriefSuggestion()"></button>
+    </div>
+  </div>
+</div>
+
 <div class="prefs-overlay" id="checkinModal" role="dialog" aria-modal="true">
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" onclick="closeCheckin()" aria-label="Close">✕</button>
@@ -533,6 +591,12 @@
     <h2 class="prefs-title" data-i18n="checkin_title" style="font-size:26px;"></h2>
     <p class="prefs-subtitle" data-i18n="checkin_subtitle"></p>
     <div class="checkin-options" id="checkinOptions"></div>
+    <div class="checkin-freetext-row">
+      <div class="checkin-divider"><span data-i18n="checkin_or"></span></div>
+      <textarea id="checkinFreeText" class="checkin-freetext-input" rows="2" data-i18n-placeholder="checkin_freetext_placeholder"></textarea>
+      <button class="checkin-freetext-btn" id="checkinFreeTextBtn" onclick="sendCheckinText()" data-i18n="checkin_freetext_btn"></button>
+      <div class="checkin-freetext-response" id="checkinFreeTextResponse" style="display:none;"></div>
+    </div>
   </div>
 </div>
 
@@ -578,15 +642,24 @@
     <div class="modal-tag" id="modalTag"></div>
     <h3 id="modalTitle"></h3>
     <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-locked" id="modalLocked" style="display:none;">
+      <div class="modal-locked-icon">🔒</div>
+      <p class="modal-locked-text" data-i18n="locked_content_text"></p>
+      <button class="modal-locked-btn" onclick="openUpgrade()" data-i18n="locked_unlock_btn"></button>
+    </div>
     <ul class="modal-steps" id="modalSteps"></ul>
     <div class="mood-widget" id="moodWidget" style="display:none;">
       <p id="moodPrompt" style="text-align:center;font-size:13px;margin:0 0 10px;"></p>
       <div class="mood-buttons" id="moodButtons"></div>
       <div class="mood-chart" id="moodChart"></div>
       <p class="mood-empty" id="moodEmptyMsg"></p>
+      <div class="mood-suggest-box" id="moodSuggestBox" style="display:none;">
+        <p class="mood-suggest-text" id="moodSuggestText"></p>
+        <button class="mood-suggest-btn" id="moodSuggestBtn" onclick="startMoodSuggestion()"></button>
+      </div>
     </div>
     <div class="journal-widget" id="journalWidget" style="display:none;">
-      <textarea id="journalInput" class="journal-textarea" rows="3"></textarea>
+      <textarea id="journalInput" class="journal-textarea" rows="4"></textarea>
       <button class="journal-save-btn" id="journalSaveBtn" onclick="saveJournalEntry()"></button>
       <div id="journalSavedMsg" class="journal-saved-msg" style="display:none;"></div>
       <div id="journalEntries" class="journal-entries"></div>
@@ -664,6 +737,18 @@ const I18N = {
     achievement_title:"إنجاز رائع! 🎉", achievement_desc:"وصلت إلى {n} يوماً متتالياً — استمر!",
     checkin_cta:"فحص سريع لحالتك", checkin_eyebrow:"في أقل من دقيقة",
     checkin_title:"كيف تشعر الآن؟", checkin_subtitle:"اختر ما يصف حالتك، وسنقترح عليك تمريناً مناسباً فوراً.",
+    checkin_or:"أو صف شعورك بكلماتك", checkin_freetext_placeholder:"مثلاً: أشعر بالتوتر من موعد غداً...",
+    checkin_freetext_btn:"احصل على اقتراح", checkin_thinking:"لحظة...", checkin_error:"تعذّر الحصول على رد الآن، جرّب مجدداً بعد قليل.",
+    ai_unavailable_notice:"⚠️ الذكاء الاصطناعي غير متاح مؤقتاً — هذا رد عام وليس مخصصاً لرسالتك",
+    clear_memory_btn:"🗑️ مسح المحادثة",
+    brief_eyebrow:"صباح الخير", brief_title:"ملخص يومك",
+    brief_streak_prefix:"سلسلتك الآن", brief_streak_suffix:"أيام متتالية",
+    brief_mood_up:"مزاجك يتحسن مؤخراً — استمر هكذا", brief_mood_down:"مزاجك كان أثقل قليلاً مؤخراً — خذ وقتك",
+    brief_mood_stable:"مزاجك مستقر نسبياً مؤخراً",
+    brief_suggest_label:"لم تجرّب بعد", brief_start_btn:"ابدأ الآن",
+    brief_word_prefix:"الكلمة الأكثر تكراراً في يومياتك مؤخراً:",
+    mood_suggest_text:"لاحظنا أن مزاجك كان أثقل قليلاً في آخر مرات — قد يفيدك:",
+    mood_suggest_btn:"جرّب",
     checkin_opt1:"قلق أو توتر", checkin_opt2:"حزن أو ثقل في الصدر", checkin_opt3:"ذهن مشتت وأفكار متسارعة", checkin_opt4:"إرهاق جسدي وتعب",
     crisis_button:"أحتاج مساعدة الآن", crisis_eyebrow:"أنت لست وحدك",
     crisis_title:"خطوط مساعدة حقيقية، مجانية وسرّية", crisis_subtitle:"إذا كنت تمر بأزمة نفسية حادة، تواصل مع أحد هذه الخطوط الآن — أشخاص مدرّبون بانتظارك.",
@@ -688,11 +773,19 @@ const I18N = {
     prefs_experience_label:"التجربة",
     prefs_calm_title:"اجعل المساحة أكثر هدوءاً", prefs_calm_desc:"إيقاف الحركات والانتقالات المرئية غير الضرورية.",
     prefs_privacy_label:"الخصوصية، بوضوح",
-    prefs_privacy_quote:"أفكارك ليست بيانات تُجمع. هذا نموذج تجريبي — أي شيء تكتبه (كاليوميات أو المزاج) يُحفظ فقط على جهازك، ولا يُرسل أبداً لأي خادم أو جهة أخرى.",
+    prefs_privacy_quote:"أفكارك ليست بيانات تُجمع دون علمك. يومياتك وسلسلتك ومزاجك تُحفظ فقط على جهازك ولا تُغادره أبداً. أما رسائل المحادثة، فتُرسل لخدمة ذكاء اصطناعي خارجية لتوليد رد ذكي — كما أوضحنا لك عند بدء أول محادثة — وتُحفظ أيضاً على جهازك فقط لتتذكرها المحادثة القادمة، ويمكنك مسحها في أي وقت.",
     prefs_dark_title:"الوضع الداكن", prefs_dark_desc:"ألوان أهدأ على العين في الإضاءة المنخفضة.",
     prefs_textlarge_title:"نص أكبر", prefs_textlarge_desc:"يكبّر نص التمارين والمقالات والمحادثة لسهولة القراءة.",
+    voice_gender_label:"صوت القراءة", voice_gender_desc:"لتمييز صوت القراءة الصوتية، أخبرنا كيف تعرّف نفسك (اختياري، ويُستخدم فقط لاختيار الصوت إن توفّر صوت بديل على جهازك).",
+    voice_gender_male:"ذكر", voice_gender_female:"أنثى", voice_gender_none:"بدون تحديد",
     aria_close:"إغلاق", aria_share:"مشاركة", aria_mic:"إدخال صوتي",
     reminder_text:"لم تسجّل فحصك اليومي بعد 👋", reminder_cta:"افحص الآن",
+    consent_eyebrow:"قبل أن نبدأ", consent_title:"محادثتك تُرسل لخدمة ذكاء اصطناعي خارجية",
+    consent_text:"لكي يرد عليك بذكاء، تُرسل رسالتك إلى Anthropic (مزوّد الذكاء الاصطناعي) عبر خادم استضافة التطبيق. لا تُحفظ رسائلك ولا تُستخدم لأي غرض آخر. هل توافق على المتابعة؟",
+    consent_accept:"أوافق، لنبدأ", consent_later:"ليس الآن",
+    locked_content_text:"هذا المحتوى ضمن Waha Plus. افتحه مع الاشتراك للاستفادة الكاملة منه.",
+    locked_unlock_btn:"افتح مع Waha Plus",
+    rate_limit_msg:"وصلنا لحد الرسائل المسموح به مؤقتاً لحماية الخدمة. من فضلك انتظر بضع دقائق ثم حاول مجدداً 🙏",
     done_btn:"تم اليوم ✓", done_btn_done:"أُنجز اليوم ✓", streak_label:"يوم متتالي",
   },
   de: {
@@ -738,6 +831,18 @@ const I18N = {
     achievement_title:"Toller Erfolg! 🎉", achievement_desc:"Du hast {n} Tage in Folge erreicht — weiter so!",
     checkin_cta:"Schnell-Check", checkin_eyebrow:"In unter einer Minute",
     checkin_title:"Wie fühlst du dich gerade?", checkin_subtitle:"Wähle, was zutrifft, und wir schlagen dir sofort eine passende Übung vor.",
+    checkin_or:"Oder beschreibe es mit eigenen Worten", checkin_freetext_placeholder:"z. B.: Ich bin wegen morgen nervös...",
+    checkin_freetext_btn:"Vorschlag erhalten", checkin_thinking:"Einen Moment...", checkin_error:"Gerade keine Antwort möglich, versuche es gleich noch einmal.",
+    ai_unavailable_notice:"⚠️ Die KI ist gerade nicht verfügbar — das ist eine allgemeine Antwort, nicht speziell auf deine Nachricht",
+    clear_memory_btn:"🗑️ Chat löschen",
+    brief_eyebrow:"Guten Morgen", brief_title:"Dein Tagesüberblick",
+    brief_streak_prefix:"Deine Serie:", brief_streak_suffix:"Tage in Folge",
+    brief_mood_up:"Deine Stimmung hat sich zuletzt verbessert — weiter so", brief_mood_down:"Deine Stimmung war zuletzt etwas schwerer — nimm dir Zeit",
+    brief_mood_stable:"Deine Stimmung ist zuletzt relativ stabil",
+    brief_suggest_label:"Noch nicht ausprobiert", brief_start_btn:"Jetzt starten",
+    brief_word_prefix:"Häufigstes Wort in deinem Journal zuletzt:",
+    mood_suggest_text:"Wir haben bemerkt, dass deine Stimmung zuletzt etwas schwerer war — das könnte helfen:",
+    mood_suggest_btn:"Ausprobieren",
     checkin_opt1:"Angst oder Anspannung", checkin_opt2:"Traurigkeit oder Schwere", checkin_opt3:"Zerstreuter, rasender Geist", checkin_opt4:"Körperliche Erschöpfung",
     crisis_button:"Ich brauche jetzt Hilfe", crisis_eyebrow:"Du bist nicht allein",
     crisis_title:"Echte Hilfe — kostenlos und anonym", crisis_subtitle:"Wenn du gerade in einer akuten Krise bist, wende dich jetzt an eine dieser Stellen — geschulte Menschen sind für dich da.",
@@ -762,11 +867,19 @@ const I18N = {
     prefs_experience_label:"Erlebnis",
     prefs_calm_title:"Den Raum ruhiger machen", prefs_calm_desc:"Unnötige Animationen und Übergänge abschalten.",
     prefs_privacy_label:"Datenschutz, klar gesagt",
-    prefs_privacy_quote:"Deine Gedanken sind keine gesammelten Daten. Dies ist eine Demo — alles, was du hier schreibst (z. B. Journal oder Stimmung), wird ausschließlich lokal auf deinem Gerät gespeichert und niemals an einen Server oder Dritte übertragen.",
+    prefs_privacy_quote:"Deine Gedanken sind keine heimlich gesammelten Daten. Journal, Serie und Stimmung werden ausschließlich lokal auf deinem Gerät gespeichert und verlassen es nie. Chat-Nachrichten hingegen werden an einen externen KI-Dienst gesendet, um eine intelligente Antwort zu erzeugen — wie beim Start deines ersten Chats erklärt — und werden ebenfalls nur lokal gespeichert, damit der Chat sich beim nächsten Mal erinnert. Du kannst sie jederzeit löschen.",
     prefs_dark_title:"Dunkler Modus", prefs_dark_desc:"Sanftere Farben für schwaches Licht.",
     prefs_textlarge_title:"Größerer Text", prefs_textlarge_desc:"Vergrößert Übungen, Artikel und Chat-Text für leichteres Lesen.",
+    voice_gender_label:"Vorlesestimme", voice_gender_desc:"Um die Vorlesestimme abzustimmen, sag uns, wie du dich identifizierst (optional, nur zur Stimmwahl, falls dein Gerät eine Alternative bietet).",
+    voice_gender_male:"Männlich", voice_gender_female:"Weiblich", voice_gender_none:"Keine Angabe",
     aria_close:"Schließen", aria_share:"Teilen", aria_mic:"Spracheingabe",
     reminder_text:"Du hast deinen Check-in heute noch nicht gemacht 👋", reminder_cta:"Jetzt prüfen",
+    consent_eyebrow:"Bevor wir beginnen", consent_title:"Dein Chat wird an einen externen KI-Dienst gesendet",
+    consent_text:"Damit du eine intelligente Antwort erhältst, wird deine Nachricht über den Hosting-Server der App an Anthropic (KI-Anbieter) gesendet. Deine Nachrichten werden nicht gespeichert und für keinen anderen Zweck verwendet. Stimmst du zu, fortzufahren?",
+    consent_accept:"Ja, los geht's", consent_later:"Nicht jetzt",
+    locked_content_text:"Dieser Inhalt gehört zu Waha Plus. Schalte ihn mit dem Abo frei, um ihn vollständig zu nutzen.",
+    locked_unlock_btn:"Mit Waha Plus freischalten",
+    rate_limit_msg:"Wir haben vorübergehend das Nachrichtenlimit erreicht, um den Dienst zu schützen. Bitte warte ein paar Minuten und versuche es erneut 🙏",
     done_btn:"Heute erledigt ✓", done_btn_done:"Heute erledigt ✓", streak_label:"Tage in Folge",
   },
   en: {
@@ -812,6 +925,18 @@ const I18N = {
     achievement_title:"Great achievement! 🎉", achievement_desc:"You reached a {n}-day streak — keep going!",
     checkin_cta:"Quick check-in", checkin_eyebrow:"Under a minute",
     checkin_title:"How are you feeling right now?", checkin_subtitle:"Pick what fits, and we'll suggest a matching exercise instantly.",
+    checkin_or:"Or describe it in your own words", checkin_freetext_placeholder:"e.g. I'm anxious about tomorrow...",
+    checkin_freetext_btn:"Get a suggestion", checkin_thinking:"One moment...", checkin_error:"Couldn't get a reply right now, try again shortly.",
+    ai_unavailable_notice:"⚠️ The AI is temporarily unavailable — this is a generic reply, not tailored to your message",
+    clear_memory_btn:"🗑️ Clear chat",
+    brief_eyebrow:"Good morning", brief_title:"Your daily brief",
+    brief_streak_prefix:"Your streak:", brief_streak_suffix:"days in a row",
+    brief_mood_up:"Your mood has been improving lately — keep it up", brief_mood_down:"Your mood has been a bit heavier lately — take your time",
+    brief_mood_stable:"Your mood has been fairly stable lately",
+    brief_suggest_label:"Haven't tried yet", brief_start_btn:"Start now",
+    brief_word_prefix:"Most frequent word in your journal lately:",
+    mood_suggest_text:"We noticed your mood has been a bit heavier lately — this might help:",
+    mood_suggest_btn:"Try",
     checkin_opt1:"Anxious or tense", checkin_opt2:"Sad or heavy-hearted", checkin_opt3:"Scattered, racing mind", checkin_opt4:"Physically exhausted",
     crisis_button:"I need help now", crisis_eyebrow:"You are not alone",
     crisis_title:"Real help — free and confidential", crisis_subtitle:"If you're in acute distress right now, reach out to one of these lines — trained people are ready to listen.",
@@ -836,11 +961,19 @@ const I18N = {
     prefs_experience_label:"Experience",
     prefs_calm_title:"Keep the room calm", prefs_calm_desc:"Use gentle transitions and turn off unnecessary moving elements.",
     prefs_privacy_label:"Privacy, plainly said",
-    prefs_privacy_quote:"Your thoughts are not data to be collected. This is a demo — anything you enter (like journal entries or mood) is saved only on your own device, and is never sent to any server or third party.",
+    prefs_privacy_quote:"Your thoughts are not data collected without your knowledge. Journal, streak, and mood are saved only on your own device and never leave it. Chat messages, however, are sent to an external AI service to generate a smart reply — as explained when you started your first chat — and are also saved only locally so the chat remembers you next time. You can clear it anytime.",
     prefs_dark_title:"Dark mode", prefs_dark_desc:"Gentler colors for low light.",
     prefs_textlarge_title:"Larger text", prefs_textlarge_desc:"Enlarges exercises, articles, and chat text for easier reading.",
+    voice_gender_label:"Reading voice", voice_gender_desc:"To fine-tune the read-aloud voice, tell us how you identify (optional, used only to pick a voice if your device offers an alternative).",
+    voice_gender_male:"Male", voice_gender_female:"Female", voice_gender_none:"Prefer not to say",
     aria_close:"Close", aria_share:"Share", aria_mic:"Voice input",
     reminder_text:"You haven't done today's check-in yet 👋", reminder_cta:"Check in now",
+    consent_eyebrow:"Before we start", consent_title:"Your chat is sent to an external AI service",
+    consent_text:"To reply intelligently, your message is sent to Anthropic (the AI provider) through the app's hosting server. Your messages are not saved and are not used for any other purpose. Do you agree to continue?",
+    consent_accept:"I agree, let's start", consent_later:"Not now",
+    locked_content_text:"This content is part of Waha Plus. Unlock it with a subscription to use it fully.",
+    locked_unlock_btn:"Unlock with Waha Plus",
+    rate_limit_msg:"We've temporarily reached the message limit to protect the service. Please wait a few minutes and try again 🙏",
     done_btn:"Done today ✓", done_btn_done:"Done today ✓", streak_label:"day streak",
   },
   fr: {
@@ -886,6 +1019,18 @@ const I18N = {
     achievement_title:"Belle réussite ! 🎉", achievement_desc:"Tu as atteint {n} jours de suite — continue !",
     checkin_cta:"Bilan rapide", checkin_eyebrow:"En moins d'une minute",
     checkin_title:"Comment te sens-tu maintenant ?", checkin_subtitle:"Choisis ce qui correspond, et on te propose aussitôt un exercice adapté.",
+    checkin_or:"Ou décris-le avec tes propres mots", checkin_freetext_placeholder:"ex. : je suis stressé(e) pour demain...",
+    checkin_freetext_btn:"Obtenir une suggestion", checkin_thinking:"Un instant...", checkin_error:"Impossible d'obtenir une réponse pour l'instant, réessaie bientôt.",
+    ai_unavailable_notice:"⚠️ L'IA est temporairement indisponible — ceci est une réponse générique, pas adaptée à ton message",
+    clear_memory_btn:"🗑️ Effacer la discussion",
+    brief_eyebrow:"Bonjour", brief_title:"Ton résumé du jour",
+    brief_streak_prefix:"Ta série :", brief_streak_suffix:"jours d'affilée",
+    brief_mood_up:"Ton humeur s'améliore ces derniers temps — continue ainsi", brief_mood_down:"Ton humeur a été un peu plus lourde ces derniers temps — prends ton temps",
+    brief_mood_stable:"Ton humeur est restée assez stable ces derniers temps",
+    brief_suggest_label:"Pas encore essayé", brief_start_btn:"Commencer maintenant",
+    brief_word_prefix:"Mot le plus fréquent dans ton journal récemment :",
+    mood_suggest_text:"On a remarqué que ton humeur a été un peu plus lourde dernièrement — ça pourrait aider :",
+    mood_suggest_btn:"Essayer",
     checkin_opt1:"Anxieux ou tendu", checkin_opt2:"Triste ou oppressé", checkin_opt3:"Esprit dispersé et agité", checkin_opt4:"Épuisement physique",
     crisis_button:"J'ai besoin d'aide maintenant", crisis_eyebrow:"Tu n'es pas seul(e)",
     crisis_title:"Une aide réelle — gratuite et confidentielle", crisis_subtitle:"Si tu traverses une crise aiguë en ce moment, contacte l'une de ces lignes — des personnes formées sont prêtes à t'écouter.",
@@ -910,11 +1055,19 @@ const I18N = {
     prefs_experience_label:"Expérience",
     prefs_calm_title:"Garder l'espace calme", prefs_calm_desc:"Désactiver les animations et transitions inutiles.",
     prefs_privacy_label:"La confidentialité, clairement",
-    prefs_privacy_quote:"Tes pensées ne sont pas des données collectées. Ceci est une démo — tout ce que tu écris ici (journal, humeur) est enregistré uniquement sur ton propre appareil, jamais envoyé à un serveur ou à un tiers.",
+    prefs_privacy_quote:"Tes pensées ne sont pas des données collectées à ton insu. Journal, série et humeur sont enregistrés uniquement sur ton appareil et ne le quittent jamais. Les messages du chat, eux, sont envoyés à un service d'IA externe pour générer une réponse intelligente — comme expliqué au début de ta première discussion — et sont aussi enregistrés uniquement en local pour que le chat se souvienne de toi la prochaine fois. Tu peux l'effacer à tout moment.",
     prefs_dark_title:"Mode sombre", prefs_dark_desc:"Des couleurs plus douces en faible luminosité.",
     prefs_textlarge_title:"Texte plus grand", prefs_textlarge_desc:"Agrandit les exercices, articles et messages du chat pour une lecture plus facile.",
+    voice_gender_label:"Voix de lecture", voice_gender_desc:"Pour ajuster la voix de lecture, dis-nous comment tu t'identifies (facultatif, utilisé seulement pour choisir une voix si ton appareil propose une alternative).",
+    voice_gender_male:"Homme", voice_gender_female:"Femme", voice_gender_none:"Ne pas préciser",
     aria_close:"Fermer", aria_share:"Partager", aria_mic:"Saisie vocale",
     reminder_text:"Tu n'as pas encore fait ton bilan du jour 👋", reminder_cta:"Vérifier maintenant",
+    consent_eyebrow:"Avant de commencer", consent_title:"Ta discussion est envoyée à un service d'IA externe",
+    consent_text:"Pour répondre intelligemment, ton message est envoyé à Anthropic (le fournisseur d'IA) via le serveur d'hébergement de l'application. Tes messages ne sont pas enregistrés ni utilisés à d'autres fins. Acceptes-tu de continuer ?",
+    consent_accept:"J'accepte, on commence", consent_later:"Pas maintenant",
+    locked_content_text:"Ce contenu fait partie de Waha Plus. Débloque-le avec l'abonnement pour en profiter pleinement.",
+    locked_unlock_btn:"Débloquer avec Waha Plus",
+    rate_limit_msg:"Nous avons temporairement atteint la limite de messages pour protéger le service. Merci d'attendre quelques minutes et de réessayer 🙏",
     done_btn:"Fait aujourd'hui ✓", done_btn_done:"Fait aujourd'hui ✓", streak_label:"jours de suite",
   },
   tr: {
@@ -960,6 +1113,18 @@ const I18N = {
     achievement_title:"Harika başarı! 🎉", achievement_desc:"{n} gün üst üste ulaştın — devam et!",
     checkin_cta:"Hızlı kontrol", checkin_eyebrow:"Bir dakikadan kısa",
     checkin_title:"Şu anda nasıl hissediyorsun?", checkin_subtitle:"Uyanı seç, sana hemen uygun bir egzersiz önerelim.",
+    checkin_or:"Ya da kendi kelimelerinle anlat", checkin_freetext_placeholder:"örn. yarınki randevu için gerginim...",
+    checkin_freetext_btn:"Öneri al", checkin_thinking:"Bir saniye...", checkin_error:"Şu an yanıt alınamadı, biraz sonra tekrar dene.",
+    ai_unavailable_notice:"⚠️ Yapay zeka şu anda kullanılamıyor — bu genel bir yanıttır, mesajına özel değildir",
+    clear_memory_btn:"🗑️ Sohbeti temizle",
+    brief_eyebrow:"Günaydın", brief_title:"Günün özeti",
+    brief_streak_prefix:"Serin:", brief_streak_suffix:"gün üst üste",
+    brief_mood_up:"Son zamanlarda ruh halin düzeliyor — böyle devam et", brief_mood_down:"Son zamanlarda ruh halin biraz ağırlaştı — kendine zaman tanı",
+    brief_mood_stable:"Son zamanlarda ruh halin oldukça istikrarlı",
+    brief_suggest_label:"Henüz denemedin", brief_start_btn:"Şimdi başla",
+    brief_word_prefix:"Son zamanlarda günlüğünde en sık geçen kelime:",
+    mood_suggest_text:"Son zamanlarda ruh halinin biraz ağırlaştığını fark ettik — bu yardımcı olabilir:",
+    mood_suggest_btn:"Dene",
     checkin_opt1:"Kaygılı veya gergin", checkin_opt2:"Üzgün veya ağır", checkin_opt3:"Dağınık, hızlı düşünceler", checkin_opt4:"Fiziksel olarak yorgun",
     crisis_button:"Şimdi yardıma ihtiyacım var", crisis_eyebrow:"Yalnız değilsin",
     crisis_title:"Gerçek yardım — ücretsiz ve gizli", crisis_subtitle:"Şu anda ciddi bir kriz yaşıyorsan, bu hatlardan birine ulaş — eğitimli kişiler seni dinlemeye hazır.",
@@ -984,11 +1149,19 @@ const I18N = {
     prefs_experience_label:"Deneyim",
     prefs_calm_title:"Alanı sakin tut", prefs_calm_desc:"Gereksiz animasyonları ve geçişleri kapat.",
     prefs_privacy_label:"Gizlilik, açıkça",
-    prefs_privacy_quote:"Düşüncelerin toplanan veriler değildir. Bu bir demodur — buraya yazdığın her şey (günlük veya ruh hali gibi) yalnızca kendi cihazında saklanır, hiçbir zaman bir sunucuya veya üçüncü bir tarafa gönderilmez.",
+    prefs_privacy_quote:"Düşüncelerin bilgin olmadan toplanan veriler değildir. Günlük, seri ve ruh halin yalnızca kendi cihazında saklanır, asla oradan çıkmaz. Sohbet mesajların ise akıllı bir yanıt üretmek için harici bir yapay zeka hizmetine gönderilir — ilk sohbetine başlarken açıkladığımız gibi — ve sohbetin seni bir dahaki sefere hatırlaması için yalnızca cihazında da saklanır. İstediğin zaman silebilirsin.",
     prefs_dark_title:"Karanlık mod", prefs_dark_desc:"Az ışıkta daha yumuşak renkler.",
     prefs_textlarge_title:"Daha büyük yazı", prefs_textlarge_desc:"Egzersiz, makale ve sohbet metnini daha kolay okunması için büyütür.",
+    voice_gender_label:"Okuma sesi", voice_gender_desc:"Seslendirme sesini ayarlamak için kendini nasıl tanımladığını söyle (isteğe bağlı, sadece cihazında alternatif ses varsa kullanılır).",
+    voice_gender_male:"Erkek", voice_gender_female:"Kadın", voice_gender_none:"Belirtmek istemiyorum",
     aria_close:"Kapat", aria_share:"Paylaş", aria_mic:"Sesli giriş",
     reminder_text:"Bugünkü kontrolünü henüz yapmadın 👋", reminder_cta:"Şimdi kontrol et",
+    consent_eyebrow:"Başlamadan önce", consent_title:"Sohbetin harici bir yapay zeka hizmetine gönderiliyor",
+    consent_text:"Akıllıca yanıt verebilmek için mesajın, uygulamanın barındırma sunucusu aracılığıyla Anthropic'e (yapay zeka sağlayıcısı) gönderilir. Mesajların kaydedilmez ve başka bir amaç için kullanılmaz. Devam etmeyi kabul ediyor musun?",
+    consent_accept:"Kabul ediyorum, başlayalım", consent_later:"Şimdi değil",
+    locked_content_text:"Bu içerik Waha Plus kapsamındadır. Tam olarak kullanmak için abonelikle aç.",
+    locked_unlock_btn:"Waha Plus ile aç",
+    rate_limit_msg:"Hizmeti korumak için geçici olarak mesaj sınırına ulaştık. Lütfen birkaç dakika bekleyip tekrar dene 🙏",
     done_btn:"Bugün tamamlandı ✓", done_btn_done:"Bugün tamamlandı ✓", streak_label:"gün üst üste",
   },
   ku: {
@@ -1034,6 +1207,18 @@ const I18N = {
     achievement_title:"Serkeftinek xweş! 🎉", achievement_desc:"Tu gihîştî {n} roj li dû hev — berdewam be!",
     checkin_cta:"Kontrolek zû", checkin_eyebrow:"Kêmtir ji xulekekê",
     checkin_title:"Tu niha çawa hîs dikî?", checkin_subtitle:"Tiştê guncan hilbijêre, emê tavilê ezmûnek guncan pêşniyar bikin.",
+    checkin_or:"An jî bi peyvên xwe rave bike", checkin_freetext_placeholder:"nimûne: ez ji bo sibê aciz im...",
+    checkin_freetext_btn:"Pêşniyarê bistîne", checkin_thinking:"Deqîqeyek...", checkin_error:"Niha bersiv nehat wergirtin, dûre dîsa biceribîne.",
+    ai_unavailable_notice:"⚠️ AI niha ne berdest e — ev bersivek giştî ye, ne li gorî peyama te ye",
+    clear_memory_btn:"🗑️ Chatê paqij bike",
+    brief_eyebrow:"Roj baş", brief_title:"Kurteya roja te",
+    brief_streak_prefix:"Rêzefîlma te:", brief_streak_suffix:"roj li pey hev",
+    brief_mood_up:"Hesta te vê dawiyê başbûye — wisa berdewam bike", brief_mood_down:"Hesta te vê dawiyê hinekî giran bûye — dema xwe bigire",
+    brief_mood_stable:"Hesta te vê dawiyê bi giştî sabît e",
+    brief_suggest_label:"Hê neceribandiye", brief_start_btn:"Niha dest pê bike",
+    brief_word_prefix:"Peyva herî zêde di rojnivîska te ya vê dawiyê de:",
+    mood_suggest_text:"Me dît ku hesta te vê dawiyê hinekî giran bûye — ev dikare bibe alîkar:",
+    mood_suggest_btn:"Biceribîne",
     checkin_opt1:"Fikar an tengasî", checkin_opt2:"Xemgînî an giranî", checkin_opt3:"Hişê belavbûyî û ramanên zû", checkin_opt4:"Betilîna laşî",
     crisis_button:"Niha hewceyî alîkariyê me", crisis_eyebrow:"Tu bi tenê nînî",
     crisis_title:"Alîkariya rastîn — belaş û veşartî", crisis_subtitle:"Heke tu niha di krîzek dijwar de yî, bi yek ji van xetan re têkilî daynin — kesên perwerdekirî amade ne ku guhdarî te bikin.",
@@ -1058,11 +1243,19 @@ const I18N = {
     prefs_experience_label:"Ezmûn",
     prefs_calm_title:"Cihê aram bihêle", prefs_calm_desc:"Anîmasyon û veguherînên ne-hewce bigire.",
     prefs_privacy_label:"Nihênî, bi zelalî",
-    prefs_privacy_quote:"Ramanên te ne daneyên têne kombûn in. Ev nimûneyek e — her tiştê tu li vir dinivîsî (wek rojnivîsk an rewşa hestî) tenê li ser cîhaza te tê tomarkirin, çu carî ji bo serverek an alîyekî din nayê şandin.",
+    prefs_privacy_quote:"Ramanên te ne daneyên bêyî zanîna te têne kombûn in. Rojnivîsk, rêzefîlm û hesta te tenê li ser cîhaza te tê tomarkirin û çu carî jê dernakeve. Lê belê, peyamên chatê ji bo karûbarek AI ya derveyî tên şandin da ku bersivek jîr biafirînin — wek ku em di destpêka chata te ya yekem de rave kirin — û ew jî tenê li ser cîhaza te tê tomarkirin da ku chat te cara din bibîr bîne. Tu dikarî her gav wê jê bibî.",
     prefs_dark_title:"Moda Tarî", prefs_dark_desc:"Rengên hêdîtir ji bo ronahiya kêm.",
     prefs_textlarge_title:"Nivîsa mezintir", prefs_textlarge_desc:"Ezmûn, gotar û peyamên chatê mezin dike ji bo xwendina hêsantir.",
+    voice_gender_label:"Dengê xwendinê", voice_gender_desc:"Ji bo mîhengkirina dengê xwendinê, ji me re bibêje tu çawa nasnameya xwe dikî (vebijarkî ye, tenê ji bo hilbijartina dengekî ku amûra te pêşkêş dike tê bikaranîn).",
+    voice_gender_male:"Nêr", voice_gender_female:"Mê", voice_gender_none:"Nabêjim",
     aria_close:"Bigire", aria_share:"Parve bike", aria_mic:"Têketina dengî",
     reminder_text:"Tu hê kontrola xwe ya îro nekiriye 👋", reminder_cta:"Niha kontrol bike",
+    consent_eyebrow:"Berî em dest pê bikin", consent_title:"Chata te ji bo karûbarek AI ya derveyî tê şandin",
+    consent_text:"Ji bo bersivek jîr, peyama te bi rêya servera hostkirinê ya sepanê ji Anthropic (peydakerê AI) re tê şandin. Peyamên te nayên tomarkirin û ji bo tu mebesta din nayên bikaranîn. Tu razî yî ku berdewam bikî?",
+    consent_accept:"Erê, em dest pê bikin", consent_later:"Niha na",
+    locked_content_text:"Ev naverok beşek ji Waha Plus e. Bi endamtiyê veke da ku bi tevahî sûdê jê wergirî.",
+    locked_unlock_btn:"Bi Waha Plus veke",
+    rate_limit_msg:"Em bi demkî gihîştine sînorê peyaman ji bo parastina xizmetê. Ji kerema xwe çend deqîqeyan bisekine û dîsa biceribîne 🙏",
     done_btn:"Îro qediya ✓", done_btn_done:"Îro qediya ✓", streak_label:"roj li dû hev",
   },
   es: {
@@ -1108,6 +1301,18 @@ const I18N = {
     achievement_title:"¡Gran logro! 🎉", achievement_desc:"Alcanzaste {n} días seguidos — ¡sigue así!",
     checkin_cta:"Chequeo rápido", checkin_eyebrow:"En menos de un minuto",
     checkin_title:"¿Cómo te sientes ahora?", checkin_subtitle:"Elige lo que te describe, y te sugerimos un ejercicio adecuado al instante.",
+    checkin_or:"O descríbelo con tus propias palabras", checkin_freetext_placeholder:"ej.: estoy nervioso/a por lo de mañana...",
+    checkin_freetext_btn:"Obtener una sugerencia", checkin_thinking:"Un momento...", checkin_error:"No se pudo obtener respuesta ahora, inténtalo de nuevo en un momento.",
+    ai_unavailable_notice:"⚠️ La IA no está disponible temporalmente — esta es una respuesta genérica, no adaptada a tu mensaje",
+    clear_memory_btn:"🗑️ Borrar chat",
+    brief_eyebrow:"Buenos días", brief_title:"Tu resumen del día",
+    brief_streak_prefix:"Tu racha:", brief_streak_suffix:"días seguidos",
+    brief_mood_up:"Tu ánimo ha mejorado últimamente — sigue así", brief_mood_down:"Tu ánimo ha estado un poco más pesado últimamente — tómate tu tiempo",
+    brief_mood_stable:"Tu ánimo se ha mantenido bastante estable últimamente",
+    brief_suggest_label:"Aún no probado", brief_start_btn:"Empezar ahora",
+    brief_word_prefix:"Palabra más frecuente en tu diario últimamente:",
+    mood_suggest_text:"Notamos que tu ánimo ha estado un poco más pesado últimamente — esto podría ayudar:",
+    mood_suggest_btn:"Probar",
     checkin_opt1:"Ansioso o tenso", checkin_opt2:"Triste o con un peso encima", checkin_opt3:"Mente dispersa y acelerada", checkin_opt4:"Agotamiento físico",
     crisis_button:"Necesito ayuda ahora", crisis_eyebrow:"No estás solo/a",
     crisis_title:"Ayuda real — gratuita y confidencial", crisis_subtitle:"Si estás pasando por una crisis aguda ahora mismo, contacta una de estas líneas — hay personas capacitadas listas para escucharte.",
@@ -1132,11 +1337,19 @@ const I18N = {
     prefs_experience_label:"Experiencia",
     prefs_calm_title:"Mantener el espacio tranquilo", prefs_calm_desc:"Desactivar animaciones y transiciones innecesarias.",
     prefs_privacy_label:"Privacidad, dicho claramente",
-    prefs_privacy_quote:"Tus pensamientos no son datos que se recopilan. Esto es una demo — todo lo que escribas aquí (como el diario o el estado de ánimo) se guarda solo en tu propio dispositivo, nunca se envía a un servidor ni a terceros.",
+    prefs_privacy_quote:"Tus pensamientos no son datos que se recopilan sin tu conocimiento. El diario, la racha y el ánimo se guardan solo en tu dispositivo y nunca salen de él. Los mensajes del chat, en cambio, se envían a un servicio de IA externo para generar una respuesta inteligente — como se explicó al iniciar tu primer chat — y también se guardan solo localmente para que el chat te recuerde la próxima vez. Puedes borrarlo cuando quieras.",
     prefs_dark_title:"Modo oscuro", prefs_dark_desc:"Colores más suaves para poca luz.",
     prefs_textlarge_title:"Texto más grande", prefs_textlarge_desc:"Agranda los ejercicios, artículos y el chat para facilitar la lectura.",
+    voice_gender_label:"Voz de lectura", voice_gender_desc:"Para ajustar la voz de lectura, dinos cómo te identificas (opcional, solo se usa para elegir una voz si tu dispositivo ofrece una alternativa).",
+    voice_gender_male:"Hombre", voice_gender_female:"Mujer", voice_gender_none:"Prefiero no decirlo",
     aria_close:"Cerrar", aria_share:"Compartir", aria_mic:"Entrada de voz",
     reminder_text:"Aún no has hecho tu chequeo de hoy 👋", reminder_cta:"Revisar ahora",
+    consent_eyebrow:"Antes de empezar", consent_title:"Tu chat se envía a un servicio de IA externo",
+    consent_text:"Para responder con inteligencia, tu mensaje se envía a Anthropic (el proveedor de IA) a través del servidor de alojamiento de la aplicación. Tus mensajes no se guardan ni se usan para ningún otro fin. ¿Aceptas continuar?",
+    consent_accept:"Acepto, empecemos", consent_later:"Ahora no",
+    locked_content_text:"Este contenido es parte de Waha Plus. Desbloquéalo con la suscripción para aprovecharlo por completo.",
+    locked_unlock_btn:"Desbloquear con Waha Plus",
+    rate_limit_msg:"Hemos alcanzado temporalmente el límite de mensajes para proteger el servicio. Espera unos minutos e inténtalo de nuevo 🙏",
     done_btn:"Hecho hoy ✓", done_btn_done:"Hecho hoy ✓", streak_label:"días seguidos",
   },
     fa: {
@@ -1172,11 +1385,19 @@ const I18N = {
       prefs_experience_label:"تجربه",
       prefs_calm_title:"فضا را آرام نگه‌دار", prefs_calm_desc:"غیرفعال کردن انیمیشن‌ها و انتقال‌های غیرضروری.",
       prefs_privacy_label:"حریم خصوصی، به‌روشنی",
-      prefs_privacy_quote:"افکار تو داده‌ای برای جمع‌آوری نیست. این یک نسخه آزمایشی است — هر چیزی که اینجا می‌نویسی (مثل یادداشت روزانه یا خلق‌وخو) فقط روی دستگاه خودت ذخیره می‌شود و هرگز به هیچ سروری یا شخص ثالثی ارسال نمی‌شود.",
+      prefs_privacy_quote:"افکار تو داده‌ای نیست که بدون اطلاعت جمع‌آوری شود. یادداشت روزانه، سلسله و خلق‌وخویت فقط روی دستگاه خودت ذخیره می‌شود و هرگز از آن خارج نمی‌شود. اما پیام‌های گفتگو برای تولید پاسخ هوشمند به یک سرویس هوش مصنوعی خارجی ارسال می‌شوند — همان‌طور که در شروع اولین گفتگویت توضیح دادیم — و همچنین فقط روی دستگاه خودت ذخیره می‌شوند تا گفتگو دفعه بعد تو را به یاد بیاورد. هر وقت بخواهی می‌توانی آن را پاک کنی.",
       prefs_dark_title:"حالت تاریک", prefs_dark_desc:"رنگ‌های ملایم‌تر برای نور کم.",
       prefs_textlarge_title:"متن بزرگ‌تر", prefs_textlarge_desc:"متن تمرین‌ها، مقالات و گفتگو را برای خواندن آسان‌تر بزرگ می‌کند.",
+      voice_gender_label:"صدای خواندن", voice_gender_desc:"برای تنظیم صدای خواندن، به ما بگو خودت را چگونه معرفی می‌کنی (اختیاری، فقط برای انتخاب صدا در صورت وجود گزینه دیگر در دستگاهت استفاده می‌شود).",
+      voice_gender_male:"مرد", voice_gender_female:"زن", voice_gender_none:"ترجیح می‌دهم نگویم",
       aria_close:"بستن", aria_share:"اشتراک‌گذاری", aria_mic:"ورودی صوتی",
       reminder_text:"هنوز فحص روزانه‌ات را انجام نداده‌ای 👋", reminder_cta:"الان فحص کن",
+      consent_eyebrow:"پیش از شروع", consent_title:"گفتگوی تو به یک سرویس هوش مصنوعی خارجی ارسال می‌شود",
+      consent_text:"برای پاسخ هوشمندانه، پیام تو از طریق سرور میزبانی اپلیکیشن به Anthropic (ارائه‌دهنده هوش مصنوعی) ارسال می‌شود. پیام‌های تو ذخیره نمی‌شوند و برای هیچ هدف دیگری استفاده نمی‌شوند. آیا موافقی ادامه دهیم؟",
+      consent_accept:"موافقم، شروع کنیم", consent_later:"الان نه",
+      locked_content_text:"این محتوا بخشی از Waha Plus است. برای استفاده کامل، آن را با اشتراک باز کن.",
+      locked_unlock_btn:"با Waha Plus باز کن",
+      rate_limit_msg:"برای محافظت از سرویس، موقتاً به محدودیت تعداد پیام رسیده‌ایم. لطفاً چند دقیقه صبر کن و دوباره امتحان کن 🙏",
       done_btn:"امروز انجام شد ✓", done_btn_done:"امروز انجام شد ✓", streak_label:"روز متوالی",
       journal_placeholder:"اینجا آزادانه بنویس…", journal_save:"ذخیره", journal_saved:"در دستگاه تو ذخیره شد ✓", journal_entries_label:"نوشته‌های قبلی تو",
       premium_badge:"پرمیوم",
@@ -1194,6 +1415,18 @@ const I18N = {
       achievement_title:"موفقیت عالی! 🎉", achievement_desc:"به {n} روز متوالی رسیدی — ادامه بده!",
       checkin_cta:"بررسی سریع حالت", checkin_eyebrow:"در کمتر از یک دقیقه",
       checkin_title:"الان چه حسی داری؟", checkin_subtitle:"آنچه را که مناسب است انتخاب کن، فوراً تمرینی مناسب پیشنهاد می‌دهیم.",
+      checkin_or:"یا با کلمات خودت توصیف کن", checkin_freetext_placeholder:"مثلاً: از فردا نگرانم...",
+      checkin_freetext_btn:"پیشنهاد بگیر", checkin_thinking:"یک لحظه...", checkin_error:"الان نتوانستیم پاسخ بگیریم، کمی بعد دوباره امتحان کن.",
+      ai_unavailable_notice:"⚠️ هوش مصنوعی موقتاً در دسترس نیست — این پاسخی عمومی است و مخصوص پیام تو نیست",
+      clear_memory_btn:"🗑️ پاک کردن گفتگو",
+      brief_eyebrow:"صبح بخیر", brief_title:"خلاصه روزت",
+      brief_streak_prefix:"سلسله‌ات:", brief_streak_suffix:"روز پیاپی",
+      brief_mood_up:"خلق‌وخویت اخیراً بهتر شده — همینطور ادامه بده", brief_mood_down:"خلق‌وخویت اخیراً کمی سنگین‌تر بوده — وقتت را بگذار",
+      brief_mood_stable:"خلق‌وخویت اخیراً نسبتاً پایدار بوده",
+      brief_suggest_label:"هنوز امتحان نکرده‌ای", brief_start_btn:"همین حالا شروع کن",
+      brief_word_prefix:"پرتکرارترین کلمه در یادداشت‌های اخیرت:",
+      mood_suggest_text:"متوجه شدیم خلق‌وخویت اخیراً کمی سنگین‌تر بوده — این می‌تواند کمک کند:",
+      mood_suggest_btn:"امتحان کن",
       checkin_opt1:"اضطراب یا تنش", checkin_opt2:"غم یا سنگینی دل", checkin_opt3:"ذهن پراکنده و افکار شتابان", checkin_opt4:"خستگی جسمی",
       crisis_button:"الان به کمک نیاز دارم", crisis_eyebrow:"تو تنها نیستی",
       crisis_title:"کمک واقعی — رایگان و محرمانه", crisis_subtitle:"اگر الان در یک بحران شدید هستی، با یکی از این خطوط تماس بگیر — افراد آموزش‌دیده آماده شنیدن صدای تو هستند.",
@@ -1246,11 +1479,19 @@ const I18N = {
       prefs_experience_label:"تجربہ",
       prefs_calm_title:"جگہ کو پرسکون رکھیں", prefs_calm_desc:"غیر ضروری اینیمیشنز اور تبدیلیاں بند کریں۔",
       prefs_privacy_label:"رازداری، واضح طور پر",
-      prefs_privacy_quote:"آپ کے خیالات جمع کیے جانے والا ڈیٹا نہیں ہیں۔ یہ ایک ڈیمو ہے — یہاں جو کچھ آپ لکھتے ہیں (جیسے جرنل یا موڈ) صرف آپ کے اپنے ڈیوائس پر محفوظ ہوتا ہے، کبھی بھی کسی سرور یا تیسرے فریق کو نہیں بھیجا جاتا۔",
+      prefs_privacy_quote:"آپ کے خیالات آپ کی مرضی کے بغیر جمع کیا جانے والا ڈیٹا نہیں ہیں۔ جرنل، سلسلہ اور موڈ صرف آپ کے اپنے ڈیوائس پر محفوظ ہوتے ہیں اور کبھی اس سے باہر نہیں جاتے۔ البتہ چیٹ کے پیغامات ذہین جواب تیار کرنے کے لیے ایک بیرونی AI سروس کو بھیجے جاتے ہیں — جیسا کہ آپ کی پہلی چیٹ کے آغاز میں بتایا گیا تھا — اور صرف آپ کے ڈیوائس پر بھی محفوظ ہوتے ہیں تاکہ چیٹ اگلی بار آپ کو یاد رکھے۔ آپ اسے کسی بھی وقت مٹا سکتے ہیں۔",
       prefs_dark_title:"ڈارک موڈ", prefs_dark_desc:"کم روشنی کے لیے نرم رنگ۔",
       prefs_textlarge_title:"بڑا متن", prefs_textlarge_desc:"آسان پڑھائی کے لیے ورزشوں، مضامین اور چیٹ کے متن کو بڑا کرتا ہے۔",
+      voice_gender_label:"پڑھنے کی آواز", voice_gender_desc:"آواز کو بہتر بنانے کے لیے، ہمیں بتائیں کہ آپ خود کو کیسے پہچانتے ہیں (اختیاری، صرف اس صورت میں آواز منتخب کرنے کے لیے استعمال ہوتا ہے جب آپ کا آلہ متبادل پیش کرے)۔",
+      voice_gender_male:"مرد", voice_gender_female:"عورت", voice_gender_none:"بتانا نہیں چاہتے",
       aria_close:"بند کریں", aria_share:"شیئر کریں", aria_mic:"صوتی ان پٹ",
       reminder_text:"آپ نے ابھی تک آج کا چیک ان نہیں کیا 👋", reminder_cta:"ابھی چیک کریں",
+      consent_eyebrow:"شروع کرنے سے پہلے", consent_title:"آپ کی چیٹ ایک بیرونی AI سروس کو بھیجی جاتی ہے",
+      consent_text:"ذہین جواب دینے کے لیے، آپ کا پیغام ایپ کے ہوسٹنگ سرور کے ذریعے Anthropic (AI فراہم کنندہ) کو بھیجا جاتا ہے۔ آپ کے پیغامات محفوظ نہیں کیے جاتے اور کسی اور مقصد کے لیے استعمال نہیں ہوتے۔ کیا آپ جاری رکھنے پر راضی ہیں؟",
+      consent_accept:"میں راضی ہوں، شروع کریں", consent_later:"ابھی نہیں",
+      locked_content_text:"یہ مواد Waha Plus کا حصہ ہے۔ مکمل فائدہ اٹھانے کے لیے سبسکرپشن کے ساتھ اسے کھولیں۔",
+      locked_unlock_btn:"Waha Plus کے ساتھ کھولیں",
+      rate_limit_msg:"سروس کو محفوظ رکھنے کے لیے ہم عارضی طور پر پیغام کی حد تک پہنچ گئے ہیں۔ براہ کرم چند منٹ انتظار کریں اور دوبارہ کوشش کریں 🙏",
       done_btn:"آج مکمل ہوا ✓", done_btn_done:"آج مکمل ہوا ✓", streak_label:"لگاتار دن",
       journal_placeholder:"یہاں آزادانہ لکھیں…", journal_save:"محفوظ کریں", journal_saved:"آپ کے آلے پر محفوظ ہو گیا ✓", journal_entries_label:"آپ کی سابقہ تحریریں",
       premium_badge:"پریمیم",
@@ -1268,6 +1509,18 @@ const I18N = {
       achievement_title:"شاندار کامیابی! 🎉", achievement_desc:"آپ نے {n} دن کا سلسلہ مکمل کیا — جاری رکھیں!",
       checkin_cta:"فوری چیک اِن", checkin_eyebrow:"ایک منٹ سے کم میں",
       checkin_title:"ابھی آپ کیسا محسوس کر رہے ہیں؟", checkin_subtitle:"جو مناسب ہو منتخب کریں، ہم فوراً موزوں مشق تجویز کریں گے۔",
+      checkin_or:"یا اپنے الفاظ میں بتائیں", checkin_freetext_placeholder:"مثلاً: کل کے بارے میں پریشان ہوں...",
+      checkin_freetext_btn:"تجویز حاصل کریں", checkin_thinking:"ایک لمحہ...", checkin_error:"ابھی جواب نہیں مل سکا، تھوڑی دیر بعد دوبارہ کوشش کریں۔",
+      ai_unavailable_notice:"⚠️ AI عارضی طور پر دستیاب نہیں ہے — یہ ایک عمومی جواب ہے، آپ کے پیغام کے لیے خاص نہیں",
+      clear_memory_btn:"🗑️ چیٹ صاف کریں",
+      brief_eyebrow:"صبح بخیر", brief_title:"آپ کے دن کا خلاصہ",
+      brief_streak_prefix:"آپ کا سلسلہ:", brief_streak_suffix:"دن مسلسل",
+      brief_mood_up:"آپ کا موڈ حال ہی میں بہتر ہوا ہے — ایسے ہی جاری رکھیں", brief_mood_down:"آپ کا موڈ حال ہی میں تھوڑا بھاری رہا ہے — اپنا وقت لیں",
+      brief_mood_stable:"آپ کا موڈ حال ہی میں کافی مستحکم رہا ہے",
+      brief_suggest_label:"ابھی تک آزمایا نہیں", brief_start_btn:"ابھی شروع کریں",
+      brief_word_prefix:"آپ کی حالیہ جرنل میں سب سے زیادہ استعمال ہونے والا لفظ:",
+      mood_suggest_text:"ہم نے محسوس کیا کہ آپ کا موڈ حال ہی میں تھوڑا بھاری رہا ہے — یہ مدد کر سکتا ہے:",
+      mood_suggest_btn:"آزمائیں",
       checkin_opt1:"اضطراب یا تناؤ", checkin_opt2:"اداسی یا دل پر بوجھ", checkin_opt3:"منتشر، تیز ذہن", checkin_opt4:"جسمانی تھکاوٹ",
       crisis_button:"مجھے ابھی مدد چاہیے", crisis_eyebrow:"آپ اکیلے نہیں ہیں",
       crisis_title:"حقیقی مدد — مفت اور خفیہ", crisis_subtitle:"اگر آپ ابھی شدید بحران سے گزر رہے ہیں تو ان لائنوں میں سے کسی ایک سے رابطہ کریں — تربیت یافتہ افراد آپ کی بات سننے کے لیے تیار ہیں۔",
@@ -1320,11 +1573,19 @@ const I18N = {
       prefs_experience_label:"Опыт",
       prefs_calm_title:"Сделать пространство спокойнее", prefs_calm_desc:"Отключить лишние анимации и переходы.",
       prefs_privacy_label:"Конфиденциальность простыми словами",
-      prefs_privacy_quote:"Твои мысли — не данные для сбора. Это демо-версия — всё, что вы здесь вводите (например, дневник или настроение), сохраняется только на вашем устройстве и никогда не передаётся на сервер или третьим лицам.",
+      prefs_privacy_quote:"Твои мысли — не данные, которые собирают без твоего ведома. Дневник, серия и настроение сохраняются только на твоём устройстве и никогда его не покидают. А сообщения чата отправляются во внешний сервис ИИ для создания разумного ответа — как было объяснено в начале первого чата — а также сохраняются только локально, чтобы чат помнил вас в следующий раз. Вы можете удалить их в любой момент.",
       prefs_dark_title:"Тёмный режим", prefs_dark_desc:"Более мягкие цвета при слабом освещении.",
       prefs_textlarge_title:"Крупный текст", prefs_textlarge_desc:"Увеличивает текст упражнений, статей и чата для удобства чтения.",
+      voice_gender_label:"Голос для чтения", voice_gender_desc:"Чтобы настроить голос озвучки, скажите нам, как вы себя определяете (по желанию, используется только для выбора голоса, если на устройстве есть альтернатива).",
+      voice_gender_male:"Мужской", voice_gender_female:"Женский", voice_gender_none:"Не указывать",
       aria_close:"Закрыть", aria_share:"Поделиться", aria_mic:"Голосовой ввод",
       reminder_text:"Вы ещё не прошли сегодняшнюю проверку 👋", reminder_cta:"Проверить сейчас",
+      consent_eyebrow:"Прежде чем начать", consent_title:"Ваш чат отправляется во внешний сервис ИИ",
+      consent_text:"Чтобы дать разумный ответ, ваше сообщение отправляется в Anthropic (поставщику ИИ) через хостинг-сервер приложения. Ваши сообщения не сохраняются и не используются для других целей. Согласны продолжить?",
+      consent_accept:"Согласен, начнём", consent_later:"Не сейчас",
+      locked_content_text:"Этот контент относится к Waha Plus. Откройте его с подпиской, чтобы использовать полностью.",
+      locked_unlock_btn:"Открыть с Waha Plus",
+      rate_limit_msg:"Мы временно достигли лимита сообщений для защиты сервиса. Подождите несколько минут и попробуйте снова 🙏",
       done_btn:"Сделано сегодня ✓", done_btn_done:"Сделано сегодня ✓", streak_label:"дней подряд",
       journal_placeholder:"Пиши здесь свободно…", journal_save:"Сохранить", journal_saved:"Сохранено на твоём устройстве ✓", journal_entries_label:"Твои прошлые записи",
       premium_badge:"Премиум",
@@ -1342,6 +1603,18 @@ const I18N = {
       achievement_title:"Отличное достижение! 🎉", achievement_desc:"Ты достиг серии в {n} дней — продолжай!",
       checkin_cta:"Быстрая проверка", checkin_eyebrow:"Меньше минуты",
       checkin_title:"Как ты себя чувствуешь сейчас?", checkin_subtitle:"Выбери подходящее, и мы сразу предложим подходящее упражнение.",
+      checkin_or:"Или опиши своими словами", checkin_freetext_placeholder:"например: я нервничаю из-за завтрашнего дня...",
+      checkin_freetext_btn:"Получить совет", checkin_thinking:"Секунду...", checkin_error:"Сейчас не удалось получить ответ, попробуйте ещё раз чуть позже.",
+      ai_unavailable_notice:"⚠️ ИИ временно недоступен — это общий ответ, не адаптированный под ваше сообщение",
+      clear_memory_btn:"🗑️ Очистить чат",
+      brief_eyebrow:"Доброе утро", brief_title:"Твоя сводка дня",
+      brief_streak_prefix:"Твоя серия:", brief_streak_suffix:"дней подряд",
+      brief_mood_up:"Твоё настроение улучшилось в последнее время — продолжай в том же духе", brief_mood_down:"Твоё настроение было немного тяжелее в последнее время — не торопись",
+      brief_mood_stable:"Твоё настроение было довольно стабильным в последнее время",
+      brief_suggest_label:"Ещё не пробовал(а)", brief_start_btn:"Начать сейчас",
+      brief_word_prefix:"Самое частое слово в вашем дневнике недавно:",
+      mood_suggest_text:"Мы заметили, что ваше настроение было немного тяжелее в последнее время — это может помочь:",
+      mood_suggest_btn:"Попробовать",
       checkin_opt1:"Тревога или напряжение", checkin_opt2:"Грусть или тяжесть на сердце", checkin_opt3:"Рассеянный, стремительный ум", checkin_opt4:"Физическое истощение",
       crisis_button:"Мне нужна помощь сейчас", crisis_eyebrow:"Вы не одни",
       crisis_title:"Реальная помощь — бесплатно и конфиденциально", crisis_subtitle:"Если вы сейчас переживаете острый кризис, обратитесь на одну из этих линий — обученные люди готовы вас выслушать.",
@@ -1394,11 +1667,19 @@ const I18N = {
       prefs_experience_label:"Experiência",
       prefs_calm_title:"Manter o espaço calmo", prefs_calm_desc:"Desativar animações e transições desnecessárias.",
       prefs_privacy_label:"Privacidade, dita claramente",
-      prefs_privacy_quote:"Os teus pensamentos não são dados a recolher. Isto é uma demo — tudo o que escreves aqui (como o diário ou o humor) é guardado apenas no teu próprio dispositivo, nunca enviado a um servidor ou a terceiros.",
+      prefs_privacy_quote:"Os teus pensamentos não são dados recolhidos sem o teu conhecimento. O diário, a sequência e o humor são guardados apenas no teu dispositivo e nunca saem dele. Já as mensagens do chat são enviadas a um serviço de IA externo para gerar uma resposta inteligente — como explicado no início do teu primeiro chat — e são também guardadas apenas localmente para que o chat se lembre de ti da próxima vez. Podes apagá-lo quando quiseres.",
       prefs_dark_title:"Modo escuro", prefs_dark_desc:"Cores mais suaves para pouca luz.",
       prefs_textlarge_title:"Texto maior", prefs_textlarge_desc:"Aumenta o texto dos exercícios, artigos e chat para facilitar a leitura.",
+      voice_gender_label:"Voz de leitura", voice_gender_desc:"Para ajustar a voz de leitura, diz-nos como te identificas (opcional, usado apenas para escolher uma voz se o teu dispositivo oferecer uma alternativa).",
+      voice_gender_male:"Homem", voice_gender_female:"Mulher", voice_gender_none:"Prefiro não dizer",
       aria_close:"Fechar", aria_share:"Partilhar", aria_mic:"Entrada de voz",
       reminder_text:"Ainda não fizeste o teu check-in de hoje 👋", reminder_cta:"Verificar agora",
+      consent_eyebrow:"Antes de começar", consent_title:"O teu chat é enviado para um serviço externo de IA",
+      consent_text:"Para responder com inteligência, a tua mensagem é enviada para a Anthropic (fornecedora de IA) através do servidor de alojamento da app. As tuas mensagens não são guardadas nem usadas para qualquer outro fim. Aceitas continuar?",
+      consent_accept:"Aceito, vamos começar", consent_later:"Agora não",
+      locked_content_text:"Este conteúdo faz parte do Waha Plus. Desbloqueia-o com a subscrição para aproveitá-lo totalmente.",
+      locked_unlock_btn:"Desbloquear com Waha Plus",
+      rate_limit_msg:"Atingimos temporariamente o limite de mensagens para proteger o serviço. Aguarda alguns minutos e tenta novamente 🙏",
       done_btn:"Feito hoje ✓", done_btn_done:"Feito hoje ✓", streak_label:"dias seguidos",
       journal_placeholder:"Escreve livremente aqui…", journal_save:"Guardar", journal_saved:"Guardado no teu dispositivo ✓", journal_entries_label:"Os teus registos anteriores",
       premium_badge:"Premium",
@@ -1416,6 +1697,18 @@ const I18N = {
       achievement_title:"Grande conquista! 🎉", achievement_desc:"Atingiste {n} dias seguidos — continua assim!",
       checkin_cta:"Verificação rápida", checkin_eyebrow:"Em menos de um minuto",
       checkin_title:"Como te sentes agora?", checkin_subtitle:"Escolhe o que descreve o teu estado, e sugerimos já um exercício adequado.",
+      checkin_or:"Ou descreve com as tuas palavras", checkin_freetext_placeholder:"ex.: estou ansioso/a com amanhã...",
+      checkin_freetext_btn:"Obter uma sugestão", checkin_thinking:"Um momento...", checkin_error:"Não foi possível obter resposta agora, tenta novamente daqui a pouco.",
+      ai_unavailable_notice:"⚠️ A IA está temporariamente indisponível — esta é uma resposta genérica, não adaptada à tua mensagem",
+      clear_memory_btn:"🗑️ Limpar conversa",
+      brief_eyebrow:"Bom dia", brief_title:"O teu resumo do dia",
+      brief_streak_prefix:"A tua sequência:", brief_streak_suffix:"dias seguidos",
+      brief_mood_up:"O teu humor tem melhorado ultimamente — continua assim", brief_mood_down:"O teu humor tem estado um pouco mais pesado ultimamente — dá o teu tempo",
+      brief_mood_stable:"O teu humor tem estado bastante estável ultimamente",
+      brief_suggest_label:"Ainda não experimentaste", brief_start_btn:"Começar agora",
+      brief_word_prefix:"Palavra mais frequente no teu diário recentemente:",
+      mood_suggest_text:"Reparámos que o teu humor tem estado um pouco mais pesado ultimamente — isto pode ajudar:",
+      mood_suggest_btn:"Experimentar",
       checkin_opt1:"Ansioso ou tenso", checkin_opt2:"Triste ou com peso no coração", checkin_opt3:"Mente dispersa e acelerada", checkin_opt4:"Exaustão física",
       crisis_button:"Preciso de ajuda agora", crisis_eyebrow:"Você não está sozinho(a)",
       crisis_title:"Ajuda real — gratuita e confidencial", crisis_subtitle:"Se você está passando por uma crise aguda agora, entre em contato com uma destas linhas — pessoas treinadas estão prontas para ouvir você.",
@@ -1468,11 +1761,19 @@ const I18N = {
       prefs_experience_label:"Esperienza",
       prefs_calm_title:"Mantieni lo spazio tranquillo", prefs_calm_desc:"Disattiva animazioni e transizioni non necessarie.",
       prefs_privacy_label:"Privacy, detta chiaramente",
-      prefs_privacy_quote:"I tuoi pensieri non sono dati da raccogliere. Questa è una demo — tutto ciò che scrivi qui (come il diario o l'umore) viene salvato solo sul tuo dispositivo, mai inviato a un server o a terzi.",
+      prefs_privacy_quote:"I tuoi pensieri non sono dati raccolti a tua insaputa. Diario, serie e umore vengono salvati solo sul tuo dispositivo e non lo lasciano mai. I messaggi della chat, invece, vengono inviati a un servizio IA esterno per generare una risposta intelligente — come spiegato all'inizio della tua prima chat — e vengono salvati anche solo localmente affinché la chat ti ricordi la prossima volta. Puoi cancellarla quando vuoi.",
       prefs_dark_title:"Modalità scura", prefs_dark_desc:"Colori più tenui per la scarsa illuminazione.",
       prefs_textlarge_title:"Testo più grande", prefs_textlarge_desc:"Ingrandisce esercizi, articoli e chat per una lettura più facile.",
+      voice_gender_label:"Voce di lettura", voice_gender_desc:"Per regolare la voce di lettura, dicci come ti identifichi (facoltativo, usato solo per scegliere una voce se il tuo dispositivo offre un'alternativa).",
+      voice_gender_male:"Uomo", voice_gender_female:"Donna", voice_gender_none:"Preferisco non dirlo",
       aria_close:"Chiudi", aria_share:"Condividi", aria_mic:"Inserimento vocale",
       reminder_text:"Non hai ancora fatto il check-in di oggi 👋", reminder_cta:"Controlla ora",
+      consent_eyebrow:"Prima di iniziare", consent_title:"La tua chat viene inviata a un servizio IA esterno",
+      consent_text:"Per rispondere in modo intelligente, il tuo messaggio viene inviato ad Anthropic (il fornitore di IA) tramite il server di hosting dell'app. I tuoi messaggi non vengono salvati né usati per altri scopi. Accetti di continuare?",
+      consent_accept:"Accetto, iniziamo", consent_later:"Non ora",
+      locked_content_text:"Questo contenuto fa parte di Waha Plus. Sbloccalo con l'abbonamento per usarlo appieno.",
+      locked_unlock_btn:"Sblocca con Waha Plus",
+      rate_limit_msg:"Abbiamo temporaneamente raggiunto il limite di messaggi per proteggere il servizio. Attendi qualche minuto e riprova 🙏",
       done_btn:"Fatto oggi ✓", done_btn_done:"Fatto oggi ✓", streak_label:"giorni consecutivi",
       journal_placeholder:"Scrivi liberamente qui…", journal_save:"Salva", journal_saved:"Salvato sul tuo dispositivo ✓", journal_entries_label:"I tuoi scritti precedenti",
       premium_badge:"Premium",
@@ -1490,6 +1791,18 @@ const I18N = {
       achievement_title:"Grande traguardo! 🎉", achievement_desc:"Hai raggiunto {n} giorni consecutivi — continua così!",
       checkin_cta:"Check-in veloce", checkin_eyebrow:"In meno di un minuto",
       checkin_title:"Come ti senti adesso?", checkin_subtitle:"Scegli ciò che ti descrive, e ti suggeriamo subito un esercizio adatto.",
+      checkin_or:"Oppure descrivilo con parole tue", checkin_freetext_placeholder:"es.: sono in ansia per domani...",
+      checkin_freetext_btn:"Ricevi un suggerimento", checkin_thinking:"Un momento...", checkin_error:"Non è stato possibile ottenere una risposta ora, riprova tra poco.",
+      ai_unavailable_notice:"⚠️ L'IA non è temporaneamente disponibile — questa è una risposta generica, non personalizzata per il tuo messaggio",
+      clear_memory_btn:"🗑️ Cancella chat",
+      brief_eyebrow:"Buongiorno", brief_title:"Il tuo riepilogo del giorno",
+      brief_streak_prefix:"La tua serie:", brief_streak_suffix:"giorni di fila",
+      brief_mood_up:"Il tuo umore è migliorato ultimamente — continua così", brief_mood_down:"Il tuo umore è stato un po' più pesante ultimamente — prenditi il tuo tempo",
+      brief_mood_stable:"Il tuo umore è stato abbastanza stabile ultimamente",
+      brief_suggest_label:"Non ancora provato", brief_start_btn:"Inizia ora",
+      brief_word_prefix:"Parola più frequente nel tuo diario di recente:",
+      mood_suggest_text:"Abbiamo notato che il tuo umore è stato un po' più pesante ultimamente — questo potrebbe aiutare:",
+      mood_suggest_btn:"Prova",
       checkin_opt1:"Ansioso o teso", checkin_opt2:"Triste o con un peso nel cuore", checkin_opt3:"Mente dispersiva e frenetica", checkin_opt4:"Esaurimento fisico",
       crisis_button:"Ho bisogno di aiuto ora", crisis_eyebrow:"Non sei solo/a",
       crisis_title:"Aiuto reale — gratuito e confidenziale", crisis_subtitle:"Se stai vivendo una crisi acuta in questo momento, contatta una di queste linee — persone formate sono pronte ad ascoltarti.",
@@ -2187,6 +2500,8 @@ let currentLang = 'ar';
 let demoIndex = 0;
 let chatHistory = [];
 const MAX_CHAT_HISTORY = 12;
+let pendingChatMessage = null;
+let pendingCheckinText = null;
 let voiceEnabled = false;
 let recognizing = false;
 let recognition = null;
@@ -2275,7 +2590,7 @@ function renderExercises(){
     const isPremium = PREMIUM_EXERCISE_IDS.includes(ex.id);
     const card = document.createElement('div');
     card.className = 'card in-view clickable';
-    card.onclick = isPremium ? openUpgrade : (()=> openExercise(ex.id));
+    card.onclick = ()=> openExercise(ex.id);
     const goLabels = { ar:'ابدأ ←', de:'Loslegen →', en:'Start →', fr:'Commencer →', tr:'Başla →', ku:'Dest pê bike →', es:'Empezar →', fa:'شروع ←', ur:'شروع کریں ←', ru:'Начать →', pt:'Começar →', it:'Inizia →' };
     const goLabel = goLabels[currentLang] || goLabels.en;
     const badge = isPremium ? '<span class="premium-tag">'+I18N[currentLang].premium_badge+'</span>' : '';
@@ -2293,7 +2608,10 @@ function openExercise(id){
   document.getElementById('modalTag').textContent = ex.tag;
   document.getElementById('modalTitle').textContent = ex.title;
   document.getElementById('modalDesc').textContent = ex.desc;
+  const isLocked = PREMIUM_EXERCISE_IDS.includes(ex.id);
+  document.getElementById('modalLocked').style.display = isLocked ? 'block' : 'none';
   const stepsBox = document.getElementById('modalSteps');
+  stepsBox.style.display = isLocked ? 'none' : '';
   stepsBox.innerHTML = '';
   ex.steps.forEach((s,i)=>{
     const li = document.createElement('li');
@@ -2301,24 +2619,26 @@ function openExercise(id){
     stepsBox.appendChild(li);
   });
   const timerBtn = document.getElementById('modalTimerBtn');
-  timerBtn.style.display = ex.duration ? 'inline-block' : 'none';
+  timerBtn.style.display = (!isLocked && ex.duration) ? 'inline-block' : 'none';
   timerBtn.textContent = I18N[currentLang].timer_start;
   document.getElementById('modalReadBtn').textContent = I18N[currentLang].read_aloud;
+  document.getElementById('modalReadBtn').style.display = isLocked ? 'none' : '';
   const doneBtn = document.getElementById('modalDoneBtn');
   const doneToday = safeGet('mc_last_done') === todayKey();
   doneBtn.textContent = doneToday ? I18N[currentLang].done_btn_done : I18N[currentLang].done_btn;
+  doneBtn.style.display = isLocked ? 'none' : '';
   const disp = document.getElementById('modalTimerDisplay');
   disp.classList.remove('show');
   clearInterval(modalTimerInterval);
   const moodWidget = document.getElementById('moodWidget');
-  if(ex.id === 'ex-mood'){
+  if(!isLocked && ex.id === 'ex-mood'){
     moodWidget.style.display = 'block';
     renderMoodWidget();
   } else {
     moodWidget.style.display = 'none';
   }
   const journalWidget = document.getElementById('journalWidget');
-  if(ex.cat === 'write'){
+  if(!isLocked && ex.cat === 'write'){
     journalWidget.style.display = 'block';
     renderJournalWidget(ex.id);
   } else {
@@ -2364,6 +2684,129 @@ function readModalAloud(){
   window.speechSynthesis.speak(utter);
 }
 
+function addTriedExercise(id){
+  try{
+    const raw = safeGet('mc_tried_exercises');
+    const arr = raw ? JSON.parse(raw) : [];
+    if(!arr.includes(id)) arr.push(id);
+    safeSet('mc_tried_exercises', JSON.stringify(arr));
+  }catch(e){}
+}
+function getTriedExercises(){
+  try{ const raw = safeGet('mc_tried_exercises'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+
+let briefSuggestedId = null;
+const COMMON_STOPWORDS = {
+  ar: ['من','في','على','إلى','عن','هذا','هذه','التي','الذي','كان','كانت','مع','أو','ثم','قد','لا','لم','لن','أن','إن','كل','بعض','هو','هي','أنا','انت','نحن','كنت','ولا','فيه','فيها'],
+  en: ['the','and','that','this','with','from','have','has','was','were','are','for','you','your','not','but','they','them','just','really'],
+  de: ['und','der','die','das','ich','ist','war','mit','auch','nicht','ein','eine','für','wie','aber','mich','mir'],
+};
+function computeTopJournalWord(){
+  const ids = ['ex-gratitude','ex-feelings','ex-reframe'];
+  let allText = '';
+  ids.forEach(id => {
+    getJournalEntries(id).forEach(e => { allText += ' ' + (e.text || ''); });
+  });
+  if(!allText.trim()) return null;
+  const stop = new Set(COMMON_STOPWORDS[currentLang] || []);
+  const words = allText.toLowerCase().split(/[\s.,!؟?،؛;:\-\n]+/).filter(w => w.length >= 3 && !stop.has(w));
+  if(!words.length) return null;
+  const freq = {};
+  words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
+  let top = null, topCount = 0;
+  Object.keys(freq).forEach(w => { if(freq[w] > topCount){ top = w; topCount = freq[w]; } });
+  return (top && topCount >= 2) ? top : null;
+}
+
+function pickSuggestedExercise(){
+  const list = (EXERCISES[currentLang] || EXERCISES.en).filter(e => !PREMIUM_EXERCISE_IDS.includes(e.id));
+  const tried = getTriedExercises();
+  const untried = list.filter(e => !tried.includes(e.id));
+  const pool = untried.length ? untried : list;
+  return pool[Math.floor(Math.random() * pool.length)] || null;
+}
+
+function maybeShowDailyBrief(){
+  const lastDone = safeGet('mc_last_done');
+  if(!lastDone) return; // new user, nothing to summarize yet
+  const today = todayKey();
+  if(safeGet('mc_daily_brief_shown') === today) return; // already shown today
+  safeSet('mc_daily_brief_shown', today);
+
+  const dict = I18N[currentLang];
+  const streak = parseInt(safeGet('mc_streak') || '0', 10);
+  document.getElementById('briefStreakLine').textContent = '🔥 ' + dict.brief_streak_prefix + ' ' + streak + ' ' + dict.brief_streak_suffix;
+
+  const moodLine = document.getElementById('briefMoodLine');
+  if(moodLog.length >= 4){
+    const recent = moodLog.slice(-5);
+    const prior = moodLog.slice(-10, -5);
+    const avg = arr => arr.reduce((a,b)=>a+b,0) / arr.length;
+    const recentAvg = avg(recent);
+    if(prior.length >= 2){
+      const priorAvg = avg(prior);
+      const diff = recentAvg - priorAvg;
+      let trendText;
+      if(diff > 0.4) trendText = dict.brief_mood_up;
+      else if(diff < -0.4) trendText = dict.brief_mood_down;
+      else trendText = dict.brief_mood_stable;
+      moodLine.textContent = '📊 ' + trendText;
+    } else {
+      moodLine.textContent = '📊 ' + dict.brief_mood_stable;
+    }
+    moodLine.style.display = 'block';
+  } else {
+    moodLine.style.display = 'none';
+  }
+
+  const pick = pickSuggestedExercise();
+  briefSuggestedId = pick ? pick.id : null;
+  document.getElementById('briefSuggestTitle').textContent = pick ? pick.title : '';
+  document.getElementById('briefSuggestBtn').textContent = dict.brief_start_btn;
+
+  const wordLine = document.getElementById('briefWordLine');
+  const topWord = computeTopJournalWord();
+  if(topWord){
+    wordLine.textContent = '💬 ' + dict.brief_word_prefix + ' "' + topWord + '"';
+    wordLine.style.display = 'block';
+  } else {
+    wordLine.style.display = 'none';
+  }
+
+  document.getElementById('dailyBriefModal').classList.add('open');
+}
+function closeDailyBrief(){
+  document.getElementById('dailyBriefModal').classList.remove('open');
+}
+function startBriefSuggestion(){
+  closeDailyBrief();
+  if(briefSuggestedId) openExercise(briefSuggestedId);
+}
+
+let moodSuggestedId = null;
+function maybeSuggestFromMood(){
+  const box = document.getElementById('moodSuggestBox');
+  if(moodLog.length < 3){ box.style.display = 'none'; return; }
+  const recent = moodLog.slice(-3);
+  const avg = recent.reduce((a,b)=>a+b,0) / recent.length;
+  if(avg > 2.2){ box.style.display = 'none'; return; }
+  const today = todayKey();
+  if(safeGet('mc_mood_suggest_dismissed') === today){ box.style.display = 'none'; return; }
+  const pick = pickSuggestedExercise();
+  if(!pick){ box.style.display = 'none'; return; }
+  moodSuggestedId = pick.id;
+  const dict = I18N[currentLang];
+  document.getElementById('moodSuggestText').textContent = dict.mood_suggest_text;
+  document.getElementById('moodSuggestBtn').textContent = dict.mood_suggest_btn + ': ' + pick.title;
+  box.style.display = 'block';
+}
+function startMoodSuggestion(){
+  safeSet('mc_mood_suggest_dismissed', todayKey());
+  document.getElementById('moodSuggestBox').style.display = 'none';
+  if(moodSuggestedId) openExercise(moodSuggestedId);
+}
+
 function loadMoodLog(){
   try{ const raw = safeGet('mc_moodlog'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
 }
@@ -2379,10 +2822,11 @@ function renderMoodWidget(){
     const b = document.createElement('button');
     b.textContent = f;
     b.setAttribute('aria-label', dict.mood_prompt + ' ' + (i+1) + '/5');
-    b.onclick = ()=>{ moodLog.push(i+1); saveMoodLog(); renderMoodChart(); updateProgressStats(); };
+    b.onclick = ()=>{ moodLog.push(i+1); saveMoodLog(); renderMoodChart(); updateProgressStats(); maybeSuggestFromMood(); };
     btnBox.appendChild(b);
   });
   renderMoodChart();
+  maybeSuggestFromMood();
 }
 function renderMoodChart(){
   const chart = document.getElementById('moodChart');
@@ -2405,7 +2849,7 @@ function renderMoodChart(){
 let currentJournalExId = null;
 function journalKey(exId){ return 'mc_journal_' + exId; }
 
-const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large'];
+const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory'];
 const BACKUP_JOURNAL_IDS = ['ex-gratitude','ex-feelings','ex-reframe'];
 
 function exportBackup(){
@@ -2452,6 +2896,16 @@ function importBackup(file){
       renderMoodChart();
       restorePreferences();
       updateProgressStats();
+      const log = document.getElementById('chatLog');
+      log.innerHTML = '';
+      chatHistory = [];
+      loadChatMemory();
+      if(!chatHistory.length){
+        const initial = document.createElement('div');
+        initial.className = 'msg bot';
+        initial.textContent = I18N[currentLang].chat_initial_msg;
+        log.appendChild(initial);
+      }
       const restoredLang = safeGet('mc_lang');
       if(restoredLang && I18N[restoredLang]) setLang(restoredLang);
       showBackupStatus(I18N[currentLang].backup_import_done);
@@ -2532,10 +2986,25 @@ function getJournalEntries(exId){
     return raw ? JSON.parse(raw) : [];
   }catch(e){ return []; }
 }
+const JOURNAL_PROMPTS = {
+  ar: { 'ex-gratitude':"١. \n٢. \n٣. ", 'ex-feelings':"أشعر بـ...\nلأن...\nوأحتاج الآن...", 'ex-reframe':"الفكرة المزعجة:\nهل هي حقيقة مؤكدة أم افتراض؟\nفكرة أكثر توازناً:" },
+  de: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Ich fühle mich...\nweil...\nund brauche gerade...", 'ex-reframe':"Der belastende Gedanke:\nIst das eine Tatsache oder eine Annahme?\nEin ausgewogenerer Gedanke:" },
+  en: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"I feel...\nbecause...\nand right now I need...", 'ex-reframe':"The troubling thought:\nIs it a fact or an assumption?\nA more balanced thought:" },
+  fr: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Je ressens...\nparce que...\net j'ai besoin maintenant de...", 'ex-reframe':"La pensée qui te préoccupe :\nEst-ce un fait ou une supposition ?\nUne pensée plus équilibrée :" },
+  tr: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Şöyle hissediyorum...\nçünkü...\nve şu an ihtiyacım olan...", 'ex-reframe':"Rahatsız edici düşünce:\nBu bir gerçek mi yoksa varsayım mı?\nDaha dengeli bir düşünce:" },
+  ku: { 'ex-gratitude':"١. \n٢. \n٣. ", 'ex-feelings':"Ez hîs dikim...\nji ber ku...\nû niha hewceyê min bi...", 'ex-reframe':"Raman a aciz dike:\nMa ev rastiyek e an texmînek e?\nRamanek bi tevahî tevlihevtir:" },
+  es: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Me siento...\nporque...\ny ahora mismo necesito...", 'ex-reframe':"El pensamiento inquietante:\n¿Es un hecho o una suposición?\nUn pensamiento más equilibrado:" },
+  fa: { 'ex-gratitude':"۱. \n۲. \n۳. ", 'ex-feelings':"احساس می‌کنم...\nچون...\nو الان نیاز دارم به...", 'ex-reframe':"فکر آزاردهنده:\nآیا این یک واقعیت است یا یک فرض؟\nفکری متعادل‌تر:" },
+  ur: { 'ex-gratitude':"۱. \n۲. \n۳. ", 'ex-feelings':"میں محسوس کرتا/کرتی ہوں...\nکیونکہ...\nاور ابھی مجھے ضرورت ہے...", 'ex-reframe':"پریشان کن خیال:\nکیا یہ حقیقت ہے یا مفروضہ؟\nزیادہ متوازن خیال:" },
+  ru: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Я чувствую...\nпотому что...\nи прямо сейчас мне нужно...", 'ex-reframe':"Тревожная мысль:\nЭто факт или предположение?\nБолее взвешенная мысль:" },
+  pt: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Sinto-me...\nporque...\ne agora preciso de...", 'ex-reframe':"O pensamento perturbador:\nÉ um facto ou uma suposição?\nUm pensamento mais equilibrado:" },
+  it: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Mi sento...\nperché...\ne adesso ho bisogno di...", 'ex-reframe':"Il pensiero preoccupante:\nÈ un fatto o un'ipotesi?\nUn pensiero più equilibrato:" },
+};
 function renderJournalWidget(exId){
   currentJournalExId = exId;
   const dict = I18N[currentLang];
-  document.getElementById('journalInput').placeholder = dict.journal_placeholder;
+  const guided = (JOURNAL_PROMPTS[currentLang] && JOURNAL_PROMPTS[currentLang][exId]) || (JOURNAL_PROMPTS.en && JOURNAL_PROMPTS.en[exId]);
+  document.getElementById('journalInput').placeholder = guided || dict.journal_placeholder;
   document.getElementById('journalInput').value = '';
   document.getElementById('journalSaveBtn').textContent = dict.journal_save;
   document.getElementById('journalSavedMsg').style.display = 'none';
@@ -2603,6 +3072,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(onboarding){
     onboarding.addEventListener('click', (e)=>{ if(e.target.id === 'onboardingModal') skipOnboarding(); });
   }
+  const chatConsent = document.getElementById('chatConsentModal');
+  if(chatConsent){
+    chatConsent.addEventListener('click', (e)=>{ if(e.target.id === 'chatConsentModal') closeChatConsent(); });
+  }
+  const dailyBrief = document.getElementById('dailyBriefModal');
+  if(dailyBrief){
+    dailyBrief.addEventListener('click', (e)=>{ if(e.target.id === 'dailyBriefModal') closeDailyBrief(); });
+  }
 });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeExercise(); });
 
@@ -2662,6 +3139,8 @@ function updateStreakDisplay(){
 function markExerciseDone(){
   const last = safeGet('mc_last_done');
   const today = todayKey();
+  const doneId = currentExercise ? currentExercise.id : (currentLibItem ? currentLibItem.id : null);
+  if(doneId) addTriedExercise(doneId);
   if(last === today){ updateProgressStats(); return; } // already counted today
   const y = new Date(); y.setDate(y.getDate()-1);
   const yesterdayKey = y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');
@@ -2687,15 +3166,30 @@ function restorePreferences(){
   document.body.classList.toggle('calm-mode', calm);
   document.body.classList.toggle('dark-mode', dark);
   document.body.classList.toggle('text-large', textLarge);
+  updateGenderButtonsUI();
   const savedLang = safeGet('mc_lang');
   updateStreakDisplay();
   return savedLang;
+}
+function setUserGender(g){
+  safeSet('mc_user_gender', g);
+  updateGenderButtonsUI();
+}
+function updateGenderButtonsUI(){
+  const g = safeGet('mc_user_gender') || '';
+  const map = { male:'genderBtnMale', female:'genderBtnFemale', '':'genderBtnNone' };
+  Object.keys(map).forEach(key=>{
+    const el = document.getElementById(map[key]);
+    if(el) el.classList.toggle('active', g === key);
+  });
 }
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePrefs(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeUpgrade(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCheckin(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCrisis(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && document.getElementById('onboardingModal').classList.contains('open')) skipOnboarding(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeChatConsent(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeDailyBrief(); });
 
 const LIB_FILTERS = ['all','anxiety','habits','relationships','self','emotions','stress'];
 let currentLibFilter = 'all';
@@ -2721,7 +3215,7 @@ function renderLibrary(){
     const isPremium = PREMIUM_LIBRARY_IDS.includes(it.id);
     const card = document.createElement('div');
     card.className = 'card in-view clickable';
-    card.onclick = isPremium ? openUpgrade : (()=> openLibraryItem(it.id));
+    card.onclick = ()=> openLibraryItem(it.id);
     const badge = isPremium ? '<span class="premium-tag">'+I18N[currentLang].premium_badge+'</span>' : '';
     card.innerHTML = '<div class="num">'+it.tag+badge+'</div><h3>'+it.title+'</h3><p>'+it.desc+'</p><span class="go">'+I18N[currentLang].read_more+'</span>';
     grid.appendChild(card);
@@ -2736,19 +3230,26 @@ function openLibraryItem(id){
   currentExercise = null;
   document.getElementById('modalTag').textContent = item.tag;
   document.getElementById('modalTitle').textContent = item.title;
-  document.getElementById('modalDesc').textContent = '';
+  document.getElementById('modalDesc').textContent = item.desc || '';
+  const isLocked = PREMIUM_LIBRARY_IDS.includes(item.id);
+  document.getElementById('modalLocked').style.display = isLocked ? 'block' : 'none';
   const stepsBox = document.getElementById('modalSteps');
+  stepsBox.style.display = isLocked ? 'none' : '';
   stepsBox.innerHTML = '';
-  const li = document.createElement('li');
-  li.innerHTML = '<span>'+item.body+'</span>';
-  stepsBox.appendChild(li);
+  if(!isLocked){
+    const li = document.createElement('li');
+    li.innerHTML = '<span>'+item.body+'</span>';
+    stepsBox.appendChild(li);
+  }
   document.getElementById('modalTimerBtn').style.display = 'none';
   document.getElementById('modalReadBtn').textContent = I18N[currentLang].read_aloud;
+  document.getElementById('modalReadBtn').style.display = isLocked ? 'none' : '';
   document.getElementById('moodWidget').style.display = 'none';
   document.getElementById('journalWidget').style.display = 'none';
   const doneBtn = document.getElementById('modalDoneBtn');
   const doneToday = safeGet('mc_last_done') === todayKey();
   doneBtn.textContent = doneToday ? I18N[currentLang].done_btn_done : I18N[currentLang].done_btn;
+  doneBtn.style.display = isLocked ? 'none' : '';
   document.getElementById('exModal').classList.add('open');
 }
 
@@ -2781,10 +3282,56 @@ function openCheckin(){
     };
     box.appendChild(btn);
   });
+  document.getElementById('checkinFreeText').value = '';
+  const respBox = document.getElementById('checkinFreeTextResponse');
+  respBox.style.display = 'none';
+  respBox.textContent = '';
+  document.getElementById('checkinFreeTextBtn').disabled = false;
   document.getElementById('checkinModal').classList.add('open');
 }
 function closeCheckin(){
   document.getElementById('checkinModal').classList.remove('open');
+}
+
+function sendCheckinText(){
+  const input = document.getElementById('checkinFreeText');
+  const text = input.value.trim();
+  if(!text) return;
+  if(safeGet('mc_chat_consent') !== '1'){
+    pendingCheckinText = text;
+    document.getElementById('checkinModal').classList.remove('open');
+    document.getElementById('chatConsentModal').classList.add('open');
+    return;
+  }
+  const btn = document.getElementById('checkinFreeTextBtn');
+  const respBox = document.getElementById('checkinFreeTextResponse');
+  btn.disabled = true;
+  respBox.style.display = 'block';
+  respBox.textContent = I18N[currentLang].checkin_thinking;
+
+  fetch('/.netlify/functions/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: [], lang: currentLang, mode: 'checkin' }),
+  })
+  .then(res => {
+    if(res.status === 429){
+      const err = new Error('rate limited');
+      err.rateLimited = true;
+      throw err;
+    }
+    if(!res.ok) throw new Error('bad status ' + res.status);
+    return res.json();
+  })
+  .then(data => {
+    if(!data.reply) throw new Error('empty reply');
+    respBox.textContent = data.reply;
+    btn.disabled = false;
+  })
+  .catch((err)=>{
+    respBox.textContent = (err && err.rateLimited) ? I18N[currentLang].rate_limit_msg : I18N[currentLang].checkin_error;
+    btn.disabled = false;
+  });
 }
 
 function renderProgram(){
@@ -2882,6 +3429,16 @@ function toggleVoice(){
   if(!voiceEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
 }
 
+function guessVoiceGender(name){
+  const n = (name||'').toLowerCase();
+  if(n.includes('female')) return 'female';
+  if(/\bmale\b/.test(n)) return 'male';
+  const knownFemale = ['samantha','victoria','karen','moira','tessa','veena','fiona','allison','ava','susan','zira','laila','salma','amira','fatima','nour','yelda','filiz','ioana','luciana','paulina','ellen','anna','maria','sara','noura'];
+  const knownMale = ['alex','daniel','fred','oliver','arthur','tarik','maged','majed','rashid','yusuf','david','mark','diego','jorge','yannick','stefan','luca','xander','reed'];
+  if(knownFemale.some(k=>n.includes(k))) return 'female';
+  if(knownMale.some(k=>n.includes(k))) return 'male';
+  return null;
+}
 function speak(text){
   if(!voiceEnabled || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
@@ -2889,7 +3446,14 @@ function speak(text){
   utter.lang = speechLangTag(currentLang);
   utter.rate = 0.98;
   const voices = window.speechSynthesis.getVoices();
-  const match = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(currentLang));
+  const langVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(currentLang));
+  const userGender = safeGet('mc_user_gender');
+  let match = null;
+  if(userGender === 'male' || userGender === 'female'){
+    const wantGender = userGender === 'male' ? 'female' : 'male';
+    match = langVoices.find(v => guessVoiceGender(v.name) === wantGender);
+  }
+  if(!match) match = langVoices[0];
   if(match) utter.voice = match;
   const dot = document.getElementById('statusDot');
   utter.onstart = ()=> dot.classList.add('speaking');
@@ -2929,10 +3493,47 @@ function toggleMic(){
   }catch(err){}
 }
 
+function saveChatMemory(){
+  try{ safeSet('mc_chat_memory', JSON.stringify(chatHistory)); }catch(e){}
+}
+function loadChatMemory(){
+  try{
+    const raw = safeGet('mc_chat_memory');
+    if(!raw) return;
+    const parsed = JSON.parse(raw);
+    if(!Array.isArray(parsed)) return;
+    chatHistory = parsed.filter(m => m && (m.role==='user'||m.role==='assistant') && typeof m.content==='string');
+    if(!chatHistory.length) return;
+    const log = document.getElementById('chatLog');
+    chatHistory.forEach(m=>{
+      const bubble = document.createElement('div');
+      bubble.className = 'msg ' + (m.role==='user' ? 'me' : 'bot');
+      bubble.textContent = m.content;
+      log.appendChild(bubble);
+    });
+    log.scrollTop = log.scrollHeight;
+  }catch(e){}
+}
+function clearChatMemory(){
+  chatHistory = [];
+  safeSet('mc_chat_memory', '[]');
+  const log = document.getElementById('chatLog');
+  log.innerHTML = '';
+  const initial = document.createElement('div');
+  initial.className = 'msg bot';
+  initial.textContent = I18N[currentLang].chat_initial_msg;
+  log.appendChild(initial);
+}
+
 function sendMsg(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if(!text) return;
+  if(safeGet('mc_chat_consent') !== '1'){
+    pendingChatMessage = text;
+    document.getElementById('chatConsentModal').classList.add('open');
+    return;
+  }
   const log = document.getElementById('chatLog');
   const typing = document.getElementById('typingIndicator');
   const me = document.createElement('div');
@@ -2953,7 +3554,15 @@ function sendMsg(){
     log.scrollTop = log.scrollHeight;
     speak(reply);
   }
+  function showSystemNotice(noticeText){
+    const notice = document.createElement('div');
+    notice.className = 'msg system-notice';
+    notice.textContent = noticeText;
+    log.appendChild(notice);
+    log.scrollTop = log.scrollHeight;
+  }
   function fallbackDemoReply(){
+    showSystemNotice(I18N[currentLang].ai_unavailable_notice);
     const replies = DEMO_REPLIES[currentLang] || DEMO_REPLIES.en;
     const reply = replies[demoIndex % replies.length];
     demoIndex++;
@@ -2966,6 +3575,11 @@ function sendMsg(){
     body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang }),
   })
   .then(res => {
+    if(res.status === 429){
+      const err = new Error('rate limited');
+      err.rateLimited = true;
+      throw err;
+    }
     if(!res.ok) throw new Error('bad status ' + res.status);
     return res.json();
   })
@@ -2973,13 +3587,37 @@ function sendMsg(){
     if(!data.reply) throw new Error('empty reply');
     chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply });
     if(chatHistory.length > MAX_CHAT_HISTORY) chatHistory = chatHistory.slice(-MAX_CHAT_HISTORY);
+    saveChatMemory();
     showReply(data.reply);
   })
-  .catch(()=>{
-    // Backend not deployed yet, or a network/API error — fall back to demo replies
-    // so the app still works even before the real AI function is live.
+  .catch((err)=>{
+    if(err && err.rateLimited){
+      typing.textContent = '';
+      showReply(I18N[currentLang].rate_limit_msg);
+      return;
+    }
     setTimeout(fallbackDemoReply, 500);
   });
+}
+
+function acceptChatConsent(){
+  safeSet('mc_chat_consent', '1');
+  document.getElementById('chatConsentModal').classList.remove('open');
+  if(pendingChatMessage){
+    document.getElementById('chatInput').value = pendingChatMessage;
+    pendingChatMessage = null;
+    sendMsg();
+  } else if(pendingCheckinText){
+    document.getElementById('checkinModal').classList.add('open');
+    document.getElementById('checkinFreeText').value = pendingCheckinText;
+    pendingCheckinText = null;
+    sendCheckinText();
+  }
+}
+function closeChatConsent(){
+  document.getElementById('chatConsentModal').classList.remove('open');
+  pendingChatMessage = null;
+  pendingCheckinText = null;
 }
 
 let deferredInstallPrompt = null;
@@ -3028,9 +3666,30 @@ if(isIOS() && !isStandalone()){
 
 populateLangSelect();
 const restoredLang = restorePreferences();
-setLang((restoredLang && I18N[restoredLang]) ? restoredLang : 'ar');
+function detectBrowserLang(){
+  try{
+    const supported = LANGS.map(l=>l.code);
+    const candidates = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
+    for(const raw of candidates){
+      if(!raw) continue;
+      const code = raw.toLowerCase().split('-')[0];
+      if(supported.includes(code)) return code;
+    }
+  }catch(e){}
+  return 'en';
+}
+
+setLang((restoredLang && I18N[restoredLang]) ? restoredLang : detectBrowserLang());
 maybeShowOnboarding();
 maybeShowReminder();
+loadChatMemory();
+setTimeout(maybeShowDailyBrief, 700);
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  });
+}
 
 </script>
 </body>
