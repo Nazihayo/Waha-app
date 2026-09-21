@@ -254,6 +254,55 @@
   .mood-suggest-box{background:var(--paper-dim);border-radius:12px;padding:14px 16px;margin-top:14px;text-align:center;}
   .mood-suggest-text{font-size:13px;color:var(--ink);margin:0 0 10px;line-height:1.5;}
   .mood-suggest-btn{background:var(--dusk-deep);color:var(--paper);border:none;border-radius:9px;padding:9px 18px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;}
+  .sleep-overlay{position:fixed;inset:0;background:#0d1420;display:none;align-items:center;justify-content:center;z-index:200;padding:24px;}
+  .sleep-overlay.open{display:flex;}
+  .sleep-box{max-width:380px;text-align:center;position:relative;}
+  .sleep-moon{font-size:52px;margin-bottom:18px;}
+  .sleep-title{color:#eef0e6;font-size:24px;margin:0 0 12px;}
+  .sleep-desc{color:#a8b0c0;font-size:14px;line-height:1.7;margin:0 0 30px;}
+  .sleep-start-btn{background:#e0b04a;color:#0d1420;border:none;border-radius:12px;padding:14px 30px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;width:100%;}
+  .sleep-skip{color:#6b7688;font-size:12.5px;margin-top:18px;cursor:pointer;text-decoration:underline;}
+  .relief-box{max-width:420px;}
+  .relief-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .relief-cat-btn{background:var(--paper-dim);border:1px solid var(--line);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;font-family:inherit;}
+  .relief-cat-icon{font-size:24px;display:block;margin-bottom:8px;}
+  .relief-cat-label{font-size:13px;color:var(--ink);font-weight:600;}
+  .relief-timer-ring{position:relative;width:150px;height:150px;margin:10px auto 20px;}
+  .relief-ring-svg{width:100%;height:100%;transform:rotate(-90deg);}
+  .relief-ring-bg{fill:none;stroke:var(--line);stroke-width:6;}
+  .relief-ring-fg{fill:none;stroke:var(--gold);stroke-width:6;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;}
+  .relief-timer-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:var(--dusk-deep);}
+  .relief-step-text{text-align:center;font-size:15px;line-height:1.7;color:var(--ink);min-height:70px;padding:0 10px;}
+  .relief-controls{display:flex;justify-content:center;gap:14px;margin:16px 0;}
+  .relief-ctrl-btn{width:46px;height:46px;border-radius:50%;background:var(--paper-dim);border:1px solid var(--line);font-size:18px;cursor:pointer;}
+  .relief-ctrl-btn.active{background:var(--gold);border-color:var(--gold);}
+  .relief-stop-link{display:block;margin:6px auto 0;color:rgba(31,42,58,0.5);font-size:12.5px;text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;}
+  .relief-feedback-row{display:flex;gap:8px;margin-top:18px;}
+  .relief-feedback-btn{flex:1;background:var(--paper-dim);border:1px solid var(--line);border-radius:10px;padding:12px 6px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;}
+  .passport-section{margin-bottom:14px;}
+  .passport-section-title{font-size:13.5px;font-weight:700;color:var(--dusk-deep);margin:0 0 4px;}
+  .passport-section-text{font-size:12.5px;color:var(--ink);line-height:1.6;margin:0;}
+  .passport-temp-row{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--paper-dim);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .passport-temp-label{font-size:13.5px;font-weight:700;color:var(--dusk-deep);margin:0 0 2px;}
+  .passport-temp-desc{font-size:11.5px;color:rgba(31,42,58,0.6);margin:0;}
+  .passport-btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+  .why-suggestion-link{display:block;margin:8px auto 0;background:none;border:none;font-family:inherit;font-size:11px;color:rgba(31,42,58,0.55);text-decoration:underline;cursor:pointer;}
+  .why-explain-text{font-size:13px;line-height:1.7;color:var(--ink);}
+  .calmplan-hint{font-size:11px;color:rgba(31,42,58,0.5);margin:0 0 12px;}
+  .ef-tone-row{display:flex;gap:8px;margin-bottom:12px;}
+  .ef-tone-btn{flex:1;background:var(--paper-dim);border:1px solid var(--line);border-radius:10px;padding:9px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;}
+  .ef-tone-btn.active{background:var(--dusk-deep);color:var(--paper);border-color:var(--dusk-deep);}
+  .ef-preview-box{background:var(--paper-dim);border-radius:12px;padding:16px;font-size:13.5px;line-height:1.8;color:var(--ink);white-space:pre-wrap;margin-bottom:12px;min-height:100px;}
+  .ef-ai-note{font-size:10.5px;color:rgba(31,42,58,0.5);text-align:center;margin:8px 0 0;}
+  .temp-mode-banner{display:none;background:#e0b04a;color:#0d1420;font-size:11.5px;font-weight:600;text-align:center;padding:5px 10px;border-radius:100px;margin:0 0 8px;}
+  .temp-mode-banner.active{display:block;}
+  .calmplan-field{margin-bottom:12px;}
+  .calmplan-label{display:block;font-size:12px;font-weight:600;color:var(--dusk-deep);margin-bottom:4px;}
+  .calmplan-input,.calmplan-textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:inherit;font-size:13.5px;color:var(--ink);box-sizing:border-box;resize:none;}
+  .calmplan-view-row{font-size:13.5px;color:var(--ink);line-height:1.7;padding:8px 0;border-bottom:1px solid var(--line);}
+  .calmplan-view-row:last-child{border-bottom:none;}
+  .calmplan-view-row b{color:var(--dusk-deep);}
+  .calmplan-crisis-link{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:11.5px;color:rgba(31,42,58,0.6);text-align:center;}
   .onboarding-box{max-width:420px;text-align:center;}
   .onboarding-icon{font-size:44px;margin-bottom:14px;}
   .onboarding-dots{display:flex;justify-content:center;gap:7px;margin:22px 0 26px;}
@@ -407,6 +456,18 @@
       <div class="progress-stat"><div class="ps-num" id="statStreak">0</div><div class="ps-label" data-i18n="progress_streak"></div></div>
       <div class="progress-stat"><div class="ps-num" id="statJournal">0</div><div class="ps-label" data-i18n="progress_journal"></div></div>
       <div class="progress-stat"><div class="ps-num" id="statMood">0</div><div class="ps-label" data-i18n="progress_mood"></div></div>
+      <div class="progress-stat"><div class="ps-num" id="statExercises">0</div><div class="ps-label" data-i18n="progress_exercises"></div></div>
+      <div class="progress-stat"><div class="ps-num" id="statHelped">0</div><div class="ps-label" data-i18n="progress_helped"></div></div>
+    </div>
+    <div class="prefs-row">
+      <label class="switch">
+        <input type="checkbox" id="streaksDisabledToggle" onchange="toggleStreaksDisabled(this.checked)">
+        <span class="switch-track"></span>
+      </label>
+      <div class="prefs-row-text">
+        <p class="prefs-row-title" data-i18n="progress_disable_streaks_title"></p>
+        <p class="prefs-row-desc" data-i18n="progress_disable_streaks_desc"></p>
+      </div>
     </div>
     <div class="progress-teaser-box">
       <p class="progress-teaser-text" data-i18n="progress_teaser"></p>
@@ -424,6 +485,169 @@
     <div class="prefs-quote-box">
       <p class="prefs-quote" data-i18n="prefs_privacy_quote"></p>
     </div>
+    <button class="backup-btn backup-btn-ghost" style="width:100%;margin-top:10px;" onclick="openPrivacyPassport()">🛂 <span data-i18n="passport_open_btn"></span></button>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="explainFeelingModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" onclick="closeExplainFeeling()" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="ef_eyebrow"></div>
+    <h2 class="prefs-title" data-i18n="ef_title" style="font-size:22px;"></h2>
+    <p class="prefs-subtitle" data-i18n="ef_intro"></p>
+
+    <div id="efFormView">
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="ef_f_now"></label>
+        <input type="text" id="efNow" class="calmplan-input" data-i18n-placeholder="ef_ph_now">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="ef_f_after"></label>
+        <input type="text" id="efAfter" class="calmplan-input" data-i18n-placeholder="ef_ph_after">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="ef_f_affecting"></label>
+        <input type="text" id="efAffecting" class="calmplan-input" data-i18n-placeholder="ef_ph_affecting">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="ef_f_hardest"></label>
+        <input type="text" id="efHardest" class="calmplan-input" data-i18n-placeholder="ef_ph_hardest">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="ef_f_need"></label>
+        <input type="text" id="efNeed" class="calmplan-input" data-i18n-placeholder="ef_ph_need">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="ef_f_help"></label>
+        <input type="text" id="efHelp" class="calmplan-input" data-i18n-placeholder="ef_ph_help">
+      </div>
+      <p class="calmplan-hint" data-i18n="ef_empty_hint"></p>
+      <button class="backup-btn" style="width:100%;" onclick="generateFeelingDraft()" data-i18n="ef_generate"></button>
+    </div>
+
+    <div id="efPreviewView" style="display:none;">
+      <div class="ef-tone-row">
+        <button class="ef-tone-btn active" id="efToneConciseBtn" onclick="setFeelingTone('concise')" data-i18n="ef_tone_concise"></button>
+        <button class="ef-tone-btn" id="efToneDetailedBtn" onclick="setFeelingTone('detailed')" data-i18n="ef_tone_detailed"></button>
+      </div>
+      <div class="ef-preview-box" id="efPreviewText"></div>
+      <div class="passport-btn-grid">
+        <button class="backup-btn" onclick="copyFeelingDraft()" data-i18n="ef_copy"></button>
+        <button class="backup-btn" onclick="printFeelingDraft()" data-i18n="calmplan_print"></button>
+        <button class="backup-btn" onclick="exportFeelingDraft()" data-i18n="calmplan_export"></button>
+        <button class="backup-btn" onclick="backToEditFeeling()" data-i18n="ef_back_edit"></button>
+      </div>
+      <button class="backup-btn backup-btn-ghost" style="width:100%;margin-top:10px;" onclick="rewriteFeelingWithAI()" id="efAiBtn">✨ <span data-i18n="ef_ai_rewrite"></span></button>
+      <p class="ef-ai-note" data-i18n="ef_ai_note"></p>
+    </div>
+    <p class="backup-status" id="efStatus"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="whyExplainModal" role="dialog" aria-modal="true">
+  <div class="prefs-box" style="max-width:340px;">
+    <button class="prefs-close aria-close-btn" onclick="closeWhyExplain()" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow">ℹ️ <span data-i18n="why_suggestion_link"></span></div>
+    <p class="why-explain-text" id="whyExplainText"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="calmPlanModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" onclick="closeCalmPlan()" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="calmplan_eyebrow"></div>
+    <h2 class="prefs-title" data-i18n="calmplan_title" style="font-size:22px;"></h2>
+
+    <div id="calmPlanEditView">
+      <p class="prefs-subtitle" data-i18n="calmplan_intro"></p>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="calmplan_f_exercise"></label>
+        <input type="text" id="cpExercise" class="calmplan-input" data-i18n-placeholder="calmplan_ph_exercise">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="calmplan_f_sentence"></label>
+        <input type="text" id="cpSentence" class="calmplan-input" data-i18n-placeholder="calmplan_ph_sentence">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="calmplan_f_place"></label>
+        <input type="text" id="cpPlace" class="calmplan-input" data-i18n-placeholder="calmplan_ph_place">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="calmplan_f_activity"></label>
+        <input type="text" id="cpActivity" class="calmplan-input" data-i18n-placeholder="calmplan_ph_activity">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="calmplan_f_person"></label>
+        <input type="text" id="cpPerson" class="calmplan-input" data-i18n-placeholder="calmplan_ph_person">
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="calmplan_f_steps"></label>
+        <textarea id="cpSteps" class="calmplan-textarea" rows="3" data-i18n-placeholder="calmplan_ph_steps"></textarea>
+      </div>
+      <button class="backup-btn" style="width:100%;" onclick="saveCalmPlan()" data-i18n="calmplan_save"></button>
+    </div>
+
+    <div id="calmPlanViewMode" style="display:none;">
+      <div class="calmplan-view-row" id="cpvExercise"></div>
+      <div class="calmplan-view-row" id="cpvSentence"></div>
+      <div class="calmplan-view-row" id="cpvPlace"></div>
+      <div class="calmplan-view-row" id="cpvActivity"></div>
+      <div class="calmplan-view-row" id="cpvPerson"></div>
+      <div class="calmplan-view-row" id="cpvSteps"></div>
+      <div class="passport-btn-grid" style="margin-top:16px;">
+        <button class="backup-btn" onclick="editCalmPlan()" data-i18n="calmplan_edit"></button>
+        <button class="backup-btn" onclick="exportCalmPlan()" data-i18n="calmplan_export"></button>
+        <button class="backup-btn" onclick="printCalmPlan()" data-i18n="calmplan_print"></button>
+        <button class="backup-btn" style="background:#c94a4a;color:#fff;border-color:#c94a4a;" onclick="confirmDeleteCalmPlan()" data-i18n="calmplan_delete"></button>
+      </div>
+    </div>
+
+    <div class="calmplan-crisis-link">
+      <span data-i18n="calmplan_crisis_note"></span>
+      <button class="relief-stop-link" style="display:inline;color:#c94a4a;" onclick="closeCalmPlan();openCrisis();" data-i18n="calmplan_crisis_btn"></button>
+    </div>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="passportModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" onclick="closePrivacyPassport()" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow">🛂 <span data-i18n="passport_eyebrow"></span></div>
+    <h2 class="prefs-title" data-i18n="passport_title" style="font-size:22px;"></h2>
+
+    <div class="passport-section">
+      <p class="passport-section-title" data-i18n="passport_local_title"></p>
+      <p class="passport-section-text" data-i18n="passport_local_text"></p>
+    </div>
+    <div class="passport-section">
+      <p class="passport-section-title" data-i18n="passport_ai_title"></p>
+      <p class="passport-section-text" data-i18n="passport_ai_text"></p>
+    </div>
+    <div class="passport-section">
+      <p class="passport-section-title" data-i18n="passport_logs_title"></p>
+      <p class="passport-section-text" data-i18n="passport_logs_text"></p>
+    </div>
+
+    <div class="passport-temp-row">
+      <div>
+        <p class="passport-temp-label" data-i18n="passport_temp_label"></p>
+        <p class="passport-temp-desc" data-i18n="passport_temp_desc"></p>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="tempModeToggle" onchange="toggleTempConversationMode(this.checked)">
+        <span class="switch-track"></span>
+      </label>
+    </div>
+
+    <div class="prefs-section-label" data-i18n="passport_controls_label"></div>
+    <div class="passport-btn-grid">
+      <button class="backup-btn" onclick="deleteChatHistoryOnly()" data-i18n="passport_del_chat"></button>
+      <button class="backup-btn" onclick="deleteMoodDataOnly()" data-i18n="passport_del_mood"></button>
+      <button class="backup-btn" onclick="deleteExerciseHistoryOnly()" data-i18n="passport_del_exercises"></button>
+      <button class="backup-btn" onclick="exportAllPassportData()" data-i18n="passport_export_all"></button>
+    </div>
+    <button class="backup-btn" style="width:100%;margin-top:10px;background:#c94a4a;color:#fff;border-color:#c94a4a;" onclick="confirmDeleteEverything()" data-i18n="passport_del_all"></button>
+    <p class="backup-status" id="passportStatus"></p>
   </div>
 </div>
 
@@ -447,8 +671,12 @@
       <span class="trust-chip" id="streakChip" style="display:none;">🔥 <span id="streakText"></span></span>
     </div>
     <div class="cta-row">
+      <button class="btn btn-primary" onclick="openRelief()">⚡ <span data-i18n="relief_cta"></span></button>
+      <button class="btn btn-ghost" onclick="openCalmPlan()">🧭 <span data-i18n="calmplan_cta"></span></button>
+      <button class="btn btn-ghost" onclick="openExplainFeeling()">💬 <span data-i18n="ef_cta"></span></button>
       <button class="btn btn-primary" onclick="openCheckin()" data-i18n="checkin_cta"></button>
       <button class="btn btn-ghost" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})" data-i18n="cta_chat"></button>
+      <button class="btn btn-ghost" onclick="openSleepMode()">🌙 <span data-i18n="sleep_cta"></span></button>
       <button class="share-btn aria-share-btn" onclick="shareApp()" title="share" aria-label="Share">🔗</button>
     </div>
   </div>
@@ -472,11 +700,13 @@
     <div class="chat-topbar">
       <span class="dot" id="statusDot"></span>
       <span class="status" data-i18n="chat_status"></span>
+      <span class="status" id="freeChatCounter" style="opacity:0.7;"></span>
       <button class="voice-toggle" id="voiceToggle" onclick="toggleVoice()">
         <span id="voiceIcon">🔈</span><span id="voiceLabel" data-i18n="voice_off"></span>
       </button>
       <button class="voice-toggle" id="clearMemoryBtn" onclick="clearChatMemory()" data-i18n="clear_memory_btn"></button>
     </div>
+    <div class="temp-mode-banner" id="tempModeBanner" data-i18n="passport_temp_active"></div>
     <div class="chat-log" id="chatLog">
       <div class="msg bot" data-i18n="chat_initial_msg"></div>
     </div>
@@ -568,6 +798,57 @@
   </div>
 </div>
 
+<div class="prefs-overlay" id="reliefModal" role="dialog" aria-modal="true">
+  <div class="prefs-box relief-box">
+    <button class="prefs-close aria-close-btn" onclick="closeRelief()" aria-label="Close">✕</button>
+
+    <div id="reliefPickView">
+      <div class="prefs-eyebrow" data-i18n="relief_eyebrow"></div>
+      <h2 class="prefs-title" data-i18n="relief_title" style="font-size:24px;"></h2>
+      <p class="prefs-subtitle" data-i18n="relief_subtitle"></p>
+      <div class="relief-grid" id="reliefGrid"></div>
+    </div>
+
+    <div id="reliefSessionView" style="display:none;">
+      <div class="relief-timer-ring">
+        <svg viewBox="0 0 100 100" class="relief-ring-svg">
+          <circle cx="50" cy="50" r="45" class="relief-ring-bg"></circle>
+          <circle cx="50" cy="50" r="45" class="relief-ring-fg" id="reliefRingFg"></circle>
+        </svg>
+        <div class="relief-timer-text" id="reliefTimerText">90</div>
+      </div>
+      <p class="relief-step-text" id="reliefStepText"></p>
+      <div class="relief-controls">
+        <button class="relief-ctrl-btn" id="reliefPauseBtn" onclick="toggleReliefPause()">⏸</button>
+        <button class="relief-ctrl-btn" onclick="restartRelief()">↺</button>
+        <button class="relief-ctrl-btn" id="reliefMuteBtn" onclick="toggleReliefMute()">🔈</button>
+      </div>
+      <button class="relief-stop-link" onclick="stopRelief()" data-i18n="relief_stop"></button>
+    </div>
+
+    <div id="reliefEndView" style="display:none;">
+      <div class="sleep-moon">🌤️</div>
+      <h2 class="prefs-title" data-i18n="relief_end_title" style="font-size:22px;"></h2>
+      <div class="relief-feedback-row">
+        <button class="relief-feedback-btn" onclick="answerReliefFeedback('yes')" data-i18n="relief_fb_yes"></button>
+        <button class="relief-feedback-btn" onclick="answerReliefFeedback('little')" data-i18n="relief_fb_little"></button>
+        <button class="relief-feedback-btn" onclick="answerReliefFeedback('no')" data-i18n="relief_fb_no"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sleep-overlay" id="sleepModal" role="dialog" aria-modal="true">
+  <div class="sleep-box">
+    <button class="prefs-close aria-close-btn" id="sleepCloseBtn" onclick="closeSleepMode()" aria-label="Close" style="color:#eef0e6;">✕</button>
+    <div class="sleep-moon">🌙</div>
+    <h2 class="sleep-title" data-i18n="sleep_title"></h2>
+    <p class="sleep-desc" data-i18n="sleep_desc"></p>
+    <button class="sleep-start-btn" onclick="startSleepBreathing()" data-i18n="sleep_start_btn"></button>
+    <p class="sleep-skip" onclick="closeSleepMode()" data-i18n="sleep_skip"></p>
+  </div>
+</div>
+
 <div class="prefs-overlay" id="dailyBriefModal" role="dialog" aria-modal="true">
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" onclick="closeDailyBrief()" aria-label="Close">✕</button>
@@ -580,6 +861,7 @@
       <p class="brief-suggest-label" data-i18n="brief_suggest_label"></p>
       <p class="brief-suggest-title" id="briefSuggestTitle"></p>
       <button class="onboarding-next" id="briefSuggestBtn" onclick="startBriefSuggestion()"></button>
+      <button class="why-suggestion-link" onclick="explainSuggestion('daily_brief')" data-i18n="why_suggestion_link"></button>
     </div>
   </div>
 </div>
@@ -596,6 +878,7 @@
       <textarea id="checkinFreeText" class="checkin-freetext-input" rows="2" data-i18n-placeholder="checkin_freetext_placeholder"></textarea>
       <button class="checkin-freetext-btn" id="checkinFreeTextBtn" onclick="sendCheckinText()" data-i18n="checkin_freetext_btn"></button>
       <div class="checkin-freetext-response" id="checkinFreeTextResponse" style="display:none;"></div>
+      <button class="why-suggestion-link" id="checkinWhyBtn" style="display:none;" onclick="explainSuggestion('checkin_ai')" data-i18n="why_suggestion_link"></button>
     </div>
   </div>
 </div>
@@ -656,6 +939,7 @@
       <div class="mood-suggest-box" id="moodSuggestBox" style="display:none;">
         <p class="mood-suggest-text" id="moodSuggestText"></p>
         <button class="mood-suggest-btn" id="moodSuggestBtn" onclick="startMoodSuggestion()"></button>
+        <button class="why-suggestion-link" onclick="explainSuggestion('mood_pattern')" data-i18n="why_suggestion_link"></button>
       </div>
     </div>
     <div class="journal-widget" id="journalWidget" style="display:none;">
@@ -729,6 +1013,24 @@ const I18N = {
     upgrade_programs_title:"برامج داخلية", upgrade_programs_desc:"دورات وبرامج متخصصة قصيرة",
     upgrade_maybe_later:"ربما لاحقاً",
     progress_label:"تقدّمك", progress_streak:"أيام متتالية", progress_journal:"كتابات محفوظة", progress_mood:"تسجيلات مزاج",
+    progress_exercises:"تمارين مكتملة", progress_helped:"مرات ساعدت",
+    progress_disable_streaks_title:"تعطيل السلاسل", progress_disable_streaks_desc:"أخفِ عدّاد الأيام المتتالية إن كان يشعرك بالضغط بدل التحفيز.",
+    why_suggestion_link:"لماذا هذا الاقتراح؟",
+    ef_cta:"عبّر عن شعوري", ef_eyebrow:"ساعدني على التعبير", ef_title:"ساعدني على التعبير عن شعوري",
+    ef_intro:"املأ ما يبدو صحيحاً بالنسبة لك الآن — اترك أي سطر فارغاً لتخطّيه.",
+    ef_f_now:"الآن أشعر بـ", ef_ph_now:"مثال: قلق وتعب",
+    ef_f_after:"لاحظت هذا بعد", ef_ph_after:"مثال: محادثة صعبة",
+    ef_f_affecting:"هذا يؤثر على", ef_ph_affecting:"مثال: نومي وتركيزي",
+    ef_f_hardest:"الأصعب بالنسبة لي هو", ef_ph_hardest:"مثال: عدم معرفة ما أفعله بعد ذلك",
+    ef_f_need:"ما أحتاجه الآن ربما", ef_ph_need:"مثال: بعض المساحة والهدوء",
+    ef_f_help:"شيء واحد قد يساعد", ef_ph_help:"مثال: التحدث مع شخص أثق به",
+    ef_empty_hint:"أي حقل تتركه فارغاً سيُستبعد ببساطة من مسودتك.", ef_generate:"أنشئ مسودتي",
+    ef_tone_concise:"مختصر", ef_tone_detailed:"مفصّل",
+    ef_copy:"نسخ", ef_copied:"تم النسخ ✓", ef_back_edit:"العودة للتعديل",
+    ef_ai_rewrite:"أعد الصياغة بالذكاء الاصطناعي", ef_ai_note:"هذا يرسل مسودتك لمزوّد الذكاء الاصطناعي لإعادة صياغتها فقط. لا شيء آخر يُرسل.",
+    ef_ai_confirm:"سيُرسل هذا مسودتك خارج جهازك إلى Anthropic (مزوّد الذكاء الاصطناعي) لإعادة صياغتها. هل تريد المتابعة؟",
+    ef_ai_needs_consent:"يرجى إرسال رسالة محادثة واحدة أولاً لتفعيل ميزات الذكاء الاصطناعي.",
+    ef_ai_done:"أُعيدت الصياغة ✓", ef_empty_draft:"املأ سطراً واحداً على الأقل لترى مسودتك هنا.",
     progress_teaser:"افتح تحليلاً أعمق لأنماطك النفسية مع Premium.", progress_cta:"عرض الخطط",
     nav_program:"البرنامج",
     program_eyebrow:"برنامج مركّز", program_title:"برنامج 7 أيام لإدارة القلق",
@@ -749,6 +1051,36 @@ const I18N = {
     brief_word_prefix:"الكلمة الأكثر تكراراً في يومياتك مؤخراً:",
     mood_suggest_text:"لاحظنا أن مزاجك كان أثقل قليلاً في آخر مرات — قد يفيدك:",
     mood_suggest_btn:"جرّب",
+    free_chat_remaining:"رسائل مجانية متبقية",
+    sleep_cta:"وضع النوم", sleep_title:"حان وقت الراحة",
+    sleep_desc:"خذ دقيقتين لتهدئة جسمك وعقلك قبل النوم، بتمرين تنفّس بسيط.",
+    sleep_start_btn:"ابدأ تمرين التنفّس", sleep_skip:"لا، شكراً — أغلق فقط",
+    relief_cta:"ساعدني لمدة 90 ثانية", relief_eyebrow:"إغاثة سريعة",
+    relief_title:"ما الأقرب لما تشعر به الآن؟", relief_subtitle:"اختر واحداً، وسنبدأ تمريناً قصيراً فوراً — بلا اتصال بالإنترنت.",
+    relief_stop:"إيقاف والخروج", relief_end_title:"أحسنت — أخذت وقتاً لنفسك",
+    relief_fb_yes:"نعم، ساعدني", relief_fb_little:"قليلاً", relief_fb_no:"ليس فعلاً",
+    passport_open_btn:"افتح جواز الخصوصية", passport_eyebrow:"جواز الخصوصية",
+    passport_title:"ماذا يحدث لبياناتك بالضبط",
+    passport_local_title:"ما يبقى على جهازك", passport_local_text:"سجل مزاجك، يومياتك، سجل تمارينك، سلسلتك، وسجل محادثتك — كلها محفوظة فقط في تخزين هذا المتصفح المحلي. لا شيء منها يُرفع لأي خادم أو قاعدة بيانات لـ Waha — لأن Waha لا تملك أصلاً قاعدة بيانات لهذه المعلومات.",
+    passport_ai_title:"ما يُرسل للذكاء الاصطناعي", passport_ai_text:"فقط النص الذي تكتبه في المحادثة أو الفحص السريع يُرسل لـ Anthropic (مزوّد الذكاء الاصطناعي) لتوليد رد. لا شيء آخر — لا سجل مزاجك، لا يومياتك، لا سجل تمارينك — يُرسل تلقائياً.",
+    passport_logs_title:"السجلات التقنية", passport_logs_text:"قد يسجّل خادمنا نجاح أو فشل الطلب، وهل استُبدل رد لأسباب أمان — لكن أبداً محتوى رسائلك الفعلي.",
+    passport_temp_label:"محادثة مؤقتة", passport_temp_desc:"عند التفعيل، لا تُحفظ رسائل المحادثة الجديدة على جهازك. تنتهي عند إيقافها أو إغلاق التطبيق.",
+    passport_temp_active:"🕶️ وضع مؤقت — هذه المحادثة لا تُحفظ",
+    passport_controls_label:"أدواتك", passport_del_chat:"حذف سجل المحادثة", passport_del_mood:"حذف بيانات المزاج",
+    passport_del_exercises:"حذف سجل التمارين", passport_export_all:"تصدير كل بياناتي", passport_del_all:"حذف كل شيء",
+    passport_done:"تم ✓", passport_error:"حدث خطأ، حاول مجدداً",
+    passport_confirm_all:"سيؤدي هذا لحذف كل بيانات Waha على جهازك بشكل نهائي — المزاج، اليوميات، المحادثة، السلسلة، كل شيء. لا يمكن التراجع عن هذا. هل تريد المتابعة؟",
+    calmplan_cta:"خطة الهدوء", calmplan_eyebrow:"خطة الهدوء الشخصية", calmplan_title:"خطتي للهدوء",
+    calmplan_intro:"جهّز هذا الآن وأنت مستقر، ليكون جاهزاً في لحظة أصعب.",
+    calmplan_f_exercise:"تمرين مهدئ يساعدني", calmplan_ph_exercise:"مثال: تنفّس 4-7-8",
+    calmplan_f_sentence:"جملة تساعدني", calmplan_ph_sentence:"مثال: هذا الشعور سيمر",
+    calmplan_f_place:"مكان أشعر فيه بهدوء أكبر", calmplan_ph_place:"مثال: شرفتي",
+    calmplan_f_activity:"نشاط آمن", calmplan_ph_activity:"مثال: مشي قصير",
+    calmplan_f_person:"شخص أستطيع التواصل معه", calmplan_ph_person:"مثال: أختي لينا",
+    calmplan_f_steps:"خطوات أريد اتباعها في لحظة صعبة", calmplan_ph_steps:"مثال: ١) توقف ٢) تنفّس ٣) اتصل بأحد",
+    calmplan_save:"احفظ خطتي", calmplan_edit:"تعديل", calmplan_export:"تصدير", calmplan_print:"طباعة", calmplan_delete:"حذف",
+    calmplan_crisis_note:"في حالة الطوارئ، هذه الخطة ليست بديلاً عن المساعدة.", calmplan_crisis_btn:"موارد الأزمة",
+    calmplan_confirm_delete:"حذف خطة الهدوء نهائياً؟ لا يمكن التراجع عن هذا.",
     checkin_opt1:"قلق أو توتر", checkin_opt2:"حزن أو ثقل في الصدر", checkin_opt3:"ذهن مشتت وأفكار متسارعة", checkin_opt4:"إرهاق جسدي وتعب",
     crisis_button:"أحتاج مساعدة الآن", crisis_eyebrow:"أنت لست وحدك",
     crisis_title:"خطوط مساعدة حقيقية، مجانية وسرّية", crisis_subtitle:"إذا كنت تمر بأزمة نفسية حادة، تواصل مع أحد هذه الخطوط الآن — أشخاص مدرّبون بانتظارك.",
@@ -823,6 +1155,24 @@ const I18N = {
     upgrade_programs_title:"Zusatzprogramme", upgrade_programs_desc:"Spezialisierte Kurzprogramme und Kurse",
     upgrade_maybe_later:"Vielleicht später",
     progress_label:"Dein Fortschritt", progress_streak:"Tage in Folge", progress_journal:"Gespeicherte Einträge", progress_mood:"Stimmungseinträge",
+    progress_exercises:"Abgeschlossene Übungen", progress_helped:"Mal geholfen",
+    progress_disable_streaks_title:"Serien deaktivieren", progress_disable_streaks_desc:"Blende den Tage-Zähler aus, falls er dich eher unter Druck setzt als motiviert.",
+    why_suggestion_link:"Warum dieser Vorschlag?",
+    ef_cta:"Mein Gefühl erklären", ef_eyebrow:"Beim Ausdrücken helfen", ef_title:"Hilf mir zu erklären, wie ich mich fühle",
+    ef_intro:"Fülle aus, was gerade für dich zutrifft — lass jede Zeile leer, die du überspringen möchtest.",
+    ef_f_now:"Gerade fühle ich mich", ef_ph_now:"z. B. ängstlich und müde",
+    ef_f_after:"Das ist mir aufgefallen nach", ef_ph_after:"z. B. einem schwierigen Gespräch",
+    ef_f_affecting:"Es beeinflusst", ef_ph_affecting:"z. B. meinen Schlaf und meine Konzentration",
+    ef_f_hardest:"Am schwersten fällt mir", ef_ph_hardest:"z. B. nicht zu wissen, was als Nächstes kommt",
+    ef_f_need:"Was ich gerade brauchen könnte", ef_ph_need:"z. B. etwas Raum und Ruhe",
+    ef_f_help:"Eine Sache, die helfen könnte", ef_ph_help:"z. B. mit jemandem zu sprechen, dem ich vertraue",
+    ef_empty_hint:"Jedes leer gelassene Feld wird einfach aus deinem Entwurf ausgelassen.", ef_generate:"Meinen Entwurf erstellen",
+    ef_tone_concise:"Kurz", ef_tone_detailed:"Ausführlich",
+    ef_copy:"Kopieren", ef_copied:"Kopiert ✓", ef_back_edit:"Zurück zum Bearbeiten",
+    ef_ai_rewrite:"Mit KI umformulieren", ef_ai_note:"Dies sendet deinen Entwurf an unseren KI-Anbieter, um ihn umzuformulieren. Nichts anderes wird gesendet.",
+    ef_ai_confirm:"Dies sendet deinen Entwurf außerhalb deines Geräts an Anthropic (unseren KI-Anbieter), um ihn umzuformulieren. Fortfahren?",
+    ef_ai_needs_consent:"Bitte sende zuerst eine Chat-Nachricht, um KI-Funktionen zu aktivieren.",
+    ef_ai_done:"Umformuliert ✓", ef_empty_draft:"Fülle mindestens eine Zeile aus, um deinen Entwurf hier zu sehen.",
     progress_teaser:"Schalte tiefere Einblicke in deine Muster mit Premium frei.", progress_cta:"Pläne ansehen",
     nav_program:"Programm",
     program_eyebrow:"Fokusprogramm", program_title:"7-Tage-Programm gegen Angst",
@@ -843,6 +1193,36 @@ const I18N = {
     brief_word_prefix:"Häufigstes Wort in deinem Journal zuletzt:",
     mood_suggest_text:"Wir haben bemerkt, dass deine Stimmung zuletzt etwas schwerer war — das könnte helfen:",
     mood_suggest_btn:"Ausprobieren",
+    free_chat_remaining:"kostenlose Nachrichten übrig",
+    sleep_cta:"Schlafmodus", sleep_title:"Zeit zur Ruhe",
+    sleep_desc:"Nimm dir zwei Minuten, um Körper und Geist mit einer einfachen Atemübung vor dem Schlafen zu beruhigen.",
+    sleep_start_btn:"Atemübung starten", sleep_skip:"Nein danke — nur schließen",
+    relief_cta:"Hilf mir für 90 Sekunden", relief_eyebrow:"Schnelle Hilfe",
+    relief_title:"Was trifft gerade am ehesten zu?", relief_subtitle:"Wähle eine Option, wir starten sofort eine kurze Übung — ganz ohne Internet.",
+    relief_stop:"Stoppen und schließen", relief_end_title:"Gut gemacht — du hast dir Zeit genommen",
+    relief_fb_yes:"Ja, es hat geholfen", relief_fb_little:"Ein bisschen", relief_fb_no:"Nicht wirklich",
+    passport_open_btn:"Privacy Passport öffnen", passport_eyebrow:"Privacy Passport",
+    passport_title:"Was mit deinen Daten passiert",
+    passport_local_title:"Was auf diesem Gerät bleibt", passport_local_text:"Dein Stimmungsprotokoll, Journal, Übungsverlauf, Serie und Chat-Verlauf werden nur im lokalen Speicher dieses Browsers gespeichert. Nichts davon wird auf einen Waha-Server oder in eine Datenbank hochgeladen — weil Waha dafür keine besitzt.",
+    passport_ai_title:"Was an die KI gesendet wird", passport_ai_text:"Nur der Text, den du im Chat oder im Schnell-Check-in eingibst, wird an Anthropic (unseren KI-Anbieter) gesendet, um eine Antwort zu erzeugen. Nichts anderes — kein Stimmungsprotokoll, kein Journal, kein Übungsverlauf — wird automatisch gesendet.",
+    passport_logs_title:"Technische Protokolle", passport_logs_text:"Unser Server kann protokollieren, ob eine Anfrage erfolgreich war oder fehlschlug, und ob eine Antwort aus Sicherheitsgründen ersetzt wurde — niemals den Inhalt deiner Nachrichten.",
+    passport_temp_label:"Temporäres Gespräch", passport_temp_desc:"Solange aktiv, werden neue Chat-Nachrichten nicht auf diesem Gerät gespeichert. Endet, wenn du es ausschaltest oder die App schließt.",
+    passport_temp_active:"🕶️ Temporärer Modus — dieses Gespräch wird nicht gespeichert",
+    passport_controls_label:"Deine Kontrollen", passport_del_chat:"Chat-Verlauf löschen", passport_del_mood:"Stimmungsdaten löschen",
+    passport_del_exercises:"Übungsverlauf löschen", passport_export_all:"Alle meine Daten exportieren", passport_del_all:"Alles löschen",
+    passport_done:"Erledigt ✓", passport_error:"Etwas ist schiefgelaufen, versuch's erneut",
+    passport_confirm_all:"Dies löscht endgültig alle Waha-Daten auf diesem Gerät — Stimmung, Journal, Chat, Serie, alles. Das kann nicht rückgängig gemacht werden. Fortfahren?",
+    calmplan_cta:"Ruheplan", calmplan_eyebrow:"Persönlicher Ruheplan", calmplan_title:"Mein Ruheplan",
+    calmplan_intro:"Bereite dies jetzt vor, während du dich stabil fühlst, damit es für einen schwereren Moment bereit ist.",
+    calmplan_f_exercise:"Eine beruhigende Übung, die mir hilft", calmplan_ph_exercise:"z. B. 4-7-8-Atmung",
+    calmplan_f_sentence:"Ein Satz, der mir hilft", calmplan_ph_sentence:"z. B. Dieses Gefühl geht vorüber",
+    calmplan_f_place:"Ein Ort, an dem ich ruhiger bin", calmplan_ph_place:"z. B. mein Balkon",
+    calmplan_f_activity:"Eine sichere Aktivität", calmplan_ph_activity:"z. B. ein kurzer Spaziergang",
+    calmplan_f_person:"Jemand, den ich erreichen kann", calmplan_ph_person:"z. B. meine Schwester Lina",
+    calmplan_f_steps:"Schritte, die ich in einem schwierigen Moment befolgen möchte", calmplan_ph_steps:"z. B. 1) innehalten 2) atmen 3) jemanden anrufen",
+    calmplan_save:"Meinen Plan speichern", calmplan_edit:"Bearbeiten", calmplan_export:"Exportieren", calmplan_print:"Drucken", calmplan_delete:"Löschen",
+    calmplan_crisis_note:"Im Notfall ist dieser Plan kein Ersatz für Hilfe.", calmplan_crisis_btn:"Krisenressourcen",
+    calmplan_confirm_delete:"Ruheplan endgültig löschen? Das kann nicht rückgängig gemacht werden.",
     checkin_opt1:"Angst oder Anspannung", checkin_opt2:"Traurigkeit oder Schwere", checkin_opt3:"Zerstreuter, rasender Geist", checkin_opt4:"Körperliche Erschöpfung",
     crisis_button:"Ich brauche jetzt Hilfe", crisis_eyebrow:"Du bist nicht allein",
     crisis_title:"Echte Hilfe — kostenlos und anonym", crisis_subtitle:"Wenn du gerade in einer akuten Krise bist, wende dich jetzt an eine dieser Stellen — geschulte Menschen sind für dich da.",
@@ -917,6 +1297,24 @@ const I18N = {
     upgrade_programs_title:"Add-on programs", upgrade_programs_desc:"Specialized short courses and programs",
     upgrade_maybe_later:"Maybe later",
     progress_label:"Your progress", progress_streak:"day streak", progress_journal:"saved entries", progress_mood:"mood logs",
+    progress_exercises:"exercises completed", progress_helped:"times it helped",
+    progress_disable_streaks_title:"Disable streaks", progress_disable_streaks_desc:"Hide the day-streak counter if it feels more like pressure than motivation.",
+    why_suggestion_link:"Why this suggestion?",
+    ef_cta:"Explain my feeling", ef_eyebrow:"Help Me Express This", ef_title:"Help Me Explain How I Feel",
+    ef_intro:"Fill in whatever feels true right now — leave any line blank to skip it.",
+    ef_f_now:"Right now I feel", ef_ph_now:"e.g. anxious and tired",
+    ef_f_after:"I noticed this after", ef_ph_after:"e.g. a difficult conversation",
+    ef_f_affecting:"It is affecting", ef_ph_affecting:"e.g. my sleep and focus",
+    ef_f_hardest:"What feels hardest is", ef_ph_hardest:"e.g. not knowing what to do next",
+    ef_f_need:"What I need right now may be", ef_ph_need:"e.g. some space and quiet",
+    ef_f_help:"One thing that could help is", ef_ph_help:"e.g. talking to someone I trust",
+    ef_empty_hint:"Any field you leave blank is simply left out of your draft.", ef_generate:"Create my draft",
+    ef_tone_concise:"Concise", ef_tone_detailed:"Detailed",
+    ef_copy:"Copy", ef_copied:"Copied ✓", ef_back_edit:"Back to edit",
+    ef_ai_rewrite:"Rewrite with AI", ef_ai_note:"This sends your draft to our AI provider to rewrite it. Nothing else is sent.",
+    ef_ai_confirm:"This will send your draft outside your device to Anthropic (our AI provider) to rewrite it. Continue?",
+    ef_ai_needs_consent:"Please send one chat message first to enable AI features.",
+    ef_ai_done:"Rewritten ✓", ef_empty_draft:"Fill in at least one line to see your draft here.",
     progress_teaser:"Unlock deeper insight into your patterns with Premium.", progress_cta:"View plans",
     nav_program:"Program",
     program_eyebrow:"Focused program", program_title:"7-day anxiety program",
@@ -937,6 +1335,36 @@ const I18N = {
     brief_word_prefix:"Most frequent word in your journal lately:",
     mood_suggest_text:"We noticed your mood has been a bit heavier lately — this might help:",
     mood_suggest_btn:"Try",
+    free_chat_remaining:"free messages left",
+    sleep_cta:"Sleep mode", sleep_title:"Time to rest",
+    sleep_desc:"Take two minutes to calm your body and mind with a simple breathing exercise before sleep.",
+    sleep_start_btn:"Start breathing exercise", sleep_skip:"No thanks — just close",
+    relief_cta:"Help me for 90 seconds", relief_eyebrow:"Quick relief",
+    relief_title:"What feels closest right now?", relief_subtitle:"Pick one, and we'll start a short exercise right away — fully offline.",
+    relief_stop:"Stop and exit", relief_end_title:"Well done — you took a moment for yourself",
+    relief_fb_yes:"Yes, it helped", relief_fb_little:"A little", relief_fb_no:"Not really",
+    passport_open_btn:"Open Privacy Passport", passport_eyebrow:"Privacy Passport",
+    passport_title:"What happens to your data",
+    passport_local_title:"What stays on this device", passport_local_text:"Your mood log, journal entries, exercise history, streak, and chat history are stored only in this browser's local storage. None of it is uploaded to any Waha server or database — because Waha doesn't have one for this data.",
+    passport_ai_title:"What is sent to the AI", passport_ai_text:"Only the text you type in the chat or quick check-in is sent to Anthropic (our AI provider) to generate a reply. Nothing else — no mood log, no journal, no exercise history — is sent automatically.",
+    passport_logs_title:"Technical logs", passport_logs_text:"Our server may log whether a request succeeded or failed, and whether a reply was rewritten for safety — never the content of your messages.",
+    passport_temp_label:"Temporary conversation", passport_temp_desc:"While active, new chat messages aren't saved to this device. Ends when you turn it off or close the app.",
+    passport_temp_active:"🕶️ Temporary mode — this conversation isn't being saved",
+    passport_controls_label:"Your controls", passport_del_chat:"Delete chat history", passport_del_mood:"Delete mood data",
+    passport_del_exercises:"Delete exercise history", passport_export_all:"Export all my data", passport_del_all:"Delete everything",
+    passport_done:"Done ✓", passport_error:"Something went wrong, try again",
+    passport_confirm_all:"This permanently deletes all Waha data on this device — mood, journal, chat, streak, everything. This can't be undone. Continue?",
+    calmplan_cta:"Calm Plan", calmplan_eyebrow:"Personal Calm Plan", calmplan_title:"My Calm Plan",
+    calmplan_intro:"Prepare this now, while you feel steady, so it's ready for a harder moment.",
+    calmplan_f_exercise:"A calming exercise that helps me", calmplan_ph_exercise:"e.g. 4-7-8 breathing",
+    calmplan_f_sentence:"A sentence that helps me", calmplan_ph_sentence:"e.g. This feeling will pass",
+    calmplan_f_place:"A place where I feel calmer", calmplan_ph_place:"e.g. my balcony",
+    calmplan_f_activity:"A safe activity", calmplan_ph_activity:"e.g. a short walk",
+    calmplan_f_person:"Someone I can reach out to", calmplan_ph_person:"e.g. my sister Lina",
+    calmplan_f_steps:"Steps I want to follow in a hard moment", calmplan_ph_steps:"e.g. 1) pause 2) breathe 3) call someone",
+    calmplan_save:"Save my plan", calmplan_edit:"Edit", calmplan_export:"Export", calmplan_print:"Print", calmplan_delete:"Delete",
+    calmplan_crisis_note:"In an emergency, this plan is not a substitute for help.", calmplan_crisis_btn:"Crisis resources",
+    calmplan_confirm_delete:"Delete your calm plan permanently? This can't be undone.",
     checkin_opt1:"Anxious or tense", checkin_opt2:"Sad or heavy-hearted", checkin_opt3:"Scattered, racing mind", checkin_opt4:"Physically exhausted",
     crisis_button:"I need help now", crisis_eyebrow:"You are not alone",
     crisis_title:"Real help — free and confidential", crisis_subtitle:"If you're in acute distress right now, reach out to one of these lines — trained people are ready to listen.",
@@ -1011,6 +1439,24 @@ const I18N = {
     upgrade_programs_title:"Programmes additionnels", upgrade_programs_desc:"Cours et programmes courts spécialisés",
     upgrade_maybe_later:"Peut-être plus tard",
     progress_label:"Ta progression", progress_streak:"jours de suite", progress_journal:"écrits enregistrés", progress_mood:"suivis d'humeur",
+    progress_exercises:"exercices terminés", progress_helped:"fois où ça a aidé",
+    progress_disable_streaks_title:"Désactiver les séries", progress_disable_streaks_desc:"Masque le compteur de jours s'il te met plus de pression qu'il ne te motive.",
+    why_suggestion_link:"Pourquoi cette suggestion ?",
+    ef_cta:"Exprimer mon ressenti", ef_eyebrow:"M'aider à m'exprimer", ef_title:"Aide-moi à expliquer ce que je ressens",
+    ef_intro:"Remplis ce qui te semble juste maintenant — laisse une ligne vide pour la sauter.",
+    ef_f_now:"En ce moment je ressens", ef_ph_now:"ex. : anxieux(se) et fatigué(e)",
+    ef_f_after:"J'ai remarqué cela après", ef_ph_after:"ex. : une conversation difficile",
+    ef_f_affecting:"Cela affecte", ef_ph_affecting:"ex. : mon sommeil et ma concentration",
+    ef_f_hardest:"Le plus difficile est", ef_ph_hardest:"ex. : ne pas savoir quoi faire ensuite",
+    ef_f_need:"Ce dont j'ai peut-être besoin maintenant", ef_ph_need:"ex. : un peu d'espace et de calme",
+    ef_f_help:"Une chose qui pourrait aider", ef_ph_help:"ex. : parler à quelqu'un en qui j'ai confiance",
+    ef_empty_hint:"Tout champ laissé vide sera simplement omis de ton brouillon.", ef_generate:"Créer mon brouillon",
+    ef_tone_concise:"Concis", ef_tone_detailed:"Détaillé",
+    ef_copy:"Copier", ef_copied:"Copié ✓", ef_back_edit:"Retour à l'édition",
+    ef_ai_rewrite:"Reformuler avec l'IA", ef_ai_note:"Ceci envoie ton brouillon à notre fournisseur d'IA pour le reformuler. Rien d'autre n'est envoyé.",
+    ef_ai_confirm:"Ceci enverra ton brouillon hors de ton appareil à Anthropic (notre fournisseur d'IA) pour le reformuler. Continuer ?",
+    ef_ai_needs_consent:"Merci d'envoyer d'abord un message dans le chat pour activer les fonctionnalités d'IA.",
+    ef_ai_done:"Reformulé ✓", ef_empty_draft:"Remplis au moins une ligne pour voir ton brouillon ici.",
     progress_teaser:"Débloque une analyse plus poussée de tes tendances avec Premium.", progress_cta:"Voir les plans",
     nav_program:"Programme",
     program_eyebrow:"Programme ciblé", program_title:"Programme anti-anxiété de 7 jours",
@@ -1031,6 +1477,36 @@ const I18N = {
     brief_word_prefix:"Mot le plus fréquent dans ton journal récemment :",
     mood_suggest_text:"On a remarqué que ton humeur a été un peu plus lourde dernièrement — ça pourrait aider :",
     mood_suggest_btn:"Essayer",
+    free_chat_remaining:"messages gratuits restants",
+    sleep_cta:"Mode sommeil", sleep_title:"L'heure du repos",
+    sleep_desc:"Prends deux minutes pour apaiser ton corps et ton esprit avec un exercice de respiration simple avant de dormir.",
+    sleep_start_btn:"Commencer l'exercice de respiration", sleep_skip:"Non merci — fermer",
+    relief_cta:"Aide-moi pendant 90 secondes", relief_eyebrow:"Soulagement rapide",
+    relief_title:"Qu'est-ce qui te correspond le plus maintenant ?", relief_subtitle:"Choisis une option, un court exercice démarre aussitôt — entièrement hors ligne.",
+    relief_stop:"Arrêter et quitter", relief_end_title:"Bravo — tu as pris un moment pour toi",
+    relief_fb_yes:"Oui, ça a aidé", relief_fb_little:"Un peu", relief_fb_no:"Pas vraiment",
+    passport_open_btn:"Ouvrir le Passeport de confidentialité", passport_eyebrow:"Passeport de confidentialité",
+    passport_title:"Ce qui arrive à tes données",
+    passport_local_title:"Ce qui reste sur cet appareil", passport_local_text:"Ton journal d'humeur, tes entrées de journal, ton historique d'exercices, ta série et ton historique de chat sont stockés uniquement dans le stockage local de ce navigateur. Rien de tout cela n'est envoyé à un serveur ou une base de données Waha — car Waha n'en possède pas pour ces données.",
+    passport_ai_title:"Ce qui est envoyé à l'IA", passport_ai_text:"Seul le texte que tu tapes dans le chat ou le check-in rapide est envoyé à Anthropic (notre fournisseur d'IA) pour générer une réponse. Rien d'autre — ni journal d'humeur, ni journal, ni historique d'exercices — n'est envoyé automatiquement.",
+    passport_logs_title:"Journaux techniques", passport_logs_text:"Notre serveur peut enregistrer si une requête a réussi ou échoué, et si une réponse a été réécrite pour des raisons de sécurité — jamais le contenu de tes messages.",
+    passport_temp_label:"Conversation temporaire", passport_temp_desc:"Tant qu'elle est active, les nouveaux messages du chat ne sont pas enregistrés sur cet appareil. Se termine quand tu la désactives ou fermes l'application.",
+    passport_temp_active:"🕶️ Mode temporaire — cette conversation n'est pas enregistrée",
+    passport_controls_label:"Tes contrôles", passport_del_chat:"Supprimer l'historique du chat", passport_del_mood:"Supprimer les données d'humeur",
+    passport_del_exercises:"Supprimer l'historique d'exercices", passport_export_all:"Exporter toutes mes données", passport_del_all:"Tout supprimer",
+    passport_done:"Fait ✓", passport_error:"Une erreur s'est produite, réessaie",
+    passport_confirm_all:"Ceci supprime définitivement toutes les données Waha sur cet appareil — humeur, journal, chat, série, tout. C'est irréversible. Continuer ?",
+    calmplan_cta:"Plan de calme", calmplan_eyebrow:"Plan de calme personnel", calmplan_title:"Mon plan de calme",
+    calmplan_intro:"Prépare ceci maintenant, pendant que tu te sens stable, pour qu'il soit prêt pour un moment plus difficile.",
+    calmplan_f_exercise:"Un exercice apaisant qui m'aide", calmplan_ph_exercise:"ex. : respiration 4-7-8",
+    calmplan_f_sentence:"Une phrase qui m'aide", calmplan_ph_sentence:"ex. : ce sentiment va passer",
+    calmplan_f_place:"Un endroit où je me sens plus calme", calmplan_ph_place:"ex. : mon balcon",
+    calmplan_f_activity:"Une activité sûre", calmplan_ph_activity:"ex. : une courte marche",
+    calmplan_f_person:"Quelqu'un que je peux contacter", calmplan_ph_person:"ex. : ma sœur Lina",
+    calmplan_f_steps:"Étapes que je veux suivre dans un moment difficile", calmplan_ph_steps:"ex. : 1) pause 2) respire 3) appelle quelqu'un",
+    calmplan_save:"Enregistrer mon plan", calmplan_edit:"Modifier", calmplan_export:"Exporter", calmplan_print:"Imprimer", calmplan_delete:"Supprimer",
+    calmplan_crisis_note:"En cas d'urgence, ce plan ne remplace pas de l'aide.", calmplan_crisis_btn:"Ressources de crise",
+    calmplan_confirm_delete:"Supprimer définitivement ton plan de calme ? C'est irréversible.",
     checkin_opt1:"Anxieux ou tendu", checkin_opt2:"Triste ou oppressé", checkin_opt3:"Esprit dispersé et agité", checkin_opt4:"Épuisement physique",
     crisis_button:"J'ai besoin d'aide maintenant", crisis_eyebrow:"Tu n'es pas seul(e)",
     crisis_title:"Une aide réelle — gratuite et confidentielle", crisis_subtitle:"Si tu traverses une crise aiguë en ce moment, contacte l'une de ces lignes — des personnes formées sont prêtes à t'écouter.",
@@ -1105,6 +1581,24 @@ const I18N = {
     upgrade_programs_title:"Ek programlar", upgrade_programs_desc:"Özel kısa kurslar ve programlar",
     upgrade_maybe_later:"Belki sonra",
     progress_label:"İlerlemen", progress_streak:"gün üst üste", progress_journal:"kaydedilen yazı", progress_mood:"ruh hali kaydı",
+    progress_exercises:"tamamlanan egzersiz", progress_helped:"yardımcı olduğu kez",
+    progress_disable_streaks_title:"Serileri devre dışı bırak", progress_disable_streaks_desc:"Gün sayacı motive etmek yerine baskı hissettiriyorsa gizle.",
+    why_suggestion_link:"Bu öneri neden yapıldı?",
+    ef_cta:"Hissimi anlat", ef_eyebrow:"İfade Etmeme Yardım Et", ef_title:"Nasıl Hissettiğimi Anlatmama Yardım Et",
+    ef_intro:"Şu an sana doğru gelen neyse doldur — atlamak istediğin satırı boş bırak.",
+    ef_f_now:"Şu anda hissediyorum", ef_ph_now:"örn. kaygılı ve yorgun",
+    ef_f_after:"Bunu şundan sonra fark ettim", ef_ph_after:"örn. zor bir konuşma",
+    ef_f_affecting:"Bu şunu etkiliyor", ef_ph_affecting:"örn. uykumu ve odaklanmamı",
+    ef_f_hardest:"En zor olan şey", ef_ph_hardest:"örn. sonra ne yapacağımı bilmemek",
+    ef_f_need:"Şu an ihtiyacım olan şey belki", ef_ph_need:"örn. biraz alan ve sessizlik",
+    ef_f_help:"Yardımcı olabilecek bir şey", ef_ph_help:"örn. güvendiğim biriyle konuşmak",
+    ef_empty_hint:"Boş bıraktığın her alan taslağından çıkarılır.", ef_generate:"Taslağımı oluştur",
+    ef_tone_concise:"Kısa", ef_tone_detailed:"Ayrıntılı",
+    ef_copy:"Kopyala", ef_copied:"Kopyalandı ✓", ef_back_edit:"Düzenlemeye dön",
+    ef_ai_rewrite:"Yapay zeka ile yeniden yaz", ef_ai_note:"Bu, taslağını yeniden yazması için yapay zeka sağlayıcımıza gönderir. Başka hiçbir şey gönderilmez.",
+    ef_ai_confirm:"Bu, taslağını yeniden yazması için Anthropic'e (yapay zeka sağlayıcımız) cihazının dışına gönderecek. Devam edilsin mi?",
+    ef_ai_needs_consent:"Yapay zeka özelliklerini etkinleştirmek için lütfen önce bir sohbet mesajı gönder.",
+    ef_ai_done:"Yeniden yazıldı ✓", ef_empty_draft:"Taslağını burada görmek için en az bir satır doldur.",
     progress_teaser:"Premium ile örüntülerine dair daha derin bir analiz aç.", progress_cta:"Planları gör",
     nav_program:"Program",
     program_eyebrow:"Odaklı program", program_title:"7 günlük kaygı programı",
@@ -1125,6 +1619,36 @@ const I18N = {
     brief_word_prefix:"Son zamanlarda günlüğünde en sık geçen kelime:",
     mood_suggest_text:"Son zamanlarda ruh halinin biraz ağırlaştığını fark ettik — bu yardımcı olabilir:",
     mood_suggest_btn:"Dene",
+    free_chat_remaining:"ücretsiz mesaj kaldı",
+    sleep_cta:"Uyku modu", sleep_title:"Dinlenme zamanı",
+    sleep_desc:"Uyumadan önce basit bir nefes egzersiziyle bedenini ve zihnini sakinleştirmek için iki dakika ayır.",
+    sleep_start_btn:"Nefes egzersizini başlat", sleep_skip:"Hayır teşekkürler — sadece kapat",
+    relief_cta:"90 saniye bana yardım et", relief_eyebrow:"Hızlı rahatlama",
+    relief_title:"Şu an neye en yakın hissediyorsun?", relief_subtitle:"Birini seç, hemen kısa bir egzersiz başlayacak — tamamen çevrimdışı.",
+    relief_stop:"Durdur ve çık", relief_end_title:"Aferin — kendine zaman ayırdın",
+    relief_fb_yes:"Evet, yardımcı oldu", relief_fb_little:"Biraz", relief_fb_no:"Pek sayılmaz",
+    passport_open_btn:"Gizlilik Pasaportunu Aç", passport_eyebrow:"Gizlilik Pasaportu",
+    passport_title:"Verilerine ne olur",
+    passport_local_title:"Bu cihazda kalanlar", passport_local_text:"Ruh hali kaydın, günlük yazıların, egzersiz geçmişin, serin ve sohbet geçmişin yalnızca bu tarayıcının yerel deposunda saklanır. Hiçbiri herhangi bir Waha sunucusuna veya veritabanına yüklenmez — çünkü Waha'nın bu veriler için böyle bir şeyi yok.",
+    passport_ai_title:"Yapay zekaya gönderilenler", passport_ai_text:"Yalnızca sohbette veya hızlı kontrolde yazdığın metin, bir yanıt üretmek için Anthropic'e (yapay zeka sağlayıcımız) gönderilir. Başka hiçbir şey — ruh hali kaydın, günlüğün, egzersiz geçmişin — otomatik olarak gönderilmez.",
+    passport_logs_title:"Teknik kayıtlar", passport_logs_text:"Sunucumuz bir isteğin başarılı olup olmadığını ve bir yanıtın güvenlik nedeniyle değiştirilip değiştirilmediğini kaydedebilir — asla mesajlarının içeriğini değil.",
+    passport_temp_label:"Geçici sohbet", passport_temp_desc:"Etkinken, yeni sohbet mesajları bu cihaza kaydedilmez. Kapattığında veya uygulamayı kapattığında sona erer.",
+    passport_temp_active:"🕶️ Geçici mod — bu sohbet kaydedilmiyor",
+    passport_controls_label:"Kontrollerin", passport_del_chat:"Sohbet geçmişini sil", passport_del_mood:"Ruh hali verilerini sil",
+    passport_del_exercises:"Egzersiz geçmişini sil", passport_export_all:"Tüm verilerimi dışa aktar", passport_del_all:"Her şeyi sil",
+    passport_done:"Tamamlandı ✓", passport_error:"Bir şeyler yanlış gitti, tekrar dene",
+    passport_confirm_all:"Bu, bu cihazdaki tüm Waha verilerini kalıcı olarak siler — ruh hali, günlük, sohbet, seri, her şey. Bu geri alınamaz. Devam edilsin mi?",
+    calmplan_cta:"Sakinlik Planı", calmplan_eyebrow:"Kişisel Sakinlik Planı", calmplan_title:"Sakinlik Planım",
+    calmplan_intro:"Bunu şimdi, kendini iyi hissederken hazırla, böylece zor bir an için hazır olur.",
+    calmplan_f_exercise:"Bana yardımcı olan sakinleştirici bir egzersiz", calmplan_ph_exercise:"örn. 4-7-8 nefes egzersizi",
+    calmplan_f_sentence:"Bana yardımcı olan bir cümle", calmplan_ph_sentence:"örn. bu duygu geçecek",
+    calmplan_f_place:"Daha sakin hissettiğim bir yer", calmplan_ph_place:"örn. balkonum",
+    calmplan_f_activity:"Güvenli bir aktivite", calmplan_ph_activity:"örn. kısa bir yürüyüş",
+    calmplan_f_person:"Ulaşabileceğim biri", calmplan_ph_person:"örn. kız kardeşim Lina",
+    calmplan_f_steps:"Zor bir anda izlemek istediğim adımlar", calmplan_ph_steps:"örn. 1) dur 2) nefes al 3) birini ara",
+    calmplan_save:"Planımı kaydet", calmplan_edit:"Düzenle", calmplan_export:"Dışa aktar", calmplan_print:"Yazdır", calmplan_delete:"Sil",
+    calmplan_crisis_note:"Acil durumda, bu plan yardımın yerini tutmaz.", calmplan_crisis_btn:"Kriz kaynakları",
+    calmplan_confirm_delete:"Sakinlik planın kalıcı olarak silinsin mi? Bu geri alınamaz.",
     checkin_opt1:"Kaygılı veya gergin", checkin_opt2:"Üzgün veya ağır", checkin_opt3:"Dağınık, hızlı düşünceler", checkin_opt4:"Fiziksel olarak yorgun",
     crisis_button:"Şimdi yardıma ihtiyacım var", crisis_eyebrow:"Yalnız değilsin",
     crisis_title:"Gerçek yardım — ücretsiz ve gizli", crisis_subtitle:"Şu anda ciddi bir kriz yaşıyorsan, bu hatlardan birine ulaş — eğitimli kişiler seni dinlemeye hazır.",
@@ -1199,6 +1723,24 @@ const I18N = {
     upgrade_programs_title:"Bernameyên zêde", upgrade_programs_desc:"Kurs û bernameyên kurt ên taybet",
     upgrade_maybe_later:"Dibe ku paşê",
     progress_label:"Pêşketina te", progress_streak:"roj li dû hev", progress_journal:"nivîsên tomarkirî", progress_mood:"tomarên rewşê",
+    progress_exercises:"ezmûnên qedandî", progress_helped:"caran alîkar bûye",
+    progress_disable_streaks_title:"Rêzefîlman neçalak bike", progress_disable_streaks_desc:"Jimareya rojan veşêre eger ew zêdetir zext bide te ji teşwîqê.",
+    why_suggestion_link:"Çima ev pêşniyar?",
+    ef_cta:"Hestê xwe rave bike", ef_eyebrow:"Alîkariya Vegotinê", ef_title:"Alîkariya min bike ku rave bikim ka ez çawa hîs dikim",
+    ef_intro:"Tiştê ku niha ji te re rast xuya dike tijî bike — rêzek vala bihêle da ku wê derbas bikî.",
+    ef_f_now:"Niha ez hîs dikim", ef_ph_now:"nimûne: xemgîn û westiyayî",
+    ef_f_after:"Min ev piştî vê dît", ef_ph_after:"nimûne: axaftinek dijwar",
+    ef_f_affecting:"Ev bandorê li ser dike", ef_ph_affecting:"nimûne: xewa min û sekinandina min",
+    ef_f_hardest:"Tiştê herî dijwar ev e", ef_ph_hardest:"nimûne: nezanîna ku paşê çi bikim",
+    ef_f_need:"Tiştê ku niha hewceyê min pê heye dibe", ef_ph_need:"nimûne: hinek cîh û aramî",
+    ef_f_help:"Tiştek ku dikare alîkar be", ef_ph_help:"nimûne: axaftin bi kesekî ku ez baweriya xwe pê tînim",
+    ef_empty_hint:"Her qadeke ku tu vala bihêlî tenê ji reçeta te tê derxistin.", ef_generate:"Reçeta min biafirîne",
+    ef_tone_concise:"Kurt", ef_tone_detailed:"Berfireh",
+    ef_copy:"Kopî bike", ef_copied:"Hate kopîkirin ✓", ef_back_edit:"Vegere sererastkirinê",
+    ef_ai_rewrite:"Bi AI ve dîsa binivîse", ef_ai_note:"Ev reçeta te ji bo dîsa nivîsandinê ji peydakerê me yê AI re dişîne. Tiştek din nayê şandin.",
+    ef_ai_confirm:"Ev ê reçeta te ji amûra te derkeve û here Anthropic (peydakerê me yê AI) da ku dîsa binivîse. Berdewam bike?",
+    ef_ai_needs_consent:"Ji kerema xwe pêşî peyamek chatê bişîne da ku taybetmendiyên AI çalak bikî.",
+    ef_ai_done:"Dîsa hate nivîsandin ✓", ef_empty_draft:"Bo dîtina reçeta xwe li vir, herî kêm rêzek tijî bike.",
     progress_teaser:"Bi Premium re analîzek kûrtir a şêwazên xwe veke.", progress_cta:"Plana bibîne",
     nav_program:"Bername",
     program_eyebrow:"Bernameya taybet", program_title:"Bernameya 7 rojan ya li dijî fikarê",
@@ -1219,6 +1761,36 @@ const I18N = {
     brief_word_prefix:"Peyva herî zêde di rojnivîska te ya vê dawiyê de:",
     mood_suggest_text:"Me dît ku hesta te vê dawiyê hinekî giran bûye — ev dikare bibe alîkar:",
     mood_suggest_btn:"Biceribîne",
+    free_chat_remaining:"peyamên belaş mane",
+    sleep_cta:"Moda xewê", sleep_title:"Wexta vehesînê ye",
+    sleep_desc:"Berî xewê du deqîqeyan bidin xwe da ku bi ezmûnek nefesê ya sade laş û hiş xwe aram bikî.",
+    sleep_start_btn:"Ezmûna nefesê dest pê bike", sleep_skip:"Na spas — tenê bigire",
+    relief_cta:"90 çirkeyan alîkariya min bike", relief_eyebrow:"Alîkariya lez",
+    relief_title:"Niha çi herî nêzîkî tu hîs dikî ye?", relief_subtitle:"Yekê hilbijêre, emê tavilê ezmûnek kurt dest pê bikin — bi tevahî bêinternet.",
+    relief_stop:"Rawestîne û derkeve", relief_end_title:"Baş kir — te dem da xwe",
+    relief_fb_yes:"Erê, alîkar bû", relief_fb_little:"Hinekî", relief_fb_no:"Ne bi rastî",
+    passport_open_btn:"Pasaporta Nihêrînê Veke", passport_eyebrow:"Pasaporta Nihêrînê",
+    passport_title:"Çi bi daneyên te dibe",
+    passport_local_title:"Çi li ser vê amûrê dimîne", passport_local_text:"Tomara hesta te, rojnivîsk, dîroka ezmûnan, rêzefîlm û dîroka chatê tenê di depoya herêmî ya vê gerokê de tê tomarkirin. Tu tişt jê nayê barkirin ser her serverek an danegehek Waha — ji ber ku Waha ji bo van daneyan tiştek weha nîne.",
+    passport_ai_title:"Çi ji AI re tê şandin", passport_ai_text:"Tenê nivîsa ku tu di chatê an lêpirsîna lezgîn de dinivîsî ji Anthropic re (peydakerê me yê AI) tê şandin da ku bersivek biafirîne. Tiştek din — ne tomara hesta te, ne rojnivîsk, ne dîroka ezmûnan — bixweber nayê şandin.",
+    passport_logs_title:"Tomarên teknîkî", passport_logs_text:"Servera me dikare tomar bike ka daxwazek serkeftî bû an sernekeftî, û ka bersivek ji ber sedemên ewlehiyê hate guhertin — çu carî naveroka peyamên te.",
+    passport_temp_label:"Chata demkî", passport_temp_desc:"Dema çalak be, peyamên chatê yên nû li ser vê amûrê nayên tomarkirin. Dema tu wê bigirî an sepan bigirî diqede.",
+    passport_temp_active:"🕶️ Moda demkî — ev chat nayê tomarkirin",
+    passport_controls_label:"Kontrolên te", passport_del_chat:"Dîroka chatê jê bibe", passport_del_mood:"Daneyên hestê jê bibe",
+    passport_del_exercises:"Dîroka ezmûnan jê bibe", passport_export_all:"Hemû daneyên min derxîne", passport_del_all:"Her tiştî jê bibe",
+    passport_done:"Temam ✓", passport_error:"Tiştek xelet çû, dîsa biceribîne",
+    passport_confirm_all:"Ev ê hemû daneyên Waha yên li ser vê amûrê bi awayekî domdar jê bibe — hest, rojnivîsk, chat, rêzefîlm, her tişt. Ev nayê vegerandin. Berdewam bike?",
+    calmplan_cta:"Plana Aramiyê", calmplan_eyebrow:"Plana Aramiyê ya Kesane", calmplan_title:"Plana Min a Aramiyê",
+    calmplan_intro:"Vê niha amade bike, dema tu xwe aram hîs dikî, da ku ji bo demek dijwartir amade be.",
+    calmplan_f_exercise:"Ezmûnek aramker ya alîkariya min dike", calmplan_ph_exercise:"nimûne: nefesa 4-7-8",
+    calmplan_f_sentence:"Hevokek ku alîkariya min dike", calmplan_ph_sentence:"nimûne: ev hest wê derbas bibe",
+    calmplan_f_place:"Cihek ku tê de xwe hêdîtir hîs dikim", calmplan_ph_place:"nimûne: balkona min",
+    calmplan_f_activity:"Çalakiyek ewle", calmplan_ph_activity:"nimûne: meşiyek kurt",
+    calmplan_f_person:"Kesek ku ez dikarim gihîjê", calmplan_ph_person:"nimûne: xwişka min Lîna",
+    calmplan_f_steps:"Gavên ku dixwazim di demek dijwar de bişopînim", calmplan_ph_steps:"nimûne: ١) rawestîne ٢) nefes bikişîne ٣) telefonê li kesek bike",
+    calmplan_save:"Plana min tomar bike", calmplan_edit:"Biguherîne", calmplan_export:"Derxîne", calmplan_print:"Çap bike", calmplan_delete:"Jê bibe",
+    calmplan_crisis_note:"Di rewşa awarte de, ev plan şûna alîkariyê nagire.", calmplan_crisis_btn:"Çavkaniyên krîzê",
+    calmplan_confirm_delete:"Plana aramiyê bi awayekî domdar jê bibe? Ev nayê vegerandin.",
     checkin_opt1:"Fikar an tengasî", checkin_opt2:"Xemgînî an giranî", checkin_opt3:"Hişê belavbûyî û ramanên zû", checkin_opt4:"Betilîna laşî",
     crisis_button:"Niha hewceyî alîkariyê me", crisis_eyebrow:"Tu bi tenê nînî",
     crisis_title:"Alîkariya rastîn — belaş û veşartî", crisis_subtitle:"Heke tu niha di krîzek dijwar de yî, bi yek ji van xetan re têkilî daynin — kesên perwerdekirî amade ne ku guhdarî te bikin.",
@@ -1293,6 +1865,24 @@ const I18N = {
     upgrade_programs_title:"Programas adicionales", upgrade_programs_desc:"Cursos y programas cortos especializados",
     upgrade_maybe_later:"Quizás más tarde",
     progress_label:"Tu progreso", progress_streak:"días seguidos", progress_journal:"escritos guardados", progress_mood:"registros de ánimo",
+    progress_exercises:"ejercicios completados", progress_helped:"veces que ayudó",
+    progress_disable_streaks_title:"Desactivar rachas", progress_disable_streaks_desc:"Oculta el contador de días si te genera más presión que motivación.",
+    why_suggestion_link:"¿Por qué esta sugerencia?",
+    ef_cta:"Explicar cómo me siento", ef_eyebrow:"Ayúdame a Expresarme", ef_title:"Ayúdame a explicar cómo me siento",
+    ef_intro:"Rellena lo que te parezca cierto ahora mismo — deja cualquier línea en blanco para omitirla.",
+    ef_f_now:"Ahora mismo me siento", ef_ph_now:"ej.: ansioso/a y cansado/a",
+    ef_f_after:"Noté esto después de", ef_ph_after:"ej.: una conversación difícil",
+    ef_f_affecting:"Esto está afectando a", ef_ph_affecting:"ej.: mi sueño y mi concentración",
+    ef_f_hardest:"Lo más difícil es", ef_ph_hardest:"ej.: no saber qué hacer después",
+    ef_f_need:"Lo que quizás necesito ahora es", ef_ph_need:"ej.: algo de espacio y tranquilidad",
+    ef_f_help:"Una cosa que podría ayudar es", ef_ph_help:"ej.: hablar con alguien de confianza",
+    ef_empty_hint:"Cualquier campo que dejes en blanco simplemente se omite de tu borrador.", ef_generate:"Crear mi borrador",
+    ef_tone_concise:"Conciso", ef_tone_detailed:"Detallado",
+    ef_copy:"Copiar", ef_copied:"Copiado ✓", ef_back_edit:"Volver a editar",
+    ef_ai_rewrite:"Reescribir con IA", ef_ai_note:"Esto envía tu borrador a nuestro proveedor de IA para reescribirlo. No se envía nada más.",
+    ef_ai_confirm:"Esto enviará tu borrador fuera de tu dispositivo a Anthropic (nuestro proveedor de IA) para reescribirlo. ¿Continuar?",
+    ef_ai_needs_consent:"Envía primero un mensaje de chat para habilitar las funciones de IA.",
+    ef_ai_done:"Reescrito ✓", ef_empty_draft:"Rellena al menos una línea para ver tu borrador aquí.",
     progress_teaser:"Desbloquea un análisis más profundo de tus patrones con Premium.", progress_cta:"Ver planes",
     nav_program:"Programa",
     program_eyebrow:"Programa enfocado", program_title:"Programa de 7 días contra la ansiedad",
@@ -1313,6 +1903,36 @@ const I18N = {
     brief_word_prefix:"Palabra más frecuente en tu diario últimamente:",
     mood_suggest_text:"Notamos que tu ánimo ha estado un poco más pesado últimamente — esto podría ayudar:",
     mood_suggest_btn:"Probar",
+    free_chat_remaining:"mensajes gratis restantes",
+    sleep_cta:"Modo sueño", sleep_title:"Hora de descansar",
+    sleep_desc:"Tómate dos minutos para calmar tu cuerpo y mente con un ejercicio de respiración simple antes de dormir.",
+    sleep_start_btn:"Empezar ejercicio de respiración", sleep_skip:"No gracias — solo cerrar",
+    relief_cta:"Ayúdame durante 90 segundos", relief_eyebrow:"Alivio rápido",
+    relief_title:"¿Qué se parece más a lo que sientes ahora?", relief_subtitle:"Elige una opción, y empezaremos un ejercicio corto de inmediato — totalmente sin conexión.",
+    relief_stop:"Detener y salir", relief_end_title:"Bien hecho — te tomaste un momento para ti",
+    relief_fb_yes:"Sí, ayudó", relief_fb_little:"Un poco", relief_fb_no:"No realmente",
+    passport_open_btn:"Abrir el Pasaporte de Privacidad", passport_eyebrow:"Pasaporte de Privacidad",
+    passport_title:"Qué pasa con tus datos",
+    passport_local_title:"Qué se queda en este dispositivo", passport_local_text:"Tu registro de ánimo, entradas de diario, historial de ejercicios, racha e historial de chat se guardan solo en el almacenamiento local de este navegador. Nada de esto se sube a ningún servidor o base de datos de Waha — porque Waha no tiene una para estos datos.",
+    passport_ai_title:"Qué se envía a la IA", passport_ai_text:"Solo el texto que escribes en el chat o en el check-in rápido se envía a Anthropic (nuestro proveedor de IA) para generar una respuesta. Nada más — ni registro de ánimo, ni diario, ni historial de ejercicios — se envía automáticamente.",
+    passport_logs_title:"Registros técnicos", passport_logs_text:"Nuestro servidor puede registrar si una solicitud tuvo éxito o falló, y si una respuesta fue reescrita por seguridad — nunca el contenido de tus mensajes.",
+    passport_temp_label:"Conversación temporal", passport_temp_desc:"Mientras esté activa, los nuevos mensajes de chat no se guardan en este dispositivo. Termina cuando la desactivas o cierras la app.",
+    passport_temp_active:"🕶️ Modo temporal — esta conversación no se está guardando",
+    passport_controls_label:"Tus controles", passport_del_chat:"Eliminar historial de chat", passport_del_mood:"Eliminar datos de ánimo",
+    passport_del_exercises:"Eliminar historial de ejercicios", passport_export_all:"Exportar todos mis datos", passport_del_all:"Eliminar todo",
+    passport_done:"Hecho ✓", passport_error:"Algo salió mal, inténtalo de nuevo",
+    passport_confirm_all:"Esto elimina permanentemente todos los datos de Waha en este dispositivo — ánimo, diario, chat, racha, todo. Esto no se puede deshacer. ¿Continuar?",
+    calmplan_cta:"Plan de calma", calmplan_eyebrow:"Plan de calma personal", calmplan_title:"Mi plan de calma",
+    calmplan_intro:"Prepara esto ahora, mientras te sientes estable, para que esté listo para un momento más difícil.",
+    calmplan_f_exercise:"Un ejercicio calmante que me ayuda", calmplan_ph_exercise:"ej.: respiración 4-7-8",
+    calmplan_f_sentence:"Una frase que me ayuda", calmplan_ph_sentence:"ej.: este sentimiento pasará",
+    calmplan_f_place:"Un lugar donde me siento más tranquilo/a", calmplan_ph_place:"ej.: mi balcón",
+    calmplan_f_activity:"Una actividad segura", calmplan_ph_activity:"ej.: un paseo corto",
+    calmplan_f_person:"Alguien a quien puedo contactar", calmplan_ph_person:"ej.: mi hermana Lina",
+    calmplan_f_steps:"Pasos que quiero seguir en un momento difícil", calmplan_ph_steps:"ej.: 1) pausa 2) respira 3) llama a alguien",
+    calmplan_save:"Guardar mi plan", calmplan_edit:"Editar", calmplan_export:"Exportar", calmplan_print:"Imprimir", calmplan_delete:"Eliminar",
+    calmplan_crisis_note:"En una emergencia, este plan no sustituye a la ayuda.", calmplan_crisis_btn:"Recursos de crisis",
+    calmplan_confirm_delete:"¿Eliminar tu plan de calma permanentemente? Esto no se puede deshacer.",
     checkin_opt1:"Ansioso o tenso", checkin_opt2:"Triste o con un peso encima", checkin_opt3:"Mente dispersa y acelerada", checkin_opt4:"Agotamiento físico",
     crisis_button:"Necesito ayuda ahora", crisis_eyebrow:"No estás solo/a",
     crisis_title:"Ayuda real — gratuita y confidencial", crisis_subtitle:"Si estás pasando por una crisis aguda ahora mismo, contacta una de estas líneas — hay personas capacitadas listas para escucharte.",
@@ -1407,6 +2027,24 @@ const I18N = {
       upgrade_programs_title:"برنامه‌های افزوده", upgrade_programs_desc:"دوره‌ها و برنامه‌های کوتاه تخصصی",
       upgrade_maybe_later:"شاید بعداً",
       progress_label:"پیشرفت تو", progress_streak:"روز متوالی", progress_journal:"نوشته ذخیره‌شده", progress_mood:"ثبت حال روحی",
+      progress_exercises:"تمرین‌های تکمیل‌شده", progress_helped:"دفعاتی که کمک کرد",
+      progress_disable_streaks_title:"غیرفعال کردن سلسله‌ها", progress_disable_streaks_desc:"اگر شمارنده روزها به‌جای انگیزه، فشار ایجاد می‌کند، آن را پنهان کن.",
+      why_suggestion_link:"چرا این پیشنهاد؟",
+      ef_cta:"احساسم را توضیح بده", ef_eyebrow:"کمک به بیان احساس", ef_title:"کمکم کن توضیح دهم چه احساسی دارم",
+      ef_intro:"آنچه الان برایت درست به نظر می‌رسد را پر کن — هر خطی را که می‌خواهی رد کنی خالی بگذار.",
+      ef_f_now:"الان احساس می‌کنم", ef_ph_now:"مثال: مضطرب و خسته",
+      ef_f_after:"این را بعد از این متوجه شدم", ef_ph_after:"مثال: یک گفتگوی سخت",
+      ef_f_affecting:"این روی این تأثیر می‌گذارد", ef_ph_affecting:"مثال: خوابم و تمرکزم",
+      ef_f_hardest:"سخت‌ترین چیز برایم", ef_ph_hardest:"مثال: ندانستن اینکه بعد چه کنم",
+      ef_f_need:"چیزی که شاید الان نیاز دارم", ef_ph_need:"مثال: کمی فضا و آرامش",
+      ef_f_help:"یک چیز که می‌تواند کمک کند", ef_ph_help:"مثال: صحبت با کسی که به او اعتماد دارم",
+      ef_empty_hint:"هر فیلدی که خالی بگذاری، به‌سادگی از پیش‌نویس تو حذف می‌شود.", ef_generate:"پیش‌نویسم را بساز",
+      ef_tone_concise:"مختصر", ef_tone_detailed:"مفصل",
+      ef_copy:"کپی", ef_copied:"کپی شد ✓", ef_back_edit:"بازگشت به ویرایش",
+      ef_ai_rewrite:"بازنویسی با هوش مصنوعی", ef_ai_note:"این پیش‌نویس تو را برای بازنویسی به ارائه‌دهنده هوش مصنوعی ما ارسال می‌کند. چیز دیگری ارسال نمی‌شود.",
+      ef_ai_confirm:"این کار پیش‌نویس تو را خارج از دستگاهت برای بازنویسی به Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌کند. ادامه می‌دهی؟",
+      ef_ai_needs_consent:"لطفاً ابتدا یک پیام گفتگو ارسال کن تا ویژگی‌های هوش مصنوعی فعال شوند.",
+      ef_ai_done:"بازنویسی شد ✓", ef_empty_draft:"برای دیدن پیش‌نویس خود اینجا، حداقل یک خط را پر کن.",
       progress_teaser:"با پرمیوم تحلیلی عمیق‌تر از الگوهای خود باز کن.", progress_cta:"مشاهده طرح‌ها",
       nav_program:"برنامه",
       program_eyebrow:"برنامه متمرکز", program_title:"برنامه ۷ روزه مدیریت اضطراب",
@@ -1427,6 +2065,36 @@ const I18N = {
       brief_word_prefix:"پرتکرارترین کلمه در یادداشت‌های اخیرت:",
       mood_suggest_text:"متوجه شدیم خلق‌وخویت اخیراً کمی سنگین‌تر بوده — این می‌تواند کمک کند:",
       mood_suggest_btn:"امتحان کن",
+      free_chat_remaining:"پیام رایگان باقی‌مانده",
+      sleep_cta:"حالت خواب", sleep_title:"وقت استراحت است",
+      sleep_desc:"دو دقیقه وقت بگذار تا با یک تمرین تنفس ساده، بدن و ذهنت را قبل از خواب آرام کنی.",
+      sleep_start_btn:"شروع تمرین تنفس", sleep_skip:"نه ممنون — فقط ببند",
+      relief_cta:"۹۰ ثانیه به من کمک کن", relief_eyebrow:"کمک سریع",
+      relief_title:"الان چه چیزی به حس تو نزدیک‌تر است؟", relief_subtitle:"یکی را انتخاب کن، فوراً یک تمرین کوتاه شروع می‌شود — کاملاً بدون اینترنت.",
+      relief_stop:"توقف و خروج", relief_end_title:"آفرین — برای خودت وقت گذاشتی",
+      relief_fb_yes:"بله، کمک کرد", relief_fb_little:"کمی", relief_fb_no:"نه واقعاً",
+      passport_open_btn:"باز کردن گذرنامه حریم خصوصی", passport_eyebrow:"گذرنامه حریم خصوصی",
+      passport_title:"چه اتفاقی برای داده‌هایت می‌افتد",
+      passport_local_title:"چه چیزی روی این دستگاه می‌ماند", passport_local_text:"سابقه خلق‌وخو، یادداشت‌های روزانه، سابقه تمرین‌ها، سلسله و سابقه گفتگویت فقط در حافظه محلی همین مرورگر ذخیره می‌شود. هیچ‌کدام به هیچ سرور یا پایگاه‌داده‌ای در Waha آپلود نمی‌شود — چون Waha چنین چیزی برای این داده‌ها ندارد.",
+      passport_ai_title:"چه چیزی برای هوش مصنوعی ارسال می‌شود", passport_ai_text:"فقط متنی که در گفتگو یا فحص سریع می‌نویسی برای Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌شود تا پاسخی تولید شود. هیچ چیز دیگری — نه سابقه خلق‌وخو، نه یادداشت روزانه، نه سابقه تمرین‌ها — به‌طور خودکار ارسال نمی‌شود.",
+      passport_logs_title:"گزارش‌های فنی", passport_logs_text:"سرور ما ممکن است ثبت کند که آیا درخواستی موفق بوده یا نه، و آیا پاسخی به دلایل ایمنی بازنویسی شده — اما هرگز محتوای پیام‌هایت را ثبت نمی‌کند.",
+      passport_temp_label:"گفتگوی موقت", passport_temp_desc:"وقتی فعال باشد، پیام‌های جدید گفتگو روی این دستگاه ذخیره نمی‌شوند. با خاموش کردنش یا بستن برنامه پایان می‌یابد.",
+      passport_temp_active:"🕶️ حالت موقت — این گفتگو ذخیره نمی‌شود",
+      passport_controls_label:"کنترل‌های تو", passport_del_chat:"حذف سابقه گفتگو", passport_del_mood:"حذف داده‌های خلق‌وخو",
+      passport_del_exercises:"حذف سابقه تمرین‌ها", passport_export_all:"صادر کردن همه داده‌هایم", passport_del_all:"حذف همه چیز",
+      passport_done:"انجام شد ✓", passport_error:"مشکلی پیش آمد، دوباره امتحان کن",
+      passport_confirm_all:"این کار همه داده‌های Waha روی این دستگاه را برای همیشه حذف می‌کند — خلق‌وخو، یادداشت روزانه، گفتگو، سلسله، همه چیز. این کار قابل بازگشت نیست. ادامه می‌دهی؟",
+      calmplan_cta:"طرح آرامش", calmplan_eyebrow:"طرح آرامش شخصی", calmplan_title:"طرح آرامش من",
+      calmplan_intro:"این را الان، وقتی حالت پایدار است، آماده کن تا برای لحظه‌ای سخت‌تر آماده باشد.",
+      calmplan_f_exercise:"تمرینی آرامش‌بخش که به من کمک می‌کند", calmplan_ph_exercise:"مثال: تنفس ۴-۷-۸",
+      calmplan_f_sentence:"جمله‌ای که به من کمک می‌کند", calmplan_ph_sentence:"مثال: این احساس می‌گذرد",
+      calmplan_f_place:"مکانی که در آن آرام‌تر هستم", calmplan_ph_place:"مثال: بالکن من",
+      calmplan_f_activity:"یک فعالیت امن", calmplan_ph_activity:"مثال: یک پیاده‌روی کوتاه",
+      calmplan_f_person:"کسی که می‌توانم با او تماس بگیرم", calmplan_ph_person:"مثال: خواهرم لینا",
+      calmplan_f_steps:"قدم‌هایی که می‌خواهم در لحظه‌ای سخت دنبال کنم", calmplan_ph_steps:"مثال: ۱) توقف ۲) نفس بکش ۳) به کسی زنگ بزن",
+      calmplan_save:"طرحم را ذخیره کن", calmplan_edit:"ویرایش", calmplan_export:"صادر کردن", calmplan_print:"چاپ", calmplan_delete:"حذف",
+      calmplan_crisis_note:"در شرایط اضطراری، این طرح جایگزین کمک نیست.", calmplan_crisis_btn:"منابع بحران",
+      calmplan_confirm_delete:"طرح آرامش برای همیشه حذف شود؟ این کار قابل بازگشت نیست.",
       checkin_opt1:"اضطراب یا تنش", checkin_opt2:"غم یا سنگینی دل", checkin_opt3:"ذهن پراکنده و افکار شتابان", checkin_opt4:"خستگی جسمی",
       crisis_button:"الان به کمک نیاز دارم", crisis_eyebrow:"تو تنها نیستی",
       crisis_title:"کمک واقعی — رایگان و محرمانه", crisis_subtitle:"اگر الان در یک بحران شدید هستی، با یکی از این خطوط تماس بگیر — افراد آموزش‌دیده آماده شنیدن صدای تو هستند.",
@@ -1501,6 +2169,24 @@ const I18N = {
       upgrade_programs_title:"اضافی پروگرام", upgrade_programs_desc:"مخصوص مختصر کورسز اور پروگرام",
       upgrade_maybe_later:"شاید بعد میں",
       progress_label:"آپ کی پیشرفت", progress_streak:"لگاتار دن", progress_journal:"محفوظ شدہ تحریریں", progress_mood:"موڈ ریکارڈز",
+      progress_exercises:"مکمل شدہ مشقیں", progress_helped:"مدد ملنے کی تعداد",
+      progress_disable_streaks_title:"سلسلے غیر فعال کریں", progress_disable_streaks_desc:"اگر دنوں کا شمار حوصلہ افزائی کے بجائے دباؤ محسوس ہو تو اسے چھپا دیں۔",
+      why_suggestion_link:"یہ تجویز کیوں؟",
+      ef_cta:"اپنا احساس بیان کریں", ef_eyebrow:"اظہار میں مدد", ef_title:"مجھے بتانے میں مدد کریں کہ میں کیسا محسوس کر رہا ہوں",
+      ef_intro:"جو کچھ ابھی آپ کو درست لگے وہ پُر کریں — کسی بھی لائن کو چھوڑنے کے لیے خالی رکھیں۔",
+      ef_f_now:"ابھی میں محسوس کر رہا ہوں", ef_ph_now:"مثال: پریشان اور تھکا ہوا",
+      ef_f_after:"میں نے یہ اس کے بعد محسوس کیا", ef_ph_after:"مثال: ایک مشکل گفتگو",
+      ef_f_affecting:"یہ اس پر اثر انداز ہو رہا ہے", ef_ph_affecting:"مثال: میری نیند اور توجہ",
+      ef_f_hardest:"سب سے مشکل چیز یہ ہے", ef_ph_hardest:"مثال: یہ نہ جاننا کہ آگے کیا کرنا ہے",
+      ef_f_need:"شاید ابھی مجھے اس کی ضرورت ہے", ef_ph_need:"مثال: کچھ جگہ اور سکون",
+      ef_f_help:"ایک چیز جو مدد کر سکتی ہے", ef_ph_help:"مثال: کسی ایسے شخص سے بات کرنا جس پر مجھے اعتماد ہے",
+      ef_empty_hint:"جو بھی فیلڈ آپ خالی چھوڑیں گے وہ آپ کے مسودے سے نکال دی جائے گی۔", ef_generate:"میرا مسودہ بنائیں",
+      ef_tone_concise:"مختصر", ef_tone_detailed:"تفصیلی",
+      ef_copy:"کاپی کریں", ef_copied:"کاپی ہو گیا ✓", ef_back_edit:"ترمیم پر واپس جائیں",
+      ef_ai_rewrite:"AI کے ساتھ دوبارہ لکھیں", ef_ai_note:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے ہمارے AI فراہم کنندہ کو بھیجتا ہے۔ کچھ اور نہیں بھیجا جاتا۔",
+      ef_ai_confirm:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے آپ کے آلے سے باہر Anthropic (ہمارے AI فراہم کنندہ) کو بھیجے گا۔ جاری رکھیں؟",
+      ef_ai_needs_consent:"AI خصوصیات کو فعال کرنے کے لیے براہ کرم پہلے ایک چیٹ پیغام بھیجیں۔",
+      ef_ai_done:"دوبارہ لکھا گیا ✓", ef_empty_draft:"اپنا مسودہ یہاں دیکھنے کے لیے کم از کم ایک لائن پُر کریں۔",
       progress_teaser:"پریمیم کے ساتھ اپنے پیٹرن کا گہرا تجزیہ کھولیں۔", progress_cta:"پلانز دیکھیں",
       nav_program:"پروگرام",
       program_eyebrow:"مرکوز پروگرام", program_title:"اضطراب کے لیے 7 دن کا پروگرام",
@@ -1521,6 +2207,36 @@ const I18N = {
       brief_word_prefix:"آپ کی حالیہ جرنل میں سب سے زیادہ استعمال ہونے والا لفظ:",
       mood_suggest_text:"ہم نے محسوس کیا کہ آپ کا موڈ حال ہی میں تھوڑا بھاری رہا ہے — یہ مدد کر سکتا ہے:",
       mood_suggest_btn:"آزمائیں",
+      free_chat_remaining:"مفت پیغامات باقی",
+      sleep_cta:"نیند کا موڈ", sleep_title:"آرام کا وقت",
+      sleep_desc:"سونے سے پہلے ایک سادہ سانس کی مشق کے ساتھ اپنے جسم اور ذہن کو پرسکون کرنے کے لیے دو منٹ نکالیں۔",
+      sleep_start_btn:"سانس کی مشق شروع کریں", sleep_skip:"نہیں شکریہ — بس بند کریں",
+      relief_cta:"90 سیکنڈ کے لیے میری مدد کریں", relief_eyebrow:"فوری مدد",
+      relief_title:"ابھی آپ کیا محسوس کر رہے ہیں؟", relief_subtitle:"ایک چنیں، ہم فوراً ایک مختصر مشق شروع کریں گے — مکمل طور پر آف لائن۔",
+      relief_stop:"روکیں اور باہر نکلیں", relief_end_title:"شاباش — آپ نے اپنے لیے وقت نکالا",
+      relief_fb_yes:"ہاں، مدد ملی", relief_fb_little:"تھوڑا سا", relief_fb_no:"واقعی نہیں",
+      passport_open_btn:"پرائیویسی پاسپورٹ کھولیں", passport_eyebrow:"پرائیویسی پاسپورٹ",
+      passport_title:"آپ کے ڈیٹا کے ساتھ کیا ہوتا ہے",
+      passport_local_title:"اس ڈیوائس پر کیا رہتا ہے", passport_local_text:"آپ کا موڈ لاگ، جرنل اندراجات، ورزش کی تاریخ، سلسلہ، اور چیٹ کی تاریخ صرف اس براؤزر کے مقامی اسٹوریج میں محفوظ ہوتے ہیں۔ ان میں سے کچھ بھی کسی Waha سرور یا ڈیٹابیس پر اپ لوڈ نہیں ہوتا — کیونکہ Waha کے پاس اس ڈیٹا کے لیے ایسا کچھ ہے ہی نہیں۔",
+      passport_ai_title:"AI کو کیا بھیجا جاتا ہے", passport_ai_text:"صرف وہ متن جو آپ چیٹ یا فوری چیک ان میں لکھتے ہیں Anthropic (ہمارے AI فراہم کنندہ) کو جواب تیار کرنے کے لیے بھیجا جاتا ہے۔ کچھ اور نہیں — نہ موڈ لاگ، نہ جرنل، نہ ورزش کی تاریخ — خودکار طور پر نہیں بھیجا جاتا۔",
+      passport_logs_title:"تکنیکی لاگز", passport_logs_text:"ہمارا سرور یہ ریکارڈ کر سکتا ہے کہ کوئی درخواست کامیاب ہوئی یا ناکام، اور کیا کوئی جواب حفاظتی وجوہات کی بنا پر دوبارہ لکھا گیا — کبھی بھی آپ کے پیغامات کا مواد نہیں۔",
+      passport_temp_label:"عارضی گفتگو", passport_temp_desc:"فعال ہونے پر، نئے چیٹ پیغامات اس ڈیوائس پر محفوظ نہیں ہوتے۔ اسے بند کرنے یا ایپ بند کرنے پر ختم ہو جاتا ہے۔",
+      passport_temp_active:"🕶️ عارضی موڈ — یہ گفتگو محفوظ نہیں ہو رہی",
+      passport_controls_label:"آپ کے کنٹرولز", passport_del_chat:"چیٹ کی تاریخ حذف کریں", passport_del_mood:"موڈ ڈیٹا حذف کریں",
+      passport_del_exercises:"ورزش کی تاریخ حذف کریں", passport_export_all:"میرا سارا ڈیٹا برآمد کریں", passport_del_all:"سب کچھ حذف کریں",
+      passport_done:"ہو گیا ✓", passport_error:"کچھ غلط ہو گیا، دوبارہ کوشش کریں",
+      passport_confirm_all:"یہ اس ڈیوائس پر موجود تمام Waha ڈیٹا کو مستقل طور پر حذف کر دے گا — موڈ، جرنل، چیٹ، سلسلہ، سب کچھ۔ اسے واپس نہیں لایا جا سکتا۔ جاری رکھیں؟",
+      calmplan_cta:"سکون کا منصوبہ", calmplan_eyebrow:"ذاتی سکون کا منصوبہ", calmplan_title:"میرا سکون کا منصوبہ",
+      calmplan_intro:"ابھی، جب آپ مستحکم محسوس کر رہے ہیں، اسے تیار کریں تاکہ یہ ایک مشکل وقت کے لیے تیار ہو۔",
+      calmplan_f_exercise:"ایک پرسکون مشق جو میری مدد کرتی ہے", calmplan_ph_exercise:"مثال: 4-7-8 سانس کی مشق",
+      calmplan_f_sentence:"ایک جملہ جو میری مدد کرتا ہے", calmplan_ph_sentence:"مثال: یہ احساس گزر جائے گا",
+      calmplan_f_place:"ایک جگہ جہاں میں زیادہ پرسکون محسوس کرتا ہوں", calmplan_ph_place:"مثال: میری بالکونی",
+      calmplan_f_activity:"ایک محفوظ سرگرمی", calmplan_ph_activity:"مثال: ایک مختصر چہل قدمی",
+      calmplan_f_person:"کوئی جس سے میں رابطہ کر سکتا ہوں", calmplan_ph_person:"مثال: میری بہن لینا",
+      calmplan_f_steps:"مشکل وقت میں جن اقدامات پر عمل کرنا چاہتا ہوں", calmplan_ph_steps:"مثال: 1) رکیں 2) سانس لیں 3) کسی کو کال کریں",
+      calmplan_save:"میرا منصوبہ محفوظ کریں", calmplan_edit:"ترمیم", calmplan_export:"برآمد", calmplan_print:"پرنٹ", calmplan_delete:"حذف",
+      calmplan_crisis_note:"ہنگامی صورتحال میں، یہ منصوبہ مدد کا متبادل نہیں ہے۔", calmplan_crisis_btn:"بحران کے وسائل",
+      calmplan_confirm_delete:"سکون کا منصوبہ مستقل طور پر حذف کریں؟ اسے واپس نہیں لایا جا سکتا۔",
       checkin_opt1:"اضطراب یا تناؤ", checkin_opt2:"اداسی یا دل پر بوجھ", checkin_opt3:"منتشر، تیز ذہن", checkin_opt4:"جسمانی تھکاوٹ",
       crisis_button:"مجھے ابھی مدد چاہیے", crisis_eyebrow:"آپ اکیلے نہیں ہیں",
       crisis_title:"حقیقی مدد — مفت اور خفیہ", crisis_subtitle:"اگر آپ ابھی شدید بحران سے گزر رہے ہیں تو ان لائنوں میں سے کسی ایک سے رابطہ کریں — تربیت یافتہ افراد آپ کی بات سننے کے لیے تیار ہیں۔",
@@ -1595,6 +2311,24 @@ const I18N = {
       upgrade_programs_title:"Дополнительные программы", upgrade_programs_desc:"Специализированные короткие курсы и программы",
       upgrade_maybe_later:"Может быть позже",
       progress_label:"Твой прогресс", progress_streak:"дней подряд", progress_journal:"сохранённых записей", progress_mood:"записей настроения",
+      progress_exercises:"выполненных упражнений", progress_helped:"раз помогло",
+      progress_disable_streaks_title:"Отключить серии", progress_disable_streaks_desc:"Скройте счётчик дней, если он больше давит, чем мотивирует.",
+      why_suggestion_link:"Почему это предложено?",
+      ef_cta:"Объяснить моё чувство", ef_eyebrow:"Помощь в выражении", ef_title:"Помоги мне объяснить, что я чувствую",
+      ef_intro:"Заполни то, что кажется тебе верным сейчас — оставь любую строку пустой, чтобы пропустить её.",
+      ef_f_now:"Прямо сейчас я чувствую", ef_ph_now:"напр.: тревогу и усталость",
+      ef_f_after:"Я заметил(а) это после", ef_ph_after:"напр.: трудного разговора",
+      ef_f_affecting:"Это влияет на", ef_ph_affecting:"напр.: мой сон и концентрацию",
+      ef_f_hardest:"Труднее всего", ef_ph_hardest:"напр.: не знать, что делать дальше",
+      ef_f_need:"Возможно, сейчас мне нужно", ef_ph_need:"напр.: немного пространства и тишины",
+      ef_f_help:"Одна вещь, которая могла бы помочь", ef_ph_help:"напр.: поговорить с тем, кому я доверяю",
+      ef_empty_hint:"Любое оставленное пустым поле просто не войдёт в черновик.", ef_generate:"Создать мой черновик",
+      ef_tone_concise:"Кратко", ef_tone_detailed:"Подробно",
+      ef_copy:"Копировать", ef_copied:"Скопировано ✓", ef_back_edit:"Вернуться к редактированию",
+      ef_ai_rewrite:"Переписать с ИИ", ef_ai_note:"Это отправляет ваш черновик нашему поставщику ИИ для переписывания. Больше ничего не отправляется.",
+      ef_ai_confirm:"Это отправит ваш черновик за пределы устройства в Anthropic (наш поставщик ИИ) для переписывания. Продолжить?",
+      ef_ai_needs_consent:"Пожалуйста, сначала отправьте одно сообщение в чате, чтобы включить функции ИИ.",
+      ef_ai_done:"Переписано ✓", ef_empty_draft:"Заполните хотя бы одну строку, чтобы увидеть черновик здесь.",
       progress_teaser:"Открой более глубокий анализ своих паттернов с Премиум.", progress_cta:"Смотреть планы",
       nav_program:"Программа",
       program_eyebrow:"Фокусная программа", program_title:"7-дневная программа против тревоги",
@@ -1615,6 +2349,36 @@ const I18N = {
       brief_word_prefix:"Самое частое слово в вашем дневнике недавно:",
       mood_suggest_text:"Мы заметили, что ваше настроение было немного тяжелее в последнее время — это может помочь:",
       mood_suggest_btn:"Попробовать",
+      free_chat_remaining:"бесплатных сообщений осталось",
+      sleep_cta:"Режим сна", sleep_title:"Время отдыха",
+      sleep_desc:"Уделите две минуты, чтобы успокоить тело и разум простым дыхательным упражнением перед сном.",
+      sleep_start_btn:"Начать дыхательное упражнение", sleep_skip:"Нет, спасибо — просто закрыть",
+      relief_cta:"Помоги мне 90 секунд", relief_eyebrow:"Быстрая помощь",
+      relief_title:"Что сейчас ближе всего к тому, что вы чувствуете?", relief_subtitle:"Выберите один вариант, и мы сразу начнём короткое упражнение — полностью офлайн.",
+      relief_stop:"Остановить и выйти", relief_end_title:"Молодец — вы уделили себе время",
+      relief_fb_yes:"Да, помогло", relief_fb_little:"Немного", relief_fb_no:"Не особо",
+      passport_open_btn:"Открыть Паспорт конфиденциальности", passport_eyebrow:"Паспорт конфиденциальности",
+      passport_title:"Что происходит с вашими данными",
+      passport_local_title:"Что остаётся на этом устройстве", passport_local_text:"Ваш журнал настроения, записи дневника, история упражнений, серия и история чата хранятся только в локальном хранилище этого браузера. Ничего из этого не загружается ни на один сервер или в базу данных Waha — потому что у Waha их нет для этих данных.",
+      passport_ai_title:"Что отправляется в ИИ", passport_ai_text:"Только текст, который вы вводите в чате или быстрой проверке, отправляется в Anthropic (наш поставщик ИИ) для генерации ответа. Ничего другого — ни журнал настроения, ни дневник, ни история упражнений — не отправляется автоматически.",
+      passport_logs_title:"Технические журналы", passport_logs_text:"Наш сервер может фиксировать, был ли запрос успешным или неудачным, и был ли ответ переписан из соображений безопасности — но никогда содержание ваших сообщений.",
+      passport_temp_label:"Временный разговор", passport_temp_desc:"Пока активен, новые сообщения чата не сохраняются на этом устройстве. Заканчивается, когда вы его отключаете или закрываете приложение.",
+      passport_temp_active:"🕶️ Временный режим — этот разговор не сохраняется",
+      passport_controls_label:"Ваши элементы управления", passport_del_chat:"Удалить историю чата", passport_del_mood:"Удалить данные настроения",
+      passport_del_exercises:"Удалить историю упражнений", passport_export_all:"Экспортировать все мои данные", passport_del_all:"Удалить всё",
+      passport_done:"Готово ✓", passport_error:"Что-то пошло не так, попробуйте снова",
+      passport_confirm_all:"Это навсегда удалит все данные Waha на этом устройстве — настроение, дневник, чат, серию, всё. Это нельзя отменить. Продолжить?",
+      calmplan_cta:"План спокойствия", calmplan_eyebrow:"Личный план спокойствия", calmplan_title:"Мой план спокойствия",
+      calmplan_intro:"Подготовьте это сейчас, пока чувствуете себя устойчиво, чтобы это было готово для более трудного момента.",
+      calmplan_f_exercise:"Успокаивающее упражнение, которое мне помогает", calmplan_ph_exercise:"напр.: дыхание 4-7-8",
+      calmplan_f_sentence:"Фраза, которая мне помогает", calmplan_ph_sentence:"напр.: это чувство пройдёт",
+      calmplan_f_place:"Место, где я чувствую себя спокойнее", calmplan_ph_place:"напр.: мой балкон",
+      calmplan_f_activity:"Безопасное занятие", calmplan_ph_activity:"напр.: короткая прогулка",
+      calmplan_f_person:"Кто-то, к кому я могу обратиться", calmplan_ph_person:"напр.: моя сестра Лина",
+      calmplan_f_steps:"Шаги, которым я хочу следовать в трудный момент", calmplan_ph_steps:"напр.: 1) пауза 2) дышать 3) позвонить кому-то",
+      calmplan_save:"Сохранить мой план", calmplan_edit:"Изменить", calmplan_export:"Экспорт", calmplan_print:"Печать", calmplan_delete:"Удалить",
+      calmplan_crisis_note:"В экстренной ситуации этот план не заменяет помощь.", calmplan_crisis_btn:"Кризисные ресурсы",
+      calmplan_confirm_delete:"Удалить план спокойствия навсегда? Это нельзя отменить.",
       checkin_opt1:"Тревога или напряжение", checkin_opt2:"Грусть или тяжесть на сердце", checkin_opt3:"Рассеянный, стремительный ум", checkin_opt4:"Физическое истощение",
       crisis_button:"Мне нужна помощь сейчас", crisis_eyebrow:"Вы не одни",
       crisis_title:"Реальная помощь — бесплатно и конфиденциально", crisis_subtitle:"Если вы сейчас переживаете острый кризис, обратитесь на одну из этих линий — обученные люди готовы вас выслушать.",
@@ -1689,6 +2453,24 @@ const I18N = {
       upgrade_programs_title:"Programas adicionais", upgrade_programs_desc:"Cursos e programas curtos especializados",
       upgrade_maybe_later:"Talvez mais tarde",
       progress_label:"O teu progresso", progress_streak:"dias seguidos", progress_journal:"registos guardados", progress_mood:"registos de humor",
+      progress_exercises:"exercícios concluídos", progress_helped:"vezes que ajudou",
+      progress_disable_streaks_title:"Desativar sequências", progress_disable_streaks_desc:"Oculta o contador de dias se te causar mais pressão do que motivação.",
+      why_suggestion_link:"Porquê esta sugestão?",
+      ef_cta:"Explicar o que sinto", ef_eyebrow:"Ajuda para me Exprimir", ef_title:"Ajuda-me a explicar como me sinto",
+      ef_intro:"Preenche o que te parece verdadeiro agora — deixa qualquer linha em branco para a saltar.",
+      ef_f_now:"Neste momento sinto-me", ef_ph_now:"ex.: ansioso/a e cansado/a",
+      ef_f_after:"Reparei nisto depois de", ef_ph_after:"ex.: uma conversa difícil",
+      ef_f_affecting:"Isto está a afetar", ef_ph_affecting:"ex.: o meu sono e a minha concentração",
+      ef_f_hardest:"O mais difícil é", ef_ph_hardest:"ex.: não saber o que fazer a seguir",
+      ef_f_need:"O que talvez precise agora é", ef_ph_need:"ex.: algum espaço e tranquilidade",
+      ef_f_help:"Uma coisa que poderia ajudar é", ef_ph_help:"ex.: falar com alguém em quem confio",
+      ef_empty_hint:"Qualquer campo que deixes em branco é simplesmente omitido do teu rascunho.", ef_generate:"Criar o meu rascunho",
+      ef_tone_concise:"Conciso", ef_tone_detailed:"Detalhado",
+      ef_copy:"Copiar", ef_copied:"Copiado ✓", ef_back_edit:"Voltar a editar",
+      ef_ai_rewrite:"Reescrever com IA", ef_ai_note:"Isto envia o teu rascunho ao nosso fornecedor de IA para o reescrever. Nada mais é enviado.",
+      ef_ai_confirm:"Isto enviará o teu rascunho para fora do teu dispositivo à Anthropic (o nosso fornecedor de IA) para o reescrever. Continuar?",
+      ef_ai_needs_consent:"Por favor envia primeiro uma mensagem de chat para ativar as funcionalidades de IA.",
+      ef_ai_done:"Reescrito ✓", ef_empty_draft:"Preenche pelo menos uma linha para veres o teu rascunho aqui.",
       progress_teaser:"Desbloqueia uma análise mais profunda dos teus padrões com o Premium.", progress_cta:"Ver planos",
       nav_program:"Programa",
       program_eyebrow:"Programa focado", program_title:"Programa de 7 dias contra a ansiedade",
@@ -1709,6 +2491,36 @@ const I18N = {
       brief_word_prefix:"Palavra mais frequente no teu diário recentemente:",
       mood_suggest_text:"Reparámos que o teu humor tem estado um pouco mais pesado ultimamente — isto pode ajudar:",
       mood_suggest_btn:"Experimentar",
+      free_chat_remaining:"mensagens gratuitas restantes",
+      sleep_cta:"Modo sono", sleep_title:"Hora de descansar",
+      sleep_desc:"Reserva dois minutos para acalmar o corpo e a mente com um exercício de respiração simples antes de dormir.",
+      sleep_start_btn:"Começar exercício de respiração", sleep_skip:"Não, obrigado — só fechar",
+      relief_cta:"Ajuda-me durante 90 segundos", relief_eyebrow:"Alívio rápido",
+      relief_title:"O que se aproxima mais do que sentes agora?", relief_subtitle:"Escolhe uma opção, e começamos já um exercício curto — totalmente offline.",
+      relief_stop:"Parar e sair", relief_end_title:"Muito bem — reservaste um momento para ti",
+      relief_fb_yes:"Sim, ajudou", relief_fb_little:"Um pouco", relief_fb_no:"Não muito",
+      passport_open_btn:"Abrir o Passaporte de Privacidade", passport_eyebrow:"Passaporte de Privacidade",
+      passport_title:"O que acontece com os teus dados",
+      passport_local_title:"O que fica neste dispositivo", passport_local_text:"O teu registo de humor, entradas do diário, histórico de exercícios, sequência e histórico de chat são guardados apenas no armazenamento local deste navegador. Nada disso é enviado para nenhum servidor ou base de dados da Waha — porque a Waha não tem uma para estes dados.",
+      passport_ai_title:"O que é enviado à IA", passport_ai_text:"Apenas o texto que escreves no chat ou no check-in rápido é enviado à Anthropic (o nosso fornecedor de IA) para gerar uma resposta. Nada mais — nem registo de humor, nem diário, nem histórico de exercícios — é enviado automaticamente.",
+      passport_logs_title:"Registos técnicos", passport_logs_text:"O nosso servidor pode registar se um pedido foi bem-sucedido ou falhou, e se uma resposta foi reescrita por segurança — nunca o conteúdo das tuas mensagens.",
+      passport_temp_label:"Conversa temporária", passport_temp_desc:"Enquanto ativa, novas mensagens de chat não são guardadas neste dispositivo. Termina quando a desativas ou fechas a app.",
+      passport_temp_active:"🕶️ Modo temporário — esta conversa não está a ser guardada",
+      passport_controls_label:"Os teus controlos", passport_del_chat:"Eliminar histórico de chat", passport_del_mood:"Eliminar dados de humor",
+      passport_del_exercises:"Eliminar histórico de exercícios", passport_export_all:"Exportar todos os meus dados", passport_del_all:"Eliminar tudo",
+      passport_done:"Feito ✓", passport_error:"Algo correu mal, tenta novamente",
+      passport_confirm_all:"Isto elimina permanentemente todos os dados da Waha neste dispositivo — humor, diário, chat, sequência, tudo. Isto não pode ser desfeito. Continuar?",
+      calmplan_cta:"Plano de calma", calmplan_eyebrow:"Plano de calma pessoal", calmplan_title:"O meu plano de calma",
+      calmplan_intro:"Prepara isto agora, enquanto te sentes estável, para que esteja pronto para um momento mais difícil.",
+      calmplan_f_exercise:"Um exercício calmante que me ajuda", calmplan_ph_exercise:"ex.: respiração 4-7-8",
+      calmplan_f_sentence:"Uma frase que me ajuda", calmplan_ph_sentence:"ex.: este sentimento vai passar",
+      calmplan_f_place:"Um lugar onde me sinto mais calmo/a", calmplan_ph_place:"ex.: a minha varanda",
+      calmplan_f_activity:"Uma atividade segura", calmplan_ph_activity:"ex.: uma caminhada curta",
+      calmplan_f_person:"Alguém a quem posso recorrer", calmplan_ph_person:"ex.: a minha irmã Lina",
+      calmplan_f_steps:"Passos que quero seguir num momento difícil", calmplan_ph_steps:"ex.: 1) pausa 2) respira 3) liga a alguém",
+      calmplan_save:"Guardar o meu plano", calmplan_edit:"Editar", calmplan_export:"Exportar", calmplan_print:"Imprimir", calmplan_delete:"Eliminar",
+      calmplan_crisis_note:"Numa emergência, este plano não substitui ajuda.", calmplan_crisis_btn:"Recursos de crise",
+      calmplan_confirm_delete:"Eliminar o teu plano de calma permanentemente? Isto não pode ser desfeito.",
       checkin_opt1:"Ansioso ou tenso", checkin_opt2:"Triste ou com peso no coração", checkin_opt3:"Mente dispersa e acelerada", checkin_opt4:"Exaustão física",
       crisis_button:"Preciso de ajuda agora", crisis_eyebrow:"Você não está sozinho(a)",
       crisis_title:"Ajuda real — gratuita e confidencial", crisis_subtitle:"Se você está passando por uma crise aguda agora, entre em contato com uma destas linhas — pessoas treinadas estão prontas para ouvir você.",
@@ -1783,6 +2595,24 @@ const I18N = {
       upgrade_programs_title:"Programmi aggiuntivi", upgrade_programs_desc:"Corsi e programmi brevi specializzati",
       upgrade_maybe_later:"Forse più tardi",
       progress_label:"I tuoi progressi", progress_streak:"giorni consecutivi", progress_journal:"scritti salvati", progress_mood:"registrazioni dell'umore",
+      progress_exercises:"esercizi completati", progress_helped:"volte che ha aiutato",
+      progress_disable_streaks_title:"Disattiva le serie", progress_disable_streaks_desc:"Nascondi il contatore dei giorni se ti mette più pressione che motivazione.",
+      why_suggestion_link:"Perché questo suggerimento?",
+      ef_cta:"Spiega il mio sentimento", ef_eyebrow:"Aiuto ad Esprimersi", ef_title:"Aiutami a spiegare come mi sento",
+      ef_intro:"Compila ciò che ti sembra vero ora — lascia vuota qualsiasi riga per saltarla.",
+      ef_f_now:"In questo momento mi sento", ef_ph_now:"es.: ansioso/a e stanco/a",
+      ef_f_after:"L'ho notato dopo", ef_ph_after:"es.: una conversazione difficile",
+      ef_f_affecting:"Questo sta influenzando", ef_ph_affecting:"es.: il mio sonno e la mia concentrazione",
+      ef_f_hardest:"La cosa più difficile è", ef_ph_hardest:"es.: non sapere cosa fare dopo",
+      ef_f_need:"Ciò di cui potrei aver bisogno ora è", ef_ph_need:"es.: un po' di spazio e tranquillità",
+      ef_f_help:"Una cosa che potrebbe aiutare è", ef_ph_help:"es.: parlare con qualcuno di cui mi fido",
+      ef_empty_hint:"Qualsiasi campo lasciato vuoto viene semplicemente omesso dalla tua bozza.", ef_generate:"Crea la mia bozza",
+      ef_tone_concise:"Conciso", ef_tone_detailed:"Dettagliato",
+      ef_copy:"Copia", ef_copied:"Copiato ✓", ef_back_edit:"Torna a modificare",
+      ef_ai_rewrite:"Riscrivi con l'IA", ef_ai_note:"Questo invia la tua bozza al nostro fornitore di IA per riscriverla. Nient'altro viene inviato.",
+      ef_ai_confirm:"Questo invierà la tua bozza fuori dal tuo dispositivo ad Anthropic (il nostro fornitore di IA) per riscriverla. Continuare?",
+      ef_ai_needs_consent:"Invia prima un messaggio in chat per abilitare le funzionalità IA.",
+      ef_ai_done:"Riscritto ✓", ef_empty_draft:"Compila almeno una riga per vedere qui la tua bozza.",
       progress_teaser:"Sblocca un'analisi più approfondita dei tuoi schemi con Premium.", progress_cta:"Vedi i piani",
       nav_program:"Programma",
       program_eyebrow:"Programma mirato", program_title:"Programma di 7 giorni contro l'ansia",
@@ -1803,6 +2633,36 @@ const I18N = {
       brief_word_prefix:"Parola più frequente nel tuo diario di recente:",
       mood_suggest_text:"Abbiamo notato che il tuo umore è stato un po' più pesante ultimamente — questo potrebbe aiutare:",
       mood_suggest_btn:"Prova",
+      free_chat_remaining:"messaggi gratuiti rimasti",
+      sleep_cta:"Modalità sonno", sleep_title:"Ora di riposare",
+      sleep_desc:"Prenditi due minuti per calmare corpo e mente con un semplice esercizio di respirazione prima di dormire.",
+      sleep_start_btn:"Inizia l'esercizio di respirazione", sleep_skip:"No grazie — chiudi soltanto",
+      relief_cta:"Aiutami per 90 secondi", relief_eyebrow:"Sollievo rapido",
+      relief_title:"Cosa si avvicina di più a ciò che provi ora?", relief_subtitle:"Scegline uno, inizieremo subito un breve esercizio — completamente offline.",
+      relief_stop:"Ferma ed esci", relief_end_title:"Ben fatto — ti sei preso un momento per te",
+      relief_fb_yes:"Sì, ha aiutato", relief_fb_little:"Un po'", relief_fb_no:"Non proprio",
+      passport_open_btn:"Apri il Passaporto della Privacy", passport_eyebrow:"Passaporto della Privacy",
+      passport_title:"Cosa succede ai tuoi dati",
+      passport_local_title:"Cosa resta su questo dispositivo", passport_local_text:"Il tuo registro dell'umore, le voci del diario, la cronologia degli esercizi, la serie e la cronologia della chat sono memorizzati solo nell'archiviazione locale di questo browser. Nulla di tutto ciò viene caricato su alcun server o database di Waha — perché Waha non ne possiede uno per questi dati.",
+      passport_ai_title:"Cosa viene inviato all'IA", passport_ai_text:"Solo il testo che scrivi nella chat o nel check-in rapido viene inviato ad Anthropic (il nostro fornitore di IA) per generare una risposta. Nient'altro — né registro dell'umore, né diario, né cronologia degli esercizi — viene inviato automaticamente.",
+      passport_logs_title:"Registri tecnici", passport_logs_text:"Il nostro server può registrare se una richiesta è riuscita o fallita, e se una risposta è stata riscritta per motivi di sicurezza — mai il contenuto dei tuoi messaggi.",
+      passport_temp_label:"Conversazione temporanea", passport_temp_desc:"Mentre è attiva, i nuovi messaggi della chat non vengono salvati su questo dispositivo. Termina quando la disattivi o chiudi l'app.",
+      passport_temp_active:"🕶️ Modalità temporanea — questa conversazione non viene salvata",
+      passport_controls_label:"I tuoi controlli", passport_del_chat:"Elimina cronologia chat", passport_del_mood:"Elimina dati dell'umore",
+      passport_del_exercises:"Elimina cronologia esercizi", passport_export_all:"Esporta tutti i miei dati", passport_del_all:"Elimina tutto",
+      passport_done:"Fatto ✓", passport_error:"Qualcosa è andato storto, riprova",
+      passport_confirm_all:"Questo eliminerà permanentemente tutti i dati Waha su questo dispositivo — umore, diario, chat, serie, tutto. Non può essere annullato. Continuare?",
+      calmplan_cta:"Piano di calma", calmplan_eyebrow:"Piano di calma personale", calmplan_title:"Il mio piano di calma",
+      calmplan_intro:"Preparalo ora, mentre ti senti stabile, così sarà pronto per un momento più difficile.",
+      calmplan_f_exercise:"Un esercizio calmante che mi aiuta", calmplan_ph_exercise:"es.: respirazione 4-7-8",
+      calmplan_f_sentence:"Una frase che mi aiuta", calmplan_ph_sentence:"es.: questa sensazione passerà",
+      calmplan_f_place:"Un luogo dove mi sento più calmo/a", calmplan_ph_place:"es.: il mio balcone",
+      calmplan_f_activity:"Un'attività sicura", calmplan_ph_activity:"es.: una breve passeggiata",
+      calmplan_f_person:"Qualcuno che posso contattare", calmplan_ph_person:"es.: mia sorella Lina",
+      calmplan_f_steps:"Passi che voglio seguire in un momento difficile", calmplan_ph_steps:"es.: 1) fermati 2) respira 3) chiama qualcuno",
+      calmplan_save:"Salva il mio piano", calmplan_edit:"Modifica", calmplan_export:"Esporta", calmplan_print:"Stampa", calmplan_delete:"Elimina",
+      calmplan_crisis_note:"In un'emergenza, questo piano non sostituisce l'aiuto.", calmplan_crisis_btn:"Risorse per crisi",
+      calmplan_confirm_delete:"Eliminare permanentemente il piano di calma? Non può essere annullato.",
       checkin_opt1:"Ansioso o teso", checkin_opt2:"Triste o con un peso nel cuore", checkin_opt3:"Mente dispersiva e frenetica", checkin_opt4:"Esaurimento fisico",
       crisis_button:"Ho bisogno di aiuto ora", crisis_eyebrow:"Non sei solo/a",
       crisis_title:"Aiuto reale — gratuito e confidenziale", crisis_subtitle:"Se stai vivendo una crisi acuta in questo momento, contatta una di queste linee — persone formate sono pronte ad ascoltarti.",
@@ -2559,6 +3419,7 @@ function setLang(lang){
   const micBtn = document.getElementById('micBtn');
   if(micBtn) micBtn.setAttribute('aria-label', I18N[lang].aria_mic);
   safeSet('mc_lang', lang);
+  updateFreeChatCounter();
 }
 
 function speechLangTag(lang){
@@ -2719,6 +3580,220 @@ function computeTopJournalWord(){
   return (top && topCount >= 2) ? top : null;
 }
 
+const WHY_SUGGESTION_TEXT = {
+  ar: {
+    daily_brief: "اختير هذا التمرين محلياً على جهازك، عشوائياً من بين التمارين التي لم تجرّبها بعد. لم يُرسل أي شيء خارج جهازك لإنشاء هذا الاقتراح، وهذا ليس تشخيصاً.",
+    mood_pattern: "اقتُرح هذا لأن آخر تسجيلات مزاجك كانت منخفضة نسبياً — حساب محلي بحت على جهازك. هذا ليس تشخيصاً، ولم يُرسل شيء خارج جهازك.",
+    checkin_ai: "هذا الرد وُلِّد بواسطة ذكاء اصطناعي (Anthropic)، بناءً على النص الذي كتبته. نصّك أُرسل خارج جهازك لتوليد هذا الرد. هذا ليس تشخيصاً ولا نصيحة طبية.",
+  },
+  de: {
+    daily_brief: "Diese Übung wurde lokal auf deinem Gerät zufällig aus den Übungen ausgewählt, die du noch nicht ausprobiert hast. Nichts wurde außerhalb deines Geräts gesendet, um diesen Vorschlag zu erstellen, und dies ist keine Diagnose.",
+    mood_pattern: "Dies wurde vorgeschlagen, weil deine letzten Stimmungseinträge relativ niedrig waren — eine rein lokale Berechnung auf deinem Gerät. Dies ist keine Diagnose, und nichts wurde außerhalb deines Geräts gesendet.",
+    checkin_ai: "Diese Antwort wurde von einer KI (Anthropic) basierend auf deinem eingegebenen Text erstellt. Dein Text wurde außerhalb deines Geräts gesendet, um diese Antwort zu erzeugen. Dies ist keine Diagnose und kein medizinischer Rat.",
+  },
+  en: {
+    daily_brief: "This exercise was chosen locally on your device, at random, from exercises you haven't tried yet. Nothing was sent outside your device to create this suggestion, and this is not a diagnosis.",
+    mood_pattern: "This was suggested because your last few mood entries were relatively low — a purely local calculation on your device. This is not a diagnosis, and nothing was sent outside your device.",
+    checkin_ai: "This reply was generated by an AI (Anthropic), based on the text you typed. Your text was sent outside your device to generate this reply. This is not a diagnosis or medical advice.",
+  },
+  fr: {
+    daily_brief: "Cet exercice a été choisi localement sur ton appareil, au hasard, parmi les exercices que tu n'as pas encore essayés. Rien n'a été envoyé hors de ton appareil pour créer cette suggestion, et ceci n'est pas un diagnostic.",
+    mood_pattern: "Ceci a été suggéré parce que tes dernières entrées d'humeur étaient relativement basses — un calcul purement local sur ton appareil. Ceci n'est pas un diagnostic, et rien n'a été envoyé hors de ton appareil.",
+    checkin_ai: "Cette réponse a été générée par une IA (Anthropic), à partir du texte que tu as écrit. Ton texte a été envoyé hors de ton appareil pour générer cette réponse. Ceci n'est pas un diagnostic ni un conseil médical.",
+  },
+  tr: {
+    daily_brief: "Bu egzersiz, henüz denemediğin egzersizler arasından cihazında yerel olarak rastgele seçildi. Bu öneriyi oluşturmak için cihazının dışına hiçbir şey gönderilmedi ve bu bir teşhis değildir.",
+    mood_pattern: "Bu, son ruh hali kayıtların nispeten düşük olduğu için önerildi — cihazında tamamen yerel bir hesaplama. Bu bir teşhis değildir ve cihazının dışına hiçbir şey gönderilmedi.",
+    checkin_ai: "Bu yanıt, yazdığın metne dayanarak bir yapay zeka (Anthropic) tarafından oluşturuldu. Metnin bu yanıtı oluşturmak için cihazının dışına gönderildi. Bu bir teşhis veya tıbbi tavsiye değildir.",
+  },
+  ku: {
+    daily_brief: "Ev ezmûn bi awayekî herêmî li ser amûra te, bi tesadufî, ji ezmûnên ku tu hê neceribandî hatiye hilbijartin. Tiştek ji bo afirandina vê pêşniyarê ji amûra te dernekeve, û ev ne teşhîs e.",
+    mood_pattern: "Ev hate pêşniyarkirin ji ber ku tomarên hesta te yên dawî nisbeten nizm bûn — hesabek tenê herêmî li ser amûra te. Ev ne teşhîs e, û tiştek ji amûra te dernekeve.",
+    checkin_ai: "Ev bersiv ji hêla AI (Anthropic) ve li gorî nivîsa te hatiye afirandin. Nivîsa te ji bo afirandina vê bersivê ji amûra te derket. Ev ne teşhîs an şêwirmendiya bijîjkî ye.",
+  },
+  es: {
+    daily_brief: "Este ejercicio se eligió localmente en tu dispositivo, al azar, entre los ejercicios que aún no has probado. No se envió nada fuera de tu dispositivo para crear esta sugerencia, y esto no es un diagnóstico.",
+    mood_pattern: "Esto se sugirió porque tus últimos registros de ánimo fueron relativamente bajos — un cálculo puramente local en tu dispositivo. Esto no es un diagnóstico, y no se envió nada fuera de tu dispositivo.",
+    checkin_ai: "Esta respuesta fue generada por una IA (Anthropic), basada en el texto que escribiste. Tu texto se envió fuera de tu dispositivo para generar esta respuesta. Esto no es un diagnóstico ni un consejo médico.",
+  },
+  fa: {
+    daily_brief: "این تمرین به‌صورت محلی روی دستگاهت، به‌طور تصادفی از میان تمرین‌هایی که هنوز امتحان نکرده‌ای انتخاب شد. برای ساخت این پیشنهاد چیزی خارج از دستگاهت ارسال نشد، و این یک تشخیص نیست.",
+    mood_pattern: "این پیشنهاد به این دلیل ارائه شد که ثبت‌های اخیر خلق‌وخویت نسبتاً پایین بودند — یک محاسبه کاملاً محلی روی دستگاهت. این تشخیص نیست، و چیزی خارج از دستگاهت ارسال نشد.",
+    checkin_ai: "این پاسخ توسط هوش مصنوعی (Anthropic) بر اساس متنی که نوشتی تولید شد. متن تو برای تولید این پاسخ خارج از دستگاهت ارسال شد. این تشخیص یا توصیه پزشکی نیست.",
+  },
+  ur: {
+    daily_brief: "یہ مشق آپ کے آلے پر مقامی طور پر، بے ترتیب طریقے سے، ان مشقوں میں سے منتخب کی گئی جنہیں آپ نے ابھی تک آزمایا نہیں۔ اس تجویز کو بنانے کے لیے آپ کے آلے سے باہر کچھ نہیں بھیجا گیا، اور یہ تشخیص نہیں ہے۔",
+    mood_pattern: "یہ اس لیے تجویز کیا گیا کیونکہ آپ کے حالیہ موڈ اندراجات نسبتاً کم تھے — آپ کے آلے پر مکمل طور پر مقامی حساب۔ یہ تشخیص نہیں ہے، اور آپ کے آلے سے باہر کچھ نہیں بھیجا گیا۔",
+    checkin_ai: "یہ جواب آپ کے لکھے گئے متن کی بنیاد پر ایک AI (Anthropic) نے تیار کیا۔ آپ کا متن یہ جواب تیار کرنے کے لیے آپ کے آلے سے باہر بھیجا گیا۔ یہ تشخیص یا طبی مشورہ نہیں ہے۔",
+  },
+  ru: {
+    daily_brief: "Это упражнение было выбрано локально на вашем устройстве, случайным образом, среди упражнений, которые вы ещё не пробовали. Ничего не отправлялось за пределы вашего устройства для создания этого предложения, и это не диагноз.",
+    mood_pattern: "Это было предложено, потому что ваши последние записи настроения были относительно низкими — чисто локальный расчёт на вашем устройстве. Это не диагноз, и ничего не отправлялось за пределы вашего устройства.",
+    checkin_ai: "Этот ответ был сгенерирован ИИ (Anthropic) на основе текста, который вы ввели. Ваш текст был отправлен за пределы вашего устройства для создания этого ответа. Это не диагноз и не медицинский совет.",
+  },
+  pt: {
+    daily_brief: "Este exercício foi escolhido localmente no teu dispositivo, ao acaso, entre os exercícios que ainda não experimentaste. Nada foi enviado para fora do teu dispositivo para criar esta sugestão, e isto não é um diagnóstico.",
+    mood_pattern: "Isto foi sugerido porque os teus últimos registos de humor foram relativamente baixos — um cálculo puramente local no teu dispositivo. Isto não é um diagnóstico, e nada foi enviado para fora do teu dispositivo.",
+    checkin_ai: "Esta resposta foi gerada por uma IA (Anthropic), com base no texto que escreveste. O teu texto foi enviado para fora do teu dispositivo para gerar esta resposta. Isto não é um diagnóstico nem um conselho médico.",
+  },
+  it: {
+    daily_brief: "Questo esercizio è stato scelto localmente sul tuo dispositivo, a caso, tra gli esercizi che non hai ancora provato. Nulla è stato inviato fuori dal tuo dispositivo per creare questo suggerimento, e questo non è una diagnosi.",
+    mood_pattern: "Questo è stato suggerito perché le tue ultime registrazioni dell'umore erano relativamente basse — un calcolo puramente locale sul tuo dispositivo. Questo non è una diagnosi, e nulla è stato inviato fuori dal tuo dispositivo.",
+    checkin_ai: "Questa risposta è stata generata da un'IA (Anthropic), basata sul testo che hai scritto. Il tuo testo è stato inviato fuori dal tuo dispositivo per generare questa risposta. Questo non è una diagnosi né un consiglio medico.",
+  },
+};
+// ---------------------------------------------------------------------
+// EXPLAIN MY FEELING
+// A fully user-controlled writing template. Nothing here is sent
+// anywhere automatically — the draft stays purely local until the user
+// explicitly taps "Rewrite with AI", which is the only action that
+// sends this text off the device (clearly labeled as such).
+// ---------------------------------------------------------------------
+let efDraftData = null;
+let efCurrentTone = 'concise';
+function openExplainFeeling(){
+  document.getElementById('efNow').value = '';
+  document.getElementById('efAfter').value = '';
+  document.getElementById('efAffecting').value = '';
+  document.getElementById('efHardest').value = '';
+  document.getElementById('efNeed').value = '';
+  document.getElementById('efHelp').value = '';
+  document.getElementById('efFormView').style.display = 'block';
+  document.getElementById('efPreviewView').style.display = 'none';
+  document.getElementById('efStatus').textContent = '';
+  document.getElementById('explainFeelingModal').classList.add('open');
+}
+function closeExplainFeeling(){
+  document.getElementById('explainFeelingModal').classList.remove('open');
+}
+function generateFeelingDraft(){
+  efDraftData = {
+    now: document.getElementById('efNow').value.trim(),
+    after: document.getElementById('efAfter').value.trim(),
+    affecting: document.getElementById('efAffecting').value.trim(),
+    hardest: document.getElementById('efHardest').value.trim(),
+    need: document.getElementById('efNeed').value.trim(),
+    help: document.getElementById('efHelp').value.trim(),
+  };
+  efCurrentTone = 'concise';
+  document.getElementById('efToneConciseBtn').classList.add('active');
+  document.getElementById('efToneDetailedBtn').classList.remove('active');
+  document.getElementById('efFormView').style.display = 'none';
+  document.getElementById('efPreviewView').style.display = 'block';
+  renderFeelingDraft();
+}
+function backToEditFeeling(){
+  document.getElementById('efFormView').style.display = 'block';
+  document.getElementById('efPreviewView').style.display = 'none';
+}
+function setFeelingTone(tone){
+  efCurrentTone = tone;
+  document.getElementById('efToneConciseBtn').classList.toggle('active', tone === 'concise');
+  document.getElementById('efToneDetailedBtn').classList.toggle('active', tone === 'detailed');
+  renderFeelingDraft();
+}
+function renderFeelingDraft(){
+  const dict = I18N[currentLang];
+  const d = efDraftData;
+  let text = '';
+  if(efCurrentTone === 'detailed'){
+    const rows = [
+      [dict.ef_f_now, d.now], [dict.ef_f_after, d.after], [dict.ef_f_affecting, d.affecting],
+      [dict.ef_f_hardest, d.hardest], [dict.ef_f_need, d.need], [dict.ef_f_help, d.help],
+    ];
+    text = rows.filter(([,v])=>v).map(([label,v])=> label+': '+v).join('\n');
+  } else {
+    const parts = [];
+    if(d.now) parts.push(dict.ef_f_now + ' ' + d.now + '.');
+    if(d.after) parts.push(dict.ef_f_after + ' ' + d.after + '.');
+    if(d.affecting) parts.push(dict.ef_f_affecting + ' ' + d.affecting + '.');
+    if(d.hardest) parts.push(dict.ef_f_hardest + ' ' + d.hardest + '.');
+    if(d.need) parts.push(dict.ef_f_need + ' ' + d.need + '.');
+    if(d.help) parts.push(dict.ef_f_help + ' ' + d.help + '.');
+    text = parts.join(' ');
+  }
+  document.getElementById('efPreviewText').textContent = text || dict.ef_empty_draft;
+}
+function showEfStatus(msg){
+  const el = document.getElementById('efStatus');
+  el.textContent = msg;
+  setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 4000);
+}
+function copyFeelingDraft(){
+  const text = document.getElementById('efPreviewText').textContent;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=> showEfStatus(I18N[currentLang].ef_copied)).catch(()=> showEfStatus(I18N[currentLang].passport_error));
+  } else {
+    showEfStatus(I18N[currentLang].passport_error);
+  }
+}
+function printFeelingDraft(){
+  const text = document.getElementById('efPreviewText').textContent;
+  const dict = I18N[currentLang];
+  const html = '<html><head><meta charset="utf-8"><title>' + dict.ef_title + '</title>' +
+    '<style>body{font-family:sans-serif;padding:30px;max-width:600px;margin:0 auto;white-space:pre-wrap;line-height:1.7;}</style></head><body>' +
+    '<h1>' + dict.ef_title + '</h1><p>' + text.replace(/</g,'&lt;') + '</p></body></html>';
+  const w = window.open('', '_blank');
+  if(!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  w.print();
+}
+function exportFeelingDraft(){
+  const text = document.getElementById('efPreviewText').textContent;
+  const blob = new Blob([text], { type:'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'waha-feeling-draft-' + todayKey() + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+function rewriteFeelingWithAI(){
+  const dict = I18N[currentLang];
+  if(!window.confirm(dict.ef_ai_confirm)) return;
+  const text = document.getElementById('efPreviewText').textContent;
+  if(safeGet('mc_chat_consent') !== '1'){
+    showEfStatus(dict.ef_ai_needs_consent);
+    return;
+  }
+  const btn = document.getElementById('efAiBtn');
+  btn.disabled = true;
+  showEfStatus(dict.checkin_thinking);
+  fetch('/.netlify/functions/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: [], lang: currentLang, mode: 'rewrite' }),
+  })
+  .then(res => {
+    if(res.status === 429){ const e = new Error('rl'); e.rateLimited = true; throw e; }
+    if(!res.ok) throw new Error('bad status');
+    return res.json();
+  })
+  .then(data => {
+    if(!data.reply) throw new Error('empty');
+    document.getElementById('efPreviewText').textContent = data.reply;
+    btn.disabled = false;
+    showEfStatus(dict.ef_ai_done);
+  })
+  .catch((err)=>{
+    btn.disabled = false;
+    showEfStatus(err && err.rateLimited ? dict.rate_limit_msg : dict.checkin_error);
+  });
+}
+
+function explainSuggestion(key){
+  const text = (WHY_SUGGESTION_TEXT[currentLang] && WHY_SUGGESTION_TEXT[currentLang][key]) || WHY_SUGGESTION_TEXT.en[key];
+  document.getElementById('whyExplainText').textContent = text;
+  document.getElementById('whyExplainModal').classList.add('open');
+}
+function closeWhyExplain(){
+  document.getElementById('whyExplainModal').classList.remove('open');
+}
+
 function pickSuggestedExercise(){
   const list = (EXERCISES[currentLang] || EXERCISES.en).filter(e => !PREMIUM_EXERCISE_IDS.includes(e.id));
   const tried = getTriedExercises();
@@ -2782,6 +3857,233 @@ function closeDailyBrief(){
 function startBriefSuggestion(){
   closeDailyBrief();
   if(briefSuggestedId) openExercise(briefSuggestedId);
+}
+
+const QUICK_RELIEF = {
+  ar: {
+    tension: { icon:'💆', label:'توتر أو شد', steps:['شدّ كتفيك للأعلى بقوة 5 ثوانٍ، ثم أرخِهما فجأة.','كرّر هذا مرتين أخريين ببطء.','لاحظ الفرق بين الشد والاسترخاء في جسدك.'] },
+    racing: { icon:'🌀', label:'أفكار متسارعة', steps:['سمِّ لنفسك 3 أشياء تراها حولك الآن.','سمِّ صوتين تسمعهما في هذه اللحظة.','خذ نفساً واحداً بطيئاً وطويلاً.'] },
+    anger: { icon:'😤', label:'غضب', steps:['اقبض يديك بقوة لمدة 5 ثوانٍ.','افردهما فجأة وهزّهما برفق.','ازفر ببطء كأنك تُطفئ شمعة بعيدة.'] },
+    sad: { icon:'😔', label:'حزن', steps:['سمِّ ما تشعر به الآن بكلمة واحدة فقط.','ضع يدك على صدرك بلطف.','قل لنفسك بصمت: هذا الشعور موجود، ولا بأس بذلك.'] },
+    focus: { icon:'🌫️', label:'صعوبة التركيز', steps:['اختر شيئاً واحداً قريباً منك.','صِفه لنفسك ذهنياً لعشر ثوانٍ.','لاحظ تنفّسك للحظة واحدة.'] },
+    overwhelmed: { icon:'😵', label:'شعور بالإرهاق', steps:['توقف تماماً عمّا تفعله الآن.','ضع قدميك بثبات على الأرض.','خذ ثلاثة أنفاس بطيئة، وعُدّ كل واحد.'] },
+  },
+  de: {
+    tension: { icon:'💆', label:'Anspannung', steps:['Ziehe deine Schultern 5 Sekunden fest hoch, dann lass sie plötzlich los.','Wiederhole das zweimal, langsam.','Spüre den Unterschied zwischen Anspannung und Entspannung.'] },
+    racing: { icon:'🌀', label:'Rasende Gedanken', steps:['Nenne dir 3 Dinge, die du gerade siehst.','Nenne 2 Geräusche, die du gerade hörst.','Atme einmal langsam und tief.'] },
+    anger: { icon:'😤', label:'Wut', steps:['Balle deine Fäuste 5 Sekunden fest.','Öffne sie plötzlich und schüttle sie sanft aus.','Atme langsam aus, als würdest du eine Kerze auspusten.'] },
+    sad: { icon:'😔', label:'Traurigkeit', steps:['Benenne, was du gerade fühlst, in einem Wort.','Lege sanft eine Hand auf deine Brust.','Sag dir still: Dieses Gefühl ist da, und das ist okay.'] },
+    focus: { icon:'🌫️', label:'Konzentrationsschwierigkeit', steps:['Wähle einen Gegenstand in deiner Nähe.','Beschreibe ihn 10 Sekunden lang für dich.','Spüre kurz deinen Atem.'] },
+    overwhelmed: { icon:'😵', label:'Überforderung', steps:['Halte kurz inne bei dem, was du gerade tust.','Stelle beide Füße fest auf den Boden.','Atme dreimal langsam, zähle jeden Atemzug.'] },
+  },
+  en: {
+    tension: { icon:'💆', label:'Stress or tension', steps:['Tense your shoulders up tightly for 5 seconds, then release suddenly.','Repeat twice more, slowly.','Notice the difference between tension and release.'] },
+    racing: { icon:'🌀', label:'Racing thoughts', steps:['Name 3 things you can see around you.','Name 2 sounds you can hear right now.','Take one slow, deep breath.'] },
+    anger: { icon:'😤', label:'Anger', steps:['Clench your fists tightly for 5 seconds.','Release them suddenly and shake them out gently.','Breathe out slowly, like blowing out a candle.'] },
+    sad: { icon:'😔', label:'Sadness', steps:['Name what you feel right now in one word.','Place a hand gently on your chest.','Say to yourself: this feeling is here, and that\'s okay.'] },
+    focus: { icon:'🌫️', label:'Difficulty focusing', steps:['Pick one object near you.','Describe it to yourself for 10 seconds.','Notice your breath for a moment.'] },
+    overwhelmed: { icon:'😵', label:'Feeling overwhelmed', steps:['Pause completely from what you\'re doing.','Plant both feet firmly on the ground.','Take three slow breaths, counting each one.'] },
+  },
+  fr: {
+    tension: { icon:'💆', label:'Stress ou tension', steps:['Contracte tes épaules fort pendant 5 secondes, puis relâche d\'un coup.','Répète deux fois, lentement.','Remarque la différence entre tension et relâchement.'] },
+    racing: { icon:'🌀', label:'Pensées qui s\'emballent', steps:['Nomme 3 choses que tu vois autour de toi.','Nomme 2 sons que tu entends maintenant.','Prends une respiration lente et profonde.'] },
+    anger: { icon:'😤', label:'Colère', steps:['Serre les poings fort pendant 5 secondes.','Relâche-les d\'un coup et secoue-les doucement.','Expire lentement, comme pour souffler une bougie.'] },
+    sad: { icon:'😔', label:'Tristesse', steps:['Nomme ce que tu ressens en un mot.','Pose doucement une main sur ta poitrine.','Dis-toi : ce sentiment est là, et c\'est normal.'] },
+    focus: { icon:'🌫️', label:'Difficulté à se concentrer', steps:['Choisis un objet près de toi.','Décris-le mentalement pendant 10 secondes.','Remarque ta respiration un instant.'] },
+    overwhelmed: { icon:'😵', label:'Sentiment d\'être dépassé', steps:['Arrête-toi complètement.','Pose fermement tes deux pieds au sol.','Prends trois respirations lentes, en comptant chacune.'] },
+  },
+  tr: {
+    tension: { icon:'💆', label:'Stres veya gerginlik', steps:['Omuzlarını 5 saniye sıkıca kaldır, sonra aniden bırak.','Bunu yavaşça iki kez daha tekrarla.','Gerginlik ile rahatlama arasındaki farkı hisset.'] },
+    racing: { icon:'🌀', label:'Hızlı düşünceler', steps:['Etrafında gördüğün 3 şeyi say.','Şu an duyduğun 2 sesi say.','Yavaş ve derin bir nefes al.'] },
+    anger: { icon:'😤', label:'Öfke', steps:['Yumruklarını 5 saniye sıkıca sık.','Aniden bırak ve nazikçe salla.','Bir mum söndürür gibi yavaşça nefes ver.'] },
+    sad: { icon:'😔', label:'Üzüntü', steps:['Şu an hissettiğini tek kelimeyle söyle.','Elini nazikçe göğsüne koy.','Kendine söyle: bu duygu burada, ve bu normal.'] },
+    focus: { icon:'🌫️', label:'Odaklanma güçlüğü', steps:['Yakınındaki bir nesneyi seç.','Onu zihninde 10 saniye tarif et.','Bir an nefesine dikkat et.'] },
+    overwhelmed: { icon:'😵', label:'Bunalmış hissetme', steps:['Yaptığın şeyi tamamen durdur.','İki ayağını yere sağlam bas.','Üç yavaş nefes al, her birini say.'] },
+  },
+  ku: {
+    tension: { icon:'💆', label:'Tengasî an teşqele', steps:['Milên xwe 5 çirkeyan bi tundî bilind bike, paşê carekê berde.','Vê du caran din hêdî hêdî dubare bike.','Cudahiya di navbera teşqele û vebûnê de hîs bike.'] },
+    racing: { icon:'🌀', label:'Ramanên bilez', steps:['3 tiştên ku dora xwe dibînî bêje.','2 dengên ku niha dibihîzî bêje.','Nefesek hêdî û kûr bikişîne.'] },
+    anger: { icon:'😤', label:'Hêrs', steps:['Destên xwe 5 çirkeyan bi tundî girêde.','Carekê wan berde û hêdî bihejîne.','Hêdî nefesê berde, mîna ku tu mûmek vedimirînî.'] },
+    sad: { icon:'😔', label:'Xemgînî', steps:['Tiştê tu niha hîs dikî bi peyvek bêje.','Destekê hêdî li ser sîngê xwe deyne.','Ji xwe re bêje: ev hest li vir e, û ev normal e.'] },
+    focus: { icon:'🌫️', label:'Zehmetiya sekinandinê', steps:['Tiştekî nêzî xwe hilbijêre.','Ji bo 10 çirkeyan wê ji xwe re rave bike.','Demek nefesa xwe bala xwe bide.'] },
+    overwhelmed: { icon:'😵', label:'Hesta zêde giranbûyê', steps:['Bi temamî ji tiştê tu dikî rawestîne.','Herdu piyên xwe bi xurtî li erdê deyne.','Sê nefesên hêdî bikişîne, her yekê bihejmêre.'] },
+  },
+  es: {
+    tension: { icon:'💆', label:'Estrés o tensión', steps:['Tensa los hombros con fuerza 5 segundos, luego suéltalos de golpe.','Repite dos veces más, despacio.','Nota la diferencia entre tensión y relajación.'] },
+    racing: { icon:'🌀', label:'Pensamientos acelerados', steps:['Nombra 3 cosas que ves a tu alrededor.','Nombra 2 sonidos que oyes ahora mismo.','Respira una vez, lento y profundo.'] },
+    anger: { icon:'😤', label:'Enojo', steps:['Aprieta los puños con fuerza 5 segundos.','Suéltalos de golpe y sacúdelos suavemente.','Exhala despacio, como si apagaras una vela.'] },
+    sad: { icon:'😔', label:'Tristeza', steps:['Nombra lo que sientes ahora en una palabra.','Pon una mano suavemente sobre tu pecho.','Dite a ti mismo: este sentimiento está aquí, y está bien.'] },
+    focus: { icon:'🌫️', label:'Dificultad para concentrarte', steps:['Elige un objeto cerca de ti.','Descríbelo mentalmente durante 10 segundos.','Nota tu respiración un momento.'] },
+    overwhelmed: { icon:'😵', label:'Sentirte abrumado/a', steps:['Detente por completo.','Planta ambos pies firmemente en el suelo.','Respira tres veces despacio, contando cada una.'] },
+  },
+  fa: {
+    tension: { icon:'💆', label:'تنش یا استرس', steps:['شانه‌هایت را ۵ ثانیه محکم بالا بکش، بعد ناگهان رها کن.','این را دو بار دیگر آرام تکرار کن.','تفاوت بین تنش و آرامش را حس کن.'] },
+    racing: { icon:'🌀', label:'افکار پرشتاب', steps:['۳ چیزی که اطرافت می‌بینی نام ببر.','۲ صدایی که همین الان می‌شنوی نام ببر.','یک نفس آرام و عمیق بکش.'] },
+    anger: { icon:'😤', label:'خشم', steps:['مشت‌هایت را ۵ ثانیه محکم ببند.','ناگهان بازشان کن و آرام تکانشان بده.','آرام نفس بیرون بده، انگار شمعی خاموش می‌کنی.'] },
+    sad: { icon:'😔', label:'غم', steps:['آنچه الان حس می‌کنی را در یک کلمه بگو.','دستت را آرام روی قلبت بگذار.','به خودت بگو: این احساس اینجاست، و اشکالی ندارد.'] },
+    focus: { icon:'🌫️', label:'مشکل تمرکز', steps:['یک شیء نزدیک خودت انتخاب کن.','۱۰ ثانیه آن را برای خودت توصیف کن.','لحظه‌ای به نفس‌کشیدنت توجه کن.'] },
+    overwhelmed: { icon:'😵', label:'احساس فرسودگی', steps:['کاملاً از کاری که می‌کنی دست بکش.','هر دو پایت را محکم روی زمین بگذار.','سه نفس آرام بکش، هرکدام را بشمار.'] },
+  },
+  ur: {
+    tension: { icon:'💆', label:'تناؤ یا دباؤ', steps:['اپنے کندھوں کو 5 سیکنڈ سختی سے اوپر کھینچیں، پھر اچانک چھوڑ دیں۔','اسے آہستہ سے دو بار مزید دہرائیں۔','تناؤ اور آرام کے فرق کو محسوس کریں۔'] },
+    racing: { icon:'🌀', label:'تیز خیالات', steps:['اپنے ارد گرد 3 چیزوں کے نام لیں جو آپ دیکھ رہے ہیں۔','2 آوازوں کے نام لیں جو آپ ابھی سن رہے ہیں۔','ایک آہستہ، گہری سانس لیں۔'] },
+    anger: { icon:'😤', label:'غصہ', steps:['اپنی مٹھیاں 5 سیکنڈ سختی سے بند کریں۔','اچانک کھولیں اور آہستہ سے جھٹکیں۔','آہستہ سانس چھوڑیں، جیسے موم بتی بجھا رہے ہوں۔'] },
+    sad: { icon:'😔', label:'اداسی', steps:['ابھی جو محسوس کر رہے ہیں اسے ایک لفظ میں بیان کریں۔','ہاتھ آہستہ سے اپنے سینے پر رکھیں۔','خود سے کہیں: یہ احساس یہاں ہے، اور یہ ٹھیک ہے۔'] },
+    focus: { icon:'🌫️', label:'توجہ مرکوز کرنے میں دشواری', steps:['اپنے قریب ایک چیز منتخب کریں۔','اسے 10 سیکنڈ کے لیے ذہن میں بیان کریں۔','ایک لمحے کے لیے اپنی سانس پر توجہ دیں۔'] },
+    overwhelmed: { icon:'😵', label:'مغلوب محسوس کرنا', steps:['جو کچھ کر رہے ہیں اسے مکمل طور پر روک دیں۔','دونوں پاؤں مضبوطی سے زمین پر رکھیں۔','تین آہستہ سانسیں لیں، ہر ایک کو شمار کریں۔'] },
+  },
+  ru: {
+    tension: { icon:'💆', label:'Стресс или напряжение', steps:['Крепко напрягите плечи на 5 секунд, затем резко расслабьте.','Повторите ещё дважды, медленно.','Заметьте разницу между напряжением и расслаблением.'] },
+    racing: { icon:'🌀', label:'Скачущие мысли', steps:['Назовите 3 предмета, которые видите вокруг.','Назовите 2 звука, которые слышите сейчас.','Сделайте один медленный глубокий вдох.'] },
+    anger: { icon:'😤', label:'Гнев', steps:['Крепко сожмите кулаки на 5 секунд.','Резко разожмите и слегка потрясите руками.','Медленно выдохните, будто задуваете свечу.'] },
+    sad: { icon:'😔', label:'Грусть', steps:['Назовите одним словом, что вы сейчас чувствуете.','Мягко положите руку на грудь.','Скажите себе: это чувство здесь, и это нормально.'] },
+    focus: { icon:'🌫️', label:'Трудности с концентрацией', steps:['Выберите предмет рядом с вами.','Опишите его про себя 10 секунд.','На мгновение обратите внимание на дыхание.'] },
+    overwhelmed: { icon:'😵', label:'Чувство перегруженности', steps:['Полностью остановите то, что делаете.','Твёрдо поставьте обе ноги на пол.','Сделайте три медленных вдоха, считая каждый.'] },
+  },
+  pt: {
+    tension: { icon:'💆', label:'Stress ou tensão', steps:['Tensiona os ombros com força 5 segundos, depois solta de repente.','Repete mais duas vezes, devagar.','Repara na diferença entre tensão e relaxamento.'] },
+    racing: { icon:'🌀', label:'Pensamentos acelerados', steps:['Nomeia 3 coisas que vês à tua volta.','Nomeia 2 sons que ouves agora.','Respira uma vez, devagar e fundo.'] },
+    anger: { icon:'😤', label:'Raiva', steps:['Aperta os punhos com força 5 segundos.','Solta de repente e abana-os suavemente.','Expira devagar, como se apagasses uma vela.'] },
+    sad: { icon:'😔', label:'Tristeza', steps:['Nomeia o que sentes agora numa palavra.','Coloca uma mão suavemente no peito.','Diz para ti: este sentimento está aqui, e está tudo bem.'] },
+    focus: { icon:'🌫️', label:'Dificuldade em concentrar-te', steps:['Escolhe um objeto perto de ti.','Descreve-o mentalmente durante 10 segundos.','Repara na tua respiração por um momento.'] },
+    overwhelmed: { icon:'😵', label:'Sentir-te sobrecarregado/a', steps:['Para completamente o que estás a fazer.','Planta os dois pés firmemente no chão.','Respira três vezes devagar, contando cada uma.'] },
+  },
+  it: {
+    tension: { icon:'💆', label:'Stress o tensione', steps:['Contrai le spalle con forza per 5 secondi, poi rilasciale di colpo.','Ripeti altre due volte, lentamente.','Nota la differenza tra tensione e rilassamento.'] },
+    racing: { icon:'🌀', label:'Pensieri accelerati', steps:['Nomina 3 cose che vedi intorno a te.','Nomina 2 suoni che senti ora.','Fai un respiro lento e profondo.'] },
+    anger: { icon:'😤', label:'Rabbia', steps:['Stringi i pugni con forza per 5 secondi.','Rilasciali di colpo e scuotili delicatamente.','Espira lentamente, come se spegnessi una candela.'] },
+    sad: { icon:'😔', label:'Tristezza', steps:['Nomina ciò che provi ora in una parola.','Metti una mano delicatamente sul petto.','Dì a te stesso: questa emozione è qui, ed è normale.'] },
+    focus: { icon:'🌫️', label:'Difficoltà a concentrarti', steps:['Scegli un oggetto vicino a te.','Descrivilo a te stesso per 10 secondi.','Nota il tuo respiro per un momento.'] },
+    overwhelmed: { icon:'😵', label:'Sentirti sopraffatto/a', steps:['Fermati completamente da ciò che stai facendo.','Pianta entrambi i piedi saldamente a terra.','Fai tre respiri lenti, contando ognuno.'] },
+  },
+};
+
+let reliefTimer = null;
+let reliefSecondsLeft = 90;
+let reliefPaused = false;
+let reliefMuted = true;
+let reliefCurrentCat = null;
+let reliefStepIndex = 0;
+const RELIEF_TOTAL_SECONDS = 90;
+
+function openRelief(){
+  renderReliefGrid();
+  document.getElementById('reliefPickView').style.display = 'block';
+  document.getElementById('reliefSessionView').style.display = 'none';
+  document.getElementById('reliefEndView').style.display = 'none';
+  document.getElementById('reliefModal').classList.add('open');
+}
+function closeRelief(){
+  stopReliefTimerOnly();
+  document.getElementById('reliefModal').classList.remove('open');
+}
+function renderReliefGrid(){
+  const data = QUICK_RELIEF[currentLang] || QUICK_RELIEF.en;
+  const grid = document.getElementById('reliefGrid');
+  grid.innerHTML = '';
+  Object.keys(data).forEach(cat=>{
+    const btn = document.createElement('button');
+    btn.className = 'relief-cat-btn';
+    btn.innerHTML = '<span class="relief-cat-icon">'+data[cat].icon+'</span><span class="relief-cat-label">'+data[cat].label+'</span>';
+    btn.onclick = ()=> startReliefSession(cat);
+    grid.appendChild(btn);
+  });
+}
+function startReliefSession(cat){
+  reliefCurrentCat = cat;
+  reliefSecondsLeft = RELIEF_TOTAL_SECONDS;
+  reliefPaused = false;
+  reliefStepIndex = 0;
+  document.getElementById('reliefPickView').style.display = 'none';
+  document.getElementById('reliefEndView').style.display = 'none';
+  document.getElementById('reliefSessionView').style.display = 'block';
+  document.getElementById('reliefPauseBtn').textContent = '⏸';
+  updateReliefMuteBtn();
+  showReliefStep();
+  runReliefTimer();
+}
+function getReliefSteps(){
+  const data = QUICK_RELIEF[currentLang] || QUICK_RELIEF.en;
+  return (data[reliefCurrentCat] || data.tension).steps;
+}
+function showReliefStep(){
+  const steps = getReliefSteps();
+  const idx = Math.min(reliefStepIndex, steps.length-1);
+  const text = steps[idx];
+  document.getElementById('reliefStepText').textContent = text;
+  if(!reliefMuted) speak(text);
+}
+function runReliefTimer(){
+  clearInterval(reliefTimer);
+  const stepDuration = RELIEF_TOTAL_SECONDS / getReliefSteps().length;
+  reliefTimer = setInterval(()=>{
+    if(reliefPaused) return;
+    reliefSecondsLeft--;
+    const elapsed = RELIEF_TOTAL_SECONDS - reliefSecondsLeft;
+    const newStepIndex = Math.min(Math.floor(elapsed / stepDuration), getReliefSteps().length-1);
+    if(newStepIndex !== reliefStepIndex){
+      reliefStepIndex = newStepIndex;
+      showReliefStep();
+    }
+    document.getElementById('reliefTimerText').textContent = reliefSecondsLeft;
+    const pct = reliefSecondsLeft / RELIEF_TOTAL_SECONDS;
+    document.getElementById('reliefRingFg').style.strokeDashoffset = String(283 * (1-pct));
+    if(reliefSecondsLeft <= 0){
+      clearInterval(reliefTimer);
+      finishReliefSession();
+    }
+  }, 1000);
+}
+function toggleReliefPause(){
+  reliefPaused = !reliefPaused;
+  document.getElementById('reliefPauseBtn').textContent = reliefPaused ? '▶' : '⏸';
+}
+function restartRelief(){
+  if(reliefCurrentCat) startReliefSession(reliefCurrentCat);
+}
+function toggleReliefMute(){
+  reliefMuted = !reliefMuted;
+  updateReliefMuteBtn();
+  if(!reliefMuted) speak(getReliefSteps()[reliefStepIndex]);
+  else if(window.speechSynthesis) window.speechSynthesis.cancel();
+}
+function updateReliefMuteBtn(){
+  const btn = document.getElementById('reliefMuteBtn');
+  btn.textContent = reliefMuted ? '🔇' : '🔈';
+  btn.classList.toggle('active', !reliefMuted);
+}
+function stopReliefTimerOnly(){
+  clearInterval(reliefTimer);
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+}
+function stopRelief(){
+  stopReliefTimerOnly();
+  closeRelief();
+}
+function finishReliefSession(){
+  stopReliefTimerOnly();
+  document.getElementById('reliefSessionView').style.display = 'none';
+  document.getElementById('reliefEndView').style.display = 'block';
+}
+function answerReliefFeedback(response){
+  try{
+    const raw = safeGet('mc_relief_log');
+    const arr = raw ? JSON.parse(raw) : [];
+    arr.push({ cat: reliefCurrentCat, response: response });
+    safeSet('mc_relief_log', JSON.stringify(arr.slice(-100)));
+  }catch(e){}
+  closeRelief();
+}
+
+function openSleepMode(){
+  document.getElementById('sleepModal').classList.add('open');
+}
+function closeSleepMode(){
+  document.getElementById('sleepModal').classList.remove('open');
+}
+function startSleepBreathing(){
+  closeSleepMode();
+  openExercise('ex-478');
 }
 
 let moodSuggestedId = null;
@@ -2849,7 +4151,7 @@ function renderMoodChart(){
 let currentJournalExId = null;
 function journalKey(exId){ return 'mc_journal_' + exId; }
 
-const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory'];
+const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count'];
 const BACKUP_JOURNAL_IDS = ['ex-gratitude','ex-feelings','ex-reframe'];
 
 function exportBackup(){
@@ -2908,6 +4210,7 @@ function importBackup(file){
       }
       const restoredLang = safeGet('mc_lang');
       if(restoredLang && I18N[restoredLang]) setLang(restoredLang);
+      updateFreeChatCounter();
       showBackupStatus(I18N[currentLang].backup_import_done);
     }catch(err){
       showBackupStatus(I18N[currentLang].backup_import_error);
@@ -3080,6 +4383,30 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(dailyBrief){
     dailyBrief.addEventListener('click', (e)=>{ if(e.target.id === 'dailyBriefModal') closeDailyBrief(); });
   }
+  const sleepModal = document.getElementById('sleepModal');
+  if(sleepModal){
+    sleepModal.addEventListener('click', (e)=>{ if(e.target.id === 'sleepModal') closeSleepMode(); });
+  }
+  const reliefModal = document.getElementById('reliefModal');
+  if(reliefModal){
+    reliefModal.addEventListener('click', (e)=>{ if(e.target.id === 'reliefModal') closeRelief(); });
+  }
+  const passportModal = document.getElementById('passportModal');
+  if(passportModal){
+    passportModal.addEventListener('click', (e)=>{ if(e.target.id === 'passportModal') closePrivacyPassport(); });
+  }
+  const calmPlanModal = document.getElementById('calmPlanModal');
+  if(calmPlanModal){
+    calmPlanModal.addEventListener('click', (e)=>{ if(e.target.id === 'calmPlanModal') closeCalmPlan(); });
+  }
+  const whyExplainModal = document.getElementById('whyExplainModal');
+  if(whyExplainModal){
+    whyExplainModal.addEventListener('click', (e)=>{ if(e.target.id === 'whyExplainModal') closeWhyExplain(); });
+  }
+  const explainFeelingModal = document.getElementById('explainFeelingModal');
+  if(explainFeelingModal){
+    explainFeelingModal.addEventListener('click', (e)=>{ if(e.target.id === 'explainFeelingModal') closeExplainFeeling(); });
+  }
 });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeExercise(); });
 
@@ -3129,12 +4456,20 @@ function updateStreakDisplay(){
   const chip = document.getElementById('streakChip');
   const text = document.getElementById('streakText');
   const streak = parseInt(safeGet('mc_streak') || '0', 10);
-  if(streak > 0){
+  if(streak > 0 && safeGet('mc_streaks_disabled') !== '1'){
     chip.style.display = 'inline-block';
     text.textContent = streak + ' ' + I18N[currentLang].streak_label;
   } else {
     chip.style.display = 'none';
   }
+}
+function dateKeyOffset(daysAgo){
+  const d = new Date(); d.setDate(d.getDate()-daysAgo);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function toggleStreaksDisabled(checked){
+  safeSet('mc_streaks_disabled', checked ? '1' : '0');
+  updateStreakDisplay();
 }
 function markExerciseDone(){
   const last = safeGet('mc_last_done');
@@ -3142,15 +4477,27 @@ function markExerciseDone(){
   const doneId = currentExercise ? currentExercise.id : (currentLibItem ? currentLibItem.id : null);
   if(doneId) addTriedExercise(doneId);
   if(last === today){ updateProgressStats(); return; } // already counted today
-  const y = new Date(); y.setDate(y.getDate()-1);
-  const yesterdayKey = y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');
+  const yesterdayKey = dateKeyOffset(1);
+  const twoDaysAgoKey = dateKeyOffset(2);
   let streak = parseInt(safeGet('mc_streak') || '0', 10);
-  streak = (last === yesterdayKey) ? streak + 1 : 1;
+  const currentMonthKey = today.slice(0,7);
+  const freezeUsedMonth = safeGet('mc_streak_freeze_used_month');
+  let usedFreeze = false;
+  if(last === yesterdayKey){
+    streak = streak + 1;
+  } else if(last === twoDaysAgoKey && streak > 0 && freezeUsedMonth !== currentMonthKey){
+    // One missed day, monthly freeze still available: keep the streak alive.
+    streak = streak + 1;
+    safeSet('mc_streak_freeze_used_month', currentMonthKey);
+    usedFreeze = true;
+  } else {
+    streak = 1;
+  }
   safeSet('mc_streak', String(streak));
   safeSet('mc_last_done', today);
   updateStreakDisplay();
   updateProgressStats();
-  checkAchievement(streak);
+  if(!usedFreeze) checkAchievement(streak);
   const banner = document.getElementById('reminderBanner');
   if(banner) banner.style.display = 'none';
   const btn = document.getElementById('modalDoneBtn');
@@ -3167,6 +4514,7 @@ function restorePreferences(){
   document.body.classList.toggle('dark-mode', dark);
   document.body.classList.toggle('text-large', textLarge);
   updateGenderButtonsUI();
+  document.getElementById('streaksDisabledToggle').checked = safeGet('mc_streaks_disabled') === '1';
   const savedLang = safeGet('mc_lang');
   updateStreakDisplay();
   return savedLang;
@@ -3190,6 +4538,12 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCrisis()
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && document.getElementById('onboardingModal').classList.contains('open')) skipOnboarding(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeChatConsent(); });
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeDailyBrief(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeSleepMode(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeRelief(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePrivacyPassport(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCalmPlan(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeWhyExplain(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeExplainFeeling(); });
 
 const LIB_FILTERS = ['all','anxiety','habits','relationships','self','emotions','stress'];
 let currentLibFilter = 'all';
@@ -3286,6 +4640,7 @@ function openCheckin(){
   const respBox = document.getElementById('checkinFreeTextResponse');
   respBox.style.display = 'none';
   respBox.textContent = '';
+  document.getElementById('checkinWhyBtn').style.display = 'none';
   document.getElementById('checkinFreeTextBtn').disabled = false;
   document.getElementById('checkinModal').classList.add('open');
 }
@@ -3305,9 +4660,11 @@ function sendCheckinText(){
   }
   const btn = document.getElementById('checkinFreeTextBtn');
   const respBox = document.getElementById('checkinFreeTextResponse');
+  const whyBtn = document.getElementById('checkinWhyBtn');
   btn.disabled = true;
   respBox.style.display = 'block';
   respBox.textContent = I18N[currentLang].checkin_thinking;
+  whyBtn.style.display = 'none';
 
   fetch('/.netlify/functions/chat', {
     method: 'POST',
@@ -3327,6 +4684,7 @@ function sendCheckinText(){
     if(!data.reply) throw new Error('empty reply');
     respBox.textContent = data.reply;
     btn.disabled = false;
+    whyBtn.style.display = 'block';
   })
   .catch((err)=>{
     respBox.textContent = (err && err.rateLimited) ? I18N[currentLang].rate_limit_msg : I18N[currentLang].checkin_error;
@@ -3361,10 +4719,23 @@ function updateProgressStats(){
   const statStreak = document.getElementById('statStreak');
   const statJournal = document.getElementById('statJournal');
   const statMood = document.getElementById('statMood');
+  const statExercises = document.getElementById('statExercises');
+  const statHelped = document.getElementById('statHelped');
   if(statStreak){ statStreak.textContent = streak; statJournal.textContent = journalCount; statMood.textContent = moodLog.length; }
+  if(statExercises) statExercises.textContent = getTriedExercises().length;
+  if(statHelped){
+    let helped = 0;
+    try{
+      const raw = safeGet('mc_relief_log');
+      const arr = raw ? JSON.parse(raw) : [];
+      helped = arr.filter(e => e.response === 'yes' || e.response === 'little').length;
+    }catch(e){}
+    statHelped.textContent = helped;
+  }
 }
 
 function checkAchievement(streak){
+  if(safeGet('mc_streaks_disabled') === '1') return;
   if(streak > 0 && streak % 7 === 0){
     const lastCelebrated = parseInt(safeGet('mc_last_celebrated') || '0', 10);
     if(streak > lastCelebrated){
@@ -3493,7 +4864,9 @@ function toggleMic(){
   }catch(err){}
 }
 
+let tempConversationMode = false;
 function saveChatMemory(){
+  if(tempConversationMode) return; // temporary mode: never persist to this device
   try{ safeSet('mc_chat_memory', JSON.stringify(chatHistory)); }catch(e){}
 }
 function loadChatMemory(){
@@ -3525,6 +4898,243 @@ function clearChatMemory(){
   log.appendChild(initial);
 }
 
+// ---------------------------------------------------------------------
+// PRIVACY PASSPORT
+// A dashboard that explains, in plain and technically accurate language,
+// what stays on this device, what is sent to the AI provider, and what
+// technical logs may exist server-side (see chat.js comments: console.warn
+// on a Safe Claims rewrite, console.error on upstream failures — never
+// message content). Every deletion control below only touches this
+// browser's local storage; Waha has no central database to also delete
+// from, because none exists.
+// ---------------------------------------------------------------------
+function openPrivacyPassport(){
+  document.getElementById('tempModeToggle').checked = tempConversationMode;
+  document.getElementById('passportStatus').textContent = '';
+  document.getElementById('passportModal').classList.add('open');
+}
+function closePrivacyPassport(){
+  document.getElementById('passportModal').classList.remove('open');
+}
+function toggleTempConversationMode(checked){
+  tempConversationMode = checked;
+  document.getElementById('tempModeBanner').classList.toggle('active', checked);
+}
+function showPassportStatus(msg){
+  const el = document.getElementById('passportStatus');
+  el.textContent = msg;
+  setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 4000);
+}
+function deleteChatHistoryOnly(){
+  clearChatMemory();
+  showPassportStatus(I18N[currentLang].passport_done);
+}
+function deleteMoodDataOnly(){
+  moodLog = [];
+  safeSet('mc_moodlog', '[]');
+  renderMoodChart();
+  showPassportStatus(I18N[currentLang].passport_done);
+}
+function deleteExerciseHistoryOnly(){
+  safeSet('mc_tried_exercises', '[]');
+  safeSet('mc_relief_log', '[]');
+  safeSet('mc_streak', '0');
+  safeSet('mc_last_done', '');
+  safeSet('mc_last_celebrated', '');
+  updateStreakDisplay();
+  updateProgressStats();
+  showPassportStatus(I18N[currentLang].passport_done);
+}
+function getAllWahaKeys(){
+  const keys = [];
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if(k && k.indexOf('mc_') === 0) keys.push(k);
+    }
+  }catch(e){}
+  return keys;
+}
+function exportAllPassportData(){
+  try{
+    const data = {};
+    getAllWahaKeys().forEach(k=>{
+      try{ data[k] = JSON.parse(safeGet(k)); }catch(e){ data[k] = safeGet(k); }
+    });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'waha-my-data-' + todayKey() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    showPassportStatus(I18N[currentLang].passport_done);
+  }catch(e){
+    showPassportStatus(I18N[currentLang].passport_error);
+  }
+}
+function confirmDeleteEverything(){
+  if(!window.confirm(I18N[currentLang].passport_confirm_all)) return;
+  getAllWahaKeys().forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} });
+  window.location.reload();
+}
+
+// ---------------------------------------------------------------------
+// PERSONAL CALM PLAN
+// Prepared while the user feels stable, for use during a harder moment.
+// Stored locally only (mc_calm_plan), never uploaded, never used to
+// auto-contact anyone — the "person" field is just a name/note the user
+// writes for themselves to remember. Crisis resources stay clearly
+// separate and one tap away from this screen at all times.
+// ---------------------------------------------------------------------
+function getCalmPlan(){
+  try{ const raw = safeGet('mc_calm_plan'); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
+}
+function openCalmPlan(){
+  const plan = getCalmPlan();
+  if(plan) renderCalmPlanView(plan);
+  else showCalmPlanEditMode();
+  document.getElementById('calmPlanModal').classList.add('open');
+}
+function closeCalmPlan(){
+  document.getElementById('calmPlanModal').classList.remove('open');
+}
+function showCalmPlanEditMode(){
+  document.getElementById('calmPlanEditView').style.display = 'block';
+  document.getElementById('calmPlanViewMode').style.display = 'none';
+}
+function saveCalmPlan(){
+  const plan = {
+    exercise: document.getElementById('cpExercise').value.trim(),
+    sentence: document.getElementById('cpSentence').value.trim(),
+    place: document.getElementById('cpPlace').value.trim(),
+    activity: document.getElementById('cpActivity').value.trim(),
+    person: document.getElementById('cpPerson').value.trim(),
+    steps: document.getElementById('cpSteps').value.trim(),
+  };
+  safeSet('mc_calm_plan', JSON.stringify(plan));
+  renderCalmPlanView(plan);
+}
+function renderCalmPlanView(plan){
+  const dict = I18N[currentLang];
+  const rows = [
+    ['cpvExercise', dict.calmplan_f_exercise, plan.exercise],
+    ['cpvSentence', dict.calmplan_f_sentence, plan.sentence],
+    ['cpvPlace', dict.calmplan_f_place, plan.place],
+    ['cpvActivity', dict.calmplan_f_activity, plan.activity],
+    ['cpvPerson', dict.calmplan_f_person, plan.person],
+    ['cpvSteps', dict.calmplan_f_steps, plan.steps],
+  ];
+  rows.forEach(([id, label, val])=>{
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    const b = document.createElement('b');
+    b.textContent = label + ': ';
+    el.appendChild(b);
+    el.appendChild(document.createTextNode(val || '—'));
+  });
+  document.getElementById('calmPlanEditView').style.display = 'none';
+  document.getElementById('calmPlanViewMode').style.display = 'block';
+}
+function editCalmPlan(){
+  const plan = getCalmPlan() || {};
+  document.getElementById('cpExercise').value = plan.exercise || '';
+  document.getElementById('cpSentence').value = plan.sentence || '';
+  document.getElementById('cpPlace').value = plan.place || '';
+  document.getElementById('cpActivity').value = plan.activity || '';
+  document.getElementById('cpPerson').value = plan.person || '';
+  document.getElementById('cpSteps').value = plan.steps || '';
+  showCalmPlanEditMode();
+}
+function exportCalmPlan(){
+  const plan = getCalmPlan();
+  if(!plan) return;
+  const blob = new Blob([JSON.stringify(plan, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'waha-calm-plan-' + todayKey() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+function printCalmPlan(){
+  const plan = getCalmPlan();
+  if(!plan) return;
+  const dict = I18N[currentLang];
+  const rows = [
+    [dict.calmplan_f_exercise, plan.exercise], [dict.calmplan_f_sentence, plan.sentence],
+    [dict.calmplan_f_place, plan.place], [dict.calmplan_f_activity, plan.activity],
+    [dict.calmplan_f_person, plan.person], [dict.calmplan_f_steps, plan.steps],
+  ];
+  const html = '<html><head><meta charset="utf-8"><title>' + dict.calmplan_title + '</title>' +
+    '<style>body{font-family:sans-serif;padding:30px;max-width:600px;margin:0 auto;} h1{font-size:20px;} p{font-size:14px;line-height:1.6;} b{display:block;margin-top:14px;color:#333;}</style></head><body>' +
+    '<h1>' + dict.calmplan_title + '</h1>' +
+    rows.map(([label,val])=> '<p><b>'+label+'</b>'+(val||'—')+'</p>').join('') +
+    '</body></html>';
+  const w = window.open('', '_blank');
+  if(!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  w.print();
+}
+function confirmDeleteCalmPlan(){
+  if(!window.confirm(I18N[currentLang].calmplan_confirm_delete)) return;
+  safeSet('mc_calm_plan', '');
+  showCalmPlanEditMode();
+  document.getElementById('cpExercise').value = '';
+  document.getElementById('cpSentence').value = '';
+  document.getElementById('cpPlace').value = '';
+  document.getElementById('cpActivity').value = '';
+  document.getElementById('cpPerson').value = '';
+  document.getElementById('cpSteps').value = '';
+}
+
+const FREE_CHAT_LIMIT = 10;
+const CLIENT_CRISIS_KEYWORDS = {
+  ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش"],
+  en: ["suicide", "kill myself", "end my life", "hurt myself", "self harm", "self-harm", "want to die", "don't want to live"],
+  de: ["selbstmord", "mich umbringen", "mir etwas antun", "nicht mehr leben", "ich will sterben", "mich verletzen", "suizid"],
+  fr: ["suicide", "me tuer", "me faire du mal", "je veux mourir", "je ne veux plus vivre"],
+  tr: ["intihar", "kendimi öldür", "kendime zarar", "ölmek istiyorum", "yaşamak istemiyorum"],
+  ku: ["xwekuştin", "xwe bikujim", "zirarê xwe bidim", "dixwazim bimirim"],
+  es: ["suicidio", "matarme", "hacerme daño", "quiero morir", "no quiero vivir"],
+  fa: ["خودکشی", "خودم را بکشم", "به خودم آسیب", "می‌خواهم بمیرم", "نمی‌خواهم زندگی کنم"],
+  ur: ["خودکشی", "خود کو نقصان", "میں مرنا چاہتا", "جینا نہیں چاہتا"],
+  ru: ["самоубийство", "покончить с собой", "причинить себе вред", "хочу умереть", "не хочу жить"],
+  pt: ["suicídio", "me matar", "me machucar", "quero morrer", "não quero viver"],
+  it: ["suicidio", "uccidermi", "farmi del male", "voglio morire", "non voglio vivere"],
+};
+function normalizeForCrisisCheck(text){
+  let t = text.toLowerCase();
+  t = t.replace(/[\u064B-\u065F\u0670]/g, '');
+  t = t.replace(/(?<!\p{L})(?:\p{L}[ \t]+){2,}\p{L}(?!\p{L})/gu, (m) => m.replace(/\s+/g, ''));
+  t = t.replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه');
+  t = t.replace(/\s+/g, ' ').trim();
+  return t;
+}
+function detectCrisisClient(text){
+  const normalized = normalizeForCrisisCheck(text);
+  for(const lang of Object.keys(CLIENT_CRISIS_KEYWORDS)){
+    for(const kw of CLIENT_CRISIS_KEYWORDS[lang]){
+      if(normalized.includes(normalizeForCrisisCheck(kw))) return true;
+    }
+  }
+  return false;
+}
+function getFreeChatCount(){ return parseInt(safeGet('mc_free_chat_count') || '0', 10); }
+function updateFreeChatCounter(){
+  const el = document.getElementById('freeChatCounter');
+  if(!el) return;
+  const remaining = Math.max(0, FREE_CHAT_LIMIT - getFreeChatCount());
+  const dict = I18N[currentLang];
+  el.textContent = '· ' + remaining + ' ' + dict.free_chat_remaining;
+}
+
 function sendMsg(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
@@ -3532,6 +5142,12 @@ function sendMsg(){
   if(safeGet('mc_chat_consent') !== '1'){
     pendingChatMessage = text;
     document.getElementById('chatConsentModal').classList.add('open');
+    return;
+  }
+  const isCrisisMsg = detectCrisisClient(text);
+  if(!isCrisisMsg && getFreeChatCount() >= FREE_CHAT_LIMIT){
+    input.value = '';
+    openUpgrade();
     return;
   }
   const log = document.getElementById('chatLog');
@@ -3553,6 +5169,7 @@ function sendMsg(){
     typing.textContent = '';
     log.scrollTop = log.scrollHeight;
     speak(reply);
+    updateFreeChatCounter();
   }
   function showSystemNotice(noticeText){
     const notice = document.createElement('div');
@@ -3588,6 +5205,7 @@ function sendMsg(){
     chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply });
     if(chatHistory.length > MAX_CHAT_HISTORY) chatHistory = chatHistory.slice(-MAX_CHAT_HISTORY);
     saveChatMemory();
+    if(!isCrisisMsg) safeSet('mc_free_chat_count', String(getFreeChatCount() + 1));
     showReply(data.reply);
   })
   .catch((err)=>{
