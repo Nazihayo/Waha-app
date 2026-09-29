@@ -6,18 +6,19 @@
 [functions]
   node_bundler = "esbuild"
 
-# Security headers. main.js/styles.css are now external, bundled files
-# (see src/), but the markup still uses onclick="" handlers and style=""
-# attributes throughout, so a strict CSP without 'unsafe-inline' would
-# still break the UI — that's a real gap (an injected inline script would
-# still execute) that only a further rewrite away from inline handlers can
-# close. These headers still stop the cheap, high-value attacks: framing
-# (clickjacking), MIME-sniffing, cross-origin fetches to anything but our
-# own API, and referrer leakage of in-app URLs.
+# Security headers. script-src no longer needs 'unsafe-inline': every
+# onclick="" / onchange="" / etc. attribute in the markup was converted to
+# data-click / data-change / data-input / data-keydown, wired up by a
+# single addEventListener-based dispatcher in src/main.js (see
+# wireDataActions()), and the app is now one external, same-origin module
+# script with zero inline <script> content. A CSP-blocked injected inline
+# script genuinely can't execute anymore — this is real defense, not just
+# a header. style-src still needs 'unsafe-inline': the markup still has
+# plenty of style="" attributes, a separate, not-yet-done cleanup.
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"

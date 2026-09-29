@@ -4651,90 +4651,154 @@ if('serviceWorker' in navigator){
 
 
 // ---------------------------------------------------------------------
-// Expose functions referenced by inline HTML event handlers (onclick="..."
-// etc.) as globals. This file is loaded as an ES module (see index.html),
-// so top-level function declarations are module-scoped, not global, and
-// wouldn't otherwise be reachable from markup. Converting every inline
-// handler to addEventListener wiring is a separate, larger refactor —
-// tracked separately, not done here to keep this pass mechanical.
+// Declarative event wiring. The markup uses data-click / data-change /
+// data-input / data-keydown attributes (see index.html) instead of
+// onclick="" etc. — inline event-handler attributes count as inline
+// script for CSP purposes, so removing them is what let script-src drop
+// 'unsafe-inline' (see netlify.toml). A handler value is either a bare
+// action name ("openPrefs"), "name:literalArg" for a fixed string
+// argument ("setUserGender:male"), or a comma-separated list for more
+// than one action ("closeCalmPlan,openCrisis"). With no literal arg,
+// change/input handlers pass the control's own value automatically:
+// .checked for a checkbox, .files[0] for a file input, .value otherwise.
+// keydown handlers always receive the raw event, since the point of
+// binding at that granularity is usually to inspect the key pressed.
+//
+// A handful of the original inline handlers weren't plain function
+// calls (DOM one-liners, a value-dependent conditional) — those became
+// the small named functions just below instead of staying inline.
 // ---------------------------------------------------------------------
-window.acceptChatConsent = acceptChatConsent;
-window.answerReliefFeedback = answerReliefFeedback;
-window.backToEditFeeling = backToEditFeeling;
-window.clearChatMemory = clearChatMemory;
-window.closeCalmPlan = closeCalmPlan;
-window.closeChatConsent = closeChatConsent;
-window.closeCheckin = closeCheckin;
-window.closeCrisis = closeCrisis;
-window.closeDailyBrief = closeDailyBrief;
-window.closeExercise = closeExercise;
-window.closeExplainFeeling = closeExplainFeeling;
-window.closePrefs = closePrefs;
-window.closePrivacyPassport = closePrivacyPassport;
-window.closeRelief = closeRelief;
-window.closeSleepMode = closeSleepMode;
-window.closeSounds = closeSounds;
-window.closeUpgrade = closeUpgrade;
-window.closeWhyExplain = closeWhyExplain;
-window.confirmAgeGate = confirmAgeGate;
-window.confirmDeleteCalmPlan = confirmDeleteCalmPlan;
-window.confirmDeleteEverything = confirmDeleteEverything;
-window.copyFeelingDraft = copyFeelingDraft;
-window.deleteChatHistoryOnly = deleteChatHistoryOnly;
-window.deleteExerciseHistoryOnly = deleteExerciseHistoryOnly;
-window.deleteMoodDataOnly = deleteMoodDataOnly;
-window.dismissInstallBanner = dismissInstallBanner;
-window.dismissReminder = dismissReminder;
-window.editCalmPlan = editCalmPlan;
-window.explainSuggestion = explainSuggestion;
-window.exportAllPassportData = exportAllPassportData;
-window.exportBackup = exportBackup;
-window.exportCalmPlan = exportCalmPlan;
-window.exportFeelingDraft = exportFeelingDraft;
-window.generateFeelingDraft = generateFeelingDraft;
-window.handleInstallClick = handleInstallClick;
-window.importBackup = importBackup;
-window.markExerciseDone = markExerciseDone;
-window.nextOnboardingStep = nextOnboardingStep;
-window.openCalmPlan = openCalmPlan;
-window.openCheckin = openCheckin;
-window.openCrisis = openCrisis;
-window.openExplainFeeling = openExplainFeeling;
-window.openPrefs = openPrefs;
-window.openPrivacyPassport = openPrivacyPassport;
-window.openRelief = openRelief;
-window.openSleepMode = openSleepMode;
-window.openSounds = openSounds;
-window.openUpgrade = openUpgrade;
-window.printCalmPlan = printCalmPlan;
-window.printFeelingDraft = printFeelingDraft;
-window.readModalAloud = readModalAloud;
-window.restartRelief = restartRelief;
-window.rewriteFeelingWithAI = rewriteFeelingWithAI;
-window.saveCalmPlan = saveCalmPlan;
-window.saveJournalEntry = saveJournalEntry;
-window.sendCheckinText = sendCheckinText;
-window.sendMsg = sendMsg;
-window.setFeelingTone = setFeelingTone;
-window.setLang = setLang;
-window.setSoundTimer = setSoundTimer;
-window.setSoundVolume = setSoundVolume;
-window.setUserGender = setUserGender;
-window.shareApp = shareApp;
-window.skipOnboarding = skipOnboarding;
-window.startBriefSuggestion = startBriefSuggestion;
-window.startModalTimer = startModalTimer;
-window.startMoodSuggestion = startMoodSuggestion;
-window.startSleepBreathing = startSleepBreathing;
-window.stopRelief = stopRelief;
-window.toggleBreathe = toggleBreathe;
-window.toggleCalmMode = toggleCalmMode;
-window.toggleDarkMode = toggleDarkMode;
-window.toggleMic = toggleMic;
-window.toggleReliefMute = toggleReliefMute;
-window.toggleReliefPause = toggleReliefPause;
-window.toggleSound = toggleSound;
-window.toggleStreaksDisabled = toggleStreaksDisabled;
-window.toggleTempConversationMode = toggleTempConversationMode;
-window.toggleTextLarge = toggleTextLarge;
-window.toggleVoice = toggleVoice;
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+function triggerImportFile(){
+  document.getElementById('importFileInput').click();
+}
+function updateAgeGateButtonState(checked){
+  document.getElementById('ageGateContinueBtn').disabled = !checked;
+}
+function sendMsgOnEnter(e){
+  if(e.key === 'Enter') sendMsg();
+}
+
+const ACTIONS = {
+  acceptChatConsent,
+  answerReliefFeedback,
+  backToEditFeeling,
+  clearChatMemory,
+  closeCalmPlan,
+  closeChatConsent,
+  closeCheckin,
+  closeCrisis,
+  closeDailyBrief,
+  closeExercise,
+  closeExplainFeeling,
+  closePrefs,
+  closePrivacyPassport,
+  closeRelief,
+  closeSleepMode,
+  closeSounds,
+  closeUpgrade,
+  closeWhyExplain,
+  confirmAgeGate,
+  confirmDeleteCalmPlan,
+  confirmDeleteEverything,
+  copyFeelingDraft,
+  deleteChatHistoryOnly,
+  deleteExerciseHistoryOnly,
+  deleteMoodDataOnly,
+  dismissInstallBanner,
+  dismissReminder,
+  editCalmPlan,
+  explainSuggestion,
+  exportAllPassportData,
+  exportBackup,
+  exportCalmPlan,
+  exportFeelingDraft,
+  generateFeelingDraft,
+  handleInstallClick,
+  importBackup,
+  markExerciseDone,
+  nextOnboardingStep,
+  openCalmPlan,
+  openCheckin,
+  openCrisis,
+  openExplainFeeling,
+  openPrefs,
+  openPrivacyPassport,
+  openRelief,
+  openSleepMode,
+  openSounds,
+  openUpgrade,
+  printCalmPlan,
+  printFeelingDraft,
+  readModalAloud,
+  restartRelief,
+  rewriteFeelingWithAI,
+  saveCalmPlan,
+  saveJournalEntry,
+  scrollToSection,
+  sendCheckinText,
+  sendMsg,
+  sendMsgOnEnter,
+  setFeelingTone,
+  setLang,
+  setSoundTimer,
+  setSoundVolume,
+  setUserGender,
+  shareApp,
+  skipOnboarding,
+  startBriefSuggestion,
+  startModalTimer,
+  startMoodSuggestion,
+  startSleepBreathing,
+  stopRelief,
+  toggleBreathe,
+  toggleCalmMode,
+  toggleDarkMode,
+  toggleMic,
+  toggleReliefMute,
+  toggleReliefPause,
+  toggleSound,
+  toggleStreaksDisabled,
+  toggleTempConversationMode,
+  toggleTextLarge,
+  toggleVoice,
+  triggerImportFile,
+  updateAgeGateButtonState
+};
+
+function callAction(name, arg){
+  const fn = ACTIONS[name];
+  if(typeof fn !== 'function'){ console.error('Unknown data-action:', name); return; }
+  arg === undefined ? fn() : fn(arg);
+}
+
+function wireDataActions(){
+  document.querySelectorAll('[data-click]').forEach((el)=>{
+    el.addEventListener('click', ()=>{
+      el.getAttribute('data-click').split(',').forEach((spec)=>{
+        const i = spec.indexOf(':');
+        i === -1 ? callAction(spec) : callAction(spec.slice(0, i), spec.slice(i + 1));
+      });
+    });
+  });
+  document.querySelectorAll('[data-change]').forEach((el)=>{
+    el.addEventListener('change', ()=>{
+      const spec = el.getAttribute('data-change');
+      const i = spec.indexOf(':');
+      if(i !== -1){ callAction(spec.slice(0, i), spec.slice(i + 1)); return; }
+      if(el.type === 'checkbox') callAction(spec, el.checked);
+      else if(el.type === 'file') callAction(spec, el.files[0]);
+      else callAction(spec, el.value);
+    });
+  });
+  document.querySelectorAll('[data-input]').forEach((el)=>{
+    el.addEventListener('input', ()=> callAction(el.getAttribute('data-input'), el.value));
+  });
+  document.querySelectorAll('[data-keydown]').forEach((el)=>{
+    el.addEventListener('keydown', (e)=> callAction(el.getAttribute('data-keydown'), e));
+  });
+}
+wireDataActions();
