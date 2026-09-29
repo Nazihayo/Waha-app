@@ -226,10 +226,17 @@
   .program-day .pd-lock{font-size:11px;color:rgba(var(--ink-rgb),0.66);}
 
   .upgrade-tiers{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
-  .upgrade-tier{background:var(--paper-dim);border-radius:12px;padding:14px 16px;}
+  .upgrade-tier{background:var(--paper-dim);border-radius:12px;padding:14px 16px;position:relative;}
   .upgrade-tier.featured{background:var(--accent-surface);}
   .upgrade-tier.featured .upgrade-tier-title{color:var(--accent-text);}
   .upgrade-tier.featured .upgrade-tier-desc{color:rgba(250,249,247,0.7);}
+  .upgrade-tier.featured .upgrade-tier-price{color:var(--accent-text);}
+  .upgrade-tier.featured .upgrade-tier-note{color:rgba(250,249,247,0.6);}
+  .upgrade-tier-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px;}
+  .upgrade-tier-row .upgrade-tier-title{margin-bottom:0;}
+  .upgrade-tier-price{font-size:14.5px;font-weight:700;color:var(--ink);white-space:nowrap;}
+  .upgrade-tier-note{font-size:11px;color:rgba(var(--ink-rgb),0.6);margin-top:4px;}
+  .upgrade-tier-badge{position:absolute;top:-9px;inset-inline-end:14px;background:var(--gold);color:var(--dusk-deep);font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:0.3px;}
   .upgrade-tier-title{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:4px;}
   .upgrade-tier-desc{font-size:12.5px;color:rgba(var(--ink-rgb),0.72);}
   .prefs-maybe-later{width:100%;background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:11px;font-family:inherit;font-size:13.5px;cursor:pointer;}
@@ -770,13 +777,21 @@
         <div class="upgrade-tier-title" data-i18n="upgrade_free_title"></div>
         <div class="upgrade-tier-desc" data-i18n="upgrade_free_desc"></div>
       </div>
-      <div class="upgrade-tier featured">
-        <div class="upgrade-tier-title" data-i18n="upgrade_monthly_title"></div>
+      <div class="upgrade-tier">
+        <div class="upgrade-tier-row">
+          <div class="upgrade-tier-title" data-i18n="upgrade_monthly_title"></div>
+          <div class="upgrade-tier-price" data-i18n="upgrade_monthly_price"></div>
+        </div>
         <div class="upgrade-tier-desc" data-i18n="upgrade_monthly_desc"></div>
       </div>
-      <div class="upgrade-tier">
-        <div class="upgrade-tier-title" data-i18n="upgrade_programs_title"></div>
-        <div class="upgrade-tier-desc" data-i18n="upgrade_programs_desc"></div>
+      <div class="upgrade-tier featured">
+        <div class="upgrade-tier-badge" data-i18n="upgrade_yearly_badge"></div>
+        <div class="upgrade-tier-row">
+          <div class="upgrade-tier-title" data-i18n="upgrade_yearly_title"></div>
+          <div class="upgrade-tier-price" data-i18n="upgrade_yearly_price"></div>
+        </div>
+        <div class="upgrade-tier-desc" data-i18n="upgrade_yearly_desc"></div>
+        <div class="upgrade-tier-note" data-i18n="upgrade_yearly_note"></div>
       </div>
     </div>
     <button class="prefs-maybe-later" onclick="closeUpgrade()" data-i18n="upgrade_maybe_later"></button>
@@ -1041,7 +1056,7 @@ const I18N = {
     upgrade_title:"افتح تجربة أعمق", upgrade_subtitle:"اختر الخطة المناسبة لمتابعة رحلتك مع Waha.",
     upgrade_free_title:"مجاني", upgrade_free_desc:"محادثات محدودة، مكتبة أساسية، 3 تمارين يومية",
     upgrade_monthly_title:"اشتراك شهري", upgrade_monthly_desc:"محادثات غير محدودة، مكتبة كاملة، برامج متقدمة",
-    upgrade_programs_title:"برامج داخلية", upgrade_programs_desc:"دورات وبرامج متخصصة قصيرة",
+    upgrade_programs_title:"برامج داخلية", upgrade_programs_desc:"دورات وبرامج متخصصة قصيرة", upgrade_monthly_price:"9.99€ / شهريًا", upgrade_yearly_title:"سنوي", upgrade_yearly_price:"99.90€ / سنويًا", upgrade_yearly_desc:"كل مزايا الاشتراك الشهري، بفاتورة سنوية واحدة", upgrade_yearly_badge:"وفّر 17%", upgrade_yearly_note:"≈ 8.33€ شهريًا",
     upgrade_maybe_later:"ربما لاحقاً",
     progress_label:"تقدّمك", progress_streak:"أيام متتالية", progress_journal:"كتابات محفوظة", progress_mood:"تسجيلات مزاج",
     progress_exercises:"تمارين مكتملة", progress_helped:"مرات ساعدت",
@@ -1183,7 +1198,7 @@ const I18N = {
     upgrade_title:"Schalte mehr Tiefe frei", upgrade_subtitle:"Wähle den passenden Plan, um deine Reise mit Waha fortzusetzen.",
     upgrade_free_title:"Kostenlos", upgrade_free_desc:"Begrenzte Chats, Basisbibliothek, 3 tägliche Übungen",
     upgrade_monthly_title:"Monatsabo", upgrade_monthly_desc:"Unbegrenzte Chats, vollständige Bibliothek, fortgeschrittene Programme",
-    upgrade_programs_title:"Zusatzprogramme", upgrade_programs_desc:"Spezialisierte Kurzprogramme und Kurse",
+    upgrade_programs_title:"Zusatzprogramme", upgrade_programs_desc:"Spezialisierte Kurzprogramme und Kurse", upgrade_monthly_price:"9,99€ / Monat", upgrade_yearly_title:"Jährlich", upgrade_yearly_price:"99,90€ / Jahr", upgrade_yearly_desc:"Alle Vorteile des Monatsabos, einmal jährlich abgerechnet", upgrade_yearly_badge:"17% sparen", upgrade_yearly_note:"≈ 8,33€ / Monat",
     upgrade_maybe_later:"Vielleicht später",
     progress_label:"Dein Fortschritt", progress_streak:"Tage in Folge", progress_journal:"Gespeicherte Einträge", progress_mood:"Stimmungseinträge",
     progress_exercises:"Abgeschlossene Übungen", progress_helped:"Mal geholfen",
@@ -1325,7 +1340,7 @@ const I18N = {
     upgrade_title:"Unlock a deeper experience", upgrade_subtitle:"Choose the plan that fits your journey with Waha.",
     upgrade_free_title:"Free", upgrade_free_desc:"Limited chats, basic library, 3 daily exercises",
     upgrade_monthly_title:"Monthly plan", upgrade_monthly_desc:"Unlimited chats, full library, advanced programs",
-    upgrade_programs_title:"Add-on programs", upgrade_programs_desc:"Specialized short courses and programs",
+    upgrade_programs_title:"Add-on programs", upgrade_programs_desc:"Specialized short courses and programs", upgrade_monthly_price:"€9.99 / mo", upgrade_yearly_title:"Yearly", upgrade_yearly_price:"€99.90 / yr", upgrade_yearly_desc:"Everything in Monthly, billed once a year", upgrade_yearly_badge:"Save 17%", upgrade_yearly_note:"≈ €8.33 / month",
     upgrade_maybe_later:"Maybe later",
     progress_label:"Your progress", progress_streak:"day streak", progress_journal:"saved entries", progress_mood:"mood logs",
     progress_exercises:"exercises completed", progress_helped:"times it helped",
@@ -1467,7 +1482,7 @@ const I18N = {
     upgrade_title:"Débloque une expérience plus approfondie", upgrade_subtitle:"Choisis le plan adapté pour continuer ton parcours avec Waha.",
     upgrade_free_title:"Gratuit", upgrade_free_desc:"Chats limités, bibliothèque de base, 3 exercices quotidiens",
     upgrade_monthly_title:"Abonnement mensuel", upgrade_monthly_desc:"Chats illimités, bibliothèque complète, programmes avancés",
-    upgrade_programs_title:"Programmes additionnels", upgrade_programs_desc:"Cours et programmes courts spécialisés",
+    upgrade_programs_title:"Programmes additionnels", upgrade_programs_desc:"Cours et programmes courts spécialisés", upgrade_monthly_price:"9,99€ / mois", upgrade_yearly_title:"Annuel", upgrade_yearly_price:"99,90€ / an", upgrade_yearly_desc:"Tous les avantages du mensuel, facturé une fois par an", upgrade_yearly_badge:"Économise 17 %", upgrade_yearly_note:"≈ 8,33€ / mois",
     upgrade_maybe_later:"Peut-être plus tard",
     progress_label:"Ta progression", progress_streak:"jours de suite", progress_journal:"écrits enregistrés", progress_mood:"suivis d'humeur",
     progress_exercises:"exercices terminés", progress_helped:"fois où ça a aidé",
@@ -1609,7 +1624,7 @@ const I18N = {
     upgrade_title:"Daha derin bir deneyimi aç", upgrade_subtitle:"Waha yolculuğuna devam etmek için uygun planı seç.",
     upgrade_free_title:"Ücretsiz", upgrade_free_desc:"Sınırlı sohbet, temel kütüphane, 3 günlük egzersiz",
     upgrade_monthly_title:"Aylık plan", upgrade_monthly_desc:"Sınırsız sohbet, tam kütüphane, gelişmiş programlar",
-    upgrade_programs_title:"Ek programlar", upgrade_programs_desc:"Özel kısa kurslar ve programlar",
+    upgrade_programs_title:"Ek programlar", upgrade_programs_desc:"Özel kısa kurslar ve programlar", upgrade_monthly_price:"9,99€ / ay", upgrade_yearly_title:"Yıllık", upgrade_yearly_price:"99,90€ / yıl", upgrade_yearly_desc:"Aylık plandaki her şey, yılda bir kez faturalandırılır", upgrade_yearly_badge:"%17 tasarruf", upgrade_yearly_note:"≈ 8,33€ / ay",
     upgrade_maybe_later:"Belki sonra",
     progress_label:"İlerlemen", progress_streak:"gün üst üste", progress_journal:"kaydedilen yazı", progress_mood:"ruh hali kaydı",
     progress_exercises:"tamamlanan egzersiz", progress_helped:"yardımcı olduğu kez",
@@ -1751,7 +1766,7 @@ const I18N = {
     upgrade_title:"Ezmûnek kûrtir veke", upgrade_subtitle:"Plana guncan hilbijêre da ku rêwîtiya xwe ya bi Waha re berdewam bikî.",
     upgrade_free_title:"Belaş", upgrade_free_desc:"Sohbetên sînordar, pirtûkxaneya bingehîn, 3 ezmûnên rojane",
     upgrade_monthly_title:"Abonetiya mehane", upgrade_monthly_desc:"Sohbetên bêsînor, pirtûkxaneya tevahî, bernameyên pêşketî",
-    upgrade_programs_title:"Bernameyên zêde", upgrade_programs_desc:"Kurs û bernameyên kurt ên taybet",
+    upgrade_programs_title:"Bernameyên zêde", upgrade_programs_desc:"Kurs û bernameyên kurt ên taybet", upgrade_monthly_price:"9.99€ / mehane", upgrade_yearly_title:"Salane", upgrade_yearly_price:"99.90€ / sal", upgrade_yearly_desc:"Hemû tiştên plana mehane, carekê di salê de tê fatûrekirin", upgrade_yearly_badge:"17% tasarûf", upgrade_yearly_note:"≈ 8.33€ / meh",
     upgrade_maybe_later:"Dibe ku paşê",
     progress_label:"Pêşketina te", progress_streak:"roj li dû hev", progress_journal:"nivîsên tomarkirî", progress_mood:"tomarên rewşê",
     progress_exercises:"ezmûnên qedandî", progress_helped:"caran alîkar bûye",
@@ -1893,7 +1908,7 @@ const I18N = {
     upgrade_title:"Desbloquea una experiencia más profunda", upgrade_subtitle:"Elige el plan adecuado para seguir tu viaje con Waha.",
     upgrade_free_title:"Gratis", upgrade_free_desc:"Chats limitados, biblioteca básica, 3 ejercicios diarios",
     upgrade_monthly_title:"Plan mensual", upgrade_monthly_desc:"Chats ilimitados, biblioteca completa, programas avanzados",
-    upgrade_programs_title:"Programas adicionales", upgrade_programs_desc:"Cursos y programas cortos especializados",
+    upgrade_programs_title:"Programas adicionales", upgrade_programs_desc:"Cursos y programas cortos especializados", upgrade_monthly_price:"9,99€ / mes", upgrade_yearly_title:"Anual", upgrade_yearly_price:"99,90€ / año", upgrade_yearly_desc:"Todo lo del plan mensual, facturado una vez al año", upgrade_yearly_badge:"Ahorra 17%", upgrade_yearly_note:"≈ 8,33€ / mes",
     upgrade_maybe_later:"Quizás más tarde",
     progress_label:"Tu progreso", progress_streak:"días seguidos", progress_journal:"escritos guardados", progress_mood:"registros de ánimo",
     progress_exercises:"ejercicios completados", progress_helped:"veces que ayudó",
@@ -2055,7 +2070,7 @@ const I18N = {
       upgrade_title:"تجربه‌ای عمیق‌تر باز کن", upgrade_subtitle:"طرح مناسب برای ادامه مسیر خود با Waha را انتخاب کن.",
       upgrade_free_title:"رایگان", upgrade_free_desc:"گفتگوی محدود، کتابخانه پایه، ۳ تمرین روزانه",
       upgrade_monthly_title:"اشتراک ماهانه", upgrade_monthly_desc:"گفتگوی نامحدود، کتابخانه کامل، برنامه‌های پیشرفته",
-      upgrade_programs_title:"برنامه‌های افزوده", upgrade_programs_desc:"دوره‌ها و برنامه‌های کوتاه تخصصی",
+      upgrade_programs_title:"برنامه‌های افزوده", upgrade_programs_desc:"دوره‌ها و برنامه‌های کوتاه تخصصی", upgrade_monthly_price:"۹.۹۹€ / ماهانه", upgrade_yearly_title:"سالانه", upgrade_yearly_price:"۹۹.۹۰€ / سالانه", upgrade_yearly_desc:"همه مزایای طرح ماهانه، با یک صورت‌حساب سالانه", upgrade_yearly_badge:"۱۷٪ صرفه‌جویی", upgrade_yearly_note:"≈ ۸.۳۳€ در ماه",
       upgrade_maybe_later:"شاید بعداً",
       progress_label:"پیشرفت تو", progress_streak:"روز متوالی", progress_journal:"نوشته ذخیره‌شده", progress_mood:"ثبت حال روحی",
       progress_exercises:"تمرین‌های تکمیل‌شده", progress_helped:"دفعاتی که کمک کرد",
@@ -2197,7 +2212,7 @@ const I18N = {
       upgrade_title:"گہرا تجربہ کھولیں", upgrade_subtitle:"Waha کے ساتھ اپنے سفر کو جاری رکھنے کے لیے موزوں پلان منتخب کریں۔",
       upgrade_free_title:"مفت", upgrade_free_desc:"محدود چیٹ، بنیادی لائبریری، 3 روزانہ مشقیں",
       upgrade_monthly_title:"ماہانہ پلان", upgrade_monthly_desc:"لامحدود چیٹ، مکمل لائبریری، جدید پروگرام",
-      upgrade_programs_title:"اضافی پروگرام", upgrade_programs_desc:"مخصوص مختصر کورسز اور پروگرام",
+      upgrade_programs_title:"اضافی پروگرام", upgrade_programs_desc:"مخصوص مختصر کورسز اور پروگرام", upgrade_monthly_price:"9.99€ / ماہانہ", upgrade_yearly_title:"سالانہ", upgrade_yearly_price:"99.90€ / سالانہ", upgrade_yearly_desc:"ماہانہ پلان کی تمام سہولیات، ایک سالانہ بل کے ساتھ", upgrade_yearly_badge:"17% بچت", upgrade_yearly_note:"≈ 8.33€ ماہانہ",
       upgrade_maybe_later:"شاید بعد میں",
       progress_label:"آپ کی پیشرفت", progress_streak:"لگاتار دن", progress_journal:"محفوظ شدہ تحریریں", progress_mood:"موڈ ریکارڈز",
       progress_exercises:"مکمل شدہ مشقیں", progress_helped:"مدد ملنے کی تعداد",
@@ -2339,7 +2354,7 @@ const I18N = {
       upgrade_title:"Открой более глубокий опыт", upgrade_subtitle:"Выбери план, подходящий для продолжения твоего пути с Waha.",
       upgrade_free_title:"Бесплатно", upgrade_free_desc:"Ограниченные чаты, базовая библиотека, 3 ежедневных упражнения",
       upgrade_monthly_title:"Месячная подписка", upgrade_monthly_desc:"Безлимитные чаты, полная библиотека, продвинутые программы",
-      upgrade_programs_title:"Дополнительные программы", upgrade_programs_desc:"Специализированные короткие курсы и программы",
+      upgrade_programs_title:"Дополнительные программы", upgrade_programs_desc:"Специализированные короткие курсы и программы", upgrade_monthly_price:"9,99€ / мес", upgrade_yearly_title:"Годовой", upgrade_yearly_price:"99,90€ / год", upgrade_yearly_desc:"Всё из месячного плана, с оплатой раз в год", upgrade_yearly_badge:"Экономия 17%", upgrade_yearly_note:"≈ 8,33€ / мес",
       upgrade_maybe_later:"Может быть позже",
       progress_label:"Твой прогресс", progress_streak:"дней подряд", progress_journal:"сохранённых записей", progress_mood:"записей настроения",
       progress_exercises:"выполненных упражнений", progress_helped:"раз помогло",
@@ -2481,7 +2496,7 @@ const I18N = {
       upgrade_title:"Desbloqueia uma experiência mais profunda", upgrade_subtitle:"Escolhe o plano certo para continuar a tua jornada com o Waha.",
       upgrade_free_title:"Gratuito", upgrade_free_desc:"Chats limitados, biblioteca básica, 3 exercícios diários",
       upgrade_monthly_title:"Plano mensal", upgrade_monthly_desc:"Chats ilimitados, biblioteca completa, programas avançados",
-      upgrade_programs_title:"Programas adicionais", upgrade_programs_desc:"Cursos e programas curtos especializados",
+      upgrade_programs_title:"Programas adicionais", upgrade_programs_desc:"Cursos e programas curtos especializados", upgrade_monthly_price:"9,99€ / mês", upgrade_yearly_title:"Anual", upgrade_yearly_price:"99,90€ / ano", upgrade_yearly_desc:"Tudo do plano mensal, faturado uma vez por ano", upgrade_yearly_badge:"Poupa 17%", upgrade_yearly_note:"≈ 8,33€ / mês",
       upgrade_maybe_later:"Talvez mais tarde",
       progress_label:"O teu progresso", progress_streak:"dias seguidos", progress_journal:"registos guardados", progress_mood:"registos de humor",
       progress_exercises:"exercícios concluídos", progress_helped:"vezes que ajudou",
@@ -2623,7 +2638,7 @@ const I18N = {
       upgrade_title:"Sblocca un'esperienza più profonda", upgrade_subtitle:"Scegli il piano adatto per continuare il tuo percorso con Waha.",
       upgrade_free_title:"Gratuito", upgrade_free_desc:"Chat limitate, biblioteca di base, 3 esercizi giornalieri",
       upgrade_monthly_title:"Piano mensile", upgrade_monthly_desc:"Chat illimitate, biblioteca completa, programmi avanzati",
-      upgrade_programs_title:"Programmi aggiuntivi", upgrade_programs_desc:"Corsi e programmi brevi specializzati",
+      upgrade_programs_title:"Programmi aggiuntivi", upgrade_programs_desc:"Corsi e programmi brevi specializzati", upgrade_monthly_price:"9,99€ / mese", upgrade_yearly_title:"Annuale", upgrade_yearly_price:"99,90€ / anno", upgrade_yearly_desc:"Tutto del piano mensile, fatturato una volta all'anno", upgrade_yearly_badge:"Risparmia 17%", upgrade_yearly_note:"≈ 8,33€ / mese",
       upgrade_maybe_later:"Forse più tardi",
       progress_label:"I tuoi progressi", progress_streak:"giorni consecutivi", progress_journal:"scritti salvati", progress_mood:"registrazioni dell'umore",
       progress_exercises:"esercizi completati", progress_helped:"volte che ha aiutato",
