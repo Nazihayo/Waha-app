@@ -278,6 +278,18 @@
   .sleep-desc{color:#a8b0c0;font-size:14px;line-height:1.7;margin:0 0 30px;}
   .sleep-start-btn{background:#e0b04a;color:#0d1420;border:none;border-radius:12px;padding:14px 30px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;width:100%;}
   .sleep-skip{color:#6b7688;font-size:12.5px;margin-top:18px;cursor:pointer;text-decoration:underline;}
+  .sound-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+  .sound-card{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--paper-dim);border:1px solid var(--line);border-radius:14px;padding:18px 10px;cursor:pointer;font-family:inherit;transition:background .15s ease, border-color .15s ease;}
+  .sound-card:hover{border-color:var(--gold);}
+  .sound-card.playing{background:var(--accent-surface);border-color:var(--accent-surface);}
+  .sound-card.playing .sound-name{color:var(--accent-text);}
+  .sound-icon{font-size:26px;}
+  .sound-name{font-size:13px;font-weight:600;color:var(--ink);}
+  .sound-control-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;}
+  .sound-control-label{font-size:12.5px;color:rgba(var(--ink-rgb),0.7);flex:none;}
+  .sound-control-row input[type=range]{flex:1;accent-color:var(--accent-surface);}
+  .sound-timer-select{font-family:inherit;font-size:12.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px;}
+  .sound-note{font-size:11.5px;color:rgba(var(--ink-rgb),0.6);margin-top:10px;text-align:center;min-height:14px;}
   .relief-box{max-width:420px;}
   .relief-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
   .relief-cat-btn{background:var(--paper-dim);border:1px solid var(--line);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;font-family:inherit;}
@@ -694,6 +706,7 @@
       <button class="btn btn-primary" onclick="openCheckin()" data-i18n="checkin_cta"></button>
       <button class="btn btn-ghost" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})" data-i18n="cta_chat"></button>
       <button class="btn btn-ghost" onclick="openSleepMode()">🌙 <span data-i18n="sleep_cta"></span></button>
+      <button class="btn btn-ghost" onclick="openSounds()">🎵 <span data-i18n="sounds_cta"></span></button>
       <button class="share-btn aria-share-btn" onclick="shareApp()" title="share" aria-label="Share">🔗</button>
     </div>
   </div>
@@ -885,6 +898,47 @@
     <p class="sleep-desc" data-i18n="sleep_desc"></p>
     <button class="sleep-start-btn" onclick="startSleepBreathing()" data-i18n="sleep_start_btn"></button>
     <p class="sleep-skip" onclick="closeSleepMode()" data-i18n="sleep_skip"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="soundsModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" onclick="closeSounds()" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="sounds_eyebrow"></div>
+    <h2 class="prefs-title" data-i18n="sounds_title" style="font-size:22px;"></h2>
+    <p class="prefs-subtitle" data-i18n="sounds_subtitle"></p>
+    <div class="sound-grid" id="soundGrid">
+      <button class="sound-card" data-sound="rain" onclick="toggleSound('rain')">
+        <span class="sound-icon">🌧️</span>
+        <span class="sound-name" data-i18n="sound_rain"></span>
+      </button>
+      <button class="sound-card" data-sound="ocean" onclick="toggleSound('ocean')">
+        <span class="sound-icon">🌊</span>
+        <span class="sound-name" data-i18n="sound_ocean"></span>
+      </button>
+      <button class="sound-card" data-sound="brown" onclick="toggleSound('brown')">
+        <span class="sound-icon">🌙</span>
+        <span class="sound-name" data-i18n="sound_brown"></span>
+      </button>
+      <button class="sound-card" data-sound="pad" onclick="toggleSound('pad')">
+        <span class="sound-icon">🎐</span>
+        <span class="sound-name" data-i18n="sound_pad"></span>
+      </button>
+    </div>
+    <div class="sound-control-row">
+      <span class="sound-control-label" data-i18n="sounds_volume_label"></span>
+      <input type="range" id="soundVolume" min="0" max="100" value="70" oninput="setSoundVolume(this.value)">
+    </div>
+    <div class="sound-control-row">
+      <span class="sound-control-label" data-i18n="sounds_timer_label"></span>
+      <select id="soundTimer" class="sound-timer-select" onchange="setSoundTimer(this.value)">
+        <option value="0" data-i18n="timer_off"></option>
+        <option value="5" data-i18n="timer_5min"></option>
+        <option value="15" data-i18n="timer_15min"></option>
+        <option value="30" data-i18n="timer_30min"></option>
+      </select>
+    </div>
+    <p class="sound-note" id="soundTimerNote"></p>
   </div>
 </div>
 
@@ -1100,7 +1154,7 @@ const I18N = {
     free_chat_remaining:"رسائل مجانية متبقية",
     sleep_cta:"وضع النوم", sleep_title:"حان وقت الراحة",
     sleep_desc:"خذ دقيقتين لتهدئة جسمك وعقلك قبل النوم، بتمرين تنفّس بسيط.",
-    sleep_start_btn:"ابدأ تمرين التنفّس", sleep_skip:"لا، شكراً — أغلق فقط",
+    sleep_start_btn:"ابدأ تمرين التنفّس", sleep_skip:"لا، شكراً — أغلق فقط", sounds_cta:"أصوات هادئة", sounds_eyebrow:"استرخِ", sounds_title:"أصوات محيطة", sounds_subtitle:"اختر صوتًا ليعمل في الخلفية أثناء استخدامك للتطبيق أو قبل النوم.", sound_rain:"مطر", sound_ocean:"أمواج البحر", sound_brown:"ضجيج عميق", sound_pad:"نغمة هادئة", sounds_volume_label:"مستوى الصوت", sounds_timer_label:"مؤقّت الإيقاف", timer_off:"بدون مؤقّت", timer_5min:"5 دقائق", timer_15min:"15 دقيقة", timer_30min:"30 دقيقة", sounds_ends_in:"ينتهي خلال",
     relief_cta:"ساعدني لمدة 90 ثانية", relief_eyebrow:"إغاثة سريعة",
     relief_title:"ما الأقرب لما تشعر به الآن؟", relief_subtitle:"اختر واحداً، وسنبدأ تمريناً قصيراً فوراً — بلا اتصال بالإنترنت.",
     relief_stop:"إيقاف والخروج", relief_end_title:"أحسنت — أخذت وقتاً لنفسك",
@@ -1242,7 +1296,7 @@ const I18N = {
     free_chat_remaining:"kostenlose Nachrichten übrig",
     sleep_cta:"Schlafmodus", sleep_title:"Zeit zur Ruhe",
     sleep_desc:"Nimm dir zwei Minuten, um Körper und Geist mit einer einfachen Atemübung vor dem Schlafen zu beruhigen.",
-    sleep_start_btn:"Atemübung starten", sleep_skip:"Nein danke — nur schließen",
+    sleep_start_btn:"Atemübung starten", sleep_skip:"Nein danke — nur schließen", sounds_cta:"Klänge", sounds_eyebrow:"Entspann dich", sounds_title:"Umgebungsklänge", sounds_subtitle:"Wähle einen Klang, der im Hintergrund läuft — während du die App nutzt oder vor dem Einschlafen.", sound_rain:"Regen", sound_ocean:"Meereswellen", sound_brown:"Tiefes Rauschen", sound_pad:"Sanfter Klang", sounds_volume_label:"Lautstärke", sounds_timer_label:"Ausschalt-Timer", timer_off:"Kein Timer", timer_5min:"5 Minuten", timer_15min:"15 Minuten", timer_30min:"30 Minuten", sounds_ends_in:"Endet in",
     relief_cta:"Hilf mir für 90 Sekunden", relief_eyebrow:"Schnelle Hilfe",
     relief_title:"Was trifft gerade am ehesten zu?", relief_subtitle:"Wähle eine Option, wir starten sofort eine kurze Übung — ganz ohne Internet.",
     relief_stop:"Stoppen und schließen", relief_end_title:"Gut gemacht — du hast dir Zeit genommen",
@@ -1384,7 +1438,7 @@ const I18N = {
     free_chat_remaining:"free messages left",
     sleep_cta:"Sleep mode", sleep_title:"Time to rest",
     sleep_desc:"Take two minutes to calm your body and mind with a simple breathing exercise before sleep.",
-    sleep_start_btn:"Start breathing exercise", sleep_skip:"No thanks — just close",
+    sleep_start_btn:"Start breathing exercise", sleep_skip:"No thanks — just close", sounds_cta:"Sounds", sounds_eyebrow:"Unwind", sounds_title:"Ambient sounds", sounds_subtitle:"Pick a sound to play in the background while you use the app or before sleep.", sound_rain:"Rain", sound_ocean:"Ocean waves", sound_brown:"Deep noise", sound_pad:"Soft tone", sounds_volume_label:"Volume", sounds_timer_label:"Sleep timer", timer_off:"No timer", timer_5min:"5 minutes", timer_15min:"15 minutes", timer_30min:"30 minutes", sounds_ends_in:"Ends in",
     relief_cta:"Help me for 90 seconds", relief_eyebrow:"Quick relief",
     relief_title:"What feels closest right now?", relief_subtitle:"Pick one, and we'll start a short exercise right away — fully offline.",
     relief_stop:"Stop and exit", relief_end_title:"Well done — you took a moment for yourself",
@@ -1526,7 +1580,7 @@ const I18N = {
     free_chat_remaining:"messages gratuits restants",
     sleep_cta:"Mode sommeil", sleep_title:"L'heure du repos",
     sleep_desc:"Prends deux minutes pour apaiser ton corps et ton esprit avec un exercice de respiration simple avant de dormir.",
-    sleep_start_btn:"Commencer l'exercice de respiration", sleep_skip:"Non merci — fermer",
+    sleep_start_btn:"Commencer l'exercice de respiration", sleep_skip:"Non merci — fermer", sounds_cta:"Sons", sounds_eyebrow:"Détends-toi", sounds_title:"Sons d'ambiance", sounds_subtitle:"Choisis un son à jouer en arrière-plan pendant que tu utilises l'application ou avant de dormir.", sound_rain:"Pluie", sound_ocean:"Vagues de l'océan", sound_brown:"Bruit grave", sound_pad:"Nappe douce", sounds_volume_label:"Volume", sounds_timer_label:"Minuteur d'arrêt", timer_off:"Aucun minuteur", timer_5min:"5 minutes", timer_15min:"15 minutes", timer_30min:"30 minutes", sounds_ends_in:"Se termine dans",
     relief_cta:"Aide-moi pendant 90 secondes", relief_eyebrow:"Soulagement rapide",
     relief_title:"Qu'est-ce qui te correspond le plus maintenant ?", relief_subtitle:"Choisis une option, un court exercice démarre aussitôt — entièrement hors ligne.",
     relief_stop:"Arrêter et quitter", relief_end_title:"Bravo — tu as pris un moment pour toi",
@@ -1668,7 +1722,7 @@ const I18N = {
     free_chat_remaining:"ücretsiz mesaj kaldı",
     sleep_cta:"Uyku modu", sleep_title:"Dinlenme zamanı",
     sleep_desc:"Uyumadan önce basit bir nefes egzersiziyle bedenini ve zihnini sakinleştirmek için iki dakika ayır.",
-    sleep_start_btn:"Nefes egzersizini başlat", sleep_skip:"Hayır teşekkürler — sadece kapat",
+    sleep_start_btn:"Nefes egzersizini başlat", sleep_skip:"Hayır teşekkürler — sadece kapat", sounds_cta:"Sesler", sounds_eyebrow:"Rahatla", sounds_title:"Ortam sesleri", sounds_subtitle:"Uygulamayı kullanırken veya uyumadan önce arka planda çalacak bir ses seç.", sound_rain:"Yağmur", sound_ocean:"Okyanus dalgaları", sound_brown:"Derin uğultu", sound_pad:"Yumuşak ton", sounds_volume_label:"Ses düzeyi", sounds_timer_label:"Kapanma zamanlayıcısı", timer_off:"Zamanlayıcı yok", timer_5min:"5 dakika", timer_15min:"15 dakika", timer_30min:"30 dakika", sounds_ends_in:"Bitmesine kalan süre",
     relief_cta:"90 saniye bana yardım et", relief_eyebrow:"Hızlı rahatlama",
     relief_title:"Şu an neye en yakın hissediyorsun?", relief_subtitle:"Birini seç, hemen kısa bir egzersiz başlayacak — tamamen çevrimdışı.",
     relief_stop:"Durdur ve çık", relief_end_title:"Aferin — kendine zaman ayırdın",
@@ -1810,7 +1864,7 @@ const I18N = {
     free_chat_remaining:"peyamên belaş mane",
     sleep_cta:"Moda xewê", sleep_title:"Wexta vehesînê ye",
     sleep_desc:"Berî xewê du deqîqeyan bidin xwe da ku bi ezmûnek nefesê ya sade laş û hiş xwe aram bikî.",
-    sleep_start_btn:"Ezmûna nefesê dest pê bike", sleep_skip:"Na spas — tenê bigire",
+    sleep_start_btn:"Ezmûna nefesê dest pê bike", sleep_skip:"Na spas — tenê bigire", sounds_cta:"Deng", sounds_eyebrow:"Bihewe", sounds_title:"Dengên derdorê", sounds_subtitle:"Dengekî hilbijêre ku li paşxanê bilîze dema tu bikaranîna sepanê an berî razanê.", sound_rain:"Baran", sound_ocean:"Pêlên deryayê", sound_brown:"Vizîna kûr", sound_pad:"Dengê nerm", sounds_volume_label:"Deng", sounds_timer_label:"Demjimêra rawestandinê", timer_off:"Bêyî demjimêr", timer_5min:"5 xulek", timer_15min:"15 xulek", timer_30min:"30 xulek", sounds_ends_in:"Diqede di",
     relief_cta:"90 çirkeyan alîkariya min bike", relief_eyebrow:"Alîkariya lez",
     relief_title:"Niha çi herî nêzîkî tu hîs dikî ye?", relief_subtitle:"Yekê hilbijêre, emê tavilê ezmûnek kurt dest pê bikin — bi tevahî bêinternet.",
     relief_stop:"Rawestîne û derkeve", relief_end_title:"Baş kir — te dem da xwe",
@@ -1952,7 +2006,7 @@ const I18N = {
     free_chat_remaining:"mensajes gratis restantes",
     sleep_cta:"Modo sueño", sleep_title:"Hora de descansar",
     sleep_desc:"Tómate dos minutos para calmar tu cuerpo y mente con un ejercicio de respiración simple antes de dormir.",
-    sleep_start_btn:"Empezar ejercicio de respiración", sleep_skip:"No gracias — solo cerrar",
+    sleep_start_btn:"Empezar ejercicio de respiración", sleep_skip:"No gracias — solo cerrar", sounds_cta:"Sonidos", sounds_eyebrow:"Relájate", sounds_title:"Sonidos ambientales", sounds_subtitle:"Elige un sonido para reproducir de fondo mientras usas la app o antes de dormir.", sound_rain:"Lluvia", sound_ocean:"Olas del océano", sound_brown:"Ruido profundo", sound_pad:"Tono suave", sounds_volume_label:"Volumen", sounds_timer_label:"Temporizador", timer_off:"Sin temporizador", timer_5min:"5 minutos", timer_15min:"15 minutos", timer_30min:"30 minutos", sounds_ends_in:"Termina en",
     relief_cta:"Ayúdame durante 90 segundos", relief_eyebrow:"Alivio rápido",
     relief_title:"¿Qué se parece más a lo que sientes ahora?", relief_subtitle:"Elige una opción, y empezaremos un ejercicio corto de inmediato — totalmente sin conexión.",
     relief_stop:"Detener y salir", relief_end_title:"Bien hecho — te tomaste un momento para ti",
@@ -2114,7 +2168,7 @@ const I18N = {
       free_chat_remaining:"پیام رایگان باقی‌مانده",
       sleep_cta:"حالت خواب", sleep_title:"وقت استراحت است",
       sleep_desc:"دو دقیقه وقت بگذار تا با یک تمرین تنفس ساده، بدن و ذهنت را قبل از خواب آرام کنی.",
-      sleep_start_btn:"شروع تمرین تنفس", sleep_skip:"نه ممنون — فقط ببند",
+      sleep_start_btn:"شروع تمرین تنفس", sleep_skip:"نه ممنون — فقط ببند", sounds_cta:"صداها", sounds_eyebrow:"آرام شو", sounds_title:"صداهای محیطی", sounds_subtitle:"صدایی انتخاب کن تا در پس‌زمینه پخش شود، هنگام استفاده از اپ یا قبل از خواب.", sound_rain:"باران", sound_ocean:"امواج دریا", sound_brown:"نویز عمیق", sound_pad:"تن ملایم", sounds_volume_label:"میزان صدا", sounds_timer_label:"تایمر توقف", timer_off:"بدون تایمر", timer_5min:"۵ دقیقه", timer_15min:"۱۵ دقیقه", timer_30min:"۳۰ دقیقه", sounds_ends_in:"پایان تا",
       relief_cta:"۹۰ ثانیه به من کمک کن", relief_eyebrow:"کمک سریع",
       relief_title:"الان چه چیزی به حس تو نزدیک‌تر است؟", relief_subtitle:"یکی را انتخاب کن، فوراً یک تمرین کوتاه شروع می‌شود — کاملاً بدون اینترنت.",
       relief_stop:"توقف و خروج", relief_end_title:"آفرین — برای خودت وقت گذاشتی",
@@ -2256,7 +2310,7 @@ const I18N = {
       free_chat_remaining:"مفت پیغامات باقی",
       sleep_cta:"نیند کا موڈ", sleep_title:"آرام کا وقت",
       sleep_desc:"سونے سے پہلے ایک سادہ سانس کی مشق کے ساتھ اپنے جسم اور ذہن کو پرسکون کرنے کے لیے دو منٹ نکالیں۔",
-      sleep_start_btn:"سانس کی مشق شروع کریں", sleep_skip:"نہیں شکریہ — بس بند کریں",
+      sleep_start_btn:"سانس کی مشق شروع کریں", sleep_skip:"نہیں شکریہ — بس بند کریں", sounds_cta:"آوازیں", sounds_eyebrow:"پرسکون ہوں", sounds_title:"ماحولیاتی آوازیں", sounds_subtitle:"ایک آواز منتخب کریں جو ایپ استعمال کرتے وقت یا سونے سے پہلے پس منظر میں چلے۔", sound_rain:"بارش", sound_ocean:"سمندری لہریں", sound_brown:"گہری گونج", sound_pad:"نرم سر", sounds_volume_label:"آواز کی سطح", sounds_timer_label:"بند کرنے کا ٹائمر", timer_off:"کوئی ٹائمر نہیں", timer_5min:"5 منٹ", timer_15min:"15 منٹ", timer_30min:"30 منٹ", sounds_ends_in:"ختم ہونے میں",
       relief_cta:"90 سیکنڈ کے لیے میری مدد کریں", relief_eyebrow:"فوری مدد",
       relief_title:"ابھی آپ کیا محسوس کر رہے ہیں؟", relief_subtitle:"ایک چنیں، ہم فوراً ایک مختصر مشق شروع کریں گے — مکمل طور پر آف لائن۔",
       relief_stop:"روکیں اور باہر نکلیں", relief_end_title:"شاباش — آپ نے اپنے لیے وقت نکالا",
@@ -2398,7 +2452,7 @@ const I18N = {
       free_chat_remaining:"бесплатных сообщений осталось",
       sleep_cta:"Режим сна", sleep_title:"Время отдыха",
       sleep_desc:"Уделите две минуты, чтобы успокоить тело и разум простым дыхательным упражнением перед сном.",
-      sleep_start_btn:"Начать дыхательное упражнение", sleep_skip:"Нет, спасибо — просто закрыть",
+      sleep_start_btn:"Начать дыхательное упражнение", sleep_skip:"Нет, спасибо — просто закрыть", sounds_cta:"Звуки", sounds_eyebrow:"Расслабься", sounds_title:"Фоновые звуки", sounds_subtitle:"Выбери звук, который будет играть на фоне, пока ты пользуешься приложением или перед сном.", sound_rain:"Дождь", sound_ocean:"Морские волны", sound_brown:"Глубокий шум", sound_pad:"Мягкий тон", sounds_volume_label:"Громкость", sounds_timer_label:"Таймер выключения", timer_off:"Без таймера", timer_5min:"5 минут", timer_15min:"15 минут", timer_30min:"30 минут", sounds_ends_in:"Закончится через",
       relief_cta:"Помоги мне 90 секунд", relief_eyebrow:"Быстрая помощь",
       relief_title:"Что сейчас ближе всего к тому, что вы чувствуете?", relief_subtitle:"Выберите один вариант, и мы сразу начнём короткое упражнение — полностью офлайн.",
       relief_stop:"Остановить и выйти", relief_end_title:"Молодец — вы уделили себе время",
@@ -2540,7 +2594,7 @@ const I18N = {
       free_chat_remaining:"mensagens gratuitas restantes",
       sleep_cta:"Modo sono", sleep_title:"Hora de descansar",
       sleep_desc:"Reserva dois minutos para acalmar o corpo e a mente com um exercício de respiração simples antes de dormir.",
-      sleep_start_btn:"Começar exercício de respiração", sleep_skip:"Não, obrigado — só fechar",
+      sleep_start_btn:"Começar exercício de respiração", sleep_skip:"Não, obrigado — só fechar", sounds_cta:"Sons", sounds_eyebrow:"Relaxa", sounds_title:"Sons ambiente", sounds_subtitle:"Escolhe um som para tocar em segundo plano enquanto usas a app ou antes de dormir.", sound_rain:"Chuva", sound_ocean:"Ondas do mar", sound_brown:"Ruído profundo", sound_pad:"Som suave", sounds_volume_label:"Volume", sounds_timer_label:"Temporizador", timer_off:"Sem temporizador", timer_5min:"5 minutos", timer_15min:"15 minutos", timer_30min:"30 minutos", sounds_ends_in:"Termina em",
       relief_cta:"Ajuda-me durante 90 segundos", relief_eyebrow:"Alívio rápido",
       relief_title:"O que se aproxima mais do que sentes agora?", relief_subtitle:"Escolhe uma opção, e começamos já um exercício curto — totalmente offline.",
       relief_stop:"Parar e sair", relief_end_title:"Muito bem — reservaste um momento para ti",
@@ -2682,7 +2736,7 @@ const I18N = {
       free_chat_remaining:"messaggi gratuiti rimasti",
       sleep_cta:"Modalità sonno", sleep_title:"Ora di riposare",
       sleep_desc:"Prenditi due minuti per calmare corpo e mente con un semplice esercizio di respirazione prima di dormire.",
-      sleep_start_btn:"Inizia l'esercizio di respirazione", sleep_skip:"No grazie — chiudi soltanto",
+      sleep_start_btn:"Inizia l'esercizio di respirazione", sleep_skip:"No grazie — chiudi soltanto", sounds_cta:"Suoni", sounds_eyebrow:"Rilassati", sounds_title:"Suoni ambientali", sounds_subtitle:"Scegli un suono da riprodurre in sottofondo mentre usi l'app o prima di dormire.", sound_rain:"Pioggia", sound_ocean:"Onde dell'oceano", sound_brown:"Rumore profondo", sound_pad:"Tono soffuso", sounds_volume_label:"Volume", sounds_timer_label:"Timer di spegnimento", timer_off:"Nessun timer", timer_5min:"5 minuti", timer_15min:"15 minuti", timer_30min:"30 minuti", sounds_ends_in:"Termina tra",
       relief_cta:"Aiutami per 90 secondi", relief_eyebrow:"Sollievo rapido",
       relief_title:"Cosa si avvicina di più a ciò che provi ora?", relief_subtitle:"Scegline uno, inizieremo subito un breve esercizio — completamente offline.",
       relief_stop:"Ferma ed esci", relief_end_title:"Ben fatto — ti sei preso un momento per te",
@@ -4212,6 +4266,161 @@ function closeSleepMode(){
 function startSleepBreathing(){
   closeSleepMode();
   openExercise('ex-478');
+}
+
+// ---------------------------------------------------------------------
+// AMBIENT SOUNDS
+// Synthesized in the browser via the Web Audio API — no audio files, no
+// third-party embeds, nothing to license. Only one plays at a time (the
+// UI is a grid of toggle cards, not a mixer). Sound keeps playing after
+// the picker modal is closed, like a background ambient track — reopen
+// the modal (the active card stays highlighted) or pick another sound to
+// stop it, or set a sleep timer to auto-stop.
+// ---------------------------------------------------------------------
+let soundCtx = null;
+let soundMasterGain = null;
+let activeSound = null;
+let soundTimerHandle = null;
+let soundTimerTickHandle = null;
+let soundTimerEndsAt = null;
+
+function getSoundCtx(){
+  if(!soundCtx){
+    soundCtx = new (window.AudioContext || window.webkitAudioContext)();
+    soundMasterGain = soundCtx.createGain();
+    soundMasterGain.gain.value = (parseInt(safeGet('mc_sound_volume') || '70', 10)) / 100;
+    soundMasterGain.connect(soundCtx.destination);
+  }
+  if(soundCtx.state === 'suspended') soundCtx.resume();
+  return soundCtx;
+}
+function makeNoiseBuffer(ctx, seconds){
+  const size = Math.floor(ctx.sampleRate * seconds);
+  const buffer = ctx.createBuffer(1, size, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i = 0; i < size; i++) data[i] = Math.random() * 2 - 1;
+  return buffer;
+}
+function makeBrownNoiseBuffer(ctx, seconds){
+  const size = Math.floor(ctx.sampleRate * seconds);
+  const buffer = ctx.createBuffer(1, size, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let last = 0;
+  for(let i = 0; i < size; i++){
+    const white = Math.random() * 2 - 1;
+    last = (last + 0.02 * white) / 1.02;
+    data[i] = last * 3.5;
+  }
+  return buffer;
+}
+function startRainSound(ctx){
+  const noise = ctx.createBufferSource();
+  noise.buffer = makeNoiseBuffer(ctx, 4);
+  noise.loop = true;
+  const highpass = ctx.createBiquadFilter(); highpass.type = 'highpass'; highpass.frequency.value = 700;
+  const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 6000;
+  const gain = ctx.createGain(); gain.gain.value = 0.5;
+  noise.connect(highpass).connect(lowpass).connect(gain).connect(soundMasterGain);
+  noise.start();
+  return { outGain: gain, stop(){ noise.stop(); } };
+}
+function startOceanSound(ctx){
+  const noise = ctx.createBufferSource();
+  noise.buffer = makeBrownNoiseBuffer(ctx, 6);
+  noise.loop = true;
+  const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 900;
+  const gain = ctx.createGain(); gain.gain.value = 0.6;
+  const lfo = ctx.createOscillator(); lfo.frequency.value = 0.12;
+  const lfoGain = ctx.createGain(); lfoGain.gain.value = 0.35;
+  lfo.connect(lfoGain).connect(gain.gain);
+  noise.connect(lowpass).connect(gain).connect(soundMasterGain);
+  noise.start(); lfo.start();
+  return { outGain: gain, stop(){ noise.stop(); lfo.stop(); } };
+}
+function startBrownSound(ctx){
+  const noise = ctx.createBufferSource();
+  noise.buffer = makeBrownNoiseBuffer(ctx, 4);
+  noise.loop = true;
+  const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 400;
+  const gain = ctx.createGain(); gain.gain.value = 0.55;
+  noise.connect(lowpass).connect(gain).connect(soundMasterGain);
+  noise.start();
+  return { outGain: gain, stop(){ noise.stop(); } };
+}
+function startPadSound(ctx){
+  // Soft, slowly-shifting chord pad (Cmaj7-ish) — plain detuned sine
+  // oscillators with slow LFOs on each voice's gain, no samples.
+  const freqs = [130.81, 164.81, 196.00, 246.94];
+  const voices = [];
+  const padGain = ctx.createGain(); padGain.gain.value = 0.28;
+  padGain.connect(soundMasterGain);
+  freqs.forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine'; osc.frequency.value = f; osc.detune.value = (i % 2 === 0) ? -4 : 4;
+    const voiceGain = ctx.createGain(); voiceGain.gain.value = 0;
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.05 + i * 0.01;
+    const lfoGain = ctx.createGain(); lfoGain.gain.value = 0.06;
+    lfo.connect(lfoGain).connect(voiceGain.gain);
+    voiceGain.gain.setTargetAtTime(0.18, ctx.currentTime, 2);
+    osc.connect(voiceGain).connect(padGain);
+    osc.start(); lfo.start();
+    voices.push(osc, lfo);
+  });
+  return { outGain: padGain, stop(){ voices.forEach(v => { try{ v.stop(); }catch(e){} }); } };
+}
+const SOUND_STARTERS = { rain: startRainSound, ocean: startOceanSound, brown: startBrownSound, pad: startPadSound };
+
+function toggleSound(name){
+  const ctx = getSoundCtx();
+  if(activeSound && activeSound.name === name){ stopActiveSound(); return; }
+  stopActiveSound();
+  const instance = SOUND_STARTERS[name](ctx);
+  activeSound = Object.assign({ name }, instance);
+  document.querySelectorAll('.sound-card').forEach(c => c.classList.toggle('playing', c.dataset.sound === name));
+}
+function stopActiveSound(){
+  if(!activeSound) return;
+  const inst = activeSound;
+  activeSound = null;
+  document.querySelectorAll('.sound-card').forEach(c => c.classList.remove('playing'));
+  const now = soundCtx.currentTime;
+  if(inst.outGain){ inst.outGain.gain.cancelScheduledValues(now); inst.outGain.gain.setTargetAtTime(0, now, 0.08); }
+  setTimeout(()=>{ try{ inst.stop(); }catch(e){} }, 350);
+}
+function setSoundVolume(val){
+  safeSet('mc_sound_volume', String(val));
+  if(soundMasterGain) soundMasterGain.gain.setTargetAtTime(val / 100, soundCtx.currentTime, 0.05);
+}
+let soundTimerMinutes = 0;
+function setSoundTimer(minutes){
+  if(soundTimerHandle){ clearTimeout(soundTimerHandle); soundTimerHandle = null; }
+  if(soundTimerTickHandle){ clearInterval(soundTimerTickHandle); soundTimerTickHandle = null; }
+  minutes = parseInt(minutes, 10);
+  soundTimerMinutes = minutes;
+  const note = document.getElementById('soundTimerNote');
+  if(!minutes){ if(note) note.textContent = ''; soundTimerEndsAt = null; return; }
+  soundTimerEndsAt = Date.now() + minutes * 60000;
+  soundTimerHandle = setTimeout(()=>{ stopActiveSound(); if(note) note.textContent = ''; soundTimerEndsAt = null; soundTimerMinutes = 0; }, minutes * 60000);
+  updateSoundTimerNote();
+  soundTimerTickHandle = setInterval(updateSoundTimerNote, 1000);
+}
+function updateSoundTimerNote(){
+  const note = document.getElementById('soundTimerNote');
+  if(!note || !soundTimerEndsAt) return;
+  const remaining = Math.max(0, Math.round((soundTimerEndsAt - Date.now()) / 1000));
+  const m = Math.floor(remaining / 60), s = remaining % 60;
+  const prefix = (I18N[currentLang] && I18N[currentLang].sounds_ends_in) || '';
+  note.textContent = prefix + ' ' + m + ':' + String(s).padStart(2, '0');
+}
+function openSounds(){
+  document.getElementById('soundsModal').classList.add('open');
+  document.getElementById('soundVolume').value = parseInt(safeGet('mc_sound_volume') || '70', 10);
+  document.getElementById('soundTimer').value = String(soundTimerMinutes);
+  document.querySelectorAll('.sound-card').forEach(c => c.classList.toggle('playing', !!activeSound && c.dataset.sound === activeSound.name));
+  if(soundTimerEndsAt) updateSoundTimerNote();
+}
+function closeSounds(){
+  document.getElementById('soundsModal').classList.remove('open');
 }
 
 let moodSuggestedId = null;
