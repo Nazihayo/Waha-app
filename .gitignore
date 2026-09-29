@@ -1,0 +1,4 @@
+# Vite build output — Netlify rebuilds this from src/ on every deploy.
+dist/
+
+node_modules/

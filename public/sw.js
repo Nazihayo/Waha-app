@@ -4,7 +4,7 @@
 // ("fully offline" relief exercises). Previous version never called
 // caches.put(), so caches.match() always missed and offline use failed
 // completely despite the app-shell being tiny and fully cacheable.
-const CACHE_NAME = "waha-cache-v3";
+const CACHE_NAME = "waha-cache-v4";
 const APP_SHELL = [
   "/", "/index.html", "/manifest.json",
   "/icon-192.png", "/icon-512.png", "/apple-touch-icon.png", "/favicon.svg",

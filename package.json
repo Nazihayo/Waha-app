@@ -1,5 +1,14 @@
 {
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@netlify/blobs": "^8.1.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.1"
   }
 }

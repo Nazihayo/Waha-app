@@ -1,27 +1,29 @@
 #!/usr/bin/env node
-// Copies the web app's static files into mobile/www/ (Capacitor's webDir)
-// and injects the production API base URL so the chat feature works from
-// inside the native app shell, where there is no same-origin Netlify
-// function to call.
+// Copies the built web app (repo root's dist/, produced by `npm run
+// build`) into mobile/www/ (Capacitor's webDir) and injects the
+// production API base URL so the chat feature works from inside the
+// native app shell, where there is no same-origin Netlify function to
+// call.
 //
 // Usage:
+//   npm run build --prefix ..                        # build dist/ first
 //   CAPACITOR_API_BASE=https://your-site.netlify.app npm run build:www
 
 const fs = require('fs');
 const path = require('path');
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
+const DIST_DIR = path.join(REPO_ROOT, 'dist');
 const WWW_DIR = path.resolve(__dirname, '..', 'www');
 
-const FILES_TO_COPY = [
-  'sw.js',
-  'manifest.json',
-  'icon-192.png',
-  'icon-512.png',
-  'apple-touch-icon.png',
-  'favicon.svg',
-  'og-image.png',
-];
+if (!fs.existsSync(DIST_DIR)) {
+  console.error(
+    `\n${DIST_DIR} doesn't exist.\n` +
+    'This script packages the already-built web app, it doesn\'t build it. Run at the repo root first:\n\n' +
+    '  npm install && npm run build\n'
+  );
+  process.exit(1);
+}
 
 const apiBase = process.env.CAPACITOR_API_BASE;
 if (!apiBase) {
@@ -41,29 +43,23 @@ if (!/^https:\/\//.test(apiBase)) {
 }
 
 fs.rmSync(WWW_DIR, { recursive: true, force: true });
-fs.mkdirSync(WWW_DIR, { recursive: true });
+fs.cpSync(DIST_DIR, WWW_DIR, { recursive: true });
 
-for (const file of FILES_TO_COPY) {
-  const src = path.join(REPO_ROOT, file);
-  if (!fs.existsSync(src)) {
-    console.warn(`Skipping missing file: ${file}`);
-    continue;
-  }
-  fs.copyFileSync(src, path.join(WWW_DIR, file));
-}
+const indexPath = path.join(WWW_DIR, 'index.html');
+let html = fs.readFileSync(indexPath, 'utf8');
 
-let html = fs.readFileSync(path.join(REPO_ROOT, 'index.html'), 'utf8');
-
-// Inject window.CAPACITOR_API_BASE before the app's own <script> block so
-// it's set by the time API_BASE is computed (see index.html's
-// `const API_BASE = ... window.CAPACITOR_API_BASE ...` line).
-const injected = `<script>window.CAPACITOR_API_BASE = ${JSON.stringify(apiBase)};</script>\n<script>`;
-if (!html.includes('<script>')) {
-  console.error('Could not find <script> tag in index.html to inject into — aborting.');
+// A plain (non-module) inline script runs the moment the parser reaches
+// it; the bundled <script type="module" src="/assets/..."> is deferred
+// like any module script, so inserting this right before it guarantees
+// window.CAPACITOR_API_BASE is set before index.html's own
+// `const API_BASE = ... window.CAPACITOR_API_BASE ...` line runs.
+const injected = `<script>window.CAPACITOR_API_BASE = ${JSON.stringify(apiBase)};</script>\n  <script type="module"`;
+if (!html.includes('<script type="module"')) {
+  console.error('Could not find the built module <script> tag in dist/index.html — aborting.');
   process.exit(1);
 }
-html = html.replace('<script>', injected);
+html = html.replace('<script type="module"', injected);
 
-fs.writeFileSync(path.join(WWW_DIR, 'index.html'), html);
+fs.writeFileSync(indexPath, html);
 
-console.log(`Built mobile/www/ with CAPACITOR_API_BASE=${apiBase}`);
+console.log(`Built mobile/www/ from dist/ with CAPACITOR_API_BASE=${apiBase}`);

@@ -12,8 +12,8 @@ Everything below is what you'd run locally.
   from `netlify/`, so installing Capacitor's tooling here can never affect
   the Netlify web deploy or the chat serverless function.
 - `www/`, `ios/`, and `android/` are all generated output (gitignored) —
-  `www/` gets rebuilt from the real `index.html` every time, so there's only
-  ever one source of truth for the app's content.
+  `www/` gets rebuilt from the repo's real `dist/` build every time (see
+  below), so there's only ever one source of truth for the app's content.
 
 ## The one real code change this required
 
@@ -29,7 +29,10 @@ const CHAT_ENDPOINT = API_BASE + '/.netlify/functions/chat';
 On the web this is unaffected (`window.Capacitor` is undefined, so
 `API_BASE` stays `''` and the path is relative, exactly as before). Inside
 Capacitor, `build-www.js` (below) injects `window.CAPACITOR_API_BASE` at
-build time so the app calls your deployed Netlify site instead.
+build time so the app calls your deployed Netlify site instead. This lives
+in `src/main.js` now — the whole app used to be one inline `<script>` in
+`index.html`; it's since been split into a real Vite build (`src/`,
+`public/`, `dist/` at the repo root).
 
 ## First-time setup (run locally, not here)
 
@@ -42,16 +45,21 @@ npx cap init   # already have capacitor.config.json checked in — this just con
 ## Build & sync
 
 ```bash
+# from the repo root: build the actual web app first
+npm install && npm run build
+
+# then, from mobile/:
 CAPACITOR_API_BASE=https://YOUR-SITE.netlify.app npm run sync
 ```
 
-This runs `build-www.js` (copies `index.html`, `sw.js`, `manifest.json`, and
-the icons from the repo root into `mobile/www/`, injecting the API base
-above), then `npx cap sync` to copy `www/` into the native projects.
+`npm run sync` runs `build-www.js` (copies the repo root's `dist/` — the
+Vite build output — into `mobile/www/`, injecting the API base above), then
+`npx cap sync` to copy `www/` into the native projects.
 
 Replace `YOUR-SITE.netlify.app` with your actual deployed URL — the build
 script refuses to run without it rather than silently shipping a native app
-whose chat feature is quietly broken.
+whose chat feature is quietly broken. It also refuses to run if `dist/`
+doesn't exist yet, since it packages the build, it doesn't produce one.
 
 ## iOS (Mac + Xcode only)
 

@@ -1,0 +1,4740 @@
+const LANGS = [
+  { code:'ar', label:'العربية', dir:'rtl' },
+  { code:'de', label:'Deutsch', dir:'ltr' },
+  { code:'en', label:'English', dir:'ltr' },
+  { code:'fr', label:'Français', dir:'ltr' },
+  { code:'tr', label:'Türkçe', dir:'ltr' },
+  { code:'ku', label:'Kurdî', dir:'ltr' },
+  { code:'es', label:'Español', dir:'ltr' },
+  { code:'fa', label:'فارسی', dir:'rtl' },
+  { code:'ur', label:'اردو', dir:'rtl' },
+  { code:'ru', label:'Русский', dir:'ltr' },
+  { code:'pt', label:'Português', dir:'ltr' },
+  { code:'it', label:'Italiano', dir:'ltr' },
+];
+
+const I18N = {
+  ar: {
+    nav_chat:"المحادثة", nav_library:"المكتبة", nav_exercises:"التمارين",
+    hero_eyebrow:"مساحة آمنة وسرّية — بدون تشخيص أو علاج طبي",
+    hero_title:"حين يثقل صدرك،<br>لست مضطراً لتحمله وحدك.",
+    hero_lead:"Waha يستمع إليك بلا حكم، ويقترح خطوات عملية مبنية على أساليب مثبتة علمياً لإدارة القلق والتوتر — في أي وقت تحتاجه.",
+    cta_chat:"جرّب المحادثة الآن", cta_exercises:"تصفّح التمارين",
+    breathe_start:"ابدأ تمرين تنفّس", breathe_hint:"اضغط لتجربة تمرين تنفّس من 30 ثانية",
+    chat_eyebrow:"تجربة حيّة", chat_title:"تحدّث مع المساعد الآن",
+    chat_desc:"هذا نموذج تجريبي للمحادثة، بالكتابة أو بالصوت — جرّبه الآن.",
+    chat_status:"متصل الآن · سرّي تماماً",
+    chat_initial_msg:"أهلاً بك. هذه مساحتك، خذ وقتك. كيف تشعر اليوم؟",
+    chat_placeholder:"اكتب أو تحدّث بالضغط على المايك…", chat_send:"إرسال",
+    voice_on:"الصوت مفعّل", voice_off:"تفعيل الصوت",
+    library_eyebrow:"المكتبة المعرفية", library_title:"ملخّصات مبسّطة من علم النفس",
+    library_desc:"محتوى علمي موثوق، بلغة يسيرة، في دقائق معدودة.",
+    lib1_tag:"القلق", lib1_title:"فهم دوامة القلق", lib1_desc:"كيف تتكوّن أفكار القلق، ولماذا تتضخّم أحياناً دون سبب واضح.",
+    lib2_tag:"العادات", lib2_title:"تغيير صغير، أثر كبير", lib2_desc:"أساسيات بناء عادة جديدة بخطوات لا تحتاج إرادة خارقة.",
+    lib3_tag:"العلاقات", lib3_title:"حدود صحية دون شعور بالذنب", lib3_desc:"كيف تقول \"لا\" وتحافظ على علاقاتك المهمة.",
+    exercises_eyebrow:"تمارين يومية", exercises_title:"مكتبة تمارين الصحة النفسية",
+    exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
+    footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
+    title:"Waha — مساحتك الآمنة",
+    filter_all:"الكل", filter_breathing:"تنفّس واسترخاء", filter_mind:"وعي وتأمل", filter_write:"كتابة", filter_sleep:"نوم وعادات",
+    libf_all:"الكل", libf_anxiety:"القلق", libf_habits:"عادات", libf_relationships:"علاقات", libf_self:"تقدير الذات", libf_emotions:"مشاعر", libf_stress:"توتر",
+    read_more:"اقرأ المزيد ←",
+    install_ios_text:"للحصول على أفضل تجربة، أضف Waha إلى شاشتك الرئيسية: اضغط زر المشاركة ⬆️ ثم \"إضافة إلى الشاشة الرئيسية\".",
+    install_android_text:"ثبّت Waha على جهازك لوصول أسرع.", install_btn:"تثبيت",
+    journal_placeholder:"اكتب هنا بحرّية…", journal_save:"احفظ", journal_saved:"تم الحفظ على جهازك ✓", journal_entries_label:"كتاباتك السابقة",
+    premium_badge:"Premium",
+    upgrade_title:"افتح تجربة أعمق", upgrade_subtitle:"اختر الخطة المناسبة لمتابعة رحلتك مع Waha.",
+    upgrade_free_title:"مجاني", upgrade_free_desc:"محادثات محدودة، مكتبة أساسية، 3 تمارين يومية",
+    upgrade_monthly_title:"اشتراك شهري", upgrade_monthly_desc:"محادثات غير محدودة، مكتبة كاملة، برامج متقدمة",
+    upgrade_programs_title:"برامج داخلية", upgrade_programs_desc:"دورات وبرامج متخصصة قصيرة", upgrade_monthly_price:"9.99€ / شهريًا", upgrade_yearly_title:"سنوي", upgrade_yearly_price:"99.90€ / سنويًا", upgrade_yearly_desc:"كل مزايا الاشتراك الشهري، بفاتورة سنوية واحدة", upgrade_yearly_badge:"وفّر 17%", upgrade_yearly_note:"≈ 8.33€ شهريًا",
+    upgrade_maybe_later:"ربما لاحقاً",
+    progress_label:"تقدّمك", progress_streak:"أيام متتالية", progress_journal:"كتابات محفوظة", progress_mood:"تسجيلات مزاج",
+    progress_exercises:"تمارين مكتملة", progress_helped:"مرات ساعدت",
+    progress_disable_streaks_title:"تعطيل السلاسل", progress_disable_streaks_desc:"أخفِ عدّاد الأيام المتتالية إن كان يشعرك بالضغط بدل التحفيز.",
+    why_suggestion_link:"لماذا هذا الاقتراح؟",
+    ef_cta:"عبّر عن شعوري", ef_eyebrow:"ساعدني على التعبير", ef_title:"ساعدني على التعبير عن شعوري",
+    ef_intro:"املأ ما يبدو صحيحاً بالنسبة لك الآن — اترك أي سطر فارغاً لتخطّيه.",
+    ef_f_now:"الآن أشعر بـ", ef_ph_now:"مثال: قلق وتعب",
+    ef_f_after:"لاحظت هذا بعد", ef_ph_after:"مثال: محادثة صعبة",
+    ef_f_affecting:"هذا يؤثر على", ef_ph_affecting:"مثال: نومي وتركيزي",
+    ef_f_hardest:"الأصعب بالنسبة لي هو", ef_ph_hardest:"مثال: عدم معرفة ما أفعله بعد ذلك",
+    ef_f_need:"ما أحتاجه الآن ربما", ef_ph_need:"مثال: بعض المساحة والهدوء",
+    ef_f_help:"شيء واحد قد يساعد", ef_ph_help:"مثال: التحدث مع شخص أثق به",
+    ef_empty_hint:"أي حقل تتركه فارغاً سيُستبعد ببساطة من مسودتك.", ef_generate:"أنشئ مسودتي",
+    ef_tone_concise:"مختصر", ef_tone_detailed:"مفصّل",
+    ef_copy:"نسخ", ef_copied:"تم النسخ ✓", ef_back_edit:"العودة للتعديل",
+    ef_ai_rewrite:"أعد الصياغة بالذكاء الاصطناعي", ef_ai_note:"هذا يرسل مسودتك لمزوّد الذكاء الاصطناعي لإعادة صياغتها فقط. لا شيء آخر يُرسل.",
+    ef_ai_confirm:"سيُرسل هذا مسودتك خارج جهازك إلى Anthropic (مزوّد الذكاء الاصطناعي) لإعادة صياغتها. هل تريد المتابعة؟",
+    ef_ai_needs_consent:"يرجى إرسال رسالة محادثة واحدة أولاً لتفعيل ميزات الذكاء الاصطناعي.",
+    ef_ai_done:"أُعيدت الصياغة ✓", ef_empty_draft:"املأ سطراً واحداً على الأقل لترى مسودتك هنا.",
+    progress_teaser:"افتح تحليلاً أعمق لأنماطك النفسية مع Premium.", progress_cta:"عرض الخطط",
+    nav_program:"البرنامج",
+    program_eyebrow:"برنامج مركّز", program_title:"برنامج 7 أيام لإدارة القلق",
+    program_desc:"سبعة تمارين متسلسلة، يوم واحد مجاني، والباقي يُفتح مع الاشتراك.",
+    program_day_prefix:"اليوم", program_locked:"مقفل 🔒",
+    achievement_title:"إنجاز رائع! 🎉", achievement_desc:"وصلت إلى {n} يوماً متتالياً — استمر!",
+    checkin_cta:"فحص سريع لحالتك", checkin_eyebrow:"في أقل من دقيقة",
+    checkin_title:"كيف تشعر الآن؟", checkin_subtitle:"اختر ما يصف حالتك، وسنقترح عليك تمريناً مناسباً فوراً.",
+    checkin_or:"أو صف شعورك بكلماتك", checkin_freetext_placeholder:"مثلاً: أشعر بالتوتر من موعد غداً...",
+    checkin_freetext_btn:"احصل على اقتراح", checkin_thinking:"لحظة...", checkin_error:"تعذّر الحصول على رد الآن، جرّب مجدداً بعد قليل.",
+    ai_unavailable_notice:"⚠️ الذكاء الاصطناعي غير متاح مؤقتاً — هذا رد عام وليس مخصصاً لرسالتك",
+    clear_memory_btn:"🗑️ مسح المحادثة",
+    brief_eyebrow:"صباح الخير", brief_title:"ملخص يومك",
+    brief_streak_prefix:"سلسلتك الآن", brief_streak_suffix:"أيام متتالية",
+    brief_mood_up:"مزاجك يتحسن مؤخراً — استمر هكذا", brief_mood_down:"مزاجك كان أثقل قليلاً مؤخراً — خذ وقتك",
+    brief_mood_stable:"مزاجك مستقر نسبياً مؤخراً",
+    brief_suggest_label:"لم تجرّب بعد", brief_start_btn:"ابدأ الآن",
+    brief_word_prefix:"الكلمة الأكثر تكراراً في يومياتك مؤخراً:",
+    mood_suggest_text:"لاحظنا أن مزاجك كان أثقل قليلاً في آخر مرات — قد يفيدك:",
+    mood_suggest_btn:"جرّب",
+    free_chat_remaining:"رسائل مجانية متبقية",
+    sleep_cta:"وضع النوم", sleep_title:"حان وقت الراحة",
+    sleep_desc:"خذ دقيقتين لتهدئة جسمك وعقلك قبل النوم، بتمرين تنفّس بسيط.",
+    sleep_start_btn:"ابدأ تمرين التنفّس", sleep_skip:"لا، شكراً — أغلق فقط", sounds_cta:"أصوات هادئة", sounds_eyebrow:"استرخِ", sounds_title:"أصوات محيطة", sounds_subtitle:"اختر صوتًا ليعمل في الخلفية أثناء استخدامك للتطبيق أو قبل النوم.", sound_rain:"مطر", sound_ocean:"أمواج البحر", sound_brown:"ضجيج عميق", sound_pad:"نغمة هادئة", sounds_volume_label:"مستوى الصوت", sounds_timer_label:"مؤقّت الإيقاف", timer_off:"بدون مؤقّت", timer_5min:"5 دقائق", timer_15min:"15 دقيقة", timer_30min:"30 دقيقة", sounds_ends_in:"ينتهي خلال",
+    relief_cta:"ساعدني لمدة 90 ثانية", relief_eyebrow:"إغاثة سريعة",
+    relief_title:"ما الأقرب لما تشعر به الآن؟", relief_subtitle:"اختر واحداً، وسنبدأ تمريناً قصيراً فوراً — بلا اتصال بالإنترنت.",
+    relief_stop:"إيقاف والخروج", relief_end_title:"أحسنت — أخذت وقتاً لنفسك",
+    relief_fb_yes:"نعم، ساعدني", relief_fb_little:"قليلاً", relief_fb_no:"ليس فعلاً",
+    passport_open_btn:"افتح جواز الخصوصية", passport_eyebrow:"جواز الخصوصية",
+    passport_title:"ماذا يحدث لبياناتك بالضبط",
+    passport_local_title:"ما يبقى على جهازك", passport_local_text:"سجل مزاجك، يومياتك، سجل تمارينك، سلسلتك، وسجل محادثتك — كلها محفوظة فقط في تخزين هذا المتصفح المحلي. لا شيء منها يُرفع لأي خادم أو قاعدة بيانات لـ Waha — لأن Waha لا تملك أصلاً قاعدة بيانات لهذه المعلومات.",
+    passport_ai_title:"ما يُرسل للذكاء الاصطناعي", passport_ai_text:"فقط النص الذي تكتبه في المحادثة أو الفحص السريع يُرسل لـ Anthropic (مزوّد الذكاء الاصطناعي) لتوليد رد. لا شيء آخر — لا سجل مزاجك، لا يومياتك، لا سجل تمارينك — يُرسل تلقائياً.",
+    passport_logs_title:"السجلات التقنية", passport_logs_text:"قد يسجّل خادمنا نجاح أو فشل الطلب، وهل استُبدل رد لأسباب أمان — لكن أبداً محتوى رسائلك الفعلي.",
+    passport_temp_label:"محادثة مؤقتة", passport_temp_desc:"عند التفعيل، لا تُحفظ رسائل المحادثة الجديدة على جهازك. تنتهي عند إيقافها أو إغلاق التطبيق.",
+    passport_temp_active:"🕶️ وضع مؤقت — هذه المحادثة لا تُحفظ",
+    passport_controls_label:"أدواتك", passport_del_chat:"حذف سجل المحادثة", passport_del_mood:"حذف بيانات المزاج",
+    passport_del_exercises:"حذف سجل التمارين", passport_export_all:"تصدير كل بياناتي", passport_del_all:"حذف كل شيء",
+    passport_done:"تم ✓", passport_error:"حدث خطأ، حاول مجدداً",
+    passport_confirm_all:"سيؤدي هذا لحذف كل بيانات Waha على جهازك بشكل نهائي — المزاج، اليوميات، المحادثة، السلسلة، كل شيء. لا يمكن التراجع عن هذا. هل تريد المتابعة؟",
+    calmplan_cta:"خطة الهدوء", calmplan_eyebrow:"خطة الهدوء الشخصية", calmplan_title:"خطتي للهدوء",
+    calmplan_intro:"جهّز هذا الآن وأنت مستقر، ليكون جاهزاً في لحظة أصعب.",
+    calmplan_f_exercise:"تمرين مهدئ يساعدني", calmplan_ph_exercise:"مثال: تنفّس 4-7-8",
+    calmplan_f_sentence:"جملة تساعدني", calmplan_ph_sentence:"مثال: هذا الشعور سيمر",
+    calmplan_f_place:"مكان أشعر فيه بهدوء أكبر", calmplan_ph_place:"مثال: شرفتي",
+    calmplan_f_activity:"نشاط آمن", calmplan_ph_activity:"مثال: مشي قصير",
+    calmplan_f_person:"شخص أستطيع التواصل معه", calmplan_ph_person:"مثال: أختي لينا",
+    calmplan_f_steps:"خطوات أريد اتباعها في لحظة صعبة", calmplan_ph_steps:"مثال: ١) توقف ٢) تنفّس ٣) اتصل بأحد",
+    calmplan_save:"احفظ خطتي", calmplan_edit:"تعديل", calmplan_export:"تصدير", calmplan_print:"طباعة", calmplan_delete:"حذف",
+    calmplan_crisis_note:"في حالة الطوارئ، هذه الخطة ليست بديلاً عن المساعدة.", calmplan_crisis_btn:"موارد الأزمة",
+    calmplan_confirm_delete:"حذف خطة الهدوء نهائياً؟ لا يمكن التراجع عن هذا.",
+    checkin_opt1:"قلق أو توتر", checkin_opt2:"حزن أو ثقل في الصدر", checkin_opt3:"ذهن مشتت وأفكار متسارعة", checkin_opt4:"إرهاق جسدي وتعب",
+    crisis_button:"أحتاج مساعدة الآن", crisis_eyebrow:"أنت لست وحدك",
+    crisis_title:"خطوط مساعدة حقيقية، مجانية وسرّية", crisis_subtitle:"إذا كنت تمر بأزمة نفسية حادة، تواصل مع أحد هذه الخطوط الآن — أشخاص مدرّبون بانتظارك.",
+    crisis_de_label:"Telefonseelsorge (ألمانيا) — على مدار الساعة، مجاني وسرّي",
+    crisis_de_note:"يمكنك التحدث بأي لغة تجيدها؛ سيحاولون توفير من يفهمها.",
+    crisis_ru_label:"للناطقين بالروسية أو الأوكرانية — خط Telefon Doweria",
+    crisis_intl_label:"خارج ألمانيا؟",
+    crisis_intl_note:"ابحث عن خط مساعدة نفسية في بلدك عبر findahelpline.com — متاح لمعظم دول العالم.",
+    backup_label:"نسخة احتياطية", backup_desc:"احفظ يومياتك وسلسلتك ومزاجك كملف صغير، أو استرجعها على جهاز آخر.",
+    backup_export:"تصدير نسخة احتياطية", backup_import:"استيراد نسخة احتياطية",
+    backup_export_done:"تم تنزيل الملف ✓", backup_import_done:"تم الاسترجاع بنجاح ✓", backup_import_error:"الملف غير صالح",
+    onboarding_next:"التالي", onboarding_skip:"تخطّي", onboarding_start:"لنبدأ",
+    ob1_icon:"👋", ob1_title:"أهلاً بك في Waha", ob1_desc:"مساحتك الآمنة والسرّية — بدون تشخيص أو علاج طبي، فقط أدوات عملية لحظة احتياجك.",
+    ob2_icon:"⚡", ob2_title:"فحص سريع لحالتك", ob2_desc:"اختر ما يصف شعورك الآن من الصفحة الرئيسية، وسنقترح عليك تمريناً مناسباً فوراً — في أقل من دقيقة.",
+    ob3_icon:"📚", ob3_title:"تمارين ومكتبة كاملة", ob3_desc:"12 تمريناً موجهاً و9 مقالات معرفية، متاحة كاملة بـ12 لغة — تصفّحها من الأعلى في أي وقت.",
+    ob4_icon:"🔒", ob4_title:"كل شيء يبقى على جهازك", ob4_desc:"يومياتك وسلسلتك ومزاجك تُحفظ محلياً فقط، ولا تُرسل لأي خادم — يمكنك أيضاً تصدير نسخة احتياطية من ⚙ الإعدادات.",
+    timer_start:"ابدأ المؤقّت", timer_running:"جارٍ الآن…", read_aloud:"استمع للخطوات",
+    trust_private:"خصوصية أولاً", trust_cbt:"مبني على CBT", trust_multilingual:"12 لغة", age_gate_title:"قبل أن نبدأ", age_gate_text:"Waha مخصص للأشخاص من عمر 16 سنة فأكثر. إذا كنت أصغر من ذلك، يرجى استخدام التطبيق بإشراف والد أو وصي.", age_gate_checkbox:"أؤكد أن عمري 16 عاماً أو أكثر", age_gate_continue:"متابعة",
+    mood_prompt:"كيف تقيّم مزاجك الآن؟", mood_empty:"سجّل مزاجك لتبدأ برؤية النمط هنا.",
+    prefs_eyebrow:"مساحتك، بقوانينك", prefs_title:"التفضيلات",
+    prefs_subtitle:"بعض الإعدادات الهادئة لشكل Waha وكيفية التعامل مع أفكارك.",
+    prefs_experience_label:"التجربة",
+    prefs_calm_title:"اجعل المساحة أكثر هدوءاً", prefs_calm_desc:"إيقاف الحركات والانتقالات المرئية غير الضرورية.",
+    prefs_privacy_label:"الخصوصية، بوضوح",
+    prefs_privacy_quote:"أفكارك ليست بيانات تُجمع دون علمك. يومياتك وسلسلتك ومزاجك تُحفظ فقط على جهازك ولا تُغادره أبداً. أما رسائل المحادثة، فتُرسل لخدمة ذكاء اصطناعي خارجية لتوليد رد ذكي — كما أوضحنا لك عند بدء أول محادثة — وتُحفظ أيضاً على جهازك فقط لتتذكرها المحادثة القادمة، ويمكنك مسحها في أي وقت.",
+    prefs_dark_title:"الوضع الداكن", prefs_dark_desc:"ألوان أهدأ على العين في الإضاءة المنخفضة.",
+    prefs_textlarge_title:"نص أكبر", prefs_textlarge_desc:"يكبّر نص التمارين والمقالات والمحادثة لسهولة القراءة.",
+    voice_gender_label:"صوت القراءة", voice_gender_desc:"لتمييز صوت القراءة الصوتية، أخبرنا كيف تعرّف نفسك (اختياري، ويُستخدم فقط لاختيار الصوت إن توفّر صوت بديل على جهازك).",
+    voice_gender_male:"ذكر", voice_gender_female:"أنثى", voice_gender_none:"بدون تحديد",
+    aria_close:"إغلاق", aria_share:"مشاركة", aria_mic:"إدخال صوتي", aria_settings:"الإعدادات",
+    reminder_text:"لم تسجّل فحصك اليومي بعد 👋", reminder_cta:"افحص الآن",
+    consent_eyebrow:"قبل أن نبدأ", consent_title:"محادثتك تُرسل لخدمة ذكاء اصطناعي خارجية",
+    consent_text:"لكي يرد عليك بذكاء، تُرسل رسالتك إلى Anthropic (مزوّد الذكاء الاصطناعي) عبر خادم استضافة التطبيق. لا تُحفظ رسائلك ولا تُستخدم لأي غرض آخر. هل توافق على المتابعة؟",
+    consent_accept:"أوافق، لنبدأ", consent_later:"ليس الآن",
+    locked_content_text:"هذا المحتوى ضمن Waha Plus. افتحه مع الاشتراك للاستفادة الكاملة منه.",
+    locked_unlock_btn:"افتح مع Waha Plus",
+    rate_limit_msg:"وصلنا لحد الرسائل المسموح به مؤقتاً لحماية الخدمة. من فضلك انتظر بضع دقائق ثم حاول مجدداً 🙏",
+    done_btn:"تم اليوم ✓", done_btn_done:"أُنجز اليوم ✓", streak_label:"يوم متتالي",
+  },
+  de: {
+    nav_chat:"Chat", nav_library:"Bibliothek", nav_exercises:"Übungen",
+    hero_eyebrow:"Ein sicherer, vertraulicher Raum — keine Diagnose, keine Behandlung",
+    hero_title:"Wenn es schwer wird,<br>musst du es nicht allein tragen.",
+    hero_lead:"Waha hört dir ohne Urteil zu und schlägt praktische, wissenschaftlich fundierte Schritte gegen Angst und Stress vor.",
+    cta_chat:"Chat jetzt ausprobieren", cta_exercises:"Übungen ansehen",
+    breathe_start:"Atemübung starten", breathe_hint:"Klicke für eine 30-Sekunden-Atemübung",
+    chat_eyebrow:"Live-Demo", chat_title:"Sprich jetzt mit dem Assistenten",
+    chat_desc:"Eine Demo des Chats — per Text oder per Stimme.",
+    chat_status:"Online · vollständig vertraulich",
+    chat_initial_msg:"Willkommen. Das ist dein Raum, nimm dir Zeit. Wie fühlst du dich heute?",
+    chat_placeholder:"Schreibe oder sprich über das Mikrofon…", chat_send:"Senden",
+    voice_on:"Stimme an", voice_off:"Stimme aktivieren",
+    library_eyebrow:"Wissensbibliothek", library_title:"Vereinfachte Psychologie-Zusammenfassungen",
+    library_desc:"Vertrauenswürdige Inhalte, einfach erklärt, in wenigen Minuten.",
+    lib1_tag:"Angst", lib1_title:"Die Angstspirale verstehen", lib1_desc:"Wie Angstgedanken entstehen und sich manchmal ohne Grund verstärken.",
+    lib2_tag:"Gewohnheiten", lib2_title:"Kleine Veränderung, große Wirkung", lib2_desc:"Grundlagen, um eine neue Gewohnheit aufzubauen.",
+    lib3_tag:"Beziehungen", lib3_title:"Gesunde Grenzen ohne Schuldgefühle", lib3_desc:"Wie du Nein sagst und Beziehungen bewahrst.",
+    exercises_eyebrow:"Tägliche Übungen", exercises_title:"Bibliothek für mentale Gesundheit",
+    exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
+    footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
+    title:"Waha — Dein sicherer Raum",
+    filter_all:"Alle", filter_breathing:"Atmen & Entspannen", filter_mind:"Achtsamkeit", filter_write:"Schreiben", filter_sleep:"Schlaf & Gewohnheiten",
+    libf_all:"Alle", libf_anxiety:"Angst", libf_habits:"Gewohnheiten", libf_relationships:"Beziehungen", libf_self:"Selbstwert", libf_emotions:"Gefühle", libf_stress:"Stress",
+    read_more:"Weiterlesen →",
+    install_ios_text:"Für die beste Erfahrung füge Waha deinem Startbildschirm hinzu: Tippe auf Teilen ⬆️ und dann auf \"Zum Home-Bildschirm\".",
+    install_android_text:"Installiere Waha für schnelleren Zugriff.", install_btn:"Installieren",
+    journal_placeholder:"Schreib hier frei…", journal_save:"Speichern", journal_saved:"Auf deinem Gerät gespeichert ✓", journal_entries_label:"Deine bisherigen Einträge",
+    premium_badge:"Premium",
+    upgrade_title:"Schalte mehr Tiefe frei", upgrade_subtitle:"Wähle den passenden Plan, um deine Reise mit Waha fortzusetzen.",
+    upgrade_free_title:"Kostenlos", upgrade_free_desc:"Begrenzte Chats, Basisbibliothek, 3 tägliche Übungen",
+    upgrade_monthly_title:"Monatsabo", upgrade_monthly_desc:"Unbegrenzte Chats, vollständige Bibliothek, fortgeschrittene Programme",
+    upgrade_programs_title:"Zusatzprogramme", upgrade_programs_desc:"Spezialisierte Kurzprogramme und Kurse", upgrade_monthly_price:"9,99€ / Monat", upgrade_yearly_title:"Jährlich", upgrade_yearly_price:"99,90€ / Jahr", upgrade_yearly_desc:"Alle Vorteile des Monatsabos, einmal jährlich abgerechnet", upgrade_yearly_badge:"17% sparen", upgrade_yearly_note:"≈ 8,33€ / Monat",
+    upgrade_maybe_later:"Vielleicht später",
+    progress_label:"Dein Fortschritt", progress_streak:"Tage in Folge", progress_journal:"Gespeicherte Einträge", progress_mood:"Stimmungseinträge",
+    progress_exercises:"Abgeschlossene Übungen", progress_helped:"Mal geholfen",
+    progress_disable_streaks_title:"Serien deaktivieren", progress_disable_streaks_desc:"Blende den Tage-Zähler aus, falls er dich eher unter Druck setzt als motiviert.",
+    why_suggestion_link:"Warum dieser Vorschlag?",
+    ef_cta:"Mein Gefühl erklären", ef_eyebrow:"Beim Ausdrücken helfen", ef_title:"Hilf mir zu erklären, wie ich mich fühle",
+    ef_intro:"Fülle aus, was gerade für dich zutrifft — lass jede Zeile leer, die du überspringen möchtest.",
+    ef_f_now:"Gerade fühle ich mich", ef_ph_now:"z. B. ängstlich und müde",
+    ef_f_after:"Das ist mir aufgefallen nach", ef_ph_after:"z. B. einem schwierigen Gespräch",
+    ef_f_affecting:"Es beeinflusst", ef_ph_affecting:"z. B. meinen Schlaf und meine Konzentration",
+    ef_f_hardest:"Am schwersten fällt mir", ef_ph_hardest:"z. B. nicht zu wissen, was als Nächstes kommt",
+    ef_f_need:"Was ich gerade brauchen könnte", ef_ph_need:"z. B. etwas Raum und Ruhe",
+    ef_f_help:"Eine Sache, die helfen könnte", ef_ph_help:"z. B. mit jemandem zu sprechen, dem ich vertraue",
+    ef_empty_hint:"Jedes leer gelassene Feld wird einfach aus deinem Entwurf ausgelassen.", ef_generate:"Meinen Entwurf erstellen",
+    ef_tone_concise:"Kurz", ef_tone_detailed:"Ausführlich",
+    ef_copy:"Kopieren", ef_copied:"Kopiert ✓", ef_back_edit:"Zurück zum Bearbeiten",
+    ef_ai_rewrite:"Mit KI umformulieren", ef_ai_note:"Dies sendet deinen Entwurf an unseren KI-Anbieter, um ihn umzuformulieren. Nichts anderes wird gesendet.",
+    ef_ai_confirm:"Dies sendet deinen Entwurf außerhalb deines Geräts an Anthropic (unseren KI-Anbieter), um ihn umzuformulieren. Fortfahren?",
+    ef_ai_needs_consent:"Bitte sende zuerst eine Chat-Nachricht, um KI-Funktionen zu aktivieren.",
+    ef_ai_done:"Umformuliert ✓", ef_empty_draft:"Fülle mindestens eine Zeile aus, um deinen Entwurf hier zu sehen.",
+    progress_teaser:"Schalte tiefere Einblicke in deine Muster mit Premium frei.", progress_cta:"Pläne ansehen",
+    nav_program:"Programm",
+    program_eyebrow:"Fokusprogramm", program_title:"7-Tage-Programm gegen Angst",
+    program_desc:"Sieben aufeinanderfolgende Übungen, ein Tag kostenlos, der Rest mit Abo freischaltbar.",
+    program_day_prefix:"Tag", program_locked:"Gesperrt 🔒",
+    achievement_title:"Toller Erfolg! 🎉", achievement_desc:"Du hast {n} Tage in Folge erreicht — weiter so!",
+    checkin_cta:"Schnell-Check", checkin_eyebrow:"In unter einer Minute",
+    checkin_title:"Wie fühlst du dich gerade?", checkin_subtitle:"Wähle, was zutrifft, und wir schlagen dir sofort eine passende Übung vor.",
+    checkin_or:"Oder beschreibe es mit eigenen Worten", checkin_freetext_placeholder:"z. B.: Ich bin wegen morgen nervös...",
+    checkin_freetext_btn:"Vorschlag erhalten", checkin_thinking:"Einen Moment...", checkin_error:"Gerade keine Antwort möglich, versuche es gleich noch einmal.",
+    ai_unavailable_notice:"⚠️ Die KI ist gerade nicht verfügbar — das ist eine allgemeine Antwort, nicht speziell auf deine Nachricht",
+    clear_memory_btn:"🗑️ Chat löschen",
+    brief_eyebrow:"Guten Morgen", brief_title:"Dein Tagesüberblick",
+    brief_streak_prefix:"Deine Serie:", brief_streak_suffix:"Tage in Folge",
+    brief_mood_up:"Deine Stimmung hat sich zuletzt verbessert — weiter so", brief_mood_down:"Deine Stimmung war zuletzt etwas schwerer — nimm dir Zeit",
+    brief_mood_stable:"Deine Stimmung ist zuletzt relativ stabil",
+    brief_suggest_label:"Noch nicht ausprobiert", brief_start_btn:"Jetzt starten",
+    brief_word_prefix:"Häufigstes Wort in deinem Journal zuletzt:",
+    mood_suggest_text:"Wir haben bemerkt, dass deine Stimmung zuletzt etwas schwerer war — das könnte helfen:",
+    mood_suggest_btn:"Ausprobieren",
+    free_chat_remaining:"kostenlose Nachrichten übrig",
+    sleep_cta:"Schlafmodus", sleep_title:"Zeit zur Ruhe",
+    sleep_desc:"Nimm dir zwei Minuten, um Körper und Geist mit einer einfachen Atemübung vor dem Schlafen zu beruhigen.",
+    sleep_start_btn:"Atemübung starten", sleep_skip:"Nein danke — nur schließen", sounds_cta:"Klänge", sounds_eyebrow:"Entspann dich", sounds_title:"Umgebungsklänge", sounds_subtitle:"Wähle einen Klang, der im Hintergrund läuft — während du die App nutzt oder vor dem Einschlafen.", sound_rain:"Regen", sound_ocean:"Meereswellen", sound_brown:"Tiefes Rauschen", sound_pad:"Sanfter Klang", sounds_volume_label:"Lautstärke", sounds_timer_label:"Ausschalt-Timer", timer_off:"Kein Timer", timer_5min:"5 Minuten", timer_15min:"15 Minuten", timer_30min:"30 Minuten", sounds_ends_in:"Endet in",
+    relief_cta:"Hilf mir für 90 Sekunden", relief_eyebrow:"Schnelle Hilfe",
+    relief_title:"Was trifft gerade am ehesten zu?", relief_subtitle:"Wähle eine Option, wir starten sofort eine kurze Übung — ganz ohne Internet.",
+    relief_stop:"Stoppen und schließen", relief_end_title:"Gut gemacht — du hast dir Zeit genommen",
+    relief_fb_yes:"Ja, es hat geholfen", relief_fb_little:"Ein bisschen", relief_fb_no:"Nicht wirklich",
+    passport_open_btn:"Privacy Passport öffnen", passport_eyebrow:"Privacy Passport",
+    passport_title:"Was mit deinen Daten passiert",
+    passport_local_title:"Was auf diesem Gerät bleibt", passport_local_text:"Dein Stimmungsprotokoll, Journal, Übungsverlauf, Serie und Chat-Verlauf werden nur im lokalen Speicher dieses Browsers gespeichert. Nichts davon wird auf einen Waha-Server oder in eine Datenbank hochgeladen — weil Waha dafür keine besitzt.",
+    passport_ai_title:"Was an die KI gesendet wird", passport_ai_text:"Nur der Text, den du im Chat oder im Schnell-Check-in eingibst, wird an Anthropic (unseren KI-Anbieter) gesendet, um eine Antwort zu erzeugen. Nichts anderes — kein Stimmungsprotokoll, kein Journal, kein Übungsverlauf — wird automatisch gesendet.",
+    passport_logs_title:"Technische Protokolle", passport_logs_text:"Unser Server kann protokollieren, ob eine Anfrage erfolgreich war oder fehlschlug, und ob eine Antwort aus Sicherheitsgründen ersetzt wurde — niemals den Inhalt deiner Nachrichten.",
+    passport_temp_label:"Temporäres Gespräch", passport_temp_desc:"Solange aktiv, werden neue Chat-Nachrichten nicht auf diesem Gerät gespeichert. Endet, wenn du es ausschaltest oder die App schließt.",
+    passport_temp_active:"🕶️ Temporärer Modus — dieses Gespräch wird nicht gespeichert",
+    passport_controls_label:"Deine Kontrollen", passport_del_chat:"Chat-Verlauf löschen", passport_del_mood:"Stimmungsdaten löschen",
+    passport_del_exercises:"Übungsverlauf löschen", passport_export_all:"Alle meine Daten exportieren", passport_del_all:"Alles löschen",
+    passport_done:"Erledigt ✓", passport_error:"Etwas ist schiefgelaufen, versuch's erneut",
+    passport_confirm_all:"Dies löscht endgültig alle Waha-Daten auf diesem Gerät — Stimmung, Journal, Chat, Serie, alles. Das kann nicht rückgängig gemacht werden. Fortfahren?",
+    calmplan_cta:"Ruheplan", calmplan_eyebrow:"Persönlicher Ruheplan", calmplan_title:"Mein Ruheplan",
+    calmplan_intro:"Bereite dies jetzt vor, während du dich stabil fühlst, damit es für einen schwereren Moment bereit ist.",
+    calmplan_f_exercise:"Eine beruhigende Übung, die mir hilft", calmplan_ph_exercise:"z. B. 4-7-8-Atmung",
+    calmplan_f_sentence:"Ein Satz, der mir hilft", calmplan_ph_sentence:"z. B. Dieses Gefühl geht vorüber",
+    calmplan_f_place:"Ein Ort, an dem ich ruhiger bin", calmplan_ph_place:"z. B. mein Balkon",
+    calmplan_f_activity:"Eine sichere Aktivität", calmplan_ph_activity:"z. B. ein kurzer Spaziergang",
+    calmplan_f_person:"Jemand, den ich erreichen kann", calmplan_ph_person:"z. B. meine Schwester Lina",
+    calmplan_f_steps:"Schritte, die ich in einem schwierigen Moment befolgen möchte", calmplan_ph_steps:"z. B. 1) innehalten 2) atmen 3) jemanden anrufen",
+    calmplan_save:"Meinen Plan speichern", calmplan_edit:"Bearbeiten", calmplan_export:"Exportieren", calmplan_print:"Drucken", calmplan_delete:"Löschen",
+    calmplan_crisis_note:"Im Notfall ist dieser Plan kein Ersatz für Hilfe.", calmplan_crisis_btn:"Krisenressourcen",
+    calmplan_confirm_delete:"Ruheplan endgültig löschen? Das kann nicht rückgängig gemacht werden.",
+    checkin_opt1:"Angst oder Anspannung", checkin_opt2:"Traurigkeit oder Schwere", checkin_opt3:"Zerstreuter, rasender Geist", checkin_opt4:"Körperliche Erschöpfung",
+    crisis_button:"Ich brauche jetzt Hilfe", crisis_eyebrow:"Du bist nicht allein",
+    crisis_title:"Echte Hilfe — kostenlos und anonym", crisis_subtitle:"Wenn du gerade in einer akuten Krise bist, wende dich jetzt an eine dieser Stellen — geschulte Menschen sind für dich da.",
+    crisis_de_label:"TelefonSeelsorge (Deutschland) — rund um die Uhr, kostenlos und anonym",
+    crisis_de_note:"Du kannst in jeder Sprache sprechen, die du beherrschst; es wird versucht, jemanden zu vermitteln, der sie versteht.",
+    crisis_ru_label:"Für russisch- oder ukrainischsprachige Menschen — Telefon Doweria",
+    crisis_intl_label:"Außerhalb Deutschlands?",
+    crisis_intl_note:"Finde eine Krisenhotline in deinem Land über findahelpline.com — für die meisten Länder verfügbar.",
+    backup_label:"Datensicherung", backup_desc:"Speichere dein Journal, deine Serie und Stimmung als kleine Datei, oder stelle sie auf einem anderen Gerät wieder her.",
+    backup_export:"Backup exportieren", backup_import:"Backup importieren",
+    backup_export_done:"Datei heruntergeladen ✓", backup_import_done:"Erfolgreich wiederhergestellt ✓", backup_import_error:"Ungültige Datei",
+    onboarding_next:"Weiter", onboarding_skip:"Überspringen", onboarding_start:"Los geht's",
+    ob1_icon:"👋", ob1_title:"Willkommen bei Waha", ob1_desc:"Dein sicherer, vertraulicher Raum — keine Diagnose, keine Behandlung, nur praktische Hilfe genau dann, wenn du sie brauchst.",
+    ob2_icon:"⚡", ob2_title:"Schnell-Check", ob2_desc:"Wähle auf der Startseite, wie du dich gerade fühlst — wir schlagen dir sofort eine passende Übung vor, in unter einer Minute.",
+    ob3_icon:"📚", ob3_title:"Übungen und Bibliothek", ob3_desc:"12 geführte Übungen und 9 Wissensartikel, vollständig in 12 Sprachen verfügbar — jederzeit oben im Menü zu finden.",
+    ob4_icon:"🔒", ob4_title:"Alles bleibt auf deinem Gerät", ob4_desc:"Journal, Serie und Stimmung werden nur lokal gespeichert, nie an einen Server gesendet — du kannst auch jederzeit ein Backup unter ⚙ Einstellungen exportieren.",
+    timer_start:"Timer starten", timer_running:"Läuft…", read_aloud:"Schritte anhören",
+    trust_private:"Datenschutz zuerst", trust_cbt:"Basiert auf CBT", trust_multilingual:"12 Sprachen", age_gate_title:"Bevor wir starten", age_gate_text:"Waha ist für Personen ab 16 Jahren gedacht. Bist du jünger, nutze die App bitte in Begleitung eines Elternteils oder Erziehungsberechtigten.", age_gate_checkbox:"Ich bestätige, dass ich 16 Jahre oder älter bin", age_gate_continue:"Weiter",
+    mood_prompt:"Wie bewertest du deine Stimmung?", mood_empty:"Trage deine Stimmung ein, um ein Muster zu sehen.",
+    prefs_eyebrow:"Dein Raum, deine Regeln", prefs_title:"Einstellungen",
+    prefs_subtitle:"Ein paar ruhige Regler dafür, wie sich Waha anfühlt und wie deine Gedanken behandelt werden.",
+    prefs_experience_label:"Erlebnis",
+    prefs_calm_title:"Den Raum ruhiger machen", prefs_calm_desc:"Unnötige Animationen und Übergänge abschalten.",
+    prefs_privacy_label:"Datenschutz, klar gesagt",
+    prefs_privacy_quote:"Deine Gedanken sind keine heimlich gesammelten Daten. Journal, Serie und Stimmung werden ausschließlich lokal auf deinem Gerät gespeichert und verlassen es nie. Chat-Nachrichten hingegen werden an einen externen KI-Dienst gesendet, um eine intelligente Antwort zu erzeugen — wie beim Start deines ersten Chats erklärt — und werden ebenfalls nur lokal gespeichert, damit der Chat sich beim nächsten Mal erinnert. Du kannst sie jederzeit löschen.",
+    prefs_dark_title:"Dunkler Modus", prefs_dark_desc:"Sanftere Farben für schwaches Licht.",
+    prefs_textlarge_title:"Größerer Text", prefs_textlarge_desc:"Vergrößert Übungen, Artikel und Chat-Text für leichteres Lesen.",
+    voice_gender_label:"Vorlesestimme", voice_gender_desc:"Um die Vorlesestimme abzustimmen, sag uns, wie du dich identifizierst (optional, nur zur Stimmwahl, falls dein Gerät eine Alternative bietet).",
+    voice_gender_male:"Männlich", voice_gender_female:"Weiblich", voice_gender_none:"Keine Angabe",
+    aria_close:"Schließen", aria_share:"Teilen", aria_mic:"Spracheingabe", aria_settings:"Einstellungen",
+    reminder_text:"Du hast deinen Check-in heute noch nicht gemacht 👋", reminder_cta:"Jetzt prüfen",
+    consent_eyebrow:"Bevor wir beginnen", consent_title:"Dein Chat wird an einen externen KI-Dienst gesendet",
+    consent_text:"Damit du eine intelligente Antwort erhältst, wird deine Nachricht über den Hosting-Server der App an Anthropic (KI-Anbieter) gesendet. Deine Nachrichten werden nicht gespeichert und für keinen anderen Zweck verwendet. Stimmst du zu, fortzufahren?",
+    consent_accept:"Ja, los geht's", consent_later:"Nicht jetzt",
+    locked_content_text:"Dieser Inhalt gehört zu Waha Plus. Schalte ihn mit dem Abo frei, um ihn vollständig zu nutzen.",
+    locked_unlock_btn:"Mit Waha Plus freischalten",
+    rate_limit_msg:"Wir haben vorübergehend das Nachrichtenlimit erreicht, um den Dienst zu schützen. Bitte warte ein paar Minuten und versuche es erneut 🙏",
+    done_btn:"Heute erledigt ✓", done_btn_done:"Heute erledigt ✓", streak_label:"Tage in Folge",
+  },
+  en: {
+    nav_chat:"Chat", nav_library:"Library", nav_exercises:"Exercises",
+    hero_eyebrow:"A safe, confidential space — no diagnosis, no treatment",
+    hero_title:"When it feels heavy,<br>you don't have to carry it alone.",
+    hero_lead:"Waha listens without judgment and suggests practical, science-based steps for anxiety and stress, whenever you need them.",
+    cta_chat:"Try the chat now", cta_exercises:"Browse exercises",
+    breathe_start:"Start breathing exercise", breathe_hint:"Tap to try a 30-second breathing exercise",
+    chat_eyebrow:"Live demo", chat_title:"Talk to the assistant now",
+    chat_desc:"A demo of the chat — by text or voice. Try it out.",
+    chat_status:"Online · fully confidential",
+    chat_initial_msg:"Welcome. This is your space, take your time. How are you feeling today?",
+    chat_placeholder:"Type or tap the mic to speak…", chat_send:"Send",
+    voice_on:"Voice on", voice_off:"Enable voice",
+    library_eyebrow:"Knowledge library", library_title:"Simplified psychology summaries",
+    library_desc:"Trustworthy, science-based content, explained simply, in a few minutes.",
+    lib1_tag:"Anxiety", lib1_title:"Understanding the anxiety spiral", lib1_desc:"How anxious thoughts form and why they sometimes grow without a clear reason.",
+    lib2_tag:"Habits", lib2_title:"Small change, big impact", lib2_desc:"The basics of building a new habit, without needing superhuman willpower.",
+    lib3_tag:"Relationships", lib3_title:"Healthy boundaries without guilt", lib3_desc:"How to say \"no\" while still keeping the relationships that matter.",
+    exercises_eyebrow:"Daily exercises", exercises_title:"Mental health exercise library",
+    exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
+    footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
+    title:"Waha — Your safe space",
+    filter_all:"All", filter_breathing:"Breathing & Relaxation", filter_mind:"Mindfulness", filter_write:"Writing", filter_sleep:"Sleep & Habits",
+    libf_all:"All", libf_anxiety:"Anxiety", libf_habits:"Habits", libf_relationships:"Relationships", libf_self:"Self-worth", libf_emotions:"Emotions", libf_stress:"Stress",
+    read_more:"Read more →",
+    install_ios_text:"For the best experience, add Waha to your home screen: tap Share ⬆️ then \"Add to Home Screen\".",
+    install_android_text:"Install Waha on your device for faster access.", install_btn:"Install",
+    journal_placeholder:"Write freely here…", journal_save:"Save", journal_saved:"Saved on your device ✓", journal_entries_label:"Your past entries",
+    premium_badge:"Premium",
+    upgrade_title:"Unlock a deeper experience", upgrade_subtitle:"Choose the plan that fits your journey with Waha.",
+    upgrade_free_title:"Free", upgrade_free_desc:"Limited chats, basic library, 3 daily exercises",
+    upgrade_monthly_title:"Monthly plan", upgrade_monthly_desc:"Unlimited chats, full library, advanced programs",
+    upgrade_programs_title:"Add-on programs", upgrade_programs_desc:"Specialized short courses and programs", upgrade_monthly_price:"€9.99 / mo", upgrade_yearly_title:"Yearly", upgrade_yearly_price:"€99.90 / yr", upgrade_yearly_desc:"Everything in Monthly, billed once a year", upgrade_yearly_badge:"Save 17%", upgrade_yearly_note:"≈ €8.33 / month",
+    upgrade_maybe_later:"Maybe later",
+    progress_label:"Your progress", progress_streak:"day streak", progress_journal:"saved entries", progress_mood:"mood logs",
+    progress_exercises:"exercises completed", progress_helped:"times it helped",
+    progress_disable_streaks_title:"Disable streaks", progress_disable_streaks_desc:"Hide the day-streak counter if it feels more like pressure than motivation.",
+    why_suggestion_link:"Why this suggestion?",
+    ef_cta:"Explain my feeling", ef_eyebrow:"Help Me Express This", ef_title:"Help Me Explain How I Feel",
+    ef_intro:"Fill in whatever feels true right now — leave any line blank to skip it.",
+    ef_f_now:"Right now I feel", ef_ph_now:"e.g. anxious and tired",
+    ef_f_after:"I noticed this after", ef_ph_after:"e.g. a difficult conversation",
+    ef_f_affecting:"It is affecting", ef_ph_affecting:"e.g. my sleep and focus",
+    ef_f_hardest:"What feels hardest is", ef_ph_hardest:"e.g. not knowing what to do next",
+    ef_f_need:"What I need right now may be", ef_ph_need:"e.g. some space and quiet",
+    ef_f_help:"One thing that could help is", ef_ph_help:"e.g. talking to someone I trust",
+    ef_empty_hint:"Any field you leave blank is simply left out of your draft.", ef_generate:"Create my draft",
+    ef_tone_concise:"Concise", ef_tone_detailed:"Detailed",
+    ef_copy:"Copy", ef_copied:"Copied ✓", ef_back_edit:"Back to edit",
+    ef_ai_rewrite:"Rewrite with AI", ef_ai_note:"This sends your draft to our AI provider to rewrite it. Nothing else is sent.",
+    ef_ai_confirm:"This will send your draft outside your device to Anthropic (our AI provider) to rewrite it. Continue?",
+    ef_ai_needs_consent:"Please send one chat message first to enable AI features.",
+    ef_ai_done:"Rewritten ✓", ef_empty_draft:"Fill in at least one line to see your draft here.",
+    progress_teaser:"Unlock deeper insight into your patterns with Premium.", progress_cta:"View plans",
+    nav_program:"Program",
+    program_eyebrow:"Focused program", program_title:"7-day anxiety program",
+    program_desc:"Seven sequenced exercises, one day free, the rest unlocked with a subscription.",
+    program_day_prefix:"Day", program_locked:"Locked 🔒",
+    achievement_title:"Great achievement! 🎉", achievement_desc:"You reached a {n}-day streak — keep going!",
+    checkin_cta:"Quick check-in", checkin_eyebrow:"Under a minute",
+    checkin_title:"How are you feeling right now?", checkin_subtitle:"Pick what fits, and we'll suggest a matching exercise instantly.",
+    checkin_or:"Or describe it in your own words", checkin_freetext_placeholder:"e.g. I'm anxious about tomorrow...",
+    checkin_freetext_btn:"Get a suggestion", checkin_thinking:"One moment...", checkin_error:"Couldn't get a reply right now, try again shortly.",
+    ai_unavailable_notice:"⚠️ The AI is temporarily unavailable — this is a generic reply, not tailored to your message",
+    clear_memory_btn:"🗑️ Clear chat",
+    brief_eyebrow:"Good morning", brief_title:"Your daily brief",
+    brief_streak_prefix:"Your streak:", brief_streak_suffix:"days in a row",
+    brief_mood_up:"Your mood has been improving lately — keep it up", brief_mood_down:"Your mood has been a bit heavier lately — take your time",
+    brief_mood_stable:"Your mood has been fairly stable lately",
+    brief_suggest_label:"Haven't tried yet", brief_start_btn:"Start now",
+    brief_word_prefix:"Most frequent word in your journal lately:",
+    mood_suggest_text:"We noticed your mood has been a bit heavier lately — this might help:",
+    mood_suggest_btn:"Try",
+    free_chat_remaining:"free messages left",
+    sleep_cta:"Sleep mode", sleep_title:"Time to rest",
+    sleep_desc:"Take two minutes to calm your body and mind with a simple breathing exercise before sleep.",
+    sleep_start_btn:"Start breathing exercise", sleep_skip:"No thanks — just close", sounds_cta:"Sounds", sounds_eyebrow:"Unwind", sounds_title:"Ambient sounds", sounds_subtitle:"Pick a sound to play in the background while you use the app or before sleep.", sound_rain:"Rain", sound_ocean:"Ocean waves", sound_brown:"Deep noise", sound_pad:"Soft tone", sounds_volume_label:"Volume", sounds_timer_label:"Sleep timer", timer_off:"No timer", timer_5min:"5 minutes", timer_15min:"15 minutes", timer_30min:"30 minutes", sounds_ends_in:"Ends in",
+    relief_cta:"Help me for 90 seconds", relief_eyebrow:"Quick relief",
+    relief_title:"What feels closest right now?", relief_subtitle:"Pick one, and we'll start a short exercise right away — fully offline.",
+    relief_stop:"Stop and exit", relief_end_title:"Well done — you took a moment for yourself",
+    relief_fb_yes:"Yes, it helped", relief_fb_little:"A little", relief_fb_no:"Not really",
+    passport_open_btn:"Open Privacy Passport", passport_eyebrow:"Privacy Passport",
+    passport_title:"What happens to your data",
+    passport_local_title:"What stays on this device", passport_local_text:"Your mood log, journal entries, exercise history, streak, and chat history are stored only in this browser's local storage. None of it is uploaded to any Waha server or database — because Waha doesn't have one for this data.",
+    passport_ai_title:"What is sent to the AI", passport_ai_text:"Only the text you type in the chat or quick check-in is sent to Anthropic (our AI provider) to generate a reply. Nothing else — no mood log, no journal, no exercise history — is sent automatically.",
+    passport_logs_title:"Technical logs", passport_logs_text:"Our server may log whether a request succeeded or failed, and whether a reply was rewritten for safety — never the content of your messages.",
+    passport_temp_label:"Temporary conversation", passport_temp_desc:"While active, new chat messages aren't saved to this device. Ends when you turn it off or close the app.",
+    passport_temp_active:"🕶️ Temporary mode — this conversation isn't being saved",
+    passport_controls_label:"Your controls", passport_del_chat:"Delete chat history", passport_del_mood:"Delete mood data",
+    passport_del_exercises:"Delete exercise history", passport_export_all:"Export all my data", passport_del_all:"Delete everything",
+    passport_done:"Done ✓", passport_error:"Something went wrong, try again",
+    passport_confirm_all:"This permanently deletes all Waha data on this device — mood, journal, chat, streak, everything. This can't be undone. Continue?",
+    calmplan_cta:"Calm Plan", calmplan_eyebrow:"Personal Calm Plan", calmplan_title:"My Calm Plan",
+    calmplan_intro:"Prepare this now, while you feel steady, so it's ready for a harder moment.",
+    calmplan_f_exercise:"A calming exercise that helps me", calmplan_ph_exercise:"e.g. 4-7-8 breathing",
+    calmplan_f_sentence:"A sentence that helps me", calmplan_ph_sentence:"e.g. This feeling will pass",
+    calmplan_f_place:"A place where I feel calmer", calmplan_ph_place:"e.g. my balcony",
+    calmplan_f_activity:"A safe activity", calmplan_ph_activity:"e.g. a short walk",
+    calmplan_f_person:"Someone I can reach out to", calmplan_ph_person:"e.g. my sister Lina",
+    calmplan_f_steps:"Steps I want to follow in a hard moment", calmplan_ph_steps:"e.g. 1) pause 2) breathe 3) call someone",
+    calmplan_save:"Save my plan", calmplan_edit:"Edit", calmplan_export:"Export", calmplan_print:"Print", calmplan_delete:"Delete",
+    calmplan_crisis_note:"In an emergency, this plan is not a substitute for help.", calmplan_crisis_btn:"Crisis resources",
+    calmplan_confirm_delete:"Delete your calm plan permanently? This can't be undone.",
+    checkin_opt1:"Anxious or tense", checkin_opt2:"Sad or heavy-hearted", checkin_opt3:"Scattered, racing mind", checkin_opt4:"Physically exhausted",
+    crisis_button:"I need help now", crisis_eyebrow:"You are not alone",
+    crisis_title:"Real help — free and confidential", crisis_subtitle:"If you're in acute distress right now, reach out to one of these lines — trained people are ready to listen.",
+    crisis_de_label:"TelefonSeelsorge (Germany) — 24/7, free and anonymous",
+    crisis_de_note:"You can speak in any language you know; they'll try to connect you with someone who understands it.",
+    crisis_ru_label:"For Russian or Ukrainian speakers — Telefon Doweria",
+    crisis_intl_label:"Outside Germany?",
+    crisis_intl_note:"Find a crisis helpline in your country at findahelpline.com — available for most countries worldwide.",
+    backup_label:"Backup", backup_desc:"Save your journal, streak, and mood as a small file, or restore them on another device.",
+    backup_export:"Export backup", backup_import:"Import backup",
+    backup_export_done:"File downloaded ✓", backup_import_done:"Restored successfully ✓", backup_import_error:"Invalid file",
+    onboarding_next:"Next", onboarding_skip:"Skip", onboarding_start:"Let's start",
+    ob1_icon:"👋", ob1_title:"Welcome to Waha", ob1_desc:"Your safe, confidential space — no diagnosis, no treatment, just practical tools right when you need them.",
+    ob2_icon:"⚡", ob2_title:"Quick check-in", ob2_desc:"Pick how you're feeling right now from the home screen, and we'll suggest a matching exercise instantly — in under a minute.",
+    ob3_icon:"📚", ob3_title:"Exercises & library", ob3_desc:"12 guided exercises and 9 knowledge articles, fully available in 12 languages — browse them anytime from the top menu.",
+    ob4_icon:"🔒", ob4_title:"Everything stays on your device", ob4_desc:"Your journal, streak, and mood are saved locally only, never sent to a server — you can also export a backup anytime from ⚙ Preferences.",
+    timer_start:"Start timer", timer_running:"Running…", read_aloud:"Listen to the steps",
+    trust_private:"Privacy-first", trust_cbt:"Based on CBT", trust_multilingual:"12 languages", age_gate_title:"Before we start", age_gate_text:"Waha is intended for people aged 16 and up. If you're younger, please use it with a parent or guardian's supervision.", age_gate_checkbox:"I confirm I'm 16 or older", age_gate_continue:"Continue",
+    mood_prompt:"How would you rate your mood right now?", mood_empty:"Log your mood to start seeing a pattern here.",
+    prefs_eyebrow:"Your space, your rules", prefs_title:"Preferences",
+    prefs_subtitle:"A few quiet controls for how Waha feels and how your thoughts are held.",
+    prefs_experience_label:"Experience",
+    prefs_calm_title:"Keep the room calm", prefs_calm_desc:"Use gentle transitions and turn off unnecessary moving elements.",
+    prefs_privacy_label:"Privacy, plainly said",
+    prefs_privacy_quote:"Your thoughts are not data collected without your knowledge. Journal, streak, and mood are saved only on your own device and never leave it. Chat messages, however, are sent to an external AI service to generate a smart reply — as explained when you started your first chat — and are also saved only locally so the chat remembers you next time. You can clear it anytime.",
+    prefs_dark_title:"Dark mode", prefs_dark_desc:"Gentler colors for low light.",
+    prefs_textlarge_title:"Larger text", prefs_textlarge_desc:"Enlarges exercises, articles, and chat text for easier reading.",
+    voice_gender_label:"Reading voice", voice_gender_desc:"To fine-tune the read-aloud voice, tell us how you identify (optional, used only to pick a voice if your device offers an alternative).",
+    voice_gender_male:"Male", voice_gender_female:"Female", voice_gender_none:"Prefer not to say",
+    aria_close:"Close", aria_share:"Share", aria_mic:"Voice input", aria_settings:"Settings",
+    reminder_text:"You haven't done today's check-in yet 👋", reminder_cta:"Check in now",
+    consent_eyebrow:"Before we start", consent_title:"Your chat is sent to an external AI service",
+    consent_text:"To reply intelligently, your message is sent to Anthropic (the AI provider) through the app's hosting server. Your messages are not saved and are not used for any other purpose. Do you agree to continue?",
+    consent_accept:"I agree, let's start", consent_later:"Not now",
+    locked_content_text:"This content is part of Waha Plus. Unlock it with a subscription to use it fully.",
+    locked_unlock_btn:"Unlock with Waha Plus",
+    rate_limit_msg:"We've temporarily reached the message limit to protect the service. Please wait a few minutes and try again 🙏",
+    done_btn:"Done today ✓", done_btn_done:"Done today ✓", streak_label:"day streak",
+  },
+  fr: {
+    nav_chat:"Chat", nav_library:"Bibliothèque", nav_exercises:"Exercices",
+    hero_eyebrow:"Un espace sûr et confidentiel — sans diagnostic ni traitement",
+    hero_title:"Quand tout devient lourd,<br>tu n'as pas à le porter seul.",
+    hero_lead:"Waha t'écoute sans jugement et propose des étapes concrètes, fondées sur la science, pour gérer l'anxiété et le stress.",
+    cta_chat:"Essayer le chat", cta_exercises:"Voir les exercices",
+    breathe_start:"Démarrer l'exercice de respiration", breathe_hint:"Appuie pour un exercice de respiration de 30 secondes",
+    chat_eyebrow:"Démo en direct", chat_title:"Parle à l'assistant maintenant",
+    chat_desc:"Une démo du chat — par texte ou par voix.",
+    chat_status:"En ligne · entièrement confidentiel",
+    chat_initial_msg:"Bienvenue. C'est ton espace, prends ton temps. Comment te sens-tu aujourd'hui ?",
+    chat_placeholder:"Écris ou parle via le micro…", chat_send:"Envoyer",
+    voice_on:"Voix activée", voice_off:"Activer la voix",
+    library_eyebrow:"Bibliothèque de connaissances", library_title:"Résumés de psychologie simplifiés",
+    library_desc:"Un contenu fiable et scientifique, expliqué simplement, en quelques minutes.",
+    lib1_tag:"Anxiété", lib1_title:"Comprendre la spirale de l'anxiété", lib1_desc:"Comment naissent les pensées anxieuses et pourquoi elles s'amplifient parfois sans raison claire.",
+    lib2_tag:"Habitudes", lib2_title:"Petit changement, grand impact", lib2_desc:"Les bases pour construire une nouvelle habitude, sans volonté surhumaine.",
+    lib3_tag:"Relations", lib3_title:"Des limites saines sans culpabilité", lib3_desc:"Comment dire \"non\" tout en préservant les relations importantes.",
+    exercises_eyebrow:"Exercices quotidiens", exercises_title:"Bibliothèque d'exercices de santé mentale",
+    exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
+    footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
+    title:"Waha — Ton espace sûr",
+    filter_all:"Tout", filter_breathing:"Respiration & Détente", filter_mind:"Pleine conscience", filter_write:"Écriture", filter_sleep:"Sommeil & Habitudes",
+    libf_all:"Tout", libf_anxiety:"Anxiété", libf_habits:"Habitudes", libf_relationships:"Relations", libf_self:"Estime de soi", libf_emotions:"Émotions", libf_stress:"Stress",
+    read_more:"Lire la suite →",
+    install_ios_text:"Pour une meilleure expérience, ajoute Waha à ton écran d'accueil : appuie sur Partager ⬆️ puis \"Sur l'écran d'accueil\".",
+    install_android_text:"Installe Waha sur ton appareil pour un accès plus rapide.", install_btn:"Installer",
+    journal_placeholder:"Écris librement ici…", journal_save:"Enregistrer", journal_saved:"Enregistré sur ton appareil ✓", journal_entries_label:"Tes écrits précédents",
+    premium_badge:"Premium",
+    upgrade_title:"Débloque une expérience plus approfondie", upgrade_subtitle:"Choisis le plan adapté pour continuer ton parcours avec Waha.",
+    upgrade_free_title:"Gratuit", upgrade_free_desc:"Chats limités, bibliothèque de base, 3 exercices quotidiens",
+    upgrade_monthly_title:"Abonnement mensuel", upgrade_monthly_desc:"Chats illimités, bibliothèque complète, programmes avancés",
+    upgrade_programs_title:"Programmes additionnels", upgrade_programs_desc:"Cours et programmes courts spécialisés", upgrade_monthly_price:"9,99€ / mois", upgrade_yearly_title:"Annuel", upgrade_yearly_price:"99,90€ / an", upgrade_yearly_desc:"Tous les avantages du mensuel, facturé une fois par an", upgrade_yearly_badge:"Économise 17 %", upgrade_yearly_note:"≈ 8,33€ / mois",
+    upgrade_maybe_later:"Peut-être plus tard",
+    progress_label:"Ta progression", progress_streak:"jours de suite", progress_journal:"écrits enregistrés", progress_mood:"suivis d'humeur",
+    progress_exercises:"exercices terminés", progress_helped:"fois où ça a aidé",
+    progress_disable_streaks_title:"Désactiver les séries", progress_disable_streaks_desc:"Masque le compteur de jours s'il te met plus de pression qu'il ne te motive.",
+    why_suggestion_link:"Pourquoi cette suggestion ?",
+    ef_cta:"Exprimer mon ressenti", ef_eyebrow:"M'aider à m'exprimer", ef_title:"Aide-moi à expliquer ce que je ressens",
+    ef_intro:"Remplis ce qui te semble juste maintenant — laisse une ligne vide pour la sauter.",
+    ef_f_now:"En ce moment je ressens", ef_ph_now:"ex. : anxieux(se) et fatigué(e)",
+    ef_f_after:"J'ai remarqué cela après", ef_ph_after:"ex. : une conversation difficile",
+    ef_f_affecting:"Cela affecte", ef_ph_affecting:"ex. : mon sommeil et ma concentration",
+    ef_f_hardest:"Le plus difficile est", ef_ph_hardest:"ex. : ne pas savoir quoi faire ensuite",
+    ef_f_need:"Ce dont j'ai peut-être besoin maintenant", ef_ph_need:"ex. : un peu d'espace et de calme",
+    ef_f_help:"Une chose qui pourrait aider", ef_ph_help:"ex. : parler à quelqu'un en qui j'ai confiance",
+    ef_empty_hint:"Tout champ laissé vide sera simplement omis de ton brouillon.", ef_generate:"Créer mon brouillon",
+    ef_tone_concise:"Concis", ef_tone_detailed:"Détaillé",
+    ef_copy:"Copier", ef_copied:"Copié ✓", ef_back_edit:"Retour à l'édition",
+    ef_ai_rewrite:"Reformuler avec l'IA", ef_ai_note:"Ceci envoie ton brouillon à notre fournisseur d'IA pour le reformuler. Rien d'autre n'est envoyé.",
+    ef_ai_confirm:"Ceci enverra ton brouillon hors de ton appareil à Anthropic (notre fournisseur d'IA) pour le reformuler. Continuer ?",
+    ef_ai_needs_consent:"Merci d'envoyer d'abord un message dans le chat pour activer les fonctionnalités d'IA.",
+    ef_ai_done:"Reformulé ✓", ef_empty_draft:"Remplis au moins une ligne pour voir ton brouillon ici.",
+    progress_teaser:"Débloque une analyse plus poussée de tes tendances avec Premium.", progress_cta:"Voir les plans",
+    nav_program:"Programme",
+    program_eyebrow:"Programme ciblé", program_title:"Programme anti-anxiété de 7 jours",
+    program_desc:"Sept exercices enchaînés, un jour gratuit, le reste débloqué avec un abonnement.",
+    program_day_prefix:"Jour", program_locked:"Verrouillé 🔒",
+    achievement_title:"Belle réussite ! 🎉", achievement_desc:"Tu as atteint {n} jours de suite — continue !",
+    checkin_cta:"Bilan rapide", checkin_eyebrow:"En moins d'une minute",
+    checkin_title:"Comment te sens-tu maintenant ?", checkin_subtitle:"Choisis ce qui correspond, et on te propose aussitôt un exercice adapté.",
+    checkin_or:"Ou décris-le avec tes propres mots", checkin_freetext_placeholder:"ex. : je suis stressé(e) pour demain...",
+    checkin_freetext_btn:"Obtenir une suggestion", checkin_thinking:"Un instant...", checkin_error:"Impossible d'obtenir une réponse pour l'instant, réessaie bientôt.",
+    ai_unavailable_notice:"⚠️ L'IA est temporairement indisponible — ceci est une réponse générique, pas adaptée à ton message",
+    clear_memory_btn:"🗑️ Effacer la discussion",
+    brief_eyebrow:"Bonjour", brief_title:"Ton résumé du jour",
+    brief_streak_prefix:"Ta série :", brief_streak_suffix:"jours d'affilée",
+    brief_mood_up:"Ton humeur s'améliore ces derniers temps — continue ainsi", brief_mood_down:"Ton humeur a été un peu plus lourde ces derniers temps — prends ton temps",
+    brief_mood_stable:"Ton humeur est restée assez stable ces derniers temps",
+    brief_suggest_label:"Pas encore essayé", brief_start_btn:"Commencer maintenant",
+    brief_word_prefix:"Mot le plus fréquent dans ton journal récemment :",
+    mood_suggest_text:"On a remarqué que ton humeur a été un peu plus lourde dernièrement — ça pourrait aider :",
+    mood_suggest_btn:"Essayer",
+    free_chat_remaining:"messages gratuits restants",
+    sleep_cta:"Mode sommeil", sleep_title:"L'heure du repos",
+    sleep_desc:"Prends deux minutes pour apaiser ton corps et ton esprit avec un exercice de respiration simple avant de dormir.",
+    sleep_start_btn:"Commencer l'exercice de respiration", sleep_skip:"Non merci — fermer", sounds_cta:"Sons", sounds_eyebrow:"Détends-toi", sounds_title:"Sons d'ambiance", sounds_subtitle:"Choisis un son à jouer en arrière-plan pendant que tu utilises l'application ou avant de dormir.", sound_rain:"Pluie", sound_ocean:"Vagues de l'océan", sound_brown:"Bruit grave", sound_pad:"Nappe douce", sounds_volume_label:"Volume", sounds_timer_label:"Minuteur d'arrêt", timer_off:"Aucun minuteur", timer_5min:"5 minutes", timer_15min:"15 minutes", timer_30min:"30 minutes", sounds_ends_in:"Se termine dans",
+    relief_cta:"Aide-moi pendant 90 secondes", relief_eyebrow:"Soulagement rapide",
+    relief_title:"Qu'est-ce qui te correspond le plus maintenant ?", relief_subtitle:"Choisis une option, un court exercice démarre aussitôt — entièrement hors ligne.",
+    relief_stop:"Arrêter et quitter", relief_end_title:"Bravo — tu as pris un moment pour toi",
+    relief_fb_yes:"Oui, ça a aidé", relief_fb_little:"Un peu", relief_fb_no:"Pas vraiment",
+    passport_open_btn:"Ouvrir le Passeport de confidentialité", passport_eyebrow:"Passeport de confidentialité",
+    passport_title:"Ce qui arrive à tes données",
+    passport_local_title:"Ce qui reste sur cet appareil", passport_local_text:"Ton journal d'humeur, tes entrées de journal, ton historique d'exercices, ta série et ton historique de chat sont stockés uniquement dans le stockage local de ce navigateur. Rien de tout cela n'est envoyé à un serveur ou une base de données Waha — car Waha n'en possède pas pour ces données.",
+    passport_ai_title:"Ce qui est envoyé à l'IA", passport_ai_text:"Seul le texte que tu tapes dans le chat ou le check-in rapide est envoyé à Anthropic (notre fournisseur d'IA) pour générer une réponse. Rien d'autre — ni journal d'humeur, ni journal, ni historique d'exercices — n'est envoyé automatiquement.",
+    passport_logs_title:"Journaux techniques", passport_logs_text:"Notre serveur peut enregistrer si une requête a réussi ou échoué, et si une réponse a été réécrite pour des raisons de sécurité — jamais le contenu de tes messages.",
+    passport_temp_label:"Conversation temporaire", passport_temp_desc:"Tant qu'elle est active, les nouveaux messages du chat ne sont pas enregistrés sur cet appareil. Se termine quand tu la désactives ou fermes l'application.",
+    passport_temp_active:"🕶️ Mode temporaire — cette conversation n'est pas enregistrée",
+    passport_controls_label:"Tes contrôles", passport_del_chat:"Supprimer l'historique du chat", passport_del_mood:"Supprimer les données d'humeur",
+    passport_del_exercises:"Supprimer l'historique d'exercices", passport_export_all:"Exporter toutes mes données", passport_del_all:"Tout supprimer",
+    passport_done:"Fait ✓", passport_error:"Une erreur s'est produite, réessaie",
+    passport_confirm_all:"Ceci supprime définitivement toutes les données Waha sur cet appareil — humeur, journal, chat, série, tout. C'est irréversible. Continuer ?",
+    calmplan_cta:"Plan de calme", calmplan_eyebrow:"Plan de calme personnel", calmplan_title:"Mon plan de calme",
+    calmplan_intro:"Prépare ceci maintenant, pendant que tu te sens stable, pour qu'il soit prêt pour un moment plus difficile.",
+    calmplan_f_exercise:"Un exercice apaisant qui m'aide", calmplan_ph_exercise:"ex. : respiration 4-7-8",
+    calmplan_f_sentence:"Une phrase qui m'aide", calmplan_ph_sentence:"ex. : ce sentiment va passer",
+    calmplan_f_place:"Un endroit où je me sens plus calme", calmplan_ph_place:"ex. : mon balcon",
+    calmplan_f_activity:"Une activité sûre", calmplan_ph_activity:"ex. : une courte marche",
+    calmplan_f_person:"Quelqu'un que je peux contacter", calmplan_ph_person:"ex. : ma sœur Lina",
+    calmplan_f_steps:"Étapes que je veux suivre dans un moment difficile", calmplan_ph_steps:"ex. : 1) pause 2) respire 3) appelle quelqu'un",
+    calmplan_save:"Enregistrer mon plan", calmplan_edit:"Modifier", calmplan_export:"Exporter", calmplan_print:"Imprimer", calmplan_delete:"Supprimer",
+    calmplan_crisis_note:"En cas d'urgence, ce plan ne remplace pas de l'aide.", calmplan_crisis_btn:"Ressources de crise",
+    calmplan_confirm_delete:"Supprimer définitivement ton plan de calme ? C'est irréversible.",
+    checkin_opt1:"Anxieux ou tendu", checkin_opt2:"Triste ou oppressé", checkin_opt3:"Esprit dispersé et agité", checkin_opt4:"Épuisement physique",
+    crisis_button:"J'ai besoin d'aide maintenant", crisis_eyebrow:"Tu n'es pas seul(e)",
+    crisis_title:"Une aide réelle — gratuite et confidentielle", crisis_subtitle:"Si tu traverses une crise aiguë en ce moment, contacte l'une de ces lignes — des personnes formées sont prêtes à t'écouter.",
+    crisis_de_label:"TelefonSeelsorge (Allemagne) — 24h/24, gratuit et anonyme",
+    crisis_de_note:"Tu peux parler dans n'importe quelle langue que tu maîtrises ; on essaiera de te mettre en contact avec quelqu'un qui la comprend.",
+    crisis_ru_label:"Pour les russophones ou ukrainophones — Telefon Doweria",
+    crisis_intl_label:"En dehors de l'Allemagne ?",
+    crisis_intl_note:"Trouve une ligne d'écoute dans ton pays sur findahelpline.com — disponible pour la plupart des pays.",
+    backup_label:"Sauvegarde", backup_desc:"Enregistre ton journal, ta série et ton humeur dans un petit fichier, ou restaure-les sur un autre appareil.",
+    backup_export:"Exporter la sauvegarde", backup_import:"Importer une sauvegarde",
+    backup_export_done:"Fichier téléchargé ✓", backup_import_done:"Restauré avec succès ✓", backup_import_error:"Fichier invalide",
+    onboarding_next:"Suivant", onboarding_skip:"Passer", onboarding_start:"Commencer",
+    ob1_icon:"👋", ob1_title:"Bienvenue sur Waha", ob1_desc:"Ton espace sûr et confidentiel — pas de diagnostic, pas de traitement, juste des outils pratiques exactement quand tu en as besoin.",
+    ob2_icon:"⚡", ob2_title:"Bilan rapide", ob2_desc:"Choisis comment tu te sens sur la page d'accueil, et on te propose aussitôt un exercice adapté — en moins d'une minute.",
+    ob3_icon:"📚", ob3_title:"Exercices et bibliothèque", ob3_desc:"12 exercices guidés et 9 articles, entièrement disponibles en 12 langues — accessibles à tout moment depuis le menu du haut.",
+    ob4_icon:"🔒", ob4_title:"Tout reste sur ton appareil", ob4_desc:"Ton journal, ta série et ton humeur sont enregistrés uniquement en local, jamais envoyés à un serveur — tu peux aussi exporter une sauvegarde depuis ⚙ Préférences.",
+    timer_start:"Démarrer le minuteur", timer_running:"En cours…", read_aloud:"Écouter les étapes",
+    trust_private:"Confidentialité avant tout", trust_cbt:"Basé sur la TCC", trust_multilingual:"12 langues", age_gate_title:"Avant de commencer", age_gate_text:"Waha est destiné aux personnes de 16 ans et plus. Si tu es plus jeune, utilise l'application sous la supervision d'un parent ou tuteur.", age_gate_checkbox:"Je confirme avoir 16 ans ou plus", age_gate_continue:"Continuer",
+    mood_prompt:"Comment évalues-tu ton humeur maintenant ?", mood_empty:"Enregistre ton humeur pour voir une tendance ici.",
+    prefs_eyebrow:"Ton espace, tes règles", prefs_title:"Préférences",
+    prefs_subtitle:"Quelques réglages discrets sur le ressenti de Waha et la façon dont tes pensées sont traitées.",
+    prefs_experience_label:"Expérience",
+    prefs_calm_title:"Garder l'espace calme", prefs_calm_desc:"Désactiver les animations et transitions inutiles.",
+    prefs_privacy_label:"La confidentialité, clairement",
+    prefs_privacy_quote:"Tes pensées ne sont pas des données collectées à ton insu. Journal, série et humeur sont enregistrés uniquement sur ton appareil et ne le quittent jamais. Les messages du chat, eux, sont envoyés à un service d'IA externe pour générer une réponse intelligente — comme expliqué au début de ta première discussion — et sont aussi enregistrés uniquement en local pour que le chat se souvienne de toi la prochaine fois. Tu peux l'effacer à tout moment.",
+    prefs_dark_title:"Mode sombre", prefs_dark_desc:"Des couleurs plus douces en faible luminosité.",
+    prefs_textlarge_title:"Texte plus grand", prefs_textlarge_desc:"Agrandit les exercices, articles et messages du chat pour une lecture plus facile.",
+    voice_gender_label:"Voix de lecture", voice_gender_desc:"Pour ajuster la voix de lecture, dis-nous comment tu t'identifies (facultatif, utilisé seulement pour choisir une voix si ton appareil propose une alternative).",
+    voice_gender_male:"Homme", voice_gender_female:"Femme", voice_gender_none:"Ne pas préciser",
+    aria_close:"Fermer", aria_share:"Partager", aria_mic:"Saisie vocale", aria_settings:"Paramètres",
+    reminder_text:"Tu n'as pas encore fait ton bilan du jour 👋", reminder_cta:"Vérifier maintenant",
+    consent_eyebrow:"Avant de commencer", consent_title:"Ta discussion est envoyée à un service d'IA externe",
+    consent_text:"Pour répondre intelligemment, ton message est envoyé à Anthropic (le fournisseur d'IA) via le serveur d'hébergement de l'application. Tes messages ne sont pas enregistrés ni utilisés à d'autres fins. Acceptes-tu de continuer ?",
+    consent_accept:"J'accepte, on commence", consent_later:"Pas maintenant",
+    locked_content_text:"Ce contenu fait partie de Waha Plus. Débloque-le avec l'abonnement pour en profiter pleinement.",
+    locked_unlock_btn:"Débloquer avec Waha Plus",
+    rate_limit_msg:"Nous avons temporairement atteint la limite de messages pour protéger le service. Merci d'attendre quelques minutes et de réessayer 🙏",
+    done_btn:"Fait aujourd'hui ✓", done_btn_done:"Fait aujourd'hui ✓", streak_label:"jours de suite",
+  },
+  tr: {
+    nav_chat:"Sohbet", nav_library:"Kütüphane", nav_exercises:"Egzersizler",
+    hero_eyebrow:"Güvenli ve gizli bir alan — tanı veya tedavi değildir",
+    hero_title:"İçin daraldığında,<br>bunu tek başına taşımak zorunda değilsin.",
+    hero_lead:"Waha seni yargılamadan dinler ve kaygı ile stresle başa çıkman için bilimsel temelli, pratik adımlar önerir.",
+    cta_chat:"Sohbeti şimdi dene", cta_exercises:"Egzersizlere göz at",
+    breathe_start:"Nefes egzersizini başlat", breathe_hint:"30 saniyelik nefes egzersizi için dokun",
+    chat_eyebrow:"Canlı deneme", chat_title:"Şimdi asistanla konuş",
+    chat_desc:"Sohbetin bir denemesi — yazarak ya da sesle.",
+    chat_status:"Çevrimiçi · tamamen gizli",
+    chat_initial_msg:"Hoş geldin. Burası senin alanın, acele etme. Bugün nasıl hissediyorsun?",
+    chat_placeholder:"Yaz veya mikrofona dokunup konuş…", chat_send:"Gönder",
+    voice_on:"Ses açık", voice_off:"Sesi etkinleştir",
+    library_eyebrow:"Bilgi kütüphanesi", library_title:"Sadeleştirilmiş psikoloji özetleri",
+    library_desc:"Güvenilir, bilimsel içerikler, birkaç dakikada anlaşılır şekilde.",
+    lib1_tag:"Kaygı", lib1_title:"Kaygı sarmalını anlamak", lib1_desc:"Kaygılı düşünceler nasıl oluşur ve bazen neden nedensiz büyür.",
+    lib2_tag:"Alışkanlıklar", lib2_title:"Küçük değişiklik, büyük etki", lib2_desc:"Olağanüstü irade gerektirmeden yeni bir alışkanlık kurmanın temelleri.",
+    lib3_tag:"İlişkiler", lib3_title:"Suçluluk duymadan sağlıklı sınırlar", lib3_desc:"Önemli ilişkileri korurken nasıl \"hayır\" denir.",
+    exercises_eyebrow:"Günlük egzersizler", exercises_title:"Ruh sağlığı egzersiz kütüphanesi",
+    exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
+    footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
+    title:"Waha — Güvenli alanın",
+    filter_all:"Tümü", filter_breathing:"Nefes & Gevşeme", filter_mind:"Farkındalık", filter_write:"Yazma", filter_sleep:"Uyku & Alışkanlıklar",
+    libf_all:"Tümü", libf_anxiety:"Kaygı", libf_habits:"Alışkanlıklar", libf_relationships:"İlişkiler", libf_self:"Özsaygı", libf_emotions:"Duygular", libf_stress:"Stres",
+    read_more:"Devamını oku →",
+    install_ios_text:"En iyi deneyim için Waha'i ana ekranına ekle: Paylaş ⬆️ düğmesine, ardından \"Ana Ekrana Ekle\"ye dokun.",
+    install_android_text:"Daha hızlı erişim için Waha'i cihazına yükle.", install_btn:"Yükle",
+    journal_placeholder:"Buraya özgürce yaz…", journal_save:"Kaydet", journal_saved:"Cihazına kaydedildi ✓", journal_entries_label:"Önceki yazıların",
+    premium_badge:"Premium",
+    upgrade_title:"Daha derin bir deneyimi aç", upgrade_subtitle:"Waha yolculuğuna devam etmek için uygun planı seç.",
+    upgrade_free_title:"Ücretsiz", upgrade_free_desc:"Sınırlı sohbet, temel kütüphane, 3 günlük egzersiz",
+    upgrade_monthly_title:"Aylık plan", upgrade_monthly_desc:"Sınırsız sohbet, tam kütüphane, gelişmiş programlar",
+    upgrade_programs_title:"Ek programlar", upgrade_programs_desc:"Özel kısa kurslar ve programlar", upgrade_monthly_price:"9,99€ / ay", upgrade_yearly_title:"Yıllık", upgrade_yearly_price:"99,90€ / yıl", upgrade_yearly_desc:"Aylık plandaki her şey, yılda bir kez faturalandırılır", upgrade_yearly_badge:"%17 tasarruf", upgrade_yearly_note:"≈ 8,33€ / ay",
+    upgrade_maybe_later:"Belki sonra",
+    progress_label:"İlerlemen", progress_streak:"gün üst üste", progress_journal:"kaydedilen yazı", progress_mood:"ruh hali kaydı",
+    progress_exercises:"tamamlanan egzersiz", progress_helped:"yardımcı olduğu kez",
+    progress_disable_streaks_title:"Serileri devre dışı bırak", progress_disable_streaks_desc:"Gün sayacı motive etmek yerine baskı hissettiriyorsa gizle.",
+    why_suggestion_link:"Bu öneri neden yapıldı?",
+    ef_cta:"Hissimi anlat", ef_eyebrow:"İfade Etmeme Yardım Et", ef_title:"Nasıl Hissettiğimi Anlatmama Yardım Et",
+    ef_intro:"Şu an sana doğru gelen neyse doldur — atlamak istediğin satırı boş bırak.",
+    ef_f_now:"Şu anda hissediyorum", ef_ph_now:"örn. kaygılı ve yorgun",
+    ef_f_after:"Bunu şundan sonra fark ettim", ef_ph_after:"örn. zor bir konuşma",
+    ef_f_affecting:"Bu şunu etkiliyor", ef_ph_affecting:"örn. uykumu ve odaklanmamı",
+    ef_f_hardest:"En zor olan şey", ef_ph_hardest:"örn. sonra ne yapacağımı bilmemek",
+    ef_f_need:"Şu an ihtiyacım olan şey belki", ef_ph_need:"örn. biraz alan ve sessizlik",
+    ef_f_help:"Yardımcı olabilecek bir şey", ef_ph_help:"örn. güvendiğim biriyle konuşmak",
+    ef_empty_hint:"Boş bıraktığın her alan taslağından çıkarılır.", ef_generate:"Taslağımı oluştur",
+    ef_tone_concise:"Kısa", ef_tone_detailed:"Ayrıntılı",
+    ef_copy:"Kopyala", ef_copied:"Kopyalandı ✓", ef_back_edit:"Düzenlemeye dön",
+    ef_ai_rewrite:"Yapay zeka ile yeniden yaz", ef_ai_note:"Bu, taslağını yeniden yazması için yapay zeka sağlayıcımıza gönderir. Başka hiçbir şey gönderilmez.",
+    ef_ai_confirm:"Bu, taslağını yeniden yazması için Anthropic'e (yapay zeka sağlayıcımız) cihazının dışına gönderecek. Devam edilsin mi?",
+    ef_ai_needs_consent:"Yapay zeka özelliklerini etkinleştirmek için lütfen önce bir sohbet mesajı gönder.",
+    ef_ai_done:"Yeniden yazıldı ✓", ef_empty_draft:"Taslağını burada görmek için en az bir satır doldur.",
+    progress_teaser:"Premium ile örüntülerine dair daha derin bir analiz aç.", progress_cta:"Planları gör",
+    nav_program:"Program",
+    program_eyebrow:"Odaklı program", program_title:"7 günlük kaygı programı",
+    program_desc:"Sıralı yedi egzersiz, bir gün ücretsiz, geri kalanı abonelikle açılır.",
+    program_day_prefix:"Gün", program_locked:"Kilitli 🔒",
+    achievement_title:"Harika başarı! 🎉", achievement_desc:"{n} gün üst üste ulaştın — devam et!",
+    checkin_cta:"Hızlı kontrol", checkin_eyebrow:"Bir dakikadan kısa",
+    checkin_title:"Şu anda nasıl hissediyorsun?", checkin_subtitle:"Uyanı seç, sana hemen uygun bir egzersiz önerelim.",
+    checkin_or:"Ya da kendi kelimelerinle anlat", checkin_freetext_placeholder:"örn. yarınki randevu için gerginim...",
+    checkin_freetext_btn:"Öneri al", checkin_thinking:"Bir saniye...", checkin_error:"Şu an yanıt alınamadı, biraz sonra tekrar dene.",
+    ai_unavailable_notice:"⚠️ Yapay zeka şu anda kullanılamıyor — bu genel bir yanıttır, mesajına özel değildir",
+    clear_memory_btn:"🗑️ Sohbeti temizle",
+    brief_eyebrow:"Günaydın", brief_title:"Günün özeti",
+    brief_streak_prefix:"Serin:", brief_streak_suffix:"gün üst üste",
+    brief_mood_up:"Son zamanlarda ruh halin düzeliyor — böyle devam et", brief_mood_down:"Son zamanlarda ruh halin biraz ağırlaştı — kendine zaman tanı",
+    brief_mood_stable:"Son zamanlarda ruh halin oldukça istikrarlı",
+    brief_suggest_label:"Henüz denemedin", brief_start_btn:"Şimdi başla",
+    brief_word_prefix:"Son zamanlarda günlüğünde en sık geçen kelime:",
+    mood_suggest_text:"Son zamanlarda ruh halinin biraz ağırlaştığını fark ettik — bu yardımcı olabilir:",
+    mood_suggest_btn:"Dene",
+    free_chat_remaining:"ücretsiz mesaj kaldı",
+    sleep_cta:"Uyku modu", sleep_title:"Dinlenme zamanı",
+    sleep_desc:"Uyumadan önce basit bir nefes egzersiziyle bedenini ve zihnini sakinleştirmek için iki dakika ayır.",
+    sleep_start_btn:"Nefes egzersizini başlat", sleep_skip:"Hayır teşekkürler — sadece kapat", sounds_cta:"Sesler", sounds_eyebrow:"Rahatla", sounds_title:"Ortam sesleri", sounds_subtitle:"Uygulamayı kullanırken veya uyumadan önce arka planda çalacak bir ses seç.", sound_rain:"Yağmur", sound_ocean:"Okyanus dalgaları", sound_brown:"Derin uğultu", sound_pad:"Yumuşak ton", sounds_volume_label:"Ses düzeyi", sounds_timer_label:"Kapanma zamanlayıcısı", timer_off:"Zamanlayıcı yok", timer_5min:"5 dakika", timer_15min:"15 dakika", timer_30min:"30 dakika", sounds_ends_in:"Bitmesine kalan süre",
+    relief_cta:"90 saniye bana yardım et", relief_eyebrow:"Hızlı rahatlama",
+    relief_title:"Şu an neye en yakın hissediyorsun?", relief_subtitle:"Birini seç, hemen kısa bir egzersiz başlayacak — tamamen çevrimdışı.",
+    relief_stop:"Durdur ve çık", relief_end_title:"Aferin — kendine zaman ayırdın",
+    relief_fb_yes:"Evet, yardımcı oldu", relief_fb_little:"Biraz", relief_fb_no:"Pek sayılmaz",
+    passport_open_btn:"Gizlilik Pasaportunu Aç", passport_eyebrow:"Gizlilik Pasaportu",
+    passport_title:"Verilerine ne olur",
+    passport_local_title:"Bu cihazda kalanlar", passport_local_text:"Ruh hali kaydın, günlük yazıların, egzersiz geçmişin, serin ve sohbet geçmişin yalnızca bu tarayıcının yerel deposunda saklanır. Hiçbiri herhangi bir Waha sunucusuna veya veritabanına yüklenmez — çünkü Waha'nın bu veriler için böyle bir şeyi yok.",
+    passport_ai_title:"Yapay zekaya gönderilenler", passport_ai_text:"Yalnızca sohbette veya hızlı kontrolde yazdığın metin, bir yanıt üretmek için Anthropic'e (yapay zeka sağlayıcımız) gönderilir. Başka hiçbir şey — ruh hali kaydın, günlüğün, egzersiz geçmişin — otomatik olarak gönderilmez.",
+    passport_logs_title:"Teknik kayıtlar", passport_logs_text:"Sunucumuz bir isteğin başarılı olup olmadığını ve bir yanıtın güvenlik nedeniyle değiştirilip değiştirilmediğini kaydedebilir — asla mesajlarının içeriğini değil.",
+    passport_temp_label:"Geçici sohbet", passport_temp_desc:"Etkinken, yeni sohbet mesajları bu cihaza kaydedilmez. Kapattığında veya uygulamayı kapattığında sona erer.",
+    passport_temp_active:"🕶️ Geçici mod — bu sohbet kaydedilmiyor",
+    passport_controls_label:"Kontrollerin", passport_del_chat:"Sohbet geçmişini sil", passport_del_mood:"Ruh hali verilerini sil",
+    passport_del_exercises:"Egzersiz geçmişini sil", passport_export_all:"Tüm verilerimi dışa aktar", passport_del_all:"Her şeyi sil",
+    passport_done:"Tamamlandı ✓", passport_error:"Bir şeyler yanlış gitti, tekrar dene",
+    passport_confirm_all:"Bu, bu cihazdaki tüm Waha verilerini kalıcı olarak siler — ruh hali, günlük, sohbet, seri, her şey. Bu geri alınamaz. Devam edilsin mi?",
+    calmplan_cta:"Sakinlik Planı", calmplan_eyebrow:"Kişisel Sakinlik Planı", calmplan_title:"Sakinlik Planım",
+    calmplan_intro:"Bunu şimdi, kendini iyi hissederken hazırla, böylece zor bir an için hazır olur.",
+    calmplan_f_exercise:"Bana yardımcı olan sakinleştirici bir egzersiz", calmplan_ph_exercise:"örn. 4-7-8 nefes egzersizi",
+    calmplan_f_sentence:"Bana yardımcı olan bir cümle", calmplan_ph_sentence:"örn. bu duygu geçecek",
+    calmplan_f_place:"Daha sakin hissettiğim bir yer", calmplan_ph_place:"örn. balkonum",
+    calmplan_f_activity:"Güvenli bir aktivite", calmplan_ph_activity:"örn. kısa bir yürüyüş",
+    calmplan_f_person:"Ulaşabileceğim biri", calmplan_ph_person:"örn. kız kardeşim Lina",
+    calmplan_f_steps:"Zor bir anda izlemek istediğim adımlar", calmplan_ph_steps:"örn. 1) dur 2) nefes al 3) birini ara",
+    calmplan_save:"Planımı kaydet", calmplan_edit:"Düzenle", calmplan_export:"Dışa aktar", calmplan_print:"Yazdır", calmplan_delete:"Sil",
+    calmplan_crisis_note:"Acil durumda, bu plan yardımın yerini tutmaz.", calmplan_crisis_btn:"Kriz kaynakları",
+    calmplan_confirm_delete:"Sakinlik planın kalıcı olarak silinsin mi? Bu geri alınamaz.",
+    checkin_opt1:"Kaygılı veya gergin", checkin_opt2:"Üzgün veya ağır", checkin_opt3:"Dağınık, hızlı düşünceler", checkin_opt4:"Fiziksel olarak yorgun",
+    crisis_button:"Şimdi yardıma ihtiyacım var", crisis_eyebrow:"Yalnız değilsin",
+    crisis_title:"Gerçek yardım — ücretsiz ve gizli", crisis_subtitle:"Şu anda ciddi bir kriz yaşıyorsan, bu hatlardan birine ulaş — eğitimli kişiler seni dinlemeye hazır.",
+    crisis_de_label:"TelefonSeelsorge (Almanya) — 7/24, ücretsiz ve anonim",
+    crisis_de_note:"Bildiğin herhangi bir dilde konuşabilirsin; seni onu anlayan biriyle bağlamaya çalışacaklardır.",
+    crisis_ru_label:"Rusça veya Ukraynaca konuşanlar için — Telefon Doweria",
+    crisis_intl_label:"Almanya dışında mısın?",
+    crisis_intl_note:"Ülkendeki bir kriz hattını findahelpline.com üzerinden bul — çoğu ülke için mevcut.",
+    backup_label:"Yedekleme", backup_desc:"Günlüğünü, serini ve ruh halini küçük bir dosya olarak kaydet veya başka bir cihazda geri yükle.",
+    backup_export:"Yedeği dışa aktar", backup_import:"Yedeği içe aktar",
+    backup_export_done:"Dosya indirildi ✓", backup_import_done:"Başarıyla geri yüklendi ✓", backup_import_error:"Geçersiz dosya",
+    onboarding_next:"İleri", onboarding_skip:"Atla", onboarding_start:"Başlayalım",
+    ob1_icon:"👋", ob1_title:"Waha'ya hoş geldin", ob1_desc:"Güvenli, gizli alanın — teşhis yok, tedavi yok, sadece tam ihtiyacın olduğunda pratik araçlar.",
+    ob2_icon:"⚡", ob2_title:"Hızlı kontrol", ob2_desc:"Ana sayfadan şu an nasıl hissettiğini seç, sana hemen uygun bir egzersiz önerelim — bir dakikadan kısa sürede.",
+    ob3_icon:"📚", ob3_title:"Egzersizler ve kütüphane", ob3_desc:"12 dilde tam olarak mevcut 12 rehberli egzersiz ve 9 bilgi makalesi — üst menüden istediğin zaman gözat.",
+    ob4_icon:"🔒", ob4_title:"Her şey cihazında kalır", ob4_desc:"Günlüğün, serin ve ruh halin yalnızca yerel olarak kaydedilir, asla bir sunucuya gönderilmez — istediğin zaman ⚙ Tercihler'den yedek de alabilirsin.",
+    timer_start:"Zamanlayıcıyı başlat", timer_running:"Devam ediyor…", read_aloud:"Adımları dinle",
+    trust_private:"Önce gizlilik", trust_cbt:"BDT temelli", trust_multilingual:"12 dil", age_gate_title:"Başlamadan önce", age_gate_text:"Waha, 16 yaş ve üzeri kişiler içindir. Daha gençsen, lütfen bir ebeveyn veya vasi gözetiminde kullan.", age_gate_checkbox:"16 yaşında veya daha büyük olduğumu onaylıyorum", age_gate_continue:"Devam et",
+    mood_prompt:"Şu anki ruh halini nasıl değerlendirirsin?", mood_empty:"Bir örüntü görmek için ruh halini kaydet.",
+    prefs_eyebrow:"Senin alanın, senin kuralların", prefs_title:"Tercihler",
+    prefs_subtitle:"Waha'in nasıl hissettirdiği ve düşüncelerinin nasıl ele alındığı için birkaç sakin ayar.",
+    prefs_experience_label:"Deneyim",
+    prefs_calm_title:"Alanı sakin tut", prefs_calm_desc:"Gereksiz animasyonları ve geçişleri kapat.",
+    prefs_privacy_label:"Gizlilik, açıkça",
+    prefs_privacy_quote:"Düşüncelerin bilgin olmadan toplanan veriler değildir. Günlük, seri ve ruh halin yalnızca kendi cihazında saklanır, asla oradan çıkmaz. Sohbet mesajların ise akıllı bir yanıt üretmek için harici bir yapay zeka hizmetine gönderilir — ilk sohbetine başlarken açıkladığımız gibi — ve sohbetin seni bir dahaki sefere hatırlaması için yalnızca cihazında da saklanır. İstediğin zaman silebilirsin.",
+    prefs_dark_title:"Karanlık mod", prefs_dark_desc:"Az ışıkta daha yumuşak renkler.",
+    prefs_textlarge_title:"Daha büyük yazı", prefs_textlarge_desc:"Egzersiz, makale ve sohbet metnini daha kolay okunması için büyütür.",
+    voice_gender_label:"Okuma sesi", voice_gender_desc:"Seslendirme sesini ayarlamak için kendini nasıl tanımladığını söyle (isteğe bağlı, sadece cihazında alternatif ses varsa kullanılır).",
+    voice_gender_male:"Erkek", voice_gender_female:"Kadın", voice_gender_none:"Belirtmek istemiyorum",
+    aria_close:"Kapat", aria_share:"Paylaş", aria_mic:"Sesli giriş", aria_settings:"Ayarlar",
+    reminder_text:"Bugünkü kontrolünü henüz yapmadın 👋", reminder_cta:"Şimdi kontrol et",
+    consent_eyebrow:"Başlamadan önce", consent_title:"Sohbetin harici bir yapay zeka hizmetine gönderiliyor",
+    consent_text:"Akıllıca yanıt verebilmek için mesajın, uygulamanın barındırma sunucusu aracılığıyla Anthropic'e (yapay zeka sağlayıcısı) gönderilir. Mesajların kaydedilmez ve başka bir amaç için kullanılmaz. Devam etmeyi kabul ediyor musun?",
+    consent_accept:"Kabul ediyorum, başlayalım", consent_later:"Şimdi değil",
+    locked_content_text:"Bu içerik Waha Plus kapsamındadır. Tam olarak kullanmak için abonelikle aç.",
+    locked_unlock_btn:"Waha Plus ile aç",
+    rate_limit_msg:"Hizmeti korumak için geçici olarak mesaj sınırına ulaştık. Lütfen birkaç dakika bekleyip tekrar dene 🙏",
+    done_btn:"Bugün tamamlandı ✓", done_btn_done:"Bugün tamamlandı ✓", streak_label:"gün üst üste",
+  },
+  ku: {
+    nav_chat:"Sohbet", nav_library:"Pirtûkxane", nav_exercises:"Ezmûn",
+    hero_eyebrow:"Cihek ewle û nihênî — ne teşxîs e, ne dermankirin e",
+    hero_title:"Gava giran dibe,<br>ne hewce ye tu bi tenê hilgirî.",
+    hero_lead:"Waha bêyî darizandin guhdarî te dike û gavên pratîk ên li ser bingeha zanistî pêşniyar dike ji bo fikar û stresê.",
+    cta_chat:"Sohbetê ceribîne", cta_exercises:"Li ezmûnan binêre",
+    breathe_start:"Ezmûna nefesê dest pê bike", breathe_hint:"Bitikîne ji bo ezmûnek nefesê ya 30 çirkeyan",
+    chat_eyebrow:"Nimûneya zindî", chat_title:"Niha bi alîkar re biaxive",
+    chat_desc:"Nimûneyek ji sohbetê — bi nivîsandin an bi deng.",
+    chat_status:"Serhêl · bi tevahî nihênî",
+    chat_initial_msg:"Bi xêr hatî. Ev cihê te ye, wextê xwe bigire. Îro tu çawa hest dikî?",
+    chat_placeholder:"Binivîse an li mîkrofonê bitikîne û biaxive…", chat_send:"Bişîne",
+    voice_on:"Deng vekirî ye", voice_off:"Dengî çalak bike",
+    library_eyebrow:"Pirtûkxaneya zanînê", library_title:"Kurteyên psîkolojiyê yên hêsan",
+    library_desc:"Naveroka pêbawer û zanistî, bi awayekî hêsan, di çend deqeyan de.",
+    lib1_tag:"Fikar", lib1_title:"Fêm kirina çerxa fikarê", lib1_desc:"Fikrên fikarê çawa çêdibin û çima carinan bêyî sedemek diyar mezin dibin.",
+    lib2_tag:"Kirdar", lib2_title:"Guherîna piçûk, bandora mezin", lib2_desc:"Bingehên avakirina kirdarek nû, bêyî hewceyê xwesteka giştî.",
+    lib3_tag:"Têkilî", lib3_title:"Sînorên tenduristî bêyî sûcdarî", lib3_desc:"Çawa 'na' bêje û di heman demê de têkiliyên girîng biparêze.",
+    exercises_eyebrow:"Ezmûnên rojane", exercises_title:"Pirtûkxaneya ezmûnên tenduristiya derûnî",
+    exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
+    footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
+    title:"Waha — Cihê te yê ewle",
+    filter_all:"Hemû", filter_breathing:"Nefes & Aramî", filter_mind:"Hişmendî", filter_write:"Nivîsandin", filter_sleep:"Xew & Kirdar",
+    libf_all:"Hemû", libf_anxiety:"Fikar", libf_habits:"Kirdar", libf_relationships:"Têkilî", libf_self:"Rêzgirtina xwe", libf_emotions:"Hest", libf_stress:"Tengî",
+    read_more:"Zêdetir bixwîne →",
+    install_ios_text:"Ji bo ezmûna herî baş, Waha li ekrana xwe ya sereke zêde bike: li Parvekirinê ⬆️ bitikîne paşê li \"Li Ekrana Malê Zêde Bike\".",
+    install_android_text:"Waha li ser cîhaza xwe saz bike ji bo gihîştina zûtir.", install_btn:"Saz bike",
+    journal_placeholder:"Li vir bi azadî binivîse…", journal_save:"Tomar bike", journal_saved:"Li ser cîhaza te hate tomarkirin ✓", journal_entries_label:"Nivîsên te yên berê",
+    premium_badge:"Premium",
+    upgrade_title:"Ezmûnek kûrtir veke", upgrade_subtitle:"Plana guncan hilbijêre da ku rêwîtiya xwe ya bi Waha re berdewam bikî.",
+    upgrade_free_title:"Belaş", upgrade_free_desc:"Sohbetên sînordar, pirtûkxaneya bingehîn, 3 ezmûnên rojane",
+    upgrade_monthly_title:"Abonetiya mehane", upgrade_monthly_desc:"Sohbetên bêsînor, pirtûkxaneya tevahî, bernameyên pêşketî",
+    upgrade_programs_title:"Bernameyên zêde", upgrade_programs_desc:"Kurs û bernameyên kurt ên taybet", upgrade_monthly_price:"9.99€ / mehane", upgrade_yearly_title:"Salane", upgrade_yearly_price:"99.90€ / sal", upgrade_yearly_desc:"Hemû tiştên plana mehane, carekê di salê de tê fatûrekirin", upgrade_yearly_badge:"17% tasarûf", upgrade_yearly_note:"≈ 8.33€ / meh",
+    upgrade_maybe_later:"Dibe ku paşê",
+    progress_label:"Pêşketina te", progress_streak:"roj li dû hev", progress_journal:"nivîsên tomarkirî", progress_mood:"tomarên rewşê",
+    progress_exercises:"ezmûnên qedandî", progress_helped:"caran alîkar bûye",
+    progress_disable_streaks_title:"Rêzefîlman neçalak bike", progress_disable_streaks_desc:"Jimareya rojan veşêre eger ew zêdetir zext bide te ji teşwîqê.",
+    why_suggestion_link:"Çima ev pêşniyar?",
+    ef_cta:"Hestê xwe rave bike", ef_eyebrow:"Alîkariya Vegotinê", ef_title:"Alîkariya min bike ku rave bikim ka ez çawa hîs dikim",
+    ef_intro:"Tiştê ku niha ji te re rast xuya dike tijî bike — rêzek vala bihêle da ku wê derbas bikî.",
+    ef_f_now:"Niha ez hîs dikim", ef_ph_now:"nimûne: xemgîn û westiyayî",
+    ef_f_after:"Min ev piştî vê dît", ef_ph_after:"nimûne: axaftinek dijwar",
+    ef_f_affecting:"Ev bandorê li ser dike", ef_ph_affecting:"nimûne: xewa min û sekinandina min",
+    ef_f_hardest:"Tiştê herî dijwar ev e", ef_ph_hardest:"nimûne: nezanîna ku paşê çi bikim",
+    ef_f_need:"Tiştê ku niha hewceyê min pê heye dibe", ef_ph_need:"nimûne: hinek cîh û aramî",
+    ef_f_help:"Tiştek ku dikare alîkar be", ef_ph_help:"nimûne: axaftin bi kesekî ku ez baweriya xwe pê tînim",
+    ef_empty_hint:"Her qadeke ku tu vala bihêlî tenê ji reçeta te tê derxistin.", ef_generate:"Reçeta min biafirîne",
+    ef_tone_concise:"Kurt", ef_tone_detailed:"Berfireh",
+    ef_copy:"Kopî bike", ef_copied:"Hate kopîkirin ✓", ef_back_edit:"Vegere sererastkirinê",
+    ef_ai_rewrite:"Bi AI ve dîsa binivîse", ef_ai_note:"Ev reçeta te ji bo dîsa nivîsandinê ji peydakerê me yê AI re dişîne. Tiştek din nayê şandin.",
+    ef_ai_confirm:"Ev ê reçeta te ji amûra te derkeve û here Anthropic (peydakerê me yê AI) da ku dîsa binivîse. Berdewam bike?",
+    ef_ai_needs_consent:"Ji kerema xwe pêşî peyamek chatê bişîne da ku taybetmendiyên AI çalak bikî.",
+    ef_ai_done:"Dîsa hate nivîsandin ✓", ef_empty_draft:"Bo dîtina reçeta xwe li vir, herî kêm rêzek tijî bike.",
+    progress_teaser:"Bi Premium re analîzek kûrtir a şêwazên xwe veke.", progress_cta:"Plana bibîne",
+    nav_program:"Bername",
+    program_eyebrow:"Bernameya taybet", program_title:"Bernameya 7 rojan ya li dijî fikarê",
+    program_desc:"Heft ezmûnên li dû hev, rojek belaş, mayîn bi aboneyê tê vekirin.",
+    program_day_prefix:"Roj", program_locked:"Girtî 🔒",
+    achievement_title:"Serkeftinek xweş! 🎉", achievement_desc:"Tu gihîştî {n} roj li dû hev — berdewam be!",
+    checkin_cta:"Kontrolek zû", checkin_eyebrow:"Kêmtir ji xulekekê",
+    checkin_title:"Tu niha çawa hîs dikî?", checkin_subtitle:"Tiştê guncan hilbijêre, emê tavilê ezmûnek guncan pêşniyar bikin.",
+    checkin_or:"An jî bi peyvên xwe rave bike", checkin_freetext_placeholder:"nimûne: ez ji bo sibê aciz im...",
+    checkin_freetext_btn:"Pêşniyarê bistîne", checkin_thinking:"Deqîqeyek...", checkin_error:"Niha bersiv nehat wergirtin, dûre dîsa biceribîne.",
+    ai_unavailable_notice:"⚠️ AI niha ne berdest e — ev bersivek giştî ye, ne li gorî peyama te ye",
+    clear_memory_btn:"🗑️ Chatê paqij bike",
+    brief_eyebrow:"Roj baş", brief_title:"Kurteya roja te",
+    brief_streak_prefix:"Rêzefîlma te:", brief_streak_suffix:"roj li pey hev",
+    brief_mood_up:"Hesta te vê dawiyê başbûye — wisa berdewam bike", brief_mood_down:"Hesta te vê dawiyê hinekî giran bûye — dema xwe bigire",
+    brief_mood_stable:"Hesta te vê dawiyê bi giştî sabît e",
+    brief_suggest_label:"Hê neceribandiye", brief_start_btn:"Niha dest pê bike",
+    brief_word_prefix:"Peyva herî zêde di rojnivîska te ya vê dawiyê de:",
+    mood_suggest_text:"Me dît ku hesta te vê dawiyê hinekî giran bûye — ev dikare bibe alîkar:",
+    mood_suggest_btn:"Biceribîne",
+    free_chat_remaining:"peyamên belaş mane",
+    sleep_cta:"Moda xewê", sleep_title:"Wexta vehesînê ye",
+    sleep_desc:"Berî xewê du deqîqeyan bidin xwe da ku bi ezmûnek nefesê ya sade laş û hiş xwe aram bikî.",
+    sleep_start_btn:"Ezmûna nefesê dest pê bike", sleep_skip:"Na spas — tenê bigire", sounds_cta:"Deng", sounds_eyebrow:"Bihewe", sounds_title:"Dengên derdorê", sounds_subtitle:"Dengekî hilbijêre ku li paşxanê bilîze dema tu bikaranîna sepanê an berî razanê.", sound_rain:"Baran", sound_ocean:"Pêlên deryayê", sound_brown:"Vizîna kûr", sound_pad:"Dengê nerm", sounds_volume_label:"Deng", sounds_timer_label:"Demjimêra rawestandinê", timer_off:"Bêyî demjimêr", timer_5min:"5 xulek", timer_15min:"15 xulek", timer_30min:"30 xulek", sounds_ends_in:"Diqede di",
+    relief_cta:"90 çirkeyan alîkariya min bike", relief_eyebrow:"Alîkariya lez",
+    relief_title:"Niha çi herî nêzîkî tu hîs dikî ye?", relief_subtitle:"Yekê hilbijêre, emê tavilê ezmûnek kurt dest pê bikin — bi tevahî bêinternet.",
+    relief_stop:"Rawestîne û derkeve", relief_end_title:"Baş kir — te dem da xwe",
+    relief_fb_yes:"Erê, alîkar bû", relief_fb_little:"Hinekî", relief_fb_no:"Ne bi rastî",
+    passport_open_btn:"Pasaporta Nihêrînê Veke", passport_eyebrow:"Pasaporta Nihêrînê",
+    passport_title:"Çi bi daneyên te dibe",
+    passport_local_title:"Çi li ser vê amûrê dimîne", passport_local_text:"Tomara hesta te, rojnivîsk, dîroka ezmûnan, rêzefîlm û dîroka chatê tenê di depoya herêmî ya vê gerokê de tê tomarkirin. Tu tişt jê nayê barkirin ser her serverek an danegehek Waha — ji ber ku Waha ji bo van daneyan tiştek weha nîne.",
+    passport_ai_title:"Çi ji AI re tê şandin", passport_ai_text:"Tenê nivîsa ku tu di chatê an lêpirsîna lezgîn de dinivîsî ji Anthropic re (peydakerê me yê AI) tê şandin da ku bersivek biafirîne. Tiştek din — ne tomara hesta te, ne rojnivîsk, ne dîroka ezmûnan — bixweber nayê şandin.",
+    passport_logs_title:"Tomarên teknîkî", passport_logs_text:"Servera me dikare tomar bike ka daxwazek serkeftî bû an sernekeftî, û ka bersivek ji ber sedemên ewlehiyê hate guhertin — çu carî naveroka peyamên te.",
+    passport_temp_label:"Chata demkî", passport_temp_desc:"Dema çalak be, peyamên chatê yên nû li ser vê amûrê nayên tomarkirin. Dema tu wê bigirî an sepan bigirî diqede.",
+    passport_temp_active:"🕶️ Moda demkî — ev chat nayê tomarkirin",
+    passport_controls_label:"Kontrolên te", passport_del_chat:"Dîroka chatê jê bibe", passport_del_mood:"Daneyên hestê jê bibe",
+    passport_del_exercises:"Dîroka ezmûnan jê bibe", passport_export_all:"Hemû daneyên min derxîne", passport_del_all:"Her tiştî jê bibe",
+    passport_done:"Temam ✓", passport_error:"Tiştek xelet çû, dîsa biceribîne",
+    passport_confirm_all:"Ev ê hemû daneyên Waha yên li ser vê amûrê bi awayekî domdar jê bibe — hest, rojnivîsk, chat, rêzefîlm, her tişt. Ev nayê vegerandin. Berdewam bike?",
+    calmplan_cta:"Plana Aramiyê", calmplan_eyebrow:"Plana Aramiyê ya Kesane", calmplan_title:"Plana Min a Aramiyê",
+    calmplan_intro:"Vê niha amade bike, dema tu xwe aram hîs dikî, da ku ji bo demek dijwartir amade be.",
+    calmplan_f_exercise:"Ezmûnek aramker ya alîkariya min dike", calmplan_ph_exercise:"nimûne: nefesa 4-7-8",
+    calmplan_f_sentence:"Hevokek ku alîkariya min dike", calmplan_ph_sentence:"nimûne: ev hest wê derbas bibe",
+    calmplan_f_place:"Cihek ku tê de xwe hêdîtir hîs dikim", calmplan_ph_place:"nimûne: balkona min",
+    calmplan_f_activity:"Çalakiyek ewle", calmplan_ph_activity:"nimûne: meşiyek kurt",
+    calmplan_f_person:"Kesek ku ez dikarim gihîjê", calmplan_ph_person:"nimûne: xwişka min Lîna",
+    calmplan_f_steps:"Gavên ku dixwazim di demek dijwar de bişopînim", calmplan_ph_steps:"nimûne: ١) rawestîne ٢) nefes bikişîne ٣) telefonê li kesek bike",
+    calmplan_save:"Plana min tomar bike", calmplan_edit:"Biguherîne", calmplan_export:"Derxîne", calmplan_print:"Çap bike", calmplan_delete:"Jê bibe",
+    calmplan_crisis_note:"Di rewşa awarte de, ev plan şûna alîkariyê nagire.", calmplan_crisis_btn:"Çavkaniyên krîzê",
+    calmplan_confirm_delete:"Plana aramiyê bi awayekî domdar jê bibe? Ev nayê vegerandin.",
+    checkin_opt1:"Fikar an tengasî", checkin_opt2:"Xemgînî an giranî", checkin_opt3:"Hişê belavbûyî û ramanên zû", checkin_opt4:"Betilîna laşî",
+    crisis_button:"Niha hewceyî alîkariyê me", crisis_eyebrow:"Tu bi tenê nînî",
+    crisis_title:"Alîkariya rastîn — belaş û veşartî", crisis_subtitle:"Heke tu niha di krîzek dijwar de yî, bi yek ji van xetan re têkilî daynin — kesên perwerdekirî amade ne ku guhdarî te bikin.",
+    crisis_de_label:"TelefonSeelsorge (Almanya) — 24/7, belaş û bênav",
+    crisis_de_note:"Tu dikarî bi her zimanê ku tu dizanî biaxivî; ewê hewl bidin te bi kesekî ku vî zimanî fêm dike ve girêdin.",
+    crisis_ru_label:"Ji bo axaftvanên rusî an ukraynî — Telefon Doweria",
+    crisis_intl_label:"Li derveyî Almanyayê yî?",
+    crisis_intl_note:"Li ser findahelpline.com xeta krîzê ya welatê xwe bibîne — ji bo piraniya welatan berdest e.",
+    backup_label:"Tomarkirina paşpişk", backup_desc:"Rojnivîsk, rêzefîlm û hestê xwe wek pelek biçûk tomar bike, an li ser amûrek din vegerîne.",
+    backup_export:"Paşpişkê derxe", backup_import:"Paşpişkê têxe",
+    backup_export_done:"Pel hate dakêşan ✓", backup_import_done:"Bi serkeftî hate vegerandin ✓", backup_import_error:"Pel ne derbasdar e",
+    onboarding_next:"Pêşve", onboarding_skip:"Derbas bike", onboarding_start:"Em dest pê bikin",
+    ob1_icon:"👋", ob1_title:"Bi xêr hatî Waha", ob1_desc:"Cihê te yê ewle û veşartî — bêyî teşxîs, bêyî dermankirin, tenê amûrên pratîk her gava tu hewce bikî.",
+    ob2_icon:"⚡", ob2_title:"Kontrolek zû", ob2_desc:"Ji rûpela sereke tiştê tu niha hîs dikî hilbijêre, emê tavilê ezmûnek guncan pêşniyar bikin — kêmtir ji xulekekê.",
+    ob3_icon:"📚", ob3_title:"Ezmûn û pirtûkxane", ob3_desc:"12 ezmûnên rêberkirî û 9 gotarên zanînê, bi tevahî bi 12 zimanan berdest in — her gav ji menuya jorîn bibîne.",
+    ob4_icon:"🔒", ob4_title:"Her tişt li ser amûra te dimîne", ob4_desc:"Rojnivîsk, rêzefîlm û hestê te tenê bi herêmî tê tomarkirin, çu carî ji bo serverek nayê şandin — tu her gav dikarî ji ⚙ Vebijark paşpişkek jî derxînî.",
+    timer_start:"Demjimêrê dest pê bike", timer_running:"Dimeşe…", read_aloud:"Guhdariya gavan bike",
+    trust_private:"Pêşî nihênî", trust_cbt:"Li ser bingeha CBT", trust_multilingual:"12 ziman", age_gate_title:"Berî em dest pê bikin", age_gate_text:"Waha ji bo kesên 16 salî û bilindtir hatiye çêkirin. Heke tu ji vê biçûktir î, ji kerema xwe di bin çavdêriya dê/bav an serperiştek de bikar bîne.", age_gate_checkbox:"Ez erê dikim ku ez 16 salî û bilindtir im", age_gate_continue:"Bidomîne",
+    mood_prompt:"Tu rewşa xwe ya derûnî ya niha çawa nirxdikî?", mood_empty:"Rewşa xwe tomar bike da ku li vir mînakek bibînî.",
+    prefs_eyebrow:"Cihê te, qaîdeyên te", prefs_title:"Vebijêrk",
+    prefs_subtitle:"Çend mîhengên aram ji bo ka Waha çawa hîs dike û ramanên te çawa têne girtin.",
+    prefs_experience_label:"Ezmûn",
+    prefs_calm_title:"Cihê aram bihêle", prefs_calm_desc:"Anîmasyon û veguherînên ne-hewce bigire.",
+    prefs_privacy_label:"Nihênî, bi zelalî",
+    prefs_privacy_quote:"Ramanên te ne daneyên bêyî zanîna te têne kombûn in. Rojnivîsk, rêzefîlm û hesta te tenê li ser cîhaza te tê tomarkirin û çu carî jê dernakeve. Lê belê, peyamên chatê ji bo karûbarek AI ya derveyî tên şandin da ku bersivek jîr biafirînin — wek ku em di destpêka chata te ya yekem de rave kirin — û ew jî tenê li ser cîhaza te tê tomarkirin da ku chat te cara din bibîr bîne. Tu dikarî her gav wê jê bibî.",
+    prefs_dark_title:"Moda Tarî", prefs_dark_desc:"Rengên hêdîtir ji bo ronahiya kêm.",
+    prefs_textlarge_title:"Nivîsa mezintir", prefs_textlarge_desc:"Ezmûn, gotar û peyamên chatê mezin dike ji bo xwendina hêsantir.",
+    voice_gender_label:"Dengê xwendinê", voice_gender_desc:"Ji bo mîhengkirina dengê xwendinê, ji me re bibêje tu çawa nasnameya xwe dikî (vebijarkî ye, tenê ji bo hilbijartina dengekî ku amûra te pêşkêş dike tê bikaranîn).",
+    voice_gender_male:"Nêr", voice_gender_female:"Mê", voice_gender_none:"Nabêjim",
+    aria_close:"Bigire", aria_share:"Parve bike", aria_mic:"Têketina dengî", aria_settings:"Mîheng",
+    reminder_text:"Tu hê kontrola xwe ya îro nekiriye 👋", reminder_cta:"Niha kontrol bike",
+    consent_eyebrow:"Berî em dest pê bikin", consent_title:"Chata te ji bo karûbarek AI ya derveyî tê şandin",
+    consent_text:"Ji bo bersivek jîr, peyama te bi rêya servera hostkirinê ya sepanê ji Anthropic (peydakerê AI) re tê şandin. Peyamên te nayên tomarkirin û ji bo tu mebesta din nayên bikaranîn. Tu razî yî ku berdewam bikî?",
+    consent_accept:"Erê, em dest pê bikin", consent_later:"Niha na",
+    locked_content_text:"Ev naverok beşek ji Waha Plus e. Bi endamtiyê veke da ku bi tevahî sûdê jê wergirî.",
+    locked_unlock_btn:"Bi Waha Plus veke",
+    rate_limit_msg:"Em bi demkî gihîştine sînorê peyaman ji bo parastina xizmetê. Ji kerema xwe çend deqîqeyan bisekine û dîsa biceribîne 🙏",
+    done_btn:"Îro qediya ✓", done_btn_done:"Îro qediya ✓", streak_label:"roj li dû hev",
+  },
+  es: {
+    nav_chat:"Chat", nav_library:"Biblioteca", nav_exercises:"Ejercicios",
+    hero_eyebrow:"Un espacio seguro y confidencial — sin diagnóstico ni tratamiento",
+    hero_title:"Cuando todo pesa,<br>no tienes que cargarlo solo.",
+    hero_lead:"Waha te escucha sin juzgar y sugiere pasos prácticos, basados en ciencia, para manejar la ansiedad y el estrés.",
+    cta_chat:"Probar el chat", cta_exercises:"Ver ejercicios",
+    breathe_start:"Iniciar ejercicio de respiración", breathe_hint:"Toca para un ejercicio de respiración de 30 segundos",
+    chat_eyebrow:"Demo en vivo", chat_title:"Habla con el asistente ahora",
+    chat_desc:"Una demo del chat — por texto o por voz.",
+    chat_status:"En línea · totalmente confidencial",
+    chat_initial_msg:"Bienvenido. Este es tu espacio, tómate tu tiempo. ¿Cómo te sientes hoy?",
+    chat_placeholder:"Escribe o toca el micrófono para hablar…", chat_send:"Enviar",
+    voice_on:"Voz activada", voice_off:"Activar voz",
+    library_eyebrow:"Biblioteca de conocimiento", library_title:"Resúmenes de psicología simplificados",
+    library_desc:"Contenido confiable y científico, explicado de forma sencilla, en pocos minutos.",
+    lib1_tag:"Ansiedad", lib1_title:"Entender la espiral de ansiedad", lib1_desc:"Cómo se forman los pensamientos ansiosos y por qué a veces crecen sin razón clara.",
+    lib2_tag:"Hábitos", lib2_title:"Pequeño cambio, gran impacto", lib2_desc:"Lo básico para construir un nuevo hábito, sin necesitar una voluntad sobrehumana.",
+    lib3_tag:"Relaciones", lib3_title:"Límites sanos sin culpa", lib3_desc:"Cómo decir \"no\" y mantener las relaciones importantes.",
+    exercises_eyebrow:"Ejercicios diarios", exercises_title:"Biblioteca de ejercicios de salud mental",
+    exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
+    footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
+    title:"Waha — Tu espacio seguro",
+    filter_all:"Todos", filter_breathing:"Respiración y relajación", filter_mind:"Atención plena", filter_write:"Escritura", filter_sleep:"Sueño y hábitos",
+    libf_all:"Todos", libf_anxiety:"Ansiedad", libf_habits:"Hábitos", libf_relationships:"Relaciones", libf_self:"Autoestima", libf_emotions:"Emociones", libf_stress:"Estrés",
+    read_more:"Leer más →",
+    install_ios_text:"Para la mejor experiencia, añade Waha a tu pantalla de inicio: toca Compartir ⬆️ y luego \"Añadir a pantalla de inicio\".",
+    install_android_text:"Instala Waha en tu dispositivo para un acceso más rápido.", install_btn:"Instalar",
+    journal_placeholder:"Escribe libremente aquí…", journal_save:"Guardar", journal_saved:"Guardado en tu dispositivo ✓", journal_entries_label:"Tus escritos anteriores",
+    premium_badge:"Premium",
+    upgrade_title:"Desbloquea una experiencia más profunda", upgrade_subtitle:"Elige el plan adecuado para seguir tu viaje con Waha.",
+    upgrade_free_title:"Gratis", upgrade_free_desc:"Chats limitados, biblioteca básica, 3 ejercicios diarios",
+    upgrade_monthly_title:"Plan mensual", upgrade_monthly_desc:"Chats ilimitados, biblioteca completa, programas avanzados",
+    upgrade_programs_title:"Programas adicionales", upgrade_programs_desc:"Cursos y programas cortos especializados", upgrade_monthly_price:"9,99€ / mes", upgrade_yearly_title:"Anual", upgrade_yearly_price:"99,90€ / año", upgrade_yearly_desc:"Todo lo del plan mensual, facturado una vez al año", upgrade_yearly_badge:"Ahorra 17%", upgrade_yearly_note:"≈ 8,33€ / mes",
+    upgrade_maybe_later:"Quizás más tarde",
+    progress_label:"Tu progreso", progress_streak:"días seguidos", progress_journal:"escritos guardados", progress_mood:"registros de ánimo",
+    progress_exercises:"ejercicios completados", progress_helped:"veces que ayudó",
+    progress_disable_streaks_title:"Desactivar rachas", progress_disable_streaks_desc:"Oculta el contador de días si te genera más presión que motivación.",
+    why_suggestion_link:"¿Por qué esta sugerencia?",
+    ef_cta:"Explicar cómo me siento", ef_eyebrow:"Ayúdame a Expresarme", ef_title:"Ayúdame a explicar cómo me siento",
+    ef_intro:"Rellena lo que te parezca cierto ahora mismo — deja cualquier línea en blanco para omitirla.",
+    ef_f_now:"Ahora mismo me siento", ef_ph_now:"ej.: ansioso/a y cansado/a",
+    ef_f_after:"Noté esto después de", ef_ph_after:"ej.: una conversación difícil",
+    ef_f_affecting:"Esto está afectando a", ef_ph_affecting:"ej.: mi sueño y mi concentración",
+    ef_f_hardest:"Lo más difícil es", ef_ph_hardest:"ej.: no saber qué hacer después",
+    ef_f_need:"Lo que quizás necesito ahora es", ef_ph_need:"ej.: algo de espacio y tranquilidad",
+    ef_f_help:"Una cosa que podría ayudar es", ef_ph_help:"ej.: hablar con alguien de confianza",
+    ef_empty_hint:"Cualquier campo que dejes en blanco simplemente se omite de tu borrador.", ef_generate:"Crear mi borrador",
+    ef_tone_concise:"Conciso", ef_tone_detailed:"Detallado",
+    ef_copy:"Copiar", ef_copied:"Copiado ✓", ef_back_edit:"Volver a editar",
+    ef_ai_rewrite:"Reescribir con IA", ef_ai_note:"Esto envía tu borrador a nuestro proveedor de IA para reescribirlo. No se envía nada más.",
+    ef_ai_confirm:"Esto enviará tu borrador fuera de tu dispositivo a Anthropic (nuestro proveedor de IA) para reescribirlo. ¿Continuar?",
+    ef_ai_needs_consent:"Envía primero un mensaje de chat para habilitar las funciones de IA.",
+    ef_ai_done:"Reescrito ✓", ef_empty_draft:"Rellena al menos una línea para ver tu borrador aquí.",
+    progress_teaser:"Desbloquea un análisis más profundo de tus patrones con Premium.", progress_cta:"Ver planes",
+    nav_program:"Programa",
+    program_eyebrow:"Programa enfocado", program_title:"Programa de 7 días contra la ansiedad",
+    program_desc:"Siete ejercicios secuenciados, un día gratis, el resto se desbloquea con una suscripción.",
+    program_day_prefix:"Día", program_locked:"Bloqueado 🔒",
+    achievement_title:"¡Gran logro! 🎉", achievement_desc:"Alcanzaste {n} días seguidos — ¡sigue así!",
+    checkin_cta:"Chequeo rápido", checkin_eyebrow:"En menos de un minuto",
+    checkin_title:"¿Cómo te sientes ahora?", checkin_subtitle:"Elige lo que te describe, y te sugerimos un ejercicio adecuado al instante.",
+    checkin_or:"O descríbelo con tus propias palabras", checkin_freetext_placeholder:"ej.: estoy nervioso/a por lo de mañana...",
+    checkin_freetext_btn:"Obtener una sugerencia", checkin_thinking:"Un momento...", checkin_error:"No se pudo obtener respuesta ahora, inténtalo de nuevo en un momento.",
+    ai_unavailable_notice:"⚠️ La IA no está disponible temporalmente — esta es una respuesta genérica, no adaptada a tu mensaje",
+    clear_memory_btn:"🗑️ Borrar chat",
+    brief_eyebrow:"Buenos días", brief_title:"Tu resumen del día",
+    brief_streak_prefix:"Tu racha:", brief_streak_suffix:"días seguidos",
+    brief_mood_up:"Tu ánimo ha mejorado últimamente — sigue así", brief_mood_down:"Tu ánimo ha estado un poco más pesado últimamente — tómate tu tiempo",
+    brief_mood_stable:"Tu ánimo se ha mantenido bastante estable últimamente",
+    brief_suggest_label:"Aún no probado", brief_start_btn:"Empezar ahora",
+    brief_word_prefix:"Palabra más frecuente en tu diario últimamente:",
+    mood_suggest_text:"Notamos que tu ánimo ha estado un poco más pesado últimamente — esto podría ayudar:",
+    mood_suggest_btn:"Probar",
+    free_chat_remaining:"mensajes gratis restantes",
+    sleep_cta:"Modo sueño", sleep_title:"Hora de descansar",
+    sleep_desc:"Tómate dos minutos para calmar tu cuerpo y mente con un ejercicio de respiración simple antes de dormir.",
+    sleep_start_btn:"Empezar ejercicio de respiración", sleep_skip:"No gracias — solo cerrar", sounds_cta:"Sonidos", sounds_eyebrow:"Relájate", sounds_title:"Sonidos ambientales", sounds_subtitle:"Elige un sonido para reproducir de fondo mientras usas la app o antes de dormir.", sound_rain:"Lluvia", sound_ocean:"Olas del océano", sound_brown:"Ruido profundo", sound_pad:"Tono suave", sounds_volume_label:"Volumen", sounds_timer_label:"Temporizador", timer_off:"Sin temporizador", timer_5min:"5 minutos", timer_15min:"15 minutos", timer_30min:"30 minutos", sounds_ends_in:"Termina en",
+    relief_cta:"Ayúdame durante 90 segundos", relief_eyebrow:"Alivio rápido",
+    relief_title:"¿Qué se parece más a lo que sientes ahora?", relief_subtitle:"Elige una opción, y empezaremos un ejercicio corto de inmediato — totalmente sin conexión.",
+    relief_stop:"Detener y salir", relief_end_title:"Bien hecho — te tomaste un momento para ti",
+    relief_fb_yes:"Sí, ayudó", relief_fb_little:"Un poco", relief_fb_no:"No realmente",
+    passport_open_btn:"Abrir el Pasaporte de Privacidad", passport_eyebrow:"Pasaporte de Privacidad",
+    passport_title:"Qué pasa con tus datos",
+    passport_local_title:"Qué se queda en este dispositivo", passport_local_text:"Tu registro de ánimo, entradas de diario, historial de ejercicios, racha e historial de chat se guardan solo en el almacenamiento local de este navegador. Nada de esto se sube a ningún servidor o base de datos de Waha — porque Waha no tiene una para estos datos.",
+    passport_ai_title:"Qué se envía a la IA", passport_ai_text:"Solo el texto que escribes en el chat o en el check-in rápido se envía a Anthropic (nuestro proveedor de IA) para generar una respuesta. Nada más — ni registro de ánimo, ni diario, ni historial de ejercicios — se envía automáticamente.",
+    passport_logs_title:"Registros técnicos", passport_logs_text:"Nuestro servidor puede registrar si una solicitud tuvo éxito o falló, y si una respuesta fue reescrita por seguridad — nunca el contenido de tus mensajes.",
+    passport_temp_label:"Conversación temporal", passport_temp_desc:"Mientras esté activa, los nuevos mensajes de chat no se guardan en este dispositivo. Termina cuando la desactivas o cierras la app.",
+    passport_temp_active:"🕶️ Modo temporal — esta conversación no se está guardando",
+    passport_controls_label:"Tus controles", passport_del_chat:"Eliminar historial de chat", passport_del_mood:"Eliminar datos de ánimo",
+    passport_del_exercises:"Eliminar historial de ejercicios", passport_export_all:"Exportar todos mis datos", passport_del_all:"Eliminar todo",
+    passport_done:"Hecho ✓", passport_error:"Algo salió mal, inténtalo de nuevo",
+    passport_confirm_all:"Esto elimina permanentemente todos los datos de Waha en este dispositivo — ánimo, diario, chat, racha, todo. Esto no se puede deshacer. ¿Continuar?",
+    calmplan_cta:"Plan de calma", calmplan_eyebrow:"Plan de calma personal", calmplan_title:"Mi plan de calma",
+    calmplan_intro:"Prepara esto ahora, mientras te sientes estable, para que esté listo para un momento más difícil.",
+    calmplan_f_exercise:"Un ejercicio calmante que me ayuda", calmplan_ph_exercise:"ej.: respiración 4-7-8",
+    calmplan_f_sentence:"Una frase que me ayuda", calmplan_ph_sentence:"ej.: este sentimiento pasará",
+    calmplan_f_place:"Un lugar donde me siento más tranquilo/a", calmplan_ph_place:"ej.: mi balcón",
+    calmplan_f_activity:"Una actividad segura", calmplan_ph_activity:"ej.: un paseo corto",
+    calmplan_f_person:"Alguien a quien puedo contactar", calmplan_ph_person:"ej.: mi hermana Lina",
+    calmplan_f_steps:"Pasos que quiero seguir en un momento difícil", calmplan_ph_steps:"ej.: 1) pausa 2) respira 3) llama a alguien",
+    calmplan_save:"Guardar mi plan", calmplan_edit:"Editar", calmplan_export:"Exportar", calmplan_print:"Imprimir", calmplan_delete:"Eliminar",
+    calmplan_crisis_note:"En una emergencia, este plan no sustituye a la ayuda.", calmplan_crisis_btn:"Recursos de crisis",
+    calmplan_confirm_delete:"¿Eliminar tu plan de calma permanentemente? Esto no se puede deshacer.",
+    checkin_opt1:"Ansioso o tenso", checkin_opt2:"Triste o con un peso encima", checkin_opt3:"Mente dispersa y acelerada", checkin_opt4:"Agotamiento físico",
+    crisis_button:"Necesito ayuda ahora", crisis_eyebrow:"No estás solo/a",
+    crisis_title:"Ayuda real — gratuita y confidencial", crisis_subtitle:"Si estás pasando por una crisis aguda ahora mismo, contacta una de estas líneas — hay personas capacitadas listas para escucharte.",
+    crisis_de_label:"TelefonSeelsorge (Alemania) — 24/7, gratis y anónimo",
+    crisis_de_note:"Puedes hablar en cualquier idioma que domines; intentarán conectarte con alguien que lo entienda.",
+    crisis_ru_label:"Para hablantes de ruso o ucraniano — Telefon Doweria",
+    crisis_intl_label:"¿Fuera de Alemania?",
+    crisis_intl_note:"Encuentra una línea de crisis en tu país en findahelpline.com — disponible para la mayoría de países.",
+    backup_label:"Copia de seguridad", backup_desc:"Guarda tu diario, tu racha y tu ánimo como un archivo pequeño, o restáuralos en otro dispositivo.",
+    backup_export:"Exportar copia de seguridad", backup_import:"Importar copia de seguridad",
+    backup_export_done:"Archivo descargado ✓", backup_import_done:"Restaurado con éxito ✓", backup_import_error:"Archivo no válido",
+    onboarding_next:"Siguiente", onboarding_skip:"Omitir", onboarding_start:"Empecemos",
+    ob1_icon:"👋", ob1_title:"Bienvenido a Waha", ob1_desc:"Tu espacio seguro y confidencial — sin diagnóstico, sin tratamiento, solo herramientas prácticas justo cuando las necesitas.",
+    ob2_icon:"⚡", ob2_title:"Chequeo rápido", ob2_desc:"Elige cómo te sientes ahora desde la página principal, y te sugerimos un ejercicio adecuado al instante — en menos de un minuto.",
+    ob3_icon:"📚", ob3_title:"Ejercicios y biblioteca", ob3_desc:"12 ejercicios guiados y 9 artículos, totalmente disponibles en 12 idiomas — explóralos cuando quieras desde el menú superior.",
+    ob4_icon:"🔒", ob4_title:"Todo se queda en tu dispositivo", ob4_desc:"Tu diario, racha y ánimo se guardan solo localmente, nunca se envían a un servidor — también puedes exportar una copia de seguridad desde ⚙ Preferencias.",
+    timer_start:"Iniciar temporizador", timer_running:"En curso…", read_aloud:"Escuchar los pasos",
+    trust_private:"Privacidad ante todo", trust_cbt:"Basado en TCC", trust_multilingual:"12 idiomas", age_gate_title:"Antes de empezar", age_gate_text:"Waha está pensado para personas de 16 años en adelante. Si eres más joven, úsalo bajo la supervisión de un padre, madre o tutor.", age_gate_checkbox:"Confirmo que tengo 16 años o más", age_gate_continue:"Continuar",
+    mood_prompt:"¿Cómo calificarías tu estado de ánimo ahora?", mood_empty:"Registra tu ánimo para empezar a ver un patrón aquí.",
+    prefs_eyebrow:"Tu espacio, tus reglas", prefs_title:"Preferencias",
+    prefs_subtitle:"Algunos controles discretos sobre cómo se siente Waha y cómo se tratan tus pensamientos.",
+    prefs_experience_label:"Experiencia",
+    prefs_calm_title:"Mantener el espacio tranquilo", prefs_calm_desc:"Desactivar animaciones y transiciones innecesarias.",
+    prefs_privacy_label:"Privacidad, dicho claramente",
+    prefs_privacy_quote:"Tus pensamientos no son datos que se recopilan sin tu conocimiento. El diario, la racha y el ánimo se guardan solo en tu dispositivo y nunca salen de él. Los mensajes del chat, en cambio, se envían a un servicio de IA externo para generar una respuesta inteligente — como se explicó al iniciar tu primer chat — y también se guardan solo localmente para que el chat te recuerde la próxima vez. Puedes borrarlo cuando quieras.",
+    prefs_dark_title:"Modo oscuro", prefs_dark_desc:"Colores más suaves para poca luz.",
+    prefs_textlarge_title:"Texto más grande", prefs_textlarge_desc:"Agranda los ejercicios, artículos y el chat para facilitar la lectura.",
+    voice_gender_label:"Voz de lectura", voice_gender_desc:"Para ajustar la voz de lectura, dinos cómo te identificas (opcional, solo se usa para elegir una voz si tu dispositivo ofrece una alternativa).",
+    voice_gender_male:"Hombre", voice_gender_female:"Mujer", voice_gender_none:"Prefiero no decirlo",
+    aria_close:"Cerrar", aria_share:"Compartir", aria_mic:"Entrada de voz", aria_settings:"Configuración",
+    reminder_text:"Aún no has hecho tu chequeo de hoy 👋", reminder_cta:"Revisar ahora",
+    consent_eyebrow:"Antes de empezar", consent_title:"Tu chat se envía a un servicio de IA externo",
+    consent_text:"Para responder con inteligencia, tu mensaje se envía a Anthropic (el proveedor de IA) a través del servidor de alojamiento de la aplicación. Tus mensajes no se guardan ni se usan para ningún otro fin. ¿Aceptas continuar?",
+    consent_accept:"Acepto, empecemos", consent_later:"Ahora no",
+    locked_content_text:"Este contenido es parte de Waha Plus. Desbloquéalo con la suscripción para aprovecharlo por completo.",
+    locked_unlock_btn:"Desbloquear con Waha Plus",
+    rate_limit_msg:"Hemos alcanzado temporalmente el límite de mensajes para proteger el servicio. Espera unos minutos e inténtalo de nuevo 🙏",
+    done_btn:"Hecho hoy ✓", done_btn_done:"Hecho hoy ✓", streak_label:"días seguidos",
+  },
+    fa: {
+      nav_chat:"گفتگو", nav_library:"کتابخانه", nav_exercises:"تمرین‌ها",
+      hero_eyebrow:"فضایی امن و محرمانه — بدون تشخیص یا درمان",
+      hero_title:"وقتی سنگین می‌شود،<br>لازم نیست تنها آن را حمل کنی.",
+      hero_lead:"Waha بدون قضاوت به تو گوش می‌دهد و گام‌های عملی و علمی برای مدیریت اضطراب و استرس پیشنهاد می‌دهد.",
+      cta_chat:"گفتگو را امتحان کن", cta_exercises:"تمرین‌ها را ببین",
+      breathe_start:"شروع تمرین تنفس", breathe_hint:"لمس کن برای یک تمرین تنفس ۳۰ ثانیه‌ای",
+      chat_eyebrow:"نمایش زنده", chat_title:"همین حالا با دستیار صحبت کن",
+      chat_desc:"نمونه‌ای از گفتگو — با نوشتن یا صدا.",
+      chat_status:"آنلاین · کاملاً محرمانه",
+      chat_initial_msg:"خوش آمدی. این فضای توست، وقت بگذار. امروز چه حسی داری؟",
+      chat_placeholder:"بنویس یا با میکروفون صحبت کن…", chat_send:"ارسال",
+      voice_on:"صدا فعال", voice_off:"فعال‌سازی صدا",
+      library_eyebrow:"کتابخانه دانش", library_title:"خلاصه‌های ساده روان‌شناسی",
+      library_desc:"محتوای علمی و قابل اعتماد، به زبان ساده، در چند دقیقه.",
+      lib1_tag:"اضطراب", lib1_title:"فهم چرخه اضطراب", lib1_desc:"افکار اضطرابی چگونه شکل می‌گیرند و چرا گاهی بدون دلیل مشخص بزرگ می‌شوند.",
+      lib2_tag:"عادت‌ها", lib2_title:"تغییر کوچک، تأثیر بزرگ", lib2_desc:"اصول ساخت عادتی جدید، بدون نیاز به اراده‌ای فوق‌بشری.",
+      lib3_tag:"روابط", lib3_title:"مرزهای سالم بدون احساس گناه", lib3_desc:"چگونه \"نه\" بگویی و روابط مهم را حفظ کنی.",
+      exercises_eyebrow:"تمرین‌های روزانه", exercises_title:"کتابخانه تمرین‌های سلامت روان",
+      exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
+      footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
+      title:"Waha — فضای امن تو",
+      filter_all:"همه", filter_breathing:"تنفس و آرامش", filter_mind:"ذهن‌آگاهی", filter_write:"نوشتن", filter_sleep:"خواب و عادت‌ها",
+      libf_all:"همه", libf_anxiety:"اضطراب", libf_habits:"عادت‌ها", libf_relationships:"روابط", libf_self:"عزت نفس", libf_emotions:"احساسات", libf_stress:"استرس",
+      read_more:"بیشتر بخوان ←",
+      timer_start:"شروع تایمر", timer_running:"در حال اجرا…", read_aloud:"شنیدن مراحل",
+      trust_private:"اولویت با حریم خصوصی", trust_cbt:"مبتنی بر CBT", trust_multilingual:"۱۲ زبان", age_gate_title:"پیش از شروع", age_gate_text:"Waha برای افراد ۱۶ سال به بالا طراحی شده. اگر کوچک‌تری، لطفاً با نظارت والدین یا سرپرست از آن استفاده کن.", age_gate_checkbox:"تأیید می‌کنم که ۱۶ سال یا بیشتر دارم", age_gate_continue:"ادامه",
+      mood_prompt:"حال روحی خود را الان چگونه ارزیابی می‌کنی؟", mood_empty:"حالت را ثبت کن تا الگو را اینجا ببینی.",
+      prefs_eyebrow:"فضای تو، قوانین تو", prefs_title:"تنظیمات",
+      prefs_subtitle:"چند تنظیم آرام درباره حس Waha و نحوه نگهداری افکار تو.",
+      prefs_experience_label:"تجربه",
+      prefs_calm_title:"فضا را آرام نگه‌دار", prefs_calm_desc:"غیرفعال کردن انیمیشن‌ها و انتقال‌های غیرضروری.",
+      prefs_privacy_label:"حریم خصوصی، به‌روشنی",
+      prefs_privacy_quote:"افکار تو داده‌ای نیست که بدون اطلاعت جمع‌آوری شود. یادداشت روزانه، سلسله و خلق‌وخویت فقط روی دستگاه خودت ذخیره می‌شود و هرگز از آن خارج نمی‌شود. اما پیام‌های گفتگو برای تولید پاسخ هوشمند به یک سرویس هوش مصنوعی خارجی ارسال می‌شوند — همان‌طور که در شروع اولین گفتگویت توضیح دادیم — و همچنین فقط روی دستگاه خودت ذخیره می‌شوند تا گفتگو دفعه بعد تو را به یاد بیاورد. هر وقت بخواهی می‌توانی آن را پاک کنی.",
+      prefs_dark_title:"حالت تاریک", prefs_dark_desc:"رنگ‌های ملایم‌تر برای نور کم.",
+      prefs_textlarge_title:"متن بزرگ‌تر", prefs_textlarge_desc:"متن تمرین‌ها، مقالات و گفتگو را برای خواندن آسان‌تر بزرگ می‌کند.",
+      voice_gender_label:"صدای خواندن", voice_gender_desc:"برای تنظیم صدای خواندن، به ما بگو خودت را چگونه معرفی می‌کنی (اختیاری، فقط برای انتخاب صدا در صورت وجود گزینه دیگر در دستگاهت استفاده می‌شود).",
+      voice_gender_male:"مرد", voice_gender_female:"زن", voice_gender_none:"ترجیح می‌دهم نگویم",
+      aria_close:"بستن", aria_share:"اشتراک‌گذاری", aria_mic:"ورودی صوتی", aria_settings:"تنظیمات",
+      reminder_text:"هنوز فحص روزانه‌ات را انجام نداده‌ای 👋", reminder_cta:"الان فحص کن",
+      consent_eyebrow:"پیش از شروع", consent_title:"گفتگوی تو به یک سرویس هوش مصنوعی خارجی ارسال می‌شود",
+      consent_text:"برای پاسخ هوشمندانه، پیام تو از طریق سرور میزبانی اپلیکیشن به Anthropic (ارائه‌دهنده هوش مصنوعی) ارسال می‌شود. پیام‌های تو ذخیره نمی‌شوند و برای هیچ هدف دیگری استفاده نمی‌شوند. آیا موافقی ادامه دهیم؟",
+      consent_accept:"موافقم، شروع کنیم", consent_later:"الان نه",
+      locked_content_text:"این محتوا بخشی از Waha Plus است. برای استفاده کامل، آن را با اشتراک باز کن.",
+      locked_unlock_btn:"با Waha Plus باز کن",
+      rate_limit_msg:"برای محافظت از سرویس، موقتاً به محدودیت تعداد پیام رسیده‌ایم. لطفاً چند دقیقه صبر کن و دوباره امتحان کن 🙏",
+      done_btn:"امروز انجام شد ✓", done_btn_done:"امروز انجام شد ✓", streak_label:"روز متوالی",
+      journal_placeholder:"اینجا آزادانه بنویس…", journal_save:"ذخیره", journal_saved:"در دستگاه تو ذخیره شد ✓", journal_entries_label:"نوشته‌های قبلی تو",
+      premium_badge:"پرمیوم",
+      upgrade_title:"تجربه‌ای عمیق‌تر باز کن", upgrade_subtitle:"طرح مناسب برای ادامه مسیر خود با Waha را انتخاب کن.",
+      upgrade_free_title:"رایگان", upgrade_free_desc:"گفتگوی محدود، کتابخانه پایه، ۳ تمرین روزانه",
+      upgrade_monthly_title:"اشتراک ماهانه", upgrade_monthly_desc:"گفتگوی نامحدود، کتابخانه کامل، برنامه‌های پیشرفته",
+      upgrade_programs_title:"برنامه‌های افزوده", upgrade_programs_desc:"دوره‌ها و برنامه‌های کوتاه تخصصی", upgrade_monthly_price:"۹.۹۹€ / ماهانه", upgrade_yearly_title:"سالانه", upgrade_yearly_price:"۹۹.۹۰€ / سالانه", upgrade_yearly_desc:"همه مزایای طرح ماهانه، با یک صورت‌حساب سالانه", upgrade_yearly_badge:"۱۷٪ صرفه‌جویی", upgrade_yearly_note:"≈ ۸.۳۳€ در ماه",
+      upgrade_maybe_later:"شاید بعداً",
+      progress_label:"پیشرفت تو", progress_streak:"روز متوالی", progress_journal:"نوشته ذخیره‌شده", progress_mood:"ثبت حال روحی",
+      progress_exercises:"تمرین‌های تکمیل‌شده", progress_helped:"دفعاتی که کمک کرد",
+      progress_disable_streaks_title:"غیرفعال کردن سلسله‌ها", progress_disable_streaks_desc:"اگر شمارنده روزها به‌جای انگیزه، فشار ایجاد می‌کند، آن را پنهان کن.",
+      why_suggestion_link:"چرا این پیشنهاد؟",
+      ef_cta:"احساسم را توضیح بده", ef_eyebrow:"کمک به بیان احساس", ef_title:"کمکم کن توضیح دهم چه احساسی دارم",
+      ef_intro:"آنچه الان برایت درست به نظر می‌رسد را پر کن — هر خطی را که می‌خواهی رد کنی خالی بگذار.",
+      ef_f_now:"الان احساس می‌کنم", ef_ph_now:"مثال: مضطرب و خسته",
+      ef_f_after:"این را بعد از این متوجه شدم", ef_ph_after:"مثال: یک گفتگوی سخت",
+      ef_f_affecting:"این روی این تأثیر می‌گذارد", ef_ph_affecting:"مثال: خوابم و تمرکزم",
+      ef_f_hardest:"سخت‌ترین چیز برایم", ef_ph_hardest:"مثال: ندانستن اینکه بعد چه کنم",
+      ef_f_need:"چیزی که شاید الان نیاز دارم", ef_ph_need:"مثال: کمی فضا و آرامش",
+      ef_f_help:"یک چیز که می‌تواند کمک کند", ef_ph_help:"مثال: صحبت با کسی که به او اعتماد دارم",
+      ef_empty_hint:"هر فیلدی که خالی بگذاری، به‌سادگی از پیش‌نویس تو حذف می‌شود.", ef_generate:"پیش‌نویسم را بساز",
+      ef_tone_concise:"مختصر", ef_tone_detailed:"مفصل",
+      ef_copy:"کپی", ef_copied:"کپی شد ✓", ef_back_edit:"بازگشت به ویرایش",
+      ef_ai_rewrite:"بازنویسی با هوش مصنوعی", ef_ai_note:"این پیش‌نویس تو را برای بازنویسی به ارائه‌دهنده هوش مصنوعی ما ارسال می‌کند. چیز دیگری ارسال نمی‌شود.",
+      ef_ai_confirm:"این کار پیش‌نویس تو را خارج از دستگاهت برای بازنویسی به Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌کند. ادامه می‌دهی؟",
+      ef_ai_needs_consent:"لطفاً ابتدا یک پیام گفتگو ارسال کن تا ویژگی‌های هوش مصنوعی فعال شوند.",
+      ef_ai_done:"بازنویسی شد ✓", ef_empty_draft:"برای دیدن پیش‌نویس خود اینجا، حداقل یک خط را پر کن.",
+      progress_teaser:"با پرمیوم تحلیلی عمیق‌تر از الگوهای خود باز کن.", progress_cta:"مشاهده طرح‌ها",
+      nav_program:"برنامه",
+      program_eyebrow:"برنامه متمرکز", program_title:"برنامه ۷ روزه مدیریت اضطراب",
+      program_desc:"هفت تمرین پیاپی، یک روز رایگان، بقیه با اشتراک باز می‌شود.",
+      program_day_prefix:"روز", program_locked:"قفل 🔒",
+      achievement_title:"موفقیت عالی! 🎉", achievement_desc:"به {n} روز متوالی رسیدی — ادامه بده!",
+      checkin_cta:"بررسی سریع حالت", checkin_eyebrow:"در کمتر از یک دقیقه",
+      checkin_title:"الان چه حسی داری؟", checkin_subtitle:"آنچه را که مناسب است انتخاب کن، فوراً تمرینی مناسب پیشنهاد می‌دهیم.",
+      checkin_or:"یا با کلمات خودت توصیف کن", checkin_freetext_placeholder:"مثلاً: از فردا نگرانم...",
+      checkin_freetext_btn:"پیشنهاد بگیر", checkin_thinking:"یک لحظه...", checkin_error:"الان نتوانستیم پاسخ بگیریم، کمی بعد دوباره امتحان کن.",
+      ai_unavailable_notice:"⚠️ هوش مصنوعی موقتاً در دسترس نیست — این پاسخی عمومی است و مخصوص پیام تو نیست",
+      clear_memory_btn:"🗑️ پاک کردن گفتگو",
+      brief_eyebrow:"صبح بخیر", brief_title:"خلاصه روزت",
+      brief_streak_prefix:"سلسله‌ات:", brief_streak_suffix:"روز پیاپی",
+      brief_mood_up:"خلق‌وخویت اخیراً بهتر شده — همینطور ادامه بده", brief_mood_down:"خلق‌وخویت اخیراً کمی سنگین‌تر بوده — وقتت را بگذار",
+      brief_mood_stable:"خلق‌وخویت اخیراً نسبتاً پایدار بوده",
+      brief_suggest_label:"هنوز امتحان نکرده‌ای", brief_start_btn:"همین حالا شروع کن",
+      brief_word_prefix:"پرتکرارترین کلمه در یادداشت‌های اخیرت:",
+      mood_suggest_text:"متوجه شدیم خلق‌وخویت اخیراً کمی سنگین‌تر بوده — این می‌تواند کمک کند:",
+      mood_suggest_btn:"امتحان کن",
+      free_chat_remaining:"پیام رایگان باقی‌مانده",
+      sleep_cta:"حالت خواب", sleep_title:"وقت استراحت است",
+      sleep_desc:"دو دقیقه وقت بگذار تا با یک تمرین تنفس ساده، بدن و ذهنت را قبل از خواب آرام کنی.",
+      sleep_start_btn:"شروع تمرین تنفس", sleep_skip:"نه ممنون — فقط ببند", sounds_cta:"صداها", sounds_eyebrow:"آرام شو", sounds_title:"صداهای محیطی", sounds_subtitle:"صدایی انتخاب کن تا در پس‌زمینه پخش شود، هنگام استفاده از اپ یا قبل از خواب.", sound_rain:"باران", sound_ocean:"امواج دریا", sound_brown:"نویز عمیق", sound_pad:"تن ملایم", sounds_volume_label:"میزان صدا", sounds_timer_label:"تایمر توقف", timer_off:"بدون تایمر", timer_5min:"۵ دقیقه", timer_15min:"۱۵ دقیقه", timer_30min:"۳۰ دقیقه", sounds_ends_in:"پایان تا",
+      relief_cta:"۹۰ ثانیه به من کمک کن", relief_eyebrow:"کمک سریع",
+      relief_title:"الان چه چیزی به حس تو نزدیک‌تر است؟", relief_subtitle:"یکی را انتخاب کن، فوراً یک تمرین کوتاه شروع می‌شود — کاملاً بدون اینترنت.",
+      relief_stop:"توقف و خروج", relief_end_title:"آفرین — برای خودت وقت گذاشتی",
+      relief_fb_yes:"بله، کمک کرد", relief_fb_little:"کمی", relief_fb_no:"نه واقعاً",
+      passport_open_btn:"باز کردن گذرنامه حریم خصوصی", passport_eyebrow:"گذرنامه حریم خصوصی",
+      passport_title:"چه اتفاقی برای داده‌هایت می‌افتد",
+      passport_local_title:"چه چیزی روی این دستگاه می‌ماند", passport_local_text:"سابقه خلق‌وخو، یادداشت‌های روزانه، سابقه تمرین‌ها، سلسله و سابقه گفتگویت فقط در حافظه محلی همین مرورگر ذخیره می‌شود. هیچ‌کدام به هیچ سرور یا پایگاه‌داده‌ای در Waha آپلود نمی‌شود — چون Waha چنین چیزی برای این داده‌ها ندارد.",
+      passport_ai_title:"چه چیزی برای هوش مصنوعی ارسال می‌شود", passport_ai_text:"فقط متنی که در گفتگو یا فحص سریع می‌نویسی برای Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌شود تا پاسخی تولید شود. هیچ چیز دیگری — نه سابقه خلق‌وخو، نه یادداشت روزانه، نه سابقه تمرین‌ها — به‌طور خودکار ارسال نمی‌شود.",
+      passport_logs_title:"گزارش‌های فنی", passport_logs_text:"سرور ما ممکن است ثبت کند که آیا درخواستی موفق بوده یا نه، و آیا پاسخی به دلایل ایمنی بازنویسی شده — اما هرگز محتوای پیام‌هایت را ثبت نمی‌کند.",
+      passport_temp_label:"گفتگوی موقت", passport_temp_desc:"وقتی فعال باشد، پیام‌های جدید گفتگو روی این دستگاه ذخیره نمی‌شوند. با خاموش کردنش یا بستن برنامه پایان می‌یابد.",
+      passport_temp_active:"🕶️ حالت موقت — این گفتگو ذخیره نمی‌شود",
+      passport_controls_label:"کنترل‌های تو", passport_del_chat:"حذف سابقه گفتگو", passport_del_mood:"حذف داده‌های خلق‌وخو",
+      passport_del_exercises:"حذف سابقه تمرین‌ها", passport_export_all:"صادر کردن همه داده‌هایم", passport_del_all:"حذف همه چیز",
+      passport_done:"انجام شد ✓", passport_error:"مشکلی پیش آمد، دوباره امتحان کن",
+      passport_confirm_all:"این کار همه داده‌های Waha روی این دستگاه را برای همیشه حذف می‌کند — خلق‌وخو، یادداشت روزانه، گفتگو، سلسله، همه چیز. این کار قابل بازگشت نیست. ادامه می‌دهی؟",
+      calmplan_cta:"طرح آرامش", calmplan_eyebrow:"طرح آرامش شخصی", calmplan_title:"طرح آرامش من",
+      calmplan_intro:"این را الان، وقتی حالت پایدار است، آماده کن تا برای لحظه‌ای سخت‌تر آماده باشد.",
+      calmplan_f_exercise:"تمرینی آرامش‌بخش که به من کمک می‌کند", calmplan_ph_exercise:"مثال: تنفس ۴-۷-۸",
+      calmplan_f_sentence:"جمله‌ای که به من کمک می‌کند", calmplan_ph_sentence:"مثال: این احساس می‌گذرد",
+      calmplan_f_place:"مکانی که در آن آرام‌تر هستم", calmplan_ph_place:"مثال: بالکن من",
+      calmplan_f_activity:"یک فعالیت امن", calmplan_ph_activity:"مثال: یک پیاده‌روی کوتاه",
+      calmplan_f_person:"کسی که می‌توانم با او تماس بگیرم", calmplan_ph_person:"مثال: خواهرم لینا",
+      calmplan_f_steps:"قدم‌هایی که می‌خواهم در لحظه‌ای سخت دنبال کنم", calmplan_ph_steps:"مثال: ۱) توقف ۲) نفس بکش ۳) به کسی زنگ بزن",
+      calmplan_save:"طرحم را ذخیره کن", calmplan_edit:"ویرایش", calmplan_export:"صادر کردن", calmplan_print:"چاپ", calmplan_delete:"حذف",
+      calmplan_crisis_note:"در شرایط اضطراری، این طرح جایگزین کمک نیست.", calmplan_crisis_btn:"منابع بحران",
+      calmplan_confirm_delete:"طرح آرامش برای همیشه حذف شود؟ این کار قابل بازگشت نیست.",
+      checkin_opt1:"اضطراب یا تنش", checkin_opt2:"غم یا سنگینی دل", checkin_opt3:"ذهن پراکنده و افکار شتابان", checkin_opt4:"خستگی جسمی",
+      crisis_button:"الان به کمک نیاز دارم", crisis_eyebrow:"تو تنها نیستی",
+      crisis_title:"کمک واقعی — رایگان و محرمانه", crisis_subtitle:"اگر الان در یک بحران شدید هستی، با یکی از این خطوط تماس بگیر — افراد آموزش‌دیده آماده شنیدن صدای تو هستند.",
+      crisis_de_label:"Telefonseelsorge (آلمان) — شبانه‌روزی، رایگان و ناشناس",
+      crisis_de_note:"می‌توانی به هر زبانی که بلدی صحبت کنی؛ تلاش می‌کنند تو را به کسی که آن زبان را می‌فهمد وصل کنند.",
+      crisis_ru_label:"برای فارسی‌زبانانی که روسی یا اوکراینی هم می‌دانند — Telefon Doweria",
+      crisis_intl_label:"خارج از آلمان هستی؟",
+      crisis_intl_note:"از طریق findahelpline.com خط بحران کشور خودت را پیدا کن — برای اکثر کشورهای جهان در دسترس است.",
+      backup_label:"پشتیبان‌گیری", backup_desc:"یادداشت روزانه، روزهای متوالی و خلق‌وخویت را به‌صورت یک فایل کوچک ذخیره کن، یا آن‌ها را روی دستگاه دیگری بازیابی کن.",
+      backup_export:"خروجی گرفتن از پشتیبان", backup_import:"وارد کردن پشتیبان",
+      backup_export_done:"فایل دانلود شد ✓", backup_import_done:"با موفقیت بازیابی شد ✓", backup_import_error:"فایل نامعتبر است",
+      onboarding_next:"بعدی", onboarding_skip:"رد کردن", onboarding_start:"شروع کنیم",
+      ob1_icon:"👋", ob1_title:"به Waha خوش آمدی", ob1_desc:"فضای امن و محرمانه‌ات — بدون تشخیص، بدون درمان، فقط ابزارهای عملی درست وقتی که نیاز داری.",
+      ob2_icon:"⚡", ob2_title:"فحص سریع", ob2_desc:"از صفحه اصلی انتخاب کن الان چه حسی داری، و ما فوراً یک تمرین مناسب پیشنهاد می‌دهیم — در کمتر از یک دقیقه.",
+      ob3_icon:"📚", ob3_title:"تمرین‌ها و کتابخانه", ob3_desc:"12 تمرین هدایت‌شده و 9 مقاله دانشی، به‌طور کامل به 12 زبان در دسترس — هر وقت از منوی بالا مرور کن.",
+      ob4_icon:"🔒", ob4_title:"همه‌چیز روی دستگاه تو می‌ماند", ob4_desc:"یادداشت، سلسله روزها و خلق‌وخویت فقط به‌صورت محلی ذخیره می‌شود، هرگز به سروری ارسال نمی‌شود — هر وقت می‌توانی از ⚙ تنظیمات هم پشتیبان بگیری.",
+      install_ios_text:"برای بهترین تجربه، Waha را به صفحه اصلی اضافه کن: روی اشتراک‌گذاری ⬆️ سپس \"افزودن به صفحه اصلی\" بزن.",
+      install_android_text:"Waha را روی دستگاه خود نصب کن برای دسترسی سریع‌تر.", install_btn:"نصب",
+    },
+    ur: {
+      nav_chat:"چیٹ", nav_library:"لائبریری", nav_exercises:"مشقیں",
+      hero_eyebrow:"ایک محفوظ اور خفیہ جگہ — کوئی تشخیص یا علاج نہیں",
+      hero_title:"جب بوجھ بھاری ہو جائے،<br>تمہیں اسے اکیلے اٹھانے کی ضرورت نہیں۔",
+      hero_lead:"Waha بغیر کسی فیصلے کے تمہاری بات سنتا ہے اور اضطراب اور تناؤ کے لیے عملی، سائنسی بنیاد پر مبنی قدم تجویز کرتا ہے۔",
+      cta_chat:"ابھی چیٹ آزمائیں", cta_exercises:"مشقیں دیکھیں",
+      breathe_start:"سانس کی مشق شروع کریں", breathe_hint:"30 سیکنڈ کی سانس کی مشق کے لیے دبائیں",
+      chat_eyebrow:"لائیو ڈیمو", chat_title:"ابھی اسسٹنٹ سے بات کریں",
+      chat_desc:"چیٹ کا ایک نمونہ — تحریر یا آواز کے ذریعے۔",
+      chat_status:"آن لائن · مکمل طور پر خفیہ",
+      chat_initial_msg:"خوش آمدید۔ یہ آپ کی جگہ ہے، وقت لیں۔ آج آپ کیسا محسوس کر رہے ہیں؟",
+      chat_placeholder:"لکھیں یا مائیک دبا کر بولیں…", chat_send:"بھیجیں",
+      voice_on:"آواز آن", voice_off:"آواز فعال کریں",
+      library_eyebrow:"علمی لائبریری", library_title:"نفسیات کے آسان خلاصے",
+      library_desc:"قابل اعتماد، سائنسی مواد، چند منٹوں میں آسان زبان میں۔",
+      lib1_tag:"اضطراب", lib1_title:"اضطراب کے چکر کو سمجھنا", lib1_desc:"اضطرابی خیالات کیسے بنتے ہیں اور کبھی کبھار بغیر واضح وجہ کے کیوں بڑھتے ہیں۔",
+      lib2_tag:"عادات", lib2_title:"چھوٹی تبدیلی، بڑا اثر", lib2_desc:"غیر معمولی قوتِ ارادی کے بغیر نئی عادت بنانے کے اصول۔",
+      lib3_tag:"تعلقات", lib3_title:"جرم کے بغیر صحت مند حدود", lib3_desc:"اہم تعلقات برقرار رکھتے ہوئے \"نہیں\" کیسے کہیں۔",
+      exercises_eyebrow:"روزانہ مشقیں", exercises_title:"ذہنی صحت کی مشقوں کی لائبریری",
+      exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
+      footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
+      title:"Waha — آپ کی محفوظ جگہ",
+      filter_all:"سب", filter_breathing:"سانس اور آرام", filter_mind:"ذہن آگاہی", filter_write:"تحریر", filter_sleep:"نیند اور عادات",
+      libf_all:"سب", libf_anxiety:"اضطراب", libf_habits:"عادات", libf_relationships:"تعلقات", libf_self:"خودعزتی", libf_emotions:"جذبات", libf_stress:"تناؤ",
+      read_more:"مزید پڑھیں ←",
+      timer_start:"ٹائمر شروع کریں", timer_running:"جاری ہے…", read_aloud:"مراحل سنیں",
+      trust_private:"رازداری پہلے", trust_cbt:"CBT پر مبنی", trust_multilingual:"12 زبانیں", age_gate_title:"شروع کرنے سے پہلے", age_gate_text:"Waha 16 سال یا اس سے زیادہ عمر کے افراد کے لیے ہے۔ اگر آپ کم عمر ہیں تو براہ کرم والدین یا سرپرست کی نگرانی میں استعمال کریں۔", age_gate_checkbox:"میں تصدیق کرتا/کرتی ہوں کہ میری عمر 16 سال یا اس سے زیادہ ہے", age_gate_continue:"جاری رکھیں",
+      mood_prompt:"ابھی آپ اپنے موڈ کو کیسے درجہ دیں گے؟", mood_empty:"پیٹرن دیکھنے کے لیے اپنا موڈ درج کریں۔",
+      prefs_eyebrow:"آپ کی جگہ، آپ کے اصول", prefs_title:"ترجیحات",
+      prefs_subtitle:"Waha کیسا محسوس ہوتا ہے اور آپ کے خیالات کیسے رکھے جاتے ہیں، اس کے لیے چند پرسکون کنٹرولز۔",
+      prefs_experience_label:"تجربہ",
+      prefs_calm_title:"جگہ کو پرسکون رکھیں", prefs_calm_desc:"غیر ضروری اینیمیشنز اور تبدیلیاں بند کریں۔",
+      prefs_privacy_label:"رازداری، واضح طور پر",
+      prefs_privacy_quote:"آپ کے خیالات آپ کی مرضی کے بغیر جمع کیا جانے والا ڈیٹا نہیں ہیں۔ جرنل، سلسلہ اور موڈ صرف آپ کے اپنے ڈیوائس پر محفوظ ہوتے ہیں اور کبھی اس سے باہر نہیں جاتے۔ البتہ چیٹ کے پیغامات ذہین جواب تیار کرنے کے لیے ایک بیرونی AI سروس کو بھیجے جاتے ہیں — جیسا کہ آپ کی پہلی چیٹ کے آغاز میں بتایا گیا تھا — اور صرف آپ کے ڈیوائس پر بھی محفوظ ہوتے ہیں تاکہ چیٹ اگلی بار آپ کو یاد رکھے۔ آپ اسے کسی بھی وقت مٹا سکتے ہیں۔",
+      prefs_dark_title:"ڈارک موڈ", prefs_dark_desc:"کم روشنی کے لیے نرم رنگ۔",
+      prefs_textlarge_title:"بڑا متن", prefs_textlarge_desc:"آسان پڑھائی کے لیے ورزشوں، مضامین اور چیٹ کے متن کو بڑا کرتا ہے۔",
+      voice_gender_label:"پڑھنے کی آواز", voice_gender_desc:"آواز کو بہتر بنانے کے لیے، ہمیں بتائیں کہ آپ خود کو کیسے پہچانتے ہیں (اختیاری، صرف اس صورت میں آواز منتخب کرنے کے لیے استعمال ہوتا ہے جب آپ کا آلہ متبادل پیش کرے)۔",
+      voice_gender_male:"مرد", voice_gender_female:"عورت", voice_gender_none:"بتانا نہیں چاہتے",
+      aria_close:"بند کریں", aria_share:"شیئر کریں", aria_mic:"صوتی ان پٹ", aria_settings:"ترتیبات",
+      reminder_text:"آپ نے ابھی تک آج کا چیک ان نہیں کیا 👋", reminder_cta:"ابھی چیک کریں",
+      consent_eyebrow:"شروع کرنے سے پہلے", consent_title:"آپ کی چیٹ ایک بیرونی AI سروس کو بھیجی جاتی ہے",
+      consent_text:"ذہین جواب دینے کے لیے، آپ کا پیغام ایپ کے ہوسٹنگ سرور کے ذریعے Anthropic (AI فراہم کنندہ) کو بھیجا جاتا ہے۔ آپ کے پیغامات محفوظ نہیں کیے جاتے اور کسی اور مقصد کے لیے استعمال نہیں ہوتے۔ کیا آپ جاری رکھنے پر راضی ہیں؟",
+      consent_accept:"میں راضی ہوں، شروع کریں", consent_later:"ابھی نہیں",
+      locked_content_text:"یہ مواد Waha Plus کا حصہ ہے۔ مکمل فائدہ اٹھانے کے لیے سبسکرپشن کے ساتھ اسے کھولیں۔",
+      locked_unlock_btn:"Waha Plus کے ساتھ کھولیں",
+      rate_limit_msg:"سروس کو محفوظ رکھنے کے لیے ہم عارضی طور پر پیغام کی حد تک پہنچ گئے ہیں۔ براہ کرم چند منٹ انتظار کریں اور دوبارہ کوشش کریں 🙏",
+      done_btn:"آج مکمل ہوا ✓", done_btn_done:"آج مکمل ہوا ✓", streak_label:"لگاتار دن",
+      journal_placeholder:"یہاں آزادانہ لکھیں…", journal_save:"محفوظ کریں", journal_saved:"آپ کے آلے پر محفوظ ہو گیا ✓", journal_entries_label:"آپ کی سابقہ تحریریں",
+      premium_badge:"پریمیم",
+      upgrade_title:"گہرا تجربہ کھولیں", upgrade_subtitle:"Waha کے ساتھ اپنے سفر کو جاری رکھنے کے لیے موزوں پلان منتخب کریں۔",
+      upgrade_free_title:"مفت", upgrade_free_desc:"محدود چیٹ، بنیادی لائبریری، 3 روزانہ مشقیں",
+      upgrade_monthly_title:"ماہانہ پلان", upgrade_monthly_desc:"لامحدود چیٹ، مکمل لائبریری، جدید پروگرام",
+      upgrade_programs_title:"اضافی پروگرام", upgrade_programs_desc:"مخصوص مختصر کورسز اور پروگرام", upgrade_monthly_price:"9.99€ / ماہانہ", upgrade_yearly_title:"سالانہ", upgrade_yearly_price:"99.90€ / سالانہ", upgrade_yearly_desc:"ماہانہ پلان کی تمام سہولیات، ایک سالانہ بل کے ساتھ", upgrade_yearly_badge:"17% بچت", upgrade_yearly_note:"≈ 8.33€ ماہانہ",
+      upgrade_maybe_later:"شاید بعد میں",
+      progress_label:"آپ کی پیشرفت", progress_streak:"لگاتار دن", progress_journal:"محفوظ شدہ تحریریں", progress_mood:"موڈ ریکارڈز",
+      progress_exercises:"مکمل شدہ مشقیں", progress_helped:"مدد ملنے کی تعداد",
+      progress_disable_streaks_title:"سلسلے غیر فعال کریں", progress_disable_streaks_desc:"اگر دنوں کا شمار حوصلہ افزائی کے بجائے دباؤ محسوس ہو تو اسے چھپا دیں۔",
+      why_suggestion_link:"یہ تجویز کیوں؟",
+      ef_cta:"اپنا احساس بیان کریں", ef_eyebrow:"اظہار میں مدد", ef_title:"مجھے بتانے میں مدد کریں کہ میں کیسا محسوس کر رہا ہوں",
+      ef_intro:"جو کچھ ابھی آپ کو درست لگے وہ پُر کریں — کسی بھی لائن کو چھوڑنے کے لیے خالی رکھیں۔",
+      ef_f_now:"ابھی میں محسوس کر رہا ہوں", ef_ph_now:"مثال: پریشان اور تھکا ہوا",
+      ef_f_after:"میں نے یہ اس کے بعد محسوس کیا", ef_ph_after:"مثال: ایک مشکل گفتگو",
+      ef_f_affecting:"یہ اس پر اثر انداز ہو رہا ہے", ef_ph_affecting:"مثال: میری نیند اور توجہ",
+      ef_f_hardest:"سب سے مشکل چیز یہ ہے", ef_ph_hardest:"مثال: یہ نہ جاننا کہ آگے کیا کرنا ہے",
+      ef_f_need:"شاید ابھی مجھے اس کی ضرورت ہے", ef_ph_need:"مثال: کچھ جگہ اور سکون",
+      ef_f_help:"ایک چیز جو مدد کر سکتی ہے", ef_ph_help:"مثال: کسی ایسے شخص سے بات کرنا جس پر مجھے اعتماد ہے",
+      ef_empty_hint:"جو بھی فیلڈ آپ خالی چھوڑیں گے وہ آپ کے مسودے سے نکال دی جائے گی۔", ef_generate:"میرا مسودہ بنائیں",
+      ef_tone_concise:"مختصر", ef_tone_detailed:"تفصیلی",
+      ef_copy:"کاپی کریں", ef_copied:"کاپی ہو گیا ✓", ef_back_edit:"ترمیم پر واپس جائیں",
+      ef_ai_rewrite:"AI کے ساتھ دوبارہ لکھیں", ef_ai_note:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے ہمارے AI فراہم کنندہ کو بھیجتا ہے۔ کچھ اور نہیں بھیجا جاتا۔",
+      ef_ai_confirm:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے آپ کے آلے سے باہر Anthropic (ہمارے AI فراہم کنندہ) کو بھیجے گا۔ جاری رکھیں؟",
+      ef_ai_needs_consent:"AI خصوصیات کو فعال کرنے کے لیے براہ کرم پہلے ایک چیٹ پیغام بھیجیں۔",
+      ef_ai_done:"دوبارہ لکھا گیا ✓", ef_empty_draft:"اپنا مسودہ یہاں دیکھنے کے لیے کم از کم ایک لائن پُر کریں۔",
+      progress_teaser:"پریمیم کے ساتھ اپنے پیٹرن کا گہرا تجزیہ کھولیں۔", progress_cta:"پلانز دیکھیں",
+      nav_program:"پروگرام",
+      program_eyebrow:"مرکوز پروگرام", program_title:"اضطراب کے لیے 7 دن کا پروگرام",
+      program_desc:"سات ترتیب وار مشقیں، ایک دن مفت، باقی سبسکرپشن سے کھلتی ہیں۔",
+      program_day_prefix:"دن", program_locked:"مقفل 🔒",
+      achievement_title:"شاندار کامیابی! 🎉", achievement_desc:"آپ نے {n} دن کا سلسلہ مکمل کیا — جاری رکھیں!",
+      checkin_cta:"فوری چیک اِن", checkin_eyebrow:"ایک منٹ سے کم میں",
+      checkin_title:"ابھی آپ کیسا محسوس کر رہے ہیں؟", checkin_subtitle:"جو مناسب ہو منتخب کریں، ہم فوراً موزوں مشق تجویز کریں گے۔",
+      checkin_or:"یا اپنے الفاظ میں بتائیں", checkin_freetext_placeholder:"مثلاً: کل کے بارے میں پریشان ہوں...",
+      checkin_freetext_btn:"تجویز حاصل کریں", checkin_thinking:"ایک لمحہ...", checkin_error:"ابھی جواب نہیں مل سکا، تھوڑی دیر بعد دوبارہ کوشش کریں۔",
+      ai_unavailable_notice:"⚠️ AI عارضی طور پر دستیاب نہیں ہے — یہ ایک عمومی جواب ہے، آپ کے پیغام کے لیے خاص نہیں",
+      clear_memory_btn:"🗑️ چیٹ صاف کریں",
+      brief_eyebrow:"صبح بخیر", brief_title:"آپ کے دن کا خلاصہ",
+      brief_streak_prefix:"آپ کا سلسلہ:", brief_streak_suffix:"دن مسلسل",
+      brief_mood_up:"آپ کا موڈ حال ہی میں بہتر ہوا ہے — ایسے ہی جاری رکھیں", brief_mood_down:"آپ کا موڈ حال ہی میں تھوڑا بھاری رہا ہے — اپنا وقت لیں",
+      brief_mood_stable:"آپ کا موڈ حال ہی میں کافی مستحکم رہا ہے",
+      brief_suggest_label:"ابھی تک آزمایا نہیں", brief_start_btn:"ابھی شروع کریں",
+      brief_word_prefix:"آپ کی حالیہ جرنل میں سب سے زیادہ استعمال ہونے والا لفظ:",
+      mood_suggest_text:"ہم نے محسوس کیا کہ آپ کا موڈ حال ہی میں تھوڑا بھاری رہا ہے — یہ مدد کر سکتا ہے:",
+      mood_suggest_btn:"آزمائیں",
+      free_chat_remaining:"مفت پیغامات باقی",
+      sleep_cta:"نیند کا موڈ", sleep_title:"آرام کا وقت",
+      sleep_desc:"سونے سے پہلے ایک سادہ سانس کی مشق کے ساتھ اپنے جسم اور ذہن کو پرسکون کرنے کے لیے دو منٹ نکالیں۔",
+      sleep_start_btn:"سانس کی مشق شروع کریں", sleep_skip:"نہیں شکریہ — بس بند کریں", sounds_cta:"آوازیں", sounds_eyebrow:"پرسکون ہوں", sounds_title:"ماحولیاتی آوازیں", sounds_subtitle:"ایک آواز منتخب کریں جو ایپ استعمال کرتے وقت یا سونے سے پہلے پس منظر میں چلے۔", sound_rain:"بارش", sound_ocean:"سمندری لہریں", sound_brown:"گہری گونج", sound_pad:"نرم سر", sounds_volume_label:"آواز کی سطح", sounds_timer_label:"بند کرنے کا ٹائمر", timer_off:"کوئی ٹائمر نہیں", timer_5min:"5 منٹ", timer_15min:"15 منٹ", timer_30min:"30 منٹ", sounds_ends_in:"ختم ہونے میں",
+      relief_cta:"90 سیکنڈ کے لیے میری مدد کریں", relief_eyebrow:"فوری مدد",
+      relief_title:"ابھی آپ کیا محسوس کر رہے ہیں؟", relief_subtitle:"ایک چنیں، ہم فوراً ایک مختصر مشق شروع کریں گے — مکمل طور پر آف لائن۔",
+      relief_stop:"روکیں اور باہر نکلیں", relief_end_title:"شاباش — آپ نے اپنے لیے وقت نکالا",
+      relief_fb_yes:"ہاں، مدد ملی", relief_fb_little:"تھوڑا سا", relief_fb_no:"واقعی نہیں",
+      passport_open_btn:"پرائیویسی پاسپورٹ کھولیں", passport_eyebrow:"پرائیویسی پاسپورٹ",
+      passport_title:"آپ کے ڈیٹا کے ساتھ کیا ہوتا ہے",
+      passport_local_title:"اس ڈیوائس پر کیا رہتا ہے", passport_local_text:"آپ کا موڈ لاگ، جرنل اندراجات، ورزش کی تاریخ، سلسلہ، اور چیٹ کی تاریخ صرف اس براؤزر کے مقامی اسٹوریج میں محفوظ ہوتے ہیں۔ ان میں سے کچھ بھی کسی Waha سرور یا ڈیٹابیس پر اپ لوڈ نہیں ہوتا — کیونکہ Waha کے پاس اس ڈیٹا کے لیے ایسا کچھ ہے ہی نہیں۔",
+      passport_ai_title:"AI کو کیا بھیجا جاتا ہے", passport_ai_text:"صرف وہ متن جو آپ چیٹ یا فوری چیک ان میں لکھتے ہیں Anthropic (ہمارے AI فراہم کنندہ) کو جواب تیار کرنے کے لیے بھیجا جاتا ہے۔ کچھ اور نہیں — نہ موڈ لاگ، نہ جرنل، نہ ورزش کی تاریخ — خودکار طور پر نہیں بھیجا جاتا۔",
+      passport_logs_title:"تکنیکی لاگز", passport_logs_text:"ہمارا سرور یہ ریکارڈ کر سکتا ہے کہ کوئی درخواست کامیاب ہوئی یا ناکام، اور کیا کوئی جواب حفاظتی وجوہات کی بنا پر دوبارہ لکھا گیا — کبھی بھی آپ کے پیغامات کا مواد نہیں۔",
+      passport_temp_label:"عارضی گفتگو", passport_temp_desc:"فعال ہونے پر، نئے چیٹ پیغامات اس ڈیوائس پر محفوظ نہیں ہوتے۔ اسے بند کرنے یا ایپ بند کرنے پر ختم ہو جاتا ہے۔",
+      passport_temp_active:"🕶️ عارضی موڈ — یہ گفتگو محفوظ نہیں ہو رہی",
+      passport_controls_label:"آپ کے کنٹرولز", passport_del_chat:"چیٹ کی تاریخ حذف کریں", passport_del_mood:"موڈ ڈیٹا حذف کریں",
+      passport_del_exercises:"ورزش کی تاریخ حذف کریں", passport_export_all:"میرا سارا ڈیٹا برآمد کریں", passport_del_all:"سب کچھ حذف کریں",
+      passport_done:"ہو گیا ✓", passport_error:"کچھ غلط ہو گیا، دوبارہ کوشش کریں",
+      passport_confirm_all:"یہ اس ڈیوائس پر موجود تمام Waha ڈیٹا کو مستقل طور پر حذف کر دے گا — موڈ، جرنل، چیٹ، سلسلہ، سب کچھ۔ اسے واپس نہیں لایا جا سکتا۔ جاری رکھیں؟",
+      calmplan_cta:"سکون کا منصوبہ", calmplan_eyebrow:"ذاتی سکون کا منصوبہ", calmplan_title:"میرا سکون کا منصوبہ",
+      calmplan_intro:"ابھی، جب آپ مستحکم محسوس کر رہے ہیں، اسے تیار کریں تاکہ یہ ایک مشکل وقت کے لیے تیار ہو۔",
+      calmplan_f_exercise:"ایک پرسکون مشق جو میری مدد کرتی ہے", calmplan_ph_exercise:"مثال: 4-7-8 سانس کی مشق",
+      calmplan_f_sentence:"ایک جملہ جو میری مدد کرتا ہے", calmplan_ph_sentence:"مثال: یہ احساس گزر جائے گا",
+      calmplan_f_place:"ایک جگہ جہاں میں زیادہ پرسکون محسوس کرتا ہوں", calmplan_ph_place:"مثال: میری بالکونی",
+      calmplan_f_activity:"ایک محفوظ سرگرمی", calmplan_ph_activity:"مثال: ایک مختصر چہل قدمی",
+      calmplan_f_person:"کوئی جس سے میں رابطہ کر سکتا ہوں", calmplan_ph_person:"مثال: میری بہن لینا",
+      calmplan_f_steps:"مشکل وقت میں جن اقدامات پر عمل کرنا چاہتا ہوں", calmplan_ph_steps:"مثال: 1) رکیں 2) سانس لیں 3) کسی کو کال کریں",
+      calmplan_save:"میرا منصوبہ محفوظ کریں", calmplan_edit:"ترمیم", calmplan_export:"برآمد", calmplan_print:"پرنٹ", calmplan_delete:"حذف",
+      calmplan_crisis_note:"ہنگامی صورتحال میں، یہ منصوبہ مدد کا متبادل نہیں ہے۔", calmplan_crisis_btn:"بحران کے وسائل",
+      calmplan_confirm_delete:"سکون کا منصوبہ مستقل طور پر حذف کریں؟ اسے واپس نہیں لایا جا سکتا۔",
+      checkin_opt1:"اضطراب یا تناؤ", checkin_opt2:"اداسی یا دل پر بوجھ", checkin_opt3:"منتشر، تیز ذہن", checkin_opt4:"جسمانی تھکاوٹ",
+      crisis_button:"مجھے ابھی مدد چاہیے", crisis_eyebrow:"آپ اکیلے نہیں ہیں",
+      crisis_title:"حقیقی مدد — مفت اور خفیہ", crisis_subtitle:"اگر آپ ابھی شدید بحران سے گزر رہے ہیں تو ان لائنوں میں سے کسی ایک سے رابطہ کریں — تربیت یافتہ افراد آپ کی بات سننے کے لیے تیار ہیں۔",
+      crisis_de_label:"Telefonseelsorge (جرمنی) — چوبیس گھنٹے، مفت اور گمنام",
+      crisis_de_note:"آپ کسی بھی زبان میں بات کر سکتے ہیں جو آپ جانتے ہیں؛ وہ آپ کو کسی ایسے شخص سے جوڑنے کی کوشش کریں گے جو اسے سمجھتا ہو۔",
+      crisis_ru_label:"روسی یا یوکرینی بولنے والوں کے لیے — Telefon Doweria",
+      crisis_intl_label:"جرمنی سے باہر ہیں؟",
+      crisis_intl_note:"findahelpline.com پر اپنے ملک کی بحرانی ہیلپ لائن تلاش کریں — زیادہ تر ممالک کے لیے دستیاب ہے۔",
+      backup_label:"بیک اپ", backup_desc:"اپنا جرنل، سلسلہ اور موڈ ایک چھوٹی فائل کے طور پر محفوظ کریں، یا کسی دوسرے ڈیوائس پر بحال کریں۔",
+      backup_export:"بیک اپ برآمد کریں", backup_import:"بیک اپ درآمد کریں",
+      backup_export_done:"فائل ڈاؤن لوڈ ہو گئی ✓", backup_import_done:"کامیابی سے بحال ہو گیا ✓", backup_import_error:"غلط فائل",
+      onboarding_next:"اگلا", onboarding_skip:"نظرانداز کریں", onboarding_start:"چلیں شروع کریں",
+      ob1_icon:"👋", ob1_title:"Waha میں خوش آمدید", ob1_desc:"آپ کی محفوظ اور خفیہ جگہ — کوئی تشخیص نہیں، کوئی علاج نہیں، بس عملی اوزار بالکل اس وقت جب آپ کو ضرورت ہو۔",
+      ob2_icon:"⚡", ob2_title:"فوری چیک ان", ob2_desc:"ہوم صفحے سے منتخب کریں کہ آپ ابھی کیسا محسوس کر رہے ہیں، ہم فوراً ایک موزوں ورزش تجویز کریں گے — ایک منٹ سے بھی کم وقت میں۔",
+      ob3_icon:"📚", ob3_title:"ورزشیں اور لائبریری", ob3_desc:"12 رہنمائی شدہ ورزشیں اور 9 معلوماتی مضامین، 12 زبانوں میں مکمل طور پر دستیاب — کبھی بھی اوپر مینو سے دیکھیں۔",
+      ob4_icon:"🔒", ob4_title:"سب کچھ آپ کے ڈیوائس پر رہتا ہے", ob4_desc:"آپ کا جرنل، سلسلہ اور موڈ صرف مقامی طور پر محفوظ ہوتا ہے، کبھی کسی سرور کو نہیں بھیجا جاتا — آپ ⚙ ترجیحات سے کبھی بھی بیک اپ بھی برآمد کر سکتے ہیں۔",
+      install_ios_text:"بہترین تجربے کے لیے، Waha کو ہوم اسکرین پر شامل کریں: شیئر ⬆️ پھر \"ہوم اسکرین پر شامل کریں\" دبائیں۔",
+      install_android_text:"تیز رسائی کے لیے Waha کو اپنے آلے پر انسٹال کریں۔", install_btn:"انسٹال کریں",
+    },
+    ru: {
+      nav_chat:"Чат", nav_library:"Библиотека", nav_exercises:"Упражнения",
+      hero_eyebrow:"Безопасное, конфиденциальное пространство — без диагноза и лечения",
+      hero_title:"Когда становится тяжело,<br>тебе не нужно нести это в одиночку.",
+      hero_lead:"Waha слушает без осуждения и предлагает практичные, научно обоснованные шаги против тревоги и стресса.",
+      cta_chat:"Попробовать чат", cta_exercises:"Смотреть упражнения",
+      breathe_start:"Начать дыхательное упражнение", breathe_hint:"Нажми для 30-секундного дыхательного упражнения",
+      chat_eyebrow:"Живая демонстрация", chat_title:"Поговори с ассистентом прямо сейчас",
+      chat_desc:"Демонстрация чата — текстом или голосом.",
+      chat_status:"Онлайн · полностью конфиденциально",
+      chat_initial_msg:"Добро пожаловать. Это твоё пространство, не торопись. Как ты себя чувствуешь сегодня?",
+      chat_placeholder:"Напиши или нажми на микрофон, чтобы говорить…", chat_send:"Отправить",
+      voice_on:"Голос включён", voice_off:"Включить голос",
+      library_eyebrow:"Библиотека знаний", library_title:"Упрощённые обзоры по психологии",
+      library_desc:"Надёжный, научный контент, объяснённый просто, за несколько минут.",
+      lib1_tag:"Тревога", lib1_title:"Понимание спирали тревоги", lib1_desc:"Как формируются тревожные мысли и почему они иногда усиливаются без явной причины.",
+      lib2_tag:"Привычки", lib2_title:"Маленькое изменение, большой эффект", lib2_desc:"Основы формирования новой привычки без сверхчеловеческой силы воли.",
+      lib3_tag:"Отношения", lib3_title:"Здоровые границы без чувства вины", lib3_desc:"Как говорить \"нет\" и сохранять важные отношения.",
+      exercises_eyebrow:"Ежедневные упражнения", exercises_title:"Библиотека упражнений для психического здоровья",
+      exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
+      footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
+      title:"Waha — Твоё безопасное пространство",
+      filter_all:"Все", filter_breathing:"Дыхание и расслабление", filter_mind:"Осознанность", filter_write:"Письмо", filter_sleep:"Сон и привычки",
+      libf_all:"Все", libf_anxiety:"Тревога", libf_habits:"Привычки", libf_relationships:"Отношения", libf_self:"Самооценка", libf_emotions:"Эмоции", libf_stress:"Стресс",
+      read_more:"Читать далее →",
+      timer_start:"Запустить таймер", timer_running:"Идёт…", read_aloud:"Прослушать шаги",
+      trust_private:"Приватность прежде всего", trust_cbt:"Основано на КПТ", trust_multilingual:"12 языков", age_gate_title:"Прежде чем начать", age_gate_text:"Waha предназначен для людей от 16 лет. Если ты младше, используй приложение под наблюдением родителя или опекуна.", age_gate_checkbox:"Подтверждаю, что мне 16 лет или больше", age_gate_continue:"Продолжить",
+      mood_prompt:"Как бы ты оценил своё настроение сейчас?", mood_empty:"Отметь своё настроение, чтобы увидеть здесь закономерность.",
+      prefs_eyebrow:"Твоё пространство, твои правила", prefs_title:"Настройки",
+      prefs_subtitle:"Несколько спокойных настроек того, как ощущается Waha и как хранятся твои мысли.",
+      prefs_experience_label:"Опыт",
+      prefs_calm_title:"Сделать пространство спокойнее", prefs_calm_desc:"Отключить лишние анимации и переходы.",
+      prefs_privacy_label:"Конфиденциальность простыми словами",
+      prefs_privacy_quote:"Твои мысли — не данные, которые собирают без твоего ведома. Дневник, серия и настроение сохраняются только на твоём устройстве и никогда его не покидают. А сообщения чата отправляются во внешний сервис ИИ для создания разумного ответа — как было объяснено в начале первого чата — а также сохраняются только локально, чтобы чат помнил вас в следующий раз. Вы можете удалить их в любой момент.",
+      prefs_dark_title:"Тёмный режим", prefs_dark_desc:"Более мягкие цвета при слабом освещении.",
+      prefs_textlarge_title:"Крупный текст", prefs_textlarge_desc:"Увеличивает текст упражнений, статей и чата для удобства чтения.",
+      voice_gender_label:"Голос для чтения", voice_gender_desc:"Чтобы настроить голос озвучки, скажите нам, как вы себя определяете (по желанию, используется только для выбора голоса, если на устройстве есть альтернатива).",
+      voice_gender_male:"Мужской", voice_gender_female:"Женский", voice_gender_none:"Не указывать",
+      aria_close:"Закрыть", aria_share:"Поделиться", aria_mic:"Голосовой ввод", aria_settings:"Настройки",
+      reminder_text:"Вы ещё не прошли сегодняшнюю проверку 👋", reminder_cta:"Проверить сейчас",
+      consent_eyebrow:"Прежде чем начать", consent_title:"Ваш чат отправляется во внешний сервис ИИ",
+      consent_text:"Чтобы дать разумный ответ, ваше сообщение отправляется в Anthropic (поставщику ИИ) через хостинг-сервер приложения. Ваши сообщения не сохраняются и не используются для других целей. Согласны продолжить?",
+      consent_accept:"Согласен, начнём", consent_later:"Не сейчас",
+      locked_content_text:"Этот контент относится к Waha Plus. Откройте его с подпиской, чтобы использовать полностью.",
+      locked_unlock_btn:"Открыть с Waha Plus",
+      rate_limit_msg:"Мы временно достигли лимита сообщений для защиты сервиса. Подождите несколько минут и попробуйте снова 🙏",
+      done_btn:"Сделано сегодня ✓", done_btn_done:"Сделано сегодня ✓", streak_label:"дней подряд",
+      journal_placeholder:"Пиши здесь свободно…", journal_save:"Сохранить", journal_saved:"Сохранено на твоём устройстве ✓", journal_entries_label:"Твои прошлые записи",
+      premium_badge:"Премиум",
+      upgrade_title:"Открой более глубокий опыт", upgrade_subtitle:"Выбери план, подходящий для продолжения твоего пути с Waha.",
+      upgrade_free_title:"Бесплатно", upgrade_free_desc:"Ограниченные чаты, базовая библиотека, 3 ежедневных упражнения",
+      upgrade_monthly_title:"Месячная подписка", upgrade_monthly_desc:"Безлимитные чаты, полная библиотека, продвинутые программы",
+      upgrade_programs_title:"Дополнительные программы", upgrade_programs_desc:"Специализированные короткие курсы и программы", upgrade_monthly_price:"9,99€ / мес", upgrade_yearly_title:"Годовой", upgrade_yearly_price:"99,90€ / год", upgrade_yearly_desc:"Всё из месячного плана, с оплатой раз в год", upgrade_yearly_badge:"Экономия 17%", upgrade_yearly_note:"≈ 8,33€ / мес",
+      upgrade_maybe_later:"Может быть позже",
+      progress_label:"Твой прогресс", progress_streak:"дней подряд", progress_journal:"сохранённых записей", progress_mood:"записей настроения",
+      progress_exercises:"выполненных упражнений", progress_helped:"раз помогло",
+      progress_disable_streaks_title:"Отключить серии", progress_disable_streaks_desc:"Скройте счётчик дней, если он больше давит, чем мотивирует.",
+      why_suggestion_link:"Почему это предложено?",
+      ef_cta:"Объяснить моё чувство", ef_eyebrow:"Помощь в выражении", ef_title:"Помоги мне объяснить, что я чувствую",
+      ef_intro:"Заполни то, что кажется тебе верным сейчас — оставь любую строку пустой, чтобы пропустить её.",
+      ef_f_now:"Прямо сейчас я чувствую", ef_ph_now:"напр.: тревогу и усталость",
+      ef_f_after:"Я заметил(а) это после", ef_ph_after:"напр.: трудного разговора",
+      ef_f_affecting:"Это влияет на", ef_ph_affecting:"напр.: мой сон и концентрацию",
+      ef_f_hardest:"Труднее всего", ef_ph_hardest:"напр.: не знать, что делать дальше",
+      ef_f_need:"Возможно, сейчас мне нужно", ef_ph_need:"напр.: немного пространства и тишины",
+      ef_f_help:"Одна вещь, которая могла бы помочь", ef_ph_help:"напр.: поговорить с тем, кому я доверяю",
+      ef_empty_hint:"Любое оставленное пустым поле просто не войдёт в черновик.", ef_generate:"Создать мой черновик",
+      ef_tone_concise:"Кратко", ef_tone_detailed:"Подробно",
+      ef_copy:"Копировать", ef_copied:"Скопировано ✓", ef_back_edit:"Вернуться к редактированию",
+      ef_ai_rewrite:"Переписать с ИИ", ef_ai_note:"Это отправляет ваш черновик нашему поставщику ИИ для переписывания. Больше ничего не отправляется.",
+      ef_ai_confirm:"Это отправит ваш черновик за пределы устройства в Anthropic (наш поставщик ИИ) для переписывания. Продолжить?",
+      ef_ai_needs_consent:"Пожалуйста, сначала отправьте одно сообщение в чате, чтобы включить функции ИИ.",
+      ef_ai_done:"Переписано ✓", ef_empty_draft:"Заполните хотя бы одну строку, чтобы увидеть черновик здесь.",
+      progress_teaser:"Открой более глубокий анализ своих паттернов с Премиум.", progress_cta:"Смотреть планы",
+      nav_program:"Программа",
+      program_eyebrow:"Фокусная программа", program_title:"7-дневная программа против тревоги",
+      program_desc:"Семь последовательных упражнений, один день бесплатно, остальное открывается по подписке.",
+      program_day_prefix:"День", program_locked:"Заблокировано 🔒",
+      achievement_title:"Отличное достижение! 🎉", achievement_desc:"Ты достиг серии в {n} дней — продолжай!",
+      checkin_cta:"Быстрая проверка", checkin_eyebrow:"Меньше минуты",
+      checkin_title:"Как ты себя чувствуешь сейчас?", checkin_subtitle:"Выбери подходящее, и мы сразу предложим подходящее упражнение.",
+      checkin_or:"Или опиши своими словами", checkin_freetext_placeholder:"например: я нервничаю из-за завтрашнего дня...",
+      checkin_freetext_btn:"Получить совет", checkin_thinking:"Секунду...", checkin_error:"Сейчас не удалось получить ответ, попробуйте ещё раз чуть позже.",
+      ai_unavailable_notice:"⚠️ ИИ временно недоступен — это общий ответ, не адаптированный под ваше сообщение",
+      clear_memory_btn:"🗑️ Очистить чат",
+      brief_eyebrow:"Доброе утро", brief_title:"Твоя сводка дня",
+      brief_streak_prefix:"Твоя серия:", brief_streak_suffix:"дней подряд",
+      brief_mood_up:"Твоё настроение улучшилось в последнее время — продолжай в том же духе", brief_mood_down:"Твоё настроение было немного тяжелее в последнее время — не торопись",
+      brief_mood_stable:"Твоё настроение было довольно стабильным в последнее время",
+      brief_suggest_label:"Ещё не пробовал(а)", brief_start_btn:"Начать сейчас",
+      brief_word_prefix:"Самое частое слово в вашем дневнике недавно:",
+      mood_suggest_text:"Мы заметили, что ваше настроение было немного тяжелее в последнее время — это может помочь:",
+      mood_suggest_btn:"Попробовать",
+      free_chat_remaining:"бесплатных сообщений осталось",
+      sleep_cta:"Режим сна", sleep_title:"Время отдыха",
+      sleep_desc:"Уделите две минуты, чтобы успокоить тело и разум простым дыхательным упражнением перед сном.",
+      sleep_start_btn:"Начать дыхательное упражнение", sleep_skip:"Нет, спасибо — просто закрыть", sounds_cta:"Звуки", sounds_eyebrow:"Расслабься", sounds_title:"Фоновые звуки", sounds_subtitle:"Выбери звук, который будет играть на фоне, пока ты пользуешься приложением или перед сном.", sound_rain:"Дождь", sound_ocean:"Морские волны", sound_brown:"Глубокий шум", sound_pad:"Мягкий тон", sounds_volume_label:"Громкость", sounds_timer_label:"Таймер выключения", timer_off:"Без таймера", timer_5min:"5 минут", timer_15min:"15 минут", timer_30min:"30 минут", sounds_ends_in:"Закончится через",
+      relief_cta:"Помоги мне 90 секунд", relief_eyebrow:"Быстрая помощь",
+      relief_title:"Что сейчас ближе всего к тому, что вы чувствуете?", relief_subtitle:"Выберите один вариант, и мы сразу начнём короткое упражнение — полностью офлайн.",
+      relief_stop:"Остановить и выйти", relief_end_title:"Молодец — вы уделили себе время",
+      relief_fb_yes:"Да, помогло", relief_fb_little:"Немного", relief_fb_no:"Не особо",
+      passport_open_btn:"Открыть Паспорт конфиденциальности", passport_eyebrow:"Паспорт конфиденциальности",
+      passport_title:"Что происходит с вашими данными",
+      passport_local_title:"Что остаётся на этом устройстве", passport_local_text:"Ваш журнал настроения, записи дневника, история упражнений, серия и история чата хранятся только в локальном хранилище этого браузера. Ничего из этого не загружается ни на один сервер или в базу данных Waha — потому что у Waha их нет для этих данных.",
+      passport_ai_title:"Что отправляется в ИИ", passport_ai_text:"Только текст, который вы вводите в чате или быстрой проверке, отправляется в Anthropic (наш поставщик ИИ) для генерации ответа. Ничего другого — ни журнал настроения, ни дневник, ни история упражнений — не отправляется автоматически.",
+      passport_logs_title:"Технические журналы", passport_logs_text:"Наш сервер может фиксировать, был ли запрос успешным или неудачным, и был ли ответ переписан из соображений безопасности — но никогда содержание ваших сообщений.",
+      passport_temp_label:"Временный разговор", passport_temp_desc:"Пока активен, новые сообщения чата не сохраняются на этом устройстве. Заканчивается, когда вы его отключаете или закрываете приложение.",
+      passport_temp_active:"🕶️ Временный режим — этот разговор не сохраняется",
+      passport_controls_label:"Ваши элементы управления", passport_del_chat:"Удалить историю чата", passport_del_mood:"Удалить данные настроения",
+      passport_del_exercises:"Удалить историю упражнений", passport_export_all:"Экспортировать все мои данные", passport_del_all:"Удалить всё",
+      passport_done:"Готово ✓", passport_error:"Что-то пошло не так, попробуйте снова",
+      passport_confirm_all:"Это навсегда удалит все данные Waha на этом устройстве — настроение, дневник, чат, серию, всё. Это нельзя отменить. Продолжить?",
+      calmplan_cta:"План спокойствия", calmplan_eyebrow:"Личный план спокойствия", calmplan_title:"Мой план спокойствия",
+      calmplan_intro:"Подготовьте это сейчас, пока чувствуете себя устойчиво, чтобы это было готово для более трудного момента.",
+      calmplan_f_exercise:"Успокаивающее упражнение, которое мне помогает", calmplan_ph_exercise:"напр.: дыхание 4-7-8",
+      calmplan_f_sentence:"Фраза, которая мне помогает", calmplan_ph_sentence:"напр.: это чувство пройдёт",
+      calmplan_f_place:"Место, где я чувствую себя спокойнее", calmplan_ph_place:"напр.: мой балкон",
+      calmplan_f_activity:"Безопасное занятие", calmplan_ph_activity:"напр.: короткая прогулка",
+      calmplan_f_person:"Кто-то, к кому я могу обратиться", calmplan_ph_person:"напр.: моя сестра Лина",
+      calmplan_f_steps:"Шаги, которым я хочу следовать в трудный момент", calmplan_ph_steps:"напр.: 1) пауза 2) дышать 3) позвонить кому-то",
+      calmplan_save:"Сохранить мой план", calmplan_edit:"Изменить", calmplan_export:"Экспорт", calmplan_print:"Печать", calmplan_delete:"Удалить",
+      calmplan_crisis_note:"В экстренной ситуации этот план не заменяет помощь.", calmplan_crisis_btn:"Кризисные ресурсы",
+      calmplan_confirm_delete:"Удалить план спокойствия навсегда? Это нельзя отменить.",
+      checkin_opt1:"Тревога или напряжение", checkin_opt2:"Грусть или тяжесть на сердце", checkin_opt3:"Рассеянный, стремительный ум", checkin_opt4:"Физическое истощение",
+      crisis_button:"Мне нужна помощь сейчас", crisis_eyebrow:"Вы не одни",
+      crisis_title:"Реальная помощь — бесплатно и конфиденциально", crisis_subtitle:"Если вы сейчас переживаете острый кризис, обратитесь на одну из этих линий — обученные люди готовы вас выслушать.",
+      crisis_de_label:"TelefonSeelsorge (Германия) — круглосуточно, бесплатно и анонимно",
+      crisis_de_note:"Вы можете говорить на любом известном вам языке; вас постараются соединить с тем, кто его понимает.",
+      crisis_ru_label:"Для русско- и украиноязычных — телефон Doweria",
+      crisis_intl_label:"Вы не в Германии?",
+      crisis_intl_note:"Найдите линию кризисной помощи в вашей стране на findahelpline.com — доступно для большинства стран мира.",
+      backup_label:"Резервная копия", backup_desc:"Сохраните дневник, серию дней и настроение в небольшой файл или восстановите их на другом устройстве.",
+      backup_export:"Экспорт резервной копии", backup_import:"Импорт резервной копии",
+      backup_export_done:"Файл загружен ✓", backup_import_done:"Успешно восстановлено ✓", backup_import_error:"Недействительный файл",
+      onboarding_next:"Далее", onboarding_skip:"Пропустить", onboarding_start:"Начнём",
+      ob1_icon:"👋", ob1_title:"Добро пожаловать в Waha", ob1_desc:"Ваше безопасное, конфиденциальное пространство — без диагнозов, без лечения, только практические инструменты именно тогда, когда они нужны.",
+      ob2_icon:"⚡", ob2_title:"Быстрая проверка", ob2_desc:"Выберите на главной странице, как вы себя чувствуете сейчас, и мы сразу предложим подходящее упражнение — менее чем за минуту.",
+      ob3_icon:"📚", ob3_title:"Упражнения и библиотека", ob3_desc:"12 управляемых упражнений и 9 статей, полностью доступных на 12 языках — просматривайте их в любое время в верхнем меню.",
+      ob4_icon:"🔒", ob4_title:"Всё остаётся на вашем устройстве", ob4_desc:"Дневник, серия и настроение сохраняются только локально, никогда не отправляются на сервер — вы также можете экспортировать резервную копию в любое время из ⚙ Настроек.",
+      install_ios_text:"Для лучшего опыта добавь Waha на главный экран: нажми Поделиться ⬆️, затем \"На экран Домой\".",
+      install_android_text:"Установи Waha на своё устройство для быстрого доступа.", install_btn:"Установить",
+    },
+    pt: {
+      nav_chat:"Chat", nav_library:"Biblioteca", nav_exercises:"Exercícios",
+      hero_eyebrow:"Um espaço seguro e confidencial — sem diagnóstico nem tratamento",
+      hero_title:"Quando tudo pesa,<br>não precisas de carregar isso sozinho.",
+      hero_lead:"O Waha ouve-te sem julgamento e sugere passos práticos, baseados em ciência, para lidar com a ansiedade e o stress.",
+      cta_chat:"Experimentar o chat", cta_exercises:"Ver exercícios",
+      breathe_start:"Iniciar exercício de respiração", breathe_hint:"Toca para um exercício de respiração de 30 segundos",
+      chat_eyebrow:"Demonstração ao vivo", chat_title:"Fala com o assistente agora",
+      chat_desc:"Uma demonstração do chat — por texto ou por voz.",
+      chat_status:"Online · totalmente confidencial",
+      chat_initial_msg:"Bem-vindo. Este é o teu espaço, leva o teu tempo. Como te sentes hoje?",
+      chat_placeholder:"Escreve ou toca no microfone para falar…", chat_send:"Enviar",
+      voice_on:"Voz ativada", voice_off:"Ativar voz",
+      library_eyebrow:"Biblioteca de conhecimento", library_title:"Resumos simplificados de psicologia",
+      library_desc:"Conteúdo fiável e científico, explicado de forma simples, em poucos minutos.",
+      lib1_tag:"Ansiedade", lib1_title:"Compreender a espiral da ansiedade", lib1_desc:"Como se formam os pensamentos ansiosos e por que às vezes crescem sem motivo claro.",
+      lib2_tag:"Hábitos", lib2_title:"Pequena mudança, grande impacto", lib2_desc:"O básico para construir um novo hábito, sem precisar de força de vontade sobre-humana.",
+      lib3_tag:"Relações", lib3_title:"Limites saudáveis sem culpa", lib3_desc:"Como dizer \"não\" e ainda manter as relações importantes.",
+      exercises_eyebrow:"Exercícios diários", exercises_title:"Biblioteca de exercícios de saúde mental",
+      exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
+      footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
+      title:"Waha — O teu espaço seguro",
+      filter_all:"Todos", filter_breathing:"Respiração e relaxamento", filter_mind:"Atenção plena", filter_write:"Escrita", filter_sleep:"Sono e hábitos",
+      libf_all:"Todos", libf_anxiety:"Ansiedade", libf_habits:"Hábitos", libf_relationships:"Relações", libf_self:"Autoestima", libf_emotions:"Emoções", libf_stress:"Stress",
+      read_more:"Ler mais →",
+      timer_start:"Iniciar temporizador", timer_running:"Em curso…", read_aloud:"Ouvir os passos",
+      trust_private:"Privacidade em primeiro lugar", trust_cbt:"Baseado em TCC", trust_multilingual:"12 idiomas", age_gate_title:"Antes de começar", age_gate_text:"O Waha é destinado a pessoas com 16 anos ou mais. Se és mais novo/a, usa a aplicação sob supervisão de um encarregado de educação.", age_gate_checkbox:"Confirmo que tenho 16 anos ou mais", age_gate_continue:"Continuar",
+      mood_prompt:"Como classificarias o teu humor agora?", mood_empty:"Regista o teu humor para começares a ver um padrão aqui.",
+      prefs_eyebrow:"O teu espaço, as tuas regras", prefs_title:"Preferências",
+      prefs_subtitle:"Alguns controlos discretos sobre como o Waha se sente e como os teus pensamentos são tratados.",
+      prefs_experience_label:"Experiência",
+      prefs_calm_title:"Manter o espaço calmo", prefs_calm_desc:"Desativar animações e transições desnecessárias.",
+      prefs_privacy_label:"Privacidade, dita claramente",
+      prefs_privacy_quote:"Os teus pensamentos não são dados recolhidos sem o teu conhecimento. O diário, a sequência e o humor são guardados apenas no teu dispositivo e nunca saem dele. Já as mensagens do chat são enviadas a um serviço de IA externo para gerar uma resposta inteligente — como explicado no início do teu primeiro chat — e são também guardadas apenas localmente para que o chat se lembre de ti da próxima vez. Podes apagá-lo quando quiseres.",
+      prefs_dark_title:"Modo escuro", prefs_dark_desc:"Cores mais suaves para pouca luz.",
+      prefs_textlarge_title:"Texto maior", prefs_textlarge_desc:"Aumenta o texto dos exercícios, artigos e chat para facilitar a leitura.",
+      voice_gender_label:"Voz de leitura", voice_gender_desc:"Para ajustar a voz de leitura, diz-nos como te identificas (opcional, usado apenas para escolher uma voz se o teu dispositivo oferecer uma alternativa).",
+      voice_gender_male:"Homem", voice_gender_female:"Mulher", voice_gender_none:"Prefiro não dizer",
+      aria_close:"Fechar", aria_share:"Partilhar", aria_mic:"Entrada de voz", aria_settings:"Definições",
+      reminder_text:"Ainda não fizeste o teu check-in de hoje 👋", reminder_cta:"Verificar agora",
+      consent_eyebrow:"Antes de começar", consent_title:"O teu chat é enviado para um serviço externo de IA",
+      consent_text:"Para responder com inteligência, a tua mensagem é enviada para a Anthropic (fornecedora de IA) através do servidor de alojamento da app. As tuas mensagens não são guardadas nem usadas para qualquer outro fim. Aceitas continuar?",
+      consent_accept:"Aceito, vamos começar", consent_later:"Agora não",
+      locked_content_text:"Este conteúdo faz parte do Waha Plus. Desbloqueia-o com a subscrição para aproveitá-lo totalmente.",
+      locked_unlock_btn:"Desbloquear com Waha Plus",
+      rate_limit_msg:"Atingimos temporariamente o limite de mensagens para proteger o serviço. Aguarda alguns minutos e tenta novamente 🙏",
+      done_btn:"Feito hoje ✓", done_btn_done:"Feito hoje ✓", streak_label:"dias seguidos",
+      journal_placeholder:"Escreve livremente aqui…", journal_save:"Guardar", journal_saved:"Guardado no teu dispositivo ✓", journal_entries_label:"Os teus registos anteriores",
+      premium_badge:"Premium",
+      upgrade_title:"Desbloqueia uma experiência mais profunda", upgrade_subtitle:"Escolhe o plano certo para continuar a tua jornada com o Waha.",
+      upgrade_free_title:"Gratuito", upgrade_free_desc:"Chats limitados, biblioteca básica, 3 exercícios diários",
+      upgrade_monthly_title:"Plano mensal", upgrade_monthly_desc:"Chats ilimitados, biblioteca completa, programas avançados",
+      upgrade_programs_title:"Programas adicionais", upgrade_programs_desc:"Cursos e programas curtos especializados", upgrade_monthly_price:"9,99€ / mês", upgrade_yearly_title:"Anual", upgrade_yearly_price:"99,90€ / ano", upgrade_yearly_desc:"Tudo do plano mensal, faturado uma vez por ano", upgrade_yearly_badge:"Poupa 17%", upgrade_yearly_note:"≈ 8,33€ / mês",
+      upgrade_maybe_later:"Talvez mais tarde",
+      progress_label:"O teu progresso", progress_streak:"dias seguidos", progress_journal:"registos guardados", progress_mood:"registos de humor",
+      progress_exercises:"exercícios concluídos", progress_helped:"vezes que ajudou",
+      progress_disable_streaks_title:"Desativar sequências", progress_disable_streaks_desc:"Oculta o contador de dias se te causar mais pressão do que motivação.",
+      why_suggestion_link:"Porquê esta sugestão?",
+      ef_cta:"Explicar o que sinto", ef_eyebrow:"Ajuda para me Exprimir", ef_title:"Ajuda-me a explicar como me sinto",
+      ef_intro:"Preenche o que te parece verdadeiro agora — deixa qualquer linha em branco para a saltar.",
+      ef_f_now:"Neste momento sinto-me", ef_ph_now:"ex.: ansioso/a e cansado/a",
+      ef_f_after:"Reparei nisto depois de", ef_ph_after:"ex.: uma conversa difícil",
+      ef_f_affecting:"Isto está a afetar", ef_ph_affecting:"ex.: o meu sono e a minha concentração",
+      ef_f_hardest:"O mais difícil é", ef_ph_hardest:"ex.: não saber o que fazer a seguir",
+      ef_f_need:"O que talvez precise agora é", ef_ph_need:"ex.: algum espaço e tranquilidade",
+      ef_f_help:"Uma coisa que poderia ajudar é", ef_ph_help:"ex.: falar com alguém em quem confio",
+      ef_empty_hint:"Qualquer campo que deixes em branco é simplesmente omitido do teu rascunho.", ef_generate:"Criar o meu rascunho",
+      ef_tone_concise:"Conciso", ef_tone_detailed:"Detalhado",
+      ef_copy:"Copiar", ef_copied:"Copiado ✓", ef_back_edit:"Voltar a editar",
+      ef_ai_rewrite:"Reescrever com IA", ef_ai_note:"Isto envia o teu rascunho ao nosso fornecedor de IA para o reescrever. Nada mais é enviado.",
+      ef_ai_confirm:"Isto enviará o teu rascunho para fora do teu dispositivo à Anthropic (o nosso fornecedor de IA) para o reescrever. Continuar?",
+      ef_ai_needs_consent:"Por favor envia primeiro uma mensagem de chat para ativar as funcionalidades de IA.",
+      ef_ai_done:"Reescrito ✓", ef_empty_draft:"Preenche pelo menos uma linha para veres o teu rascunho aqui.",
+      progress_teaser:"Desbloqueia uma análise mais profunda dos teus padrões com o Premium.", progress_cta:"Ver planos",
+      nav_program:"Programa",
+      program_eyebrow:"Programa focado", program_title:"Programa de 7 dias contra a ansiedade",
+      program_desc:"Sete exercícios sequenciados, um dia grátis, o resto desbloqueado com subscrição.",
+      program_day_prefix:"Dia", program_locked:"Bloqueado 🔒",
+      achievement_title:"Grande conquista! 🎉", achievement_desc:"Atingiste {n} dias seguidos — continua assim!",
+      checkin_cta:"Verificação rápida", checkin_eyebrow:"Em menos de um minuto",
+      checkin_title:"Como te sentes agora?", checkin_subtitle:"Escolhe o que descreve o teu estado, e sugerimos já um exercício adequado.",
+      checkin_or:"Ou descreve com as tuas palavras", checkin_freetext_placeholder:"ex.: estou ansioso/a com amanhã...",
+      checkin_freetext_btn:"Obter uma sugestão", checkin_thinking:"Um momento...", checkin_error:"Não foi possível obter resposta agora, tenta novamente daqui a pouco.",
+      ai_unavailable_notice:"⚠️ A IA está temporariamente indisponível — esta é uma resposta genérica, não adaptada à tua mensagem",
+      clear_memory_btn:"🗑️ Limpar conversa",
+      brief_eyebrow:"Bom dia", brief_title:"O teu resumo do dia",
+      brief_streak_prefix:"A tua sequência:", brief_streak_suffix:"dias seguidos",
+      brief_mood_up:"O teu humor tem melhorado ultimamente — continua assim", brief_mood_down:"O teu humor tem estado um pouco mais pesado ultimamente — dá o teu tempo",
+      brief_mood_stable:"O teu humor tem estado bastante estável ultimamente",
+      brief_suggest_label:"Ainda não experimentaste", brief_start_btn:"Começar agora",
+      brief_word_prefix:"Palavra mais frequente no teu diário recentemente:",
+      mood_suggest_text:"Reparámos que o teu humor tem estado um pouco mais pesado ultimamente — isto pode ajudar:",
+      mood_suggest_btn:"Experimentar",
+      free_chat_remaining:"mensagens gratuitas restantes",
+      sleep_cta:"Modo sono", sleep_title:"Hora de descansar",
+      sleep_desc:"Reserva dois minutos para acalmar o corpo e a mente com um exercício de respiração simples antes de dormir.",
+      sleep_start_btn:"Começar exercício de respiração", sleep_skip:"Não, obrigado — só fechar", sounds_cta:"Sons", sounds_eyebrow:"Relaxa", sounds_title:"Sons ambiente", sounds_subtitle:"Escolhe um som para tocar em segundo plano enquanto usas a app ou antes de dormir.", sound_rain:"Chuva", sound_ocean:"Ondas do mar", sound_brown:"Ruído profundo", sound_pad:"Som suave", sounds_volume_label:"Volume", sounds_timer_label:"Temporizador", timer_off:"Sem temporizador", timer_5min:"5 minutos", timer_15min:"15 minutos", timer_30min:"30 minutos", sounds_ends_in:"Termina em",
+      relief_cta:"Ajuda-me durante 90 segundos", relief_eyebrow:"Alívio rápido",
+      relief_title:"O que se aproxima mais do que sentes agora?", relief_subtitle:"Escolhe uma opção, e começamos já um exercício curto — totalmente offline.",
+      relief_stop:"Parar e sair", relief_end_title:"Muito bem — reservaste um momento para ti",
+      relief_fb_yes:"Sim, ajudou", relief_fb_little:"Um pouco", relief_fb_no:"Não muito",
+      passport_open_btn:"Abrir o Passaporte de Privacidade", passport_eyebrow:"Passaporte de Privacidade",
+      passport_title:"O que acontece com os teus dados",
+      passport_local_title:"O que fica neste dispositivo", passport_local_text:"O teu registo de humor, entradas do diário, histórico de exercícios, sequência e histórico de chat são guardados apenas no armazenamento local deste navegador. Nada disso é enviado para nenhum servidor ou base de dados da Waha — porque a Waha não tem uma para estes dados.",
+      passport_ai_title:"O que é enviado à IA", passport_ai_text:"Apenas o texto que escreves no chat ou no check-in rápido é enviado à Anthropic (o nosso fornecedor de IA) para gerar uma resposta. Nada mais — nem registo de humor, nem diário, nem histórico de exercícios — é enviado automaticamente.",
+      passport_logs_title:"Registos técnicos", passport_logs_text:"O nosso servidor pode registar se um pedido foi bem-sucedido ou falhou, e se uma resposta foi reescrita por segurança — nunca o conteúdo das tuas mensagens.",
+      passport_temp_label:"Conversa temporária", passport_temp_desc:"Enquanto ativa, novas mensagens de chat não são guardadas neste dispositivo. Termina quando a desativas ou fechas a app.",
+      passport_temp_active:"🕶️ Modo temporário — esta conversa não está a ser guardada",
+      passport_controls_label:"Os teus controlos", passport_del_chat:"Eliminar histórico de chat", passport_del_mood:"Eliminar dados de humor",
+      passport_del_exercises:"Eliminar histórico de exercícios", passport_export_all:"Exportar todos os meus dados", passport_del_all:"Eliminar tudo",
+      passport_done:"Feito ✓", passport_error:"Algo correu mal, tenta novamente",
+      passport_confirm_all:"Isto elimina permanentemente todos os dados da Waha neste dispositivo — humor, diário, chat, sequência, tudo. Isto não pode ser desfeito. Continuar?",
+      calmplan_cta:"Plano de calma", calmplan_eyebrow:"Plano de calma pessoal", calmplan_title:"O meu plano de calma",
+      calmplan_intro:"Prepara isto agora, enquanto te sentes estável, para que esteja pronto para um momento mais difícil.",
+      calmplan_f_exercise:"Um exercício calmante que me ajuda", calmplan_ph_exercise:"ex.: respiração 4-7-8",
+      calmplan_f_sentence:"Uma frase que me ajuda", calmplan_ph_sentence:"ex.: este sentimento vai passar",
+      calmplan_f_place:"Um lugar onde me sinto mais calmo/a", calmplan_ph_place:"ex.: a minha varanda",
+      calmplan_f_activity:"Uma atividade segura", calmplan_ph_activity:"ex.: uma caminhada curta",
+      calmplan_f_person:"Alguém a quem posso recorrer", calmplan_ph_person:"ex.: a minha irmã Lina",
+      calmplan_f_steps:"Passos que quero seguir num momento difícil", calmplan_ph_steps:"ex.: 1) pausa 2) respira 3) liga a alguém",
+      calmplan_save:"Guardar o meu plano", calmplan_edit:"Editar", calmplan_export:"Exportar", calmplan_print:"Imprimir", calmplan_delete:"Eliminar",
+      calmplan_crisis_note:"Numa emergência, este plano não substitui ajuda.", calmplan_crisis_btn:"Recursos de crise",
+      calmplan_confirm_delete:"Eliminar o teu plano de calma permanentemente? Isto não pode ser desfeito.",
+      checkin_opt1:"Ansioso ou tenso", checkin_opt2:"Triste ou com peso no coração", checkin_opt3:"Mente dispersa e acelerada", checkin_opt4:"Exaustão física",
+      crisis_button:"Preciso de ajuda agora", crisis_eyebrow:"Você não está sozinho(a)",
+      crisis_title:"Ajuda real — gratuita e confidencial", crisis_subtitle:"Se você está passando por uma crise aguda agora, entre em contato com uma destas linhas — pessoas treinadas estão prontas para ouvir você.",
+      crisis_de_label:"TelefonSeelsorge (Alemanha) — 24h, gratuito e anônimo",
+      crisis_de_note:"Você pode falar em qualquer idioma que souber; tentarão conectá-lo com alguém que o compreenda.",
+      crisis_ru_label:"Para falantes de russo ou ucraniano — Telefon Doweria",
+      crisis_intl_label:"Fora da Alemanha?",
+      crisis_intl_note:"Encontre uma linha de crise no seu país em findahelpline.com — disponível para a maioria dos países.",
+      backup_label:"Backup", backup_desc:"Guarda o teu diário, sequência e humor como um pequeno ficheiro, ou restaura-os noutro dispositivo.",
+      backup_export:"Exportar backup", backup_import:"Importar backup",
+      backup_export_done:"Ficheiro descarregado ✓", backup_import_done:"Restaurado com sucesso ✓", backup_import_error:"Ficheiro inválido",
+      onboarding_next:"Seguinte", onboarding_skip:"Ignorar", onboarding_start:"Vamos começar",
+      ob1_icon:"👋", ob1_title:"Bem-vindo ao Waha", ob1_desc:"O teu espaço seguro e confidencial — sem diagnóstico, sem tratamento, apenas ferramentas práticas exatamente quando precisas.",
+      ob2_icon:"⚡", ob2_title:"Verificação rápida", ob2_desc:"Escolhe como te sentes agora na página inicial, e sugerimos de imediato um exercício adequado — em menos de um minuto.",
+      ob3_icon:"📚", ob3_title:"Exercícios e biblioteca", ob3_desc:"12 exercícios guiados e 9 artigos, totalmente disponíveis em 12 idiomas — explora-os quando quiseres a partir do menu superior.",
+      ob4_icon:"🔒", ob4_title:"Tudo fica no teu dispositivo", ob4_desc:"O teu diário, sequência e humor são guardados apenas localmente, nunca enviados a um servidor — também podes exportar um backup a qualquer momento em ⚙ Preferências.",
+      install_ios_text:"Para a melhor experiência, adiciona o Waha ao ecrã principal: toca em Partilhar ⬆️ e depois em \"Adicionar ao ecrã principal\".",
+      install_android_text:"Instala o Waha no teu dispositivo para acesso mais rápido.", install_btn:"Instalar",
+    },
+    it: {
+      nav_chat:"Chat", nav_library:"Biblioteca", nav_exercises:"Esercizi",
+      hero_eyebrow:"Uno spazio sicuro e riservato — nessuna diagnosi, nessun trattamento",
+      hero_title:"Quando tutto pesa,<br>non devi portarlo da solo.",
+      hero_lead:"Waha ti ascolta senza giudicare e propone passi pratici, basati sulla scienza, contro ansia e stress.",
+      cta_chat:"Prova la chat", cta_exercises:"Vedi gli esercizi",
+      breathe_start:"Avvia esercizio di respirazione", breathe_hint:"Tocca per un esercizio di respirazione di 30 secondi",
+      chat_eyebrow:"Demo dal vivo", chat_title:"Parla ora con l'assistente",
+      chat_desc:"Una demo della chat — per testo o voce.",
+      chat_status:"Online · completamente riservato",
+      chat_initial_msg:"Benvenuto. Questo è il tuo spazio, prenditi il tuo tempo. Come ti senti oggi?",
+      chat_placeholder:"Scrivi o tocca il microfono per parlare…", chat_send:"Invia",
+      voice_on:"Voce attiva", voice_off:"Attiva voce",
+      library_eyebrow:"Biblioteca di conoscenza", library_title:"Riassunti semplificati di psicologia",
+      library_desc:"Contenuti affidabili e scientifici, spiegati in modo semplice, in pochi minuti.",
+      lib1_tag:"Ansia", lib1_title:"Capire la spirale dell'ansia", lib1_desc:"Come si formano i pensieri ansiosi e perché a volte crescono senza un motivo chiaro.",
+      lib2_tag:"Abitudini", lib2_title:"Piccolo cambiamento, grande impatto", lib2_desc:"Le basi per costruire una nuova abitudine, senza bisogno di forza di volontà sovrumana.",
+      lib3_tag:"Relazioni", lib3_title:"Confini sani senza sensi di colpa", lib3_desc:"Come dire \"no\" mantenendo comunque le relazioni importanti.",
+      exercises_eyebrow:"Esercizi quotidiani", exercises_title:"Biblioteca di esercizi per la salute mentale",
+      exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
+      footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
+      title:"Waha — Il tuo spazio sicuro",
+      filter_all:"Tutti", filter_breathing:"Respirazione e relax", filter_mind:"Consapevolezza", filter_write:"Scrittura", filter_sleep:"Sonno e abitudini",
+      libf_all:"Tutti", libf_anxiety:"Ansia", libf_habits:"Abitudini", libf_relationships:"Relazioni", libf_self:"Autostima", libf_emotions:"Emozioni", libf_stress:"Stress",
+      read_more:"Leggi di più →",
+      timer_start:"Avvia timer", timer_running:"In corso…", read_aloud:"Ascolta i passaggi",
+      trust_private:"Privacy al primo posto", trust_cbt:"Basato sulla TCC", trust_multilingual:"12 lingue", age_gate_title:"Prima di iniziare", age_gate_text:"Waha è pensato per persone dai 16 anni in su. Se sei più giovane, usalo sotto la supervisione di un genitore o tutore.", age_gate_checkbox:"Confermo di avere almeno 16 anni", age_gate_continue:"Continua",
+      mood_prompt:"Come valuteresti il tuo umore adesso?", mood_empty:"Registra il tuo umore per iniziare a vedere uno schema qui.",
+      prefs_eyebrow:"Il tuo spazio, le tue regole", prefs_title:"Preferenze",
+      prefs_subtitle:"Alcuni controlli discreti su come si sente Waha e su come vengono trattati i tuoi pensieri.",
+      prefs_experience_label:"Esperienza",
+      prefs_calm_title:"Mantieni lo spazio tranquillo", prefs_calm_desc:"Disattiva animazioni e transizioni non necessarie.",
+      prefs_privacy_label:"Privacy, detta chiaramente",
+      prefs_privacy_quote:"I tuoi pensieri non sono dati raccolti a tua insaputa. Diario, serie e umore vengono salvati solo sul tuo dispositivo e non lo lasciano mai. I messaggi della chat, invece, vengono inviati a un servizio IA esterno per generare una risposta intelligente — come spiegato all'inizio della tua prima chat — e vengono salvati anche solo localmente affinché la chat ti ricordi la prossima volta. Puoi cancellarla quando vuoi.",
+      prefs_dark_title:"Modalità scura", prefs_dark_desc:"Colori più tenui per la scarsa illuminazione.",
+      prefs_textlarge_title:"Testo più grande", prefs_textlarge_desc:"Ingrandisce esercizi, articoli e chat per una lettura più facile.",
+      voice_gender_label:"Voce di lettura", voice_gender_desc:"Per regolare la voce di lettura, dicci come ti identifichi (facoltativo, usato solo per scegliere una voce se il tuo dispositivo offre un'alternativa).",
+      voice_gender_male:"Uomo", voice_gender_female:"Donna", voice_gender_none:"Preferisco non dirlo",
+      aria_close:"Chiudi", aria_share:"Condividi", aria_mic:"Inserimento vocale", aria_settings:"Impostazioni",
+      reminder_text:"Non hai ancora fatto il check-in di oggi 👋", reminder_cta:"Controlla ora",
+      consent_eyebrow:"Prima di iniziare", consent_title:"La tua chat viene inviata a un servizio IA esterno",
+      consent_text:"Per rispondere in modo intelligente, il tuo messaggio viene inviato ad Anthropic (il fornitore di IA) tramite il server di hosting dell'app. I tuoi messaggi non vengono salvati né usati per altri scopi. Accetti di continuare?",
+      consent_accept:"Accetto, iniziamo", consent_later:"Non ora",
+      locked_content_text:"Questo contenuto fa parte di Waha Plus. Sbloccalo con l'abbonamento per usarlo appieno.",
+      locked_unlock_btn:"Sblocca con Waha Plus",
+      rate_limit_msg:"Abbiamo temporaneamente raggiunto il limite di messaggi per proteggere il servizio. Attendi qualche minuto e riprova 🙏",
+      done_btn:"Fatto oggi ✓", done_btn_done:"Fatto oggi ✓", streak_label:"giorni consecutivi",
+      journal_placeholder:"Scrivi liberamente qui…", journal_save:"Salva", journal_saved:"Salvato sul tuo dispositivo ✓", journal_entries_label:"I tuoi scritti precedenti",
+      premium_badge:"Premium",
+      upgrade_title:"Sblocca un'esperienza più profonda", upgrade_subtitle:"Scegli il piano adatto per continuare il tuo percorso con Waha.",
+      upgrade_free_title:"Gratuito", upgrade_free_desc:"Chat limitate, biblioteca di base, 3 esercizi giornalieri",
+      upgrade_monthly_title:"Piano mensile", upgrade_monthly_desc:"Chat illimitate, biblioteca completa, programmi avanzati",
+      upgrade_programs_title:"Programmi aggiuntivi", upgrade_programs_desc:"Corsi e programmi brevi specializzati", upgrade_monthly_price:"9,99€ / mese", upgrade_yearly_title:"Annuale", upgrade_yearly_price:"99,90€ / anno", upgrade_yearly_desc:"Tutto del piano mensile, fatturato una volta all'anno", upgrade_yearly_badge:"Risparmia 17%", upgrade_yearly_note:"≈ 8,33€ / mese",
+      upgrade_maybe_later:"Forse più tardi",
+      progress_label:"I tuoi progressi", progress_streak:"giorni consecutivi", progress_journal:"scritti salvati", progress_mood:"registrazioni dell'umore",
+      progress_exercises:"esercizi completati", progress_helped:"volte che ha aiutato",
+      progress_disable_streaks_title:"Disattiva le serie", progress_disable_streaks_desc:"Nascondi il contatore dei giorni se ti mette più pressione che motivazione.",
+      why_suggestion_link:"Perché questo suggerimento?",
+      ef_cta:"Spiega il mio sentimento", ef_eyebrow:"Aiuto ad Esprimersi", ef_title:"Aiutami a spiegare come mi sento",
+      ef_intro:"Compila ciò che ti sembra vero ora — lascia vuota qualsiasi riga per saltarla.",
+      ef_f_now:"In questo momento mi sento", ef_ph_now:"es.: ansioso/a e stanco/a",
+      ef_f_after:"L'ho notato dopo", ef_ph_after:"es.: una conversazione difficile",
+      ef_f_affecting:"Questo sta influenzando", ef_ph_affecting:"es.: il mio sonno e la mia concentrazione",
+      ef_f_hardest:"La cosa più difficile è", ef_ph_hardest:"es.: non sapere cosa fare dopo",
+      ef_f_need:"Ciò di cui potrei aver bisogno ora è", ef_ph_need:"es.: un po' di spazio e tranquillità",
+      ef_f_help:"Una cosa che potrebbe aiutare è", ef_ph_help:"es.: parlare con qualcuno di cui mi fido",
+      ef_empty_hint:"Qualsiasi campo lasciato vuoto viene semplicemente omesso dalla tua bozza.", ef_generate:"Crea la mia bozza",
+      ef_tone_concise:"Conciso", ef_tone_detailed:"Dettagliato",
+      ef_copy:"Copia", ef_copied:"Copiato ✓", ef_back_edit:"Torna a modificare",
+      ef_ai_rewrite:"Riscrivi con l'IA", ef_ai_note:"Questo invia la tua bozza al nostro fornitore di IA per riscriverla. Nient'altro viene inviato.",
+      ef_ai_confirm:"Questo invierà la tua bozza fuori dal tuo dispositivo ad Anthropic (il nostro fornitore di IA) per riscriverla. Continuare?",
+      ef_ai_needs_consent:"Invia prima un messaggio in chat per abilitare le funzionalità IA.",
+      ef_ai_done:"Riscritto ✓", ef_empty_draft:"Compila almeno una riga per vedere qui la tua bozza.",
+      progress_teaser:"Sblocca un'analisi più approfondita dei tuoi schemi con Premium.", progress_cta:"Vedi i piani",
+      nav_program:"Programma",
+      program_eyebrow:"Programma mirato", program_title:"Programma di 7 giorni contro l'ansia",
+      program_desc:"Sette esercizi in sequenza, un giorno gratuito, il resto si sblocca con un abbonamento.",
+      program_day_prefix:"Giorno", program_locked:"Bloccato 🔒",
+      achievement_title:"Grande traguardo! 🎉", achievement_desc:"Hai raggiunto {n} giorni consecutivi — continua così!",
+      checkin_cta:"Check-in veloce", checkin_eyebrow:"In meno di un minuto",
+      checkin_title:"Come ti senti adesso?", checkin_subtitle:"Scegli ciò che ti descrive, e ti suggeriamo subito un esercizio adatto.",
+      checkin_or:"Oppure descrivilo con parole tue", checkin_freetext_placeholder:"es.: sono in ansia per domani...",
+      checkin_freetext_btn:"Ricevi un suggerimento", checkin_thinking:"Un momento...", checkin_error:"Non è stato possibile ottenere una risposta ora, riprova tra poco.",
+      ai_unavailable_notice:"⚠️ L'IA non è temporaneamente disponibile — questa è una risposta generica, non personalizzata per il tuo messaggio",
+      clear_memory_btn:"🗑️ Cancella chat",
+      brief_eyebrow:"Buongiorno", brief_title:"Il tuo riepilogo del giorno",
+      brief_streak_prefix:"La tua serie:", brief_streak_suffix:"giorni di fila",
+      brief_mood_up:"Il tuo umore è migliorato ultimamente — continua così", brief_mood_down:"Il tuo umore è stato un po' più pesante ultimamente — prenditi il tuo tempo",
+      brief_mood_stable:"Il tuo umore è stato abbastanza stabile ultimamente",
+      brief_suggest_label:"Non ancora provato", brief_start_btn:"Inizia ora",
+      brief_word_prefix:"Parola più frequente nel tuo diario di recente:",
+      mood_suggest_text:"Abbiamo notato che il tuo umore è stato un po' più pesante ultimamente — questo potrebbe aiutare:",
+      mood_suggest_btn:"Prova",
+      free_chat_remaining:"messaggi gratuiti rimasti",
+      sleep_cta:"Modalità sonno", sleep_title:"Ora di riposare",
+      sleep_desc:"Prenditi due minuti per calmare corpo e mente con un semplice esercizio di respirazione prima di dormire.",
+      sleep_start_btn:"Inizia l'esercizio di respirazione", sleep_skip:"No grazie — chiudi soltanto", sounds_cta:"Suoni", sounds_eyebrow:"Rilassati", sounds_title:"Suoni ambientali", sounds_subtitle:"Scegli un suono da riprodurre in sottofondo mentre usi l'app o prima di dormire.", sound_rain:"Pioggia", sound_ocean:"Onde dell'oceano", sound_brown:"Rumore profondo", sound_pad:"Tono soffuso", sounds_volume_label:"Volume", sounds_timer_label:"Timer di spegnimento", timer_off:"Nessun timer", timer_5min:"5 minuti", timer_15min:"15 minuti", timer_30min:"30 minuti", sounds_ends_in:"Termina tra",
+      relief_cta:"Aiutami per 90 secondi", relief_eyebrow:"Sollievo rapido",
+      relief_title:"Cosa si avvicina di più a ciò che provi ora?", relief_subtitle:"Scegline uno, inizieremo subito un breve esercizio — completamente offline.",
+      relief_stop:"Ferma ed esci", relief_end_title:"Ben fatto — ti sei preso un momento per te",
+      relief_fb_yes:"Sì, ha aiutato", relief_fb_little:"Un po'", relief_fb_no:"Non proprio",
+      passport_open_btn:"Apri il Passaporto della Privacy", passport_eyebrow:"Passaporto della Privacy",
+      passport_title:"Cosa succede ai tuoi dati",
+      passport_local_title:"Cosa resta su questo dispositivo", passport_local_text:"Il tuo registro dell'umore, le voci del diario, la cronologia degli esercizi, la serie e la cronologia della chat sono memorizzati solo nell'archiviazione locale di questo browser. Nulla di tutto ciò viene caricato su alcun server o database di Waha — perché Waha non ne possiede uno per questi dati.",
+      passport_ai_title:"Cosa viene inviato all'IA", passport_ai_text:"Solo il testo che scrivi nella chat o nel check-in rapido viene inviato ad Anthropic (il nostro fornitore di IA) per generare una risposta. Nient'altro — né registro dell'umore, né diario, né cronologia degli esercizi — viene inviato automaticamente.",
+      passport_logs_title:"Registri tecnici", passport_logs_text:"Il nostro server può registrare se una richiesta è riuscita o fallita, e se una risposta è stata riscritta per motivi di sicurezza — mai il contenuto dei tuoi messaggi.",
+      passport_temp_label:"Conversazione temporanea", passport_temp_desc:"Mentre è attiva, i nuovi messaggi della chat non vengono salvati su questo dispositivo. Termina quando la disattivi o chiudi l'app.",
+      passport_temp_active:"🕶️ Modalità temporanea — questa conversazione non viene salvata",
+      passport_controls_label:"I tuoi controlli", passport_del_chat:"Elimina cronologia chat", passport_del_mood:"Elimina dati dell'umore",
+      passport_del_exercises:"Elimina cronologia esercizi", passport_export_all:"Esporta tutti i miei dati", passport_del_all:"Elimina tutto",
+      passport_done:"Fatto ✓", passport_error:"Qualcosa è andato storto, riprova",
+      passport_confirm_all:"Questo eliminerà permanentemente tutti i dati Waha su questo dispositivo — umore, diario, chat, serie, tutto. Non può essere annullato. Continuare?",
+      calmplan_cta:"Piano di calma", calmplan_eyebrow:"Piano di calma personale", calmplan_title:"Il mio piano di calma",
+      calmplan_intro:"Preparalo ora, mentre ti senti stabile, così sarà pronto per un momento più difficile.",
+      calmplan_f_exercise:"Un esercizio calmante che mi aiuta", calmplan_ph_exercise:"es.: respirazione 4-7-8",
+      calmplan_f_sentence:"Una frase che mi aiuta", calmplan_ph_sentence:"es.: questa sensazione passerà",
+      calmplan_f_place:"Un luogo dove mi sento più calmo/a", calmplan_ph_place:"es.: il mio balcone",
+      calmplan_f_activity:"Un'attività sicura", calmplan_ph_activity:"es.: una breve passeggiata",
+      calmplan_f_person:"Qualcuno che posso contattare", calmplan_ph_person:"es.: mia sorella Lina",
+      calmplan_f_steps:"Passi che voglio seguire in un momento difficile", calmplan_ph_steps:"es.: 1) fermati 2) respira 3) chiama qualcuno",
+      calmplan_save:"Salva il mio piano", calmplan_edit:"Modifica", calmplan_export:"Esporta", calmplan_print:"Stampa", calmplan_delete:"Elimina",
+      calmplan_crisis_note:"In un'emergenza, questo piano non sostituisce l'aiuto.", calmplan_crisis_btn:"Risorse per crisi",
+      calmplan_confirm_delete:"Eliminare permanentemente il piano di calma? Non può essere annullato.",
+      checkin_opt1:"Ansioso o teso", checkin_opt2:"Triste o con un peso nel cuore", checkin_opt3:"Mente dispersiva e frenetica", checkin_opt4:"Esaurimento fisico",
+      crisis_button:"Ho bisogno di aiuto ora", crisis_eyebrow:"Non sei solo/a",
+      crisis_title:"Aiuto reale — gratuito e confidenziale", crisis_subtitle:"Se stai vivendo una crisi acuta in questo momento, contatta una di queste linee — persone formate sono pronte ad ascoltarti.",
+      crisis_de_label:"TelefonSeelsorge (Germania) — 24 ore su 24, gratuito e anonimo",
+      crisis_de_note:"Puoi parlare in qualsiasi lingua tu conosca; cercheranno di metterti in contatto con qualcuno che la capisca.",
+      crisis_ru_label:"Per chi parla russo o ucraino — Telefon Doweria",
+      crisis_intl_label:"Sei fuori dalla Germania?",
+      crisis_intl_note:"Trova una linea di crisi nel tuo paese su findahelpline.com — disponibile per la maggior parte dei paesi.",
+      backup_label:"Backup", backup_desc:"Salva il tuo diario, la tua serie e il tuo umore come un piccolo file, oppure ripristinali su un altro dispositivo.",
+      backup_export:"Esporta backup", backup_import:"Importa backup",
+      backup_export_done:"File scaricato ✓", backup_import_done:"Ripristinato con successo ✓", backup_import_error:"File non valido",
+      onboarding_next:"Avanti", onboarding_skip:"Salta", onboarding_start:"Iniziamo",
+      ob1_icon:"👋", ob1_title:"Benvenuto su Waha", ob1_desc:"Il tuo spazio sicuro e confidenziale — nessuna diagnosi, nessun trattamento, solo strumenti pratici esattamente quando ne hai bisogno.",
+      ob2_icon:"⚡", ob2_title:"Controllo rapido", ob2_desc:"Scegli dalla home page come ti senti ora, e ti suggeriamo subito un esercizio adatto — in meno di un minuto.",
+      ob3_icon:"📚", ob3_title:"Esercizi e biblioteca", ob3_desc:"12 esercizi guidati e 9 articoli, completamente disponibili in 12 lingue — sfogliali quando vuoi dal menu in alto.",
+      ob4_icon:"🔒", ob4_title:"Tutto resta sul tuo dispositivo", ob4_desc:"Il tuo diario, la tua serie e il tuo umore vengono salvati solo localmente, mai inviati a un server — puoi anche esportare un backup in qualsiasi momento da ⚙ Preferenze.",
+      install_ios_text:"Per la migliore esperienza, aggiungi Waha alla schermata Home: tocca Condividi ⬆️ poi \"Aggiungi a Home\".",
+      install_android_text:"Installa Waha sul tuo dispositivo per un accesso più rapido.", install_btn:"Installa",
+    },
+};
+
+const BREATHE_PHASES = {
+  ar:['استنشق ببطء…','احتفظ بالنفس…','أخرج الهواء ببطء…'],
+  de:['Langsam einatmen…','Luft anhalten…','Langsam ausatmen…'],
+  en:['Breathe in slowly…','Hold your breath…','Breathe out slowly…'],
+  fr:['Inspire lentement…','Retiens ta respiration…','Expire lentement…'],
+  tr:['Yavaşça nefes al…','Nefesini tut…','Yavaşça nefes ver…'],
+  ku:['Hêdî hêdî nefes hilde…','Nefesê xwe bigire…','Hêdî hêdî nefes berde…'],
+  es:['Inhala lentamente…','Aguanta la respiración…','Exhala lentamente…'],
+  fa:['به آرامی نفس بکش…','نفس را نگه‌دار…','به آرامی بازدم کن…'],
+  ur:['آہستہ سانس لیں…','سانس روکیں…','آہستہ سانس چھوڑیں…'],
+  ru:['Медленно вдохните…','Задержите дыхание…','Медленно выдохните…'],
+  pt:['Inspire lentamente…','Prenda a respiração…','Expire lentamente…'],
+  it:['Inspira lentamente…','Trattieni il respiro…','Espira lentamente…'],
+};
+const BREATHE_DONE = {
+  ar:['جرّب مرة أخرى','أحسنت. خذ لحظة قبل أن تكمل.'],
+  de:['Nochmal versuchen','Gut gemacht. Nimm dir einen Moment.'],
+  en:['Try again','Well done. Take a moment before continuing.'],
+  fr:['Réessayer','Bien joué. Prends un instant avant de continuer.'],
+  tr:['Tekrar dene','Aferin. Devam etmeden önce biraz bekle.'],
+  ku:['Dîsa biceribîne','Baş kir. Berî berdewamkirinê hinekî bisekine.'],
+  es:['Intentar de nuevo','Bien hecho. Tómate un momento antes de continuar.'],
+  fa:['دوباره امتحان کن','آفرین. پیش از ادامه، لحظه‌ای مکث کن.'],
+  ur:['دوبارہ کوشش کریں','شاباش۔ آگے بڑھنے سے پہلے ایک لمحہ رکیں۔'],
+  ru:['Попробовать снова','Отлично. Сделайте паузу перед продолжением.'],
+  pt:['Tentar novamente','Muito bem. Faça uma pausa antes de continuar.'],
+  it:['Riprova','Ben fatto. Fai una pausa prima di continuare.'],
+};
+
+const DEMO_REPLIES = {
+  ar:[
+    "أفهم أن هذا ثقيل عليك. هل تريد أن نبدأ بتمرين تنفّس قصير قبل أن نتحدث أكثر؟",
+    "شكراً لمشاركتي هذا. متى بدأ هذا الشعور يظهر معك بهذا الشكل؟",
+    "هذا شعور طبيعي أكثر مما تتخيّل. جرّب أن تكتب ثلاث جمل فقط عمّا يدور في ذهنك الآن.",
+    "أنا هنا لأستمع، لا لأحكم. هل تشعر أن هذا الأمر يؤثر على نومك أو يومك بشكل عام؟",
+    "خذ نفساً عميقاً معي. تذكّر أن هذه المساحة لك وحدك، ولا شيء تقوله هنا يُحفظ أو يُشارك."
+  ],
+  de:[
+    "Ich verstehe, dass das schwer für dich ist. Sollen wir mit einer kurzen Atemübung beginnen?",
+    "Danke, dass du das mit mir teilst. Seit wann fühlst du das so?",
+    "Das ist natürlicher, als du denkst. Versuch, nur drei Sätze darüber zu schreiben, was dir gerade durch den Kopf geht.",
+    "Ich bin hier, um zuzuhören, nicht um zu urteilen. Beeinflusst das deinen Schlaf oder deinen Alltag?",
+    "Atme tief mit mir ein. Dieser Raum gehört nur dir, nichts hier wird gespeichert oder geteilt."
+  ],
+  en:[
+    "I understand this feels heavy. Should we start with a short breathing exercise before we talk more?",
+    "Thank you for sharing that with me. Since when have you been feeling this way?",
+    "That's more natural than you think. Try writing just three sentences about what's on your mind right now.",
+    "I'm here to listen, not to judge. Is this affecting your sleep or your day in general?",
+    "Take a deep breath with me. Remember, this space is yours alone — nothing you say here is saved or shared."
+  ],
+  fr:[
+    "Je comprends que c'est lourd pour toi. On commence par un court exercice de respiration avant de continuer ?",
+    "Merci de me le partager. Depuis quand ressens-tu cela ?",
+    "C'est plus naturel que tu ne le penses. Essaie d'écrire seulement trois phrases sur ce qui te préoccupe.",
+    "Je suis là pour écouter, pas pour juger. Est-ce que cela affecte ton sommeil ou ta journée en général ?",
+    "Respire profondément avec moi. Cet espace est seulement le tien, rien ici n'est enregistré ni partagé."
+  ],
+  tr:[
+    "Bunun senin için ağır olduğunu anlıyorum. Daha çok konuşmadan önce kısa bir nefes egzersiziyle mi başlayalım?",
+    "Bunu benimle paylaştığın için teşekkürler. Bunu ne zamandır böyle hissediyorsun?",
+    "Bu, düşündüğünden daha doğal bir şey. Aklından geçenler hakkında sadece üç cümle yazmayı dene.",
+    "Ben burada dinlemek için varım, yargılamak için değil. Bu durum uykunu veya gündelik hayatını etkiliyor mu?",
+    "Benimle derin bir nefes al. Unutma, burası sadece senin alanın; söylediğin hiçbir şey kaydedilmez ya da paylaşılmaz."
+  ],
+  ku:[
+    "Fêm dikim ku ev ji bo te giran e. Ma em bi ezmûnek nefesê ya kurt dest pê bikin berî ku zêdetir biaxivin?",
+    "Spas ku tu vê bi min re parve dikî. Ji kengî ve tu vî hestî hîs dikî?",
+    "Ev ji tiştê tu difikirî normaltir e. Biceribîne tenê sê hevokan binivîse li ser tiştê ku di hişê te de ye.",
+    "Ez li vir im ku guhdarî bikim, ne ku darizînim. Ma ev bandorê li xew an rojê ya te dike?",
+    "Bi min re nefesek kûr bikişîne. Bîr neke, ev cih tenê yê te ye, tiştek li vir nayê tomarkirin an parvekirin."
+  ],
+  es:[
+    "Entiendo que esto se siente pesado. ¿Empezamos con un breve ejercicio de respiración antes de seguir hablando?",
+    "Gracias por compartir esto conmigo. ¿Desde cuándo sientes esto?",
+    "Esto es más natural de lo que piensas. Intenta escribir solo tres frases sobre lo que tienes en mente ahora.",
+    "Estoy aquí para escuchar, no para juzgar. ¿Esto afecta tu sueño o tu día en general?",
+    "Respira hondo conmigo. Recuerda que este espacio es solo tuyo, nada de lo que digas aquí se guarda ni se comparte."
+  ],
+  fa:[
+    "می‌فهمم که این برایت سنگین است. آیا پیش از ادامه گفتگو، با یک تمرین تنفس کوتاه شروع کنیم؟",
+    "ممنون که این را با من در میان گذاشتی. از کی این احساس را داری؟",
+    "این طبیعی‌تر از آن چیزی است که فکر می‌کنی. فقط سه جمله درباره آنچه در ذهنت است بنویس.",
+    "من اینجا هستم تا گوش کنم، نه قضاوت کنم. آیا این روی خواب یا روز تو تأثیر می‌گذارد؟",
+    "با من نفس عمیقی بکش. یادت باشد، این فضا فقط مال توست، هیچ‌چیز اینجا ذخیره یا به اشتراک گذاشته نمی‌شود."
+  ],
+  ur:[
+    "میں سمجھتا ہوں کہ یہ آپ کے لیے بھاری ہے۔ کیا مزید بات کرنے سے پہلے ایک مختصر سانس کی مشق سے شروع کریں؟",
+    "یہ مجھ سے شیئر کرنے کا شکریہ۔ یہ احساس کب سے ہو رہا ہے؟",
+    "یہ اس سے زیادہ فطری ہے جتنا آپ سوچتے ہیں۔ صرف تین جملے لکھنے کی کوشش کریں کہ ابھی آپ کے ذہن میں کیا ہے۔",
+    "میں یہاں سننے کے لیے ہوں، فیصلہ کرنے کے لیے نہیں۔ کیا یہ آپ کی نیند یا دن کو متاثر کر رہا ہے؟",
+    "میرے ساتھ گہرا سانس لیں۔ یاد رکھیں، یہ جگہ صرف آپ کی ہے، یہاں جو کچھ آپ کہتے ہیں محفوظ یا شیئر نہیں ہوتا۔"
+  ],
+  ru:[
+    "Я понимаю, что это тяжело для вас. Начнём с короткого дыхательного упражнения перед тем, как продолжить?",
+    "Спасибо, что поделились этим со мной. С каких пор вы это чувствуете?",
+    "Это более естественно, чем вы думаете. Попробуйте написать всего три предложения о том, что у вас на уме сейчас.",
+    "Я здесь, чтобы слушать, а не судить. Это влияет на ваш сон или день в целом?",
+    "Сделайте глубокий вдох вместе со мной. Помните, это пространство принадлежит только вам — ничто из сказанного здесь не сохраняется и не передаётся."
+  ],
+  pt:[
+    "Entendo que isso é pesado para você. Vamos começar com um breve exercício de respiração antes de continuar conversando?",
+    "Obrigado por compartilhar isso comigo. Desde quando você sente isso?",
+    "Isso é mais natural do que você pensa. Tente escrever apenas três frases sobre o que está em sua mente agora.",
+    "Estou aqui para ouvir, não para julgar. Isso está afetando seu sono ou seu dia em geral?",
+    "Respire fundo comigo. Lembre-se, este espaço é só seu — nada do que você diz aqui é salvo ou compartilhado."
+  ],
+  it:[
+    "Capisco che questo sia pesante per te. Iniziamo con un breve esercizio di respirazione prima di continuare a parlare?",
+    "Grazie per averlo condiviso con me. Da quando provi questa sensazione?",
+    "È più naturale di quanto pensi. Prova a scrivere solo tre frasi su ciò che hai in mente ora.",
+    "Sono qui per ascoltare, non per giudicare. Questo influisce sul tuo sonno o sulla tua giornata in generale?",
+    "Fai un respiro profondo con me. Ricorda, questo spazio è solo tuo — nulla di ciò che dici qui viene salvato o condiviso."
+  ],
+};
+const EXERCISES = {
+  ar: [
+    { id:'ex-478', cat:'breathing', tag:'تنفّس', title:'تنفّس 4-7-8', desc:'تمرين تنفّس قصير لتهدئة الجهاز العصبي في لحظته.', duration:120,
+      steps:['اجلس في وضع مريح وأغلق عينيك إن أمكن.','استنشق من الأنف بعمق لمدة 4 ثوانٍ.','احبس النفس لمدة 7 ثوانٍ.','أخرج الهواء ببطء من الفم لمدة 8 ثوانٍ.','كرّر الدورة 4 مرات.'] },
+    { id:'ex-box', cat:'breathing', tag:'تنفّس', title:'تنفّس الصندوق', desc:'تقنية يستخدمها المحترفون لتهدئة القلق بسرعة.', duration:120,
+      steps:['استنشق لمدة 4 ثوانٍ.','احبس النفس 4 ثوانٍ.','أخرج الهواء 4 ثوانٍ.','ابقَ بلا نفس 4 ثوانٍ.','كرّر لمدة دقيقتين.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'استرخاء', title:'استرخاء العضلات التدريجي', desc:'شدّ وإرخاء كل مجموعة عضلية لتخفيف التوتر الجسدي.', duration:300,
+      steps:['ابدأ بقدميك: شدّها لمدة 5 ثوانٍ ثم أرخِها.','انتقل للساقين، ثم البطن، ثم اليدين.','شدّ الكتفين ثم أرخهما ببطء.','انتهِ بعضلات الوجه والفك.','لاحظ الفرق بين الشد والاسترخاء.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'وعي', title:'المسح الذهني للجسم', desc:'تمرين تأمل بسيط لإعادة الاتصال بجسدك وتهدئة الذهن.', duration:300,
+      steps:['استلقِ أو اجلس بشكل مريح.','وجّه انتباهك إلى قدميك دون الحكم على ما تشعر به.','انتقل ببطء عبر الساقين، الجذع، الذراعين، حتى الرأس.','إن شرد ذهنك، أعده بلطف إلى الجسد.','أنهِ بثلاثة أنفاس عميقة.'] },
+    { id:'ex-stop', cat:'mind', tag:'وعي', title:'تقنية STOP', desc:'أداة سريعة للتوقف عن دوامة الأفكار في أي لحظة.', duration:60,
+      steps:['S — توقف عمّا تفعله للحظة.','T — خذ نفساً عميقاً واحداً.','O — لاحظ ما يدور في ذهنك وجسدك دون حكم.','P — تابع بخطوة واحدة صغيرة وواعية.'] },
+    { id:'ex-safe', cat:'mind', tag:'تصوّر', title:'تصوّر المكان الآمن', desc:'تمرين تخيّل لبناء شعور داخلي بالأمان.', duration:180,
+      steps:['أغلق عينيك وتخيّل مكاناً تشعر فيه بأمان تام.','لاحظ التفاصيل: الألوان، الأصوات، الروائح.','لاحظ شعور جسدك في هذا المكان.','تذكّر أن بإمكانك العودة لهذا المكان ذهنياً وقتما تشاء.'] },
+    { id:'ex-gratitude', cat:'write', tag:'كتابة', title:'يوميات الامتنان', desc:'ثلاثة أشياء بسيطة تستحق الشكر اليوم.',
+      steps:['اكتب شيئاً واحداً صغيراً أسعدك اليوم.','اكتب شخصاً تشعر بالامتنان لوجوده في حياتك.','اكتب شيئاً في جسدك أو قدراتك تقدّره.'] },
+    { id:'ex-feelings', cat:'write', tag:'كتابة', title:'يوميات المشاعر', desc:'ثلاث جمل فقط، لتفريغ ما يشغل بالك دون تحليل زائد.',
+      steps:['اكتب ما تشعر به الآن بجملة واحدة بسيطة.','اكتب متى بدأ هذا الشعور تقريباً.','اكتب شيئاً واحداً صغيراً قد يساعدك الآن.'] },
+    { id:'ex-reframe', cat:'write', tag:'CBT', title:'إعادة صياغة الفكرة', desc:'أداة من العلاج المعرفي السلوكي لفحص الأفكار المزعجة.',
+      steps:['اكتب الفكرة المزعجة كما تراودك بالضبط.','اسأل نفسك: ما الدليل الفعلي على صحتها؟','اكتب طريقة أكثر توازناً للنظر لنفس الموقف.'] },
+    { id:'ex-mood', cat:'sleep', tag:'تتبّع', title:'مخطط المزاج', desc:'تتبّع بسيط لمزاجك عبر الأسبوع لتلاحظ الأنماط.',
+      steps:['اختر رقماً من 1 إلى 5 يصف مزاجك الآن.','اكتب كلمة واحدة تصف السبب الرئيسي.','كرّر هذا يومياً بنفس التوقيت لتلاحظ النمط بعد أسبوع.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'تحدٍ', title:'تحدي 7 أيام للنوم', desc:'خطوات بسيطة لتحسين جودة نومك خلال أسبوع.',
+      steps:['حدّد موعداً ثابتاً للنوم والاستيقاظ.','ابتعد عن الشاشات قبل النوم بـ30 دقيقة.','جرّب تمرين تنفّس قبل النوم مباشرة.','تجنّب الكافيين بعد الساعة 4 عصراً.'] },
+    { id:'ex-walk', cat:'mind', tag:'حركة', title:'المشي الواعي', desc:'تحويل مشي يومي عادي إلى تمرين تأمل بسيط.', duration:300,
+      steps:['امشِ ببطء أكثر من المعتاد.','لاحظ إحساس قدميك عند لمس الأرض.','لاحظ ثلاثة أصوات من حولك دون الحكم عليها.','أعد انتباهك للمشي كلما شرد ذهنك.'] },
+    { id:'ex-grounding', cat:'mind', tag:'تأريض', title:'تأريض 5-4-3-2-1', desc:'تقنية حسية تعيد ذهنك من القلق إلى اللحظة الحالية.', duration:180,
+      steps:['سمِّ 5 أشياء تراها حولك.','سمِّ 4 أشياء تشعر بها جسدياً (قدماك على الأرض، الهواء على جلدك).','سمِّ 3 أصوات تسمعها الآن.','سمِّ رائحتين تشمّهما أو تحبّهما.','سمِّ طعماً واحداً تتذوقه، أو شيئاً واحداً تشعر بالامتنان له.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'رأفة ذاتية', title:'استراحة الرأفة الذاتية', desc:'تمرين قصير للحظات الصعوبة، مبني على تقنية الرأفة الذاتية بثلاث خطوات.', duration:120,
+      steps:['ضع يدك على صدرك وقل لنفسك: هذه لحظة صعبة.','ذكّر نفسك: الصعوبة جزء من كوني إنساناً، ولست وحدي فيها.','اسأل نفسك: ماذا أحتاج أن أسمعه الآن؟ وامنح نفسك ذلك بلطف.','خذ نفساً بطيئاً واحداً قبل أن تكمل يومك.'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'وقت القلق', desc:'تقنية من العلاج المعرفي السلوكي تحصر القلق في وقت محدد بدل أن ينتشر طوال اليوم.',
+      steps:['حين يظهر قلق، اكتبه في سطر واحد وضعه جانباً.','حدّد "وقت قلق" ثابت لاحقاً اليوم، مدته 10 دقائق.','في ذلك الوقت، راجع قائمتك — ستجد أغلبها أصبح أصغر حجماً.','لما يستحق التصرف، اكتب خطوة صغيرة تالية واحدة.'] },
+  ],
+  de: [
+    { id:'ex-478', cat:'breathing', tag:'Atmen', title:'4-7-8-Atmung', desc:'Eine kurze Atemübung zur Beruhigung des Nervensystems.', duration:120,
+      steps:['Setz dich bequem hin, schließe die Augen.','4 Sekunden tief durch die Nase einatmen.','7 Sekunden den Atem anhalten.','8 Sekunden langsam durch den Mund ausatmen.','4 Mal wiederholen.'] },
+    { id:'ex-box', cat:'breathing', tag:'Atmen', title:'Box-Atmung', desc:'Eine Profi-Technik, um Angst schnell zu beruhigen.', duration:120,
+      steps:['4 Sekunden einatmen.','4 Sekunden anhalten.','4 Sekunden ausatmen.','4 Sekunden ohne Atem bleiben.','2 Minuten wiederholen.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Entspannung', title:'Progressive Muskelentspannung', desc:'Muskelgruppen anspannen und lösen, um Körperspannung zu lindern.', duration:300,
+      steps:['Beginne mit den Füßen: 5 Sekunden anspannen, dann lösen.','Weiter zu Beinen, Bauch, Händen.','Schultern anspannen und langsam lösen.','Zum Schluss Gesicht und Kiefer.','Achte auf den Unterschied.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Achtsamkeit', title:'Body-Scan', desc:'Eine einfache Meditation, um sich wieder mit dem Körper zu verbinden.', duration:300,
+      steps:['Leg oder setz dich bequem hin.','Richte die Aufmerksamkeit auf deine Füße.','Wandere langsam durch Beine, Rumpf, Arme, Kopf.','Kehre sanft zum Körper zurück, wenn die Gedanken abschweifen.','Schließe mit drei tiefen Atemzügen ab.'] },
+    { id:'ex-stop', cat:'mind', tag:'Achtsamkeit', title:'STOP-Technik', desc:'Ein schnelles Werkzeug, um Gedankenspiralen zu unterbrechen.', duration:60,
+      steps:['S — Stoppe kurz, was du tust.','T — Nimm einen tiefen Atemzug.','O — Beobachte Gedanken und Körper ohne Bewertung.','P — Mach bewusst einen kleinen nächsten Schritt.'] },
+    { id:'ex-safe', cat:'mind', tag:'Visualisierung', title:'Sicherer-Ort-Übung', desc:'Eine Vorstellungsübung für ein inneres Sicherheitsgefühl.', duration:180,
+      steps:['Schließe die Augen, stell dir einen sicheren Ort vor.','Achte auf Details: Farben, Geräusche, Gerüche.','Spüre, wie sich dein Körper dort anfühlt.','Du kannst jederzeit gedanklich dorthin zurückkehren.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Schreiben', title:'Dankbarkeitstagebuch', desc:'Drei einfache Dinge, für die du heute dankbar bist.',
+      steps:['Schreib eine kleine Sache auf, die dich heute gefreut hat.','Schreib eine Person auf, für die du dankbar bist.','Schreib etwas an dir selbst auf, das du schätzt.'] },
+    { id:'ex-feelings', cat:'write', tag:'Schreiben', title:'Gefühlstagebuch', desc:'Nur drei Sätze, um loszuwerden, was dich beschäftigt.',
+      steps:['Schreib in einem Satz, was du gerade fühlst.','Schreib, seit wann du das fühlst.','Schreib eine kleine Sache, die jetzt helfen könnte.'] },
+    { id:'ex-reframe', cat:'write', tag:'CBT', title:'Gedanken umformulieren', desc:'Ein CBT-Werkzeug zur Prüfung belastender Gedanken.',
+      steps:['Schreib den belastenden Gedanken genau auf.','Frag dich: welche Belege gibt es dafür?','Schreib eine ausgewogenere Sicht auf.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Tracking', title:'Stimmungsverlauf', desc:'Einfaches Tracking deiner Stimmung über die Woche.',
+      steps:['Wähle eine Zahl von 1 bis 5 für deine Stimmung.','Schreib ein Wort für den Hauptgrund.','Wiederhole das täglich, um ein Muster zu erkennen.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Challenge', title:'7-Tage-Schlaf-Challenge', desc:'Einfache Schritte, um deinen Schlaf zu verbessern.',
+      steps:['Feste Schlaf- und Aufwachzeiten festlegen.','Bildschirme 30 Minuten vor dem Schlafen vermeiden.','Direkt vorher eine Atemübung probieren.','Koffein nach 16 Uhr vermeiden.'] },
+    { id:'ex-walk', cat:'mind', tag:'Bewegung', title:'Achtsames Gehen', desc:'Einen Spaziergang in eine Meditation verwandeln.', duration:300,
+      steps:['Geh langsamer als gewöhnlich.','Spüre deine Füße auf dem Boden.','Achte auf drei Geräusche, ohne zu bewerten.','Kehre zur Gehbewegung zurück, wenn die Gedanken abschweifen.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Erdung', title:'5-4-3-2-1-Erdung', desc:'Eine sensorische Technik, um deinen Geist aus der Angst zurück in den gegenwärtigen Moment zu holen.', duration:180,
+      steps:['Nenne 5 Dinge, die du um dich herum siehst.','Nenne 4 Dinge, die du körperlich spürst (deine Füße auf dem Boden, die Luft auf deiner Haut).','Nenne 3 Geräusche, die du gerade hörst.','Nenne 2 Gerüche, die du wahrnimmst oder magst.','Nenne 1 Geschmack, den du schmeckst, oder eine Sache, für die du dankbar bist.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Selbstmitgefühl', title:'Selbstmitgefühls-Pause', desc:'Eine kurze Übung für schwierige Momente, basierend auf der dreiteiligen Selbstmitgefühls-Technik.', duration:120,
+      steps:['Leg eine Hand auf deine Brust und sag dir: Das ist ein schwieriger Moment.','Erinnere dich: Schwierigkeiten gehören zum Menschsein dazu — ich bin damit nicht allein.','Frag dich: Was brauche ich gerade? Und gib es dir selbst sanft.','Nimm einen langsamen Atemzug, bevor du weitermachst.'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Sorgenzeit', desc:'Eine CBT-Technik, die Sorgen auf eine feste Zeit begrenzt, statt sie den ganzen Tag verteilt zu lassen.',
+      steps:['Wenn eine Sorge auftaucht, schreib sie in einem Satz auf und leg sie beiseite.','Lege eine feste 10-minütige "Sorgenzeit" später am Tag fest.','Geh zu dieser Zeit deine Liste durch — die meisten Sorgen wirken dann schon kleiner.','Schreib für das, was noch wichtig ist, einen kleinen nächsten Schritt auf.'] },
+  ],
+  en: [
+    { id:'ex-478', cat:'breathing', tag:'Breathing', title:'4-7-8 Breathing', desc:'A short breathing exercise to calm the nervous system.', duration:120,
+      steps:['Sit comfortably, close your eyes if you can.','Inhale deeply through your nose for 4 seconds.','Hold your breath for 7 seconds.','Exhale slowly through your mouth for 8 seconds.','Repeat the cycle 4 times.'] },
+    { id:'ex-box', cat:'breathing', tag:'Breathing', title:'Box Breathing', desc:'A technique professionals use to calm anxiety quickly.', duration:120,
+      steps:['Inhale for 4 seconds.','Hold for 4 seconds.','Exhale for 4 seconds.','Stay empty for 4 seconds.','Repeat for 2 minutes.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Relaxation', title:'Progressive Muscle Relaxation', desc:'Tense and release each muscle group to ease physical tension.', duration:300,
+      steps:['Start with your feet: tense for 5 seconds, then release.','Move to legs, stomach, hands.','Tense your shoulders, then slowly release.','Finish with your face and jaw.','Notice the difference between tension and relaxation.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Mindfulness', title:'Body Scan', desc:'A simple meditation to reconnect with your body and calm the mind.', duration:300,
+      steps:['Lie down or sit comfortably.','Bring attention to your feet without judging what you feel.','Slowly move through your legs, torso, arms, up to your head.','If your mind wanders, gently bring it back to the body.','Finish with three deep breaths.'] },
+    { id:'ex-stop', cat:'mind', tag:'Mindfulness', title:'The STOP technique', desc:'A quick tool to interrupt spiraling thoughts at any moment.', duration:60,
+      steps:['S — Stop what you\'re doing for a moment.','T — Take one deep breath.','O — Observe your thoughts and body without judgment.','P — Proceed with one small, mindful step.'] },
+    { id:'ex-safe', cat:'mind', tag:'Visualization', title:'Safe place visualization', desc:'An imagery exercise to build an inner sense of safety.', duration:180,
+      steps:['Close your eyes and picture a place where you feel completely safe.','Notice the details: colors, sounds, smells.','Notice how your body feels in that place.','Remember you can return here mentally whenever you need to.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Writing', title:'Gratitude journal', desc:'Three simple things worth being thankful for today.',
+      steps:['Write one small thing that made you happy today.','Write one person you feel grateful to have in your life.','Write one thing about yourself or your abilities that you value.'] },
+    { id:'ex-feelings', cat:'write', tag:'Writing', title:'Feelings journal', desc:'Just three sentences to release what\'s on your mind, without overanalyzing.',
+      steps:['Write what you\'re feeling right now in one simple sentence.','Write roughly when this feeling started.','Write one small thing that might help right now.'] },
+    { id:'ex-reframe', cat:'write', tag:'CBT', title:'Cognitive reframing', desc:'A CBT tool for examining distressing thoughts.',
+      steps:['Write the distressing thought exactly as it comes to you.','Ask yourself: what\'s the actual evidence for it?','Write a more balanced way of looking at the same situation.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Tracking', title:'Mood tracker', desc:'Simple tracking of your mood over the week to notice patterns.',
+      steps:['Pick a number from 1 to 5 describing your mood now.','Write one word for the main reason.','Repeat this daily at the same time to notice a pattern after a week.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Challenge', title:'7-day sleep challenge', desc:'Simple steps to improve your sleep quality within a week.',
+      steps:['Set a fixed bedtime and wake time.','Avoid screens for 30 minutes before bed.','Try a breathing exercise right before sleep.','Avoid caffeine after 4pm.'] },
+    { id:'ex-walk', cat:'mind', tag:'Movement', title:'Mindful walking', desc:'Turning an ordinary walk into a simple meditation.', duration:300,
+      steps:['Walk slower than usual.','Notice the feeling of your feet touching the ground.','Notice three sounds around you without judging them.','Bring your attention back to walking whenever your mind wanders.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Grounding', title:'5-4-3-2-1 Grounding', desc:'A sensory technique to pull your mind out of anxiety and back into the present moment.', duration:180,
+      steps:['Name 5 things you can see around you.','Name 4 things you can physically feel (your feet on the floor, the air on your skin).','Name 3 things you can hear right now.','Name 2 things you can smell, or like the smell of.','Name 1 thing you can taste, or are grateful for.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Self-compassion', title:'Self-compassion break', desc:'A short practice for moments of struggle, based on the three-part self-compassion technique.', duration:120,
+      steps:['Place a hand on your chest and acknowledge: this is a moment of difficulty.','Remind yourself: struggling is part of being human — I\'m not alone in this.','Ask yourself: what do I need to hear right now? Offer it to yourself gently.','Take one slow breath before continuing your day.'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Worry time', desc:'A CBT technique that contains worry to one scheduled slot instead of letting it spread through the day.',
+      steps:['When a worry pops up, write it down in one line and set it aside.','Pick a fixed 10-minute "worry time" later today.','At that time, go through your list — most worries will already feel smaller.','For what\'s still worth acting on, write one small next step.'] },
+  ],
+  fr: [
+    { id:'ex-478', cat:'breathing', tag:'Respiration', title:'Respiration 4-7-8', desc:'Un court exercice de respiration pour calmer le système nerveux.', duration:120,
+      steps:['Assieds-toi confortablement, ferme les yeux si possible.','Inspire profondément par le nez pendant 4 secondes.','Retiens ta respiration pendant 7 secondes.','Expire lentement par la bouche pendant 8 secondes.','Répète le cycle 4 fois.'] },
+    { id:'ex-box', cat:'breathing', tag:'Respiration', title:'Respiration carrée', desc:'Une technique utilisée par les professionnels pour calmer l\'anxiété rapidement.', duration:120,
+      steps:['Inspire pendant 4 secondes.','Retiens pendant 4 secondes.','Expire pendant 4 secondes.','Reste sans respirer 4 secondes.','Répète pendant 2 minutes.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Détente', title:'Relaxation musculaire progressive', desc:'Contracter et relâcher chaque groupe musculaire pour réduire la tension physique.', duration:300,
+      steps:['Commence par les pieds : contracte 5 secondes, puis relâche.','Passe aux jambes, au ventre, aux mains.','Contracte les épaules, puis relâche lentement.','Termine par le visage et la mâchoire.','Remarque la différence entre tension et détente.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Pleine conscience', title:'Balayage corporel', desc:'Une méditation simple pour se reconnecter à son corps et apaiser l\'esprit.', duration:300,
+      steps:['Allonge-toi ou assieds-toi confortablement.','Porte ton attention sur tes pieds sans juger ce que tu ressens.','Remonte lentement à travers les jambes, le tronc, les bras, jusqu\'à la tête.','Si ton esprit s\'égare, ramène-le doucement au corps.','Termine par trois respirations profondes.'] },
+    { id:'ex-stop', cat:'mind', tag:'Pleine conscience', title:'La technique STOP', desc:'Un outil rapide pour interrompre une spirale de pensées à tout moment.', duration:60,
+      steps:['S — Arrête-toi un instant.','T — Prends une respiration profonde.','O — Observe tes pensées et ton corps sans juger.','P — Poursuis avec un petit pas conscient.'] },
+    { id:'ex-safe', cat:'mind', tag:'Visualisation', title:'Visualisation du lieu sûr', desc:'Un exercice d\'imagerie pour construire un sentiment intérieur de sécurité.', duration:180,
+      steps:['Ferme les yeux et imagine un lieu où tu te sens en totale sécurité.','Remarque les détails : couleurs, sons, odeurs.','Remarque comment ton corps se sent à cet endroit.','Souviens-toi que tu peux y revenir mentalement quand tu veux.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Écriture', title:'Journal de gratitude', desc:'Trois choses simples pour lesquelles être reconnaissant aujourd\'hui.',
+      steps:['Écris une petite chose qui t\'a rendu heureux aujourd\'hui.','Écris une personne pour qui tu es reconnaissant.','Écris une chose que tu apprécies chez toi.'] },
+    { id:'ex-feelings', cat:'write', tag:'Écriture', title:'Journal des émotions', desc:'Seulement trois phrases pour libérer ce qui t\'occupe l\'esprit.',
+      steps:['Écris ce que tu ressens maintenant en une phrase simple.','Écris depuis quand tu ressens cela environ.','Écris une petite chose qui pourrait t\'aider maintenant.'] },
+    { id:'ex-reframe', cat:'write', tag:'TCC', title:'Reformulation cognitive', desc:'Un outil de TCC pour examiner les pensées pénibles.',
+      steps:['Écris la pensée pénible exactement telle qu\'elle te vient.','Demande-toi : quelles sont les preuves réelles ?','Écris une vision plus équilibrée de la même situation.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Suivi', title:'Suivi de l\'humeur', desc:'Un suivi simple de ton humeur sur la semaine pour repérer des tendances.',
+      steps:['Choisis un chiffre de 1 à 5 pour ton humeur actuelle.','Écris un mot pour la raison principale.','Répète cela chaque jour à la même heure pour voir une tendance après une semaine.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Défi', title:'Défi sommeil de 7 jours', desc:'Des étapes simples pour améliorer ton sommeil en une semaine.',
+      steps:['Fixe une heure de coucher et de réveil régulière.','Évite les écrans 30 minutes avant de dormir.','Essaie un exercice de respiration juste avant de dormir.','Évite la caféine après 16h.'] },
+    { id:'ex-walk', cat:'mind', tag:'Mouvement', title:'Marche en pleine conscience', desc:'Transformer une marche ordinaire en une simple méditation.', duration:300,
+      steps:['Marche plus lentement que d\'habitude.','Remarque la sensation de tes pieds touchant le sol.','Remarque trois sons autour de toi sans les juger.','Reviens à la marche chaque fois que ton esprit s\'égare.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Ancrage', title:'Ancrage 5-4-3-2-1', desc:'Une technique sensorielle pour ramener ton esprit de l\'anxiété vers le moment présent.', duration:180,
+      steps:['Nomme 5 choses que tu vois autour de toi.','Nomme 4 choses que tu ressens physiquement (tes pieds sur le sol, l\'air sur ta peau).','Nomme 3 sons que tu entends en ce moment.','Nomme 2 odeurs que tu perçois ou apprécies.','Nomme 1 goût que tu perçois, ou une chose dont tu es reconnaissant(e).'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Auto-compassion', title:'Pause d\'auto-compassion', desc:'Un exercice court pour les moments difficiles, basé sur la technique d\'auto-compassion en trois étapes.', duration:120,
+      steps:['Pose une main sur ta poitrine et dis-toi : c\'est un moment difficile.','Rappelle-toi : la difficulté fait partie de l\'expérience humaine — je ne suis pas seul(e).','Demande-toi : de quoi ai-je besoin maintenant ? Offre-le-toi avec douceur.','Prends une respiration lente avant de continuer ta journée.'] },
+    { id:'ex-worrytime', cat:'write', tag:'TCC', title:'Temps d\'inquiétude', desc:'Une technique de TCC qui limite les inquiétudes à un créneau fixe au lieu de les laisser envahir la journée.',
+      steps:['Quand une inquiétude apparaît, écris-la en une ligne et mets-la de côté.','Fixe un "temps d\'inquiétude" de 10 minutes plus tard dans la journée.','À ce moment-là, relis ta liste — la plupart des inquiétudes sembleront déjà plus petites.','Pour ce qui mérite encore une action, écris une petite prochaine étape.'] },
+  ],
+  tr: [
+    { id:'ex-478', cat:'breathing', tag:'Nefes', title:'4-7-8 Nefes Egzersizi', desc:'Sinir sistemini sakinleştiren kısa bir nefes egzersizi.', duration:120,
+      steps:['Rahat otur, mümkünse gözlerini kapat.','Burnundan 4 saniye derin nefes al.','Nefesini 7 saniye tut.','Ağzından 8 saniyede yavaşça nefes ver.','Döngüyü 4 kez tekrarla.'] },
+    { id:'ex-box', cat:'breathing', tag:'Nefes', title:'Kutu Nefesi', desc:'Profesyonellerin kaygıyı hızla sakinleştirmek için kullandığı bir teknik.', duration:120,
+      steps:['4 saniye nefes al.','4 saniye tut.','4 saniye nefes ver.','4 saniye nefessiz kal.','2 dakika tekrarla.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Gevşeme', title:'Kademeli Kas Gevşetme', desc:'Fiziksel gerginliği azaltmak için her kas grubunu gerip gevşetme.', duration:300,
+      steps:['Ayaklarınla başla: 5 saniye ger, sonra gevşet.','Bacaklara, karına, ellere geç.','Omuzları ger, sonra yavaşça gevşet.','Yüz ve çene ile bitir.','Gerginlik ve gevşeme arasındaki farkı fark et.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Farkındalık', title:'Beden Taraması', desc:'Bedeninle yeniden bağ kurmak ve zihni sakinleştirmek için basit bir meditasyon.', duration:300,
+      steps:['Rahatça uzan veya otur.','Dikkatini, hissettiğini yargılamadan ayaklarına ver.','Yavaşça bacaklar, gövde, kollar ve başa doğru ilerle.','Zihnin dağılırsa, nazikçe bedene geri getir.','Üç derin nefesle bitir.'] },
+    { id:'ex-stop', cat:'mind', tag:'Farkındalık', title:'STOP Tekniği', desc:'Düşünce sarmalını her an durdurmak için hızlı bir araç.', duration:60,
+      steps:['S — Yaptığın şeyi bir an için durdur.','T — Derin bir nefes al.','O — Düşüncelerini ve bedenini yargılamadan gözlemle.','P — Küçük, bilinçli bir adımla devam et.'] },
+    { id:'ex-safe', cat:'mind', tag:'Görselleştirme', title:'Güvenli Yer Görselleştirmesi', desc:'İçsel bir güven duygusu oluşturmak için bir hayal egzersizi.', duration:180,
+      steps:['Gözlerini kapat ve tamamen güvende hissettiğin bir yer hayal et.','Detaylara dikkat et: renkler, sesler, kokular.','O yerde bedeninin nasıl hissettiğine dikkat et.','Buraya istediğin zaman zihinsel olarak dönebileceğini unutma.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Yazma', title:'Şükran Günlüğü', desc:'Bugün minnettar olduğun üç basit şey.',
+      steps:['Bugün seni mutlu eden küçük bir şey yaz.','Hayatında olduğu için minnettar olduğun bir kişi yaz.','Kendinle veya yeteneklerinle ilgili değer verdiğin bir şey yaz.'] },
+    { id:'ex-feelings', cat:'write', tag:'Yazma', title:'Duygu Günlüğü', desc:'Aklını meşgul edeni boşaltmak için sadece üç cümle.',
+      steps:['Şu an ne hissettiğini tek bir basit cümleyle yaz.','Bu hissin yaklaşık ne zaman başladığını yaz.','Şu an yardımcı olabilecek küçük bir şey yaz.'] },
+    { id:'ex-reframe', cat:'write', tag:'BDT', title:'Düşünceyi Yeniden Çerçeveleme', desc:'Rahatsız edici düşünceleri incelemek için bir BDT aracı.',
+      steps:['Rahatsız edici düşünceyi geldiği şekliyle tam olarak yaz.','Kendine sor: bunun için gerçek kanıt nedir?','Aynı durum için daha dengeli bir bakış açısı yaz.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Takip', title:'Ruh Hali Takibi', desc:'Örüntüleri fark etmek için hafta boyunca ruh halinin basit takibi.',
+      steps:['Şu anki ruh halin için 1 ile 5 arasında bir sayı seç.','Ana sebep için tek bir kelime yaz.','Bir hafta sonra örüntüyü fark etmek için bunu her gün aynı saatte tekrarla.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Meydan Okuma', title:'7 Günlük Uyku Programı', desc:'Uyku kaliteni bir hafta içinde artırmak için basit adımlar.',
+      steps:['Sabit bir yatma ve uyanma saati belirle.','Uyumadan 30 dakika önce ekranlardan uzak dur.','Uyumadan hemen önce bir nefes egzersizi dene.','Saat 16:00\'dan sonra kafeinden kaçın.'] },
+    { id:'ex-walk', cat:'mind', tag:'Hareket', title:'Bilinçli Yürüyüş', desc:'Sıradan bir yürüyüşü basit bir meditasyona dönüştürmek.', duration:300,
+      steps:['Her zamankinden daha yavaş yürü.','Ayaklarının yere değme hissine dikkat et.','Çevrendeki üç sesi yargılamadan fark et.','Zihnin dağıldığında dikkatini yürüyüşe geri getir.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Topraklama', title:'5-4-3-2-1 Topraklama', desc:'Zihnini kaygıdan çıkarıp şimdiki ana geri getiren duyusal bir teknik.', duration:180,
+      steps:['Etrafında gördüğün 5 şeyi say.','Fiziksel olarak hissettiğin 4 şeyi say (ayakların yerde, cildindeki hava).','Şu an duyduğun 3 sesi say.','Algıladığın veya sevdiğin 2 kokuyu say.','Tattığın 1 tadı, ya da minnettar olduğun 1 şeyi say.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Öz-şefkat', title:'Öz-şefkat molası', desc:'Zorlanma anları için üç aşamalı öz-şefkat tekniğine dayanan kısa bir uygulama.', duration:120,
+      steps:['Elini göğsüne koy ve şunu kabul et: bu zor bir an.','Kendine hatırlat: zorlanmak insan olmanın bir parçası — bunda yalnız değilim.','Kendine sor: şu an neye ihtiyacım var? Bunu kendine nazikçe sun.','Gününe devam etmeden önce yavaş bir nefes al.'] },
+    { id:'ex-worrytime', cat:'write', tag:'BDT', title:'Endişe zamanı', desc:'Endişeyi tüm güne yayılmak yerine belirli bir zaman dilimine hapseden bir BDT tekniği.',
+      steps:['Bir endişe belirdiğinde, tek satırda yaz ve bir kenara bırak.','Bugün ilerleyen saatlerde sabit 10 dakikalık bir "endişe zamanı" belirle.','O zaman geldiğinde listeni gözden geçir — çoğu endişe artık daha küçük görünecek.','Hâlâ üzerinde durulması gerekenler için küçük bir sonraki adım yaz.'] },
+  ],
+  ku: [
+    { id:'ex-478', cat:'breathing', tag:'Nefes', title:'Nefesa 4-7-8', desc:'Ezmûnek nefesê ya kurt ji bo aramkirina pergala nervî.', duration:120,
+      steps:['Bi rehetî rûne, çavên xwe bigire heke gengaz be.','Bi poz 4 çirkeyan kûr nefes hilde.','4 çirke... 7 çirkeyan nefesê xwe bigire.','8 çirkeyan bi dev hêdî nefes berde.','Çerxê 4 caran dubare bike.'] },
+    { id:'ex-box', cat:'breathing', tag:'Nefes', title:'Nefesa Qutîkê', desc:'Teknîkek ku pispor bikar tînin ji bo aramkirina fikarê zû.', duration:120,
+      steps:['4 çirkeyan nefes hilde.','4 çirkeyan bigire.','4 çirkeyan nefes berde.','4 çirkeyan bêyî nefes bimîne.','2 deqeyan dubare bike.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Aramî', title:'Aramkirina Masûlkeyan a Gav bi Gav', desc:'Her komek masûlkeyan teng û vekirî bike da ku tengiya laşî kêm bibe.', duration:300,
+      steps:['Bi lingan dest pê bike: 5 çirkeyan teng bike, paşê vekirî bike.','Here ser ling, zik, dest.','Milan teng bike, paşê hêdî vekirî bike.','Bi rû û çena xwe biqedîne.','Cudahiya di navbera tengî û aramiyê de fam bike.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Hişmendî', title:'Vekolîna Laş', desc:'Meditasyonek hêsan ji bo ji nû ve girêdana bi laş û aramkirina hişê.', duration:300,
+      steps:['Bi rehetî razê an rûne.','Bala xwe bide lingên xwe bêyî ku tiştê hîs dikî darizînî.','Hêdî hêdî here ling, laş, dest, heta serî.','Heke hişê te here, hêdîka wê vegerîne laş.','Bi sê nefesên kûr biqedîne.'] },
+    { id:'ex-stop', cat:'mind', tag:'Hişmendî', title:'Teknîka STOP', desc:'Amûrek zû ji bo rawestandina çerxa raman di her kêliyê de.', duration:60,
+      steps:['S — Ji bo kêliyekê tiştê tu dikî rawestîne.','T — Nefesek kûr hilde.','O — Raman û laşê xwe bêyî darizandin çav bike.','P — Bi gavek piçûk a hişmend berdewam bike.'] },
+    { id:'ex-safe', cat:'mind', tag:'Xeyalkirin', title:'Xeyalkirina Cihê Ewle', desc:'Ezmûnek xeyalî ji bo avakirina hesta ewlekariyê ya hundir.', duration:180,
+      steps:['Çavên xwe bigire û cihek xeyal bike ku tê de bi tevahî ewle hîs dikî.','Bala xwe bide hûrgiliyan: reng, deng, bêhn.','Bala xwe bide ka laşê te li wir çawa hîs dike.','Bîr neke tu dikarî her gav bi hiş vegerî wir.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Nivîsandin', title:'Rojnivîska Spasiyê', desc:'Sê tiştên hêsan ku îro spasiyê dixwazin.',
+      steps:['Tiştek piçûk binivîse ku îro te kêfxweş kir.','Kesek binivîse ku tu spasdar î ku ew di jiyana te de ye.','Tiştek li ser xwe binivîse ku tu qedirî didî.'] },
+    { id:'ex-feelings', cat:'write', tag:'Nivîsandin', title:'Rojnivîska Hestan', desc:'Tenê sê hevok, ji bo vala kirina tiştê di hişê te de ye.',
+      steps:['Bi hevokek hêsan binivîse ka niha çi hîs dikî.','Binivîse ka ev hest ji kengî ve dest pê kir.','Tiştek piçûk binivîse ku niha dikare alîkariya te bike.'] },
+    { id:'ex-reframe', cat:'write', tag:'CBT', title:'Ji Nû Ve Çarçoveyîkirina Ramanê', desc:'Amûrek CBT ji bo lêkolîna ramanên aloz.',
+      steps:['Ramana aloz tam wek tê bîra te binivîse.','Ji xwe bipirse: delîl ji bo vê çi ne?','Nêrînek hevsengtir a heman rewşê binivîse.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Şopandin', title:'Şopandina Rewşa Derûnî', desc:'Şopandinek hêsan a rewşa te ya derûnî li seranserê hefteyê.',
+      steps:['Ji 1 heta 5 hejmarek ji bo rewşa xwe ya niha hilbijêre.','Peyvek ji bo sedema sereke binivîse.','Vê her roj di heman demjimêrî de dubare bike da ku piştî hefteyekê mînakekê bibînî.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Talûke', title:'Talûkeya Xewê ya 7 Rojan', desc:'Gavên hêsan ji bo baştirkirina xewê di hefteyekê de.',
+      steps:['Demek sabît a xew û şiyarbûnê destnîşan bike.','30 deqeyan berî xewê ji ekranan dûr bisekine.','Berî xewê ezmûnek nefesê biceribîne.','Piştî saet 4an ji kafeînê dûr bisekine.'] },
+    { id:'ex-walk', cat:'mind', tag:'Tevger', title:'Meşiya Hişmend', desc:'Meşiyek asayî veguherîne meditasyonek hêsan.', duration:300,
+      steps:['Ji asayî hêdîtir meşe.','Bala xwe bide hesta lingên xwe li erdê.','Sê dengên li dora xwe bêyî darizandin fam bike.','Her carê hişê te here, bala xwe vegerîne meşê.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Bingehîn', title:'Bingehîna 5-4-3-2-1', desc:'Teknîkek hestyarî ku hişê te ji xemgîniyê derdixe û vedigerîne kêliya niha.', duration:180,
+      steps:['5 tiştên ku tu li dora xwe dibînî bibêje.','4 tiştên ku tu bi laşî hîs dikî bibêje (lingên te li erdê, hewa li ser çermê te).','3 dengên ku tu niha dibihîzî bibêje.','2 bêhnên ku tu hîs dikî an ji wan hez dikî bibêje.','1 tehmê ku tu tam dikî, an tiştekî ku tu spasdar î bibêje.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Dilovaniya-xwe', title:'Navber a dilovaniya xwe', desc:'Pratîkek kurt ji bo kêliyên zehmet, li ser bingeha teknîka dilovaniya xwe ya sê-beşî.', duration:120,
+      steps:['Destekî xwe deyne ser sîngê xwe û bêje: ev kêliyek zehmet e.','Bîr bîne: zehmetî beşek ji mirovbûnê ye — ez di vê de bi tenê nînim.','Ji xwe bipirse: niha ez hewceyê çi me ku bibihîzim? Bi mihrîbanî ew bide xwe.','Berî ku tu rojê xwe berdewam bikî, nefesek hêdî bistîne.'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Dema xeman', desc:'Teknîkeke CBT ku xeman di demek diyarkirî de digire, li şûna ku di tevahiya rojê de belav bibe.',
+      steps:['Dema xemek derdikeve, wê di rêzek de binivîse û wê aliyek bihêle.','Ji bo paşê îro "dema xeman"ek 10-xulekî ya sabît diyar bike.','Di wê demê de, li lîsteya xwe binêre — piraniya xeman ê wê demê biçûktir xuya bikin.','Ji bo tiştê hêj hêjayî kirinê ye, gavek din a piçûk binivîse.'] },
+  ],
+  es: [
+    { id:'ex-478', cat:'breathing', tag:'Respiración', title:'Respiración 4-7-8', desc:'Un breve ejercicio de respiración para calmar el sistema nervioso.', duration:120,
+      steps:['Siéntate cómodamente, cierra los ojos si puedes.','Inhala profundo por la nariz durante 4 segundos.','Aguanta la respiración 7 segundos.','Exhala lentamente por la boca durante 8 segundos.','Repite el ciclo 4 veces.'] },
+    { id:'ex-box', cat:'breathing', tag:'Respiración', title:'Respiración cuadrada', desc:'Una técnica usada por profesionales para calmar la ansiedad rápido.', duration:120,
+      steps:['Inhala durante 4 segundos.','Aguanta 4 segundos.','Exhala 4 segundos.','Quédate sin aire 4 segundos.','Repite durante 2 minutos.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Relajación', title:'Relajación muscular progresiva', desc:'Tensar y soltar cada grupo muscular para aliviar la tensión física.', duration:300,
+      steps:['Empieza por los pies: tensa 5 segundos, luego suelta.','Pasa a piernas, abdomen, manos.','Tensa los hombros, luego suelta lentamente.','Termina con la cara y la mandíbula.','Nota la diferencia entre tensión y relajación.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Atención plena', title:'Escaneo corporal', desc:'Una meditación simple para reconectar con tu cuerpo y calmar la mente.', duration:300,
+      steps:['Acuéstate o siéntate cómodamente.','Lleva la atención a tus pies sin juzgar lo que sientes.','Recorre lentamente piernas, torso, brazos, hasta la cabeza.','Si tu mente se distrae, vuélvela suavemente al cuerpo.','Termina con tres respiraciones profundas.'] },
+    { id:'ex-stop', cat:'mind', tag:'Atención plena', title:'La técnica STOP', desc:'Una herramienta rápida para interrumpir una espiral de pensamientos.', duration:60,
+      steps:['S — Detente un momento.','T — Toma una respiración profunda.','O — Observa tus pensamientos y cuerpo sin juzgar.','P — Continúa con un pequeño paso consciente.'] },
+    { id:'ex-safe', cat:'mind', tag:'Visualización', title:'Visualización del lugar seguro', desc:'Un ejercicio de imaginación para construir una sensación interior de seguridad.', duration:180,
+      steps:['Cierra los ojos e imagina un lugar donde te sientas totalmente seguro.','Nota los detalles: colores, sonidos, olores.','Nota cómo se siente tu cuerpo en ese lugar.','Recuerda que puedes volver ahí mentalmente cuando quieras.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Escritura', title:'Diario de gratitud', desc:'Tres cosas simples por las que agradecer hoy.',
+      steps:['Escribe algo pequeño que te alegró hoy.','Escribe una persona por la que te sientas agradecido.','Escribe algo de ti mismo que valores.'] },
+    { id:'ex-feelings', cat:'write', tag:'Escritura', title:'Diario de emociones', desc:'Solo tres frases para soltar lo que ocupa tu mente.',
+      steps:['Escribe qué sientes ahora en una frase simple.','Escribe desde cuándo sientes esto, aproximadamente.','Escribe algo pequeño que podría ayudarte ahora.'] },
+    { id:'ex-reframe', cat:'write', tag:'TCC', title:'Reestructuración cognitiva', desc:'Una herramienta de TCC para examinar pensamientos angustiantes.',
+      steps:['Escribe el pensamiento angustiante tal como aparece.','Pregúntate: ¿cuál es la evidencia real de esto?','Escribe una forma más equilibrada de ver la misma situación.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Seguimiento', title:'Registro de ánimo', desc:'Un seguimiento simple de tu ánimo durante la semana para notar patrones.',
+      steps:['Elige un número del 1 al 5 para tu ánimo actual.','Escribe una palabra para la razón principal.','Repite esto a diario a la misma hora para notar un patrón tras una semana.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Reto', title:'Reto de sueño de 7 días', desc:'Pasos simples para mejorar tu sueño en una semana.',
+      steps:['Fija una hora fija para dormir y despertar.','Evita pantallas 30 minutos antes de dormir.','Prueba un ejercicio de respiración justo antes de dormir.','Evita la cafeína después de las 4pm.'] },
+    { id:'ex-walk', cat:'mind', tag:'Movimiento', title:'Caminata consciente', desc:'Convertir una caminata normal en una meditación simple.', duration:300,
+      steps:['Camina más lento de lo habitual.','Nota la sensación de tus pies al tocar el suelo.','Nota tres sonidos a tu alrededor sin juzgarlos.','Vuelve la atención a caminar cada vez que tu mente se distraiga.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Anclaje', title:'Anclaje 5-4-3-2-1', desc:'Una técnica sensorial para sacar tu mente de la ansiedad y traerla de vuelta al momento presente.', duration:180,
+      steps:['Nombra 5 cosas que puedas ver a tu alrededor.','Nombra 4 cosas que puedas sentir físicamente (tus pies en el suelo, el aire en tu piel).','Nombra 3 sonidos que puedas oír ahora mismo.','Nombra 2 olores que percibas o te gusten.','Nombra 1 sabor que percibas, o algo por lo que estés agradecido.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Autocompasión', title:'Pausa de autocompasión', desc:'Una práctica breve para momentos difíciles, basada en la técnica de autocompasión de tres partes.', duration:120,
+      steps:['Pon una mano sobre tu pecho y reconoce: este es un momento difícil.','Recuérdate: luchar es parte de ser humano — no estoy solo/a en esto.','Pregúntate: ¿qué necesito escuchar ahora mismo? Ofrécetelo con amabilidad.','Respira lentamente una vez antes de continuar tu día.'] },
+    { id:'ex-worrytime', cat:'write', tag:'TCC', title:'Tiempo de preocupación', desc:'Una técnica de TCC que limita la preocupación a un horario fijo en lugar de dejar que se extienda por todo el día.',
+      steps:['Cuando aparezca una preocupación, escríbela en una línea y déjala a un lado.','Elige un "tiempo de preocupación" fijo de 10 minutos más tarde hoy.','En ese momento, repasa tu lista — la mayoría ya se sentirán más pequeñas.','Para lo que aún merezca acción, escribe un pequeño siguiente paso.'] },
+  ],
+  fa: [
+    { id:'ex-478', cat:'breathing', tag:'تنفس', title:'تنفس ۴-۷-۸', desc:'یک تمرین کوتاه تنفس برای آرام کردن سیستم عصبی.', duration:120,
+      steps:['راحت بنشین و اگر می‌توانی چشمانت را ببند.','۴ ثانیه از بینی نفس عمیق بکش.','۷ ثانیه نفس را نگه‌دار.','۸ ثانیه آرام از دهان بازدم کن.','چرخه را ۴ بار تکرار کن.'] },
+    { id:'ex-box', cat:'breathing', tag:'تنفس', title:'تنفس جعبه‌ای', desc:'تکنیکی که حرفه‌ای‌ها برای آرام کردن سریع اضطراب استفاده می‌کنند.', duration:120,
+      steps:['۴ ثانیه دم بگیر.','۴ ثانیه نگه‌دار.','۴ ثانیه بازدم کن.','۴ ثانیه بدون نفس بمان.','برای ۲ دقیقه تکرار کن.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'آرامش', title:'آرام‌سازی پیش‌رونده عضلات', desc:'سفت و شل کردن هر گروه عضلانی برای کاهش تنش بدنی.', duration:300,
+      steps:['از پاها شروع کن: ۵ ثانیه سفت کن، سپس شل کن.','به پاها، شکم، دست‌ها برو.','شانه‌ها را سفت کن و آرام شل کن.','با صورت و فک تمام کن.','تفاوت بین تنش و آرامش را حس کن.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'ذهن‌آگاهی', title:'اسکن بدن', desc:'مدیتیشنی ساده برای بازگشت به بدن و آرام کردن ذهن.', duration:300,
+      steps:['دراز بکش یا راحت بنشین.','توجه را بدون قضاوت به پاهایت بده.','آرام از پاها، تنه، دست‌ها تا سر برو.','اگر ذهنت پرت شد، به‌آرامی به بدن برگردان.','با سه نفس عمیق تمام کن.'] },
+    { id:'ex-stop', cat:'mind', tag:'ذهن‌آگاهی', title:'تکنیک STOP', desc:'ابزاری سریع برای قطع چرخه افکار در هر لحظه.', duration:60,
+      steps:['S — برای لحظه‌ای کاری که می‌کنی متوقف کن.','T — یک نفس عمیق بکش.','O — افکار و بدنت را بدون قضاوت مشاهده کن.','P — با یک قدم کوچک آگاهانه ادامه بده.'] },
+    { id:'ex-safe', cat:'mind', tag:'تجسم', title:'تجسم مکان امن', desc:'تمرین تجسمی برای ساختن حس درونی امنیت.', duration:180,
+      steps:['چشمانت را ببند و مکانی را تجسم کن که در آن کاملاً امن حس می‌کنی.','جزئیات را حس کن: رنگ‌ها، صداها، بوها.','حس بدنت را در آن مکان توجه کن.','به‌یاد داشته باش هر زمان می‌توانی ذهنی به آنجا برگردی.'] },
+    { id:'ex-gratitude', cat:'write', tag:'نوشتن', title:'دفترچه سپاسگزاری', desc:'سه چیز ساده که امروز جای شکرگزاری دارند.',
+      steps:['یک چیز کوچک بنویس که امروز خوشحالت کرد.','شخصی را بنویس که برای بودنش در زندگی‌ات سپاسگزاری.','چیزی درباره خودت یا توانایی‌هایت بنویس که قدر می‌دانی.'] },
+    { id:'ex-feelings', cat:'write', tag:'نوشتن', title:'دفترچه احساسات', desc:'فقط سه جمله، برای رها کردن آنچه ذهنت را مشغول کرده.',
+      steps:['با یک جمله ساده بنویس الان چه حسی داری.','بنویس این حس تقریباً از کی شروع شده.','یک چیز کوچک بنویس که ممکن است الان کمک کند.'] },
+    { id:'ex-reframe', cat:'write', tag:'CBT', title:'بازسازی فکر', desc:'ابزاری از درمان شناختی‌رفتاری برای بررسی افکار آزاردهنده.',
+      steps:['فکر آزاردهنده را دقیقاً همان‌طور که می‌آید بنویس.','از خودت بپرس: شواهد واقعی برای آن چیست؟','دیدگاهی متعادل‌تر از همان موقعیت بنویس.'] },
+    { id:'ex-mood', cat:'sleep', tag:'پیگیری', title:'نمودار خلق‌وخو', desc:'پیگیری ساده حال روحی‌ات در طول هفته برای دیدن الگوها.',
+      steps:['عددی از ۱ تا ۵ برای حال روحی الانت انتخاب کن.','یک کلمه برای دلیل اصلی بنویس.','این را هر روز در همان ساعت تکرار کن تا بعد از یک هفته الگو را ببینی.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'چالش', title:'چالش ۷ روزه خواب', desc:'گام‌های ساده برای بهبود کیفیت خوابت در یک هفته.',
+      steps:['ساعت ثابتی برای خواب و بیداری تعیین کن.','۳۰ دقیقه قبل از خواب از صفحه‌نمایش دوری کن.','درست قبل از خواب یک تمرین تنفس امتحان کن.','بعد از ساعت ۴ بعدازظهر از کافئین دوری کن.'] },
+    { id:'ex-walk', cat:'mind', tag:'حرکت', title:'پیاده‌روی آگاهانه', desc:'تبدیل یک پیاده‌روی عادی به مدیتیشنی ساده.', duration:300,
+      steps:['آهسته‌تر از حد معمول راه برو.','حس پاهایت را هنگام لمس زمین توجه کن.','سه صدای اطرافت را بدون قضاوت توجه کن.','هر بار ذهنت پرت شد، توجه را به راه رفتن برگردان.'] },
+    { id:'ex-grounding', cat:'mind', tag:'زمین‌گیری', title:'زمین‌گیری ۵-۴-۳-۲-۱', desc:'تکنیکی حسی برای بازگرداندن ذهن از اضطراب به لحظه‌ی حال.', duration:180,
+      steps:['۵ چیز که دور و برت می‌بینی نام ببر.','۴ چیز که به‌طور فیزیکی حس می‌کنی نام ببر (پاهایت روی زمین، هوا روی پوستت).','۳ صدا که همین الان می‌شنوی نام ببر.','۲ بو که حس می‌کنی یا دوستشان داری نام ببر.','۱ طعم که می‌چشی، یا چیزی که بابتش سپاسگزاری نام ببر.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'شفقت به خود', title:'وقفه‌ی شفقت به خود', desc:'تمرینی کوتاه برای لحظات دشوار، بر پایه‌ی تکنیک سه‌بخشی شفقت به خود.', duration:120,
+      steps:['دستت را روی قفسه سینه‌ات بگذار و بگو: این یک لحظه‌ی دشوار است.','به خودت یادآوری کن: دشواری بخشی از انسان‌بودن است — در این تنها نیستم.','از خودت بپرس: الان به چه چیزی نیاز دارم که بشنوم؟ و آن را با ملایمت به خودت بده.','پیش از ادامه‌ی روزت، یک نفس آرام بکش.'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'زمان نگرانی', desc:'تکنیکی از CBT که نگرانی را به یک بازه‌ی زمانی مشخص محدود می‌کند، به‌جای اینکه در طول روز پخش شود.',
+      steps:['وقتی نگرانی‌ای پیش آمد، آن را در یک خط بنویس و کنار بگذار.','یک "زمان نگرانی" ۱۰ دقیقه‌ای ثابت برای بعداً امروز تعیین کن.','در آن زمان، فهرستت را مرور کن — اغلب نگرانی‌ها دیگر کوچک‌تر به نظر می‌رسند.','برای چیزی که هنوز ارزش اقدام دارد، یک قدم بعدی کوچک بنویس.'] },
+  ],
+  ur: [
+    { id:'ex-478', cat:'breathing', tag:'سانس', title:'4-7-8 سانس کی مشق', desc:'اعصابی نظام کو پرسکون کرنے کے لیے مختصر سانس کی مشق۔', duration:120,
+      steps:['آرام سے بیٹھیں، ممکن ہو تو آنکھیں بند کریں۔','ناک سے 4 سیکنڈ گہری سانس لیں۔','7 سیکنڈ سانس روکیں۔','منہ سے 8 سیکنڈ میں آہستہ سانس چھوڑیں۔','چکر کو 4 بار دہرائیں۔'] },
+    { id:'ex-box', cat:'breathing', tag:'سانس', title:'باکس بریدنگ', desc:'اضطراب کو تیزی سے پرسکون کرنے کے لیے پیشہ ور افراد کی تکنیک۔', duration:120,
+      steps:['4 سیکنڈ سانس لیں۔','4 سیکنڈ روکیں۔','4 سیکنڈ سانس چھوڑیں۔','4 سیکنڈ بغیر سانس کے رہیں۔','2 منٹ تک دہرائیں۔'] },
+    { id:'ex-pmr', cat:'breathing', tag:'آرام', title:'بتدریج عضلاتی آرام', desc:'جسمانی تناؤ کم کرنے کے لیے ہر عضلاتی گروپ کو تنگ اور ڈھیلا کریں۔', duration:300,
+      steps:['پیروں سے شروع کریں: 5 سیکنڈ تنگ کریں، پھر ڈھیلا کریں۔','ٹانگوں، پیٹ، ہاتھوں کی طرف بڑھیں۔','کندھے تنگ کریں پھر آہستہ ڈھیلے کریں۔','چہرے اور جبڑے کے ساتھ ختم کریں۔','تناؤ اور آرام کے فرق کو محسوس کریں۔'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'ذہن آگاہی', title:'باڈی اسکین', desc:'اپنے جسم سے دوبارہ جڑنے اور ذہن کو پرسکون کرنے کی سادہ مشق۔', duration:300,
+      steps:['آرام سے لیٹیں یا بیٹھیں۔','بغیر فیصلہ کیے اپنے پیروں پر توجہ دیں۔','آہستہ ٹانگوں، دھڑ، بازوؤں سے سر تک جائیں۔','اگر ذہن بھٹکے تو نرمی سے جسم کی طرف واپس لائیں۔','تین گہری سانسوں کے ساتھ ختم کریں۔'] },
+    { id:'ex-stop', cat:'mind', tag:'ذہن آگاہی', title:'STOP تکنیک', desc:'کسی بھی وقت خیالات کے چکر کو روکنے کا فوری آلہ۔', duration:60,
+      steps:['S — ایک لمحے کے لیے جو کر رہے ہیں رک جائیں۔','T — ایک گہری سانس لیں۔','O — بغیر فیصلہ کیے اپنے خیالات اور جسم کا مشاہدہ کریں۔','P — ایک چھوٹے، باشعور قدم کے ساتھ آگے بڑھیں۔'] },
+    { id:'ex-safe', cat:'mind', tag:'تصور', title:'محفوظ جگہ کا تصور', desc:'اندرونی تحفظ کا احساس بنانے کے لیے تصوراتی مشق۔', duration:180,
+      steps:['آنکھیں بند کریں اور ایک ایسی جگہ کا تصور کریں جہاں آپ مکمل محفوظ محسوس کریں۔','تفصیلات محسوس کریں: رنگ، آوازیں، خوشبوئیں۔','اس جگہ اپنے جسم کا احساس محسوس کریں۔','یاد رکھیں آپ جب چاہیں ذہنی طور پر وہاں واپس جا سکتے ہیں۔'] },
+    { id:'ex-gratitude', cat:'write', tag:'تحریر', title:'شکرگزاری کی ڈائری', desc:'تین سادہ چیزیں جن کے لیے آج شکرگزار ہونا چاہیے۔',
+      steps:['ایک چھوٹی چیز لکھیں جس نے آج آپ کو خوش کیا۔','ایک شخص لکھیں جس کے لیے آپ اپنی زندگی میں شکرگزار ہیں۔','اپنے بارے میں یا اپنی صلاحیتوں کے بارے میں کچھ لکھیں جس کی آپ قدر کرتے ہیں۔'] },
+    { id:'ex-feelings', cat:'write', tag:'تحریر', title:'جذبات کی ڈائری', desc:'صرف تین جملے، جو ذہن میں ہے اسے خالی کرنے کے لیے۔',
+      steps:['ایک سادہ جملے میں لکھیں ابھی آپ کیا محسوس کر رہے ہیں۔','لکھیں یہ احساس تقریباً کب سے شروع ہوا۔','ایک چھوٹی چیز لکھیں جو ابھی مدد کر سکتی ہے۔'] },
+    { id:'ex-reframe', cat:'write', tag:'CBT', title:'خیال کی نئی تشکیل', desc:'پریشان کن خیالات کا جائزہ لینے کے لیے CBT کا آلہ۔',
+      steps:['پریشان کن خیال کو بالکل ویسے ہی لکھیں جیسے آتا ہے۔','اپنے آپ سے پوچھیں: اس کے لیے حقیقی ثبوت کیا ہے؟','اسی صورتحال کو دیکھنے کا زیادہ متوازن طریقہ لکھیں۔'] },
+    { id:'ex-mood', cat:'sleep', tag:'ٹریکنگ', title:'موڈ ٹریکر', desc:'پیٹرن دیکھنے کے لیے ہفتے بھر اپنے موڈ کی سادہ ٹریکنگ۔',
+      steps:['اپنے موجودہ موڈ کے لیے 1 سے 5 تک ایک نمبر منتخب کریں۔','اہم وجہ کے لیے ایک لفظ لکھیں۔','ایک ہفتے بعد پیٹرن دیکھنے کے لیے اسے روزانہ ایک ہی وقت پر دہرائیں۔'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'چیلنج', title:'7 دن کا نیند چیلنج', desc:'ایک ہفتے میں اپنی نیند کا معیار بہتر بنانے کے سادہ اقدامات۔',
+      steps:['سونے اور جاگنے کا مقررہ وقت طے کریں۔','سونے سے 30 منٹ پہلے اسکرینز سے دور رہیں۔','سونے سے عین پہلے سانس کی مشق آزمائیں۔','شام 4 بجے کے بعد کیفین سے پرہیز کریں۔'] },
+    { id:'ex-walk', cat:'mind', tag:'حرکت', title:'باشعور چہل قدمی', desc:'ایک عام چہل قدمی کو سادہ مراقبے میں بدلنا۔', duration:300,
+      steps:['معمول سے آہستہ چلیں۔','زمین کو چھوتے وقت اپنے پیروں کا احساس محسوس کریں۔','اپنے ارد گرد کی تین آوازوں کو بغیر فیصلہ کیے محسوس کریں۔','جب بھی ذہن بھٹکے، توجہ چلنے کی طرف واپس لائیں۔'] },
+    { id:'ex-grounding', cat:'mind', tag:'زمینی تعلق', title:'5-4-3-2-1 زمینی تعلق', desc:'ایک حسی تکنیک جو آپ کے ذہن کو پریشانی سے نکال کر موجودہ لمحے میں واپس لاتی ہے۔', duration:180,
+      steps:['اپنے ارد گرد نظر آنے والی 5 چیزوں کے نام لیں۔','جسمانی طور پر محسوس ہونے والی 4 چیزوں کے نام لیں (آپ کے پاؤں زمین پر، جلد پر ہوا)۔','ابھی سنائی دینے والی 3 آوازوں کے نام لیں۔','محسوس ہونے والی یا پسندیدہ 2 خوشبوؤں کے نام لیں۔','چکھے جانے والے 1 ذائقے، یا کسی ایک چیز کا نام لیں جس کے لیے آپ شکرگزار ہیں۔'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'خود ہمدردی', title:'خود ہمدردی کا وقفہ', desc:'مشکل لمحات کے لیے ایک مختصر مشق، تین حصوں پر مبنی خود ہمدردی کی تکنیک پر مبنی۔', duration:120,
+      steps:['اپنا ہاتھ اپنے سینے پر رکھیں اور تسلیم کریں: یہ ایک مشکل لمحہ ہے۔','خود کو یاد دلائیں: جدوجہد انسان ہونے کا حصہ ہے — میں اس میں اکیلا/اکیلی نہیں ہوں۔','اپنے آپ سے پوچھیں: ابھی مجھے کیا سننے کی ضرورت ہے؟ اور نرمی سے خود کو وہ دیں۔','اپنا دن جاری رکھنے سے پہلے ایک آہستہ سانس لیں۔'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'پریشانی کا وقت', desc:'CBT کی ایک تکنیک جو پریشانی کو پورے دن پھیلنے کے بجائے ایک مقررہ وقت تک محدود رکھتی ہے۔',
+      steps:['جب کوئی پریشانی آئے تو اسے ایک سطر میں لکھ کر ایک طرف رکھ دیں۔','آج بعد میں ایک مقررہ 10 منٹ کا "پریشانی کا وقت" منتخب کریں۔','اس وقت اپنی فہرست دیکھیں — زیادہ تر پریشانیاں پہلے ہی چھوٹی محسوس ہوں گی۔','جو چیز اب بھی توجہ کی مستحق ہو، اس کے لیے ایک چھوٹا اگلا قدم لکھیں۔'] },
+  ],
+  ru: [
+    { id:'ex-478', cat:'breathing', tag:'Дыхание', title:'Дыхание 4-7-8', desc:'Короткое дыхательное упражнение для успокоения нервной системы.', duration:120,
+      steps:['Сядь удобно, закрой глаза, если можешь.','Вдохни глубоко через нос на 4 секунды.','Задержи дыхание на 7 секунд.','Медленно выдохни через рот на 8 секунд.','Повтори цикл 4 раза.'] },
+    { id:'ex-box', cat:'breathing', tag:'Дыхание', title:'Квадратное дыхание', desc:'Техника, которую используют профессионалы для быстрого снятия тревоги.', duration:120,
+      steps:['Вдохни на 4 секунды.','Задержи на 4 секунды.','Выдохни на 4 секунды.','Оставайся без воздуха 4 секунды.','Повторяй 2 минуты.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Расслабление', title:'Прогрессивная мышечная релаксация', desc:'Напрягай и расслабляй каждую группу мышц, чтобы снять физическое напряжение.', duration:300,
+      steps:['Начни со стоп: напряги на 5 секунд, затем расслабь.','Перейди к ногам, животу, рукам.','Напряги плечи, затем медленно расслабь.','Закончи лицом и челюстью.','Заметь разницу между напряжением и расслаблением.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Осознанность', title:'Сканирование тела', desc:'Простая медитация для воссоединения с телом и успокоения ума.', duration:300,
+      steps:['Ляг или сядь удобно.','Направь внимание на стопы, не оценивая ощущения.','Медленно двигайся через ноги, туловище, руки, до головы.','Если ум отвлёкся, мягко верни его к телу.','Закончи тремя глубокими вдохами.'] },
+    { id:'ex-stop', cat:'mind', tag:'Осознанность', title:'Техника STOP', desc:'Быстрый инструмент, чтобы остановить спираль мыслей в любой момент.', duration:60,
+      steps:['S — Остановись на мгновение.','T — Сделай один глубокий вдох.','O — Наблюдай за мыслями и телом без осуждения.','P — Продолжи одним маленьким осознанным шагом.'] },
+    { id:'ex-safe', cat:'mind', tag:'Визуализация', title:'Визуализация безопасного места', desc:'Упражнение воображения для создания внутреннего чувства безопасности.', duration:180,
+      steps:['Закрой глаза и представь место, где ты чувствуешь себя полностью безопасно.','Заметь детали: цвета, звуки, запахи.','Заметь, как твоё тело ощущается в этом месте.','Помни, ты можешь вернуться туда мысленно в любой момент.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Письмо', title:'Дневник благодарности', desc:'Три простые вещи, за которые стоит быть благодарным сегодня.',
+      steps:['Напиши одну маленькую вещь, которая порадовала тебя сегодня.','Напиши человека, за которого ты благодарен в своей жизни.','Напиши то в себе или своих способностях, что ты ценишь.'] },
+    { id:'ex-feelings', cat:'write', tag:'Письмо', title:'Дневник чувств', desc:'Всего три предложения, чтобы отпустить то, что занимает твой ум.',
+      steps:['Напиши одним простым предложением, что ты чувствуешь сейчас.','Напиши, примерно с каких пор ты это чувствуешь.','Напиши одну маленькую вещь, которая может помочь сейчас.'] },
+    { id:'ex-reframe', cat:'write', tag:'КПТ', title:'Переосмысление мысли', desc:'Инструмент КПТ для проверки тревожных мыслей.',
+      steps:['Запиши тревожную мысль точно так, как она приходит.','Спроси себя: какие реальные доказательства этому есть?','Напиши более сбалансированный взгляд на ту же ситуацию.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Отслеживание', title:'Трекер настроения', desc:'Простое отслеживание настроения в течение недели, чтобы заметить закономерности.',
+      steps:['Выбери число от 1 до 5 для текущего настроения.','Напиши одно слово для главной причины.','Повторяй это ежедневно в одно и то же время, чтобы через неделю увидеть закономерность.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Испытание', title:'7-дневная программа сна', desc:'Простые шаги для улучшения качества сна за неделю.',
+      steps:['Установи фиксированное время сна и пробуждения.','Избегай экранов за 30 минут до сна.','Попробуй дыхательное упражнение прямо перед сном.','Избегай кофеина после 16:00.'] },
+    { id:'ex-walk', cat:'mind', tag:'Движение', title:'Осознанная ходьба', desc:'Превращение обычной прогулки в простую медитацию.', duration:300,
+      steps:['Иди медленнее, чем обычно.','Заметь ощущение стоп, касающихся земли.','Заметь три звука вокруг тебя, не оценивая их.','Возвращай внимание к ходьбе всякий раз, когда ум отвлекается.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Заземление', title:'Заземление 5-4-3-2-1', desc:'Сенсорная техника, чтобы вернуть ум из тревоги в настоящий момент.', duration:180,
+      steps:['Назови 5 вещей, которые видишь вокруг.','Назови 4 вещи, которые физически ощущаешь (ноги на полу, воздух на коже).','Назови 3 звука, которые слышишь прямо сейчас.','Назови 2 запаха, которые чувствуешь или любишь.','Назови 1 вкус, который ощущаешь, или то, за что благодарен(на).'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Самосострадание', title:'Пауза самосострадания', desc:'Короткая практика для трудных моментов, основанная на технике самосострадания из трёх частей.', duration:120,
+      steps:['Положи руку на грудь и признай: это трудный момент.','Напомни себе: трудности — часть человеческого опыта, я не одинок(а) в этом.','Спроси себя: что мне сейчас нужно услышать? И мягко дай это себе.','Сделай один медленный вдох, прежде чем продолжить день.'] },
+    { id:'ex-worrytime', cat:'write', tag:'КПТ', title:'Время для тревог', desc:'Техника КПТ, которая ограничивает тревогу одним запланированным временем вместо того, чтобы позволять ей распространяться на весь день.',
+      steps:['Когда появляется тревога, запиши её одной строкой и отложи.','Выбери фиксированное 10-минутное "время для тревог" позже сегодня.','В это время просмотри список — большинство тревог уже покажутся меньше.','Для того, что всё ещё стоит внимания, запиши один маленький следующий шаг.'] },
+  ],
+  pt: [
+    { id:'ex-478', cat:'breathing', tag:'Respiração', title:'Respiração 4-7-8', desc:'Um breve exercício de respiração para acalmar o sistema nervoso.', duration:120,
+      steps:['Senta-te confortavelmente, fecha os olhos se conseguires.','Inspira profundamente pelo nariz durante 4 segundos.','Segura a respiração durante 7 segundos.','Expira lentamente pela boca durante 8 segundos.','Repete o ciclo 4 vezes.'] },
+    { id:'ex-box', cat:'breathing', tag:'Respiração', title:'Respiração quadrada', desc:'Uma técnica usada por profissionais para acalmar a ansiedade rapidamente.', duration:120,
+      steps:['Inspira durante 4 segundos.','Segura 4 segundos.','Expira 4 segundos.','Fica sem ar 4 segundos.','Repete durante 2 minutos.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Relaxamento', title:'Relaxamento muscular progressivo', desc:'Contrai e solta cada grupo muscular para aliviar a tensão física.', duration:300,
+      steps:['Começa pelos pés: contrai 5 segundos, depois solta.','Passa às pernas, barriga, mãos.','Contrai os ombros, depois solta lentamente.','Termina com a cara e a mandíbula.','Repara na diferença entre tensão e relaxamento.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Atenção plena', title:'Escaneamento corporal', desc:'Uma meditação simples para te reconectares com o corpo e acalmar a mente.', duration:300,
+      steps:['Deita-te ou senta-te confortavelmente.','Leva a atenção aos pés sem julgar o que sentes.','Percorre lentamente pernas, tronco, braços, até à cabeça.','Se a mente divagar, traz-a suavemente de volta ao corpo.','Termina com três respirações profundas.'] },
+    { id:'ex-stop', cat:'mind', tag:'Atenção plena', title:'A técnica STOP', desc:'Uma ferramenta rápida para interromper uma espiral de pensamentos a qualquer momento.', duration:60,
+      steps:['S — Para por um momento o que estás a fazer.','T — Faz uma respiração profunda.','O — Observa os teus pensamentos e corpo sem julgar.','P — Continua com um pequeno passo consciente.'] },
+    { id:'ex-safe', cat:'mind', tag:'Visualização', title:'Visualização do lugar seguro', desc:'Um exercício de imaginação para construir uma sensação interior de segurança.', duration:180,
+      steps:['Fecha os olhos e imagina um lugar onde te sintas totalmente seguro.','Repara nos detalhes: cores, sons, cheiros.','Repara em como o teu corpo se sente nesse lugar.','Lembra-te que podes voltar lá mentalmente sempre que quiseres.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Escrita', title:'Diário de gratidão', desc:'Três coisas simples pelas quais vale a pena ser grato hoje.',
+      steps:['Escreve uma pequena coisa que te alegrou hoje.','Escreve uma pessoa pela qual és grato na tua vida.','Escreve algo sobre ti ou as tuas capacidades que valorizas.'] },
+    { id:'ex-feelings', cat:'write', tag:'Escrita', title:'Diário de sentimentos', desc:'Apenas três frases, para libertar o que ocupa a tua mente.',
+      steps:['Escreve numa frase simples o que sentes agora.','Escreve desde quando sentes isto, aproximadamente.','Escreve uma pequena coisa que possa ajudar agora.'] },
+    { id:'ex-reframe', cat:'write', tag:'TCC', title:'Reformulação cognitiva', desc:'Uma ferramenta de TCC para examinar pensamentos angustiantes.',
+      steps:['Escreve o pensamento angustiante exatamente como surge.','Pergunta-te: qual é a evidência real para isto?','Escreve uma visão mais equilibrada da mesma situação.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Registo', title:'Registo de humor', desc:'Um registo simples do teu humor ao longo da semana para notares padrões.',
+      steps:['Escolhe um número de 1 a 5 para o teu humor atual.','Escreve uma palavra para a razão principal.','Repete isto diariamente à mesma hora para notares um padrão ao fim de uma semana.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Desafio', title:'Desafio de sono de 7 dias', desc:'Passos simples para melhorar a qualidade do teu sono numa semana.',
+      steps:['Define uma hora fixa para dormir e acordar.','Evita ecrãs 30 minutos antes de dormir.','Experimenta um exercício de respiração mesmo antes de dormir.','Evita cafeína depois das 16h.'] },
+    { id:'ex-walk', cat:'mind', tag:'Movimento', title:'Caminhada consciente', desc:'Transformar uma caminhada comum numa meditação simples.', duration:300,
+      steps:['Caminha mais devagar do que o habitual.','Repara na sensação dos teus pés a tocar o chão.','Repara em três sons à tua volta sem os julgar.','Traz a atenção de volta à caminhada sempre que a mente divagar.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Ancoragem', title:'Ancoragem 5-4-3-2-1', desc:'Uma técnica sensorial para trazer a tua mente da ansiedade de volta ao momento presente.', duration:180,
+      steps:['Nomeia 5 coisas que consegues ver à tua volta.','Nomeia 4 coisas que sentes fisicamente (os teus pés no chão, o ar na tua pele).','Nomeia 3 sons que ouves agora mesmo.','Nomeia 2 cheiros que sentes ou gostas.','Nomeia 1 sabor que sentes, ou algo pelo qual és grato/a.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Autocompaixão', title:'Pausa de autocompaixão', desc:'Uma prática breve para momentos difíceis, baseada na técnica de autocompaixão em três partes.', duration:120,
+      steps:['Coloca uma mão no peito e reconhece: este é um momento difícil.','Lembra-te: lutar faz parte de ser humano — não estou sozinho/a nisto.','Pergunta-te: o que preciso de ouvir agora? Oferece isso a ti próprio/a com gentileza.','Respira devagar uma vez antes de continuares o teu dia.'] },
+    { id:'ex-worrytime', cat:'write', tag:'TCC', title:'Tempo de preocupação', desc:'Uma técnica de TCC que limita a preocupação a um horário marcado em vez de a deixar espalhar-se pelo dia.',
+      steps:['Quando surgir uma preocupação, escreve-a numa linha e põe-na de lado.','Escolhe um "tempo de preocupação" fixo de 10 minutos mais tarde hoje.','Nessa altura, revê a tua lista — a maioria já vai parecer menor.','Para o que ainda mereça ação, escreve um pequeno próximo passo.'] },
+  ],
+  it: [
+    { id:'ex-478', cat:'breathing', tag:'Respirazione', title:'Respirazione 4-7-8', desc:'Un breve esercizio di respirazione per calmare il sistema nervoso.', duration:120,
+      steps:['Siediti comodamente, chiudi gli occhi se puoi.','Inspira profondamente dal naso per 4 secondi.','Trattieni il respiro per 7 secondi.','Espira lentamente dalla bocca per 8 secondi.','Ripeti il ciclo 4 volte.'] },
+    { id:'ex-box', cat:'breathing', tag:'Respirazione', title:'Respirazione quadrata', desc:'Una tecnica usata dai professionisti per calmare rapidamente l\'ansia.', duration:120,
+      steps:['Inspira per 4 secondi.','Trattieni per 4 secondi.','Espira per 4 secondi.','Resta senza respiro per 4 secondi.','Ripeti per 2 minuti.'] },
+    { id:'ex-pmr', cat:'breathing', tag:'Rilassamento', title:'Rilassamento muscolare progressivo', desc:'Contrai e rilascia ogni gruppo muscolare per alleviare la tensione fisica.', duration:300,
+      steps:['Inizia dai piedi: contrai per 5 secondi, poi rilascia.','Passa a gambe, pancia, mani.','Contrai le spalle, poi rilascia lentamente.','Finisci con viso e mascella.','Nota la differenza tra tensione e rilassamento.'] },
+    { id:'ex-bodyscan', cat:'mind', tag:'Consapevolezza', title:'Scansione corporea', desc:'Una meditazione semplice per riconnetterti al corpo e calmare la mente.', duration:300,
+      steps:['Sdraiati o siediti comodamente.','Porta l\'attenzione ai piedi senza giudicare ciò che senti.','Muoviti lentamente attraverso gambe, busto, braccia, fino alla testa.','Se la mente vaga, riportala dolcemente al corpo.','Concludi con tre respiri profondi.'] },
+    { id:'ex-stop', cat:'mind', tag:'Consapevolezza', title:'La tecnica STOP', desc:'Uno strumento rapido per interrompere una spirale di pensieri in qualsiasi momento.', duration:60,
+      steps:['S — Fermati un momento da ciò che stai facendo.','T — Fai un respiro profondo.','O — Osserva i tuoi pensieri e il corpo senza giudicare.','P — Prosegui con un piccolo passo consapevole.'] },
+    { id:'ex-safe', cat:'mind', tag:'Visualizzazione', title:'Visualizzazione del luogo sicuro', desc:'Un esercizio immaginativo per costruire un senso interiore di sicurezza.', duration:180,
+      steps:['Chiudi gli occhi e immagina un luogo dove ti senti completamente al sicuro.','Nota i dettagli: colori, suoni, odori.','Nota come si sente il tuo corpo in quel luogo.','Ricorda che puoi tornarci mentalmente ogni volta che vuoi.'] },
+    { id:'ex-gratitude', cat:'write', tag:'Scrittura', title:'Diario della gratitudine', desc:'Tre cose semplici per cui essere grati oggi.',
+      steps:['Scrivi una piccola cosa che ti ha reso felice oggi.','Scrivi una persona per cui sei grato nella tua vita.','Scrivi qualcosa di te stesso o delle tue capacità che apprezzi.'] },
+    { id:'ex-feelings', cat:'write', tag:'Scrittura', title:'Diario delle emozioni', desc:'Solo tre frasi, per liberare ciò che occupa la tua mente.',
+      steps:['Scrivi in una frase semplice cosa provi ora.','Scrivi da quando provi questa sensazione, all\'incirca.','Scrivi una piccola cosa che potrebbe aiutarti ora.'] },
+    { id:'ex-reframe', cat:'write', tag:'TCC', title:'Ristrutturazione cognitiva', desc:'Uno strumento di TCC per esaminare pensieri angoscianti.',
+      steps:['Scrivi il pensiero angosciante esattamente come ti viene.','Chiediti: quali sono le prove reali per questo?','Scrivi una visione più equilibrata della stessa situazione.'] },
+    { id:'ex-mood', cat:'sleep', tag:'Monitoraggio', title:'Monitoraggio dell\'umore', desc:'Un monitoraggio semplice del tuo umore durante la settimana per notare schemi.',
+      steps:['Scegli un numero da 1 a 5 per il tuo umore attuale.','Scrivi una parola per il motivo principale.','Ripeti questo ogni giorno alla stessa ora per notare uno schema dopo una settimana.'] },
+    { id:'ex-sleep7', cat:'sleep', tag:'Sfida', title:'Sfida del sonno di 7 giorni', desc:'Passi semplici per migliorare la qualità del sonno in una settimana.',
+      steps:['Fissa un orario fisso per dormire e svegliarti.','Evita gli schermi 30 minuti prima di dormire.','Prova un esercizio di respirazione appena prima di dormire.','Evita la caffeina dopo le 16.'] },
+    { id:'ex-walk', cat:'mind', tag:'Movimento', title:'Camminata consapevole', desc:'Trasformare una camminata ordinaria in una semplice meditazione.', duration:300,
+      steps:['Cammina più lentamente del solito.','Nota la sensazione dei piedi che toccano il suolo.','Nota tre suoni intorno a te senza giudicarli.','Riporta l\'attenzione alla camminata ogni volta che la mente vaga.'] },
+    { id:'ex-grounding', cat:'mind', tag:'Radicamento', title:'Radicamento 5-4-3-2-1', desc:'Una tecnica sensoriale per riportare la mente dall\'ansia al momento presente.', duration:180,
+      steps:['Nomina 5 cose che vedi intorno a te.','Nomina 4 cose che senti fisicamente (i tuoi piedi sul pavimento, l\'aria sulla pelle).','Nomina 3 suoni che senti in questo momento.','Nomina 2 odori che percepisci o che ti piacciono.','Nomina 1 sapore che percepisci, o una cosa per cui sei grato/a.'] },
+    { id:'ex-selfcompassion', cat:'mind', tag:'Autocompassione', title:'Pausa di autocompassione', desc:'Una pratica breve per i momenti difficili, basata sulla tecnica dell\'autocompassione in tre parti.', duration:120,
+      steps:['Metti una mano sul petto e riconosci: questo è un momento difficile.','Ricordati: la difficoltà fa parte dell\'essere umani — non sono solo/a in questo.','Chiediti: di cosa ho bisogno adesso? Offritelo con gentilezza.','Fai un respiro lento prima di continuare la giornata.'] },
+    { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Tempo per le preoccupazioni', desc:'Una tecnica CBT che contiene le preoccupazioni in un momento programmato invece di lasciarle espandersi per tutta la giornata.',
+      steps:['Quando emerge una preoccupazione, scrivila in una riga e mettila da parte.','Scegli un "tempo per le preoccupazioni" fisso di 10 minuti più tardi oggi.','In quel momento, ripassa la lista — la maggior parte sembrerà già più piccola.','Per ciò che merita ancora azione, scrivi un piccolo passo successivo.'] },
+  ],
+};
+const LIBRARY = {
+  ar: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'القلق', title:'فهم دوامة القلق', desc:'كيف تتكوّن أفكار القلق، ولماذا تتضخّم أحياناً دون سبب واضح.',
+      body:'القلق يبدأ عادة بفكرة صغيرة، ثم يفسّرها الدماغ كخطر فيرسل إشارات جسدية (تسارع القلب، توتر العضلات) تجعل الفكرة تبدو أكثر واقعية، فتتولد دوامة تغذّي نفسها. فهم أن الجسد يستجيب للفكرة وليس للخطر الفعلي هو أول خطوة لكسر هذه الحلقة.' },
+    { id:'lib-habits', cat:'habits', tag:'العادات', title:'تغيير صغير، أثر كبير', desc:'أساسيات بناء عادة جديدة بخطوات لا تحتاج إرادة خارقة.',
+      body:'العادات تُبنى بتكرار سلوك صغير جداً مرتبط بمحفّز واضح، لا بقرارات كبيرة تعتمد على قوة الإرادة. ابدأ بنسخة أصغر بكثير مما تتخيّل (دقيقة واحدة بدل ساعة)، واربطها بروتين قائم أصلاً، فالثبات أهم من الحجم في المراحل الأولى.' },
+    { id:'lib-relationships', cat:'relationships', tag:'العلاقات', title:'حدود صحية دون شعور بالذنب', desc:'كيف تقول "لا" وتحافظ على علاقاتك المهمة.',
+      body:'الحدود الصحية ليست رفضاً للآخر، بل توضيح لما يناسبك أنت. الشعور بالذنب عند قول "لا" غالباً ما يأتي من الخلط بين "رفض الطلب" و"رفض الشخص". جملة بسيطة وواضحة دون تبرير مطوّل تحافظ على العلاقة وعلى راحتك معاً.' },
+    { id:'lib-selfworth', cat:'self', tag:'تقدير الذات', title:'قيمتك لا تُقاس بإنجازك', desc:'كيف تفصل بين ما تفعله ومن أنت فعلاً.',
+      body:'كثير من الناس يربطون قيمتهم الذاتية بالإنتاجية أو تقييم الآخرين، فيصبح أي فشل تهديداً لهويتهم كاملة. تدريب تدريجي على ملاحظة صفاتك الثابتة (النزاهة، التعاطف، الفضول) بمعزل عن نتائج يومك يخفف هذا الربط تدريجياً.' },
+    { id:'lib-anger', cat:'emotions', tag:'الغضب', title:'الغضب رسالة لا عدو', desc:'كيف تتعامل مع الغضب دون كبته أو الانفجار به.',
+      body:'الغضب غالباً يحمل رسالة عن حدّ تم تجاوزه أو حاجة لم تُلبَّ. كبته لا يُزيله بل يؤجله، والانفجار به يضر العلاقات. الخطوة الوسطى: أوقف نفسك لحظة، اسأل "ما الذي يزعجني فعلاً هنا؟"، ثم عبّر عن الحاجة وراءه بهدوء بدل الاتهام المباشر.' },
+    { id:'lib-procrastination', cat:'habits', tag:'المماطلة', title:'المماطلة ليست كسلاً', desc:'السبب الحقيقي وراء التسويف غالباً عاطفي لا إداري.',
+      body:'أغلب المماطلة ليست مشكلة في إدارة الوقت، بل محاولة لتجنّب شعور غير مريح مرتبط بالمهمة (خوف من الفشل، الملل، الإرهاق). تجزئة المهمة لخطوة أولى صغيرة جداً تقلّل الشعور المزعج قبل أن يمنعك من البدء أصلاً.' },
+    { id:'lib-grief', cat:'emotions', tag:'الفقد', title:'الحزن ليس خطاً مستقيماً', desc:'لماذا يعود الحزن بموجات بدل أن ينتهي بترتيب.',
+      body:'نظرية "مراحل الحزن" الشائعة تعطي انطباعاً خاطئاً بأنها خطية ومنتهية. الحزن الحقيقي يأتي بموجات، يخف ثم يعود فجأة، وهذا طبيعي تماماً وليس علامة على "عدم التعافي". السماح للموجة بالمرور دون مقاومتها أسهل من محاربتها.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'تنظيم المشاعر', title:'سمِّ ما تشعر به لتهدأ', desc:'تقنية بسيطة ومثبتة علمياً لتقليل شدة المشاعر الصعبة.',
+      body:'أظهرت أبحاث في التصوير الدماغي أن مجرد تسمية المشاعر بدقة ("أشعر بالإحباط" بدل "أنا بخير") يقلّل نشاط مركز الخوف في الدماغ. الخطوة تبدو بسيطة لكنها فعالة: توقف، وسمِّ الشعور بكلمة واحدة دقيقة قبل أن تتصرف بناءً عليه.' },
+    { id:'lib-stress', cat:'stress', tag:'التوتر المزمن', title:'حين يصبح التوتر حالة دائمة', desc:'الفرق بين التوتر العابر والتوتر المزمن، ولماذا يستحق انتباهاً مختلفاً.',
+      body:'التوتر العابر يحمي الجسد في لحظة الخطر، لكن التوتر المزمن يبقي الجسد في حالة تأهب مستمرة حتى دون خطر حقيقي، ما يؤثر على النوم والمناعة والمزاج. تحديد مصادر التوتر المتكررة، لا فقط التعامل مع أعراضه، هو ما يصنع فرقاً حقيقياً على المدى الطويل.' },
+  ],
+  de: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Angst', title:'Die Angstspirale verstehen', desc:'Wie Angstgedanken entstehen und sich manchmal ohne Grund verstärken.',
+      body:'Angst beginnt oft mit einem kleinen Gedanken, den das Gehirn als Gefahr interpretiert und mit körperlichen Signalen beantwortet (schneller Herzschlag, Anspannung), die den Gedanken realer erscheinen lassen — eine sich selbst verstärkende Spirale. Zu verstehen, dass der Körper auf den Gedanken reagiert, nicht auf echte Gefahr, ist der erste Schritt, diesen Kreis zu durchbrechen.' },
+    { id:'lib-habits', cat:'habits', tag:'Gewohnheiten', title:'Kleine Veränderung, große Wirkung', desc:'Grundlagen, um eine neue Gewohnheit aufzubauen, ohne übermenschliche Willenskraft.',
+      body:'Gewohnheiten entstehen durch Wiederholung eines sehr kleinen Verhaltens, das an einen klaren Auslöser gekoppelt ist — nicht durch große willenskraftabhängige Entscheidungen. Beginne mit einer viel kleineren Version als gedacht und verknüpfe sie mit einer bestehenden Routine; Beständigkeit zählt anfangs mehr als Größe.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Beziehungen', title:'Gesunde Grenzen ohne Schuldgefühle', desc:'Wie du Nein sagst und trotzdem wichtige Beziehungen bewahrst.',
+      body:'Gesunde Grenzen sind keine Ablehnung der Person, sondern eine Klärung dessen, was für dich passt. Schuldgefühle beim Neinsagen entstehen oft aus der Verwechslung von "die Bitte ablehnen" und "die Person ablehnen". Ein klarer, kurzer Satz ohne lange Rechtfertigung bewahrt Beziehung und eigenes Wohlbefinden zugleich.' },
+    { id:'lib-selfworth', cat:'self', tag:'Selbstwert', title:'Dein Wert misst sich nicht an Leistung', desc:'Wie du trennst, was du tust, von dem, wer du bist.',
+      body:'Viele verknüpfen ihren Selbstwert mit Produktivität oder der Meinung anderer, sodass jeder Rückschlag die ganze Identität bedroht. Schrittweises Bemerken stabiler Eigenschaften (Integrität, Empathie, Neugier), unabhängig vom Tagesergebnis, löst diese Verknüpfung allmählich.' },
+    { id:'lib-anger', cat:'emotions', tag:'Wut', title:'Wut ist eine Botschaft, kein Feind', desc:'Wie du mit Wut umgehst, ohne sie zu unterdrücken oder auszubrechen.',
+      body:'Wut trägt oft eine Botschaft über eine überschrittene Grenze oder ein unerfülltes Bedürfnis. Sie zu unterdrücken verschiebt sie nur, ausbrechen schadet Beziehungen. Der Mittelweg: einen Moment innehalten, fragen "was stört mich hier wirklich?", dann das Bedürfnis ruhig ausdrücken statt direkt anzuklagen.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Aufschieben', title:'Aufschieben ist keine Faulheit', desc:'Der wahre Grund fürs Prokrastinieren ist meist emotional, nicht organisatorisch.',
+      body:'Die meiste Prokrastination ist kein Zeitmanagementproblem, sondern ein Vermeiden eines unangenehmen Gefühls, das mit der Aufgabe verbunden ist (Angst vor Versagen, Langeweile, Erschöpfung). Die Aufgabe in einen sehr kleinen ersten Schritt zu zerlegen, senkt das unangenehme Gefühl, bevor es dich am Anfangen hindert.' },
+    { id:'lib-grief', cat:'emotions', tag:'Trauer', title:'Trauer verläuft nicht geradlinig', desc:'Warum Trauer in Wellen zurückkehrt, statt geordnet zu enden.',
+      body:'Das bekannte Modell der "Trauerphasen" vermittelt fälschlich, sie seien linear und abgeschlossen. Echte Trauer kommt in Wellen, lässt nach und kehrt plötzlich zurück — völlig normal und kein Zeichen von "nicht heilen". Eine Welle durchzulassen, statt gegen sie anzukämpfen, ist leichter als sie zu bekämpfen.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Gefühlsregulation', title:'Benenne, was du fühlst, um ruhiger zu werden', desc:'Eine einfache, wissenschaftlich belegte Technik, um starke Gefühle abzumildern.',
+      body:'Bildgebende Studien zeigen: Gefühle präzise zu benennen ("ich bin frustriert" statt "mir geht es gut") senkt die Aktivität im Angstzentrum des Gehirns. Der Schritt wirkt simpel, ist aber wirksam: innehalten und das Gefühl mit einem genauen Wort benennen, bevor du danach handelst.' },
+    { id:'lib-stress', cat:'stress', tag:'Chronischer Stress', title:'Wenn Stress zum Dauerzustand wird', desc:'Der Unterschied zwischen kurzfristigem und chronischem Stress.',
+      body:'Kurzfristiger Stress schützt den Körper in echter Gefahr, chronischer Stress hält den Körper jedoch dauerhaft in Alarmbereitschaft, auch ohne reale Gefahr — mit Folgen für Schlaf, Immunsystem und Stimmung. Wiederkehrende Stressquellen zu identifizieren, statt nur Symptome zu behandeln, macht langfristig den echten Unterschied.' },
+  ],
+  en: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Anxiety', title:'Understanding the anxiety spiral', desc:'How anxious thoughts form and why they sometimes grow without a clear reason.',
+      body:'Anxiety usually starts with a small thought that the brain interprets as danger, triggering physical signals (racing heart, muscle tension) that make the thought feel more real — a self-feeding spiral. Understanding that the body is reacting to the thought, not actual danger, is the first step to breaking the cycle.' },
+    { id:'lib-habits', cat:'habits', tag:'Habits', title:'Small change, big impact', desc:'The basics of building a new habit, without needing superhuman willpower.',
+      body:'Habits form through repeating a very small behavior tied to a clear trigger, not through big willpower-dependent decisions. Start with a version much smaller than you imagine, and attach it to an existing routine — consistency matters more than size in the early stages.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Relationships', title:'Healthy boundaries without guilt', desc:'How to say "no" while still keeping the relationships that matter.',
+      body:'Healthy boundaries aren\'t rejecting the person, just clarifying what works for you. Guilt when saying no often comes from confusing "declining the request" with "declining the person". A short, clear sentence without a long justification protects both the relationship and your own wellbeing.' },
+    { id:'lib-selfworth', cat:'self', tag:'Self-worth', title:'Your worth isn\'t measured by achievement', desc:'How to separate what you do from who you actually are.',
+      body:'Many people tie their self-worth to productivity or others\' opinions, so any setback feels like a threat to their entire identity. Gradually noticing your stable traits (integrity, empathy, curiosity), separate from the day\'s results, loosens this link over time.' },
+    { id:'lib-anger', cat:'emotions', tag:'Anger', title:'Anger is a message, not an enemy', desc:'How to deal with anger without suppressing or exploding.',
+      body:'Anger often carries a message about a boundary that was crossed or a need that wasn\'t met. Suppressing it just delays it; exploding damages relationships. The middle path: pause for a moment, ask "what\'s actually bothering me here?", then express the need behind it calmly instead of direct blame.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Procrastination', title:'Procrastination isn\'t laziness', desc:'The real reason behind procrastination is usually emotional, not organizational.',
+      body:'Most procrastination isn\'t a time-management problem — it\'s avoiding an uncomfortable feeling tied to the task (fear of failure, boredom, exhaustion). Breaking the task into a very small first step lowers that uncomfortable feeling before it stops you from starting at all.' },
+    { id:'lib-grief', cat:'emotions', tag:'Grief', title:'Grief isn\'t a straight line', desc:'Why grief comes back in waves instead of ending in neat order.',
+      body:'The popular "stages of grief" model wrongly suggests grief is linear and finite. Real grief comes in waves — it eases, then suddenly returns, which is completely normal and not a sign of "not healing". Letting a wave pass without fighting it is easier than resisting it.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Emotional regulation', title:'Name what you feel to calm down', desc:'A simple, science-backed technique to reduce the intensity of difficult emotions.',
+      body:'Brain imaging research shows that precisely naming an emotion ("I feel frustrated" instead of "I\'m fine") reduces activity in the brain\'s fear center. The step looks simple but works: pause, and name the feeling with one precise word before acting on it.' },
+    { id:'lib-stress', cat:'stress', tag:'Chronic stress', title:'When stress becomes a permanent state', desc:'The difference between short-term and chronic stress, and why it deserves different attention.',
+      body:'Short-term stress protects the body in a moment of real danger, but chronic stress keeps the body constantly on alert even without real danger, affecting sleep, immunity, and mood. Identifying recurring stress sources, not just managing symptoms, is what makes a real difference long-term.' },
+  ],
+  fr: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Anxiété', title:'Comprendre la spirale de l\'anxiété', desc:'Comment naissent les pensées anxieuses et pourquoi elles s\'amplifient parfois sans raison claire.',
+      body:'L\'anxiété commence souvent par une petite pensée que le cerveau interprète comme un danger, déclenchant des signaux physiques (cœur qui s\'accélère, tension musculaire) qui rendent la pensée plus réelle — une spirale qui s\'auto-alimente. Comprendre que le corps réagit à la pensée, et non au danger réel, est la première étape pour briser ce cycle.' },
+    { id:'lib-habits', cat:'habits', tag:'Habitudes', title:'Petit changement, grand impact', desc:'Les bases pour construire une nouvelle habitude, sans volonté surhumaine.',
+      body:'Les habitudes se construisent en répétant un comportement très petit lié à un déclencheur clair, pas par de grandes décisions dépendant de la volonté. Commence par une version bien plus petite que celle imaginée, et relie-la à une routine existante — la régularité compte plus que la taille au début.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Relations', title:'Des limites saines sans culpabilité', desc:'Comment dire "non" tout en préservant les relations importantes.',
+      body:'Des limites saines ne rejettent pas la personne, elles clarifient simplement ce qui te convient. La culpabilité en disant non vient souvent de la confusion entre "refuser la demande" et "refuser la personne". Une phrase courte et claire, sans longue justification, préserve à la fois la relation et ton propre bien-être.' },
+    { id:'lib-selfworth', cat:'self', tag:'Estime de soi', title:'Ta valeur ne se mesure pas à tes réussites', desc:'Comment séparer ce que tu fais de qui tu es réellement.',
+      body:'Beaucoup lient leur estime de soi à leur productivité ou à l\'avis des autres, si bien que le moindre échec menace toute leur identité. Remarquer progressivement tes traits stables (intégrité, empathie, curiosité), indépendamment des résultats du jour, desserre peu à peu ce lien.' },
+    { id:'lib-anger', cat:'emotions', tag:'Colère', title:'La colère est un message, pas un ennemi', desc:'Comment gérer la colère sans la réprimer ni exploser.',
+      body:'La colère porte souvent un message sur une limite franchie ou un besoin non satisfait. La réprimer ne fait que la reporter, exploser abîme les relations. La voie du milieu : marque une pause, demande-toi "qu\'est-ce qui me dérange vraiment ici ?", puis exprime calmement le besoin plutôt qu\'un reproche direct.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Procrastination', title:'Procrastiner n\'est pas de la paresse', desc:'La vraie raison derrière la procrastination est souvent émotionnelle, pas organisationnelle.',
+      body:'La plupart des procrastinations ne sont pas un problème de gestion du temps, mais une façon d\'éviter un sentiment inconfortable lié à la tâche (peur de l\'échec, ennui, épuisement). Diviser la tâche en une toute petite première étape réduit ce sentiment avant qu\'il ne t\'empêche même de commencer.' },
+    { id:'lib-grief', cat:'emotions', tag:'Deuil', title:'Le deuil n\'est pas une ligne droite', desc:'Pourquoi le deuil revient par vagues au lieu de se terminer proprement.',
+      body:'Le modèle populaire des "étapes du deuil" suggère à tort qu\'il est linéaire et fini. Le vrai deuil vient par vagues, s\'atténue puis revient soudainement, ce qui est totalement normal et non un signe de "ne pas guérir". Laisser passer une vague sans lutter contre elle est plus facile que de la combattre.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Régulation émotionnelle', title:'Nomme ce que tu ressens pour t\'apaiser', desc:'Une technique simple et scientifiquement prouvée pour réduire l\'intensité des émotions difficiles.',
+      body:'Des études en imagerie cérébrale montrent que nommer précisément une émotion ("je me sens frustré" plutôt que "ça va") réduit l\'activité du centre de la peur dans le cerveau. L\'étape semble simple mais fonctionne : fais une pause et nomme le sentiment par un mot précis avant d\'agir en fonction de lui.' },
+    { id:'lib-stress', cat:'stress', tag:'Stress chronique', title:'Quand le stress devient permanent', desc:'La différence entre le stress ponctuel et le stress chronique, et pourquoi elle mérite une attention différente.',
+      body:'Le stress ponctuel protège le corps face à un danger réel, mais le stress chronique maintient le corps en alerte constante même sans danger réel, affectant le sommeil, l\'immunité et l\'humeur. Identifier les sources de stress récurrentes, pas seulement gérer les symptômes, fait la vraie différence sur le long terme.' },
+  ],
+  tr: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Kaygı', title:'Kaygı sarmalını anlamak', desc:'Kaygılı düşünceler nasıl oluşur ve bazen neden nedensiz büyür.',
+      body:'Kaygı genellikle beynin tehlike olarak yorumladığı küçük bir düşünceyle başlar ve bu, düşünceyi daha gerçek hissettiren fiziksel sinyalleri (hızlı kalp atışı, kas gerginliği) tetikler — kendi kendini besleyen bir sarmal. Bedenin gerçek tehlikeye değil düşünceye tepki verdiğini anlamak, bu döngüyü kırmanın ilk adımıdır.' },
+    { id:'lib-habits', cat:'habits', tag:'Alışkanlıklar', title:'Küçük değişiklik, büyük etki', desc:'Olağanüstü irade gerektirmeden yeni bir alışkanlık kurmanın temelleri.',
+      body:'Alışkanlıklar, büyük irade gerektiren kararlarla değil, net bir tetikleyiciye bağlı çok küçük bir davranışın tekrarıyla oluşur. Hayal ettiğinden çok daha küçük bir versiyonla başla ve onu var olan bir rutine bağla — başlangıçta büyüklükten çok tutarlılık önemlidir.' },
+    { id:'lib-relationships', cat:'relationships', tag:'İlişkiler', title:'Suçluluk duymadan sağlıklı sınırlar', desc:'Önemli ilişkileri korurken nasıl "hayır" denir.',
+      body:'Sağlıklı sınırlar kişiyi reddetmek değil, senin için neyin uygun olduğunu netleştirmektir. Hayır derken suçluluk hissi genellikle "isteği reddetmek" ile "kişiyi reddetmek"i karıştırmaktan kaynaklanır. Uzun bir gerekçe olmadan kısa ve net bir cümle, hem ilişkiyi hem de kendi rahatlığını korur.' },
+    { id:'lib-selfworth', cat:'self', tag:'Özsaygı', title:'Değerin başarınla ölçülmez', desc:'Yaptığın şeyi gerçekte kim olduğundan nasıl ayırırsın.',
+      body:'Birçok kişi özsaygısını üretkenliğe veya başkalarının fikrine bağlar, bu yüzden her aksilik tüm kimliğine tehdit gibi hissettirir. Günün sonuçlarından bağımsız olarak sabit özelliklerini (dürüstlük, empati, merak) fark etmek bu bağı zamanla gevşetir.' },
+    { id:'lib-anger', cat:'emotions', tag:'Öfke', title:'Öfke bir mesajdır, düşman değil', desc:'Öfkeyle bastırmadan veya patlamadan nasıl başa çıkılır.',
+      body:'Öfke genellikle aşılan bir sınır veya karşılanmamış bir ihtiyaç hakkında mesaj taşır. Bastırmak sadece erteler, patlamak ilişkilere zarar verir. Orta yol: bir an dur, "beni burada gerçekten rahatsız eden ne?" diye sor, sonra doğrudan suçlamak yerine arkasındaki ihtiyacı sakince ifade et.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Erteleme', title:'Erteleme tembellik değildir', desc:'Ertelemenin gerçek nedeni genellikle örgütsel değil duygusaldır.',
+      body:'Ertelemenin çoğu bir zaman yönetimi sorunu değil, görevle bağlantılı rahatsız edici bir duygudan (başarısızlık korkusu, sıkılma, tükenmişlik) kaçınmaktır. Görevi çok küçük bir ilk adıma bölmek, seni başlamaktan alıkoymadan önce bu rahatsız edici hissi azaltır.' },
+    { id:'lib-grief', cat:'emotions', tag:'Yas', title:'Yas düz bir çizgi değildir', desc:'Yasın neden düzenli bitmek yerine dalgalar halinde geri döndüğü.',
+      body:'Yaygın "yas evreleri" modeli, yanlışlıkla doğrusal ve bitmiş olduğunu düşündürür. Gerçek yas dalgalar halinde gelir, azalır sonra aniden geri döner — bu tamamen normaldir ve "iyileşmediğinin" işareti değildir. Bir dalgayla savaşmadan geçmesine izin vermek, ona direnmekten daha kolaydır.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Duygu düzenleme', title:'Sakinleşmek için ne hissettiğini adlandır', desc:'Zor duyguların şiddetini azaltmak için basit, bilimsel bir teknik.',
+      body:'Beyin görüntüleme araştırmaları, bir duyguyu tam olarak adlandırmanın ("iyiyim" yerine "hayal kırıklığına uğradım") beyindeki korku merkezinin etkinliğini azalttığını gösteriyor. Adım basit görünür ama işe yarar: dur ve harekete geçmeden önce duyguyu tek, doğru bir kelimeyle adlandır.' },
+    { id:'lib-stress', cat:'stress', tag:'Kronik stres', title:'Stres kalıcı bir hal aldığında', desc:'Kısa süreli ve kronik stres arasındaki fark ve neden farklı bir ilgiyi hak ettiği.',
+      body:'Kısa süreli stres, gerçek bir tehlike anında bedeni korur, ancak kronik stres gerçek bir tehlike olmasa bile bedeni sürekli tetikte tutarak uykuyu, bağışıklığı ve ruh halini etkiler. Sadece belirtileri yönetmek değil, tekrarlayan stres kaynaklarını belirlemek uzun vadede gerçek farkı yaratır.' },
+  ],
+  ku: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Fikar', title:'Fêm kirina çerxa fikarê', desc:'Fikrên fikarê çawa çêdibin û çima carinan bêyî sedemek diyar mezin dibin.',
+      body:'Fikar bi gelemperî bi ramanek piçûk dest pê dike ku mêjî wê wek xetereyek şîrove dike, û pîşeyên laşî (lezbûna dil, tengbûna masûlkeyan) çêdike ku ramanê rasttir nîşan dide — çerxek ku xwe bi xwe xwedî dike. Fêmkirina ku laş bersiva ramanê dide, ne xetereya rastîn, gav yekem e ji bo şikandina vê çerxê.' },
+    { id:'lib-habits', cat:'habits', tag:'Kirdar', title:'Guherîna piçûk, bandora mezin', desc:'Bingehên avakirina kirdarek nû, bêyî hewceyê xwesteka giştî.',
+      body:'Kirdar bi dubarekirina tevgerek pir piçûk a girêdayî destpêkerek zelal têne avakirin, ne bi biryarên mezin ên bi xwestekê ve girêdayî. Bi guhertoyek pir piçûktir ji ya ku tu xeyal dikî dest pê bike, û wê bi rûtînek heyî ve girêde — di destpêkê de berdewamî ji mezinahiyê girîngtir e.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Têkilî', title:'Sînorên tenduristî bêyî sûcdarî', desc:'Çawa "na" bêje û di heman demê de têkiliyên girîng biparêze.',
+      body:'Sînorên tenduristî redkirina kesî nînin, tenê zelalkirina tiştê ku ji bo te guncan e. Hesta sûcdariyê dema "na" dibêjî bi gelemperî ji tevlihevkirina "redkirina daxwazê" û "redkirina kesî" tê. Hevokek kurt û zelal bêyî delîlkirinek dirêj, hem têkiliyê hem jî rehetiya te diparêze.' },
+    { id:'lib-selfworth', cat:'self', tag:'Rêzgirtina xwe', title:'Nirxa te bi serkeftina te nayê pîvan', desc:'Çawa tiştê tu dikî û kî yî ji hev cuda bike.',
+      body:'Gelek kes nirxa xwe ya kesane bi berhemdarî an bi ramana kesên din ve girê didin, ji ber vê yekê her têkçûnek weke gefek li hemû nasnameya wan xuya dike. Hêdî hêdî fêrbûna taybetmendiyên xwe yên sabît (rastgoyî, dilovanî, meraq), ji encamên rojê cuda, vê girêdanê hêdî hêdî sist dike.' },
+    { id:'lib-anger', cat:'emotions', tag:'Hêrs', title:'Hêrs peyam e, ne dijmin', desc:'Çawa bi hêrsê re mijûl bibe bêyî ku wê veşêre an biteqe.',
+      body:'Hêrs bi gelemperî peyamek li ser sînorekî ku hatiye derbaskirin an hewcedariyek ku nehatiye têrkirin hilgirtiye. Veşartina wê tenê wê dide paş, teqîna wê zirarê dide têkiliyan. Rêya navîn: kêliyek bisekine, ji xwe bipirse "bi rastî çi min aciz dike?", paşê hewcedariya li pişt wê bi aramî diyar bike li şûna sûcdarkirina rasterast.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Paşxistin', title:'Paşxistin tembelî nîne', desc:'Sedema rastîn a paşxistinê bi gelemperî hestyarî ye, ne rêxistinî.',
+      body:'Piraniya paşxistinê ne pirsgirêkek rêvebirina demê ye, lê dûrxistina hestek nerehet e ku bi peywirê ve girêdayî ye (tirsa têkçûnê, betilîn, betilîn). Perçekirina peywirê bo gaveke pêşîn a gelekî piçûk, ev hesta nerehet kêm dike berî ku rê li ber destpêkirina te bigire.' },
+    { id:'lib-grief', cat:'emotions', tag:'Şîn', title:'Şîn ne rêzek rast e', desc:'Çima şîn bi pêlan vedigere li şûna ku bi rêzê biqede.',
+      body:'Modela navdar a "qonaxên şînê" bi xeletî destnîşan dike ku ew rast û qediyayî ye. Şîna rastîn bi pêlan tê, kêm dibe paşê ji nişka ve vedigere — ev bi tevahî asayî ye û ne nîşana "başnebûnê" ye. Hiştina pêlek derbas bibe bêyî ku li dijî wê şer bike, ji berxwedanê hêsantir e.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Rêzkirina hestan', title:'Tiştê tu hîs dikî nav bike da ku aram bibî', desc:'Teknîkek hêsan a zanistî ji bo kêmkirina tundiya hestên dijwar.',
+      body:'Lêkolînên wênekêşana mêjî nîşan didin ku navdana rast a hestekî ("ez aciz dibim" li şûna "ez baş im") çalakiya navenda tirsê ya mêjî kêm dike. Gav hêsan xuya dike lê kار dike: bisekine û berî ku li gorî hestî tevbigerî, wê bi peyvek rast nav bike.' },
+    { id:'lib-stress', cat:'stress', tag:'Tengiya berdewam', title:'Dema tengî dibe rewşek berdewam', desc:'Cudahiya di navbera tengiya demkurt û ya berdewam de, û çima hewceyê baldarî ya cuda ye.',
+      body:'Tengiya demkurt laş di kêliya xetereya rastîn de diparêze, lê tengiya berdewam laş her gav di rewşa amadebûnê de dihêle tewra bêyî xetereyek rastîn jî, ku bandorê li xew, berxwedan û giyanî dike. Nasîna çavkaniyên tengiya dubarebûyî, ne tenê rêvebirina nîşanan, ew e ku li dirêjahiyê cudahiyek rastîn çêdike.' },
+  ],
+  es: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Ansiedad', title:'Entender la espiral de ansiedad', desc:'Cómo se forman los pensamientos ansiosos y por qué a veces crecen sin razón clara.',
+      body:'La ansiedad suele empezar con un pensamiento pequeño que el cerebro interpreta como peligro, activando señales físicas (corazón acelerado, tensión muscular) que hacen que el pensamiento parezca más real — una espiral que se autoalimenta. Entender que el cuerpo reacciona al pensamiento, no al peligro real, es el primer paso para romper el ciclo.' },
+    { id:'lib-habits', cat:'habits', tag:'Hábitos', title:'Pequeño cambio, gran impacto', desc:'Lo básico para construir un nuevo hábito, sin necesitar una voluntad sobrehumana.',
+      body:'Los hábitos se forman repitiendo un comportamiento muy pequeño ligado a un disparador claro, no con grandes decisiones que dependen de la fuerza de voluntad. Empieza con una versión mucho más pequeña de lo que imaginas, y únela a una rutina ya existente — la constancia importa más que el tamaño al principio.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Relaciones', title:'Límites sanos sin culpa', desc:'Cómo decir "no" y mantener las relaciones importantes.',
+      body:'Los límites sanos no rechazan a la persona, solo aclaran qué te conviene. La culpa al decir no suele venir de confundir "rechazar la petición" con "rechazar a la persona". Una frase corta y clara sin una larga justificación protege tanto la relación como tu propio bienestar.' },
+    { id:'lib-selfworth', cat:'self', tag:'Autoestima', title:'Tu valor no se mide por tus logros', desc:'Cómo separar lo que haces de quién realmente eres.',
+      body:'Muchas personas ligan su autoestima a la productividad o a la opinión de otros, así que cualquier tropiezo se siente como una amenaza a toda su identidad. Notar gradualmente tus rasgos estables (integridad, empatía, curiosidad), separados de los resultados del día, afloja ese vínculo con el tiempo.' },
+    { id:'lib-anger', cat:'emotions', tag:'Ira', title:'La ira es un mensaje, no un enemigo', desc:'Cómo manejar la ira sin reprimirla ni explotar.',
+      body:'La ira suele llevar un mensaje sobre un límite cruzado o una necesidad no satisfecha. Reprimirla solo la posterga; explotar daña las relaciones. El camino medio: haz una pausa, pregúntate "¿qué me molesta realmente aquí?", y luego expresa con calma la necesidad detrás en vez de culpar directamente.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Procrastinación', title:'Procrastinar no es pereza', desc:'La razón real detrás de la procrastinación suele ser emocional, no organizativa.',
+      body:'La mayor parte de la procrastinación no es un problema de gestión del tiempo, sino evitar un sentimiento incómodo ligado a la tarea (miedo al fracaso, aburrimiento, agotamiento). Dividir la tarea en un primer paso muy pequeño reduce ese sentimiento incómodo antes de que te impida siquiera empezar.' },
+    { id:'lib-grief', cat:'emotions', tag:'Duelo', title:'El duelo no es una línea recta', desc:'Por qué el duelo vuelve en oleadas en vez de terminar de forma ordenada.',
+      body:'El popular modelo de las "etapas del duelo" sugiere erróneamente que es lineal y finito. El duelo real llega en oleadas, disminuye y de repente vuelve — algo completamente normal y no una señal de "no estar sanando". Dejar pasar una ola sin luchar contra ella es más fácil que resistirla.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Regulación emocional', title:'Nombra lo que sientes para calmarte', desc:'Una técnica simple y respaldada por la ciencia para reducir la intensidad de emociones difíciles.',
+      body:'Estudios de imagen cerebral muestran que nombrar con precisión una emoción ("me siento frustrado" en vez de "estoy bien") reduce la actividad del centro del miedo en el cerebro. El paso parece simple pero funciona: haz una pausa y nombra el sentimiento con una palabra precisa antes de actuar según él.' },
+    { id:'lib-stress', cat:'stress', tag:'Estrés crónico', title:'Cuando el estrés se vuelve permanente', desc:'La diferencia entre el estrés puntual y el crónico, y por qué merece una atención distinta.',
+      body:'El estrés puntual protege al cuerpo en un momento de peligro real, pero el estrés crónico mantiene al cuerpo en alerta constante incluso sin peligro real, afectando el sueño, la inmunidad y el ánimo. Identificar las fuentes recurrentes de estrés, no solo manejar los síntomas, es lo que marca una diferencia real a largo plazo.' },
+  ],
+  fa: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'اضطراب', title:'درک چرخه اضطراب', desc:'افکار اضطرابی چگونه شکل می‌گیرند و چرا گاهی بدون دلیل روشن بزرگ می‌شوند.',
+      body:'اضطراب معمولاً با یک فکر کوچک شروع می‌شود که مغز آن را خطر تفسیر می‌کند و سیگنال‌های جسمی (تپش قلب، تنش عضلانی) می‌فرستد که فکر را واقعی‌تر جلوه می‌دهند — چرخه‌ای که خودش را تغذیه می‌کند. فهم این‌که بدن به فکر واکنش نشان می‌دهد نه به خطر واقعی، اولین قدم برای شکستن این چرخه است.' },
+    { id:'lib-habits', cat:'habits', tag:'عادت‌ها', title:'تغییر کوچک، تأثیر بزرگ', desc:'اصول ساختن یک عادت جدید، بدون نیاز به اراده‌ای فراانسانی.',
+      body:'عادت‌ها با تکرار یک رفتار بسیار کوچک که به یک محرک روشن وصل است شکل می‌گیرند، نه با تصمیم‌های بزرگ وابسته به اراده. با نسخه‌ای بسیار کوچک‌تر از آنچه تصور می‌کنی شروع کن و آن را به یک روال موجود وصل کن — در ابتدا ثبات مهم‌تر از بزرگی است.' },
+    { id:'lib-relationships', cat:'relationships', tag:'روابط', title:'مرزهای سالم بدون احساس گناه', desc:'چگونه «نه» بگویی و در عین حال روابط مهم را حفظ کنی.',
+      body:'مرزهای سالم به معنای رد کردن فرد نیست، بلکه روشن کردن چیزی است که برای تو مناسب است. احساس گناه هنگام گفتن «نه» اغلب از خلط «رد درخواست» با «رد شخص» می‌آید. یک جمله کوتاه و روشن بدون توجیه طولانی، هم رابطه و هم آرامش تو را حفظ می‌کند.' },
+    { id:'lib-selfworth', cat:'self', tag:'عزت‌نفس', title:'ارزش تو با موفقیتت سنجیده نمی‌شود', desc:'چگونه کاری که انجام می‌دهی را از آنچه واقعاً هستی جدا کنی.',
+      body:'بسیاری ارزش خود را به بهره‌وری یا نظر دیگران گره می‌زنند، پس هر شکستی مثل تهدیدی برای کل هویتشان حس می‌شود. متوجه شدن تدریجی ویژگی‌های ثابت خودت (صداقت، همدلی، کنجکاوی)، جدا از نتایج روزانه، این پیوند را کم‌کم شل می‌کند.' },
+    { id:'lib-anger', cat:'emotions', tag:'خشم', title:'خشم پیامی است، نه دشمن', desc:'چگونه با خشم کنار بیایی بدون سرکوب یا انفجار.',
+      body:'خشم اغلب پیامی درباره مرزی که رد شده یا نیازی برآورده‌نشده حمل می‌کند. سرکوب آن فقط به تعویق می‌اندازد، انفجار به روابط آسیب می‌زند. راه میانه: لحظه‌ای مکث کن، بپرس «واقعاً چه چیزی مرا آزار می‌دهد؟»، سپس نیاز پشت آن را آرام بیان کن نه اتهام مستقیم.' },
+    { id:'lib-procrastination', cat:'habits', tag:'تعلل', title:'تعلل تنبلی نیست', desc:'دلیل واقعی پشت تعلل معمولاً احساسی است، نه سازمانی.',
+      body:'بیشتر تعلل مشکل مدیریت زمان نیست، بلکه اجتناب از احساسی ناخوشایند مرتبط با کار است (ترس از شکست، خستگی، ملال). تقسیم کار به یک قدم اول بسیار کوچک، آن احساس ناخوشایند را پیش از آن‌که مانع شروع شود، کاهش می‌دهد.' },
+    { id:'lib-grief', cat:'emotions', tag:'سوگ', title:'سوگ یک خط مستقیم نیست', desc:'چرا سوگ به‌صورت موج بازمی‌گردد نه اینکه منظم پایان یابد.',
+      body:'مدل معروف «مراحل سوگ» به‌اشتباه القا می‌کند که خطی و پایان‌پذیر است. سوگ واقعی موج به موج می‌آید، فروکش می‌کند و ناگهان بازمی‌گردد — کاملاً طبیعی و نشانه «بهبود نیافتن» نیست. گذاشتن موج بگذرد بدون جنگیدن، آسان‌تر از مقاومت است.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'تنظیم هیجان', title:'برای آرام شدن، آنچه حس می‌کنی را نام ببر', desc:'تکنیکی ساده و علمی برای کاهش شدت احساسات دشوار.',
+      body:'تحقیقات تصویربرداری مغزی نشان می‌دهد نام‌گذاری دقیق یک احساس («ناامید هستم» به‌جای «خوبم») فعالیت مرکز ترس مغز را کاهش می‌دهد. این قدم ساده به‌نظر می‌رسد اما مؤثر است: مکث کن و پیش از عمل، احساس را با یک کلمه دقیق نام ببر.' },
+    { id:'lib-stress', cat:'stress', tag:'استرس مزمن', title:'وقتی استرس به حالتی دائمی تبدیل می‌شود', desc:'تفاوت استرس کوتاه‌مدت و مزمن، و چرا توجه متفاوتی می‌خواهد.',
+      body:'استرس کوتاه‌مدت بدن را در لحظه خطر واقعی محافظت می‌کند، اما استرس مزمن بدن را حتی بدون خطر واقعی همیشه در حالت آماده‌باش نگه می‌دارد و بر خواب، ایمنی و خلق‌وخو اثر می‌گذارد. شناسایی منابع تکرارشونده استرس، نه فقط مدیریت علائم، تفاوت واقعی را در بلندمدت می‌سازد.' },
+  ],
+  ur: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'اضطراب', title:'اضطراب کے چکر کو سمجھنا', desc:'اضطرابی خیالات کیسے بنتے ہیں اور کبھی کبھار بغیر کسی واضح وجہ کے کیوں بڑھ جاتے ہیں۔',
+      body:'اضطراب عام طور پر ایک چھوٹے خیال سے شروع ہوتا ہے جسے دماغ خطرہ سمجھ لیتا ہے اور جسمانی اشارے (دل کی دھڑکن تیز، پٹھوں میں تناؤ) بھیجتا ہے جو خیال کو زیادہ حقیقی محسوس کراتے ہیں — ایک ایسا چکر جو خود کو بڑھاتا ہے۔ یہ سمجھنا کہ جسم خیال پر ردعمل دے رہا ہے نہ کہ حقیقی خطرے پر، اس چکر کو توڑنے کا پہلا قدم ہے۔' },
+    { id:'lib-habits', cat:'habits', tag:'عادات', title:'چھوٹی تبدیلی، بڑا اثر', desc:'غیرمعمولی قوتِ ارادی کے بغیر نئی عادت بنانے کے بنیادی اصول۔',
+      body:'عادات ایک بہت چھوٹے عمل کو دہرانے سے بنتی ہیں جو ایک واضح محرک سے جڑا ہو، نہ کہ قوتِ ارادی پر منحصر بڑے فیصلوں سے۔ اپنی سوچ سے کہیں چھوٹا ورژن شروع کریں اور اسے کسی موجودہ معمول سے جوڑ دیں — شروع میں تسلسل حجم سے زیادہ اہم ہے۔' },
+    { id:'lib-relationships', cat:'relationships', tag:'تعلقات', title:'جرم کے احساس کے بغیر صحت مند حدود', desc:'اہم رشتے برقرار رکھتے ہوئے "نہیں" کیسے کہیں۔',
+      body:'صحت مند حدود کسی شخص کو رد کرنا نہیں بلکہ یہ واضح کرنا ہے کہ آپ کے لیے کیا مناسب ہے۔ "نہیں" کہتے وقت جرم کا احساس اکثر "درخواست کو رد کرنے" اور "شخص کو رد کرنے" میں الجھن سے آتا ہے۔ ایک مختصر اور واضح جملہ، لمبی وضاحت کے بغیر، رشتے اور آپ کے سکون دونوں کو محفوظ رکھتا ہے۔' },
+    { id:'lib-selfworth', cat:'self', tag:'خودعزتی', title:'آپ کی قدر آپ کی کامیابی سے نہیں ناپی جاتی', desc:'جو آپ کرتے ہیں اسے اس سے الگ کیسے کریں جو آپ واقعی ہیں۔',
+      body:'بہت سے لوگ اپنی خودعزتی کو پیداواریت یا دوسروں کی رائے سے جوڑ دیتے ہیں، اس لیے کوئی بھی ناکامی پوری شناخت کے لیے خطرہ محسوس ہوتی ہے۔ اپنی مستقل خصوصیات (دیانتداری، ہمدردی، تجسس) کو دن کے نتائج سے الگ دیکھنا، وقت کے ساتھ اس تعلق کو ڈھیلا کر دیتا ہے۔' },
+    { id:'lib-anger', cat:'emotions', tag:'غصہ', title:'غصہ ایک پیغام ہے، دشمن نہیں', desc:'غصے کو دبائے یا پھٹے بغیر کیسے سنبھالیں۔',
+      body:'غصہ اکثر کسی حد کے پار ہونے یا کسی نہ پوری ہونے والی ضرورت کا پیغام لاتا ہے۔ اسے دبانا صرف اسے موخر کرتا ہے، پھٹنا رشتوں کو نقصان پہنچاتا ہے۔ درمیانی راستہ: ایک لمحہ رکیں، خود سے پوچھیں "مجھے واقعی کیا پریشان کر رہا ہے؟"، پھر براہ راست الزام کے بجائے پیچھے کی ضرورت پرسکون انداز میں بیان کریں۔' },
+    { id:'lib-procrastination', cat:'habits', tag:'ٹال مٹول', title:'ٹال مٹول سستی نہیں ہے', desc:'ٹال مٹول کی اصل وجہ عام طور پر جذباتی ہوتی ہے، انتظامی نہیں۔',
+      body:'زیادہ تر ٹال مٹول وقت کے انتظام کا مسئلہ نہیں بلکہ کام سے جڑے ایک ناخوشگوار احساس (ناکامی کا خوف، بوریت، تھکاوٹ) سے بچنا ہے۔ کام کو ایک بہت چھوٹے پہلے قدم میں تقسیم کرنا اس احساس کو کم کر دیتا ہے اس سے پہلے کہ وہ شروع کرنے سے روکے۔' },
+    { id:'lib-grief', cat:'emotions', tag:'غم', title:'غم سیدھی لکیر نہیں ہے', desc:'غم ترتیب سے ختم ہونے کے بجائے لہروں میں کیوں واپس آتا ہے۔',
+      body:'مشہور "غم کے مراحل" کا ماڈل غلط طور پر یہ تاثر دیتا ہے کہ یہ لکیری اور محدود ہے۔ اصل غم لہروں میں آتا ہے، کم ہوتا ہے پھر اچانک واپس آتا ہے — یہ بالکل معمول ہے اور "شفا نہ پانے" کی نشانی نہیں۔ لہر کو بغیر لڑے گزرنے دینا اس سے لڑنے سے آسان ہے۔' },
+    { id:'lib-emoreg', cat:'emotions', tag:'جذباتی توازن', title:'پرسکون ہونے کے لیے جو محسوس کرتے ہیں اسے نام دیں', desc:'مشکل جذبات کی شدت کم کرنے کی ایک سادہ، سائنسی تکنیک۔',
+      body:'دماغی امیجنگ کی تحقیق ظاہر کرتی ہے کہ کسی جذبے کو درست طور پر نام دینا ("میں مایوس ہوں" بجائے "میں ٹھیک ہوں") دماغ کے خوف کے مرکز کی سرگرمی کم کر دیتا ہے۔ یہ قدم سادہ لگتا ہے لیکن مؤثر ہے: رکیں اور عمل کرنے سے پہلے احساس کو ایک درست لفظ سے نام دیں۔' },
+    { id:'lib-stress', cat:'stress', tag:'دائمی تناؤ', title:'جب تناؤ مستقل حالت بن جائے', desc:'مختصر مدتی اور دائمی تناؤ میں فرق، اور یہ الگ توجہ کیوں چاہتا ہے۔',
+      body:'مختصر مدتی تناؤ حقیقی خطرے کے لمحے میں جسم کی حفاظت کرتا ہے، لیکن دائمی تناؤ جسم کو حقیقی خطرے کے بغیر بھی مسلسل چوکنا رکھتا ہے، جو نیند، قوت مدافعت اور موڈ کو متاثر کرتا ہے۔ صرف علامات سے نمٹنے کے بجائے بار بار آنے والے تناؤ کے ذرائع کی نشاندہی، طویل مدت میں اصل فرق پیدا کرتی ہے۔' },
+  ],
+  ru: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Тревога', title:'Понять спираль тревоги', desc:'Как формируются тревожные мысли и почему они иногда усиливаются без ясной причины.',
+      body:'Тревога обычно начинается с небольшой мысли, которую мозг воспринимает как опасность, вызывая физические сигналы (учащённое сердцебиение, напряжение мышц), из-за которых мысль кажется более реальной — самоподдерживающаяся спираль. Понимание того, что тело реагирует на мысль, а не на реальную опасность, — первый шаг к разрыву этого цикла.' },
+    { id:'lib-habits', cat:'habits', tag:'Привычки', title:'Маленькое изменение, большой эффект', desc:'Основы формирования новой привычки без сверхчеловеческой силы воли.',
+      body:'Привычки формируются через повторение очень маленького действия, привязанного к чёткому триггеру, а не через большие решения, зависящие от силы воли. Начните с версии намного меньше, чем вы представляете, и привяжите её к уже существующему распорядку — на первых порах постоянство важнее масштаба.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Отношения', title:'Здоровые границы без чувства вины', desc:'Как говорить «нет», сохраняя важные отношения.',
+      body:'Здоровые границы — это не отказ человеку, а прояснение того, что подходит именно вам. Чувство вины при отказе часто возникает из смешения «отклонить просьбу» и «отклонить человека». Короткая, ясная фраза без долгих оправданий сохраняет и отношения, и ваше собственное спокойствие.' },
+    { id:'lib-selfworth', cat:'self', tag:'Самооценка', title:'Ваша ценность не измеряется достижениями', desc:'Как отделить то, что вы делаете, от того, кто вы есть на самом деле.',
+      body:'Многие связывают самооценку с продуктивностью или мнением других, поэтому любая неудача ощущается как угроза всей идентичности. Постепенное замечание своих устойчивых качеств (честность, эмпатия, любопытство), независимо от результатов дня, со временем ослабляет эту связь.' },
+    { id:'lib-anger', cat:'emotions', tag:'Гнев', title:'Гнев — это послание, а не враг', desc:'Как справляться с гневом, не подавляя его и не срываясь.',
+      body:'Гнев часто несёт сообщение о нарушенной границе или неудовлетворённой потребности. Подавление лишь откладывает его, а срыв вредит отношениям. Средний путь: сделайте паузу, спросите себя «что меня на самом деле беспокоит?», затем спокойно выразите стоящую за этим потребность вместо прямого обвинения.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Прокрастинация', title:'Прокрастинация — это не лень', desc:'Настоящая причина прокрастинации обычно эмоциональная, а не организационная.',
+      body:'Большая часть прокрастинации — не проблема управления временем, а избегание неприятного чувства, связанного с задачей (страх неудачи, скука, истощение). Разбивка задачи на очень маленький первый шаг снижает это неприятное чувство прежде, чем оно помешает вообще начать.' },
+    { id:'lib-grief', cat:'emotions', tag:'Горе', title:'Горе — не прямая линия', desc:'Почему горе возвращается волнами, а не заканчивается по порядку.',
+      body:'Популярная модель «стадий горя» ошибочно предполагает, что оно линейно и конечно. Настоящее горе приходит волнами, стихает и внезапно возвращается — это совершенно нормально и не признак «неисцеления». Дать волне пройти, не борясь с ней, легче, чем сопротивляться.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Эмоциональная регуляция', title:'Назовите то, что чувствуете, чтобы успокоиться', desc:'Простая, научно обоснованная техника снижения интенсивности трудных эмоций.',
+      body:'Исследования с помощью нейровизуализации показывают, что точное называние эмоции («я разочарован» вместо «всё нормально») снижает активность центра страха в мозге. Шаг кажется простым, но работает: остановитесь и назовите чувство одним точным словом, прежде чем действовать под его влиянием.' },
+    { id:'lib-stress', cat:'stress', tag:'Хронический стресс', title:'Когда стресс становится постоянным состоянием', desc:'Разница между кратковременным и хроническим стрессом и почему она требует разного внимания.',
+      body:'Кратковременный стресс защищает тело в момент реальной опасности, но хронический стресс держит тело в постоянной готовности даже без реальной угрозы, влияя на сон, иммунитет и настроение. Выявление повторяющихся источников стресса, а не только управление симптомами, действительно меняет ситуацию в долгосрочной перспективе.' },
+  ],
+  pt: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Ansiedade', title:'Entender a espiral da ansiedade', desc:'Como se formam os pensamentos ansiosos e por que às vezes crescem sem razão clara.',
+      body:'A ansiedade geralmente começa com um pequeno pensamento que o cérebro interpreta como perigo, ativando sinais físicos (coração acelerado, tensão muscular) que tornam o pensamento mais real — uma espiral que se autoalimenta. Entender que o corpo reage ao pensamento, não ao perigo real, é o primeiro passo para quebrar o ciclo.' },
+    { id:'lib-habits', cat:'habits', tag:'Hábitos', title:'Pequena mudança, grande impacto', desc:'O básico para construir um novo hábito sem precisar de força de vontade sobre-humana.',
+      body:'Hábitos se formam repetindo um comportamento muito pequeno ligado a um gatilho claro, não com grandes decisões dependentes de força de vontade. Comece com uma versão bem menor do que imagina e ligue-a a uma rotina já existente — no início, a constância importa mais que o tamanho.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Relacionamentos', title:'Limites saudáveis sem culpa', desc:'Como dizer "não" mantendo os relacionamentos importantes.',
+      body:'Limites saudáveis não rejeitam a pessoa, apenas esclarecem o que funciona para você. A culpa ao dizer não geralmente vem de confundir "recusar o pedido" com "recusar a pessoa". Uma frase curta e clara, sem longa justificativa, protege tanto o relacionamento quanto o seu próprio bem-estar.' },
+    { id:'lib-selfworth', cat:'self', tag:'Autoestima', title:'Seu valor não se mede pelas suas conquistas', desc:'Como separar o que você faz de quem você realmente é.',
+      body:'Muitas pessoas ligam sua autoestima à produtividade ou à opinião alheia, então qualquer tropeço parece ameaçar toda a identidade. Notar gradualmente seus traços estáveis (integridade, empatia, curiosidade), separados dos resultados do dia, afrouxa esse vínculo com o tempo.' },
+    { id:'lib-anger', cat:'emotions', tag:'Raiva', title:'A raiva é uma mensagem, não um inimigo', desc:'Como lidar com a raiva sem reprimi-la nem explodir.',
+      body:'A raiva geralmente carrega uma mensagem sobre um limite ultrapassado ou uma necessidade não atendida. Reprimi-la só a adia; explodir prejudica relacionamentos. O caminho do meio: faça uma pausa, pergunte-se "o que realmente me incomoda aqui?", depois expresse com calma a necessidade por trás em vez de culpar diretamente.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Procrastinação', title:'Procrastinar não é preguiça', desc:'A razão real por trás da procrastinação costuma ser emocional, não organizacional.',
+      body:'A maior parte da procrastinação não é um problema de gestão do tempo, mas evitar um sentimento desconfortável ligado à tarefa (medo do fracasso, tédio, exaustão). Dividir a tarefa em um primeiro passo bem pequeno reduz esse desconforto antes que ele impeça até de começar.' },
+    { id:'lib-grief', cat:'emotions', tag:'Luto', title:'O luto não é uma linha reta', desc:'Por que o luto volta em ondas em vez de terminar de forma ordenada.',
+      body:'O popular modelo das "fases do luto" sugere erroneamente que ele é linear e finito. O luto real vem em ondas, diminui e volta de repente — algo totalmente normal e não um sinal de "não estar curando". Deixar uma onda passar sem lutar contra ela é mais fácil do que resisti-la.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Regulação emocional', title:'Nomeie o que sente para se acalmar', desc:'Uma técnica simples e respaldada pela ciência para reduzir a intensidade de emoções difíceis.',
+      body:'Estudos de imagem cerebral mostram que nomear com precisão uma emoção ("estou frustrado" em vez de "estou bem") reduz a atividade do centro do medo no cérebro. O passo parece simples, mas funciona: pare e nomeie o sentimento com uma palavra precisa antes de agir conforme ele.' },
+    { id:'lib-stress', cat:'stress', tag:'Estresse crônico', title:'Quando o estresse se torna permanente', desc:'A diferença entre estresse pontual e crônico, e por que merece atenção diferente.',
+      body:'O estresse pontual protege o corpo num momento de perigo real, mas o estresse crônico mantém o corpo em alerta constante mesmo sem perigo real, afetando sono, imunidade e humor. Identificar fontes recorrentes de estresse, não apenas tratar sintomas, é o que faz real diferença a longo prazo.' },
+  ],
+  it: [
+    { id:'lib-anxiety', cat:'anxiety', tag:'Ansia', title:'Capire la spirale dell\'ansia', desc:'Come si formano i pensieri ansiosi e perché a volte crescono senza un motivo chiaro.',
+      body:'L\'ansia di solito inizia con un piccolo pensiero che il cervello interpreta come pericolo, attivando segnali fisici (battito accelerato, tensione muscolare) che rendono il pensiero più reale — una spirale che si autoalimenta. Capire che il corpo reagisce al pensiero, non al pericolo reale, è il primo passo per spezzare il ciclo.' },
+    { id:'lib-habits', cat:'habits', tag:'Abitudini', title:'Piccolo cambiamento, grande impatto', desc:'Le basi per costruire una nuova abitudine, senza bisogno di una forza di volontà sovrumana.',
+      body:'Le abitudini si formano ripetendo un comportamento molto piccolo legato a un innesco chiaro, non con grandi decisioni dipendenti dalla forza di volontà. Inizia con una versione molto più piccola di quella che immagini e collegala a una routine già esistente — all\'inizio la costanza conta più della dimensione.' },
+    { id:'lib-relationships', cat:'relationships', tag:'Relazioni', title:'Confini sani senza sensi di colpa', desc:'Come dire "no" mantenendo le relazioni importanti.',
+      body:'Confini sani non rifiutano la persona, chiariscono solo cosa funziona per te. Il senso di colpa nel dire no spesso nasce dal confondere "rifiutare la richiesta" con "rifiutare la persona". Una frase breve e chiara, senza lunghe giustificazioni, protegge sia la relazione sia il tuo benessere.' },
+    { id:'lib-selfworth', cat:'self', tag:'Autostima', title:'Il tuo valore non si misura dai risultati', desc:'Come separare ciò che fai da chi sei veramente.',
+      body:'Molti legano la propria autostima alla produttività o al giudizio altrui, così ogni battuta d\'arresto sembra minacciare l\'intera identità. Notare gradualmente i tuoi tratti stabili (integrità, empatia, curiosità), separati dai risultati della giornata, allenta questo legame nel tempo.' },
+    { id:'lib-anger', cat:'emotions', tag:'Rabbia', title:'La rabbia è un messaggio, non un nemico', desc:'Come gestire la rabbia senza reprimerla né esplodere.',
+      body:'La rabbia porta spesso un messaggio su un confine superato o un bisogno insoddisfatto. Reprimerla la rimanda soltanto; esplodere danneggia le relazioni. La via di mezzo: fermati un momento, chiediti "cosa mi disturba davvero qui?", poi esprimi con calma il bisogno sottostante invece di accusare direttamente.' },
+    { id:'lib-procrastination', cat:'habits', tag:'Procrastinazione', title:'Procrastinare non è pigrizia', desc:'La vera ragione dietro la procrastinazione è di solito emotiva, non organizzativa.',
+      body:'La maggior parte della procrastinazione non è un problema di gestione del tempo, ma evitare una sensazione spiacevole legata al compito (paura del fallimento, noia, esaurimento). Suddividere il compito in un primo passo molto piccolo riduce quella sensazione prima che impedisca persino di iniziare.' },
+    { id:'lib-grief', cat:'emotions', tag:'Lutto', title:'Il lutto non è una linea retta', desc:'Perché il lutto torna a ondate invece di finire in modo ordinato.',
+      body:'Il modello popolare delle "fasi del lutto" suggerisce erroneamente che sia lineare e finito. Il lutto reale arriva a ondate, si attenua e poi torna improvvisamente — è del tutto normale e non un segno di "non guarigione". Lasciar passare un\'ondata senza combatterla è più facile che resisterle.' },
+    { id:'lib-emoreg', cat:'emotions', tag:'Regolazione emotiva', title:'Nomina ciò che senti per calmarti', desc:'Una tecnica semplice e scientificamente provata per ridurre l\'intensità delle emozioni difficili.',
+      body:'Studi di neuroimaging mostrano che nominare con precisione un\'emozione ("mi sento frustrato" invece di "sto bene") riduce l\'attività del centro della paura nel cervello. Il passo sembra semplice ma funziona: fermati e nomina il sentimento con una parola precisa prima di agire di conseguenza.' },
+    { id:'lib-stress', cat:'stress', tag:'Stress cronico', title:'Quando lo stress diventa uno stato permanente', desc:'La differenza tra stress temporaneo e cronico, e perché merita un\'attenzione diversa.',
+      body:'Lo stress temporaneo protegge il corpo in un momento di pericolo reale, ma lo stress cronico mantiene il corpo costantemente in allerta anche senza pericolo reale, influenzando sonno, immunità e umore. Identificare le fonti ricorrenti di stress, non solo gestirne i sintomi, fa la vera differenza nel lungo periodo.' },
+  ],
+};
+
+// When this page is served over https (the normal web deploy on Netlify),
+// a relative path is correct and works with any domain/preview URL.
+// When it's bundled into a native app shell (Capacitor: capacitor:// /
+// http://localhost on iOS/Android), there is no same-origin Netlify
+// function to call, so the request must go to the deployed site instead.
+// See mobile/README.md for how CAPACITOR_API_BASE gets set at build time.
+const API_BASE = (window.Capacitor && window.CAPACITOR_API_BASE) ? window.CAPACITOR_API_BASE : '';
+const CHAT_ENDPOINT = API_BASE + '/.netlify/functions/chat';
+
+let currentLang = 'ar';
+let demoIndex = 0;
+let chatHistory = [];
+const MAX_CHAT_HISTORY = 12;
+let pendingChatMessage = null;
+let pendingCheckinText = null;
+let voiceEnabled = false;
+let recognizing = false;
+let recognition = null;
+let currentFilter = 'all';
+let currentExercise = null;
+let modalTimerInterval = null;
+let moodLog = loadMoodLog();
+
+function populateLangSelect(){
+  const sel = document.getElementById('langSelect');
+  sel.innerHTML = '';
+  LANGS.forEach(l=>{
+    const opt = document.createElement('option');
+    opt.value = l.code;
+    opt.textContent = l.label;
+    sel.appendChild(opt);
+  });
+}
+
+function applyI18n(lang){
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+  });
+  document.getElementById('pageTitle').textContent = dict.title;
+  document.title = dict.title;
+  document.getElementById('voiceLabel').textContent = voiceEnabled ? dict.voice_on : dict.voice_off;
+}
+
+function setLang(lang){
+  currentLang = lang;
+  const meta = LANGS.find(l=>l.code===lang) || LANGS[0];
+  const html = document.getElementById('htmlRoot');
+  html.setAttribute('lang', lang);
+  html.setAttribute('dir', meta.dir);
+  document.getElementById('langSelect').value = lang;
+  applyI18n(lang);
+  if(recognition) recognition.lang = speechLangTag(lang);
+  renderFilters();
+  renderExercises();
+  renderLibFilters();
+  renderLibrary();
+  renderProgram();
+  updateStreakDisplay();
+  updateProgressStats();
+  const crisisLabel = document.getElementById('crisisBtnLabel');
+  if(crisisLabel) crisisLabel.textContent = I18N[lang].crisis_button;
+  document.querySelectorAll('.aria-close-btn').forEach(btn=>{ btn.setAttribute('aria-label', I18N[lang].aria_close); });
+  document.querySelectorAll('.aria-share-btn').forEach(btn=>{ btn.setAttribute('aria-label', I18N[lang].aria_share); });
+  document.querySelectorAll('.aria-settings-btn').forEach(btn=>{ btn.setAttribute('aria-label', I18N[lang].aria_settings); });
+  const micBtn = document.getElementById('micBtn');
+  if(micBtn) micBtn.setAttribute('aria-label', I18N[lang].aria_mic);
+  safeSet('mc_lang', lang);
+  updateFreeChatCounter();
+}
+
+function speechLangTag(lang){
+  const map = { ar:'ar-SA', de:'de-DE', en:'en-US', fr:'fr-FR', tr:'tr-TR', ku:'ku', es:'es-ES', fa:'fa-IR', ur:'ur-PK', ru:'ru-RU', pt:'pt-PT', it:'it-IT' };
+  return map[lang] || 'en-US';
+}
+
+const FILTERS = ['all','breathing','mind','write','sleep'];
+function renderFilters(){
+  const dict = I18N[currentLang];
+  const labels = { all:dict.filter_all, breathing:dict.filter_breathing, mind:dict.filter_mind, write:dict.filter_write, sleep:dict.filter_sleep };
+  const box = document.getElementById('exFilters');
+  box.innerHTML = '';
+  FILTERS.forEach(f=>{
+    const btn = document.createElement('button');
+    btn.textContent = labels[f];
+    btn.className = f===currentFilter ? 'active' : '';
+    btn.onclick = ()=>{ currentFilter = f; renderExercises(); renderFilters(); };
+    box.appendChild(btn);
+  });
+}
+
+function renderExercises(){
+  const list = EXERCISES[currentLang] || EXERCISES.en;
+  const grid = document.getElementById('exGrid');
+  grid.innerHTML = '';
+  const filtered = currentFilter==='all' ? list : list.filter(e=>e.cat===currentFilter);
+  filtered.forEach(ex=>{
+    const isPremium = PREMIUM_EXERCISE_IDS.includes(ex.id);
+    const card = document.createElement('div');
+    card.className = 'card in-view clickable';
+    card.onclick = ()=> openExercise(ex.id);
+    const goLabels = { ar:'ابدأ ←', de:'Loslegen →', en:'Start →', fr:'Commencer →', tr:'Başla →', ku:'Dest pê bike →', es:'Empezar →', fa:'شروع ←', ur:'شروع کریں ←', ru:'Начать →', pt:'Começar →', it:'Inizia →' };
+    const goLabel = goLabels[currentLang] || goLabels.en;
+    const badge = isPremium ? '<span class="premium-tag">'+I18N[currentLang].premium_badge+'</span>' : '';
+    card.innerHTML = '<div class="num">'+ex.tag+badge+'</div><h3>'+ex.title+'</h3><p>'+ex.desc+'</p><span class="go">'+goLabel+'</span>';
+    grid.appendChild(card);
+  });
+}
+
+function openExercise(id){
+  const list = EXERCISES[currentLang] || EXERCISES.en;
+  const ex = list.find(e=>e.id===id);
+  if(!ex) return;
+  currentExercise = ex;
+  currentLibItem = null;
+  document.getElementById('modalTag').textContent = ex.tag;
+  document.getElementById('modalTitle').textContent = ex.title;
+  document.getElementById('modalDesc').textContent = ex.desc;
+  const isLocked = PREMIUM_EXERCISE_IDS.includes(ex.id);
+  document.getElementById('modalLocked').style.display = isLocked ? 'block' : 'none';
+  const stepsBox = document.getElementById('modalSteps');
+  stepsBox.style.display = isLocked ? 'none' : '';
+  stepsBox.innerHTML = '';
+  ex.steps.forEach((s,i)=>{
+    const li = document.createElement('li');
+    li.innerHTML = '<span class="n">'+(i+1)+'.</span><span>'+s+'</span>';
+    stepsBox.appendChild(li);
+  });
+  const timerBtn = document.getElementById('modalTimerBtn');
+  timerBtn.style.display = (!isLocked && ex.duration) ? 'inline-block' : 'none';
+  timerBtn.textContent = I18N[currentLang].timer_start;
+  document.getElementById('modalReadBtn').textContent = I18N[currentLang].read_aloud;
+  document.getElementById('modalReadBtn').style.display = isLocked ? 'none' : '';
+  const doneBtn = document.getElementById('modalDoneBtn');
+  const doneToday = safeGet('mc_last_done') === todayKey();
+  doneBtn.textContent = doneToday ? I18N[currentLang].done_btn_done : I18N[currentLang].done_btn;
+  doneBtn.style.display = isLocked ? 'none' : '';
+  const disp = document.getElementById('modalTimerDisplay');
+  disp.classList.remove('show');
+  clearInterval(modalTimerInterval);
+  const moodWidget = document.getElementById('moodWidget');
+  if(!isLocked && ex.id === 'ex-mood'){
+    moodWidget.style.display = 'block';
+    renderMoodWidget();
+  } else {
+    moodWidget.style.display = 'none';
+  }
+  const journalWidget = document.getElementById('journalWidget');
+  if(!isLocked && ex.cat === 'write'){
+    journalWidget.style.display = 'block';
+    renderJournalWidget(ex.id);
+  } else {
+    journalWidget.style.display = 'none';
+  }
+  document.getElementById('exModal').classList.add('open');
+}
+function closeExercise(){
+  document.getElementById('exModal').classList.remove('open');
+  clearInterval(modalTimerInterval);
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+}
+function startModalTimer(){
+  if(!currentExercise || !currentExercise.duration) return;
+  let remaining = currentExercise.duration;
+  const disp = document.getElementById('modalTimerDisplay');
+  disp.classList.add('show');
+  document.getElementById('modalTimerBtn').textContent = I18N[currentLang].timer_running;
+  clearInterval(modalTimerInterval);
+  const tick = ()=>{
+    const m = Math.floor(remaining/60), s = remaining%60;
+    disp.textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    if(remaining<=0){
+      clearInterval(modalTimerInterval);
+      document.getElementById('modalTimerBtn').textContent = I18N[currentLang].timer_start;
+      return;
+    }
+    remaining--;
+  };
+  tick();
+  modalTimerInterval = setInterval(tick, 1000);
+}
+function readModalAloud(){
+  const source = currentLibItem || currentExercise;
+  if(!source || !('speechSynthesis' in window)) return;
+  const text = source.title + '. ' + (source.body || source.steps.join('. '));
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = speechLangTag(currentLang);
+  const voices = window.speechSynthesis.getVoices();
+  const match = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(currentLang));
+  if(match) utter.voice = match;
+  window.speechSynthesis.speak(utter);
+}
+
+function addTriedExercise(id){
+  try{
+    const raw = safeGet('mc_tried_exercises');
+    const arr = raw ? JSON.parse(raw) : [];
+    if(!arr.includes(id)) arr.push(id);
+    safeSet('mc_tried_exercises', JSON.stringify(arr));
+  }catch(e){}
+}
+function getTriedExercises(){
+  try{ const raw = safeGet('mc_tried_exercises'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+
+let briefSuggestedId = null;
+const COMMON_STOPWORDS = {
+  ar: ['من','في','على','إلى','عن','هذا','هذه','التي','الذي','كان','كانت','مع','أو','ثم','قد','لا','لم','لن','أن','إن','كل','بعض','هو','هي','أنا','انت','نحن','كنت','ولا','فيه','فيها'],
+  en: ['the','and','that','this','with','from','have','has','was','were','are','for','you','your','not','but','they','them','just','really'],
+  de: ['und','der','die','das','ich','ist','war','mit','auch','nicht','ein','eine','für','wie','aber','mich','mir'],
+};
+function computeTopJournalWord(){
+  const ids = ['ex-gratitude','ex-feelings','ex-reframe'];
+  let allText = '';
+  ids.forEach(id => {
+    getJournalEntries(id).forEach(e => { allText += ' ' + (e.text || ''); });
+  });
+  if(!allText.trim()) return null;
+  const stop = new Set(COMMON_STOPWORDS[currentLang] || []);
+  const words = allText.toLowerCase().split(/[\s.,!؟?،؛;:\-\n]+/).filter(w => w.length >= 3 && !stop.has(w));
+  if(!words.length) return null;
+  const freq = {};
+  words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
+  let top = null, topCount = 0;
+  Object.keys(freq).forEach(w => { if(freq[w] > topCount){ top = w; topCount = freq[w]; } });
+  return (top && topCount >= 2) ? top : null;
+}
+
+const WHY_SUGGESTION_TEXT = {
+  ar: {
+    daily_brief: "اختير هذا التمرين محلياً على جهازك، عشوائياً من بين التمارين التي لم تجرّبها بعد. لم يُرسل أي شيء خارج جهازك لإنشاء هذا الاقتراح، وهذا ليس تشخيصاً.",
+    mood_pattern: "اقتُرح هذا لأن آخر تسجيلات مزاجك كانت منخفضة نسبياً — حساب محلي بحت على جهازك. هذا ليس تشخيصاً، ولم يُرسل شيء خارج جهازك.",
+    checkin_ai: "هذا الرد وُلِّد بواسطة ذكاء اصطناعي (Anthropic)، بناءً على النص الذي كتبته. نصّك أُرسل خارج جهازك لتوليد هذا الرد. هذا ليس تشخيصاً ولا نصيحة طبية.",
+  },
+  de: {
+    daily_brief: "Diese Übung wurde lokal auf deinem Gerät zufällig aus den Übungen ausgewählt, die du noch nicht ausprobiert hast. Nichts wurde außerhalb deines Geräts gesendet, um diesen Vorschlag zu erstellen, und dies ist keine Diagnose.",
+    mood_pattern: "Dies wurde vorgeschlagen, weil deine letzten Stimmungseinträge relativ niedrig waren — eine rein lokale Berechnung auf deinem Gerät. Dies ist keine Diagnose, und nichts wurde außerhalb deines Geräts gesendet.",
+    checkin_ai: "Diese Antwort wurde von einer KI (Anthropic) basierend auf deinem eingegebenen Text erstellt. Dein Text wurde außerhalb deines Geräts gesendet, um diese Antwort zu erzeugen. Dies ist keine Diagnose und kein medizinischer Rat.",
+  },
+  en: {
+    daily_brief: "This exercise was chosen locally on your device, at random, from exercises you haven't tried yet. Nothing was sent outside your device to create this suggestion, and this is not a diagnosis.",
+    mood_pattern: "This was suggested because your last few mood entries were relatively low — a purely local calculation on your device. This is not a diagnosis, and nothing was sent outside your device.",
+    checkin_ai: "This reply was generated by an AI (Anthropic), based on the text you typed. Your text was sent outside your device to generate this reply. This is not a diagnosis or medical advice.",
+  },
+  fr: {
+    daily_brief: "Cet exercice a été choisi localement sur ton appareil, au hasard, parmi les exercices que tu n'as pas encore essayés. Rien n'a été envoyé hors de ton appareil pour créer cette suggestion, et ceci n'est pas un diagnostic.",
+    mood_pattern: "Ceci a été suggéré parce que tes dernières entrées d'humeur étaient relativement basses — un calcul purement local sur ton appareil. Ceci n'est pas un diagnostic, et rien n'a été envoyé hors de ton appareil.",
+    checkin_ai: "Cette réponse a été générée par une IA (Anthropic), à partir du texte que tu as écrit. Ton texte a été envoyé hors de ton appareil pour générer cette réponse. Ceci n'est pas un diagnostic ni un conseil médical.",
+  },
+  tr: {
+    daily_brief: "Bu egzersiz, henüz denemediğin egzersizler arasından cihazında yerel olarak rastgele seçildi. Bu öneriyi oluşturmak için cihazının dışına hiçbir şey gönderilmedi ve bu bir teşhis değildir.",
+    mood_pattern: "Bu, son ruh hali kayıtların nispeten düşük olduğu için önerildi — cihazında tamamen yerel bir hesaplama. Bu bir teşhis değildir ve cihazının dışına hiçbir şey gönderilmedi.",
+    checkin_ai: "Bu yanıt, yazdığın metne dayanarak bir yapay zeka (Anthropic) tarafından oluşturuldu. Metnin bu yanıtı oluşturmak için cihazının dışına gönderildi. Bu bir teşhis veya tıbbi tavsiye değildir.",
+  },
+  ku: {
+    daily_brief: "Ev ezmûn bi awayekî herêmî li ser amûra te, bi tesadufî, ji ezmûnên ku tu hê neceribandî hatiye hilbijartin. Tiştek ji bo afirandina vê pêşniyarê ji amûra te dernekeve, û ev ne teşhîs e.",
+    mood_pattern: "Ev hate pêşniyarkirin ji ber ku tomarên hesta te yên dawî nisbeten nizm bûn — hesabek tenê herêmî li ser amûra te. Ev ne teşhîs e, û tiştek ji amûra te dernekeve.",
+    checkin_ai: "Ev bersiv ji hêla AI (Anthropic) ve li gorî nivîsa te hatiye afirandin. Nivîsa te ji bo afirandina vê bersivê ji amûra te derket. Ev ne teşhîs an şêwirmendiya bijîjkî ye.",
+  },
+  es: {
+    daily_brief: "Este ejercicio se eligió localmente en tu dispositivo, al azar, entre los ejercicios que aún no has probado. No se envió nada fuera de tu dispositivo para crear esta sugerencia, y esto no es un diagnóstico.",
+    mood_pattern: "Esto se sugirió porque tus últimos registros de ánimo fueron relativamente bajos — un cálculo puramente local en tu dispositivo. Esto no es un diagnóstico, y no se envió nada fuera de tu dispositivo.",
+    checkin_ai: "Esta respuesta fue generada por una IA (Anthropic), basada en el texto que escribiste. Tu texto se envió fuera de tu dispositivo para generar esta respuesta. Esto no es un diagnóstico ni un consejo médico.",
+  },
+  fa: {
+    daily_brief: "این تمرین به‌صورت محلی روی دستگاهت، به‌طور تصادفی از میان تمرین‌هایی که هنوز امتحان نکرده‌ای انتخاب شد. برای ساخت این پیشنهاد چیزی خارج از دستگاهت ارسال نشد، و این یک تشخیص نیست.",
+    mood_pattern: "این پیشنهاد به این دلیل ارائه شد که ثبت‌های اخیر خلق‌وخویت نسبتاً پایین بودند — یک محاسبه کاملاً محلی روی دستگاهت. این تشخیص نیست، و چیزی خارج از دستگاهت ارسال نشد.",
+    checkin_ai: "این پاسخ توسط هوش مصنوعی (Anthropic) بر اساس متنی که نوشتی تولید شد. متن تو برای تولید این پاسخ خارج از دستگاهت ارسال شد. این تشخیص یا توصیه پزشکی نیست.",
+  },
+  ur: {
+    daily_brief: "یہ مشق آپ کے آلے پر مقامی طور پر، بے ترتیب طریقے سے، ان مشقوں میں سے منتخب کی گئی جنہیں آپ نے ابھی تک آزمایا نہیں۔ اس تجویز کو بنانے کے لیے آپ کے آلے سے باہر کچھ نہیں بھیجا گیا، اور یہ تشخیص نہیں ہے۔",
+    mood_pattern: "یہ اس لیے تجویز کیا گیا کیونکہ آپ کے حالیہ موڈ اندراجات نسبتاً کم تھے — آپ کے آلے پر مکمل طور پر مقامی حساب۔ یہ تشخیص نہیں ہے، اور آپ کے آلے سے باہر کچھ نہیں بھیجا گیا۔",
+    checkin_ai: "یہ جواب آپ کے لکھے گئے متن کی بنیاد پر ایک AI (Anthropic) نے تیار کیا۔ آپ کا متن یہ جواب تیار کرنے کے لیے آپ کے آلے سے باہر بھیجا گیا۔ یہ تشخیص یا طبی مشورہ نہیں ہے۔",
+  },
+  ru: {
+    daily_brief: "Это упражнение было выбрано локально на вашем устройстве, случайным образом, среди упражнений, которые вы ещё не пробовали. Ничего не отправлялось за пределы вашего устройства для создания этого предложения, и это не диагноз.",
+    mood_pattern: "Это было предложено, потому что ваши последние записи настроения были относительно низкими — чисто локальный расчёт на вашем устройстве. Это не диагноз, и ничего не отправлялось за пределы вашего устройства.",
+    checkin_ai: "Этот ответ был сгенерирован ИИ (Anthropic) на основе текста, который вы ввели. Ваш текст был отправлен за пределы вашего устройства для создания этого ответа. Это не диагноз и не медицинский совет.",
+  },
+  pt: {
+    daily_brief: "Este exercício foi escolhido localmente no teu dispositivo, ao acaso, entre os exercícios que ainda não experimentaste. Nada foi enviado para fora do teu dispositivo para criar esta sugestão, e isto não é um diagnóstico.",
+    mood_pattern: "Isto foi sugerido porque os teus últimos registos de humor foram relativamente baixos — um cálculo puramente local no teu dispositivo. Isto não é um diagnóstico, e nada foi enviado para fora do teu dispositivo.",
+    checkin_ai: "Esta resposta foi gerada por uma IA (Anthropic), com base no texto que escreveste. O teu texto foi enviado para fora do teu dispositivo para gerar esta resposta. Isto não é um diagnóstico nem um conselho médico.",
+  },
+  it: {
+    daily_brief: "Questo esercizio è stato scelto localmente sul tuo dispositivo, a caso, tra gli esercizi che non hai ancora provato. Nulla è stato inviato fuori dal tuo dispositivo per creare questo suggerimento, e questo non è una diagnosi.",
+    mood_pattern: "Questo è stato suggerito perché le tue ultime registrazioni dell'umore erano relativamente basse — un calcolo puramente locale sul tuo dispositivo. Questo non è una diagnosi, e nulla è stato inviato fuori dal tuo dispositivo.",
+    checkin_ai: "Questa risposta è stata generata da un'IA (Anthropic), basata sul testo che hai scritto. Il tuo testo è stato inviato fuori dal tuo dispositivo per generare questa risposta. Questo non è una diagnosi né un consiglio medico.",
+  },
+};
+// ---------------------------------------------------------------------
+// EXPLAIN MY FEELING
+// A fully user-controlled writing template. Nothing here is sent
+// anywhere automatically — the draft stays purely local until the user
+// explicitly taps "Rewrite with AI", which is the only action that
+// sends this text off the device (clearly labeled as such).
+// ---------------------------------------------------------------------
+let efDraftData = null;
+let efCurrentTone = 'concise';
+function openExplainFeeling(){
+  document.getElementById('efNow').value = '';
+  document.getElementById('efAfter').value = '';
+  document.getElementById('efAffecting').value = '';
+  document.getElementById('efHardest').value = '';
+  document.getElementById('efNeed').value = '';
+  document.getElementById('efHelp').value = '';
+  document.getElementById('efFormView').style.display = 'block';
+  document.getElementById('efPreviewView').style.display = 'none';
+  document.getElementById('efStatus').textContent = '';
+  document.getElementById('explainFeelingModal').classList.add('open');
+}
+function closeExplainFeeling(){
+  document.getElementById('explainFeelingModal').classList.remove('open');
+}
+function generateFeelingDraft(){
+  efDraftData = {
+    now: document.getElementById('efNow').value.trim(),
+    after: document.getElementById('efAfter').value.trim(),
+    affecting: document.getElementById('efAffecting').value.trim(),
+    hardest: document.getElementById('efHardest').value.trim(),
+    need: document.getElementById('efNeed').value.trim(),
+    help: document.getElementById('efHelp').value.trim(),
+  };
+  efCurrentTone = 'concise';
+  document.getElementById('efToneConciseBtn').classList.add('active');
+  document.getElementById('efToneDetailedBtn').classList.remove('active');
+  document.getElementById('efFormView').style.display = 'none';
+  document.getElementById('efPreviewView').style.display = 'block';
+  renderFeelingDraft();
+}
+function backToEditFeeling(){
+  document.getElementById('efFormView').style.display = 'block';
+  document.getElementById('efPreviewView').style.display = 'none';
+}
+function setFeelingTone(tone){
+  efCurrentTone = tone;
+  document.getElementById('efToneConciseBtn').classList.toggle('active', tone === 'concise');
+  document.getElementById('efToneDetailedBtn').classList.toggle('active', tone === 'detailed');
+  renderFeelingDraft();
+}
+function renderFeelingDraft(){
+  const dict = I18N[currentLang];
+  const d = efDraftData;
+  let text = '';
+  if(efCurrentTone === 'detailed'){
+    const rows = [
+      [dict.ef_f_now, d.now], [dict.ef_f_after, d.after], [dict.ef_f_affecting, d.affecting],
+      [dict.ef_f_hardest, d.hardest], [dict.ef_f_need, d.need], [dict.ef_f_help, d.help],
+    ];
+    text = rows.filter(([,v])=>v).map(([label,v])=> label+': '+v).join('\n');
+  } else {
+    const parts = [];
+    if(d.now) parts.push(dict.ef_f_now + ' ' + d.now + '.');
+    if(d.after) parts.push(dict.ef_f_after + ' ' + d.after + '.');
+    if(d.affecting) parts.push(dict.ef_f_affecting + ' ' + d.affecting + '.');
+    if(d.hardest) parts.push(dict.ef_f_hardest + ' ' + d.hardest + '.');
+    if(d.need) parts.push(dict.ef_f_need + ' ' + d.need + '.');
+    if(d.help) parts.push(dict.ef_f_help + ' ' + d.help + '.');
+    text = parts.join(' ');
+  }
+  document.getElementById('efPreviewText').textContent = text || dict.ef_empty_draft;
+}
+function showEfStatus(msg){
+  const el = document.getElementById('efStatus');
+  el.textContent = msg;
+  setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 4000);
+}
+function copyFeelingDraft(){
+  const text = document.getElementById('efPreviewText').textContent;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=> showEfStatus(I18N[currentLang].ef_copied)).catch(()=> showEfStatus(I18N[currentLang].passport_error));
+  } else {
+    showEfStatus(I18N[currentLang].passport_error);
+  }
+}
+function printFeelingDraft(){
+  const text = document.getElementById('efPreviewText').textContent;
+  const dict = I18N[currentLang];
+  const html = '<html><head><meta charset="utf-8"><title>' + escapeHtml(dict.ef_title) + '</title>' +
+    '<style>body{font-family:sans-serif;padding:30px;max-width:600px;margin:0 auto;white-space:pre-wrap;line-height:1.7;}</style></head><body>' +
+    '<h1>' + escapeHtml(dict.ef_title) + '</h1><p>' + escapeHtml(text) + '</p></body></html>';
+  const w = window.open('', '_blank');
+  if(!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  w.print();
+}
+function exportFeelingDraft(){
+  const text = document.getElementById('efPreviewText').textContent;
+  const blob = new Blob([text], { type:'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'waha-feeling-draft-' + todayKey() + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+function rewriteFeelingWithAI(){
+  const dict = I18N[currentLang];
+  if(!window.confirm(dict.ef_ai_confirm)) return;
+  const text = document.getElementById('efPreviewText').textContent;
+  if(safeGet('mc_chat_consent') !== '1'){
+    showEfStatus(dict.ef_ai_needs_consent);
+    return;
+  }
+  const btn = document.getElementById('efAiBtn');
+  btn.disabled = true;
+  showEfStatus(dict.checkin_thinking);
+  fetch(CHAT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: [], lang: currentLang, mode: 'rewrite' }),
+  })
+  .then(res => {
+    if(res.status === 429){ const e = new Error('rl'); e.rateLimited = true; throw e; }
+    if(!res.ok) throw new Error('bad status');
+    return res.json();
+  })
+  .then(data => {
+    if(!data.reply) throw new Error('empty');
+    document.getElementById('efPreviewText').textContent = data.reply;
+    btn.disabled = false;
+    showEfStatus(dict.ef_ai_done);
+  })
+  .catch((err)=>{
+    btn.disabled = false;
+    showEfStatus(err && err.rateLimited ? dict.rate_limit_msg : dict.checkin_error);
+  });
+}
+
+function explainSuggestion(key){
+  const text = (WHY_SUGGESTION_TEXT[currentLang] && WHY_SUGGESTION_TEXT[currentLang][key]) || WHY_SUGGESTION_TEXT.en[key];
+  document.getElementById('whyExplainText').textContent = text;
+  document.getElementById('whyExplainModal').classList.add('open');
+}
+function closeWhyExplain(){
+  document.getElementById('whyExplainModal').classList.remove('open');
+}
+
+function pickSuggestedExercise(){
+  const list = (EXERCISES[currentLang] || EXERCISES.en).filter(e => !PREMIUM_EXERCISE_IDS.includes(e.id));
+  const tried = getTriedExercises();
+  const untried = list.filter(e => !tried.includes(e.id));
+  const pool = untried.length ? untried : list;
+  return pool[Math.floor(Math.random() * pool.length)] || null;
+}
+
+function maybeShowDailyBrief(){
+  const lastDone = safeGet('mc_last_done');
+  if(!lastDone) return; // new user, nothing to summarize yet
+  const today = todayKey();
+  if(safeGet('mc_daily_brief_shown') === today) return; // already shown today
+  safeSet('mc_daily_brief_shown', today);
+
+  const dict = I18N[currentLang];
+  const streak = parseInt(safeGet('mc_streak') || '0', 10);
+  document.getElementById('briefStreakLine').textContent = '🔥 ' + dict.brief_streak_prefix + ' ' + streak + ' ' + dict.brief_streak_suffix;
+
+  const moodLine = document.getElementById('briefMoodLine');
+  if(moodLog.length >= 4){
+    const recent = moodLog.slice(-5);
+    const prior = moodLog.slice(-10, -5);
+    const avg = arr => arr.reduce((a,b)=>a+b,0) / arr.length;
+    const recentAvg = avg(recent);
+    if(prior.length >= 2){
+      const priorAvg = avg(prior);
+      const diff = recentAvg - priorAvg;
+      let trendText;
+      if(diff > 0.4) trendText = dict.brief_mood_up;
+      else if(diff < -0.4) trendText = dict.brief_mood_down;
+      else trendText = dict.brief_mood_stable;
+      moodLine.textContent = '📊 ' + trendText;
+    } else {
+      moodLine.textContent = '📊 ' + dict.brief_mood_stable;
+    }
+    moodLine.style.display = 'block';
+  } else {
+    moodLine.style.display = 'none';
+  }
+
+  const pick = pickSuggestedExercise();
+  briefSuggestedId = pick ? pick.id : null;
+  document.getElementById('briefSuggestTitle').textContent = pick ? pick.title : '';
+  document.getElementById('briefSuggestBtn').textContent = dict.brief_start_btn;
+
+  const wordLine = document.getElementById('briefWordLine');
+  const topWord = computeTopJournalWord();
+  if(topWord){
+    wordLine.textContent = '💬 ' + dict.brief_word_prefix + ' "' + topWord + '"';
+    wordLine.style.display = 'block';
+  } else {
+    wordLine.style.display = 'none';
+  }
+
+  document.getElementById('dailyBriefModal').classList.add('open');
+}
+function closeDailyBrief(){
+  document.getElementById('dailyBriefModal').classList.remove('open');
+}
+function startBriefSuggestion(){
+  closeDailyBrief();
+  if(briefSuggestedId) openExercise(briefSuggestedId);
+}
+
+const QUICK_RELIEF = {
+  ar: {
+    tension: { icon:'💆', label:'توتر أو شد', steps:['شدّ كتفيك للأعلى بقوة 5 ثوانٍ، ثم أرخِهما فجأة.','كرّر هذا مرتين أخريين ببطء.','لاحظ الفرق بين الشد والاسترخاء في جسدك.'] },
+    racing: { icon:'🌀', label:'أفكار متسارعة', steps:['سمِّ لنفسك 3 أشياء تراها حولك الآن.','سمِّ صوتين تسمعهما في هذه اللحظة.','خذ نفساً واحداً بطيئاً وطويلاً.'] },
+    anger: { icon:'😤', label:'غضب', steps:['اقبض يديك بقوة لمدة 5 ثوانٍ.','افردهما فجأة وهزّهما برفق.','ازفر ببطء كأنك تُطفئ شمعة بعيدة.'] },
+    sad: { icon:'😔', label:'حزن', steps:['سمِّ ما تشعر به الآن بكلمة واحدة فقط.','ضع يدك على صدرك بلطف.','قل لنفسك بصمت: هذا الشعور موجود، ولا بأس بذلك.'] },
+    focus: { icon:'🌫️', label:'صعوبة التركيز', steps:['اختر شيئاً واحداً قريباً منك.','صِفه لنفسك ذهنياً لعشر ثوانٍ.','لاحظ تنفّسك للحظة واحدة.'] },
+    overwhelmed: { icon:'😵', label:'شعور بالإرهاق', steps:['توقف تماماً عمّا تفعله الآن.','ضع قدميك بثبات على الأرض.','خذ ثلاثة أنفاس بطيئة، وعُدّ كل واحد.'] },
+  },
+  de: {
+    tension: { icon:'💆', label:'Anspannung', steps:['Ziehe deine Schultern 5 Sekunden fest hoch, dann lass sie plötzlich los.','Wiederhole das zweimal, langsam.','Spüre den Unterschied zwischen Anspannung und Entspannung.'] },
+    racing: { icon:'🌀', label:'Rasende Gedanken', steps:['Nenne dir 3 Dinge, die du gerade siehst.','Nenne 2 Geräusche, die du gerade hörst.','Atme einmal langsam und tief.'] },
+    anger: { icon:'😤', label:'Wut', steps:['Balle deine Fäuste 5 Sekunden fest.','Öffne sie plötzlich und schüttle sie sanft aus.','Atme langsam aus, als würdest du eine Kerze auspusten.'] },
+    sad: { icon:'😔', label:'Traurigkeit', steps:['Benenne, was du gerade fühlst, in einem Wort.','Lege sanft eine Hand auf deine Brust.','Sag dir still: Dieses Gefühl ist da, und das ist okay.'] },
+    focus: { icon:'🌫️', label:'Konzentrationsschwierigkeit', steps:['Wähle einen Gegenstand in deiner Nähe.','Beschreibe ihn 10 Sekunden lang für dich.','Spüre kurz deinen Atem.'] },
+    overwhelmed: { icon:'😵', label:'Überforderung', steps:['Halte kurz inne bei dem, was du gerade tust.','Stelle beide Füße fest auf den Boden.','Atme dreimal langsam, zähle jeden Atemzug.'] },
+  },
+  en: {
+    tension: { icon:'💆', label:'Stress or tension', steps:['Tense your shoulders up tightly for 5 seconds, then release suddenly.','Repeat twice more, slowly.','Notice the difference between tension and release.'] },
+    racing: { icon:'🌀', label:'Racing thoughts', steps:['Name 3 things you can see around you.','Name 2 sounds you can hear right now.','Take one slow, deep breath.'] },
+    anger: { icon:'😤', label:'Anger', steps:['Clench your fists tightly for 5 seconds.','Release them suddenly and shake them out gently.','Breathe out slowly, like blowing out a candle.'] },
+    sad: { icon:'😔', label:'Sadness', steps:['Name what you feel right now in one word.','Place a hand gently on your chest.','Say to yourself: this feeling is here, and that\'s okay.'] },
+    focus: { icon:'🌫️', label:'Difficulty focusing', steps:['Pick one object near you.','Describe it to yourself for 10 seconds.','Notice your breath for a moment.'] },
+    overwhelmed: { icon:'😵', label:'Feeling overwhelmed', steps:['Pause completely from what you\'re doing.','Plant both feet firmly on the ground.','Take three slow breaths, counting each one.'] },
+  },
+  fr: {
+    tension: { icon:'💆', label:'Stress ou tension', steps:['Contracte tes épaules fort pendant 5 secondes, puis relâche d\'un coup.','Répète deux fois, lentement.','Remarque la différence entre tension et relâchement.'] },
+    racing: { icon:'🌀', label:'Pensées qui s\'emballent', steps:['Nomme 3 choses que tu vois autour de toi.','Nomme 2 sons que tu entends maintenant.','Prends une respiration lente et profonde.'] },
+    anger: { icon:'😤', label:'Colère', steps:['Serre les poings fort pendant 5 secondes.','Relâche-les d\'un coup et secoue-les doucement.','Expire lentement, comme pour souffler une bougie.'] },
+    sad: { icon:'😔', label:'Tristesse', steps:['Nomme ce que tu ressens en un mot.','Pose doucement une main sur ta poitrine.','Dis-toi : ce sentiment est là, et c\'est normal.'] },
+    focus: { icon:'🌫️', label:'Difficulté à se concentrer', steps:['Choisis un objet près de toi.','Décris-le mentalement pendant 10 secondes.','Remarque ta respiration un instant.'] },
+    overwhelmed: { icon:'😵', label:'Sentiment d\'être dépassé', steps:['Arrête-toi complètement.','Pose fermement tes deux pieds au sol.','Prends trois respirations lentes, en comptant chacune.'] },
+  },
+  tr: {
+    tension: { icon:'💆', label:'Stres veya gerginlik', steps:['Omuzlarını 5 saniye sıkıca kaldır, sonra aniden bırak.','Bunu yavaşça iki kez daha tekrarla.','Gerginlik ile rahatlama arasındaki farkı hisset.'] },
+    racing: { icon:'🌀', label:'Hızlı düşünceler', steps:['Etrafında gördüğün 3 şeyi say.','Şu an duyduğun 2 sesi say.','Yavaş ve derin bir nefes al.'] },
+    anger: { icon:'😤', label:'Öfke', steps:['Yumruklarını 5 saniye sıkıca sık.','Aniden bırak ve nazikçe salla.','Bir mum söndürür gibi yavaşça nefes ver.'] },
+    sad: { icon:'😔', label:'Üzüntü', steps:['Şu an hissettiğini tek kelimeyle söyle.','Elini nazikçe göğsüne koy.','Kendine söyle: bu duygu burada, ve bu normal.'] },
+    focus: { icon:'🌫️', label:'Odaklanma güçlüğü', steps:['Yakınındaki bir nesneyi seç.','Onu zihninde 10 saniye tarif et.','Bir an nefesine dikkat et.'] },
+    overwhelmed: { icon:'😵', label:'Bunalmış hissetme', steps:['Yaptığın şeyi tamamen durdur.','İki ayağını yere sağlam bas.','Üç yavaş nefes al, her birini say.'] },
+  },
+  ku: {
+    tension: { icon:'💆', label:'Tengasî an teşqele', steps:['Milên xwe 5 çirkeyan bi tundî bilind bike, paşê carekê berde.','Vê du caran din hêdî hêdî dubare bike.','Cudahiya di navbera teşqele û vebûnê de hîs bike.'] },
+    racing: { icon:'🌀', label:'Ramanên bilez', steps:['3 tiştên ku dora xwe dibînî bêje.','2 dengên ku niha dibihîzî bêje.','Nefesek hêdî û kûr bikişîne.'] },
+    anger: { icon:'😤', label:'Hêrs', steps:['Destên xwe 5 çirkeyan bi tundî girêde.','Carekê wan berde û hêdî bihejîne.','Hêdî nefesê berde, mîna ku tu mûmek vedimirînî.'] },
+    sad: { icon:'😔', label:'Xemgînî', steps:['Tiştê tu niha hîs dikî bi peyvek bêje.','Destekê hêdî li ser sîngê xwe deyne.','Ji xwe re bêje: ev hest li vir e, û ev normal e.'] },
+    focus: { icon:'🌫️', label:'Zehmetiya sekinandinê', steps:['Tiştekî nêzî xwe hilbijêre.','Ji bo 10 çirkeyan wê ji xwe re rave bike.','Demek nefesa xwe bala xwe bide.'] },
+    overwhelmed: { icon:'😵', label:'Hesta zêde giranbûyê', steps:['Bi temamî ji tiştê tu dikî rawestîne.','Herdu piyên xwe bi xurtî li erdê deyne.','Sê nefesên hêdî bikişîne, her yekê bihejmêre.'] },
+  },
+  es: {
+    tension: { icon:'💆', label:'Estrés o tensión', steps:['Tensa los hombros con fuerza 5 segundos, luego suéltalos de golpe.','Repite dos veces más, despacio.','Nota la diferencia entre tensión y relajación.'] },
+    racing: { icon:'🌀', label:'Pensamientos acelerados', steps:['Nombra 3 cosas que ves a tu alrededor.','Nombra 2 sonidos que oyes ahora mismo.','Respira una vez, lento y profundo.'] },
+    anger: { icon:'😤', label:'Enojo', steps:['Aprieta los puños con fuerza 5 segundos.','Suéltalos de golpe y sacúdelos suavemente.','Exhala despacio, como si apagaras una vela.'] },
+    sad: { icon:'😔', label:'Tristeza', steps:['Nombra lo que sientes ahora en una palabra.','Pon una mano suavemente sobre tu pecho.','Dite a ti mismo: este sentimiento está aquí, y está bien.'] },
+    focus: { icon:'🌫️', label:'Dificultad para concentrarte', steps:['Elige un objeto cerca de ti.','Descríbelo mentalmente durante 10 segundos.','Nota tu respiración un momento.'] },
+    overwhelmed: { icon:'😵', label:'Sentirte abrumado/a', steps:['Detente por completo.','Planta ambos pies firmemente en el suelo.','Respira tres veces despacio, contando cada una.'] },
+  },
+  fa: {
+    tension: { icon:'💆', label:'تنش یا استرس', steps:['شانه‌هایت را ۵ ثانیه محکم بالا بکش، بعد ناگهان رها کن.','این را دو بار دیگر آرام تکرار کن.','تفاوت بین تنش و آرامش را حس کن.'] },
+    racing: { icon:'🌀', label:'افکار پرشتاب', steps:['۳ چیزی که اطرافت می‌بینی نام ببر.','۲ صدایی که همین الان می‌شنوی نام ببر.','یک نفس آرام و عمیق بکش.'] },
+    anger: { icon:'😤', label:'خشم', steps:['مشت‌هایت را ۵ ثانیه محکم ببند.','ناگهان بازشان کن و آرام تکانشان بده.','آرام نفس بیرون بده، انگار شمعی خاموش می‌کنی.'] },
+    sad: { icon:'😔', label:'غم', steps:['آنچه الان حس می‌کنی را در یک کلمه بگو.','دستت را آرام روی قلبت بگذار.','به خودت بگو: این احساس اینجاست، و اشکالی ندارد.'] },
+    focus: { icon:'🌫️', label:'مشکل تمرکز', steps:['یک شیء نزدیک خودت انتخاب کن.','۱۰ ثانیه آن را برای خودت توصیف کن.','لحظه‌ای به نفس‌کشیدنت توجه کن.'] },
+    overwhelmed: { icon:'😵', label:'احساس فرسودگی', steps:['کاملاً از کاری که می‌کنی دست بکش.','هر دو پایت را محکم روی زمین بگذار.','سه نفس آرام بکش، هرکدام را بشمار.'] },
+  },
+  ur: {
+    tension: { icon:'💆', label:'تناؤ یا دباؤ', steps:['اپنے کندھوں کو 5 سیکنڈ سختی سے اوپر کھینچیں، پھر اچانک چھوڑ دیں۔','اسے آہستہ سے دو بار مزید دہرائیں۔','تناؤ اور آرام کے فرق کو محسوس کریں۔'] },
+    racing: { icon:'🌀', label:'تیز خیالات', steps:['اپنے ارد گرد 3 چیزوں کے نام لیں جو آپ دیکھ رہے ہیں۔','2 آوازوں کے نام لیں جو آپ ابھی سن رہے ہیں۔','ایک آہستہ، گہری سانس لیں۔'] },
+    anger: { icon:'😤', label:'غصہ', steps:['اپنی مٹھیاں 5 سیکنڈ سختی سے بند کریں۔','اچانک کھولیں اور آہستہ سے جھٹکیں۔','آہستہ سانس چھوڑیں، جیسے موم بتی بجھا رہے ہوں۔'] },
+    sad: { icon:'😔', label:'اداسی', steps:['ابھی جو محسوس کر رہے ہیں اسے ایک لفظ میں بیان کریں۔','ہاتھ آہستہ سے اپنے سینے پر رکھیں۔','خود سے کہیں: یہ احساس یہاں ہے، اور یہ ٹھیک ہے۔'] },
+    focus: { icon:'🌫️', label:'توجہ مرکوز کرنے میں دشواری', steps:['اپنے قریب ایک چیز منتخب کریں۔','اسے 10 سیکنڈ کے لیے ذہن میں بیان کریں۔','ایک لمحے کے لیے اپنی سانس پر توجہ دیں۔'] },
+    overwhelmed: { icon:'😵', label:'مغلوب محسوس کرنا', steps:['جو کچھ کر رہے ہیں اسے مکمل طور پر روک دیں۔','دونوں پاؤں مضبوطی سے زمین پر رکھیں۔','تین آہستہ سانسیں لیں، ہر ایک کو شمار کریں۔'] },
+  },
+  ru: {
+    tension: { icon:'💆', label:'Стресс или напряжение', steps:['Крепко напрягите плечи на 5 секунд, затем резко расслабьте.','Повторите ещё дважды, медленно.','Заметьте разницу между напряжением и расслаблением.'] },
+    racing: { icon:'🌀', label:'Скачущие мысли', steps:['Назовите 3 предмета, которые видите вокруг.','Назовите 2 звука, которые слышите сейчас.','Сделайте один медленный глубокий вдох.'] },
+    anger: { icon:'😤', label:'Гнев', steps:['Крепко сожмите кулаки на 5 секунд.','Резко разожмите и слегка потрясите руками.','Медленно выдохните, будто задуваете свечу.'] },
+    sad: { icon:'😔', label:'Грусть', steps:['Назовите одним словом, что вы сейчас чувствуете.','Мягко положите руку на грудь.','Скажите себе: это чувство здесь, и это нормально.'] },
+    focus: { icon:'🌫️', label:'Трудности с концентрацией', steps:['Выберите предмет рядом с вами.','Опишите его про себя 10 секунд.','На мгновение обратите внимание на дыхание.'] },
+    overwhelmed: { icon:'😵', label:'Чувство перегруженности', steps:['Полностью остановите то, что делаете.','Твёрдо поставьте обе ноги на пол.','Сделайте три медленных вдоха, считая каждый.'] },
+  },
+  pt: {
+    tension: { icon:'💆', label:'Stress ou tensão', steps:['Tensiona os ombros com força 5 segundos, depois solta de repente.','Repete mais duas vezes, devagar.','Repara na diferença entre tensão e relaxamento.'] },
+    racing: { icon:'🌀', label:'Pensamentos acelerados', steps:['Nomeia 3 coisas que vês à tua volta.','Nomeia 2 sons que ouves agora.','Respira uma vez, devagar e fundo.'] },
+    anger: { icon:'😤', label:'Raiva', steps:['Aperta os punhos com força 5 segundos.','Solta de repente e abana-os suavemente.','Expira devagar, como se apagasses uma vela.'] },
+    sad: { icon:'😔', label:'Tristeza', steps:['Nomeia o que sentes agora numa palavra.','Coloca uma mão suavemente no peito.','Diz para ti: este sentimento está aqui, e está tudo bem.'] },
+    focus: { icon:'🌫️', label:'Dificuldade em concentrar-te', steps:['Escolhe um objeto perto de ti.','Descreve-o mentalmente durante 10 segundos.','Repara na tua respiração por um momento.'] },
+    overwhelmed: { icon:'😵', label:'Sentir-te sobrecarregado/a', steps:['Para completamente o que estás a fazer.','Planta os dois pés firmemente no chão.','Respira três vezes devagar, contando cada uma.'] },
+  },
+  it: {
+    tension: { icon:'💆', label:'Stress o tensione', steps:['Contrai le spalle con forza per 5 secondi, poi rilasciale di colpo.','Ripeti altre due volte, lentamente.','Nota la differenza tra tensione e rilassamento.'] },
+    racing: { icon:'🌀', label:'Pensieri accelerati', steps:['Nomina 3 cose che vedi intorno a te.','Nomina 2 suoni che senti ora.','Fai un respiro lento e profondo.'] },
+    anger: { icon:'😤', label:'Rabbia', steps:['Stringi i pugni con forza per 5 secondi.','Rilasciali di colpo e scuotili delicatamente.','Espira lentamente, come se spegnessi una candela.'] },
+    sad: { icon:'😔', label:'Tristezza', steps:['Nomina ciò che provi ora in una parola.','Metti una mano delicatamente sul petto.','Dì a te stesso: questa emozione è qui, ed è normale.'] },
+    focus: { icon:'🌫️', label:'Difficoltà a concentrarti', steps:['Scegli un oggetto vicino a te.','Descrivilo a te stesso per 10 secondi.','Nota il tuo respiro per un momento.'] },
+    overwhelmed: { icon:'😵', label:'Sentirti sopraffatto/a', steps:['Fermati completamente da ciò che stai facendo.','Pianta entrambi i piedi saldamente a terra.','Fai tre respiri lenti, contando ognuno.'] },
+  },
+};
+
+let reliefTimer = null;
+let reliefSecondsLeft = 90;
+let reliefPaused = false;
+let reliefMuted = true;
+let reliefCurrentCat = null;
+let reliefStepIndex = 0;
+const RELIEF_TOTAL_SECONDS = 90;
+
+function openRelief(){
+  renderReliefGrid();
+  document.getElementById('reliefPickView').style.display = 'block';
+  document.getElementById('reliefSessionView').style.display = 'none';
+  document.getElementById('reliefEndView').style.display = 'none';
+  document.getElementById('reliefModal').classList.add('open');
+}
+function closeRelief(){
+  stopReliefTimerOnly();
+  document.getElementById('reliefModal').classList.remove('open');
+}
+function renderReliefGrid(){
+  const data = QUICK_RELIEF[currentLang] || QUICK_RELIEF.en;
+  const grid = document.getElementById('reliefGrid');
+  grid.innerHTML = '';
+  Object.keys(data).forEach(cat=>{
+    const btn = document.createElement('button');
+    btn.className = 'relief-cat-btn';
+    btn.innerHTML = '<span class="relief-cat-icon">'+data[cat].icon+'</span><span class="relief-cat-label">'+data[cat].label+'</span>';
+    btn.onclick = ()=> startReliefSession(cat);
+    grid.appendChild(btn);
+  });
+}
+function startReliefSession(cat){
+  reliefCurrentCat = cat;
+  reliefSecondsLeft = RELIEF_TOTAL_SECONDS;
+  reliefPaused = false;
+  reliefStepIndex = 0;
+  document.getElementById('reliefPickView').style.display = 'none';
+  document.getElementById('reliefEndView').style.display = 'none';
+  document.getElementById('reliefSessionView').style.display = 'block';
+  document.getElementById('reliefPauseBtn').textContent = '⏸';
+  updateReliefMuteBtn();
+  showReliefStep();
+  runReliefTimer();
+}
+function getReliefSteps(){
+  const data = QUICK_RELIEF[currentLang] || QUICK_RELIEF.en;
+  return (data[reliefCurrentCat] || data.tension).steps;
+}
+function showReliefStep(){
+  const steps = getReliefSteps();
+  const idx = Math.min(reliefStepIndex, steps.length-1);
+  const text = steps[idx];
+  document.getElementById('reliefStepText').textContent = text;
+  if(!reliefMuted) speak(text);
+}
+function runReliefTimer(){
+  clearInterval(reliefTimer);
+  const stepDuration = RELIEF_TOTAL_SECONDS / getReliefSteps().length;
+  reliefTimer = setInterval(()=>{
+    if(reliefPaused) return;
+    reliefSecondsLeft--;
+    const elapsed = RELIEF_TOTAL_SECONDS - reliefSecondsLeft;
+    const newStepIndex = Math.min(Math.floor(elapsed / stepDuration), getReliefSteps().length-1);
+    if(newStepIndex !== reliefStepIndex){
+      reliefStepIndex = newStepIndex;
+      showReliefStep();
+    }
+    document.getElementById('reliefTimerText').textContent = reliefSecondsLeft;
+    const pct = reliefSecondsLeft / RELIEF_TOTAL_SECONDS;
+    document.getElementById('reliefRingFg').style.strokeDashoffset = String(283 * (1-pct));
+    if(reliefSecondsLeft <= 0){
+      clearInterval(reliefTimer);
+      finishReliefSession();
+    }
+  }, 1000);
+}
+function toggleReliefPause(){
+  reliefPaused = !reliefPaused;
+  document.getElementById('reliefPauseBtn').textContent = reliefPaused ? '▶' : '⏸';
+}
+function restartRelief(){
+  if(reliefCurrentCat) startReliefSession(reliefCurrentCat);
+}
+function toggleReliefMute(){
+  reliefMuted = !reliefMuted;
+  updateReliefMuteBtn();
+  if(!reliefMuted) speak(getReliefSteps()[reliefStepIndex]);
+  else if(window.speechSynthesis) window.speechSynthesis.cancel();
+}
+function updateReliefMuteBtn(){
+  const btn = document.getElementById('reliefMuteBtn');
+  btn.textContent = reliefMuted ? '🔇' : '🔈';
+  btn.classList.toggle('active', !reliefMuted);
+}
+function stopReliefTimerOnly(){
+  clearInterval(reliefTimer);
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+}
+function stopRelief(){
+  stopReliefTimerOnly();
+  closeRelief();
+}
+function finishReliefSession(){
+  stopReliefTimerOnly();
+  document.getElementById('reliefSessionView').style.display = 'none';
+  document.getElementById('reliefEndView').style.display = 'block';
+}
+function answerReliefFeedback(response){
+  try{
+    const raw = safeGet('mc_relief_log');
+    const arr = raw ? JSON.parse(raw) : [];
+    arr.push({ cat: reliefCurrentCat, response: response });
+    safeSet('mc_relief_log', JSON.stringify(arr.slice(-100)));
+  }catch(e){}
+  closeRelief();
+}
+
+function openSleepMode(){
+  document.getElementById('sleepModal').classList.add('open');
+}
+function closeSleepMode(){
+  document.getElementById('sleepModal').classList.remove('open');
+}
+function startSleepBreathing(){
+  closeSleepMode();
+  openExercise('ex-478');
+}
+
+// ---------------------------------------------------------------------
+// AMBIENT SOUNDS
+// Synthesized in the browser via the Web Audio API — no audio files, no
+// third-party embeds, nothing to license. Only one plays at a time (the
+// UI is a grid of toggle cards, not a mixer). Sound keeps playing after
+// the picker modal is closed, like a background ambient track — reopen
+// the modal (the active card stays highlighted) or pick another sound to
+// stop it, or set a sleep timer to auto-stop.
+// ---------------------------------------------------------------------
+let soundCtx = null;
+let soundMasterGain = null;
+let activeSound = null;
+let soundTimerHandle = null;
+let soundTimerTickHandle = null;
+let soundTimerEndsAt = null;
+
+function getSoundCtx(){
+  if(!soundCtx){
+    soundCtx = new (window.AudioContext || window.webkitAudioContext)();
+    soundMasterGain = soundCtx.createGain();
+    soundMasterGain.gain.value = (parseInt(safeGet('mc_sound_volume') || '70', 10)) / 100;
+    soundMasterGain.connect(soundCtx.destination);
+  }
+  if(soundCtx.state === 'suspended') soundCtx.resume();
+  return soundCtx;
+}
+function makeNoiseBuffer(ctx, seconds){
+  const size = Math.floor(ctx.sampleRate * seconds);
+  const buffer = ctx.createBuffer(1, size, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i = 0; i < size; i++) data[i] = Math.random() * 2 - 1;
+  return buffer;
+}
+function makeBrownNoiseBuffer(ctx, seconds){
+  const size = Math.floor(ctx.sampleRate * seconds);
+  const buffer = ctx.createBuffer(1, size, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let last = 0;
+  for(let i = 0; i < size; i++){
+    const white = Math.random() * 2 - 1;
+    last = (last + 0.02 * white) / 1.02;
+    data[i] = last * 3.5;
+  }
+  return buffer;
+}
+function startRainSound(ctx){
+  const noise = ctx.createBufferSource();
+  noise.buffer = makeNoiseBuffer(ctx, 4);
+  noise.loop = true;
+  const highpass = ctx.createBiquadFilter(); highpass.type = 'highpass'; highpass.frequency.value = 700;
+  const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 6000;
+  const gain = ctx.createGain(); gain.gain.value = 0.5;
+  noise.connect(highpass).connect(lowpass).connect(gain).connect(soundMasterGain);
+  noise.start();
+  return { outGain: gain, stop(){ noise.stop(); } };
+}
+function startOceanSound(ctx){
+  const noise = ctx.createBufferSource();
+  noise.buffer = makeBrownNoiseBuffer(ctx, 6);
+  noise.loop = true;
+  const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 900;
+  const gain = ctx.createGain(); gain.gain.value = 0.6;
+  const lfo = ctx.createOscillator(); lfo.frequency.value = 0.12;
+  const lfoGain = ctx.createGain(); lfoGain.gain.value = 0.35;
+  lfo.connect(lfoGain).connect(gain.gain);
+  noise.connect(lowpass).connect(gain).connect(soundMasterGain);
+  noise.start(); lfo.start();
+  return { outGain: gain, stop(){ noise.stop(); lfo.stop(); } };
+}
+function startBrownSound(ctx){
+  const noise = ctx.createBufferSource();
+  noise.buffer = makeBrownNoiseBuffer(ctx, 4);
+  noise.loop = true;
+  const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 400;
+  const gain = ctx.createGain(); gain.gain.value = 0.55;
+  noise.connect(lowpass).connect(gain).connect(soundMasterGain);
+  noise.start();
+  return { outGain: gain, stop(){ noise.stop(); } };
+}
+function startPadSound(ctx){
+  // Soft, slowly-shifting chord pad (Cmaj7-ish) — plain detuned sine
+  // oscillators with slow LFOs on each voice's gain, no samples.
+  const freqs = [130.81, 164.81, 196.00, 246.94];
+  const voices = [];
+  const padGain = ctx.createGain(); padGain.gain.value = 0.28;
+  padGain.connect(soundMasterGain);
+  freqs.forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine'; osc.frequency.value = f; osc.detune.value = (i % 2 === 0) ? -4 : 4;
+    const voiceGain = ctx.createGain(); voiceGain.gain.value = 0;
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.05 + i * 0.01;
+    const lfoGain = ctx.createGain(); lfoGain.gain.value = 0.06;
+    lfo.connect(lfoGain).connect(voiceGain.gain);
+    voiceGain.gain.setTargetAtTime(0.18, ctx.currentTime, 2);
+    osc.connect(voiceGain).connect(padGain);
+    osc.start(); lfo.start();
+    voices.push(osc, lfo);
+  });
+  return { outGain: padGain, stop(){ voices.forEach(v => { try{ v.stop(); }catch(e){} }); } };
+}
+const SOUND_STARTERS = { rain: startRainSound, ocean: startOceanSound, brown: startBrownSound, pad: startPadSound };
+
+function toggleSound(name){
+  const ctx = getSoundCtx();
+  if(activeSound && activeSound.name === name){ stopActiveSound(); return; }
+  stopActiveSound();
+  const instance = SOUND_STARTERS[name](ctx);
+  activeSound = Object.assign({ name }, instance);
+  document.querySelectorAll('.sound-card').forEach(c => c.classList.toggle('playing', c.dataset.sound === name));
+}
+function stopActiveSound(){
+  if(!activeSound) return;
+  const inst = activeSound;
+  activeSound = null;
+  document.querySelectorAll('.sound-card').forEach(c => c.classList.remove('playing'));
+  const now = soundCtx.currentTime;
+  if(inst.outGain){ inst.outGain.gain.cancelScheduledValues(now); inst.outGain.gain.setTargetAtTime(0, now, 0.08); }
+  setTimeout(()=>{ try{ inst.stop(); }catch(e){} }, 350);
+}
+function setSoundVolume(val){
+  safeSet('mc_sound_volume', String(val));
+  if(soundMasterGain) soundMasterGain.gain.setTargetAtTime(val / 100, soundCtx.currentTime, 0.05);
+}
+let soundTimerMinutes = 0;
+function setSoundTimer(minutes){
+  if(soundTimerHandle){ clearTimeout(soundTimerHandle); soundTimerHandle = null; }
+  if(soundTimerTickHandle){ clearInterval(soundTimerTickHandle); soundTimerTickHandle = null; }
+  minutes = parseInt(minutes, 10);
+  soundTimerMinutes = minutes;
+  const note = document.getElementById('soundTimerNote');
+  if(!minutes){ if(note) note.textContent = ''; soundTimerEndsAt = null; return; }
+  soundTimerEndsAt = Date.now() + minutes * 60000;
+  soundTimerHandle = setTimeout(()=>{ stopActiveSound(); if(note) note.textContent = ''; soundTimerEndsAt = null; soundTimerMinutes = 0; }, minutes * 60000);
+  updateSoundTimerNote();
+  soundTimerTickHandle = setInterval(updateSoundTimerNote, 1000);
+}
+function updateSoundTimerNote(){
+  const note = document.getElementById('soundTimerNote');
+  if(!note || !soundTimerEndsAt) return;
+  const remaining = Math.max(0, Math.round((soundTimerEndsAt - Date.now()) / 1000));
+  const m = Math.floor(remaining / 60), s = remaining % 60;
+  const prefix = (I18N[currentLang] && I18N[currentLang].sounds_ends_in) || '';
+  note.textContent = prefix + ' ' + m + ':' + String(s).padStart(2, '0');
+}
+function openSounds(){
+  document.getElementById('soundsModal').classList.add('open');
+  document.getElementById('soundVolume').value = parseInt(safeGet('mc_sound_volume') || '70', 10);
+  document.getElementById('soundTimer').value = String(soundTimerMinutes);
+  document.querySelectorAll('.sound-card').forEach(c => c.classList.toggle('playing', !!activeSound && c.dataset.sound === activeSound.name));
+  if(soundTimerEndsAt) updateSoundTimerNote();
+}
+function closeSounds(){
+  document.getElementById('soundsModal').classList.remove('open');
+}
+
+let moodSuggestedId = null;
+function maybeSuggestFromMood(){
+  const box = document.getElementById('moodSuggestBox');
+  if(moodLog.length < 3){ box.style.display = 'none'; return; }
+  const recent = moodLog.slice(-3);
+  const avg = recent.reduce((a,b)=>a+b,0) / recent.length;
+  if(avg > 2.2){ box.style.display = 'none'; return; }
+  const today = todayKey();
+  if(safeGet('mc_mood_suggest_dismissed') === today){ box.style.display = 'none'; return; }
+  const pick = pickSuggestedExercise();
+  if(!pick){ box.style.display = 'none'; return; }
+  moodSuggestedId = pick.id;
+  const dict = I18N[currentLang];
+  document.getElementById('moodSuggestText').textContent = dict.mood_suggest_text;
+  document.getElementById('moodSuggestBtn').textContent = dict.mood_suggest_btn + ': ' + pick.title;
+  box.style.display = 'block';
+}
+function startMoodSuggestion(){
+  safeSet('mc_mood_suggest_dismissed', todayKey());
+  document.getElementById('moodSuggestBox').style.display = 'none';
+  if(moodSuggestedId) openExercise(moodSuggestedId);
+}
+
+function loadMoodLog(){
+  try{ const raw = safeGet('mc_moodlog'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function saveMoodLog(){ safeSet('mc_moodlog', JSON.stringify(moodLog)); }
+
+function renderMoodWidget(){
+  const dict = I18N[currentLang];
+  document.getElementById('moodPrompt').textContent = dict.mood_prompt;
+  const btnBox = document.getElementById('moodButtons');
+  btnBox.innerHTML = '';
+  const faces = ['😞','🙁','😐','🙂','😄'];
+  faces.forEach((f,i)=>{
+    const b = document.createElement('button');
+    b.textContent = f;
+    b.setAttribute('aria-label', dict.mood_prompt + ' ' + (i+1) + '/5');
+    b.onclick = ()=>{ moodLog.push(i+1); saveMoodLog(); renderMoodChart(); updateProgressStats(); maybeSuggestFromMood(); };
+    btnBox.appendChild(b);
+  });
+  renderMoodChart();
+  maybeSuggestFromMood();
+}
+function renderMoodChart(){
+  const chart = document.getElementById('moodChart');
+  const empty = document.getElementById('moodEmptyMsg');
+  chart.innerHTML = '';
+  if(moodLog.length===0){
+    empty.textContent = I18N[currentLang].mood_empty;
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  moodLog.slice(-14).forEach(v=>{
+    const bar = document.createElement('div');
+    bar.className = 'mood-bar';
+    bar.style.height = (v*14)+'px';
+    chart.appendChild(bar);
+  });
+}
+
+let currentJournalExId = null;
+function journalKey(exId){ return 'mc_journal_' + exId; }
+
+const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count'];
+const BACKUP_JOURNAL_IDS = ['ex-gratitude','ex-feelings','ex-reframe'];
+
+function exportBackup(){
+  const data = { exportedAt: new Date().toISOString(), values: {} };
+  BACKUP_KEYS.forEach(k=>{
+    const v = safeGet(k);
+    if(v !== null) data.values[k] = v;
+  });
+  BACKUP_JOURNAL_IDS.forEach(id=>{
+    const k = journalKey(id);
+    const v = safeGet(k);
+    if(v !== null) data.values[k] = v;
+  });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = 'waha-backup-' + dateStr + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showBackupStatus(I18N[currentLang].backup_export_done);
+}
+
+function importBackup(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const parsed = JSON.parse(e.target.result);
+      if(!parsed || typeof parsed.values !== 'object'){
+        showBackupStatus(I18N[currentLang].backup_import_error);
+        return;
+      }
+      const allowedKeys = BACKUP_KEYS.concat(BACKUP_JOURNAL_IDS.map(journalKey));
+      Object.keys(parsed.values).forEach(k=>{
+        if(allowedKeys.includes(k)){
+          safeSet(k, parsed.values[k]);
+        }
+      });
+      moodLog = loadMoodLog();
+      renderMoodChart();
+      restorePreferences();
+      updateProgressStats();
+      const log = document.getElementById('chatLog');
+      log.innerHTML = '';
+      chatHistory = [];
+      loadChatMemory();
+      if(!chatHistory.length){
+        const initial = document.createElement('div');
+        initial.className = 'msg bot';
+        initial.textContent = I18N[currentLang].chat_initial_msg;
+        log.appendChild(initial);
+      }
+      const restoredLang = safeGet('mc_lang');
+      if(restoredLang && I18N[restoredLang]) setLang(restoredLang);
+      updateFreeChatCounter();
+      showBackupStatus(I18N[currentLang].backup_import_done);
+    }catch(err){
+      showBackupStatus(I18N[currentLang].backup_import_error);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function showBackupStatus(text){
+  const el = document.getElementById('backupStatus');
+  if(!el) return;
+  el.textContent = text;
+  setTimeout(()=>{ if(el.textContent === text) el.textContent = ''; }, 5000);
+}
+
+const ONBOARDING_STEPS = ['ob1','ob2','ob3','ob4'];
+let obStep = 0;
+function renderOnboardingStep(){
+  const dict = I18N[currentLang];
+  const key = ONBOARDING_STEPS[obStep];
+  document.getElementById('obIcon').textContent = dict[key+'_icon'];
+  document.getElementById('obTitle').textContent = dict[key+'_title'];
+  document.getElementById('obDesc').textContent = dict[key+'_desc'];
+  const dots = document.getElementById('obDots');
+  dots.innerHTML = '';
+  ONBOARDING_STEPS.forEach((_, i)=>{
+    const d = document.createElement('div');
+    d.className = 'onboarding-dot' + (i===obStep ? ' active' : '');
+    dots.appendChild(d);
+  });
+  const isLast = obStep === ONBOARDING_STEPS.length - 1;
+  document.getElementById('obNextBtn').textContent = isLast ? dict.onboarding_start : dict.onboarding_next;
+  document.getElementById('obSkipBtn').textContent = dict.onboarding_skip;
+  document.getElementById('obSkipBtn').style.visibility = isLast ? 'hidden' : 'visible';
+}
+function nextOnboardingStep(){
+  if(obStep < ONBOARDING_STEPS.length - 1){
+    obStep++;
+    renderOnboardingStep();
+  } else {
+    closeOnboarding();
+  }
+}
+function skipOnboarding(){ closeOnboarding(); }
+function closeOnboarding(){
+  document.getElementById('onboardingModal').classList.remove('open');
+  safeSet('mc_onboarding_seen', '1');
+}
+function maybeShowOnboarding(){
+  if(safeGet('mc_onboarding_seen')) return;
+  obStep = 0;
+  renderOnboardingStep();
+  setTimeout(()=>{ document.getElementById('onboardingModal').classList.add('open'); }, 600);
+}
+
+// Self-attestation age gate: not verified identity, just a legal minimum —
+// blocks entry to the rest of the app (no skip) until checked, then chains
+// into the normal onboarding flow. Runs before everything else so a
+// returning user who already confirmed never sees it again.
+function maybeShowAgeGate(){
+  if(safeGet('mc_age_confirmed') === '1'){
+    maybeShowOnboarding();
+    return;
+  }
+  document.getElementById('ageGateModal').classList.add('open');
+}
+function confirmAgeGate(){
+  if(!document.getElementById('ageGateCheckbox').checked) return;
+  safeSet('mc_age_confirmed', '1');
+  document.getElementById('ageGateModal').classList.remove('open');
+  maybeShowOnboarding();
+}
+
+function maybeShowReminder(){
+  const lastDone = safeGet('mc_last_done');
+  const today = todayKey();
+  if(!lastDone) return; // new user, never done a check-in yet — don't nag
+  if(lastDone === today) return; // already done today
+  if(safeGet('mc_reminder_dismissed_date') === today) return; // dismissed already today
+  const banner = document.getElementById('reminderBanner');
+  const dict = I18N[currentLang];
+  document.getElementById('reminderText').textContent = dict.reminder_text;
+  document.getElementById('reminderCta').textContent = dict.reminder_cta;
+  banner.style.display = 'flex';
+}
+function dismissReminder(){
+  document.getElementById('reminderBanner').style.display = 'none';
+  safeSet('mc_reminder_dismissed_date', todayKey());
+}
+
+function getJournalEntries(exId){
+  try{
+    const raw = safeGet(journalKey(exId));
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+const JOURNAL_PROMPTS = {
+  ar: { 'ex-gratitude':"١. \n٢. \n٣. ", 'ex-feelings':"أشعر بـ...\nلأن...\nوأحتاج الآن...", 'ex-reframe':"الفكرة المزعجة:\nهل هي حقيقة مؤكدة أم افتراض؟\nفكرة أكثر توازناً:" },
+  de: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Ich fühle mich...\nweil...\nund brauche gerade...", 'ex-reframe':"Der belastende Gedanke:\nIst das eine Tatsache oder eine Annahme?\nEin ausgewogenerer Gedanke:" },
+  en: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"I feel...\nbecause...\nand right now I need...", 'ex-reframe':"The troubling thought:\nIs it a fact or an assumption?\nA more balanced thought:" },
+  fr: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Je ressens...\nparce que...\net j'ai besoin maintenant de...", 'ex-reframe':"La pensée qui te préoccupe :\nEst-ce un fait ou une supposition ?\nUne pensée plus équilibrée :" },
+  tr: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Şöyle hissediyorum...\nçünkü...\nve şu an ihtiyacım olan...", 'ex-reframe':"Rahatsız edici düşünce:\nBu bir gerçek mi yoksa varsayım mı?\nDaha dengeli bir düşünce:" },
+  ku: { 'ex-gratitude':"١. \n٢. \n٣. ", 'ex-feelings':"Ez hîs dikim...\nji ber ku...\nû niha hewceyê min bi...", 'ex-reframe':"Raman a aciz dike:\nMa ev rastiyek e an texmînek e?\nRamanek bi tevahî tevlihevtir:" },
+  es: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Me siento...\nporque...\ny ahora mismo necesito...", 'ex-reframe':"El pensamiento inquietante:\n¿Es un hecho o una suposición?\nUn pensamiento más equilibrado:" },
+  fa: { 'ex-gratitude':"۱. \n۲. \n۳. ", 'ex-feelings':"احساس می‌کنم...\nچون...\nو الان نیاز دارم به...", 'ex-reframe':"فکر آزاردهنده:\nآیا این یک واقعیت است یا یک فرض؟\nفکری متعادل‌تر:" },
+  ur: { 'ex-gratitude':"۱. \n۲. \n۳. ", 'ex-feelings':"میں محسوس کرتا/کرتی ہوں...\nکیونکہ...\nاور ابھی مجھے ضرورت ہے...", 'ex-reframe':"پریشان کن خیال:\nکیا یہ حقیقت ہے یا مفروضہ؟\nزیادہ متوازن خیال:" },
+  ru: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Я чувствую...\nпотому что...\nи прямо сейчас мне нужно...", 'ex-reframe':"Тревожная мысль:\nЭто факт или предположение?\nБолее взвешенная мысль:" },
+  pt: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Sinto-me...\nporque...\ne agora preciso de...", 'ex-reframe':"O pensamento perturbador:\nÉ um facto ou uma suposição?\nUm pensamento mais equilibrado:" },
+  it: { 'ex-gratitude':"1. \n2. \n3. ", 'ex-feelings':"Mi sento...\nperché...\ne adesso ho bisogno di...", 'ex-reframe':"Il pensiero preoccupante:\nÈ un fatto o un'ipotesi?\nUn pensiero più equilibrato:" },
+};
+function renderJournalWidget(exId){
+  currentJournalExId = exId;
+  const dict = I18N[currentLang];
+  const guided = (JOURNAL_PROMPTS[currentLang] && JOURNAL_PROMPTS[currentLang][exId]) || (JOURNAL_PROMPTS.en && JOURNAL_PROMPTS.en[exId]);
+  document.getElementById('journalInput').placeholder = guided || dict.journal_placeholder;
+  document.getElementById('journalInput').value = '';
+  document.getElementById('journalSaveBtn').textContent = dict.journal_save;
+  document.getElementById('journalSavedMsg').style.display = 'none';
+  renderJournalEntries(exId);
+}
+function renderJournalEntries(exId){
+  const dict = I18N[currentLang];
+  const box = document.getElementById('journalEntries');
+  const entries = getJournalEntries(exId);
+  box.innerHTML = '';
+  if(entries.length === 0) return;
+  const label = document.createElement('div');
+  label.className = 'prefs-section-label';
+  label.style.marginTop = '4px';
+  label.textContent = dict.journal_entries_label;
+  box.appendChild(label);
+  entries.slice(-5).reverse().forEach(entry=>{
+    const div = document.createElement('div');
+    div.className = 'journal-entry';
+    const dateSpan = document.createElement('span');
+    dateSpan.className = 'je-date';
+    dateSpan.textContent = entry.date;
+    div.appendChild(dateSpan);
+    div.appendChild(document.createTextNode(entry.text));
+    box.appendChild(div);
+  });
+}
+function saveJournalEntry(){
+  const input = document.getElementById('journalInput');
+  const text = input.value.trim();
+  if(!text || !currentJournalExId) return;
+  const entries = getJournalEntries(currentJournalExId);
+  entries.push({ date: todayKey(), text: text });
+  safeSet(journalKey(currentJournalExId), JSON.stringify(entries));
+  input.value = '';
+  const msg = document.getElementById('journalSavedMsg');
+  msg.textContent = I18N[currentLang].journal_saved;
+  msg.style.display = 'block';
+  renderJournalEntries(currentJournalExId);
+  markExerciseDone();
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const modal = document.getElementById('exModal');
+  if(modal){
+    modal.addEventListener('click', (e)=>{ if(e.target.id === 'exModal') closeExercise(); });
+  }
+  const prefs = document.getElementById('prefsModal');
+  if(prefs){
+    prefs.addEventListener('click', (e)=>{ if(e.target.id === 'prefsModal') closePrefs(); });
+  }
+  const upgrade = document.getElementById('upgradeModal');
+  if(upgrade){
+    upgrade.addEventListener('click', (e)=>{ if(e.target.id === 'upgradeModal') closeUpgrade(); });
+  }
+  const checkin = document.getElementById('checkinModal');
+  if(checkin){
+    checkin.addEventListener('click', (e)=>{ if(e.target.id === 'checkinModal') closeCheckin(); });
+  }
+  const crisis = document.getElementById('crisisModal');
+  if(crisis){
+    crisis.addEventListener('click', (e)=>{ if(e.target.id === 'crisisModal') closeCrisis(); });
+  }
+  const onboarding = document.getElementById('onboardingModal');
+  if(onboarding){
+    onboarding.addEventListener('click', (e)=>{ if(e.target.id === 'onboardingModal') skipOnboarding(); });
+  }
+  const chatConsent = document.getElementById('chatConsentModal');
+  if(chatConsent){
+    chatConsent.addEventListener('click', (e)=>{ if(e.target.id === 'chatConsentModal') closeChatConsent(); });
+  }
+  const dailyBrief = document.getElementById('dailyBriefModal');
+  if(dailyBrief){
+    dailyBrief.addEventListener('click', (e)=>{ if(e.target.id === 'dailyBriefModal') closeDailyBrief(); });
+  }
+  const sleepModal = document.getElementById('sleepModal');
+  if(sleepModal){
+    sleepModal.addEventListener('click', (e)=>{ if(e.target.id === 'sleepModal') closeSleepMode(); });
+  }
+  const reliefModal = document.getElementById('reliefModal');
+  if(reliefModal){
+    reliefModal.addEventListener('click', (e)=>{ if(e.target.id === 'reliefModal') closeRelief(); });
+  }
+  const passportModal = document.getElementById('passportModal');
+  if(passportModal){
+    passportModal.addEventListener('click', (e)=>{ if(e.target.id === 'passportModal') closePrivacyPassport(); });
+  }
+  const calmPlanModal = document.getElementById('calmPlanModal');
+  if(calmPlanModal){
+    calmPlanModal.addEventListener('click', (e)=>{ if(e.target.id === 'calmPlanModal') closeCalmPlan(); });
+  }
+  const whyExplainModal = document.getElementById('whyExplainModal');
+  if(whyExplainModal){
+    whyExplainModal.addEventListener('click', (e)=>{ if(e.target.id === 'whyExplainModal') closeWhyExplain(); });
+  }
+  const explainFeelingModal = document.getElementById('explainFeelingModal');
+  if(explainFeelingModal){
+    explainFeelingModal.addEventListener('click', (e)=>{ if(e.target.id === 'explainFeelingModal') closeExplainFeeling(); });
+  }
+});
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeExercise(); });
+
+function shareApp(){
+  const shareData = {
+    title: 'Waha',
+    text: currentLang==='ar' ? 'جرّب Waha — مساعدك النفسي الذكي' : 'Try Waha — your intelligent mental health companion',
+    url: window.location.href,
+  };
+  if(navigator.share){
+    navigator.share(shareData).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      alert(currentLang==='ar' ? 'تم نسخ الرابط' : 'Link copied');
+    }).catch(()=>{});
+  }
+}
+
+function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+function safeSet(key, val){ try{ localStorage.setItem(key, val); }catch(e){} }
+
+function openPrefs(){
+  document.getElementById('prefsModal').classList.add('open');
+  updateProgressStats();
+}
+function closePrefs(){
+  document.getElementById('prefsModal').classList.remove('open');
+}
+function toggleCalmMode(on){
+  document.body.classList.toggle('calm-mode', on);
+  safeSet('mc_calm', on ? '1' : '0');
+}
+function toggleDarkMode(on){
+  document.body.classList.toggle('dark-mode', on);
+  safeSet('mc_dark', on ? '1' : '0');
+}
+function toggleTextLarge(on){
+  document.body.classList.toggle('text-large', on);
+  safeSet('mc_text_large', on ? '1' : '0');
+}
+
+function todayKey(){
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function updateStreakDisplay(){
+  const chip = document.getElementById('streakChip');
+  const text = document.getElementById('streakText');
+  const streak = parseInt(safeGet('mc_streak') || '0', 10);
+  if(streak > 0 && safeGet('mc_streaks_disabled') !== '1'){
+    chip.style.display = 'inline-block';
+    text.textContent = streak + ' ' + I18N[currentLang].streak_label;
+  } else {
+    chip.style.display = 'none';
+  }
+}
+function dateKeyOffset(daysAgo){
+  const d = new Date(); d.setDate(d.getDate()-daysAgo);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function toggleStreaksDisabled(checked){
+  safeSet('mc_streaks_disabled', checked ? '1' : '0');
+  updateStreakDisplay();
+}
+function markExerciseDone(){
+  const last = safeGet('mc_last_done');
+  const today = todayKey();
+  const doneId = currentExercise ? currentExercise.id : (currentLibItem ? currentLibItem.id : null);
+  if(doneId) addTriedExercise(doneId);
+  if(last === today){ updateProgressStats(); return; } // already counted today
+  const yesterdayKey = dateKeyOffset(1);
+  const twoDaysAgoKey = dateKeyOffset(2);
+  let streak = parseInt(safeGet('mc_streak') || '0', 10);
+  const currentMonthKey = today.slice(0,7);
+  const freezeUsedMonth = safeGet('mc_streak_freeze_used_month');
+  let usedFreeze = false;
+  if(last === yesterdayKey){
+    streak = streak + 1;
+  } else if(last === twoDaysAgoKey && streak > 0 && freezeUsedMonth !== currentMonthKey){
+    // One missed day, monthly freeze still available: keep the streak alive.
+    streak = streak + 1;
+    safeSet('mc_streak_freeze_used_month', currentMonthKey);
+    usedFreeze = true;
+  } else {
+    streak = 1;
+  }
+  safeSet('mc_streak', String(streak));
+  safeSet('mc_last_done', today);
+  updateStreakDisplay();
+  updateProgressStats();
+  if(!usedFreeze) checkAchievement(streak);
+  const banner = document.getElementById('reminderBanner');
+  if(banner) banner.style.display = 'none';
+  const btn = document.getElementById('modalDoneBtn');
+  if(btn) btn.textContent = I18N[currentLang].done_btn_done;
+}
+function restorePreferences(){
+  const calm = safeGet('mc_calm') === '1';
+  const dark = safeGet('mc_dark') === '1';
+  const textLarge = safeGet('mc_text_large') === '1';
+  document.getElementById('calmToggle').checked = calm;
+  document.getElementById('darkToggle').checked = dark;
+  document.getElementById('textLargeToggle').checked = textLarge;
+  document.body.classList.toggle('calm-mode', calm);
+  document.body.classList.toggle('dark-mode', dark);
+  document.body.classList.toggle('text-large', textLarge);
+  updateGenderButtonsUI();
+  document.getElementById('streaksDisabledToggle').checked = safeGet('mc_streaks_disabled') === '1';
+  const savedLang = safeGet('mc_lang');
+  updateStreakDisplay();
+  return savedLang;
+}
+function setUserGender(g){
+  safeSet('mc_user_gender', g);
+  updateGenderButtonsUI();
+}
+function updateGenderButtonsUI(){
+  const g = safeGet('mc_user_gender') || '';
+  const map = { male:'genderBtnMale', female:'genderBtnFemale', '':'genderBtnNone' };
+  Object.keys(map).forEach(key=>{
+    const el = document.getElementById(map[key]);
+    if(el) el.classList.toggle('active', g === key);
+  });
+}
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePrefs(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeUpgrade(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCheckin(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCrisis(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && document.getElementById('onboardingModal').classList.contains('open')) skipOnboarding(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeChatConsent(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeDailyBrief(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeSleepMode(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeRelief(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePrivacyPassport(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeCalmPlan(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeWhyExplain(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeExplainFeeling(); });
+
+const LIB_FILTERS = ['all','anxiety','habits','relationships','self','emotions','stress'];
+let currentLibFilter = 'all';
+function renderLibFilters(){
+  const dict = I18N[currentLang];
+  const labels = { all:dict.libf_all, anxiety:dict.libf_anxiety, habits:dict.libf_habits, relationships:dict.libf_relationships, self:dict.libf_self, emotions:dict.libf_emotions, stress:dict.libf_stress };
+  const box = document.getElementById('libFilters');
+  box.innerHTML = '';
+  LIB_FILTERS.forEach(f=>{
+    const btn = document.createElement('button');
+    btn.textContent = labels[f];
+    btn.className = f===currentLibFilter ? 'active' : '';
+    btn.onclick = ()=>{ currentLibFilter = f; renderLibrary(); renderLibFilters(); };
+    box.appendChild(btn);
+  });
+}
+function renderLibrary(){
+  const list = LIBRARY[currentLang] || LIBRARY.en;
+  const grid = document.getElementById('libGrid');
+  grid.innerHTML = '';
+  const filtered = currentLibFilter==='all' ? list : list.filter(it=>it.cat===currentLibFilter);
+  filtered.forEach(it=>{
+    const isPremium = PREMIUM_LIBRARY_IDS.includes(it.id);
+    const card = document.createElement('div');
+    card.className = 'card in-view clickable';
+    card.onclick = ()=> openLibraryItem(it.id);
+    const badge = isPremium ? '<span class="premium-tag">'+I18N[currentLang].premium_badge+'</span>' : '';
+    card.innerHTML = '<div class="num">'+it.tag+badge+'</div><h3>'+it.title+'</h3><p>'+it.desc+'</p><span class="go">'+I18N[currentLang].read_more+'</span>';
+    grid.appendChild(card);
+  });
+}
+let currentLibItem = null;
+function openLibraryItem(id){
+  const list = LIBRARY[currentLang] || LIBRARY.en;
+  const item = list.find(i=>i.id===id);
+  if(!item) return;
+  currentLibItem = item;
+  currentExercise = null;
+  document.getElementById('modalTag').textContent = item.tag;
+  document.getElementById('modalTitle').textContent = item.title;
+  document.getElementById('modalDesc').textContent = item.desc || '';
+  const isLocked = PREMIUM_LIBRARY_IDS.includes(item.id);
+  document.getElementById('modalLocked').style.display = isLocked ? 'block' : 'none';
+  const stepsBox = document.getElementById('modalSteps');
+  stepsBox.style.display = isLocked ? 'none' : '';
+  stepsBox.innerHTML = '';
+  if(!isLocked){
+    const li = document.createElement('li');
+    li.innerHTML = '<span>'+item.body+'</span>';
+    stepsBox.appendChild(li);
+  }
+  document.getElementById('modalTimerBtn').style.display = 'none';
+  document.getElementById('modalReadBtn').textContent = I18N[currentLang].read_aloud;
+  document.getElementById('modalReadBtn').style.display = isLocked ? 'none' : '';
+  document.getElementById('moodWidget').style.display = 'none';
+  document.getElementById('journalWidget').style.display = 'none';
+  const doneBtn = document.getElementById('modalDoneBtn');
+  const doneToday = safeGet('mc_last_done') === todayKey();
+  doneBtn.textContent = doneToday ? I18N[currentLang].done_btn_done : I18N[currentLang].done_btn;
+  doneBtn.style.display = isLocked ? 'none' : '';
+  document.getElementById('exModal').classList.add('open');
+}
+
+const PREMIUM_EXERCISE_IDS = ['ex-pmr','ex-safe','ex-sleep7'];
+const PREMIUM_LIBRARY_IDS = ['lib-emoreg','lib-stress'];
+const PROGRAM_DAYS = ['ex-478','ex-bodyscan','ex-gratitude','ex-box','ex-reframe','ex-walk','ex-mood'];
+
+function openUpgrade(){ document.getElementById('upgradeModal').classList.add('open'); }
+function closeUpgrade(){ document.getElementById('upgradeModal').classList.remove('open'); }
+
+const CHECKIN_MAP = { opt1:'ex-478', opt2:'ex-feelings', opt3:'ex-stop', opt4:'ex-walk' };
+function openCrisis(){
+  document.getElementById('crisisModal').classList.add('open');
+}
+function closeCrisis(){
+  document.getElementById('crisisModal').classList.remove('open');
+}
+
+function openCheckin(){
+  const dict = I18N[currentLang];
+  const box = document.getElementById('checkinOptions');
+  box.innerHTML = '';
+  ['opt1','opt2','opt3','opt4'].forEach(key=>{
+    const btn = document.createElement('button');
+    btn.className = 'checkin-opt';
+    btn.textContent = dict['checkin_'+key];
+    btn.onclick = ()=>{
+      closeCheckin();
+      openExercise(CHECKIN_MAP[key]);
+    };
+    box.appendChild(btn);
+  });
+  document.getElementById('checkinFreeText').value = '';
+  const respBox = document.getElementById('checkinFreeTextResponse');
+  respBox.style.display = 'none';
+  respBox.textContent = '';
+  document.getElementById('checkinWhyBtn').style.display = 'none';
+  document.getElementById('checkinFreeTextBtn').disabled = false;
+  document.getElementById('checkinModal').classList.add('open');
+}
+function closeCheckin(){
+  document.getElementById('checkinModal').classList.remove('open');
+}
+
+function sendCheckinText(){
+  const input = document.getElementById('checkinFreeText');
+  const text = input.value.trim();
+  if(!text) return;
+  if(safeGet('mc_chat_consent') !== '1'){
+    pendingCheckinText = text;
+    document.getElementById('checkinModal').classList.remove('open');
+    document.getElementById('chatConsentModal').classList.add('open');
+    return;
+  }
+  const btn = document.getElementById('checkinFreeTextBtn');
+  const respBox = document.getElementById('checkinFreeTextResponse');
+  const whyBtn = document.getElementById('checkinWhyBtn');
+  btn.disabled = true;
+  respBox.style.display = 'block';
+  respBox.textContent = I18N[currentLang].checkin_thinking;
+  whyBtn.style.display = 'none';
+
+  fetch(CHAT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: [], lang: currentLang, mode: 'checkin' }),
+  })
+  .then(res => {
+    if(res.status === 429){
+      const err = new Error('rate limited');
+      err.rateLimited = true;
+      throw err;
+    }
+    if(!res.ok) throw new Error('bad status ' + res.status);
+    return res.json();
+  })
+  .then(data => {
+    if(!data.reply) throw new Error('empty reply');
+    respBox.textContent = data.reply;
+    btn.disabled = false;
+    whyBtn.style.display = 'block';
+  })
+  .catch((err)=>{
+    respBox.textContent = (err && err.rateLimited) ? I18N[currentLang].rate_limit_msg : I18N[currentLang].checkin_error;
+    btn.disabled = false;
+  });
+}
+
+function renderProgram(){
+  const row = document.getElementById('programRow');
+  row.innerHTML = '';
+  const list = EXERCISES[currentLang] || EXERCISES.en;
+  const dict = I18N[currentLang];
+  PROGRAM_DAYS.forEach((exId, idx)=>{
+    const ex = list.find(e=>e.id===exId);
+    if(!ex) return;
+    const locked = idx > 0;
+    const card = document.createElement('div');
+    card.className = 'program-day' + (locked ? ' locked' : '');
+    card.onclick = locked ? openUpgrade : (()=> openExercise(exId));
+    card.innerHTML = '<div class="pd-num">'+dict.program_day_prefix+' '+(idx+1)+'</div>'+
+      '<div class="pd-title">'+ex.title+'</div>'+
+      (locked ? '<div class="pd-lock">'+dict.program_locked+'</div>' : '');
+    row.appendChild(card);
+  });
+}
+
+function updateProgressStats(){
+  const streak = parseInt(safeGet('mc_streak') || '0', 10);
+  const journalIds = ['ex-gratitude','ex-feelings','ex-reframe'];
+  let journalCount = 0;
+  journalIds.forEach(id=>{ journalCount += getJournalEntries(id).length; });
+  const statStreak = document.getElementById('statStreak');
+  const statJournal = document.getElementById('statJournal');
+  const statMood = document.getElementById('statMood');
+  const statExercises = document.getElementById('statExercises');
+  const statHelped = document.getElementById('statHelped');
+  if(statStreak){ statStreak.textContent = streak; statJournal.textContent = journalCount; statMood.textContent = moodLog.length; }
+  if(statExercises) statExercises.textContent = getTriedExercises().length;
+  if(statHelped){
+    let helped = 0;
+    try{
+      const raw = safeGet('mc_relief_log');
+      const arr = raw ? JSON.parse(raw) : [];
+      helped = arr.filter(e => e.response === 'yes' || e.response === 'little').length;
+    }catch(e){}
+    statHelped.textContent = helped;
+  }
+}
+
+function checkAchievement(streak){
+  if(safeGet('mc_streaks_disabled') === '1') return;
+  if(streak > 0 && streak % 7 === 0){
+    const lastCelebrated = parseInt(safeGet('mc_last_celebrated') || '0', 10);
+    if(streak > lastCelebrated){
+      safeSet('mc_last_celebrated', String(streak));
+      showAchievementToast(streak);
+    }
+  }
+}
+function showAchievementToast(streak){
+  const dict = I18N[currentLang];
+  document.getElementById('achievementTitle').textContent = dict.achievement_title;
+  document.getElementById('achievementDesc').textContent = dict.achievement_desc.replace('{n}', streak);
+  const toast = document.getElementById('achievementToast');
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 5000);
+}
+
+const LIB_FILTERS_INIT = true;
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('in-view'); });
+}, { threshold:0.15 });
+
+let breatheActive = false;
+let breatheTimer = null;
+function toggleBreathe(){
+  const core = document.getElementById('breatheCore');
+  const label = document.getElementById('breatheLabel');
+  if(breatheActive){
+    breatheActive = false;
+    core.classList.remove('breathing');
+    core.textContent = I18N[currentLang].breathe_start;
+    label.textContent = I18N[currentLang].breathe_hint;
+    clearInterval(breatheTimer);
+    return;
+  }
+  breatheActive = true;
+  core.classList.add('breathing');
+  core.textContent = '';
+  const phases = BREATHE_PHASES[currentLang] || BREATHE_PHASES.en;
+  let i = 0;
+  label.textContent = phases[0];
+  breatheTimer = setInterval(()=>{
+    i = (i+1) % phases.length;
+    label.textContent = phases[i];
+  }, 2666);
+  setTimeout(()=>{
+    if(breatheActive){
+      breatheActive = false;
+      core.classList.remove('breathing');
+      const done = BREATHE_DONE[currentLang] || BREATHE_DONE.en;
+      core.textContent = done[0];
+      label.textContent = done[1];
+      clearInterval(breatheTimer);
+    }
+  }, 30000);
+}
+
+function toggleVoice(){
+  voiceEnabled = !voiceEnabled;
+  document.getElementById('voiceToggle').classList.toggle('active', voiceEnabled);
+  document.getElementById('voiceLabel').textContent = voiceEnabled ? I18N[currentLang].voice_on : I18N[currentLang].voice_off;
+  if(!voiceEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
+}
+
+function guessVoiceGender(name){
+  const n = (name||'').toLowerCase();
+  if(n.includes('female')) return 'female';
+  if(/\bmale\b/.test(n)) return 'male';
+  const knownFemale = ['samantha','victoria','karen','moira','tessa','veena','fiona','allison','ava','susan','zira','laila','salma','amira','fatima','nour','yelda','filiz','ioana','luciana','paulina','ellen','anna','maria','sara','noura'];
+  const knownMale = ['alex','daniel','fred','oliver','arthur','tarik','maged','majed','rashid','yusuf','david','mark','diego','jorge','yannick','stefan','luca','xander','reed'];
+  if(knownFemale.some(k=>n.includes(k))) return 'female';
+  if(knownMale.some(k=>n.includes(k))) return 'male';
+  return null;
+}
+function speak(text){
+  if(!voiceEnabled || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = speechLangTag(currentLang);
+  utter.rate = 0.98;
+  const voices = window.speechSynthesis.getVoices();
+  const langVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(currentLang));
+  const userGender = safeGet('mc_user_gender');
+  let match = null;
+  if(userGender === 'male' || userGender === 'female'){
+    const wantGender = userGender === 'male' ? 'female' : 'male';
+    match = langVoices.find(v => guessVoiceGender(v.name) === wantGender);
+  }
+  if(!match) match = langVoices[0];
+  if(match) utter.voice = match;
+  const dot = document.getElementById('statusDot');
+  utter.onstart = ()=> dot.classList.add('speaking');
+  utter.onend = ()=> dot.classList.remove('speaking');
+  utter.onerror = ()=> dot.classList.remove('speaking');
+  window.speechSynthesis.speak(utter);
+}
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = ()=>{}; }
+
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+if(SR){
+  recognition = new SR();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = 'ar-SA';
+  recognition.onresult = (e)=>{
+    const transcript = e.results[0][0].transcript;
+    document.getElementById('chatInput').value = transcript;
+    sendMsg();
+  };
+  recognition.onend = ()=>{ recognizing = false; document.getElementById('micBtn').classList.remove('recording'); };
+  recognition.onerror = ()=>{ recognizing = false; document.getElementById('micBtn').classList.remove('recording'); };
+} else {
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const mic = document.getElementById('micBtn');
+    if(mic) mic.style.display = 'none';
+  });
+}
+function toggleMic(){
+  if(!recognition) return;
+  if(recognizing){ recognition.stop(); return; }
+  recognition.lang = speechLangTag(currentLang);
+  try{
+    recognition.start();
+    recognizing = true;
+    document.getElementById('micBtn').classList.add('recording');
+  }catch(err){}
+}
+
+let tempConversationMode = false;
+function saveChatMemory(){
+  if(tempConversationMode) return; // temporary mode: never persist to this device
+  try{ safeSet('mc_chat_memory', JSON.stringify(chatHistory)); }catch(e){}
+}
+function loadChatMemory(){
+  try{
+    const raw = safeGet('mc_chat_memory');
+    if(!raw) return;
+    const parsed = JSON.parse(raw);
+    if(!Array.isArray(parsed)) return;
+    chatHistory = parsed.filter(m => m && (m.role==='user'||m.role==='assistant') && typeof m.content==='string');
+    if(!chatHistory.length) return;
+    const log = document.getElementById('chatLog');
+    chatHistory.forEach(m=>{
+      const bubble = document.createElement('div');
+      bubble.className = 'msg ' + (m.role==='user' ? 'me' : 'bot');
+      bubble.textContent = m.content;
+      log.appendChild(bubble);
+    });
+    log.scrollTop = log.scrollHeight;
+  }catch(e){}
+}
+function clearChatMemory(){
+  chatHistory = [];
+  safeSet('mc_chat_memory', '[]');
+  const log = document.getElementById('chatLog');
+  log.innerHTML = '';
+  const initial = document.createElement('div');
+  initial.className = 'msg bot';
+  initial.textContent = I18N[currentLang].chat_initial_msg;
+  log.appendChild(initial);
+}
+
+// ---------------------------------------------------------------------
+// PRIVACY PASSPORT
+// A dashboard that explains, in plain and technically accurate language,
+// what stays on this device, what is sent to the AI provider, and what
+// technical logs may exist server-side (see chat.js comments: console.warn
+// on a Safe Claims rewrite, console.error on upstream failures — never
+// message content). Every deletion control below only touches this
+// browser's local storage; Waha has no central database to also delete
+// from, because none exists.
+// ---------------------------------------------------------------------
+function openPrivacyPassport(){
+  document.getElementById('tempModeToggle').checked = tempConversationMode;
+  document.getElementById('passportStatus').textContent = '';
+  document.getElementById('passportModal').classList.add('open');
+}
+function closePrivacyPassport(){
+  document.getElementById('passportModal').classList.remove('open');
+}
+function toggleTempConversationMode(checked){
+  tempConversationMode = checked;
+  document.getElementById('tempModeBanner').classList.toggle('active', checked);
+}
+function showPassportStatus(msg){
+  const el = document.getElementById('passportStatus');
+  el.textContent = msg;
+  setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 4000);
+}
+function deleteChatHistoryOnly(){
+  clearChatMemory();
+  showPassportStatus(I18N[currentLang].passport_done);
+}
+function deleteMoodDataOnly(){
+  moodLog = [];
+  safeSet('mc_moodlog', '[]');
+  renderMoodChart();
+  showPassportStatus(I18N[currentLang].passport_done);
+}
+function deleteExerciseHistoryOnly(){
+  safeSet('mc_tried_exercises', '[]');
+  safeSet('mc_relief_log', '[]');
+  safeSet('mc_streak', '0');
+  safeSet('mc_last_done', '');
+  safeSet('mc_last_celebrated', '');
+  updateStreakDisplay();
+  updateProgressStats();
+  showPassportStatus(I18N[currentLang].passport_done);
+}
+function getAllWahaKeys(){
+  const keys = [];
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if(k && k.indexOf('mc_') === 0) keys.push(k);
+    }
+  }catch(e){}
+  return keys;
+}
+function exportAllPassportData(){
+  try{
+    const data = {};
+    getAllWahaKeys().forEach(k=>{
+      try{ data[k] = JSON.parse(safeGet(k)); }catch(e){ data[k] = safeGet(k); }
+    });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'waha-my-data-' + todayKey() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    showPassportStatus(I18N[currentLang].passport_done);
+  }catch(e){
+    showPassportStatus(I18N[currentLang].passport_error);
+  }
+}
+function confirmDeleteEverything(){
+  if(!window.confirm(I18N[currentLang].passport_confirm_all)) return;
+  getAllWahaKeys().forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} });
+  window.location.reload();
+}
+
+// ---------------------------------------------------------------------
+// PERSONAL CALM PLAN
+// Prepared while the user feels stable, for use during a harder moment.
+// Stored locally only (mc_calm_plan), never uploaded, never used to
+// auto-contact anyone — the "person" field is just a name/note the user
+// writes for themselves to remember. Crisis resources stay clearly
+// separate and one tap away from this screen at all times.
+// ---------------------------------------------------------------------
+function getCalmPlan(){
+  try{ const raw = safeGet('mc_calm_plan'); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
+}
+function openCalmPlan(){
+  const plan = getCalmPlan();
+  if(plan) renderCalmPlanView(plan);
+  else showCalmPlanEditMode();
+  document.getElementById('calmPlanModal').classList.add('open');
+}
+function closeCalmPlan(){
+  document.getElementById('calmPlanModal').classList.remove('open');
+}
+function showCalmPlanEditMode(){
+  document.getElementById('calmPlanEditView').style.display = 'block';
+  document.getElementById('calmPlanViewMode').style.display = 'none';
+}
+function saveCalmPlan(){
+  const plan = {
+    exercise: document.getElementById('cpExercise').value.trim(),
+    sentence: document.getElementById('cpSentence').value.trim(),
+    place: document.getElementById('cpPlace').value.trim(),
+    activity: document.getElementById('cpActivity').value.trim(),
+    person: document.getElementById('cpPerson').value.trim(),
+    steps: document.getElementById('cpSteps').value.trim(),
+  };
+  safeSet('mc_calm_plan', JSON.stringify(plan));
+  renderCalmPlanView(plan);
+}
+function renderCalmPlanView(plan){
+  const dict = I18N[currentLang];
+  const rows = [
+    ['cpvExercise', dict.calmplan_f_exercise, plan.exercise],
+    ['cpvSentence', dict.calmplan_f_sentence, plan.sentence],
+    ['cpvPlace', dict.calmplan_f_place, plan.place],
+    ['cpvActivity', dict.calmplan_f_activity, plan.activity],
+    ['cpvPerson', dict.calmplan_f_person, plan.person],
+    ['cpvSteps', dict.calmplan_f_steps, plan.steps],
+  ];
+  rows.forEach(([id, label, val])=>{
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    const b = document.createElement('b');
+    b.textContent = label + ': ';
+    el.appendChild(b);
+    el.appendChild(document.createTextNode(val || '—'));
+  });
+  document.getElementById('calmPlanEditView').style.display = 'none';
+  document.getElementById('calmPlanViewMode').style.display = 'block';
+}
+function editCalmPlan(){
+  const plan = getCalmPlan() || {};
+  document.getElementById('cpExercise').value = plan.exercise || '';
+  document.getElementById('cpSentence').value = plan.sentence || '';
+  document.getElementById('cpPlace').value = plan.place || '';
+  document.getElementById('cpActivity').value = plan.activity || '';
+  document.getElementById('cpPerson').value = plan.person || '';
+  document.getElementById('cpSteps').value = plan.steps || '';
+  showCalmPlanEditMode();
+}
+function exportCalmPlan(){
+  const plan = getCalmPlan();
+  if(!plan) return;
+  const blob = new Blob([JSON.stringify(plan, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'waha-calm-plan-' + todayKey() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+function escapeHtml(str){
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function printCalmPlan(){
+  const plan = getCalmPlan();
+  if(!plan) return;
+  const dict = I18N[currentLang];
+  const rows = [
+    [dict.calmplan_f_exercise, plan.exercise], [dict.calmplan_f_sentence, plan.sentence],
+    [dict.calmplan_f_place, plan.place], [dict.calmplan_f_activity, plan.activity],
+    [dict.calmplan_f_person, plan.person], [dict.calmplan_f_steps, plan.steps],
+  ];
+  const html = '<html><head><meta charset="utf-8"><title>' + escapeHtml(dict.calmplan_title) + '</title>' +
+    '<style>body{font-family:sans-serif;padding:30px;max-width:600px;margin:0 auto;} h1{font-size:20px;} p{font-size:14px;line-height:1.6;} b{display:block;margin-top:14px;color:#333;}</style></head><body>' +
+    '<h1>' + escapeHtml(dict.calmplan_title) + '</h1>' +
+    rows.map(([label,val])=> '<p><b>'+escapeHtml(label)+'</b>'+escapeHtml(val||'—')+'</p>').join('') +
+    '</body></html>';
+  const w = window.open('', '_blank');
+  if(!w) return;
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  w.print();
+}
+function confirmDeleteCalmPlan(){
+  if(!window.confirm(I18N[currentLang].calmplan_confirm_delete)) return;
+  safeSet('mc_calm_plan', '');
+  showCalmPlanEditMode();
+  document.getElementById('cpExercise').value = '';
+  document.getElementById('cpSentence').value = '';
+  document.getElementById('cpPlace').value = '';
+  document.getElementById('cpActivity').value = '';
+  document.getElementById('cpPerson').value = '';
+  document.getElementById('cpSteps').value = '';
+}
+
+const FREE_CHAT_LIMIT = 10;
+const CLIENT_CRISIS_KEYWORDS = {
+  ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش"],
+  en: ["suicide", "kill myself", "end my life", "hurt myself", "self harm", "self-harm", "want to die", "don't want to live"],
+  de: ["selbstmord", "mich umbringen", "mir etwas antun", "nicht mehr leben", "ich will sterben", "mich verletzen", "suizid"],
+  fr: ["suicide", "me tuer", "me faire du mal", "je veux mourir", "je ne veux plus vivre"],
+  tr: ["intihar", "kendimi öldür", "kendime zarar", "ölmek istiyorum", "yaşamak istemiyorum"],
+  ku: ["xwekuştin", "xwe bikujim", "zirarê xwe bidim", "dixwazim bimirim"],
+  es: ["suicidio", "matarme", "hacerme daño", "quiero morir", "no quiero vivir"],
+  fa: ["خودکشی", "خودم را بکشم", "به خودم آسیب", "می‌خواهم بمیرم", "نمی‌خواهم زندگی کنم"],
+  ur: ["خودکشی", "خود کو نقصان", "میں مرنا چاہتا", "جینا نہیں چاہتا"],
+  ru: ["самоубийство", "покончить с собой", "причинить себе вред", "хочу умереть", "не хочу жить"],
+  pt: ["suicídio", "me matar", "me machucar", "quero morrer", "não quero viver"],
+  it: ["suicidio", "uccidermi", "farmi del male", "voglio morire", "non voglio vivere"],
+};
+function normalizeForCrisisCheck(text){
+  let t = text.toLowerCase();
+  t = t.replace(/[\u064B-\u065F\u0670]/g, '');
+  t = t.replace(/(?<!\p{L})(?:\p{L}[ \t]+){2,}\p{L}(?!\p{L})/gu, (m) => m.replace(/\s+/g, ''));
+  t = t.replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه');
+  t = t.replace(/\s+/g, ' ').trim();
+  return t;
+}
+function detectCrisisClient(text){
+  const normalized = normalizeForCrisisCheck(text);
+  for(const lang of Object.keys(CLIENT_CRISIS_KEYWORDS)){
+    for(const kw of CLIENT_CRISIS_KEYWORDS[lang]){
+      if(normalized.includes(normalizeForCrisisCheck(kw))) return true;
+    }
+  }
+  return false;
+}
+function getFreeChatCount(){ return parseInt(safeGet('mc_free_chat_count') || '0', 10); }
+function updateFreeChatCounter(){
+  const el = document.getElementById('freeChatCounter');
+  if(!el) return;
+  const remaining = Math.max(0, FREE_CHAT_LIMIT - getFreeChatCount());
+  const dict = I18N[currentLang];
+  el.textContent = '· ' + remaining + ' ' + dict.free_chat_remaining;
+}
+
+function sendMsg(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  if(safeGet('mc_chat_consent') !== '1'){
+    pendingChatMessage = text;
+    document.getElementById('chatConsentModal').classList.add('open');
+    return;
+  }
+  const isCrisisMsg = detectCrisisClient(text);
+  if(!isCrisisMsg && getFreeChatCount() >= FREE_CHAT_LIMIT){
+    input.value = '';
+    openUpgrade();
+    return;
+  }
+  const log = document.getElementById('chatLog');
+  const typing = document.getElementById('typingIndicator');
+  const me = document.createElement('div');
+  me.className = 'msg me';
+  me.textContent = text;
+  log.appendChild(me);
+  input.value = '';
+  log.scrollTop = log.scrollHeight;
+  const typingLabels = { ar:'يكتب الآن…', de:'Schreibt gerade…', en:'Typing…', fr:'Écrit…', tr:'Yazıyor…', ku:'Dinivîse…', es:'Escribiendo…', fa:'در حال نوشتن…', ur:'لکھ رہا ہے…', ru:'Печатает…', pt:'A escrever…', it:'Sta scrivendo…' };
+  typing.textContent = typingLabels[currentLang] || typingLabels.en;
+
+  function showReply(reply){
+    const bot = document.createElement('div');
+    bot.className = 'msg bot';
+    bot.textContent = reply;
+    log.appendChild(bot);
+    typing.textContent = '';
+    log.scrollTop = log.scrollHeight;
+    speak(reply);
+    updateFreeChatCounter();
+  }
+  function showSystemNotice(noticeText){
+    const notice = document.createElement('div');
+    notice.className = 'msg system-notice';
+    notice.textContent = noticeText;
+    log.appendChild(notice);
+    log.scrollTop = log.scrollHeight;
+  }
+  function fallbackDemoReply(){
+    showSystemNotice(I18N[currentLang].ai_unavailable_notice);
+    const replies = DEMO_REPLIES[currentLang] || DEMO_REPLIES.en;
+    const reply = replies[demoIndex % replies.length];
+    demoIndex++;
+    showReply(reply);
+  }
+
+  fetch(CHAT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang }),
+  })
+  .then(res => {
+    if(res.status === 429){
+      const err = new Error('rate limited');
+      err.rateLimited = true;
+      throw err;
+    }
+    if(!res.ok) throw new Error('bad status ' + res.status);
+    return res.json();
+  })
+  .then(data => {
+    if(!data.reply) throw new Error('empty reply');
+    chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply });
+    if(chatHistory.length > MAX_CHAT_HISTORY) chatHistory = chatHistory.slice(-MAX_CHAT_HISTORY);
+    saveChatMemory();
+    if(!isCrisisMsg) safeSet('mc_free_chat_count', String(getFreeChatCount() + 1));
+    showReply(data.reply);
+  })
+  .catch((err)=>{
+    if(err && err.rateLimited){
+      typing.textContent = '';
+      showReply(I18N[currentLang].rate_limit_msg);
+      return;
+    }
+    setTimeout(fallbackDemoReply, 500);
+  });
+}
+
+function acceptChatConsent(){
+  safeSet('mc_chat_consent', '1');
+  document.getElementById('chatConsentModal').classList.remove('open');
+  if(pendingChatMessage){
+    document.getElementById('chatInput').value = pendingChatMessage;
+    pendingChatMessage = null;
+    sendMsg();
+  } else if(pendingCheckinText){
+    document.getElementById('checkinModal').classList.add('open');
+    document.getElementById('checkinFreeText').value = pendingCheckinText;
+    pendingCheckinText = null;
+    sendCheckinText();
+  }
+}
+function closeChatConsent(){
+  document.getElementById('chatConsentModal').classList.remove('open');
+  pendingChatMessage = null;
+  pendingCheckinText = null;
+}
+
+let deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  maybeShowInstallBanner('android');
+});
+function isStandalone(){
+  return window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+}
+function isIOS(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+function maybeShowInstallBanner(kind){
+  if(isStandalone()) return;
+  if(safeGet('mc_install_dismissed') === '1') return;
+  const banner = document.getElementById('installBanner');
+  const text = document.getElementById('installBannerText');
+  const btn = document.getElementById('installBannerBtn');
+  const dict = I18N[currentLang] || I18N.en;
+  if(kind === 'ios'){
+    text.textContent = dict.install_ios_text;
+    btn.style.display = 'none';
+  } else {
+    text.textContent = dict.install_android_text;
+    btn.style.display = 'inline-block';
+    btn.textContent = dict.install_btn;
+  }
+  banner.style.display = 'flex';
+}
+function dismissInstallBanner(){
+  document.getElementById('installBanner').style.display = 'none';
+  safeSet('mc_install_dismissed', '1');
+}
+async function handleInstallClick(){
+  if(!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  dismissInstallBanner();
+}
+if(isIOS() && !isStandalone()){
+  setTimeout(()=> maybeShowInstallBanner('ios'), 1200);
+}
+
+populateLangSelect();
+const restoredLang = restorePreferences();
+function detectBrowserLang(){
+  try{
+    const supported = LANGS.map(l=>l.code);
+    const candidates = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
+    for(const raw of candidates){
+      if(!raw) continue;
+      const code = raw.toLowerCase().split('-')[0];
+      if(supported.includes(code)) return code;
+    }
+  }catch(e){}
+  return 'en';
+}
+
+// Generic modal accessibility: every dialog in the app already has
+// role="dialog" aria-modal="true" and (except the age gate, by design) an
+// Escape-to-close handler, but none of them moved focus into the dialog on
+// open, restored it on close, or trapped Tab inside the dialog while open
+// — so keyboard/screen-reader users could tab straight into the dimmed
+// background content behind an open modal. This observes every
+// .prefs-overlay/.modal-overlay for its open/close class toggle (however
+// the modal-specific code already opens/closes it) and handles all three,
+// without touching any of the existing per-modal open/close functions.
+(function initModalA11y(){
+  let lastFocused = null;
+  function focusableIn(container){
+    return Array.from(container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.offsetParent !== null);
+  }
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Tab') return;
+    const modal = document.querySelector('.prefs-overlay.open, .modal-overlay.open');
+    if(!modal) return;
+    const focusable = focusableIn(modal);
+    if(!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  });
+  const observer = new MutationObserver((mutations)=>{
+    mutations.forEach((m)=>{
+      const el = m.target;
+      if(!(el.classList.contains('prefs-overlay') || el.classList.contains('modal-overlay'))) return;
+      if(el.classList.contains('open')){
+        lastFocused = document.activeElement;
+        const focusable = focusableIn(el);
+        (focusable[0] || el).focus();
+      } else if(lastFocused && document.body.contains(lastFocused)){
+        lastFocused.focus();
+        lastFocused = null;
+      }
+    });
+  });
+  document.querySelectorAll('.prefs-overlay, .modal-overlay').forEach((el)=>{
+    if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+  });
+})();
+
+setLang((restoredLang && I18N[restoredLang]) ? restoredLang : detectBrowserLang());
+maybeShowAgeGate();
+maybeShowReminder();
+loadChatMemory();
+setTimeout(maybeShowDailyBrief, 700);
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  });
+}
+
+
+// ---------------------------------------------------------------------
+// Expose functions referenced by inline HTML event handlers (onclick="..."
+// etc.) as globals. This file is loaded as an ES module (see index.html),
+// so top-level function declarations are module-scoped, not global, and
+// wouldn't otherwise be reachable from markup. Converting every inline
+// handler to addEventListener wiring is a separate, larger refactor —
+// tracked separately, not done here to keep this pass mechanical.
+// ---------------------------------------------------------------------
+window.acceptChatConsent = acceptChatConsent;
+window.answerReliefFeedback = answerReliefFeedback;
+window.backToEditFeeling = backToEditFeeling;
+window.clearChatMemory = clearChatMemory;
+window.closeCalmPlan = closeCalmPlan;
+window.closeChatConsent = closeChatConsent;
+window.closeCheckin = closeCheckin;
+window.closeCrisis = closeCrisis;
+window.closeDailyBrief = closeDailyBrief;
+window.closeExercise = closeExercise;
+window.closeExplainFeeling = closeExplainFeeling;
+window.closePrefs = closePrefs;
+window.closePrivacyPassport = closePrivacyPassport;
+window.closeRelief = closeRelief;
+window.closeSleepMode = closeSleepMode;
+window.closeSounds = closeSounds;
+window.closeUpgrade = closeUpgrade;
+window.closeWhyExplain = closeWhyExplain;
+window.confirmAgeGate = confirmAgeGate;
+window.confirmDeleteCalmPlan = confirmDeleteCalmPlan;
+window.confirmDeleteEverything = confirmDeleteEverything;
+window.copyFeelingDraft = copyFeelingDraft;
+window.deleteChatHistoryOnly = deleteChatHistoryOnly;
+window.deleteExerciseHistoryOnly = deleteExerciseHistoryOnly;
+window.deleteMoodDataOnly = deleteMoodDataOnly;
+window.dismissInstallBanner = dismissInstallBanner;
+window.dismissReminder = dismissReminder;
+window.editCalmPlan = editCalmPlan;
+window.explainSuggestion = explainSuggestion;
+window.exportAllPassportData = exportAllPassportData;
+window.exportBackup = exportBackup;
+window.exportCalmPlan = exportCalmPlan;
+window.exportFeelingDraft = exportFeelingDraft;
+window.generateFeelingDraft = generateFeelingDraft;
+window.handleInstallClick = handleInstallClick;
+window.importBackup = importBackup;
+window.markExerciseDone = markExerciseDone;
+window.nextOnboardingStep = nextOnboardingStep;
+window.openCalmPlan = openCalmPlan;
+window.openCheckin = openCheckin;
+window.openCrisis = openCrisis;
+window.openExplainFeeling = openExplainFeeling;
+window.openPrefs = openPrefs;
+window.openPrivacyPassport = openPrivacyPassport;
+window.openRelief = openRelief;
+window.openSleepMode = openSleepMode;
+window.openSounds = openSounds;
+window.openUpgrade = openUpgrade;
+window.printCalmPlan = printCalmPlan;
+window.printFeelingDraft = printFeelingDraft;
+window.readModalAloud = readModalAloud;
+window.restartRelief = restartRelief;
+window.rewriteFeelingWithAI = rewriteFeelingWithAI;
+window.saveCalmPlan = saveCalmPlan;
+window.saveJournalEntry = saveJournalEntry;
+window.sendCheckinText = sendCheckinText;
+window.sendMsg = sendMsg;
+window.setFeelingTone = setFeelingTone;
+window.setLang = setLang;
+window.setSoundTimer = setSoundTimer;
+window.setSoundVolume = setSoundVolume;
+window.setUserGender = setUserGender;
+window.shareApp = shareApp;
+window.skipOnboarding = skipOnboarding;
+window.startBriefSuggestion = startBriefSuggestion;
+window.startModalTimer = startModalTimer;
+window.startMoodSuggestion = startMoodSuggestion;
+window.startSleepBreathing = startSleepBreathing;
+window.stopRelief = stopRelief;
+window.toggleBreathe = toggleBreathe;
+window.toggleCalmMode = toggleCalmMode;
+window.toggleDarkMode = toggleDarkMode;
+window.toggleMic = toggleMic;
+window.toggleReliefMute = toggleReliefMute;
+window.toggleReliefPause = toggleReliefPause;
+window.toggleSound = toggleSound;
+window.toggleStreaksDisabled = toggleStreaksDisabled;
+window.toggleTempConversationMode = toggleTempConversationMode;
+window.toggleTextLarge = toggleTextLarge;
+window.toggleVoice = toggleVoice;
