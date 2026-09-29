@@ -42,6 +42,15 @@
 # URIs in the HTML (re-downloaded on every page load, never cacheable on
 # their own); as real files they can now sit in the browser cache for a
 # year like any other static asset.
+#
+# IMPORTANT: because of `immutable`, a browser that already fetched one of
+# these once will keep serving that exact copy for a year and won't even
+# re-ask the server — replacing the file's content at the same URL (as
+# happened once already, silently) does nothing for anyone who already has
+# it cached. Any future change to favicon.svg / icon-192.png / icon-512.png
+# / apple-touch-icon.png must bump the `?v=N` query string on every
+# reference to it (index.html's <link> tags, manifest.json's icons[].src)
+# to force a fresh URL.
 [[headers]]
   for = "/*.png"
   [headers.values]
