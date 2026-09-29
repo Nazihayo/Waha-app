@@ -1,0 +1,20 @@
+{
+  "name": "waha-mobile",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Capacitor wrapper that packages the Waha web app as a native iOS/Android app.",
+  "scripts": {
+    "build:www": "node scripts/build-www.js",
+    "sync": "npm run build:www && npx cap sync",
+    "open:ios": "npx cap open ios",
+    "open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
+    "@capacitor/android": "^6.1.2"
+  }
+}

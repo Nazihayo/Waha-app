@@ -3459,6 +3459,15 @@ const LIBRARY = {
   ],
 };
 
+// When this page is served over https (the normal web deploy on Netlify),
+// a relative path is correct and works with any domain/preview URL.
+// When it's bundled into a native app shell (Capacitor: capacitor:// /
+// http://localhost on iOS/Android), there is no same-origin Netlify
+// function to call, so the request must go to the deployed site instead.
+// See mobile/README.md for how CAPACITOR_API_BASE gets set at build time.
+const API_BASE = (window.Capacitor && window.CAPACITOR_API_BASE) ? window.CAPACITOR_API_BASE : '';
+const CHAT_ENDPOINT = API_BASE + '/.netlify/functions/chat';
+
 let currentLang = 'ar';
 let demoIndex = 0;
 let chatHistory = [];
@@ -3867,7 +3876,7 @@ function rewriteFeelingWithAI(){
   const btn = document.getElementById('efAiBtn');
   btn.disabled = true;
   showEfStatus(dict.checkin_thinking);
-  fetch('/.netlify/functions/chat', {
+  fetch(CHAT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: text, history: [], lang: currentLang, mode: 'rewrite' }),
@@ -4788,7 +4797,7 @@ function sendCheckinText(){
   respBox.textContent = I18N[currentLang].checkin_thinking;
   whyBtn.style.display = 'none';
 
-  fetch('/.netlify/functions/chat', {
+  fetch(CHAT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: text, history: [], lang: currentLang, mode: 'checkin' }),
@@ -5311,7 +5320,7 @@ function sendMsg(){
     showReply(reply);
   }
 
-  fetch('/.netlify/functions/chat', {
+  fetch(CHAT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang }),

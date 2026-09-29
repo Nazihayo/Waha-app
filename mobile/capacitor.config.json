@@ -1,0 +1,12 @@
+{
+  "appId": "com.waha.app",
+  "appName": "Waha",
+  "webDir": "www",
+  "backgroundColor": "#1B2B36",
+  "ios": {
+    "contentInset": "always"
+  },
+  "android": {
+    "backgroundColor": "#1B2B36"
+  }
+}
