@@ -3,6 +3,13 @@
   publish = "dist"
   functions = "netlify/functions"
 
+[build.environment]
+  # Vite 8 requires Node ^20.19.0 || >=22.12.0. Without this pinned,
+  # Netlify falls back to its account-level default Node version, which
+  # can be older than that and makes `npm run build` fail outright — the
+  # deploy then silently stays on the last successful (pre-Vite) build.
+  NODE_VERSION = "22.12.0"
+
 [functions]
   node_bundler = "esbuild"
 
