@@ -13,12 +13,16 @@
 # wireDataActions()), and the app is now one external, same-origin module
 # script with zero inline <script> content. A CSP-blocked injected inline
 # script genuinely can't execute anymore — this is real defense, not just
-# a header. style-src still needs 'unsafe-inline': the markup still has
-# plenty of style="" attributes, a separate, not-yet-done cleanup.
+# a header. style-src also dropped 'unsafe-inline': every style="" in the
+# markup became a CSS class (src/styles.css), and the only runtime style
+# manipulation in main.js is individual el.style.property assignment
+# (e.g. banner.style.display = 'flex'), which isn't inline-style-attribute
+# injection and isn't gated by style-src — there's no remaining
+# setAttribute('style', ...) or el.style.cssText usage.
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"

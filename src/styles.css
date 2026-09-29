@@ -385,3 +385,51 @@
   @media (prefers-reduced-motion: reduce){
     .core.breathing, .blob1, .blob2, .dot.speaking, .icon-btn.recording{animation:none;}
   }
+
+/* ---------------------------------------------------------------------
+   Converted from style="" attributes (see index.html) so style-src can
+   drop 'unsafe-inline' too. Small, single-purpose utility classes for
+   values that repeated verbatim across otherwise-unrelated elements;
+   purpose-named classes for one-off combinations. The utility classes
+   use !important because that's what they're replacing: an inline
+   style="" attribute always won regardless of any other rule's
+   specificity (e.g. html[lang="ar"] .prefs-title{font-size:30px} has
+   higher specificity than a plain .u-fs-22 and would otherwise silently
+   win for Arabic/Farsi/Urdu — exactly the kind of per-language
+   regression this file's tests don't all cover, since most of them run
+   in English).
+   --------------------------------------------------------------------- */
+  .u-hidden{display:none !important;}
+  .u-w-full{width:100% !important;}
+  .u-mt-3{margin-top:3px !important;}
+  .u-mt-10{margin-top:10px !important;}
+  .u-mt-16{margin-top:16px !important;}
+  .u-mb-24{margin-bottom:24px !important;}
+  .u-text-center{text-align:center !important;}
+  .u-op-40{opacity:0.4 !important;}
+  .u-op-70{opacity:0.7 !important;}
+  .u-fs-13-5{font-size:13.5px !important;}
+  .u-fs-22{font-size:22px !important;}
+  .u-fs-24{font-size:24px !important;}
+  .u-fs-26{font-size:26px !important;}
+  .u-max-w-340{max-width:340px !important;}
+  .u-z-200{z-index:200 !important;}
+  .u-link-inherit{color:inherit !important;opacity:0.7 !important;}
+  .u-danger-btn{background:#c94a4a !important;color:#fff !important;border-color:#c94a4a !important;}
+
+  /* Install banner: originally had both display:none and display:flex in
+     the same style="" attribute (the second silently wins in CSS, so the
+     banner was actually always visible by default, an empty fixed bar at
+     the bottom of every page load — a pre-existing bug, fixed here to the
+     evidently-intended display:none; JS's existing banner.style.display =
+     'flex'/'none' calls are untouched and still show/hide it correctly). */
+  .install-banner{position:fixed;bottom:0;inset-inline:0;z-index:200;background:var(--accent-surface);color:var(--accent-text);padding:14px 18px;font-size:13px;display:none;align-items:center;gap:12px;box-shadow:0 -6px 20px rgba(0,0,0,0.2);}
+  .install-banner-text{flex:1;line-height:1.5;}
+  .install-banner-btn{display:none;background:var(--gold);color:var(--ink);border:none;border-radius:8px;padding:8px 14px;font-weight:600;font-family:inherit;font-size:13px;cursor:pointer;white-space:nowrap;}
+  .install-banner-close{background:transparent;border:none;color:var(--accent-text);font-size:16px;cursor:pointer;opacity:0.7;}
+
+  .relief-stop-link-inline{display:inline;color:#c94a4a;}
+  .age-gate-label{display:flex;align-items:flex-start;gap:10px;margin:18px 0;cursor:pointer;}
+  .sleep-close-icon{color:#eef0e6;}
+  .mood-prompt-text{text-align:center;font-size:13px;margin:0 0 10px;}
+  .footer-links-row{text-align:center;font-size:12.5px;margin-top:10px;}

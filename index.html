@@ -26,10 +26,10 @@
 </head>
 <body>
 
-<div id="installBanner" style="display:none;position:fixed;bottom:0;inset-inline:0;z-index:200;background:var(--accent-surface);color:var(--accent-text);padding:14px 18px;font-size:13px;display:flex;align-items:center;gap:12px;box-shadow:0 -6px 20px rgba(0,0,0,0.2);">
-  <span id="installBannerText" style="flex:1;line-height:1.5;"></span>
-  <button id="installBannerBtn" data-click="handleInstallClick" style="display:none;background:var(--gold);color:var(--ink);border:none;border-radius:8px;padding:8px 14px;font-weight:600;font-family:inherit;font-size:13px;cursor:pointer;white-space:nowrap;"></button>
-  <button class="aria-close-btn" data-click="dismissInstallBanner" style="background:transparent;border:none;color:var(--accent-text);font-size:16px;cursor:pointer;opacity:0.7;">✕</button>
+<div class="install-banner" id="installBanner">
+  <span class="install-banner-text" id="installBannerText"></span>
+  <button class="install-banner-btn" id="installBannerBtn" data-click="handleInstallClick"></button>
+  <button class="aria-close-btn install-banner-close" data-click="dismissInstallBanner">✕</button>
 </div>
 
 <header>
@@ -120,14 +120,14 @@
     <div class="backup-row">
       <button class="backup-btn" data-click="exportBackup" data-i18n="backup_export"></button>
       <button class="backup-btn backup-btn-ghost" data-click="triggerImportFile" data-i18n="backup_import"></button>
-      <input type="file" id="importFileInput" accept="application/json" style="display:none;" data-change="importBackup">
+      <input class="u-hidden" type="file" id="importFileInput" accept="application/json" data-change="importBackup">
     </div>
     <p class="backup-status" id="backupStatus"></p>
     <div class="prefs-section-label" data-i18n="prefs_privacy_label"></div>
     <div class="prefs-quote-box">
       <p class="prefs-quote" data-i18n="prefs_privacy_quote"></p>
     </div>
-    <button class="backup-btn backup-btn-ghost" style="width:100%;margin-top:10px;" data-click="openPrivacyPassport">🛂 <span data-i18n="passport_open_btn"></span></button>
+    <button class="backup-btn backup-btn-ghost u-w-full u-mt-10" data-click="openPrivacyPassport">🛂 <span data-i18n="passport_open_btn"></span></button>
   </div>
 </div>
 
@@ -135,7 +135,7 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closeExplainFeeling" aria-label="Close">✕</button>
     <div class="prefs-eyebrow" data-i18n="ef_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="ef_title" style="font-size:22px;"></h2>
+    <h2 class="prefs-title u-fs-22" data-i18n="ef_title"></h2>
     <p class="prefs-subtitle" data-i18n="ef_intro"></p>
 
     <div id="efFormView">
@@ -164,10 +164,10 @@
         <input type="text" id="efHelp" class="calmplan-input" data-i18n-placeholder="ef_ph_help">
       </div>
       <p class="calmplan-hint" data-i18n="ef_empty_hint"></p>
-      <button class="backup-btn" style="width:100%;" data-click="generateFeelingDraft" data-i18n="ef_generate"></button>
+      <button class="backup-btn u-w-full" data-click="generateFeelingDraft" data-i18n="ef_generate"></button>
     </div>
 
-    <div id="efPreviewView" style="display:none;">
+    <div class="u-hidden" id="efPreviewView">
       <div class="ef-tone-row">
         <button class="ef-tone-btn active" id="efToneConciseBtn" data-click="setFeelingTone:concise" data-i18n="ef_tone_concise"></button>
         <button class="ef-tone-btn" id="efToneDetailedBtn" data-click="setFeelingTone:detailed" data-i18n="ef_tone_detailed"></button>
@@ -179,7 +179,7 @@
         <button class="backup-btn" data-click="exportFeelingDraft" data-i18n="calmplan_export"></button>
         <button class="backup-btn" data-click="backToEditFeeling" data-i18n="ef_back_edit"></button>
       </div>
-      <button class="backup-btn backup-btn-ghost" style="width:100%;margin-top:10px;" data-click="rewriteFeelingWithAI" id="efAiBtn">✨ <span data-i18n="ef_ai_rewrite"></span></button>
+      <button class="backup-btn backup-btn-ghost u-w-full u-mt-10" data-click="rewriteFeelingWithAI" id="efAiBtn">✨ <span data-i18n="ef_ai_rewrite"></span></button>
       <p class="ef-ai-note" data-i18n="ef_ai_note"></p>
     </div>
     <p class="backup-status" id="efStatus"></p>
@@ -187,7 +187,7 @@
 </div>
 
 <div class="prefs-overlay" id="whyExplainModal" role="dialog" aria-modal="true">
-  <div class="prefs-box" style="max-width:340px;">
+  <div class="prefs-box u-max-w-340">
     <button class="prefs-close aria-close-btn" data-click="closeWhyExplain" aria-label="Close">✕</button>
     <div class="prefs-eyebrow">ℹ️ <span data-i18n="why_suggestion_link"></span></div>
     <p class="why-explain-text" id="whyExplainText"></p>
@@ -198,7 +198,7 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closeCalmPlan" aria-label="Close">✕</button>
     <div class="prefs-eyebrow" data-i18n="calmplan_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="calmplan_title" style="font-size:22px;"></h2>
+    <h2 class="prefs-title u-fs-22" data-i18n="calmplan_title"></h2>
 
     <div id="calmPlanEditView">
       <p class="prefs-subtitle" data-i18n="calmplan_intro"></p>
@@ -226,27 +226,27 @@
         <label class="calmplan-label" data-i18n="calmplan_f_steps"></label>
         <textarea id="cpSteps" class="calmplan-textarea" rows="3" data-i18n-placeholder="calmplan_ph_steps"></textarea>
       </div>
-      <button class="backup-btn" style="width:100%;" data-click="saveCalmPlan" data-i18n="calmplan_save"></button>
+      <button class="backup-btn u-w-full" data-click="saveCalmPlan" data-i18n="calmplan_save"></button>
     </div>
 
-    <div id="calmPlanViewMode" style="display:none;">
+    <div class="u-hidden" id="calmPlanViewMode">
       <div class="calmplan-view-row" id="cpvExercise"></div>
       <div class="calmplan-view-row" id="cpvSentence"></div>
       <div class="calmplan-view-row" id="cpvPlace"></div>
       <div class="calmplan-view-row" id="cpvActivity"></div>
       <div class="calmplan-view-row" id="cpvPerson"></div>
       <div class="calmplan-view-row" id="cpvSteps"></div>
-      <div class="passport-btn-grid" style="margin-top:16px;">
+      <div class="passport-btn-grid u-mt-16">
         <button class="backup-btn" data-click="editCalmPlan" data-i18n="calmplan_edit"></button>
         <button class="backup-btn" data-click="exportCalmPlan" data-i18n="calmplan_export"></button>
         <button class="backup-btn" data-click="printCalmPlan" data-i18n="calmplan_print"></button>
-        <button class="backup-btn" style="background:#c94a4a;color:#fff;border-color:#c94a4a;" data-click="confirmDeleteCalmPlan" data-i18n="calmplan_delete"></button>
+        <button class="backup-btn u-danger-btn" data-click="confirmDeleteCalmPlan" data-i18n="calmplan_delete"></button>
       </div>
     </div>
 
     <div class="calmplan-crisis-link">
       <span data-i18n="calmplan_crisis_note"></span>
-      <button class="relief-stop-link" style="display:inline;color:#c94a4a;" data-click="closeCalmPlan,openCrisis" data-i18n="calmplan_crisis_btn"></button>
+      <button class="relief-stop-link relief-stop-link-inline" data-click="closeCalmPlan,openCrisis" data-i18n="calmplan_crisis_btn"></button>
     </div>
   </div>
 </div>
@@ -255,7 +255,7 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closePrivacyPassport" aria-label="Close">✕</button>
     <div class="prefs-eyebrow">🛂 <span data-i18n="passport_eyebrow"></span></div>
-    <h2 class="prefs-title" data-i18n="passport_title" style="font-size:22px;"></h2>
+    <h2 class="prefs-title u-fs-22" data-i18n="passport_title"></h2>
 
     <div class="passport-section">
       <p class="passport-section-title" data-i18n="passport_local_title"></p>
@@ -288,12 +288,12 @@
       <button class="backup-btn" data-click="deleteExerciseHistoryOnly" data-i18n="passport_del_exercises"></button>
       <button class="backup-btn" data-click="exportAllPassportData" data-i18n="passport_export_all"></button>
     </div>
-    <button class="backup-btn" style="width:100%;margin-top:10px;background:#c94a4a;color:#fff;border-color:#c94a4a;" data-click="confirmDeleteEverything" data-i18n="passport_del_all"></button>
+    <button class="backup-btn u-w-full u-mt-10 u-danger-btn" data-click="confirmDeleteEverything" data-i18n="passport_del_all"></button>
     <p class="backup-status" id="passportStatus"></p>
   </div>
 </div>
 
-<div id="reminderBanner" class="reminder-banner" style="display:none;">
+<div id="reminderBanner" class="reminder-banner u-hidden">
   <span class="reminder-icon">🌤️</span>
   <span id="reminderText" class="reminder-text"></span>
   <button class="reminder-cta" data-click="openCheckin" id="reminderCta"></button>
@@ -310,7 +310,7 @@
       <span class="trust-chip">🔒 <span data-i18n="trust_private"></span></span>
       <span class="trust-chip">🧠 <span data-i18n="trust_cbt"></span></span>
       <span class="trust-chip">🌍 <span data-i18n="trust_multilingual"></span></span>
-      <span class="trust-chip" id="streakChip" style="display:none;">🔥 <span id="streakText"></span></span>
+      <span class="trust-chip u-hidden" id="streakChip">🔥 <span id="streakText"></span></span>
     </div>
     <div class="cta-row">
       <button class="btn btn-primary" data-click="openRelief">⚡ <span data-i18n="relief_cta"></span></button>
@@ -343,7 +343,7 @@
     <div class="chat-topbar">
       <span class="dot" id="statusDot"></span>
       <span class="status" data-i18n="chat_status"></span>
-      <span class="status" id="freeChatCounter" style="opacity:0.7;"></span>
+      <span class="status u-op-70" id="freeChatCounter"></span>
       <button class="voice-toggle" id="voiceToggle" data-click="toggleVoice">
         <span id="voiceIcon">🔈</span><span id="voiceLabel" data-i18n="voice_off"></span>
       </button>
@@ -424,13 +424,13 @@
   </div>
 </div>
 
-<div class="prefs-overlay" id="ageGateModal" role="dialog" aria-modal="true" style="z-index:200;">
+<div class="prefs-overlay u-z-200" id="ageGateModal" role="dialog" aria-modal="true">
   <div class="prefs-box">
-    <h2 class="prefs-title" data-i18n="age_gate_title" style="font-size:22px;"></h2>
+    <h2 class="prefs-title u-fs-22" data-i18n="age_gate_title"></h2>
     <p class="prefs-subtitle" data-i18n="age_gate_text"></p>
-    <label style="display:flex;align-items:flex-start;gap:10px;margin:18px 0;cursor:pointer;">
-      <input type="checkbox" id="ageGateCheckbox" data-change="updateAgeGateButtonState" style="margin-top:3px;">
-      <span data-i18n="age_gate_checkbox" style="font-size:13.5px;"></span>
+    <label class="age-gate-label">
+      <input class="u-mt-3" type="checkbox" id="ageGateCheckbox" data-change="updateAgeGateButtonState">
+      <span class="u-fs-13-5" data-i18n="age_gate_checkbox"></span>
     </label>
     <div class="onboarding-actions">
       <button class="onboarding-next" id="ageGateContinueBtn" data-click="confirmAgeGate" data-i18n="age_gate_continue" disabled></button>
@@ -441,8 +441,8 @@
 <div class="prefs-overlay" id="onboardingModal" role="dialog" aria-modal="true">
   <div class="prefs-box onboarding-box">
     <div class="onboarding-icon" id="obIcon">👋</div>
-    <h2 class="prefs-title" id="obTitle" style="font-size:24px;text-align:center;"></h2>
-    <p class="prefs-subtitle" id="obDesc" style="text-align:center;"></p>
+    <h2 class="prefs-title u-fs-24 u-text-center" id="obTitle"></h2>
+    <p class="prefs-subtitle u-text-center" id="obDesc"></p>
     <div class="onboarding-dots" id="obDots"></div>
     <div class="onboarding-actions">
       <button class="onboarding-skip" id="obSkipBtn" data-click="skipOnboarding"></button>
@@ -454,8 +454,8 @@
 <div class="prefs-overlay" id="chatConsentModal" role="dialog" aria-modal="true">
   <div class="prefs-box">
     <div class="prefs-eyebrow" data-i18n="consent_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="consent_title" style="font-size:24px;"></h2>
-    <p class="prefs-subtitle" data-i18n="consent_text" style="margin-bottom:24px;"></p>
+    <h2 class="prefs-title u-fs-24" data-i18n="consent_title"></h2>
+    <p class="prefs-subtitle u-mb-24" data-i18n="consent_text"></p>
     <div class="onboarding-actions">
       <button class="onboarding-next" data-click="acceptChatConsent" data-i18n="consent_accept"></button>
       <button class="onboarding-skip" data-click="closeChatConsent" data-i18n="consent_later"></button>
@@ -469,12 +469,12 @@
 
     <div id="reliefPickView">
       <div class="prefs-eyebrow" data-i18n="relief_eyebrow"></div>
-      <h2 class="prefs-title" data-i18n="relief_title" style="font-size:24px;"></h2>
+      <h2 class="prefs-title u-fs-24" data-i18n="relief_title"></h2>
       <p class="prefs-subtitle" data-i18n="relief_subtitle"></p>
       <div class="relief-grid" id="reliefGrid"></div>
     </div>
 
-    <div id="reliefSessionView" style="display:none;">
+    <div class="u-hidden" id="reliefSessionView">
       <div class="relief-timer-ring">
         <svg viewBox="0 0 100 100" class="relief-ring-svg">
           <circle cx="50" cy="50" r="45" class="relief-ring-bg"></circle>
@@ -491,9 +491,9 @@
       <button class="relief-stop-link" data-click="stopRelief" data-i18n="relief_stop"></button>
     </div>
 
-    <div id="reliefEndView" style="display:none;">
+    <div class="u-hidden" id="reliefEndView">
       <div class="sleep-moon">🌤️</div>
-      <h2 class="prefs-title" data-i18n="relief_end_title" style="font-size:22px;"></h2>
+      <h2 class="prefs-title u-fs-22" data-i18n="relief_end_title"></h2>
       <div class="relief-feedback-row">
         <button class="relief-feedback-btn" data-click="answerReliefFeedback:yes" data-i18n="relief_fb_yes"></button>
         <button class="relief-feedback-btn" data-click="answerReliefFeedback:little" data-i18n="relief_fb_little"></button>
@@ -505,7 +505,7 @@
 
 <div class="sleep-overlay" id="sleepModal" role="dialog" aria-modal="true">
   <div class="sleep-box">
-    <button class="prefs-close aria-close-btn" id="sleepCloseBtn" data-click="closeSleepMode" aria-label="Close" style="color:#eef0e6;">✕</button>
+    <button class="prefs-close aria-close-btn sleep-close-icon" id="sleepCloseBtn" data-click="closeSleepMode" aria-label="Close">✕</button>
     <div class="sleep-moon">🌙</div>
     <h2 class="sleep-title" data-i18n="sleep_title"></h2>
     <p class="sleep-desc" data-i18n="sleep_desc"></p>
@@ -518,7 +518,7 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closeSounds" aria-label="Close">✕</button>
     <div class="prefs-eyebrow" data-i18n="sounds_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="sounds_title" style="font-size:22px;"></h2>
+    <h2 class="prefs-title u-fs-22" data-i18n="sounds_title"></h2>
     <p class="prefs-subtitle" data-i18n="sounds_subtitle"></p>
     <div class="sound-grid" id="soundGrid">
       <button class="sound-card" data-sound="rain" data-click="toggleSound:rain">
@@ -559,7 +559,7 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closeDailyBrief" aria-label="Close">✕</button>
     <div class="prefs-eyebrow" data-i18n="brief_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="brief_title" style="font-size:24px;"></h2>
+    <h2 class="prefs-title u-fs-24" data-i18n="brief_title"></h2>
     <div class="brief-line" id="briefStreakLine"></div>
     <div class="brief-line" id="briefMoodLine"></div>
     <div class="brief-line" id="briefWordLine"></div>
@@ -576,15 +576,15 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closeCheckin" aria-label="Close">✕</button>
     <div class="prefs-eyebrow" data-i18n="checkin_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="checkin_title" style="font-size:26px;"></h2>
+    <h2 class="prefs-title u-fs-26" data-i18n="checkin_title"></h2>
     <p class="prefs-subtitle" data-i18n="checkin_subtitle"></p>
     <div class="checkin-options" id="checkinOptions"></div>
     <div class="checkin-freetext-row">
       <div class="checkin-divider"><span data-i18n="checkin_or"></span></div>
       <textarea id="checkinFreeText" class="checkin-freetext-input" rows="2" data-i18n-placeholder="checkin_freetext_placeholder"></textarea>
       <button class="checkin-freetext-btn" id="checkinFreeTextBtn" data-click="sendCheckinText" data-i18n="checkin_freetext_btn"></button>
-      <div class="checkin-freetext-response" id="checkinFreeTextResponse" style="display:none;"></div>
-      <button class="why-suggestion-link" id="checkinWhyBtn" style="display:none;" data-click="explainSuggestion:checkin_ai" data-i18n="why_suggestion_link"></button>
+      <div class="checkin-freetext-response u-hidden" id="checkinFreeTextResponse"></div>
+      <button class="why-suggestion-link u-hidden" id="checkinWhyBtn" data-click="explainSuggestion:checkin_ai" data-i18n="why_suggestion_link"></button>
     </div>
   </div>
 </div>
@@ -606,7 +606,7 @@
   <div class="prefs-box">
     <button class="prefs-close aria-close-btn" data-click="closeCrisis" aria-label="Close">✕</button>
     <div class="prefs-eyebrow" data-i18n="crisis_eyebrow"></div>
-    <h2 class="prefs-title" data-i18n="crisis_title" style="font-size:24px;"></h2>
+    <h2 class="prefs-title u-fs-24" data-i18n="crisis_title"></h2>
     <p class="prefs-subtitle" data-i18n="crisis_subtitle"></p>
     <div class="crisis-card">
       <div class="crisis-card-label" data-i18n="crisis_de_label"></div>
@@ -631,27 +631,27 @@
     <div class="modal-tag" id="modalTag"></div>
     <h3 id="modalTitle"></h3>
     <p class="modal-desc" id="modalDesc"></p>
-    <div class="modal-locked" id="modalLocked" style="display:none;">
+    <div class="modal-locked u-hidden" id="modalLocked">
       <div class="modal-locked-icon">🔒</div>
       <p class="modal-locked-text" data-i18n="locked_content_text"></p>
       <button class="modal-locked-btn" data-click="openUpgrade" data-i18n="locked_unlock_btn"></button>
     </div>
     <ul class="modal-steps" id="modalSteps"></ul>
-    <div class="mood-widget" id="moodWidget" style="display:none;">
-      <p id="moodPrompt" style="text-align:center;font-size:13px;margin:0 0 10px;"></p>
+    <div class="mood-widget u-hidden" id="moodWidget">
+      <p class="mood-prompt-text" id="moodPrompt"></p>
       <div class="mood-buttons" id="moodButtons"></div>
       <div class="mood-chart" id="moodChart"></div>
       <p class="mood-empty" id="moodEmptyMsg"></p>
-      <div class="mood-suggest-box" id="moodSuggestBox" style="display:none;">
+      <div class="mood-suggest-box u-hidden" id="moodSuggestBox">
         <p class="mood-suggest-text" id="moodSuggestText"></p>
         <button class="mood-suggest-btn" id="moodSuggestBtn" data-click="startMoodSuggestion"></button>
         <button class="why-suggestion-link" data-click="explainSuggestion:mood_pattern" data-i18n="why_suggestion_link"></button>
       </div>
     </div>
-    <div class="journal-widget" id="journalWidget" style="display:none;">
+    <div class="journal-widget u-hidden" id="journalWidget">
       <textarea id="journalInput" class="journal-textarea" rows="4"></textarea>
       <button class="journal-save-btn" id="journalSaveBtn" data-click="saveJournalEntry"></button>
-      <div id="journalSavedMsg" class="journal-saved-msg" style="display:none;"></div>
+      <div id="journalSavedMsg" class="journal-saved-msg u-hidden"></div>
       <div id="journalEntries" class="journal-entries"></div>
     </div>
     <div class="modal-actions">
@@ -665,12 +665,12 @@
 
 <footer>
   <p class="disclaimer" data-i18n="footer_disclaimer"></p>
-  <p style="text-align:center;font-size:12.5px;margin-top:10px;">
-    <a href="privacy.html" style="color:inherit;opacity:0.7;">Privacy Policy</a>
-    <span style="opacity:0.4;"> · </span>
-    <a href="terms.html" style="color:inherit;opacity:0.7;">Terms of Service</a>
-    <span style="opacity:0.4;"> · </span>
-    <a href="impressum.html" style="color:inherit;opacity:0.7;">Impressum</a>
+  <p class="footer-links-row">
+    <a class="u-link-inherit" href="privacy.html">Privacy Policy</a>
+    <span class="u-op-40"> · </span>
+    <a class="u-link-inherit" href="terms.html">Terms of Service</a>
+    <span class="u-op-40"> · </span>
+    <a class="u-link-inherit" href="impressum.html">Impressum</a>
   </p>
 </footer>
 
