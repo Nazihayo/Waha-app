@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Waha</title>
+<style>
+  :root{ --ink:#1F2A3A; --paper:#FAF9F7; --dusk-deep:#1B2B36; --gold:#C9A66B; --line:rgba(31,42,58,0.12); }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.7;padding:0 20px 80px;}
+  .wrap{max-width:720px;margin:0 auto;}
+  header{padding:28px 0 8px;}
+  header a{color:var(--dusk-deep);text-decoration:none;font-weight:700;font-size:18px;}
+  h1{font-size:28px;color:var(--dusk-deep);margin:18px 0 4px;}
+  .updated{color:rgba(31,42,58,0.6);font-size:13px;margin-bottom:28px;}
+  h2{font-size:18px;color:var(--dusk-deep);margin:32px 0 10px;}
+  p, li{font-size:15px;color:rgba(31,42,58,0.85);}
+  ul{padding-inline-start:22px;}
+  .placeholder{background:rgba(201,166,107,0.15);border:1px dashed var(--gold);border-radius:6px;padding:1px 6px;color:#7a5a1e;font-weight:600;}
+  .draft-banner{background:#fff3cd;border:1px solid #f0d180;border-radius:10px;padding:14px 16px;font-size:13.5px;color:#6b4f04;margin:20px 0 30px;}
+  a{color:var(--dusk-deep);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a href="index.html">← Waha</a></header>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: <span class="placeholder">[DATE]</span></p>
+
+  <div class="draft-banner">
+    ⚠️ <strong>This is a working draft, not a finished legal document.</strong> It was generated to map out the required sections and give a reasonably accurate starting description of what the app actually does with data. Every <span class="placeholder">[bracketed]</span> field needs a real value, and the whole document needs review by a lawyer qualified in your target jurisdiction(s) — especially for GDPR (EU/Germany) and any health-data-specific rules — before this app is publicly launched.
+  </div>
+
+  <h2>1. Who is responsible for your data (data controller)</h2>
+  <p>
+    <span class="placeholder">[Legal entity name]</span><br>
+    <span class="placeholder">[Full registered address]</span><br>
+    <span class="placeholder">[Country]</span><br>
+    Contact: <span class="placeholder">[privacy@yourdomain.com]</span>
+  </p>
+
+  <h2>2. What Waha actually does with your data</h2>
+  <p>Waha is built so that most of what you enter never leaves your device. Concretely:</p>
+  <ul>
+    <li><strong>Stored only on your device (browser local storage), never sent to us:</strong> journal entries, mood log, exercise streak, calm plan, language and display preferences. We have no server-side database for this data — we cannot see it, back it up, or hand it over, because it never reaches us.</li>
+    <li><strong>Sent to a third-party AI service to generate a reply:</strong> the text you type in the chat, mood check-in, or "rewrite my feelings" feature. This is sent to Anthropic (the maker of the Claude AI models) via our own server, which also stores it — again only on your device — so the chat can remember earlier turns.</li>
+    <li><strong>Processed by our server but not stored by us:</strong> your IP address is used momentarily to apply a rate limit (so one visitor can't exhaust the app's AI budget) and is not logged alongside your messages.</li>
+    <li><strong>Technical logs:</strong> our server may log whether a request succeeded or failed, and whether a reply was rewritten by our safety layer — never the content of your messages.</li>
+  </ul>
+
+  <h2>3. Legal basis for processing (GDPR)</h2>
+  <p>
+    Chat messages, mood check-ins, and similar free-text entries can reveal information about your mental health, which GDPR treats as a special category of personal data (Art. 9). We rely on your <strong>explicit consent</strong> (Art. 9(2)(a)), which you give before your first chat message is sent (the in-app consent step). You can withdraw consent at any time by not using the chat feature and deleting your local chat history via the in-app "Privacy Passport."
+  </p>
+  <p><span class="placeholder">[Confirm this matches your actual consent flow and legal basis with your lawyer — this section is the most legally sensitive part of the whole document.]</span></p>
+
+  <h2>4. Third parties who process data on our behalf</h2>
+  <ul>
+    <li><strong>Anthropic</strong> (chat message processing) — <span class="placeholder">[confirm Data Processing Agreement / Standard Contractual Clauses are in place for EU users, since Anthropic is a US-based company]</span>.</li>
+    <li><strong>Netlify</strong> (hosting, serverless functions, rate-limit storage) — <span class="placeholder">[confirm hosting region and DPA]</span>.</li>
+  </ul>
+
+  <h2>5. International data transfers</h2>
+  <p><span class="placeholder">[Describe the safeguard used for transferring EU/EEA user data to the US — e.g. Standard Contractual Clauses — once confirmed with Anthropic/Netlify.]</span></p>
+
+  <h2>6. How long we keep data</h2>
+  <p>Locally-stored data (journal, mood, streak, chat history) stays on your device until you delete it or clear your browser storage — we have no way to delete it remotely because we never had it. <span class="placeholder">[State Anthropic's and Netlify's own retention periods for data that passes through their systems, once confirmed.]</span></p>
+
+  <h2>7. Your rights</h2>
+  <p>You can, at any time, from the app's "Privacy Passport" screen:</p>
+  <ul>
+    <li>Export all your locally-stored data as a file</li>
+    <li>Delete just your chat history, mood data, or exercise history</li>
+    <li>Delete everything at once</li>
+  </ul>
+  <p>Under GDPR you additionally have the right to access, rectify, restrict, or object to processing, and to lodge a complaint with your local data protection authority. Contact us at <span class="placeholder">[privacy@yourdomain.com]</span> for anything not covered by the in-app tools.</p>
+
+  <h2>8. Children</h2>
+  <p>Waha asks users to confirm they are 16 or older (or using the app with a parent/guardian) before first use. <span class="placeholder">[Confirm 16 is the right threshold for your target markets — GDPR sets 16 by default but allows member states to lower it to 13; non-EU jurisdictions vary.]</span></p>
+
+  <h2>9. Cookies and local storage</h2>
+  <p>Waha does not use tracking or advertising cookies. It uses your browser's local storage purely to save your own preferences and content on your own device, as described in Section 2.</p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>We'll update the date at the top of this page when this policy changes. <span class="placeholder">[Describe how you'll notify existing users of material changes.]</span></p>
+
+  <h2>11. Contact</h2>
+  <p><span class="placeholder">[privacy@yourdomain.com]</span></p>
+</div>
+</body>
+</html>

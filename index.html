@@ -310,6 +310,7 @@
   .onboarding-dot.active{width:20px;background:var(--gold);}
   .onboarding-actions{display:flex;flex-direction:column;gap:10px;}
   .onboarding-next{background:var(--dusk-deep);color:var(--paper);border:none;border-radius:10px;padding:13px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;}
+  .onboarding-next:disabled{opacity:0.4;cursor:not-allowed;}
   .onboarding-skip{background:transparent;color:rgba(31,42,58,0.55);border:none;font-family:inherit;font-size:12.5px;cursor:pointer;padding:4px;}
 
   body.text-large .modal-steps li{font-size:17px;line-height:1.65;}
@@ -773,6 +774,20 @@
   </div>
 </div>
 
+<div class="prefs-overlay" id="ageGateModal" role="dialog" aria-modal="true" style="z-index:200;">
+  <div class="prefs-box">
+    <h2 class="prefs-title" data-i18n="age_gate_title" style="font-size:22px;"></h2>
+    <p class="prefs-subtitle" data-i18n="age_gate_text"></p>
+    <label style="display:flex;align-items:flex-start;gap:10px;margin:18px 0;cursor:pointer;">
+      <input type="checkbox" id="ageGateCheckbox" onchange="document.getElementById('ageGateContinueBtn').disabled = !this.checked;" style="margin-top:3px;">
+      <span data-i18n="age_gate_checkbox" style="font-size:13.5px;"></span>
+    </label>
+    <div class="onboarding-actions">
+      <button class="onboarding-next" id="ageGateContinueBtn" onclick="confirmAgeGate()" data-i18n="age_gate_continue" disabled></button>
+    </div>
+  </div>
+</div>
+
 <div class="prefs-overlay" id="onboardingModal" role="dialog" aria-modal="true">
   <div class="prefs-box onboarding-box">
     <div class="onboarding-icon" id="obIcon">👋</div>
@@ -959,6 +974,13 @@
 
 <footer>
   <p class="disclaimer" data-i18n="footer_disclaimer"></p>
+  <p style="text-align:center;font-size:12.5px;margin-top:10px;">
+    <a href="privacy.html" style="color:inherit;opacity:0.7;">Privacy Policy</a>
+    <span style="opacity:0.4;"> · </span>
+    <a href="terms.html" style="color:inherit;opacity:0.7;">Terms of Service</a>
+    <span style="opacity:0.4;"> · </span>
+    <a href="impressum.html" style="color:inherit;opacity:0.7;">Impressum</a>
+  </p>
 </footer>
 
 <script>
@@ -1098,7 +1120,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"تمارين ومكتبة كاملة", ob3_desc:"12 تمريناً موجهاً و9 مقالات معرفية، متاحة كاملة بـ12 لغة — تصفّحها من الأعلى في أي وقت.",
     ob4_icon:"🔒", ob4_title:"كل شيء يبقى على جهازك", ob4_desc:"يومياتك وسلسلتك ومزاجك تُحفظ محلياً فقط، ولا تُرسل لأي خادم — يمكنك أيضاً تصدير نسخة احتياطية من ⚙ الإعدادات.",
     timer_start:"ابدأ المؤقّت", timer_running:"جارٍ الآن…", read_aloud:"استمع للخطوات",
-    trust_private:"سرّي 100%", trust_cbt:"مبني على CBT", trust_multilingual:"12 لغة",
+    trust_private:"خصوصية أولاً", trust_cbt:"مبني على CBT", trust_multilingual:"12 لغة", age_gate_title:"قبل أن نبدأ", age_gate_text:"Waha مخصص للأشخاص من عمر 16 سنة فأكثر. إذا كنت أصغر من ذلك، يرجى استخدام التطبيق بإشراف والد أو وصي.", age_gate_checkbox:"أؤكد أن عمري 16 عاماً أو أكثر", age_gate_continue:"متابعة",
     mood_prompt:"كيف تقيّم مزاجك الآن؟", mood_empty:"سجّل مزاجك لتبدأ برؤية النمط هنا.",
     prefs_eyebrow:"مساحتك، بقوانينك", prefs_title:"التفضيلات",
     prefs_subtitle:"بعض الإعدادات الهادئة لشكل Waha وكيفية التعامل مع أفكارك.",
@@ -1240,7 +1262,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"Übungen und Bibliothek", ob3_desc:"12 geführte Übungen und 9 Wissensartikel, vollständig in 12 Sprachen verfügbar — jederzeit oben im Menü zu finden.",
     ob4_icon:"🔒", ob4_title:"Alles bleibt auf deinem Gerät", ob4_desc:"Journal, Serie und Stimmung werden nur lokal gespeichert, nie an einen Server gesendet — du kannst auch jederzeit ein Backup unter ⚙ Einstellungen exportieren.",
     timer_start:"Timer starten", timer_running:"Läuft…", read_aloud:"Schritte anhören",
-    trust_private:"100% vertraulich", trust_cbt:"Basiert auf CBT", trust_multilingual:"12 Sprachen",
+    trust_private:"Datenschutz zuerst", trust_cbt:"Basiert auf CBT", trust_multilingual:"12 Sprachen", age_gate_title:"Bevor wir starten", age_gate_text:"Waha ist für Personen ab 16 Jahren gedacht. Bist du jünger, nutze die App bitte in Begleitung eines Elternteils oder Erziehungsberechtigten.", age_gate_checkbox:"Ich bestätige, dass ich 16 Jahre oder älter bin", age_gate_continue:"Weiter",
     mood_prompt:"Wie bewertest du deine Stimmung?", mood_empty:"Trage deine Stimmung ein, um ein Muster zu sehen.",
     prefs_eyebrow:"Dein Raum, deine Regeln", prefs_title:"Einstellungen",
     prefs_subtitle:"Ein paar ruhige Regler dafür, wie sich Waha anfühlt und wie deine Gedanken behandelt werden.",
@@ -1382,7 +1404,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"Exercises & library", ob3_desc:"12 guided exercises and 9 knowledge articles, fully available in 12 languages — browse them anytime from the top menu.",
     ob4_icon:"🔒", ob4_title:"Everything stays on your device", ob4_desc:"Your journal, streak, and mood are saved locally only, never sent to a server — you can also export a backup anytime from ⚙ Preferences.",
     timer_start:"Start timer", timer_running:"Running…", read_aloud:"Listen to the steps",
-    trust_private:"100% confidential", trust_cbt:"Based on CBT", trust_multilingual:"12 languages",
+    trust_private:"Privacy-first", trust_cbt:"Based on CBT", trust_multilingual:"12 languages", age_gate_title:"Before we start", age_gate_text:"Waha is intended for people aged 16 and up. If you're younger, please use it with a parent or guardian's supervision.", age_gate_checkbox:"I confirm I'm 16 or older", age_gate_continue:"Continue",
     mood_prompt:"How would you rate your mood right now?", mood_empty:"Log your mood to start seeing a pattern here.",
     prefs_eyebrow:"Your space, your rules", prefs_title:"Preferences",
     prefs_subtitle:"A few quiet controls for how Waha feels and how your thoughts are held.",
@@ -1524,7 +1546,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"Exercices et bibliothèque", ob3_desc:"12 exercices guidés et 9 articles, entièrement disponibles en 12 langues — accessibles à tout moment depuis le menu du haut.",
     ob4_icon:"🔒", ob4_title:"Tout reste sur ton appareil", ob4_desc:"Ton journal, ta série et ton humeur sont enregistrés uniquement en local, jamais envoyés à un serveur — tu peux aussi exporter une sauvegarde depuis ⚙ Préférences.",
     timer_start:"Démarrer le minuteur", timer_running:"En cours…", read_aloud:"Écouter les étapes",
-    trust_private:"100% confidentiel", trust_cbt:"Basé sur la TCC", trust_multilingual:"12 langues",
+    trust_private:"Confidentialité avant tout", trust_cbt:"Basé sur la TCC", trust_multilingual:"12 langues", age_gate_title:"Avant de commencer", age_gate_text:"Waha est destiné aux personnes de 16 ans et plus. Si tu es plus jeune, utilise l'application sous la supervision d'un parent ou tuteur.", age_gate_checkbox:"Je confirme avoir 16 ans ou plus", age_gate_continue:"Continuer",
     mood_prompt:"Comment évalues-tu ton humeur maintenant ?", mood_empty:"Enregistre ton humeur pour voir une tendance ici.",
     prefs_eyebrow:"Ton espace, tes règles", prefs_title:"Préférences",
     prefs_subtitle:"Quelques réglages discrets sur le ressenti de Waha et la façon dont tes pensées sont traitées.",
@@ -1666,7 +1688,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"Egzersizler ve kütüphane", ob3_desc:"12 dilde tam olarak mevcut 12 rehberli egzersiz ve 9 bilgi makalesi — üst menüden istediğin zaman gözat.",
     ob4_icon:"🔒", ob4_title:"Her şey cihazında kalır", ob4_desc:"Günlüğün, serin ve ruh halin yalnızca yerel olarak kaydedilir, asla bir sunucuya gönderilmez — istediğin zaman ⚙ Tercihler'den yedek de alabilirsin.",
     timer_start:"Zamanlayıcıyı başlat", timer_running:"Devam ediyor…", read_aloud:"Adımları dinle",
-    trust_private:"%100 gizli", trust_cbt:"BDT temelli", trust_multilingual:"12 dil",
+    trust_private:"Önce gizlilik", trust_cbt:"BDT temelli", trust_multilingual:"12 dil", age_gate_title:"Başlamadan önce", age_gate_text:"Waha, 16 yaş ve üzeri kişiler içindir. Daha gençsen, lütfen bir ebeveyn veya vasi gözetiminde kullan.", age_gate_checkbox:"16 yaşında veya daha büyük olduğumu onaylıyorum", age_gate_continue:"Devam et",
     mood_prompt:"Şu anki ruh halini nasıl değerlendirirsin?", mood_empty:"Bir örüntü görmek için ruh halini kaydet.",
     prefs_eyebrow:"Senin alanın, senin kuralların", prefs_title:"Tercihler",
     prefs_subtitle:"Waha'in nasıl hissettirdiği ve düşüncelerinin nasıl ele alındığı için birkaç sakin ayar.",
@@ -1808,7 +1830,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"Ezmûn û pirtûkxane", ob3_desc:"12 ezmûnên rêberkirî û 9 gotarên zanînê, bi tevahî bi 12 zimanan berdest in — her gav ji menuya jorîn bibîne.",
     ob4_icon:"🔒", ob4_title:"Her tişt li ser amûra te dimîne", ob4_desc:"Rojnivîsk, rêzefîlm û hestê te tenê bi herêmî tê tomarkirin, çu carî ji bo serverek nayê şandin — tu her gav dikarî ji ⚙ Vebijark paşpişkek jî derxînî.",
     timer_start:"Demjimêrê dest pê bike", timer_running:"Dimeşe…", read_aloud:"Guhdariya gavan bike",
-    trust_private:"%100 nihênî", trust_cbt:"Li ser bingeha CBT", trust_multilingual:"12 ziman",
+    trust_private:"Pêşî nihênî", trust_cbt:"Li ser bingeha CBT", trust_multilingual:"12 ziman", age_gate_title:"Berî em dest pê bikin", age_gate_text:"Waha ji bo kesên 16 salî û bilindtir hatiye çêkirin. Heke tu ji vê biçûktir î, ji kerema xwe di bin çavdêriya dê/bav an serperiştek de bikar bîne.", age_gate_checkbox:"Ez erê dikim ku ez 16 salî û bilindtir im", age_gate_continue:"Bidomîne",
     mood_prompt:"Tu rewşa xwe ya derûnî ya niha çawa nirxdikî?", mood_empty:"Rewşa xwe tomar bike da ku li vir mînakek bibînî.",
     prefs_eyebrow:"Cihê te, qaîdeyên te", prefs_title:"Vebijêrk",
     prefs_subtitle:"Çend mîhengên aram ji bo ka Waha çawa hîs dike û ramanên te çawa têne girtin.",
@@ -1950,7 +1972,7 @@ const I18N = {
     ob3_icon:"📚", ob3_title:"Ejercicios y biblioteca", ob3_desc:"12 ejercicios guiados y 9 artículos, totalmente disponibles en 12 idiomas — explóralos cuando quieras desde el menú superior.",
     ob4_icon:"🔒", ob4_title:"Todo se queda en tu dispositivo", ob4_desc:"Tu diario, racha y ánimo se guardan solo localmente, nunca se envían a un servidor — también puedes exportar una copia de seguridad desde ⚙ Preferencias.",
     timer_start:"Iniciar temporizador", timer_running:"En curso…", read_aloud:"Escuchar los pasos",
-    trust_private:"100% confidencial", trust_cbt:"Basado en TCC", trust_multilingual:"12 idiomas",
+    trust_private:"Privacidad ante todo", trust_cbt:"Basado en TCC", trust_multilingual:"12 idiomas", age_gate_title:"Antes de empezar", age_gate_text:"Waha está pensado para personas de 16 años en adelante. Si eres más joven, úsalo bajo la supervisión de un padre, madre o tutor.", age_gate_checkbox:"Confirmo que tengo 16 años o más", age_gate_continue:"Continuar",
     mood_prompt:"¿Cómo calificarías tu estado de ánimo ahora?", mood_empty:"Registra tu ánimo para empezar a ver un patrón aquí.",
     prefs_eyebrow:"Tu espacio, tus reglas", prefs_title:"Preferencias",
     prefs_subtitle:"Algunos controles discretos sobre cómo se siente Waha y cómo se tratan tus pensamientos.",
@@ -1998,7 +2020,7 @@ const I18N = {
       libf_all:"همه", libf_anxiety:"اضطراب", libf_habits:"عادت‌ها", libf_relationships:"روابط", libf_self:"عزت نفس", libf_emotions:"احساسات", libf_stress:"استرس",
       read_more:"بیشتر بخوان ←",
       timer_start:"شروع تایمر", timer_running:"در حال اجرا…", read_aloud:"شنیدن مراحل",
-      trust_private:"۱۰۰٪ محرمانه", trust_cbt:"مبتنی بر CBT", trust_multilingual:"۱۲ زبان",
+      trust_private:"اولویت با حریم خصوصی", trust_cbt:"مبتنی بر CBT", trust_multilingual:"۱۲ زبان", age_gate_title:"پیش از شروع", age_gate_text:"Waha برای افراد ۱۶ سال به بالا طراحی شده. اگر کوچک‌تری، لطفاً با نظارت والدین یا سرپرست از آن استفاده کن.", age_gate_checkbox:"تأیید می‌کنم که ۱۶ سال یا بیشتر دارم", age_gate_continue:"ادامه",
       mood_prompt:"حال روحی خود را الان چگونه ارزیابی می‌کنی؟", mood_empty:"حالت را ثبت کن تا الگو را اینجا ببینی.",
       prefs_eyebrow:"فضای تو، قوانین تو", prefs_title:"تنظیمات",
       prefs_subtitle:"چند تنظیم آرام درباره حس Waha و نحوه نگهداری افکار تو.",
@@ -2140,7 +2162,7 @@ const I18N = {
       libf_all:"سب", libf_anxiety:"اضطراب", libf_habits:"عادات", libf_relationships:"تعلقات", libf_self:"خودعزتی", libf_emotions:"جذبات", libf_stress:"تناؤ",
       read_more:"مزید پڑھیں ←",
       timer_start:"ٹائمر شروع کریں", timer_running:"جاری ہے…", read_aloud:"مراحل سنیں",
-      trust_private:"100% خفیہ", trust_cbt:"CBT پر مبنی", trust_multilingual:"12 زبانیں",
+      trust_private:"رازداری پہلے", trust_cbt:"CBT پر مبنی", trust_multilingual:"12 زبانیں", age_gate_title:"شروع کرنے سے پہلے", age_gate_text:"Waha 16 سال یا اس سے زیادہ عمر کے افراد کے لیے ہے۔ اگر آپ کم عمر ہیں تو براہ کرم والدین یا سرپرست کی نگرانی میں استعمال کریں۔", age_gate_checkbox:"میں تصدیق کرتا/کرتی ہوں کہ میری عمر 16 سال یا اس سے زیادہ ہے", age_gate_continue:"جاری رکھیں",
       mood_prompt:"ابھی آپ اپنے موڈ کو کیسے درجہ دیں گے؟", mood_empty:"پیٹرن دیکھنے کے لیے اپنا موڈ درج کریں۔",
       prefs_eyebrow:"آپ کی جگہ، آپ کے اصول", prefs_title:"ترجیحات",
       prefs_subtitle:"Waha کیسا محسوس ہوتا ہے اور آپ کے خیالات کیسے رکھے جاتے ہیں، اس کے لیے چند پرسکون کنٹرولز۔",
@@ -2282,7 +2304,7 @@ const I18N = {
       libf_all:"Все", libf_anxiety:"Тревога", libf_habits:"Привычки", libf_relationships:"Отношения", libf_self:"Самооценка", libf_emotions:"Эмоции", libf_stress:"Стресс",
       read_more:"Читать далее →",
       timer_start:"Запустить таймер", timer_running:"Идёт…", read_aloud:"Прослушать шаги",
-      trust_private:"100% конфиденциально", trust_cbt:"Основано на КПТ", trust_multilingual:"12 языков",
+      trust_private:"Приватность прежде всего", trust_cbt:"Основано на КПТ", trust_multilingual:"12 языков", age_gate_title:"Прежде чем начать", age_gate_text:"Waha предназначен для людей от 16 лет. Если ты младше, используй приложение под наблюдением родителя или опекуна.", age_gate_checkbox:"Подтверждаю, что мне 16 лет или больше", age_gate_continue:"Продолжить",
       mood_prompt:"Как бы ты оценил своё настроение сейчас?", mood_empty:"Отметь своё настроение, чтобы увидеть здесь закономерность.",
       prefs_eyebrow:"Твоё пространство, твои правила", prefs_title:"Настройки",
       prefs_subtitle:"Несколько спокойных настроек того, как ощущается Waha и как хранятся твои мысли.",
@@ -2424,7 +2446,7 @@ const I18N = {
       libf_all:"Todos", libf_anxiety:"Ansiedade", libf_habits:"Hábitos", libf_relationships:"Relações", libf_self:"Autoestima", libf_emotions:"Emoções", libf_stress:"Stress",
       read_more:"Ler mais →",
       timer_start:"Iniciar temporizador", timer_running:"Em curso…", read_aloud:"Ouvir os passos",
-      trust_private:"100% confidencial", trust_cbt:"Baseado em TCC", trust_multilingual:"12 idiomas",
+      trust_private:"Privacidade em primeiro lugar", trust_cbt:"Baseado em TCC", trust_multilingual:"12 idiomas", age_gate_title:"Antes de começar", age_gate_text:"O Waha é destinado a pessoas com 16 anos ou mais. Se és mais novo/a, usa a aplicação sob supervisão de um encarregado de educação.", age_gate_checkbox:"Confirmo que tenho 16 anos ou mais", age_gate_continue:"Continuar",
       mood_prompt:"Como classificarias o teu humor agora?", mood_empty:"Regista o teu humor para começares a ver um padrão aqui.",
       prefs_eyebrow:"O teu espaço, as tuas regras", prefs_title:"Preferências",
       prefs_subtitle:"Alguns controlos discretos sobre como o Waha se sente e como os teus pensamentos são tratados.",
@@ -2566,7 +2588,7 @@ const I18N = {
       libf_all:"Tutti", libf_anxiety:"Ansia", libf_habits:"Abitudini", libf_relationships:"Relazioni", libf_self:"Autostima", libf_emotions:"Emozioni", libf_stress:"Stress",
       read_more:"Leggi di più →",
       timer_start:"Avvia timer", timer_running:"In corso…", read_aloud:"Ascolta i passaggi",
-      trust_private:"100% riservato", trust_cbt:"Basato sulla TCC", trust_multilingual:"12 lingue",
+      trust_private:"Privacy al primo posto", trust_cbt:"Basato sulla TCC", trust_multilingual:"12 lingue", age_gate_title:"Prima di iniziare", age_gate_text:"Waha è pensato per persone dai 16 anni in su. Se sei più giovane, usalo sotto la supervisione di un genitore o tutore.", age_gate_checkbox:"Confermo di avere almeno 16 anni", age_gate_continue:"Continua",
       mood_prompt:"Come valuteresti il tuo umore adesso?", mood_empty:"Registra il tuo umore per iniziare a vedere uno schema qui.",
       prefs_eyebrow:"Il tuo spazio, le tue regole", prefs_title:"Preferenze",
       prefs_subtitle:"Alcuni controlli discreti su come si sente Waha e su come vengono trattati i tuoi pensieri.",
@@ -3730,9 +3752,9 @@ function copyFeelingDraft(){
 function printFeelingDraft(){
   const text = document.getElementById('efPreviewText').textContent;
   const dict = I18N[currentLang];
-  const html = '<html><head><meta charset="utf-8"><title>' + dict.ef_title + '</title>' +
+  const html = '<html><head><meta charset="utf-8"><title>' + escapeHtml(dict.ef_title) + '</title>' +
     '<style>body{font-family:sans-serif;padding:30px;max-width:600px;margin:0 auto;white-space:pre-wrap;line-height:1.7;}</style></head><body>' +
-    '<h1>' + dict.ef_title + '</h1><p>' + text.replace(/</g,'&lt;') + '</p></body></html>';
+    '<h1>' + escapeHtml(dict.ef_title) + '</h1><p>' + escapeHtml(text) + '</p></body></html>';
   const w = window.open('', '_blank');
   if(!w) return;
   w.document.write(html);
@@ -4264,6 +4286,24 @@ function maybeShowOnboarding(){
   obStep = 0;
   renderOnboardingStep();
   setTimeout(()=>{ document.getElementById('onboardingModal').classList.add('open'); }, 600);
+}
+
+// Self-attestation age gate: not verified identity, just a legal minimum —
+// blocks entry to the rest of the app (no skip) until checked, then chains
+// into the normal onboarding flow. Runs before everything else so a
+// returning user who already confirmed never sees it again.
+function maybeShowAgeGate(){
+  if(safeGet('mc_age_confirmed') === '1'){
+    maybeShowOnboarding();
+    return;
+  }
+  document.getElementById('ageGateModal').classList.add('open');
+}
+function confirmAgeGate(){
+  if(!document.getElementById('ageGateCheckbox').checked) return;
+  safeSet('mc_age_confirmed', '1');
+  document.getElementById('ageGateModal').classList.remove('open');
+  maybeShowOnboarding();
 }
 
 function maybeShowReminder(){
@@ -5061,6 +5101,9 @@ function exportCalmPlan(){
   a.remove();
   URL.revokeObjectURL(url);
 }
+function escapeHtml(str){
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 function printCalmPlan(){
   const plan = getCalmPlan();
   if(!plan) return;
@@ -5070,10 +5113,10 @@ function printCalmPlan(){
     [dict.calmplan_f_place, plan.place], [dict.calmplan_f_activity, plan.activity],
     [dict.calmplan_f_person, plan.person], [dict.calmplan_f_steps, plan.steps],
   ];
-  const html = '<html><head><meta charset="utf-8"><title>' + dict.calmplan_title + '</title>' +
+  const html = '<html><head><meta charset="utf-8"><title>' + escapeHtml(dict.calmplan_title) + '</title>' +
     '<style>body{font-family:sans-serif;padding:30px;max-width:600px;margin:0 auto;} h1{font-size:20px;} p{font-size:14px;line-height:1.6;} b{display:block;margin-top:14px;color:#333;}</style></head><body>' +
-    '<h1>' + dict.calmplan_title + '</h1>' +
-    rows.map(([label,val])=> '<p><b>'+label+'</b>'+(val||'—')+'</p>').join('') +
+    '<h1>' + escapeHtml(dict.calmplan_title) + '</h1>' +
+    rows.map(([label,val])=> '<p><b>'+escapeHtml(label)+'</b>'+escapeHtml(val||'—')+'</p>').join('') +
     '</body></html>';
   const w = window.open('', '_blank');
   if(!w) return;
@@ -5298,7 +5341,7 @@ function detectBrowserLang(){
 }
 
 setLang((restoredLang && I18N[restoredLang]) ? restoredLang : detectBrowserLang());
-maybeShowOnboarding();
+maybeShowAgeGate();
 maybeShowReminder();
 loadChatMemory();
 setTimeout(maybeShowDailyBrief, 700);

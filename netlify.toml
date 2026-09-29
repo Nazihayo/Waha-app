@@ -4,3 +4,20 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# Security headers. The app is a single inline <script>/<style> page with
+# onclick="" handlers throughout, so a strict CSP without 'unsafe-inline'
+# would break the whole UI — that's a real gap (an injected inline script
+# would still execute) that only a rewrite away from inline handlers can
+# close. These headers still stop the cheap, high-value attacks: framing
+# (clickjacking), MIME-sniffing, cross-origin fetches to anything but our
+# own API, and referrer leakage of in-app URLs.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
