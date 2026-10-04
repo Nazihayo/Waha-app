@@ -33,6 +33,7 @@ const I18N = {
     lib2_tag:"العادات", lib2_title:"تغيير صغير، أثر كبير", lib2_desc:"أساسيات بناء عادة جديدة بخطوات لا تحتاج إرادة خارقة.",
     lib3_tag:"العلاقات", lib3_title:"حدود صحية دون شعور بالذنب", lib3_desc:"كيف تقول \"لا\" وتحافظ على علاقاتك المهمة.",
     exercises_eyebrow:"تمارين يومية", exercises_title:"مكتبة تمارين الصحة النفسية",
+    daily_practice_eyebrow:"ممارسة اليوم", daily_practice_cta:"ابدأ التمرين", daily_practice_browse:"تصفّح كل الفئات",
     exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
     footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
     title:"Waha — مساحتك الآمنة",
@@ -175,6 +176,7 @@ const I18N = {
     lib2_tag:"Gewohnheiten", lib2_title:"Kleine Veränderung, große Wirkung", lib2_desc:"Grundlagen, um eine neue Gewohnheit aufzubauen.",
     lib3_tag:"Beziehungen", lib3_title:"Gesunde Grenzen ohne Schuldgefühle", lib3_desc:"Wie du Nein sagst und Beziehungen bewahrst.",
     exercises_eyebrow:"Tägliche Übungen", exercises_title:"Bibliothek für mentale Gesundheit",
+    daily_practice_eyebrow:"Übung des Tages", daily_practice_cta:"Übung starten", daily_practice_browse:"Alle Kategorien ansehen",
     exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
     footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
     title:"Waha — Dein sicherer Raum",
@@ -317,6 +319,7 @@ const I18N = {
     lib2_tag:"Habits", lib2_title:"Small change, big impact", lib2_desc:"The basics of building a new habit, without needing superhuman willpower.",
     lib3_tag:"Relationships", lib3_title:"Healthy boundaries without guilt", lib3_desc:"How to say \"no\" while still keeping the relationships that matter.",
     exercises_eyebrow:"Daily exercises", exercises_title:"Mental health exercise library",
+    daily_practice_eyebrow:"Today's practice", daily_practice_cta:"Start the practice", daily_practice_browse:"Browse all categories",
     exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
     footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
     title:"Waha — Your safe space",
@@ -459,6 +462,7 @@ const I18N = {
     lib2_tag:"Habitudes", lib2_title:"Petit changement, grand impact", lib2_desc:"Les bases pour construire une nouvelle habitude, sans volonté surhumaine.",
     lib3_tag:"Relations", lib3_title:"Des limites saines sans culpabilité", lib3_desc:"Comment dire \"non\" tout en préservant les relations importantes.",
     exercises_eyebrow:"Exercices quotidiens", exercises_title:"Bibliothèque d'exercices de santé mentale",
+    daily_practice_eyebrow:"Pratique du jour", daily_practice_cta:"Commencer la pratique", daily_practice_browse:"Parcourir toutes les catégories",
     exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
     footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
     title:"Waha — Ton espace sûr",
@@ -601,6 +605,7 @@ const I18N = {
     lib2_tag:"Alışkanlıklar", lib2_title:"Küçük değişiklik, büyük etki", lib2_desc:"Olağanüstü irade gerektirmeden yeni bir alışkanlık kurmanın temelleri.",
     lib3_tag:"İlişkiler", lib3_title:"Suçluluk duymadan sağlıklı sınırlar", lib3_desc:"Önemli ilişkileri korurken nasıl \"hayır\" denir.",
     exercises_eyebrow:"Günlük egzersizler", exercises_title:"Ruh sağlığı egzersiz kütüphanesi",
+    daily_practice_eyebrow:"Günün pratiği", daily_practice_cta:"Pratiğe başla", daily_practice_browse:"Tüm kategorilere göz at",
     exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
     footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
     title:"Waha — Güvenli alanın",
@@ -743,6 +748,7 @@ const I18N = {
     lib2_tag:"Kirdar", lib2_title:"Guherîna piçûk, bandora mezin", lib2_desc:"Bingehên avakirina kirdarek nû, bêyî hewceyê xwesteka giştî.",
     lib3_tag:"Têkilî", lib3_title:"Sînorên tenduristî bêyî sûcdarî", lib3_desc:"Çawa 'na' bêje û di heman demê de têkiliyên girîng biparêze.",
     exercises_eyebrow:"Ezmûnên rojane", exercises_title:"Pirtûkxaneya ezmûnên tenduristiya derûnî",
+    daily_practice_eyebrow:"Peywira îro", daily_practice_cta:"Dest bi peywirê bike", daily_practice_browse:"Li hemû kategoriyan binêre",
     exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
     footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
     title:"Waha — Cihê te yê ewle",
@@ -885,6 +891,7 @@ const I18N = {
     lib2_tag:"Hábitos", lib2_title:"Pequeño cambio, gran impacto", lib2_desc:"Lo básico para construir un nuevo hábito, sin necesitar una voluntad sobrehumana.",
     lib3_tag:"Relaciones", lib3_title:"Límites sanos sin culpa", lib3_desc:"Cómo decir \"no\" y mantener las relaciones importantes.",
     exercises_eyebrow:"Ejercicios diarios", exercises_title:"Biblioteca de ejercicios de salud mental",
+    daily_practice_eyebrow:"Práctica de hoy", daily_practice_cta:"Empezar la práctica", daily_practice_browse:"Explorar todas las categorías",
     exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
     footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
     title:"Waha — Tu espacio seguro",
@@ -1027,6 +1034,7 @@ const I18N = {
       lib2_tag:"عادت‌ها", lib2_title:"تغییر کوچک، تأثیر بزرگ", lib2_desc:"اصول ساخت عادتی جدید، بدون نیاز به اراده‌ای فوق‌بشری.",
       lib3_tag:"روابط", lib3_title:"مرزهای سالم بدون احساس گناه", lib3_desc:"چگونه \"نه\" بگویی و روابط مهم را حفظ کنی.",
       exercises_eyebrow:"تمرین‌های روزانه", exercises_title:"کتابخانه تمرین‌های سلامت روان",
+      daily_practice_eyebrow:"تمرین امروز", daily_practice_cta:"شروع تمرین", daily_practice_browse:"مرور همه دسته‌ها",
       exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
       footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
       title:"Waha — فضای امن تو",
@@ -1169,6 +1177,7 @@ const I18N = {
       lib2_tag:"عادات", lib2_title:"چھوٹی تبدیلی، بڑا اثر", lib2_desc:"غیر معمولی قوتِ ارادی کے بغیر نئی عادت بنانے کے اصول۔",
       lib3_tag:"تعلقات", lib3_title:"جرم کے بغیر صحت مند حدود", lib3_desc:"اہم تعلقات برقرار رکھتے ہوئے \"نہیں\" کیسے کہیں۔",
       exercises_eyebrow:"روزانہ مشقیں", exercises_title:"ذہنی صحت کی مشقوں کی لائبریری",
+      daily_practice_eyebrow:"آج کی مشق", daily_practice_cta:"مشق شروع کریں", daily_practice_browse:"تمام زمرہ جات دیکھیں",
       exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
       footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
       title:"Waha — آپ کی محفوظ جگہ",
@@ -1311,6 +1320,7 @@ const I18N = {
       lib2_tag:"Привычки", lib2_title:"Маленькое изменение, большой эффект", lib2_desc:"Основы формирования новой привычки без сверхчеловеческой силы воли.",
       lib3_tag:"Отношения", lib3_title:"Здоровые границы без чувства вины", lib3_desc:"Как говорить \"нет\" и сохранять важные отношения.",
       exercises_eyebrow:"Ежедневные упражнения", exercises_title:"Библиотека упражнений для психического здоровья",
+      daily_practice_eyebrow:"Практика дня", daily_practice_cta:"Начать практику", daily_practice_browse:"Просмотреть все категории",
       exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
       footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
       title:"Waha — Твоё безопасное пространство",
@@ -1453,6 +1463,7 @@ const I18N = {
       lib2_tag:"Hábitos", lib2_title:"Pequena mudança, grande impacto", lib2_desc:"O básico para construir um novo hábito, sem precisar de força de vontade sobre-humana.",
       lib3_tag:"Relações", lib3_title:"Limites saudáveis sem culpa", lib3_desc:"Como dizer \"não\" e ainda manter as relações importantes.",
       exercises_eyebrow:"Exercícios diários", exercises_title:"Biblioteca de exercícios de saúde mental",
+      daily_practice_eyebrow:"Prática de hoje", daily_practice_cta:"Começar a prática", daily_practice_browse:"Ver todas as categorias",
       exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
       footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
       title:"Waha — O teu espaço seguro",
@@ -1595,6 +1606,7 @@ const I18N = {
       lib2_tag:"Abitudini", lib2_title:"Piccolo cambiamento, grande impatto", lib2_desc:"Le basi per costruire una nuova abitudine, senza bisogno di forza di volontà sovrumana.",
       lib3_tag:"Relazioni", lib3_title:"Confini sani senza sensi di colpa", lib3_desc:"Come dire \"no\" mantenendo comunque le relazioni importanti.",
       exercises_eyebrow:"Esercizi quotidiani", exercises_title:"Biblioteca di esercizi per la salute mentale",
+      daily_practice_eyebrow:"Pratica di oggi", daily_practice_cta:"Inizia la pratica", daily_practice_browse:"Sfoglia tutte le categorie",
       exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
       footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
       title:"Waha — Il tuo spazio sicuro",
@@ -1867,6 +1879,10 @@ const EXERCISES = {
       steps:['ضع يدك على صدرك وقل لنفسك: هذه لحظة صعبة.','ذكّر نفسك: الصعوبة جزء من كوني إنساناً، ولست وحدي فيها.','اسأل نفسك: ماذا أحتاج أن أسمعه الآن؟ وامنح نفسك ذلك بلطف.','خذ نفساً بطيئاً واحداً قبل أن تكمل يومك.'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'وقت القلق', desc:'تقنية من العلاج المعرفي السلوكي تحصر القلق في وقت محدد بدل أن ينتشر طوال اليوم.',
       steps:['حين يظهر قلق، اكتبه في سطر واحد وضعه جانباً.','حدّد "وقت قلق" ثابت لاحقاً اليوم، مدته 10 دقائق.','في ذلك الوقت، راجع قائمتك — ستجد أغلبها أصبح أصغر حجماً.','لما يستحق التصرف، اكتب خطوة صغيرة تالية واحدة.'] },
+    { id:'ex-bestself', cat:'write', tag:'تصوّر', title:'الذات المستقبلية الأفضل', desc:'تمرين كتابي من علم النفس الإيجابي: تخيّل حياتك بعد سنة وقد سارت بأفضل شكل ممكن واقعياً.',
+      steps:['تخيّل نفسك بعد سنة من الآن، وقد سارت الأمور بأفضل شكل ممكن واقعياً.','اكتب كيف يبدو ذلك اليوم — أين أنت، من حولك، كيف تشعر.','أضف تفاصيل حقيقية: الأصوات، الأماكن، لحظات صغيرة عادية.','لاحظ خطوة صغيرة واحدة يمكنك اتخاذها اليوم تقرّبك قليلاً من ذلك.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'التخلي عن السيطرة', desc:'تقنية من العلاج بالقبول والالتزام (ACT) لأمور تقلقك ولا تملك سيطرة كاملة عليها الآن.',
+      steps:['اكتب شيئاً واحداً يقلقك ولا تملك سيطرة كاملة عليه الآن.','لاحظ أنها مجرد فكرة تمر — ليست حقيقة، وليست أمراً يجب أن تطيعه.','قل لنفسك: أستطيع أن أحمل هذا دون أن أحتاج لحلّه هذه اللحظة.','اترك الفكرة على الورقة، وأعد انتباهك لما أمامك اليوم.'] },
   ],
   de: [
     { id:'ex-478', cat:'breathing', tag:'Atmen', title:'4-7-8-Atmung', desc:'Eine kurze Atemübung zur Beruhigung des Nervensystems.', duration:120,
@@ -1899,6 +1915,10 @@ const EXERCISES = {
       steps:['Leg eine Hand auf deine Brust und sag dir: Das ist ein schwieriger Moment.','Erinnere dich: Schwierigkeiten gehören zum Menschsein dazu — ich bin damit nicht allein.','Frag dich: Was brauche ich gerade? Und gib es dir selbst sanft.','Nimm einen langsamen Atemzug, bevor du weitermachst.'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Sorgenzeit', desc:'Eine CBT-Technik, die Sorgen auf eine feste Zeit begrenzt, statt sie den ganzen Tag verteilt zu lassen.',
       steps:['Wenn eine Sorge auftaucht, schreib sie in einem Satz auf und leg sie beiseite.','Lege eine feste 10-minütige "Sorgenzeit" später am Tag fest.','Geh zu dieser Zeit deine Liste durch — die meisten Sorgen wirken dann schon kleiner.','Schreib für das, was noch wichtig ist, einen kleinen nächsten Schritt auf.'] },
+    { id:'ex-bestself', cat:'write', tag:'Visualisierung', title:'Die beste mögliche Zukunft', desc:'Eine Schreibübung aus der positiven Psychologie: stell dir dein Leben in einem Jahr vor, so gut es realistisch laufen könnte.',
+      steps:['Stell dir vor, wie dein Leben in einem Jahr aussieht, nachdem es realistisch so gut wie möglich gelaufen ist.','Schreib auf, wie dieser Tag aussieht — wo du bist, wer um dich ist, wie du dich fühlst.','Füge echte Details hinzu: Geräusche, Orte, kleine alltägliche Momente.','Finde einen kleinen Schritt, den du heute gehen könntest, um dich etwas näher heranzubringen.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Loslassen der Kontrolle', desc:'Eine ACT-Technik für Sorgen, die du gerade nicht vollständig kontrollieren kannst.',
+      steps:['Schreib eine Sache auf, die dich beunruhigt und die du gerade nicht vollständig kontrollieren kannst.','Bemerke, dass es nur ein vorbeiziehender Gedanke ist — keine Tatsache, kein Befehl, dem du gehorchen musst.','Sag dir: Ich kann das halten, ohne es in diesem Moment lösen zu müssen.','Lass den Gedanken auf dem Papier liegen und kehre mit deiner Aufmerksamkeit zu dem zurück, was heute vor dir liegt.'] },
   ],
   en: [
     { id:'ex-478', cat:'breathing', tag:'Breathing', title:'4-7-8 Breathing', desc:'A short breathing exercise to calm the nervous system.', duration:120,
@@ -1931,6 +1951,10 @@ const EXERCISES = {
       steps:['Place a hand on your chest and acknowledge: this is a moment of difficulty.','Remind yourself: struggling is part of being human — I\'m not alone in this.','Ask yourself: what do I need to hear right now? Offer it to yourself gently.','Take one slow breath before continuing your day.'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Worry time', desc:'A CBT technique that contains worry to one scheduled slot instead of letting it spread through the day.',
       steps:['When a worry pops up, write it down in one line and set it aside.','Pick a fixed 10-minute "worry time" later today.','At that time, go through your list — most worries will already feel smaller.','For what\'s still worth acting on, write one small next step.'] },
+    { id:'ex-bestself', cat:'write', tag:'Visualization', title:'Best possible self', desc:'A positive-psychology writing exercise: imagine your life a year from now, going as well as it realistically could.',
+      steps:['Picture yourself one year from now, after things have gone about as well as they realistically could.','Write what that day looks like — where you are, who\'s around you, how you feel.','Add real detail: sounds, places, small ordinary moments.','Notice one small step you could take today that moves you slightly closer.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Letting go of control', desc:'An ACT technique for worries you can\'t fully control right now.',
+      steps:['Write down one thing you\'re anxious about that you don\'t fully control right now.','Notice that it\'s just a thought passing through — not a fact, not an order you must obey.','Say to yourself: I can hold this without needing to solve it this second.','Let it sit on the page, and bring your attention back to what\'s in front of you today.'] },
   ],
   fr: [
     { id:'ex-478', cat:'breathing', tag:'Respiration', title:'Respiration 4-7-8', desc:'Un court exercice de respiration pour calmer le système nerveux.', duration:120,
@@ -1963,6 +1987,10 @@ const EXERCISES = {
       steps:['Pose une main sur ta poitrine et dis-toi : c\'est un moment difficile.','Rappelle-toi : la difficulté fait partie de l\'expérience humaine — je ne suis pas seul(e).','Demande-toi : de quoi ai-je besoin maintenant ? Offre-le-toi avec douceur.','Prends une respiration lente avant de continuer ta journée.'] },
     { id:'ex-worrytime', cat:'write', tag:'TCC', title:'Temps d\'inquiétude', desc:'Une technique de TCC qui limite les inquiétudes à un créneau fixe au lieu de les laisser envahir la journée.',
       steps:['Quand une inquiétude apparaît, écris-la en une ligne et mets-la de côté.','Fixe un "temps d\'inquiétude" de 10 minutes plus tard dans la journée.','À ce moment-là, relis ta liste — la plupart des inquiétudes sembleront déjà plus petites.','Pour ce qui mérite encore une action, écris une petite prochaine étape.'] },
+    { id:'ex-bestself', cat:'write', tag:'Visualisation', title:'Le meilleur soi possible', desc:'Un exercice d\'écriture de psychologie positive : imagine ta vie dans un an, telle qu\'elle pourrait se passer du mieux possible, de façon réaliste.',
+      steps:['Imagine-toi dans un an, après que les choses se soient déroulées du mieux possible, de façon réaliste.','Écris à quoi ressemble cette journée — où tu es, qui t\'entoure, ce que tu ressens.','Ajoute de vrais détails : des sons, des lieux, de petits moments ordinaires.','Repère un petit pas que tu pourrais faire aujourd\'hui pour t\'en rapprocher un peu.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Lâcher le contrôle', desc:'Une technique de thérapie ACT pour les soucis que tu ne contrôles pas entièrement en ce moment.',
+      steps:['Écris une chose qui t\'inquiète et que tu ne contrôles pas entièrement en ce moment.','Remarque que ce n\'est qu\'une pensée qui passe — pas un fait, pas un ordre à obéir.','Dis-toi : je peux porter cela sans avoir besoin de le résoudre cette seconde.','Laisse cette pensée sur la page, et ramène ton attention à ce qui est devant toi aujourd\'hui.'] },
   ],
   tr: [
     { id:'ex-478', cat:'breathing', tag:'Nefes', title:'4-7-8 Nefes Egzersizi', desc:'Sinir sistemini sakinleştiren kısa bir nefes egzersizi.', duration:120,
@@ -1995,6 +2023,10 @@ const EXERCISES = {
       steps:['Elini göğsüne koy ve şunu kabul et: bu zor bir an.','Kendine hatırlat: zorlanmak insan olmanın bir parçası — bunda yalnız değilim.','Kendine sor: şu an neye ihtiyacım var? Bunu kendine nazikçe sun.','Gününe devam etmeden önce yavaş bir nefes al.'] },
     { id:'ex-worrytime', cat:'write', tag:'BDT', title:'Endişe zamanı', desc:'Endişeyi tüm güne yayılmak yerine belirli bir zaman dilimine hapseden bir BDT tekniği.',
       steps:['Bir endişe belirdiğinde, tek satırda yaz ve bir kenara bırak.','Bugün ilerleyen saatlerde sabit 10 dakikalık bir "endişe zamanı" belirle.','O zaman geldiğinde listeni gözden geçir — çoğu endişe artık daha küçük görünecek.','Hâlâ üzerinde durulması gerekenler için küçük bir sonraki adım yaz.'] },
+    { id:'ex-bestself', cat:'write', tag:'Görselleştirme', title:'Olabilecek en iyi gelecek', desc:'Pozitif psikolojiden bir yazma egzersizi: bir yıl sonra hayatının gerçekçi olarak olabileceği en iyi hâlini hayal et.',
+      steps:['Bir yıl sonra, işler gerçekçi olarak olabileceği en iyi şekilde gittikten sonra kendini hayal et.','O günün nasıl göründüğünü yaz — neredesin, çevrende kim var, nasıl hissediyorsun.','Gerçek detaylar ekle: sesler, mekânlar, küçük sıradan anlar.','Bugün atabileceğin, seni biraz daha yaklaştıracak küçük bir adımı fark et.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Kontrolü bırakmak', desc:'Şu anda tam olarak kontrol edemediğin endişeler için bir ACT (Kabul ve Kararlılık Terapisi) tekniği.',
+      steps:['Şu anda tam olarak kontrol edemediğin, seni kaygılandıran bir şeyi yaz.','Bunun sadece geçip giden bir düşünce olduğunu fark et — bir gerçek ya da uyman gereken bir emir değil.','Kendine söyle: Bunu şu an çözmem gerekmeden taşıyabilirim.','Düşünceyi kağıtta bırak ve dikkatini bugün önünde olana geri getir.'] },
   ],
   ku: [
     { id:'ex-478', cat:'breathing', tag:'Nefes', title:'Nefesa 4-7-8', desc:'Ezmûnek nefesê ya kurt ji bo aramkirina pergala nervî.', duration:120,
@@ -2027,6 +2059,10 @@ const EXERCISES = {
       steps:['Destekî xwe deyne ser sîngê xwe û bêje: ev kêliyek zehmet e.','Bîr bîne: zehmetî beşek ji mirovbûnê ye — ez di vê de bi tenê nînim.','Ji xwe bipirse: niha ez hewceyê çi me ku bibihîzim? Bi mihrîbanî ew bide xwe.','Berî ku tu rojê xwe berdewam bikî, nefesek hêdî bistîne.'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Dema xeman', desc:'Teknîkeke CBT ku xeman di demek diyarkirî de digire, li şûna ku di tevahiya rojê de belav bibe.',
       steps:['Dema xemek derdikeve, wê di rêzek de binivîse û wê aliyek bihêle.','Ji bo paşê îro "dema xeman"ek 10-xulekî ya sabît diyar bike.','Di wê demê de, li lîsteya xwe binêre — piraniya xeman ê wê demê biçûktir xuya bikin.','Ji bo tiştê hêj hêjayî kirinê ye, gavek din a piçûk binivîse.'] },
+    { id:'ex-bestself', cat:'write', tag:'Xeyalkirin', title:'Xweya herî baş a pêşerojê', desc:'Ezmûnek nivîsandinê ji psîkolojiya erênî: xwe xeyal bike piştî salekê, dema ku her tişt bi qasî ku dikare çêbibe baş çûye.',
+      steps:['Xwe piştî salekê xeyal bike, piştî ku her tişt bi rastî bi qasî ku mimkun e baş çûye.','Binivîse ew roj çawa xuya dike — tu li ku yî, kî li dora te ye, hest bi çi dikî.','Hûrgiliyên rastî lê zêde bike: deng, cih, kêliyên piçûk ên asayî.','Gavek biçûk a ku dikarî îro bavêjî û te hinekî nêzîktir bike, tespît bike.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Berdana kontrolê', desc:'Teknîkek ACT ji bo xemgîniyên ku tu niha bi tevahî kontrol nakî.',
+      steps:['Tiştekî ku te niha xemgîn dike û tu bi tevahî kontrol nakî binivîse.','Tespît bike ku ev tenê ramanek derbasbûyî ye — ne rastiyek e, ne jî fermanek e ku divê tu bişopînî.','Ji xwe re bêje: ez dikarim vê hilgirim bêyî ku pêdivî bi çareserkirina wê di vê gavê de hebe.','Bihêle ev raman li ser kaxezê bimîne, û baldariya xwe bidî ser tiştê ku îro li pêşiya te ye.'] },
   ],
   es: [
     { id:'ex-478', cat:'breathing', tag:'Respiración', title:'Respiración 4-7-8', desc:'Un breve ejercicio de respiración para calmar el sistema nervioso.', duration:120,
@@ -2059,6 +2095,10 @@ const EXERCISES = {
       steps:['Pon una mano sobre tu pecho y reconoce: este es un momento difícil.','Recuérdate: luchar es parte de ser humano — no estoy solo/a en esto.','Pregúntate: ¿qué necesito escuchar ahora mismo? Ofrécetelo con amabilidad.','Respira lentamente una vez antes de continuar tu día.'] },
     { id:'ex-worrytime', cat:'write', tag:'TCC', title:'Tiempo de preocupación', desc:'Una técnica de TCC que limita la preocupación a un horario fijo en lugar de dejar que se extienda por todo el día.',
       steps:['Cuando aparezca una preocupación, escríbela en una línea y déjala a un lado.','Elige un "tiempo de preocupación" fijo de 10 minutos más tarde hoy.','En ese momento, repasa tu lista — la mayoría ya se sentirán más pequeñas.','Para lo que aún merezca acción, escribe un pequeño siguiente paso.'] },
+    { id:'ex-bestself', cat:'write', tag:'Visualización', title:'El mejor yo posible', desc:'Un ejercicio de escritura de psicología positiva: imagina tu vida dentro de un año, yendo tan bien como realistamente podría ir.',
+      steps:['Imagínate dentro de un año, después de que las cosas hayan ido tan bien como realistamente podrían ir.','Escribe cómo es ese día — dónde estás, quién te rodea, cómo te sientes.','Añade detalles reales: sonidos, lugares, pequeños momentos cotidianos.','Identifica un pequeño paso que podrías dar hoy para acercarte un poco más.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Soltar el control', desc:'Una técnica de terapia ACT para preocupaciones que ahora mismo no controlas del todo.',
+      steps:['Escribe algo que te preocupa y que ahora mismo no controlas del todo.','Date cuenta de que es solo un pensamiento que pasa — no un hecho, no una orden que debas obedecer.','Dite a ti mismo: puedo sostener esto sin necesidad de resolverlo en este instante.','Deja ese pensamiento en el papel, y vuelve tu atención a lo que tienes delante hoy.'] },
   ],
   fa: [
     { id:'ex-478', cat:'breathing', tag:'تنفس', title:'تنفس ۴-۷-۸', desc:'یک تمرین کوتاه تنفس برای آرام کردن سیستم عصبی.', duration:120,
@@ -2091,6 +2131,10 @@ const EXERCISES = {
       steps:['دستت را روی قفسه سینه‌ات بگذار و بگو: این یک لحظه‌ی دشوار است.','به خودت یادآوری کن: دشواری بخشی از انسان‌بودن است — در این تنها نیستم.','از خودت بپرس: الان به چه چیزی نیاز دارم که بشنوم؟ و آن را با ملایمت به خودت بده.','پیش از ادامه‌ی روزت، یک نفس آرام بکش.'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'زمان نگرانی', desc:'تکنیکی از CBT که نگرانی را به یک بازه‌ی زمانی مشخص محدود می‌کند، به‌جای اینکه در طول روز پخش شود.',
       steps:['وقتی نگرانی‌ای پیش آمد، آن را در یک خط بنویس و کنار بگذار.','یک "زمان نگرانی" ۱۰ دقیقه‌ای ثابت برای بعداً امروز تعیین کن.','در آن زمان، فهرستت را مرور کن — اغلب نگرانی‌ها دیگر کوچک‌تر به نظر می‌رسند.','برای چیزی که هنوز ارزش اقدام دارد، یک قدم بعدی کوچک بنویس.'] },
+    { id:'ex-bestself', cat:'write', tag:'تجسم', title:'بهترین خودِ ممکن', desc:'تمرینی نوشتاری از روان‌شناسی مثبت‌گرا: زندگی‌ات را یک سال دیگر تصور کن، آن‌طور که واقع‌بینانه بهترین حالت ممکن پیش رفته باشد.',
+      steps:['خودت را یک سال دیگر تصور کن، بعد از اینکه اوضاع تا حد واقع‌بینانه‌ای به بهترین شکل پیش رفته است.','بنویس آن روز چگونه است — کجا هستی، چه کسانی دورت هستند، چه حسی داری.','جزئیات واقعی اضافه کن: صداها، مکان‌ها، لحظه‌های کوچک روزمره.','یک قدم کوچک که امروز می‌توانی برداری و کمی به آن نزدیک‌ترت کند، مشخص کن.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'رها کردن کنترل', desc:'تکنیکی از درمان مبتنی بر پذیرش و تعهد (ACT) برای نگرانی‌هایی که در حال حاضر کنترل کاملی بر آن‌ها نداری.',
+      steps:['چیزی را بنویس که نگرانت می‌کند و در حال حاضر کنترل کاملی بر آن نداری.','متوجه باش که این فقط یک فکر گذراست — نه یک واقعیت، نه فرمانی که باید اطاعت کنی.','به خودت بگو: می‌توانم این را نگه دارم بدون اینکه لازم باشد همین الان حلش کنم.','بگذار این فکر روی کاغذ بماند، و توجهت را به آنچه امروز پیش رویت است برگردان.'] },
   ],
   ur: [
     { id:'ex-478', cat:'breathing', tag:'سانس', title:'4-7-8 سانس کی مشق', desc:'اعصابی نظام کو پرسکون کرنے کے لیے مختصر سانس کی مشق۔', duration:120,
@@ -2123,6 +2167,10 @@ const EXERCISES = {
       steps:['اپنا ہاتھ اپنے سینے پر رکھیں اور تسلیم کریں: یہ ایک مشکل لمحہ ہے۔','خود کو یاد دلائیں: جدوجہد انسان ہونے کا حصہ ہے — میں اس میں اکیلا/اکیلی نہیں ہوں۔','اپنے آپ سے پوچھیں: ابھی مجھے کیا سننے کی ضرورت ہے؟ اور نرمی سے خود کو وہ دیں۔','اپنا دن جاری رکھنے سے پہلے ایک آہستہ سانس لیں۔'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'پریشانی کا وقت', desc:'CBT کی ایک تکنیک جو پریشانی کو پورے دن پھیلنے کے بجائے ایک مقررہ وقت تک محدود رکھتی ہے۔',
       steps:['جب کوئی پریشانی آئے تو اسے ایک سطر میں لکھ کر ایک طرف رکھ دیں۔','آج بعد میں ایک مقررہ 10 منٹ کا "پریشانی کا وقت" منتخب کریں۔','اس وقت اپنی فہرست دیکھیں — زیادہ تر پریشانیاں پہلے ہی چھوٹی محسوس ہوں گی۔','جو چیز اب بھی توجہ کی مستحق ہو، اس کے لیے ایک چھوٹا اگلا قدم لکھیں۔'] },
+    { id:'ex-bestself', cat:'write', tag:'تصور', title:'بہترین ممکنہ مستقبل کی ذات', desc:'مثبت نفسیات کی ایک تحریری مشق: ایک سال بعد اپنی زندگی کا تصور کریں، جتنا حقیقت پسندانہ طور پر بہترین ہو سکے۔',
+      steps:['اپنے آپ کو ایک سال بعد تصور کریں، جب حالات حقیقت پسندانہ طور پر بہترین انداز میں آگے بڑھ چکے ہوں۔','لکھیں وہ دن کیسا دکھتا ہے — آپ کہاں ہیں، آپ کے ارد گرد کون ہے، آپ کیسا محسوس کرتے ہیں۔','حقیقی تفصیلات شامل کریں: آوازیں، جگہیں، چھوٹے روزمرہ لمحات۔','ایک چھوٹا قدم پہچانیں جو آج آپ اٹھا سکتے ہیں اور آپ کو تھوڑا قریب لے جائے۔'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'کنٹرول چھوڑنا', desc:'ACT تھراپی کی ایک تکنیک ان پریشانیوں کے لیے جن پر آپ کا ابھی مکمل اختیار نہیں۔',
+      steps:['ایک ایسی چیز لکھیں جو آپ کو پریشان کرتی ہے اور جس پر ابھی آپ کا مکمل اختیار نہیں۔','محسوس کریں کہ یہ محض ایک گزرتا خیال ہے — نہ کوئی حقیقت، نہ کوئی حکم جس کی تعمیل ضروری ہو۔','اپنے آپ سے کہیں: میں اسے ابھی حل کیے بغیر بھی سنبھال سکتا ہوں۔','اس خیال کو کاغذ پر رہنے دیں، اور اپنی توجہ آج جو کچھ آپ کے سامنے ہے اس کی طرف لوٹائیں۔'] },
   ],
   ru: [
     { id:'ex-478', cat:'breathing', tag:'Дыхание', title:'Дыхание 4-7-8', desc:'Короткое дыхательное упражнение для успокоения нервной системы.', duration:120,
@@ -2155,6 +2203,10 @@ const EXERCISES = {
       steps:['Положи руку на грудь и признай: это трудный момент.','Напомни себе: трудности — часть человеческого опыта, я не одинок(а) в этом.','Спроси себя: что мне сейчас нужно услышать? И мягко дай это себе.','Сделай один медленный вдох, прежде чем продолжить день.'] },
     { id:'ex-worrytime', cat:'write', tag:'КПТ', title:'Время для тревог', desc:'Техника КПТ, которая ограничивает тревогу одним запланированным временем вместо того, чтобы позволять ей распространяться на весь день.',
       steps:['Когда появляется тревога, запиши её одной строкой и отложи.','Выбери фиксированное 10-минутное "время для тревог" позже сегодня.','В это время просмотри список — большинство тревог уже покажутся меньше.','Для того, что всё ещё стоит внимания, запиши один маленький следующий шаг.'] },
+    { id:'ex-bestself', cat:'write', tag:'Визуализация', title:'Лучшая возможная версия себя', desc:'Упражнение по письму из позитивной психологии: представь свою жизнь через год, такой, какой она могла бы реалистично сложиться наилучшим образом.',
+      steps:['Представь себя через год, после того как всё сложилось настолько хорошо, насколько это реально возможно.','Опиши, как выглядит этот день — где ты, кто рядом, что ты чувствуешь.','Добавь настоящие детали: звуки, места, маленькие обычные моменты.','Отметь один маленький шаг, который ты мог бы сделать сегодня, чтобы приблизиться к этому.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Отпустить контроль', desc:'Техника ACT-терапии для тревог, которые ты сейчас не можешь полностью контролировать.',
+      steps:['Напиши то, что тебя тревожит и что ты сейчас не можешь полностью контролировать.','Заметь, что это просто проходящая мысль — не факт и не приказ, которому нужно подчиняться.','Скажи себе: я могу держать это в себе, не решая прямо сейчас.','Оставь эту мысль на бумаге и верни внимание к тому, что перед тобой сегодня.'] },
   ],
   pt: [
     { id:'ex-478', cat:'breathing', tag:'Respiração', title:'Respiração 4-7-8', desc:'Um breve exercício de respiração para acalmar o sistema nervoso.', duration:120,
@@ -2187,6 +2239,10 @@ const EXERCISES = {
       steps:['Coloca uma mão no peito e reconhece: este é um momento difícil.','Lembra-te: lutar faz parte de ser humano — não estou sozinho/a nisto.','Pergunta-te: o que preciso de ouvir agora? Oferece isso a ti próprio/a com gentileza.','Respira devagar uma vez antes de continuares o teu dia.'] },
     { id:'ex-worrytime', cat:'write', tag:'TCC', title:'Tempo de preocupação', desc:'Uma técnica de TCC que limita a preocupação a um horário marcado em vez de a deixar espalhar-se pelo dia.',
       steps:['Quando surgir uma preocupação, escreve-a numa linha e põe-na de lado.','Escolhe um "tempo de preocupação" fixo de 10 minutos mais tarde hoje.','Nessa altura, revê a tua lista — a maioria já vai parecer menor.','Para o que ainda mereça ação, escreve um pequeno próximo passo.'] },
+    { id:'ex-bestself', cat:'write', tag:'Visualização', title:'O melhor eu possível', desc:'Um exercício de escrita da psicologia positiva: imagina a tua vida daqui a um ano, a correr tão bem quanto realisticamente poderia.',
+      steps:['Imagina-te daqui a um ano, depois de as coisas terem corrido tão bem quanto realisticamente possível.','Escreve como é esse dia — onde estás, quem está à tua volta, como te sentes.','Acrescenta detalhes reais: sons, lugares, pequenos momentos do quotidiano.','Identifica um pequeno passo que podes dar hoje para te aproximares um pouco mais.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Largar o controlo', desc:'Uma técnica de terapia ACT para preocupações que não controlas totalmente agora.',
+      steps:['Escreve algo que te preocupa e que não controlas totalmente agora.','Repara que é apenas um pensamento a passar — não um facto, não uma ordem a obedecer.','Diz para ti próprio: posso carregar com isto sem precisar de o resolver neste segundo.','Deixa esse pensamento no papel, e traz a tua atenção de volta para o que tens à tua frente hoje.'] },
   ],
   it: [
     { id:'ex-478', cat:'breathing', tag:'Respirazione', title:'Respirazione 4-7-8', desc:'Un breve esercizio di respirazione per calmare il sistema nervoso.', duration:120,
@@ -2219,6 +2275,10 @@ const EXERCISES = {
       steps:['Metti una mano sul petto e riconosci: questo è un momento difficile.','Ricordati: la difficoltà fa parte dell\'essere umani — non sono solo/a in questo.','Chiediti: di cosa ho bisogno adesso? Offritelo con gentilezza.','Fai un respiro lento prima di continuare la giornata.'] },
     { id:'ex-worrytime', cat:'write', tag:'CBT', title:'Tempo per le preoccupazioni', desc:'Una tecnica CBT che contiene le preoccupazioni in un momento programmato invece di lasciarle espandersi per tutta la giornata.',
       steps:['Quando emerge una preoccupazione, scrivila in una riga e mettila da parte.','Scegli un "tempo per le preoccupazioni" fisso di 10 minuti più tardi oggi.','In quel momento, ripassa la lista — la maggior parte sembrerà già più piccola.','Per ciò che merita ancora azione, scrivi un piccolo passo successivo.'] },
+    { id:'ex-bestself', cat:'write', tag:'Visualizzazione', title:'Il miglior sé possibile', desc:'Un esercizio di scrittura di psicologia positiva: immagina la tua vita tra un anno, andata nel migliore dei modi realisticamente possibili.',
+      steps:['Immaginati tra un anno, dopo che le cose sono andate nel migliore dei modi realisticamente possibili.','Scrivi com\'è quella giornata — dove sei, chi c\'è intorno a te, come ti senti.','Aggiungi dettagli reali: suoni, luoghi, piccoli momenti quotidiani.','Individua un piccolo passo che potresti fare oggi per avvicinarti un po\'.'] },
+    { id:'ex-acceptance', cat:'write', tag:'ACT', title:'Lasciare andare il controllo', desc:'Una tecnica ACT per le preoccupazioni che al momento non controlli del tutto.',
+      steps:['Scrivi una cosa che ti preoccupa e che al momento non controlli del tutto.','Nota che è solo un pensiero che passa — non un fatto, non un ordine da obbedire.','Dì a te stesso: posso portare questo senza doverlo risolvere in questo istante.','Lascia quel pensiero sulla pagina, e riporta l\'attenzione a ciò che hai davanti oggi.'] },
   ],
 };
 const LIBRARY = {
@@ -2524,6 +2584,7 @@ function setLang(lang){
   if(recognition) recognition.lang = speechLangTag(lang);
   renderFilters();
   renderExercises();
+  renderDailyPractice();
   renderLibFilters();
   renderLibrary();
   renderProgram();
@@ -3899,6 +3960,29 @@ function openLibraryItem(id){
 }
 
 const PREMIUM_EXERCISE_IDS = ['ex-pmr','ex-safe','ex-sleep7'];
+// Rotating daily-practice picks: all free, evidence-based (CBT/ACT/positive
+// psychology), reusing the existing exercise cards/modal — no separate
+// content or locking system. Deterministic by day so every visitor sees the
+// same one that day (not randomized per page load).
+const DAILY_PRACTICE_IDS = ['ex-reframe','ex-selfcompassion','ex-bestself','ex-acceptance','ex-gratitude'];
+function todaysPracticeId(){
+  const dayIndex = Math.floor(Date.now() / 86400000);
+  return DAILY_PRACTICE_IDS[dayIndex % DAILY_PRACTICE_IDS.length];
+}
+function renderDailyPractice(){
+  const list = EXERCISES[currentLang] || EXERCISES.en;
+  const ex = list.find(e => e.id === todaysPracticeId());
+  if(!ex) return;
+  const tagEl = document.getElementById('dailyPracticeTag');
+  const titleEl = document.getElementById('dailyPracticeTitle');
+  const descEl = document.getElementById('dailyPracticeDesc');
+  if(tagEl) tagEl.textContent = ex.tag;
+  if(titleEl) titleEl.textContent = ex.title;
+  if(descEl) descEl.textContent = ex.desc;
+}
+function startDailyPractice(){
+  openExercise(todaysPracticeId());
+}
 const PREMIUM_LIBRARY_IDS = ['lib-emoreg','lib-stress'];
 const PROGRAM_DAYS = ['ex-478','ex-bodyscan','ex-gratitude','ex-box','ex-reframe','ex-walk','ex-mood'];
 
@@ -4750,6 +4834,7 @@ const ACTIONS = {
   shareApp,
   skipOnboarding,
   startBriefSuggestion,
+  startDailyPractice,
   startModalTimer,
   startMoodSuggestion,
   startSleepBreathing,

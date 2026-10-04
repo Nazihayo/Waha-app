@@ -112,6 +112,15 @@
   .section-head h2{font-size:27px;color:var(--ink);margin:8px 0 10px;}
   .section-head p{color:rgba(var(--ink-rgb),0.65);font-size:15px;}
 
+  .daily-practice-card{max-width:560px;margin:0 auto 36px;background:var(--accent-surface);border-radius:16px;padding:26px 28px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.12);}
+  .daily-practice-card .prefs-eyebrow{color:var(--gold);}
+  .daily-practice-tag{display:inline-block;margin-top:10px;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(201,166,107,0.15);border-radius:100px;padding:4px 12px;}
+  .daily-practice-title{font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--accent-text);margin:12px 0 8px;}
+  html[lang="ar"] .daily-practice-title, html[lang="fa"] .daily-practice-title, html[lang="ur"] .daily-practice-title{font-family:Tahoma,'Segoe UI',Arial,sans-serif;}
+  .daily-practice-desc{font-size:14px;color:rgba(250,249,247,0.72);line-height:1.6;margin:0 0 18px;}
+  .daily-practice-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;}
+  .daily-practice-browse-link{background:transparent;border:none;color:rgba(250,249,247,0.65);font-family:inherit;font-size:12.5px;text-decoration:underline;cursor:pointer;padding:0;}
+
   #chat{background:var(--accent-surface);overflow:hidden;}
   #chat .section-head h2, #chat .section-head p, #chat .section-head .tag{color:var(--accent-text);}
   #chat .section-head p{color:rgba(250,249,247,0.62);}
