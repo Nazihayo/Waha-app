@@ -431,6 +431,11 @@
       <p data-i18n="journey_item_dashboard_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
+    <div class="journey-card journey-card-active" data-click="openHealth">
+      <h3 data-i18n="journey_item_health_title"></h3>
+      <p data-i18n="journey_item_health_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
+    </div>
   </div>
 </section>
 
@@ -462,6 +467,33 @@
     </div>
     <div class="tracker-list" id="habitsList"></div>
     <p class="tracker-empty u-hidden" id="habitsEmptyMsg" data-i18n="habits_empty"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="healthModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeHealth" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="health_modal_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="health_modal_title"></h2>
+    <p class="prefs-subtitle" data-i18n="health_modal_subtitle"></p>
+    <div class="health-fields-grid">
+      <div class="health-field">
+        <label data-i18n="health_sleep_label" for="healthSleepInput"></label>
+        <input type="number" id="healthSleepInput" min="0" max="24" step="0.5">
+      </div>
+      <div class="health-field">
+        <label data-i18n="health_water_label" for="healthWaterInput"></label>
+        <input type="number" id="healthWaterInput" min="0" max="30" step="1">
+      </div>
+      <div class="health-field">
+        <label data-i18n="health_movement_label" for="healthMovementInput"></label>
+        <input type="number" id="healthMovementInput" min="0" max="600" step="5">
+      </div>
+    </div>
+    <button class="journal-save-btn" data-click="saveHealthLog" data-i18n="reviews_save_btn"></button>
+    <div class="review-history-label" data-i18n="health_history_label"></div>
+    <div id="healthHistory"></div>
+    <p class="tracker-empty u-hidden" id="healthEmptyMsg" data-i18n="health_empty"></p>
   </div>
 </div>
 

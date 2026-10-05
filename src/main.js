@@ -57,6 +57,10 @@ const I18N = {
     coach_consent_eyebrow:"قبل أن نكمل", coach_consent_title:"مشاركة ملخص مع مدرّبك؟",
     coach_consent_text:"لتقديم تأمل شخصي لك، يُرسَل ملخص لأهدافك وعاداتك وأيامك المتتالية ومزاج هذا الأسبوع — وليس كتاباتك الخاصة — إلى Anthropic (مزوّد الذكاء الاصطناعي) عبر خادم التطبيق. لا يُحفظ. هل توافق على المتابعة؟",
     dashboard_coach_label:"مدرّبك", dashboard_coach_cta:"احصل على تأمل",
+    journey_item_health_title:"الصحة", journey_item_health_desc:"أرقام يومية بسيطة — النوم، الماء، الحركة — لأن الجسد والعقل ليسا منفصلين.",
+    health_modal_eyebrow:"الجسد والعقل", health_modal_title:"سجل صحتك", health_modal_subtitle:"ملاحظة يومية سريعة، وليست أداة تتبّع للمثالية. املأ ما ينطبق عليك اليوم.",
+    health_sleep_label:"النوم (ساعات)", health_water_label:"الماء (أكواب)", health_movement_label:"الحركة (دقائق)",
+    health_history_label:"الأيام الأخيرة", health_empty:"لا توجد سجلات صحية بعد.", health_delete_aria:"حذف السجل",
     exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
     footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
     title:"Waha — مساحتك الآمنة",
@@ -234,6 +238,10 @@ const I18N = {
     coach_consent_eyebrow:"Bevor wir fortfahren", coach_consent_title:"Eine Zusammenfassung mit deinem Coach teilen?",
     coach_consent_text:"Um dir eine persönliche Reflexion zu geben, wird eine Zusammenfassung deiner Ziele, Gewohnheiten, Serien und der Stimmung dieser Woche — nicht deine privaten Tagebucheinträge — über den Server der App an Anthropic (KI-Anbieter) gesendet. Sie wird nicht gespeichert. Stimmst du zu, fortzufahren?",
     dashboard_coach_label:"Dein Coach", dashboard_coach_cta:"Reflexion erhalten",
+    journey_item_health_title:"Gesundheit", journey_item_health_desc:"Ein paar einfache tägliche Zahlen — Schlaf, Wasser, Bewegung — denn Körper und Geist sind nicht getrennt.",
+    health_modal_eyebrow:"Körper & Geist", health_modal_title:"Dein Gesundheitslog", health_modal_subtitle:"Eine kurze tägliche Notiz, kein Optimierungs-Tracker. Trage ein, was heute zutrifft.",
+    health_sleep_label:"Schlaf (Stunden)", health_water_label:"Wasser (Gläser)", health_movement_label:"Bewegung (Minuten)",
+    health_history_label:"Letzte Tage", health_empty:"Noch keine Gesundheitseinträge.", health_delete_aria:"Eintrag löschen",
     exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
     footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
     title:"Waha — Dein sicherer Raum",
@@ -411,6 +419,10 @@ const I18N = {
     coach_consent_eyebrow:"Before we continue", coach_consent_title:"Share a summary with your coach?",
     coach_consent_text:"To give you a personalized reflection, a summary of your goals, habits, streaks and this week's mood — not your private journal entries — is sent to Anthropic (the AI provider) through the app's server. It isn't saved. Do you agree to continue?",
     dashboard_coach_label:"Your coach", dashboard_coach_cta:"Get a reflection",
+    journey_item_health_title:"Health", journey_item_health_desc:"A few simple daily numbers — sleep, water, movement — because body and mind aren't separate.",
+    health_modal_eyebrow:"Body & mind", health_modal_title:"Your health log", health_modal_subtitle:"A quick daily note, not a tracker to optimize. Fill in whatever applies today.",
+    health_sleep_label:"Sleep (hours)", health_water_label:"Water (glasses)", health_movement_label:"Movement (minutes)",
+    health_history_label:"Recent days", health_empty:"No health logs yet.", health_delete_aria:"Delete entry",
     exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
     footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
     title:"Waha — Your safe space",
@@ -588,6 +600,10 @@ const I18N = {
     coach_consent_eyebrow:"Avant de continuer", coach_consent_title:"Partager un résumé avec ton coach ?",
     coach_consent_text:"Pour te donner une réflexion personnalisée, un résumé de tes objectifs, habitudes, séries et de l'humeur de cette semaine — pas tes écrits privés — est envoyé à Anthropic (le fournisseur d'IA) via le serveur de l'application. Il n'est pas enregistré. Acceptes-tu de continuer ?",
     dashboard_coach_label:"Ton coach", dashboard_coach_cta:"Obtenir une réflexion",
+    journey_item_health_title:"Santé", journey_item_health_desc:"Quelques chiffres quotidiens simples — sommeil, eau, mouvement — parce que le corps et l'esprit ne sont pas séparés.",
+    health_modal_eyebrow:"Corps et esprit", health_modal_title:"Ton journal de santé", health_modal_subtitle:"Une note quotidienne rapide, pas un tracker à optimiser. Remplis ce qui s'applique aujourd'hui.",
+    health_sleep_label:"Sommeil (heures)", health_water_label:"Eau (verres)", health_movement_label:"Mouvement (minutes)",
+    health_history_label:"Jours récents", health_empty:"Aucun journal de santé pour l'instant.", health_delete_aria:"Supprimer l'entrée",
     exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
     footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
     title:"Waha — Ton espace sûr",
@@ -765,6 +781,10 @@ const I18N = {
     coach_consent_eyebrow:"Devam etmeden önce", coach_consent_title:"Koçunla bir özet paylaşılsın mı?",
     coach_consent_text:"Sana kişiselleştirilmiş bir yansıma sunmak için hedeflerinin, alışkanlıklarının, serilerinin ve bu haftaki ruh halinin özeti — özel yazıların değil — uygulamanın sunucusu üzerinden Anthropic'e (yapay zeka sağlayıcısı) gönderilir. Kaydedilmez. Devam etmeyi kabul ediyor musun?",
     dashboard_coach_label:"Koçun", dashboard_coach_cta:"Yansıma al",
+    journey_item_health_title:"Sağlık", journey_item_health_desc:"Birkaç basit günlük sayı — uyku, su, hareket — çünkü beden ve zihin ayrı değildir.",
+    health_modal_eyebrow:"Beden ve zihin", health_modal_title:"Sağlık günlüğün", health_modal_subtitle:"Hızlı bir günlük not, optimize edilecek bir takip aracı değil. Bugün geçerli olanı doldur.",
+    health_sleep_label:"Uyku (saat)", health_water_label:"Su (bardak)", health_movement_label:"Hareket (dakika)",
+    health_history_label:"Son günler", health_empty:"Henüz sağlık günlüğü yok.", health_delete_aria:"Kaydı sil",
     exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
     footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
     title:"Waha — Güvenli alanın",
@@ -942,6 +962,10 @@ const I18N = {
     coach_consent_eyebrow:"Berî ku em berdewam bikin", coach_consent_title:"Kurtahiyek bi rahênerê te re parve bike?",
     coach_consent_text:"Ji bo ku nerînek kesane bide te, kurtahiyek ji armanc, adet, rêzefîlm û rewşa giyanî ya vê heftiyê — ne nivîsên te yên taybet — li ser rajekarê sepanê ji Anthropic (dabînkerê AI) re tê şandin. Nayê tomarkirin. Tu dizanî berdewam bikî?",
     dashboard_coach_label:"Rahênerê te", dashboard_coach_cta:"Nerînek bistîne",
+    journey_item_health_title:"Tenduristî", journey_item_health_desc:"Çend hejmarên rojane yên sade — xew, av, tevger — ji ber ku beden û hiş ji hev cuda nînin.",
+    health_modal_eyebrow:"Beden û hiş", health_modal_title:"Tomara tenduristiya te", health_modal_subtitle:"Nîşeyeke rojane ya zûtir, ne amûrek şopandinê ya bêkêmasî. Tiştê ku îro derbasdar e tije bike.",
+    health_sleep_label:"Xew (saet)", health_water_label:"Av (perçîn)", health_movement_label:"Tevger (deqe)",
+    health_history_label:"Rojên dawî", health_empty:"Hêj tomarên tenduristî tune ne.", health_delete_aria:"Tomarê jê bibe",
     exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
     footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
     title:"Waha — Cihê te yê ewle",
@@ -1119,6 +1143,10 @@ const I18N = {
     coach_consent_eyebrow:"Antes de continuar", coach_consent_title:"¿Compartir un resumen con tu coach?",
     coach_consent_text:"Para darte una reflexión personalizada, se envía un resumen de tus metas, hábitos, rachas y el ánimo de esta semana — no tus escritos privados — a Anthropic (el proveedor de IA) a través del servidor de la app. No se guarda. ¿Aceptas continuar?",
     dashboard_coach_label:"Tu coach", dashboard_coach_cta:"Obtener una reflexión",
+    journey_item_health_title:"Salud", journey_item_health_desc:"Unos pocos números diarios simples — sueño, agua, movimiento — porque cuerpo y mente no están separados.",
+    health_modal_eyebrow:"Cuerpo y mente", health_modal_title:"Tu registro de salud", health_modal_subtitle:"Una nota diaria rápida, no un rastreador para optimizar. Rellena lo que aplique hoy.",
+    health_sleep_label:"Sueño (horas)", health_water_label:"Agua (vasos)", health_movement_label:"Movimiento (minutos)",
+    health_history_label:"Días recientes", health_empty:"Aún no hay registros de salud.", health_delete_aria:"Eliminar registro",
     exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
     footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
     title:"Waha — Tu espacio seguro",
@@ -1296,6 +1324,10 @@ const I18N = {
       coach_consent_eyebrow:"پیش از ادامه", coach_consent_title:"خلاصه‌ای با مربی‌ات به اشتراک بگذاری؟",
       coach_consent_text:"برای ارائه‌ی یک تأمل شخصی‌سازی‌شده، خلاصه‌ای از هدف‌ها، عادت‌ها، روزهای متوالی و خلق‌وخوی این هفته‌ات — نه نوشته‌های خصوصی‌ات — از طریق سرور اپ برای Anthropic (ارائه‌دهنده‌ی هوش مصنوعی) ارسال می‌شود. ذخیره نمی‌شود. آیا با ادامه موافقی؟",
       dashboard_coach_label:"مربی تو", dashboard_coach_cta:"دریافت تأمل",
+      journey_item_health_title:"سلامت", journey_item_health_desc:"چند عدد ساده‌ی روزانه — خواب، آب، حرکت — چون بدن و ذهن جدا نیستند.",
+      health_modal_eyebrow:"بدن و ذهن", health_modal_title:"ثبت سلامت تو", health_modal_subtitle:"یک یادداشت سریع روزانه، نه ابزاری برای کمال‌گرایی. هرچه امروز صدق می‌کند را پر کن.",
+      health_sleep_label:"خواب (ساعت)", health_water_label:"آب (لیوان)", health_movement_label:"حرکت (دقیقه)",
+      health_history_label:"روزهای اخیر", health_empty:"هنوز ثبت سلامتی وجود ندارد.", health_delete_aria:"حذف ثبت",
       exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
       footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
       title:"Waha — فضای امن تو",
@@ -1473,6 +1505,10 @@ const I18N = {
       coach_consent_eyebrow:"آگے بڑھنے سے پہلے", coach_consent_title:"اپنے کوچ کے ساتھ خلاصہ شیئر کریں؟",
       coach_consent_text:"آپ کو ایک ذاتی نوعیت کا جائزہ دینے کے لیے، آپ کے اہداف، عادات، لگاتار دنوں اور اس ہفتے کے موڈ کا خلاصہ — آپ کی نجی تحریریں نہیں — ایپ کے سرور کے ذریعے Anthropic (AI فراہم کنندہ) کو بھیجا جاتا ہے۔ یہ محفوظ نہیں کیا جاتا۔ کیا آپ جاری رکھنے پر راضی ہیں؟",
       dashboard_coach_label:"آپ کا کوچ", dashboard_coach_cta:"جائزہ حاصل کریں",
+      journey_item_health_title:"صحت", journey_item_health_desc:"چند سادہ روزانہ اعداد — نیند، پانی، حرکت — کیونکہ جسم اور ذہن الگ نہیں ہیں۔",
+      health_modal_eyebrow:"جسم اور ذہن", health_modal_title:"آپ کا صحت لاگ", health_modal_subtitle:"ایک فوری روزانہ نوٹ، کمال کے لیے ٹریکر نہیں۔ جو آج لاگو ہو وہ پر کریں۔",
+      health_sleep_label:"نیند (گھنٹے)", health_water_label:"پانی (گلاس)", health_movement_label:"حرکت (منٹ)",
+      health_history_label:"حالیہ دن", health_empty:"ابھی تک کوئی صحت کا ریکارڈ نہیں۔", health_delete_aria:"اندراج حذف کریں",
       exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
       footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
       title:"Waha — آپ کی محفوظ جگہ",
@@ -1650,6 +1686,10 @@ const I18N = {
       coach_consent_eyebrow:"Прежде чем продолжить", coach_consent_title:"Поделиться сводкой с твоим коучем?",
       coach_consent_text:"Чтобы дать тебе персональную рефлексию, сводка твоих целей, привычек, серий и настроения за эту неделю — не твои личные записи — отправляется в Anthropic (поставщик ИИ) через сервер приложения. Она не сохраняется. Согласен(на) продолжить?",
       dashboard_coach_label:"Твой коуч", dashboard_coach_cta:"Получить рефлексию",
+      journey_item_health_title:"Здоровье", journey_item_health_desc:"Несколько простых ежедневных чисел — сон, вода, движение — потому что тело и разум не разделены.",
+      health_modal_eyebrow:"Тело и разум", health_modal_title:"Твой журнал здоровья", health_modal_subtitle:"Быстрая ежедневная запись, а не трекер для оптимизации. Заполни то, что подходит сегодня.",
+      health_sleep_label:"Сон (часы)", health_water_label:"Вода (стаканы)", health_movement_label:"Движение (минуты)",
+      health_history_label:"Последние дни", health_empty:"Пока нет записей о здоровье.", health_delete_aria:"Удалить запись",
       exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
       footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
       title:"Waha — Твоё безопасное пространство",
@@ -1827,6 +1867,10 @@ const I18N = {
       coach_consent_eyebrow:"Antes de continuar", coach_consent_title:"Partilhar um resumo com o teu coach?",
       coach_consent_text:"Para te dar uma reflexão personalizada, um resumo das tuas metas, hábitos, sequências e do humor desta semana — não os teus escritos privados — é enviado para a Anthropic (o fornecedor de IA) através do servidor da app. Não é guardado. Aceitas continuar?",
       dashboard_coach_label:"O teu coach", dashboard_coach_cta:"Obter uma reflexão",
+      journey_item_health_title:"Saúde", journey_item_health_desc:"Alguns números diários simples — sono, água, movimento — porque corpo e mente não são separados.",
+      health_modal_eyebrow:"Corpo e mente", health_modal_title:"O teu registo de saúde", health_modal_subtitle:"Uma nota diária rápida, não um tracker para otimizar. Preenche o que se aplica hoje.",
+      health_sleep_label:"Sono (horas)", health_water_label:"Água (copos)", health_movement_label:"Movimento (minutos)",
+      health_history_label:"Dias recentes", health_empty:"Ainda sem registos de saúde.", health_delete_aria:"Eliminar registo",
       exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
       footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
       title:"Waha — O teu espaço seguro",
@@ -2004,6 +2048,10 @@ const I18N = {
       coach_consent_eyebrow:"Prima di continuare", coach_consent_title:"Condividere un riepilogo con il tuo coach?",
       coach_consent_text:"Per darti una riflessione personalizzata, un riepilogo dei tuoi obiettivi, abitudini, serie e dell'umore di questa settimana — non i tuoi scritti privati — viene inviato ad Anthropic (il fornitore di IA) tramite il server dell'app. Non viene salvato. Accetti di continuare?",
       dashboard_coach_label:"Il tuo coach", dashboard_coach_cta:"Ottieni una riflessione",
+      journey_item_health_title:"Salute", journey_item_health_desc:"Alcuni semplici numeri giornalieri — sonno, acqua, movimento — perché corpo e mente non sono separati.",
+      health_modal_eyebrow:"Corpo e mente", health_modal_title:"Il tuo diario della salute", health_modal_subtitle:"Una rapida nota giornaliera, non un tracker da ottimizzare. Compila ciò che si applica oggi.",
+      health_sleep_label:"Sonno (ore)", health_water_label:"Acqua (bicchieri)", health_movement_label:"Movimento (minuti)",
+      health_history_label:"Giorni recenti", health_empty:"Ancora nessun registro di salute.", health_delete_aria:"Elimina registro",
       exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
       footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
       title:"Waha — Il tuo spazio sicuro",
@@ -4304,6 +4352,10 @@ function computeLifeScore(){
     const completed = goals.filter(g => g.done).length;
     scores.push((completed / goals.length) * 100);
   }
+  const healthDaysLogged = new Set(recent.filter(e => e.entity_type === 'health_log').map(e => dateKeyFromTs(e.occurred_at))).size;
+  if(healthDaysLogged > 0){
+    scores.push(Math.min(100, (healthDaysLogged / 7) * 100));
+  }
   const total = scores.reduce((a, b) => a + b, 0) / scores.length;
   return Math.round(Math.max(0, Math.min(100, total)));
 }
@@ -4406,6 +4458,23 @@ function buildCoachSummary(){
     ? ("This week's average mood (1-5 scale): " + (recentMood.reduce((s, e) => s + (e.payload.score || 0), 0) / recentMood.length).toFixed(1) + ' from ' + recentMood.length + ' log(s)')
     : "This week's mood: no logs yet");
   lines.push('Exercises completed this week: ' + exercisesThisWeek);
+  const recentHealthLogs = getHealthLogs().filter(l => l.id >= dateKeyFromTs(cutoff));
+  if(recentHealthLogs.length){
+    const avgOf = (key) => {
+      const vals = recentHealthLogs.map(l => l[key]).filter(v => v !== null && v !== undefined);
+      return vals.length ? (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1) : null;
+    };
+    const sleepAvg = avgOf('sleepHours');
+    const waterAvg = avgOf('waterGlasses');
+    const movementAvg = avgOf('movementMinutes');
+    const parts = [];
+    if(sleepAvg !== null) parts.push('avg sleep ' + sleepAvg + 'h');
+    if(waterAvg !== null) parts.push('avg water ' + waterAvg + ' glasses');
+    if(movementAvg !== null) parts.push('avg movement ' + movementAvg + ' min');
+    lines.push('Health this week (' + recentHealthLogs.length + ' day(s) logged): ' + (parts.length ? parts.join(', ') : 'logged but no values given'));
+  } else {
+    lines.push('Health: no logs yet');
+  }
   lines.push('Reply language code: ' + currentLang);
   return lines.join('\n');
 }
@@ -4461,6 +4530,82 @@ function closeCoachConsent(){
   pendingCoachAsk = false;
 }
 
+function getHealthLogs(){
+  try{ const raw = safeGet('mc_health_logs'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function saveHealthLogsList(list){ safeSet('mc_health_logs', JSON.stringify(list)); }
+function parseHealthNum(val){
+  const n = parseFloat(val);
+  return (val !== '' && !isNaN(n)) ? n : null;
+}
+function saveHealthLog(){
+  const sleepHours = parseHealthNum(document.getElementById('healthSleepInput').value);
+  const waterGlasses = parseHealthNum(document.getElementById('healthWaterInput').value);
+  const movementMinutes = parseHealthNum(document.getElementById('healthMovementInput').value);
+  if(sleepHours === null && waterGlasses === null && movementMinutes === null) return;
+  const todayKey = dateKeyFromTs(Date.now());
+  const logs = getHealthLogs().filter(l => l.id !== todayKey);
+  logs.push({ id: todayKey, sleepHours, waterGlasses, movementMinutes, updatedAt: Date.now() });
+  saveHealthLogsList(logs);
+  addEntry('health_log', { sleepHours, waterGlasses, movementMinutes }, todayKey);
+  renderHealthLogs();
+}
+function deleteHealthLog(id){
+  const logs = getHealthLogs().filter(l => l.id !== id);
+  saveHealthLogsList(logs);
+  addEntry('health_log_deleted', {}, id);
+  renderHealthLogs();
+}
+function formatHealthLogLine(dict, log){
+  const parts = [];
+  if(log.sleepHours !== null && log.sleepHours !== undefined) parts.push(dict.health_sleep_label + ': ' + log.sleepHours);
+  if(log.waterGlasses !== null && log.waterGlasses !== undefined) parts.push(dict.health_water_label + ': ' + log.waterGlasses);
+  if(log.movementMinutes !== null && log.movementMinutes !== undefined) parts.push(dict.health_movement_label + ': ' + log.movementMinutes);
+  return parts.join(' · ');
+}
+function renderHealthLogs(){
+  const dict = I18N[currentLang];
+  const list = document.getElementById('healthHistory');
+  const empty = document.getElementById('healthEmptyMsg');
+  const logs = getHealthLogs().slice().sort((a, b) => b.id.localeCompare(a.id));
+  list.innerHTML = '';
+  empty.classList.toggle('u-hidden', logs.length > 0);
+  const todayKey = dateKeyFromTs(Date.now());
+  const todayLog = logs.find(l => l.id === todayKey);
+  document.getElementById('healthSleepInput').value = (todayLog && todayLog.sleepHours !== null && todayLog.sleepHours !== undefined) ? todayLog.sleepHours : '';
+  document.getElementById('healthWaterInput').value = (todayLog && todayLog.waterGlasses !== null && todayLog.waterGlasses !== undefined) ? todayLog.waterGlasses : '';
+  document.getElementById('healthMovementInput').value = (todayLog && todayLog.movementMinutes !== null && todayLog.movementMinutes !== undefined) ? todayLog.movementMinutes : '';
+  logs.forEach(log => {
+    const row = document.createElement('div');
+    row.className = 'review-history-item';
+    const dateEl = document.createElement('span');
+    dateEl.className = 'review-history-date';
+    dateEl.textContent = log.id;
+    row.appendChild(dateEl);
+    const line = formatHealthLogLine(dict, log);
+    if(line){
+      const p = document.createElement('p');
+      p.className = 'review-history-text';
+      p.textContent = line;
+      row.appendChild(p);
+    }
+    const delBtn = document.createElement('button');
+    delBtn.className = 'review-history-delete';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.health_delete_aria);
+    delBtn.onclick = () => deleteHealthLog(log.id);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+function openHealth(){
+  renderHealthLogs();
+  document.getElementById('healthModal').classList.add('open');
+}
+function closeHealth(){
+  document.getElementById('healthModal').classList.remove('open');
+}
+
 function renderMoodWidget(){
   const dict = I18N[currentLang];
   document.getElementById('moodPrompt').textContent = dict.mood_prompt;
@@ -4498,7 +4643,7 @@ function renderMoodChart(){
 let currentJournalExId = null;
 function journalKey(exId){ return 'mc_journal_' + exId; }
 
-const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count','mc_entries','mc_mode','mc_goals','mc_habits','mc_daily_reviews','mc_weekly_reviews'];
+const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count','mc_entries','mc_mode','mc_goals','mc_habits','mc_daily_reviews','mc_weekly_reviews','mc_health_logs'];
 const BACKUP_JOURNAL_IDS = ['ex-gratitude','ex-feelings','ex-reframe'];
 
 function exportBackup(){
@@ -5847,6 +5992,7 @@ const ACTIONS = {
   closeExplainFeeling,
   closeGoals,
   closeHabits,
+  closeHealth,
   closePrefs,
   closePrivacyPassport,
   closeRelief,
@@ -5886,6 +6032,7 @@ const ACTIONS = {
   openSleepMode,
   openGoals,
   openHabits,
+  openHealth,
   openReviews,
   openSounds,
   openUpgrade,
@@ -5896,6 +6043,7 @@ const ACTIONS = {
   rewriteFeelingWithAI,
   saveCalmPlan,
   saveDailyReview,
+  saveHealthLog,
   saveJournalEntry,
   saveWeeklyReview,
   scrollToSection,
