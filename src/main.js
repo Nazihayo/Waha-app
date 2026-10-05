@@ -49,6 +49,11 @@ const I18N = {
     reviews_weekly_exercises_label:"تمارين مُنجزة", reviews_weekly_mood_label:"متوسط المزاج", reviews_weekly_mood_empty:"لا توجد بيانات مزاج بعد",
     reviews_weekly_win_placeholder:"أكبر إنجاز هذا الأسبوع", reviews_weekly_focus_placeholder:"تركيز واحد للأسبوع القادم",
     reviews_weekly_history_label:"الأسابيع الماضية", reviews_weekly_empty:"لا توجد مراجعات أسبوعية بعد.", reviews_delete_aria:"حذف المراجعة",
+    dashboard_modal_eyebrow:"نظرة عامة", dashboard_modal_title:"لوحتك", dashboard_modal_subtitle:"لمحة لطيفة عن أسبوعك — ليست تقييمًا، بل مرآة فقط.",
+    dashboard_score_label:"مؤشر الحياة", dashboard_score_empty:"لا توجد بيانات كافية بعد — عُد بعد أيام قليلة من استخدام Waha.",
+    dashboard_band_early:"أنت في البداية فقط — وهذا يكفي لليوم.", dashboard_band_steady:"إيقاع ثابت يتشكّل. استمر في الحضور.", dashboard_band_thriving:"زخم قوي ومستمر هذا الأسبوع.",
+    dashboard_stat_streak_label:"أيام متتالية", dashboard_stat_goals_label:"أهداف نشطة", dashboard_stat_habits_label:"عادات متابَعة", dashboard_stat_mood_label:"مزاج هذا الأسبوع",
+    dashboard_activity_label:"آخر 7 أيام",
     exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
     footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
     title:"Waha — مساحتك الآمنة",
@@ -218,6 +223,11 @@ const I18N = {
     reviews_weekly_exercises_label:"Übungen gemacht", reviews_weekly_mood_label:"Durchschnittliche Stimmung", reviews_weekly_mood_empty:"Noch keine Stimmungsdaten",
     reviews_weekly_win_placeholder:"Größter Erfolg dieser Woche", reviews_weekly_focus_placeholder:"Ein Fokus für nächste Woche",
     reviews_weekly_history_label:"Vergangene Wochen", reviews_weekly_empty:"Noch keine wöchentlichen Rückblicke.", reviews_delete_aria:"Rückblick löschen",
+    dashboard_modal_eyebrow:"Überblick", dashboard_modal_title:"Dein Dashboard", dashboard_modal_subtitle:"Ein sanfter Schnappschuss deiner Woche — keine Bewertung, nur ein Spiegel.",
+    dashboard_score_label:"Lebens-Score", dashboard_score_empty:"Noch nicht genug Daten — komm nach ein paar Tagen Waha-Nutzung wieder vorbei.",
+    dashboard_band_early:"Du fängst gerade erst an — das ist heute genug.", dashboard_band_steady:"Ein stetiger Rhythmus entsteht. Bleib dran.", dashboard_band_thriving:"Starke, beständige Dynamik diese Woche.",
+    dashboard_stat_streak_label:"Tage in Folge", dashboard_stat_goals_label:"Aktive Ziele", dashboard_stat_habits_label:"Verfolgte Gewohnheiten", dashboard_stat_mood_label:"Stimmung dieser Woche",
+    dashboard_activity_label:"Letzte 7 Tage",
     exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
     footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
     title:"Waha — Dein sicherer Raum",
@@ -387,6 +397,11 @@ const I18N = {
     reviews_weekly_exercises_label:"Exercises done", reviews_weekly_mood_label:"Average mood", reviews_weekly_mood_empty:"No mood data yet",
     reviews_weekly_win_placeholder:"Biggest win this week", reviews_weekly_focus_placeholder:"One focus for next week",
     reviews_weekly_history_label:"Past weeks", reviews_weekly_empty:"No weekly reviews yet.", reviews_delete_aria:"Delete review",
+    dashboard_modal_eyebrow:"Overview", dashboard_modal_title:"Your dashboard", dashboard_modal_subtitle:"A gentle snapshot of your week — not a grade, just a mirror.",
+    dashboard_score_label:"Life score", dashboard_score_empty:"Not enough data yet — come back after a few days of using Waha.",
+    dashboard_band_early:"You're just getting started — that's enough for today.", dashboard_band_steady:"A steady rhythm is forming. Keep showing up.", dashboard_band_thriving:"Strong, consistent momentum this week.",
+    dashboard_stat_streak_label:"Day streak", dashboard_stat_goals_label:"Active goals", dashboard_stat_habits_label:"Habits tracked", dashboard_stat_mood_label:"This week's mood",
+    dashboard_activity_label:"Last 7 days",
     exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
     footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
     title:"Waha — Your safe space",
@@ -556,6 +571,11 @@ const I18N = {
     reviews_weekly_exercises_label:"Exercices faits", reviews_weekly_mood_label:"Humeur moyenne", reviews_weekly_mood_empty:"Pas encore de données d'humeur",
     reviews_weekly_win_placeholder:"Plus grande réussite de la semaine", reviews_weekly_focus_placeholder:"Un objectif pour la semaine prochaine",
     reviews_weekly_history_label:"Semaines passées", reviews_weekly_empty:"Aucun bilan hebdomadaire pour l'instant.", reviews_delete_aria:"Supprimer le bilan",
+    dashboard_modal_eyebrow:"Aperçu", dashboard_modal_title:"Ton tableau de bord", dashboard_modal_subtitle:"Un aperçu doux de ta semaine — pas une note, juste un miroir.",
+    dashboard_score_label:"Score de vie", dashboard_score_empty:"Pas encore assez de données — reviens dans quelques jours d'utilisation de Waha.",
+    dashboard_band_early:"Tu commences tout juste — c'est suffisant pour aujourd'hui.", dashboard_band_steady:"Un rythme stable se met en place. Continue.", dashboard_band_thriving:"Un élan fort et régulier cette semaine.",
+    dashboard_stat_streak_label:"Jours de suite", dashboard_stat_goals_label:"Objectifs actifs", dashboard_stat_habits_label:"Habitudes suivies", dashboard_stat_mood_label:"Humeur de la semaine",
+    dashboard_activity_label:"7 derniers jours",
     exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
     footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
     title:"Waha — Ton espace sûr",
@@ -725,6 +745,11 @@ const I18N = {
     reviews_weekly_exercises_label:"Yapılan egzersizler", reviews_weekly_mood_label:"Ortalama ruh hali", reviews_weekly_mood_empty:"Henüz ruh hali verisi yok",
     reviews_weekly_win_placeholder:"Bu haftanın en büyük kazanımı", reviews_weekly_focus_placeholder:"Gelecek hafta için bir odak",
     reviews_weekly_history_label:"Geçmiş haftalar", reviews_weekly_empty:"Henüz haftalık değerlendirme yok.", reviews_delete_aria:"Değerlendirmeyi sil",
+    dashboard_modal_eyebrow:"Genel bakış", dashboard_modal_title:"Panelin", dashboard_modal_subtitle:"Haftana nazik bir bakış — not değil, sadece bir ayna.",
+    dashboard_score_label:"Yaşam puanı", dashboard_score_empty:"Henüz yeterli veri yok — birkaç gün Waha kullandıktan sonra tekrar bak.",
+    dashboard_band_early:"Daha yeni başlıyorsun — bugün için bu yeterli.", dashboard_band_steady:"İstikrarlı bir ritim oluşuyor. Devam et.", dashboard_band_thriving:"Bu hafta güçlü, istikrarlı bir ivme var.",
+    dashboard_stat_streak_label:"Gün üst üste", dashboard_stat_goals_label:"Aktif hedefler", dashboard_stat_habits_label:"Takip edilen alışkanlıklar", dashboard_stat_mood_label:"Bu haftanın ruh hali",
+    dashboard_activity_label:"Son 7 gün",
     exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
     footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
     title:"Waha — Güvenli alanın",
@@ -894,6 +919,11 @@ const I18N = {
     reviews_weekly_exercises_label:"Temrînên qedandî", reviews_weekly_mood_label:"Rewşa giyanî ya navîn", reviews_weekly_mood_empty:"Hêj daneyên rewşa giyanî tune ne",
     reviews_weekly_win_placeholder:"Serkeftina herî mezin a vê heftiyê", reviews_weekly_focus_placeholder:"Armancek ji bo heftiya pêş",
     reviews_weekly_history_label:"Heftiyên borî", reviews_weekly_empty:"Hêj tu nirxandinên heftane tune ne.", reviews_delete_aria:"Nirxandinê jê bibe",
+    dashboard_modal_eyebrow:"Nêrîna giştî", dashboard_modal_title:"Panela te", dashboard_modal_subtitle:"Nêrînek nerm a heftiya te — ne nirxandin e, tenê neynîk e.",
+    dashboard_score_label:"Xala jiyanê", dashboard_score_empty:"Hêj dane ne têr in — piştî çend rojan ji bikaranîna Waha vegere.",
+    dashboard_band_early:"Tu hêj dest pê dikî — ev ji bo îro bes e.", dashboard_band_steady:"Rîtmek domdar tê avakirin. Berdewam be.", dashboard_band_thriving:"Vê heftiyê xwedî lezgîniyeke bihêz û domdar î.",
+    dashboard_stat_streak_label:"Roj li dû hev", dashboard_stat_goals_label:"Armancên çalak", dashboard_stat_habits_label:"Adetên tên şopandin", dashboard_stat_mood_label:"Rewşa giyanî ya vê heftiyê",
+    dashboard_activity_label:"7 rojên dawî",
     exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
     footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
     title:"Waha — Cihê te yê ewle",
@@ -1063,6 +1093,11 @@ const I18N = {
     reviews_weekly_exercises_label:"Ejercicios hechos", reviews_weekly_mood_label:"Estado de ánimo promedio", reviews_weekly_mood_empty:"Aún no hay datos de ánimo",
     reviews_weekly_win_placeholder:"Mayor logro de esta semana", reviews_weekly_focus_placeholder:"Un enfoque para la próxima semana",
     reviews_weekly_history_label:"Semanas pasadas", reviews_weekly_empty:"Aún no hay revisiones semanales.", reviews_delete_aria:"Eliminar revisión",
+    dashboard_modal_eyebrow:"Resumen", dashboard_modal_title:"Tu panel", dashboard_modal_subtitle:"Una instantánea suave de tu semana — no es una nota, solo un espejo.",
+    dashboard_score_label:"Puntuación de vida", dashboard_score_empty:"Aún no hay suficientes datos — vuelve tras unos días usando Waha.",
+    dashboard_band_early:"Apenas estás empezando — con eso basta por hoy.", dashboard_band_steady:"Se está formando un ritmo constante. Sigue así.", dashboard_band_thriving:"Un impulso fuerte y constante esta semana.",
+    dashboard_stat_streak_label:"Días seguidos", dashboard_stat_goals_label:"Metas activas", dashboard_stat_habits_label:"Hábitos seguidos", dashboard_stat_mood_label:"Ánimo de esta semana",
+    dashboard_activity_label:"Últimos 7 días",
     exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
     footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
     title:"Waha — Tu espacio seguro",
@@ -1232,6 +1267,11 @@ const I18N = {
       reviews_weekly_exercises_label:"تمرین‌های انجام‌شده", reviews_weekly_mood_label:"میانگین خلق‌وخو", reviews_weekly_mood_empty:"هنوز داده‌ای از خلق‌وخو نیست",
       reviews_weekly_win_placeholder:"بزرگ‌ترین موفقیت این هفته", reviews_weekly_focus_placeholder:"یک تمرکز برای هفته‌ی آینده",
       reviews_weekly_history_label:"هفته‌های گذشته", reviews_weekly_empty:"هنوز مرور هفتگی‌ای ثبت نشده.", reviews_delete_aria:"حذف مرور",
+      dashboard_modal_eyebrow:"نمای کلی", dashboard_modal_title:"داشبورد تو", dashboard_modal_subtitle:"نگاهی ملایم به هفته‌ات — نه نمره، فقط یک آینه.",
+      dashboard_score_label:"امتیاز زندگی", dashboard_score_empty:"هنوز داده‌ی کافی نیست — بعد از چند روز استفاده از Waha دوباره سر بزن.",
+      dashboard_band_early:"تازه شروع کرده‌ای — همین برای امروز کافی‌ست.", dashboard_band_steady:"ریتمی پایدار در حال شکل‌گیری است. ادامه بده.", dashboard_band_thriving:"این هفته شتابی قوی و پیوسته داشتی.",
+      dashboard_stat_streak_label:"روز متوالی", dashboard_stat_goals_label:"هدف‌های فعال", dashboard_stat_habits_label:"عادت‌های دنبال‌شده", dashboard_stat_mood_label:"خلق‌وخوی این هفته",
+      dashboard_activity_label:"۷ روز اخیر",
       exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
       footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
       title:"Waha — فضای امن تو",
@@ -1401,6 +1441,11 @@ const I18N = {
       reviews_weekly_exercises_label:"مکمل شدہ مشقیں", reviews_weekly_mood_label:"اوسط موڈ", reviews_weekly_mood_empty:"ابھی تک موڈ کا ڈیٹا نہیں",
       reviews_weekly_win_placeholder:"اس ہفتے کی سب سے بڑی کامیابی", reviews_weekly_focus_placeholder:"اگلے ہفتے کے لیے ایک توجہ",
       reviews_weekly_history_label:"گزشتہ ہفتے", reviews_weekly_empty:"ابھی تک کوئی ہفتہ وار جائزہ نہیں۔", reviews_delete_aria:"جائزہ حذف کریں",
+      dashboard_modal_eyebrow:"جائزہ", dashboard_modal_title:"آپ کا ڈیش بورڈ", dashboard_modal_subtitle:"آپ کے ہفتے کی ایک نرم جھلک — یہ نمبر نہیں، بس آئینہ ہے۔",
+      dashboard_score_label:"لائف اسکور", dashboard_score_empty:"ابھی تک کافی ڈیٹا نہیں — Waha استعمال کرنے کے چند دن بعد واپس آئیں۔",
+      dashboard_band_early:"آپ ابھی شروع کر رہے ہیں — آج کے لیے یہی کافی ہے۔", dashboard_band_steady:"ایک مستقل تال بن رہی ہے۔ آتے رہیں۔", dashboard_band_thriving:"اس ہفتے مضبوط اور مستقل رفتار رہی۔",
+      dashboard_stat_streak_label:"لگاتار دن", dashboard_stat_goals_label:"فعال اہداف", dashboard_stat_habits_label:"ٹریک کی گئی عادات", dashboard_stat_mood_label:"اس ہفتے کا موڈ",
+      dashboard_activity_label:"پچھلے 7 دن",
       exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
       footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
       title:"Waha — آپ کی محفوظ جگہ",
@@ -1570,6 +1615,11 @@ const I18N = {
       reviews_weekly_exercises_label:"Выполненные упражнения", reviews_weekly_mood_label:"Среднее настроение", reviews_weekly_mood_empty:"Пока нет данных о настроении",
       reviews_weekly_win_placeholder:"Главное достижение этой недели", reviews_weekly_focus_placeholder:"Фокус на следующую неделю",
       reviews_weekly_history_label:"Прошедшие недели", reviews_weekly_empty:"Пока нет еженедельных обзоров.", reviews_delete_aria:"Удалить обзор",
+      dashboard_modal_eyebrow:"Обзор", dashboard_modal_title:"Твоя панель", dashboard_modal_subtitle:"Мягкий снимок твоей недели — не оценка, а просто зеркало.",
+      dashboard_score_label:"Индекс жизни", dashboard_score_empty:"Пока недостаточно данных — вернись через несколько дней использования Waha.",
+      dashboard_band_early:"Ты только начинаешь — этого достаточно на сегодня.", dashboard_band_steady:"Формируется устойчивый ритм. Продолжай в том же духе.", dashboard_band_thriving:"Сильный, стабильный импульс на этой неделе.",
+      dashboard_stat_streak_label:"Дней подряд", dashboard_stat_goals_label:"Активные цели", dashboard_stat_habits_label:"Отслеживаемые привычки", dashboard_stat_mood_label:"Настроение этой недели",
+      dashboard_activity_label:"Последние 7 дней",
       exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
       footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
       title:"Waha — Твоё безопасное пространство",
@@ -1739,6 +1789,11 @@ const I18N = {
       reviews_weekly_exercises_label:"Exercícios feitos", reviews_weekly_mood_label:"Humor médio", reviews_weekly_mood_empty:"Ainda sem dados de humor",
       reviews_weekly_win_placeholder:"Maior conquista desta semana", reviews_weekly_focus_placeholder:"Um foco para a próxima semana",
       reviews_weekly_history_label:"Semanas passadas", reviews_weekly_empty:"Ainda sem revisões semanais.", reviews_delete_aria:"Eliminar revisão",
+      dashboard_modal_eyebrow:"Visão geral", dashboard_modal_title:"O teu painel", dashboard_modal_subtitle:"Um retrato suave da tua semana — não é uma nota, só um espelho.",
+      dashboard_score_label:"Pontuação de vida", dashboard_score_empty:"Ainda sem dados suficientes — volta depois de alguns dias a usar o Waha.",
+      dashboard_band_early:"Estás apenas a começar — isso já chega por hoje.", dashboard_band_steady:"Está a formar-se um ritmo constante. Continua assim.", dashboard_band_thriving:"Um impulso forte e constante esta semana.",
+      dashboard_stat_streak_label:"Dias seguidos", dashboard_stat_goals_label:"Metas ativas", dashboard_stat_habits_label:"Hábitos acompanhados", dashboard_stat_mood_label:"Humor desta semana",
+      dashboard_activity_label:"Últimos 7 dias",
       exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
       footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
       title:"Waha — O teu espaço seguro",
@@ -1908,6 +1963,11 @@ const I18N = {
       reviews_weekly_exercises_label:"Esercizi fatti", reviews_weekly_mood_label:"Umore medio", reviews_weekly_mood_empty:"Ancora nessun dato sull'umore",
       reviews_weekly_win_placeholder:"Il più grande successo di questa settimana", reviews_weekly_focus_placeholder:"Un focus per la prossima settimana",
       reviews_weekly_history_label:"Settimane passate", reviews_weekly_empty:"Ancora nessuna revisione settimanale.", reviews_delete_aria:"Elimina revisione",
+      dashboard_modal_eyebrow:"Panoramica", dashboard_modal_title:"La tua dashboard", dashboard_modal_subtitle:"Un'istantanea gentile della tua settimana — non un voto, solo uno specchio.",
+      dashboard_score_label:"Punteggio di vita", dashboard_score_empty:"Non ci sono ancora abbastanza dati — torna dopo qualche giorno di utilizzo di Waha.",
+      dashboard_band_early:"Stai solo iniziando — per oggi va bene così.", dashboard_band_steady:"Si sta formando un ritmo costante. Continua così.", dashboard_band_thriving:"Slancio forte e costante questa settimana.",
+      dashboard_stat_streak_label:"Giorni consecutivi", dashboard_stat_goals_label:"Obiettivi attivi", dashboard_stat_habits_label:"Abitudini monitorate", dashboard_stat_mood_label:"Umore di questa settimana",
+      dashboard_activity_label:"Ultimi 7 giorni",
       exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
       footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
       title:"Waha — Il tuo spazio sicuro",
@@ -4184,6 +4244,112 @@ function closeReviews(){
   document.getElementById('reviewsModal').classList.remove('open');
 }
 
+const DASH_DAY_MS = 86400000;
+function computeLifeScore(){
+  const entries = getEntries();
+  if(entries.length === 0) return null;
+  const cutoff = Date.now() - 7 * DASH_DAY_MS;
+  const recent = entries.filter(e => !e.deleted_at && e.occurred_at >= cutoff);
+  const activeDays = new Set(recent.map(e => dateKeyFromTs(e.occurred_at)));
+  const scores = [(activeDays.size / 7) * 100];
+  const habits = getHabits();
+  if(habits.length){
+    const completions = recent.filter(e => e.entity_type === 'habit_completion').length;
+    scores.push(Math.min(100, (completions / (habits.length * 7)) * 100));
+  }
+  const moodEntries = recent.filter(e => e.entity_type === 'mood_log');
+  if(moodEntries.length){
+    const avg = moodEntries.reduce((s, e) => s + (e.payload.score || 0), 0) / moodEntries.length;
+    scores.push(((avg - 1) / 4) * 100);
+  }
+  const goals = getGoals();
+  if(goals.length){
+    const completed = goals.filter(g => g.done).length;
+    scores.push((completed / goals.length) * 100);
+  }
+  const total = scores.reduce((a, b) => a + b, 0) / scores.length;
+  return Math.round(Math.max(0, Math.min(100, total)));
+}
+function lifeScoreBand(score){
+  const dict = I18N[currentLang];
+  if(score < 40) return dict.dashboard_band_early;
+  if(score < 70) return dict.dashboard_band_steady;
+  return dict.dashboard_band_thriving;
+}
+function renderDashboardActivityBars(){
+  const container = document.getElementById('dashboardActivityBars');
+  container.innerHTML = '';
+  const entries = getEntries();
+  const counts = [];
+  for(let i = 6; i >= 0; i--){
+    const key = dateKeyFromTs(Date.now() - i * DASH_DAY_MS);
+    counts.push(entries.filter(e => !e.deleted_at && dateKeyFromTs(e.occurred_at) === key).length);
+  }
+  const max = Math.max(1, ...counts);
+  counts.forEach(c => {
+    const bar = document.createElement('div');
+    bar.className = 'dashboard-bar';
+    const fill = document.createElement('div');
+    fill.className = 'dashboard-bar-fill';
+    fill.style.height = Math.max(6, (c / max) * 100) + '%';
+    bar.appendChild(fill);
+    container.appendChild(bar);
+  });
+}
+function renderDashboardStats(){
+  const dict = I18N[currentLang];
+  const streak = parseInt(safeGet('mc_streak') || '0', 10);
+  const goals = getGoals();
+  const activeGoals = goals.filter(g => !g.done).length;
+  const habits = getHabits();
+  const cutoff = Date.now() - 7 * DASH_DAY_MS;
+  const recentMood = getEntries().filter(e => !e.deleted_at && e.entity_type === 'mood_log' && e.occurred_at >= cutoff);
+  const moodText = recentMood.length ? (recentMood.reduce((s, e) => s + (e.payload.score || 0), 0) / recentMood.length).toFixed(1) : dict.reviews_weekly_mood_empty;
+  const grid = document.getElementById('dashboardStatsGrid');
+  grid.innerHTML = '';
+  [
+    [dict.dashboard_stat_streak_label, String(streak)],
+    [dict.dashboard_stat_goals_label, String(activeGoals)],
+    [dict.dashboard_stat_habits_label, String(habits.length)],
+    [dict.dashboard_stat_mood_label, moodText]
+  ].forEach(([label, value]) => {
+    const cell = document.createElement('div');
+    cell.className = 'review-stat';
+    const valEl = document.createElement('div');
+    valEl.className = 'review-stat-value';
+    valEl.textContent = value;
+    const labelEl = document.createElement('div');
+    labelEl.className = 'review-stat-label';
+    labelEl.textContent = label;
+    cell.appendChild(valEl);
+    cell.appendChild(labelEl);
+    grid.appendChild(cell);
+  });
+}
+function renderDashboard(){
+  const score = computeLifeScore();
+  const scoreWrap = document.getElementById('dashboardScoreWrap');
+  const scoreEmptyEl = document.getElementById('dashboardScoreEmpty');
+  if(score === null){
+    scoreWrap.classList.add('u-hidden');
+    scoreEmptyEl.classList.remove('u-hidden');
+  } else {
+    scoreWrap.classList.remove('u-hidden');
+    scoreEmptyEl.classList.add('u-hidden');
+    document.getElementById('dashboardScoreValue').textContent = score;
+    document.getElementById('dashboardScoreBand').textContent = lifeScoreBand(score);
+  }
+  renderDashboardStats();
+  renderDashboardActivityBars();
+}
+function openDashboard(){
+  renderDashboard();
+  document.getElementById('dashboardModal').classList.add('open');
+}
+function closeDashboard(){
+  document.getElementById('dashboardModal').classList.remove('open');
+}
+
 function renderMoodWidget(){
   const dict = I18N[currentLang];
   document.getElementById('moodPrompt').textContent = dict.mood_prompt;
@@ -5562,6 +5728,7 @@ const ACTIONS = {
   closeCheckin,
   closeCrisis,
   closeDailyBrief,
+  closeDashboard,
   closeExercise,
   closeExplainFeeling,
   closeGoals,
@@ -5597,6 +5764,7 @@ const ACTIONS = {
   openCalmPlan,
   openCheckin,
   openCrisis,
+  openDashboard,
   openExplainFeeling,
   openPrefs,
   openPrivacyPassport,

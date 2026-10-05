@@ -370,6 +370,15 @@
   .review-history-text{font-size:12.5px;color:rgba(var(--ink-rgb),0.75);line-height:1.5;margin:2px 0;}
   .review-history-delete{background:transparent;border:none;color:rgba(var(--ink-rgb),0.45);font-size:12px;cursor:pointer;margin-top:4px;padding:0;}
 
+  .dashboard-score-wrap{text-align:center;background:var(--paper-dim);border-radius:14px;padding:22px 16px;margin-bottom:16px;}
+  .dashboard-score-value{font-size:40px;font-weight:700;color:var(--gold);line-height:1;}
+  .dashboard-score-label{font-size:11.5px;letter-spacing:0.5px;text-transform:uppercase;color:rgba(var(--ink-rgb),0.55);margin-top:6px;}
+  .dashboard-score-band{font-size:13px;color:var(--ink);margin:10px 0 0;line-height:1.5;}
+  .dashboard-activity-label{font-size:12px;font-weight:700;color:var(--ink);margin:18px 0 10px;}
+  .dashboard-activity-bars{display:flex;align-items:flex-end;gap:7px;height:70px;}
+  .dashboard-bar{flex:1;height:100%;display:flex;align-items:flex-end;background:rgba(var(--ink-rgb),0.06);border-radius:4px;overflow:hidden;}
+  .dashboard-bar-fill{width:100%;background:var(--gold);border-radius:4px;}
+
   body.text-large .modal-steps li{font-size:17px;line-height:1.65;}
   body.text-large .card p{font-size:16px;line-height:1.6;}
   body.text-large .card h3{font-size:19px;}

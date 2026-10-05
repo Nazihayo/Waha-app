@@ -426,10 +426,10 @@
       <p data-i18n="journey_item_reviews_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
-    <div class="journey-card">
-      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+    <div class="journey-card journey-card-active" data-click="openDashboard">
       <h3 data-i18n="journey_item_dashboard_title"></h3>
       <p data-i18n="journey_item_dashboard_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
     </div>
   </div>
 </section>
@@ -493,6 +493,24 @@
       <div id="reviewWeeklyHistory"></div>
       <p class="tracker-empty u-hidden" id="reviewWeeklyEmptyMsg" data-i18n="reviews_weekly_empty"></p>
     </div>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="dashboardModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeDashboard" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="dashboard_modal_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="dashboard_modal_title"></h2>
+    <p class="prefs-subtitle" data-i18n="dashboard_modal_subtitle"></p>
+    <div class="dashboard-score-wrap" id="dashboardScoreWrap">
+      <div class="dashboard-score-value" id="dashboardScoreValue">0</div>
+      <div class="dashboard-score-label" data-i18n="dashboard_score_label"></div>
+      <p class="dashboard-score-band" id="dashboardScoreBand"></p>
+    </div>
+    <p class="tracker-empty u-hidden" id="dashboardScoreEmpty" data-i18n="dashboard_score_empty"></p>
+    <div class="review-stats-grid" id="dashboardStatsGrid"></div>
+    <div class="dashboard-activity-label" data-i18n="dashboard_activity_label"></div>
+    <div class="dashboard-activity-bars" id="dashboardActivityBars"></div>
   </div>
 </div>
 
