@@ -40,6 +40,7 @@
         <li><a data-click="scrollToSection:chat" data-i18n="nav_chat"></a></li>
         <li><a data-click="scrollToSection:library" data-i18n="nav_library"></a></li>
         <li><a data-click="scrollToSection:exercises" data-i18n="nav_exercises"></a></li>
+        <li><a data-click="scrollToSection:journey" data-i18n="nav_journey"></a></li>
         <li><a data-click="scrollToSection:program" data-i18n="nav_program"></a></li>
       </ul>
       <select class="lang-select" id="langSelect" data-change="setLang"></select>
@@ -55,6 +56,17 @@
     <h2 class="prefs-title" data-i18n="prefs_title"></h2>
     <p class="prefs-subtitle" data-i18n="prefs_subtitle"></p>
     <hr class="prefs-divider">
+    <div class="prefs-section-label" data-i18n="mode_settings_label"></div>
+    <div class="mode-settings-choice">
+      <button class="onboarding-mode-btn" id="modeSupportBtn" data-click="chooseMode:support">
+        <span class="onboarding-mode-label" data-i18n="mode_support_label"></span>
+        <span class="onboarding-mode-desc" data-i18n="mode_support_desc"></span>
+      </button>
+      <button class="onboarding-mode-btn" id="modeGrowthBtn" data-click="chooseMode:growth">
+        <span class="onboarding-mode-label" data-i18n="mode_growth_label"></span>
+        <span class="onboarding-mode-desc" data-i18n="mode_growth_desc"></span>
+      </button>
+    </div>
     <div class="prefs-section-label" data-i18n="prefs_experience_label"></div>
     <div class="prefs-row">
       <label class="switch">
@@ -392,6 +404,36 @@
   <div class="grid" id="exGrid"></div>
 </section>
 
+<section id="journey">
+  <div class="section-head">
+    <div class="tag" data-i18n="journey_eyebrow"></div>
+    <h2 data-i18n="journey_title"></h2>
+    <p data-i18n="journey_desc"></p>
+  </div>
+  <div class="journey-grid">
+    <div class="journey-card">
+      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+      <h3 data-i18n="journey_item_goals_title"></h3>
+      <p data-i18n="journey_item_goals_desc"></p>
+    </div>
+    <div class="journey-card">
+      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+      <h3 data-i18n="journey_item_habits_title"></h3>
+      <p data-i18n="journey_item_habits_desc"></p>
+    </div>
+    <div class="journey-card">
+      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+      <h3 data-i18n="journey_item_reviews_title"></h3>
+      <p data-i18n="journey_item_reviews_desc"></p>
+    </div>
+    <div class="journey-card">
+      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+      <h3 data-i18n="journey_item_dashboard_title"></h3>
+      <p data-i18n="journey_item_dashboard_desc"></p>
+    </div>
+  </div>
+</section>
+
 <section id="program">
   <div class="section-head">
     <div class="tag" data-i18n="program_eyebrow"></div>
@@ -454,7 +496,17 @@
     <h2 class="prefs-title u-fs-24 u-text-center" id="obTitle"></h2>
     <p class="prefs-subtitle u-text-center" id="obDesc"></p>
     <div class="onboarding-dots" id="obDots"></div>
-    <div class="onboarding-actions">
+    <div class="onboarding-mode-choice u-hidden" id="obModeChoice">
+      <button class="onboarding-mode-btn" data-click="chooseMode:support">
+        <span class="onboarding-mode-label" data-i18n="mode_support_label"></span>
+        <span class="onboarding-mode-desc" data-i18n="mode_support_desc"></span>
+      </button>
+      <button class="onboarding-mode-btn" data-click="chooseMode:growth">
+        <span class="onboarding-mode-label" data-i18n="mode_growth_label"></span>
+        <span class="onboarding-mode-desc" data-i18n="mode_growth_desc"></span>
+      </button>
+    </div>
+    <div class="onboarding-actions" id="obActions">
       <button class="onboarding-skip" id="obSkipBtn" data-click="skipOnboarding"></button>
       <button class="onboarding-next" id="obNextBtn" data-click="nextOnboardingStep"></button>
     </div>

@@ -69,7 +69,18 @@ const I18N = {
     ef_ai_needs_consent:"يرجى إرسال رسالة محادثة واحدة أولاً لتفعيل ميزات الذكاء الاصطناعي.",
     ef_ai_done:"أُعيدت الصياغة ✓", ef_empty_draft:"املأ سطراً واحداً على الأقل لترى مسودتك هنا.",
     progress_teaser:"افتح تحليلاً أعمق لأنماطك النفسية مع Premium.", progress_cta:"عرض الخطط",
-    nav_program:"البرنامج",
+    nav_program:"البرنامج", nav_journey:"رحلتي",
+    journey_eyebrow:"قريباً", journey_title:"حياتك، منظّمة", journey_desc:"أهداف، عادات، ومراجعات — مبنية على نفس الأسلوب الهادئ بلا ضغط الذي تعرفه هنا.",
+    journey_soon_badge:"قريباً",
+    journey_item_goals_title:"الأهداف والمحطات", journey_item_goals_desc:"حدّد هدفاً، قسّمه لخطوات صغيرة، وتابع تقدّمك بلا ضغط.",
+    journey_item_habits_title:"العادات", journey_item_habits_desc:"ابنِ روتينك بلطف، مع سلاسل التزام يمكنك إيقافها متى شئت.",
+    journey_item_reviews_title:"مراجعات يومية وأسبوعية", journey_item_reviews_desc:"دقائق قليلة للتأمل — مُعبّأة مسبقاً من أسبوعك، لا صفحة فارغة.",
+    journey_item_dashboard_title:"لوحتك الخاصة", journey_item_dashboard_desc:"تركيز اليوم، تقدّمك، ورؤى لطيفة في مكان واحد.",
+    mode_prompt_title:"ما الذي أتى بك اليوم؟", mode_prompt_subtitle:"يمكنك تغيير هذا لاحقاً من الإعدادات في أي وقت.",
+    mode_support_label:"أحتاج دعماً الآن", mode_support_desc:"المساحة الهادئة التي تعرفها — محادثة، تمارين، ودعم الأزمات.",
+    mode_growth_label:"أريد تنظيم حياتي", mode_growth_desc:"أهداف وعادات وأدوات نمو — والدعم يبقى على بُعد لمسة واحدة دائماً.",
+    mode_settings_label:"وضعك",
+    hero_growth_eyebrow:"حياتك، خطوة بخطوة بلطف", hero_growth_title:"خطوات صغيرة، بعناية وتتبّع.", hero_growth_lead:"تساعدك الواحة على تحديد أهداف وبناء عادات — بلا ضغط ولا حكم، والدعم دائماً على بُعد لمسة.",
     program_eyebrow:"برنامج مركّز", program_title:"برنامج 7 أيام لإدارة القلق",
     program_desc:"سبعة تمارين متسلسلة، يوم واحد مجاني، والباقي يُفتح مع الاشتراك.",
     program_day_prefix:"اليوم", program_locked:"مقفل 🔒",
@@ -212,7 +223,18 @@ const I18N = {
     ef_ai_needs_consent:"Bitte sende zuerst eine Chat-Nachricht, um KI-Funktionen zu aktivieren.",
     ef_ai_done:"Umformuliert ✓", ef_empty_draft:"Fülle mindestens eine Zeile aus, um deinen Entwurf hier zu sehen.",
     progress_teaser:"Schalte tiefere Einblicke in deine Muster mit Premium frei.", progress_cta:"Pläne ansehen",
-    nav_program:"Programm",
+    nav_program:"Programm", nav_journey:"Meine Reise",
+    journey_eyebrow:"Demnächst", journey_title:"Dein Leben, organisiert", journey_desc:"Ziele, Gewohnheiten und Reviews — gebaut auf demselben ruhigen, druckfreien Ansatz wie alles andere hier.",
+    journey_soon_badge:"Demnächst",
+    journey_item_goals_title:"Ziele & Meilensteine", journey_item_goals_desc:"Setz dir ein Ziel, teile es in kleine Schritte, verfolge deinen Fortschritt ohne Druck.",
+    journey_item_habits_title:"Gewohnheiten", journey_item_habits_desc:"Baue Routinen sanft auf, mit Streaks, die du jederzeit ausschalten kannst.",
+    journey_item_reviews_title:"Tägliche & wöchentliche Reviews", journey_item_reviews_desc:"Ein paar Minuten zum Nachdenken — vorausgefüllt aus deiner Woche, keine leere Seite.",
+    journey_item_dashboard_title:"Dein Dashboard", journey_item_dashboard_desc:"Heutiger Fokus, dein Fortschritt und sanfte Einblicke an einem Ort.",
+    mode_prompt_title:"Was führt dich heute her?", mode_prompt_subtitle:"Du kannst das später jederzeit in den Einstellungen ändern.",
+    mode_support_label:"Ich brauche jetzt Unterstützung", mode_support_desc:"Der ruhige Raum, den du schon kennst — Chat, Übungen und Krisenhilfe.",
+    mode_growth_label:"Ich will mein Leben organisieren", mode_growth_desc:"Ziele, Gewohnheiten und Wachstums-Tools — Unterstützung bleibt immer einen Klick entfernt.",
+    mode_settings_label:"Dein Modus",
+    hero_growth_eyebrow:"Dein Leben, Schritt für sanften Schritt", hero_growth_title:"Kleine Schritte, achtsam verfolgt.", hero_growth_lead:"Waha hilft dir, Ziele zu setzen und Gewohnheiten aufzubauen — ohne Druck, ohne Urteil, und Unterstützung ist immer einen Klick entfernt.",
     program_eyebrow:"Fokusprogramm", program_title:"7-Tage-Programm gegen Angst",
     program_desc:"Sieben aufeinanderfolgende Übungen, ein Tag kostenlos, der Rest mit Abo freischaltbar.",
     program_day_prefix:"Tag", program_locked:"Gesperrt 🔒",
@@ -355,7 +377,18 @@ const I18N = {
     ef_ai_needs_consent:"Please send one chat message first to enable AI features.",
     ef_ai_done:"Rewritten ✓", ef_empty_draft:"Fill in at least one line to see your draft here.",
     progress_teaser:"Unlock deeper insight into your patterns with Premium.", progress_cta:"View plans",
-    nav_program:"Program",
+    nav_program:"Program", nav_journey:"My Journey",
+    journey_eyebrow:"Coming soon", journey_title:"Your life, organized", journey_desc:"Goals, habits, and reviews — built on the same calm, pressure-free approach as everything else here.",
+    journey_soon_badge:"Coming soon",
+    journey_item_goals_title:"Goals & milestones", journey_item_goals_desc:"Set a goal, break it into small steps, track progress without pressure.",
+    journey_item_habits_title:"Habits", journey_item_habits_desc:"Build routines gently, with streaks you can turn off anytime.",
+    journey_item_reviews_title:"Daily & weekly reviews", journey_item_reviews_desc:"A few minutes to reflect — pre-filled from your week, not a blank page.",
+    journey_item_dashboard_title:"Your dashboard", journey_item_dashboard_desc:"Today's focus, your progress, and gentle insights in one place.",
+    mode_prompt_title:"What brings you here today?", mode_prompt_subtitle:"You can always change this later in Settings.",
+    mode_support_label:"I need support right now", mode_support_desc:"The calm space you already know — chat, exercises, and crisis support.",
+    mode_growth_label:"I want to organize my life", mode_growth_desc:"Goals, habits, and growth tools — support stays one tap away, always.",
+    mode_settings_label:"Your mode",
+    hero_growth_eyebrow:"Your life, one gentle step at a time", hero_growth_title:"Small steps, tracked with care.", hero_growth_lead:"Waha helps you set goals and build habits — without pressure, without judgment, and support is always one tap away.",
     program_eyebrow:"Focused program", program_title:"7-day anxiety program",
     program_desc:"Seven sequenced exercises, one day free, the rest unlocked with a subscription.",
     program_day_prefix:"Day", program_locked:"Locked 🔒",
@@ -498,7 +531,18 @@ const I18N = {
     ef_ai_needs_consent:"Merci d'envoyer d'abord un message dans le chat pour activer les fonctionnalités d'IA.",
     ef_ai_done:"Reformulé ✓", ef_empty_draft:"Remplis au moins une ligne pour voir ton brouillon ici.",
     progress_teaser:"Débloque une analyse plus poussée de tes tendances avec Premium.", progress_cta:"Voir les plans",
-    nav_program:"Programme",
+    nav_program:"Programme", nav_journey:"Mon parcours",
+    journey_eyebrow:"Bientôt", journey_title:"Ta vie, organisée", journey_desc:"Objectifs, habitudes et bilans — construits sur la même approche calme et sans pression que tout le reste ici.",
+    journey_soon_badge:"Bientôt",
+    journey_item_goals_title:"Objectifs et étapes", journey_item_goals_desc:"Fixe un objectif, découpe-le en petites étapes, suis ta progression sans pression.",
+    journey_item_habits_title:"Habitudes", journey_item_habits_desc:"Construis des routines en douceur, avec des séries que tu peux désactiver à tout moment.",
+    journey_item_reviews_title:"Bilans quotidiens et hebdomadaires", journey_item_reviews_desc:"Quelques minutes pour réfléchir — préremplies à partir de ta semaine, pas une page blanche.",
+    journey_item_dashboard_title:"Ton tableau de bord", journey_item_dashboard_desc:"Le focus du jour, ta progression et des insights doux, au même endroit.",
+    mode_prompt_title:"Qu'est-ce qui t'amène aujourd'hui ?", mode_prompt_subtitle:"Tu peux toujours changer cela plus tard dans les réglages.",
+    mode_support_label:"J'ai besoin de soutien maintenant", mode_support_desc:"L'espace calme que tu connais déjà — chat, exercices et aide en cas de crise.",
+    mode_growth_label:"Je veux organiser ma vie", mode_growth_desc:"Objectifs, habitudes et outils de croissance — le soutien reste toujours à portée de main.",
+    mode_settings_label:"Ton mode",
+    hero_growth_eyebrow:"Ta vie, un pas doux à la fois", hero_growth_title:"Petits pas, suivis avec soin.", hero_growth_lead:"Waha t'aide à fixer des objectifs et construire des habitudes — sans pression, sans jugement, et le soutien reste toujours à portée de main.",
     program_eyebrow:"Programme ciblé", program_title:"Programme anti-anxiété de 7 jours",
     program_desc:"Sept exercices enchaînés, un jour gratuit, le reste débloqué avec un abonnement.",
     program_day_prefix:"Jour", program_locked:"Verrouillé 🔒",
@@ -641,7 +685,18 @@ const I18N = {
     ef_ai_needs_consent:"Yapay zeka özelliklerini etkinleştirmek için lütfen önce bir sohbet mesajı gönder.",
     ef_ai_done:"Yeniden yazıldı ✓", ef_empty_draft:"Taslağını burada görmek için en az bir satır doldur.",
     progress_teaser:"Premium ile örüntülerine dair daha derin bir analiz aç.", progress_cta:"Planları gör",
-    nav_program:"Program",
+    nav_program:"Program", nav_journey:"Yolculuğum",
+    journey_eyebrow:"Yakında", journey_title:"Hayatın, düzenli", journey_desc:"Hedefler, alışkanlıklar ve değerlendirmeler — buradaki her şeyle aynı sakin, baskısız yaklaşımla.",
+    journey_soon_badge:"Yakında",
+    journey_item_goals_title:"Hedefler ve kilometre taşları", journey_item_goals_desc:"Bir hedef belirle, küçük adımlara böl, baskı olmadan ilerlemeni takip et.",
+    journey_item_habits_title:"Alışkanlıklar", journey_item_habits_desc:"Rutinlerini nazikçe oluştur, istediğin an kapatabileceğin serilerle.",
+    journey_item_reviews_title:"Günlük ve haftalık değerlendirmeler", journey_item_reviews_desc:"Düşünmek için birkaç dakika — haftandan önceden doldurulmuş, boş bir sayfa değil.",
+    journey_item_dashboard_title:"Kontrol panelin", journey_item_dashboard_desc:"Bugünün odağı, ilerlemen ve nazik içgörüler tek bir yerde.",
+    mode_prompt_title:"Bugün seni buraya ne getirdi?", mode_prompt_subtitle:"Bunu daha sonra Ayarlar'dan her zaman değiştirebilirsin.",
+    mode_support_label:"Şu an desteğe ihtiyacım var", mode_support_desc:"Zaten bildiğin sakin alan — sohbet, egzersizler ve kriz desteği.",
+    mode_growth_label:"Hayatımı düzenlemek istiyorum", mode_growth_desc:"Hedefler, alışkanlıklar ve gelişim araçları — destek her zaman bir dokunuş uzağında kalır.",
+    mode_settings_label:"Modun",
+    hero_growth_eyebrow:"Hayatın, nazik adımlarla", hero_growth_title:"Küçük adımlar, özenle takip edilir.", hero_growth_lead:"Waha, hedef belirlemene ve alışkanlık oluşturmana yardımcı olur — baskı yok, yargı yok, destek her zaman bir dokunuş uzağında.",
     program_eyebrow:"Odaklı program", program_title:"7 günlük kaygı programı",
     program_desc:"Sıralı yedi egzersiz, bir gün ücretsiz, geri kalanı abonelikle açılır.",
     program_day_prefix:"Gün", program_locked:"Kilitli 🔒",
@@ -784,7 +839,18 @@ const I18N = {
     ef_ai_needs_consent:"Ji kerema xwe pêşî peyamek chatê bişîne da ku taybetmendiyên AI çalak bikî.",
     ef_ai_done:"Dîsa hate nivîsandin ✓", ef_empty_draft:"Bo dîtina reçeta xwe li vir, herî kêm rêzek tijî bike.",
     progress_teaser:"Bi Premium re analîzek kûrtir a şêwazên xwe veke.", progress_cta:"Plana bibîne",
-    nav_program:"Bername",
+    nav_program:"Bername", nav_journey:"Rêwîtiya min",
+    journey_eyebrow:"Nêzîk", journey_title:"Jiyana te, birêkûpêk", journey_desc:"Armanc, adet û nirxandin — li ser heman nêzîkatiya aram û bêzext a ku li vir heye hatine avakirin.",
+    journey_soon_badge:"Nêzîk",
+    journey_item_goals_title:"Armanc û qonax", journey_item_goals_desc:"Armancekê diyar bike, wê bike gavên biçûk, pêşketina xwe bêyî zext bişopîne.",
+    journey_item_habits_title:"Adet", journey_item_habits_desc:"Rûtînên xwe bi nermî ava bike, bi rêzên ku tu dikarî her gav bigirî.",
+    journey_item_reviews_title:"Nirxandinên rojane û heftane", journey_item_reviews_desc:"Çend deqîqe ji bo ramana — ji heftiya te berê tije kirî, ne rûpelek vala.",
+    journey_item_dashboard_title:"Panela te", journey_item_dashboard_desc:"Balkêşiya îro, pêşketina te, û têgihiştinên nerm li cihekî.",
+    mode_prompt_title:"Îro çi te anî vir?", mode_prompt_subtitle:"Tu dikarî vê her gav ji Mîhengan biguherînî.",
+    mode_support_label:"Niha pêdiviya min bi piştgiriyê heye", mode_support_desc:"Cîhê aram ê ku tu jixwe nas dikî — axaftin, ezmûn, û piştgiriya krîzê.",
+    mode_growth_label:"Ez dixwazim jiyana xwe birêkûpêk bikim", mode_growth_desc:"Armanc, adet, û amûrên geşedanê — piştgirî her gav gavek dûr e.",
+    mode_settings_label:"Moda te",
+    hero_growth_eyebrow:"Jiyana te, gav bi gav bi nermî", hero_growth_title:"Gavên biçûk, bi baldarî tên şopandin.", hero_growth_lead:"Waha alîkariya te dike ku armancan diyar bikî û adetan ava bikî — bêyî zext, bêyî dadbarî, û piştgirî her gav gavek dûr e.",
     program_eyebrow:"Bernameya taybet", program_title:"Bernameya 7 rojan ya li dijî fikarê",
     program_desc:"Heft ezmûnên li dû hev, rojek belaş, mayîn bi aboneyê tê vekirin.",
     program_day_prefix:"Roj", program_locked:"Girtî 🔒",
@@ -927,7 +993,18 @@ const I18N = {
     ef_ai_needs_consent:"Envía primero un mensaje de chat para habilitar las funciones de IA.",
     ef_ai_done:"Reescrito ✓", ef_empty_draft:"Rellena al menos una línea para ver tu borrador aquí.",
     progress_teaser:"Desbloquea un análisis más profundo de tus patrones con Premium.", progress_cta:"Ver planes",
-    nav_program:"Programa",
+    nav_program:"Programa", nav_journey:"Mi camino",
+    journey_eyebrow:"Próximamente", journey_title:"Tu vida, organizada", journey_desc:"Metas, hábitos y revisiones — construidos con el mismo enfoque tranquilo y sin presión que todo lo demás aquí.",
+    journey_soon_badge:"Próximamente",
+    journey_item_goals_title:"Metas e hitos", journey_item_goals_desc:"Define una meta, divídela en pasos pequeños, sigue tu progreso sin presión.",
+    journey_item_habits_title:"Hábitos", journey_item_habits_desc:"Construye rutinas con suavidad, con rachas que puedes desactivar cuando quieras.",
+    journey_item_reviews_title:"Revisiones diarias y semanales", journey_item_reviews_desc:"Unos minutos para reflexionar — precompletadas desde tu semana, no una página en blanco.",
+    journey_item_dashboard_title:"Tu panel", journey_item_dashboard_desc:"El enfoque de hoy, tu progreso y perspectivas suaves en un solo lugar.",
+    mode_prompt_title:"¿Qué te trae por aquí hoy?", mode_prompt_subtitle:"Siempre puedes cambiar esto más tarde en Ajustes.",
+    mode_support_label:"Necesito apoyo ahora mismo", mode_support_desc:"El espacio tranquilo que ya conoces — chat, ejercicios y apoyo en crisis.",
+    mode_growth_label:"Quiero organizar mi vida", mode_growth_desc:"Metas, hábitos y herramientas de crecimiento — el apoyo siempre está a un toque de distancia.",
+    mode_settings_label:"Tu modo",
+    hero_growth_eyebrow:"Tu vida, paso a paso con calma", hero_growth_title:"Pequeños pasos, seguidos con cuidado.", hero_growth_lead:"Waha te ayuda a fijar metas y construir hábitos — sin presión, sin juicio, y el apoyo siempre está a un toque de distancia.",
     program_eyebrow:"Programa enfocado", program_title:"Programa de 7 días contra la ansiedad",
     program_desc:"Siete ejercicios secuenciados, un día gratis, el resto se desbloquea con una suscripción.",
     program_day_prefix:"Día", program_locked:"Bloqueado 🔒",
@@ -1090,7 +1167,18 @@ const I18N = {
       ef_ai_needs_consent:"لطفاً ابتدا یک پیام گفتگو ارسال کن تا ویژگی‌های هوش مصنوعی فعال شوند.",
       ef_ai_done:"بازنویسی شد ✓", ef_empty_draft:"برای دیدن پیش‌نویس خود اینجا، حداقل یک خط را پر کن.",
       progress_teaser:"با پرمیوم تحلیلی عمیق‌تر از الگوهای خود باز کن.", progress_cta:"مشاهده طرح‌ها",
-      nav_program:"برنامه",
+      nav_program:"برنامه", nav_journey:"سفر من",
+      journey_eyebrow:"به‌زودی", journey_title:"زندگی‌ات، منظم", journey_desc:"اهداف، عادت‌ها و مرورها — بر همان رویکرد آرام و بدون فشار بقیه‌ی این‌جا ساخته شده‌اند.",
+      journey_soon_badge:"به‌زودی",
+      journey_item_goals_title:"اهداف و نقاط عطف", journey_item_goals_desc:"هدفی تعیین کن، آن را به قدم‌های کوچک بشکن، پیشرفتت را بدون فشار دنبال کن.",
+      journey_item_habits_title:"عادت‌ها", journey_item_habits_desc:"روتین‌هایت را به‌آرامی بساز، با زنجیره‌هایی که هر وقت خواستی می‌توانی خاموش کنی.",
+      journey_item_reviews_title:"مرورهای روزانه و هفتگی", journey_item_reviews_desc:"چند دقیقه برای تأمل — از قبل با داده‌های هفته‌ات پر شده، نه یک صفحه خالی.",
+      journey_item_dashboard_title:"داشبورد تو", journey_item_dashboard_desc:"تمرکز امروز، پیشرفتت، و بینش‌های ملایم در یک جا.",
+      mode_prompt_title:"امروز چه چیزی تو را به این‌جا آورده؟", mode_prompt_subtitle:"همیشه می‌توانی این را بعداً از تنظیمات تغییر دهی.",
+      mode_support_label:"همین الان به حمایت نیاز دارم", mode_support_desc:"فضای آرامی که از قبل می‌شناسی — گفتگو، تمرین‌ها، و حمایت در بحران.",
+      mode_growth_label:"می‌خواهم زندگی‌ام را منظم کنم", mode_growth_desc:"اهداف، عادت‌ها و ابزارهای رشد — حمایت همیشه یک لمس فاصله دارد.",
+      mode_settings_label:"حالت تو",
+      hero_growth_eyebrow:"زندگی‌ات، قدم‌به‌قدم و با آرامش", hero_growth_title:"قدم‌های کوچک، با دقت دنبال‌شده.", hero_growth_lead:"واحه به تو کمک می‌کند هدف تعیین کنی و عادت بسازی — بدون فشار، بدون قضاوت، و حمایت همیشه یک لمس فاصله دارد.",
       program_eyebrow:"برنامه متمرکز", program_title:"برنامه ۷ روزه مدیریت اضطراب",
       program_desc:"هفت تمرین پیاپی، یک روز رایگان، بقیه با اشتراک باز می‌شود.",
       program_day_prefix:"روز", program_locked:"قفل 🔒",
@@ -1233,7 +1321,18 @@ const I18N = {
       ef_ai_needs_consent:"AI خصوصیات کو فعال کرنے کے لیے براہ کرم پہلے ایک چیٹ پیغام بھیجیں۔",
       ef_ai_done:"دوبارہ لکھا گیا ✓", ef_empty_draft:"اپنا مسودہ یہاں دیکھنے کے لیے کم از کم ایک لائن پُر کریں۔",
       progress_teaser:"پریمیم کے ساتھ اپنے پیٹرن کا گہرا تجزیہ کھولیں۔", progress_cta:"پلانز دیکھیں",
-      nav_program:"پروگرام",
+      nav_program:"پروگرام", nav_journey:"میرا سفر",
+      journey_eyebrow:"جلد آرہا ہے", journey_title:"آپ کی زندگی، منظم", journey_desc:"اہداف، عادات، اور جائزے — بالکل اسی پرسکون، بے دباؤ انداز پر بنائے گئے جو یہاں باقی ہر چیز میں ہے۔",
+      journey_soon_badge:"جلد آرہا ہے",
+      journey_item_goals_title:"اہداف اور سنگ میل", journey_item_goals_desc:"ایک ہدف مقرر کریں، اسے چھوٹے قدموں میں تقسیم کریں، بغیر دباؤ کے پیش رفت دیکھیں۔",
+      journey_item_habits_title:"عادات", journey_item_habits_desc:"نرمی سے اپنی روٹین بنائیں، ایسی لڑیوں کے ساتھ جنہیں آپ کسی بھی وقت بند کر سکتے ہیں۔",
+      journey_item_reviews_title:"روزانہ اور ہفتہ وار جائزے", journey_item_reviews_desc:"سوچنے کے لیے چند منٹ — آپ کے ہفتے سے پہلے سے بھرے ہوئے، خالی صفحہ نہیں۔",
+      journey_item_dashboard_title:"آپ کا ڈیش بورڈ", journey_item_dashboard_desc:"آج کی توجہ، آپ کی پیش رفت، اور نرم بصیرتیں ایک جگہ۔",
+      mode_prompt_title:"آج آپ کو یہاں کیا لایا؟", mode_prompt_subtitle:"آپ ہمیشہ بعد میں سیٹنگز میں اسے تبدیل کر سکتے ہیں۔",
+      mode_support_label:"مجھے ابھی مدد چاہیے", mode_support_desc:"وہ پرسکون جگہ جسے آپ پہلے سے جانتے ہیں — بات چیت، مشقیں، اور بحران میں مدد۔",
+      mode_growth_label:"میں اپنی زندگی منظم کرنا چاہتا ہوں", mode_growth_desc:"اہداف، عادات، اور ترقی کے اوزار — مدد ہمیشہ ایک ٹچ کی دوری پر رہتی ہے۔",
+      mode_settings_label:"آپ کا موڈ",
+      hero_growth_eyebrow:"آپ کی زندگی، نرمی سے ایک قدم پر ایک قدم", hero_growth_title:"چھوٹے قدم، دھیان سے پیروی شدہ۔", hero_growth_lead:"واحہ آپ کو اہداف طے کرنے اور عادات بنانے میں مدد دیتا ہے — بغیر دباؤ، بغیر فیصلے کے، اور مدد ہمیشہ ایک ٹچ کی دوری پر۔",
       program_eyebrow:"مرکوز پروگرام", program_title:"اضطراب کے لیے 7 دن کا پروگرام",
       program_desc:"سات ترتیب وار مشقیں، ایک دن مفت، باقی سبسکرپشن سے کھلتی ہیں۔",
       program_day_prefix:"دن", program_locked:"مقفل 🔒",
@@ -1376,7 +1475,18 @@ const I18N = {
       ef_ai_needs_consent:"Пожалуйста, сначала отправьте одно сообщение в чате, чтобы включить функции ИИ.",
       ef_ai_done:"Переписано ✓", ef_empty_draft:"Заполните хотя бы одну строку, чтобы увидеть черновик здесь.",
       progress_teaser:"Открой более глубокий анализ своих паттернов с Премиум.", progress_cta:"Смотреть планы",
-      nav_program:"Программа",
+      nav_program:"Программа", nav_journey:"Мой путь",
+      journey_eyebrow:"Скоро", journey_title:"Твоя жизнь, организована", journey_desc:"Цели, привычки и обзоры — построены на том же спокойном подходе без давления, как и всё остальное здесь.",
+      journey_soon_badge:"Скоро",
+      journey_item_goals_title:"Цели и этапы", journey_item_goals_desc:"Поставь цель, разбей её на маленькие шаги, отслеживай прогресс без давления.",
+      journey_item_habits_title:"Привычки", journey_item_habits_desc:"Формируй привычки мягко, с сериями, которые можно отключить в любой момент.",
+      journey_item_reviews_title:"Ежедневные и еженедельные обзоры", journey_item_reviews_desc:"Несколько минут на размышление — уже заполненные данными твоей недели, а не пустая страница.",
+      journey_item_dashboard_title:"Твоя панель", journey_item_dashboard_desc:"Фокус дня, твой прогресс и мягкие инсайты в одном месте.",
+      mode_prompt_title:"Что привело тебя сюда сегодня?", mode_prompt_subtitle:"Ты всегда можешь изменить это позже в настройках.",
+      mode_support_label:"Мне нужна поддержка прямо сейчас", mode_support_desc:"Спокойное пространство, которое ты уже знаешь — чат, упражнения и помощь в кризисе.",
+      mode_growth_label:"Я хочу организовать свою жизнь", mode_growth_desc:"Цели, привычки и инструменты роста — поддержка всегда на расстоянии одного касания.",
+      mode_settings_label:"Твой режим",
+      hero_growth_eyebrow:"Твоя жизнь, мягкий шаг за шагом", hero_growth_title:"Маленькие шаги, заботливо отслеженные.", hero_growth_lead:"Waha помогает тебе ставить цели и формировать привычки — без давления, без осуждения, и поддержка всегда на расстоянии одного касания.",
       program_eyebrow:"Фокусная программа", program_title:"7-дневная программа против тревоги",
       program_desc:"Семь последовательных упражнений, один день бесплатно, остальное открывается по подписке.",
       program_day_prefix:"День", program_locked:"Заблокировано 🔒",
@@ -1519,7 +1629,18 @@ const I18N = {
       ef_ai_needs_consent:"Por favor envia primeiro uma mensagem de chat para ativar as funcionalidades de IA.",
       ef_ai_done:"Reescrito ✓", ef_empty_draft:"Preenche pelo menos uma linha para veres o teu rascunho aqui.",
       progress_teaser:"Desbloqueia uma análise mais profunda dos teus padrões com o Premium.", progress_cta:"Ver planos",
-      nav_program:"Programa",
+      nav_program:"Programa", nav_journey:"A minha jornada",
+      journey_eyebrow:"Brevemente", journey_title:"A tua vida, organizada", journey_desc:"Objetivos, hábitos e revisões — construídos com a mesma abordagem calma e sem pressão de tudo o resto aqui.",
+      journey_soon_badge:"Brevemente",
+      journey_item_goals_title:"Objetivos e marcos", journey_item_goals_desc:"Define um objetivo, divide-o em pequenos passos, acompanha o teu progresso sem pressão.",
+      journey_item_habits_title:"Hábitos", journey_item_habits_desc:"Constrói rotinas com suavidade, com sequências que podes desativar a qualquer momento.",
+      journey_item_reviews_title:"Revisões diárias e semanais", journey_item_reviews_desc:"Uns minutos para refletir — pré-preenchidas a partir da tua semana, não uma página em branco.",
+      journey_item_dashboard_title:"O teu painel", journey_item_dashboard_desc:"O foco de hoje, o teu progresso e insights suaves num só lugar.",
+      mode_prompt_title:"O que te traz aqui hoje?", mode_prompt_subtitle:"Podes sempre mudar isto mais tarde nas Definições.",
+      mode_support_label:"Preciso de apoio agora", mode_support_desc:"O espaço calmo que já conheces — chat, exercícios e apoio em crise.",
+      mode_growth_label:"Quero organizar a minha vida", mode_growth_desc:"Objetivos, hábitos e ferramentas de crescimento — o apoio continua sempre a um toque de distância.",
+      mode_settings_label:"O teu modo",
+      hero_growth_eyebrow:"A tua vida, um passo suave de cada vez", hero_growth_title:"Pequenos passos, acompanhados com cuidado.", hero_growth_lead:"A Waha ajuda-te a definir objetivos e construir hábitos — sem pressão, sem julgamento, e o apoio está sempre a um toque de distância.",
       program_eyebrow:"Programa focado", program_title:"Programa de 7 dias contra a ansiedade",
       program_desc:"Sete exercícios sequenciados, um dia grátis, o resto desbloqueado com subscrição.",
       program_day_prefix:"Dia", program_locked:"Bloqueado 🔒",
@@ -1662,7 +1783,18 @@ const I18N = {
       ef_ai_needs_consent:"Invia prima un messaggio in chat per abilitare le funzionalità IA.",
       ef_ai_done:"Riscritto ✓", ef_empty_draft:"Compila almeno una riga per vedere qui la tua bozza.",
       progress_teaser:"Sblocca un'analisi più approfondita dei tuoi schemi con Premium.", progress_cta:"Vedi i piani",
-      nav_program:"Programma",
+      nav_program:"Programma", nav_journey:"Il mio percorso",
+      journey_eyebrow:"In arrivo", journey_title:"La tua vita, organizzata", journey_desc:"Obiettivi, abitudini e revisioni — costruiti con lo stesso approccio calmo e senza pressione di tutto il resto qui.",
+      journey_soon_badge:"In arrivo",
+      journey_item_goals_title:"Obiettivi e tappe", journey_item_goals_desc:"Fissa un obiettivo, dividilo in piccoli passi, segui i tuoi progressi senza pressione.",
+      journey_item_habits_title:"Abitudini", journey_item_habits_desc:"Costruisci routine con dolcezza, con serie che puoi disattivare in qualsiasi momento.",
+      journey_item_reviews_title:"Revisioni giornaliere e settimanali", journey_item_reviews_desc:"Qualche minuto per riflettere — precompilate dalla tua settimana, non una pagina vuota.",
+      journey_item_dashboard_title:"La tua dashboard", journey_item_dashboard_desc:"Il focus di oggi, i tuoi progressi e intuizioni delicate in un unico posto.",
+      mode_prompt_title:"Cosa ti porta qui oggi?", mode_prompt_subtitle:"Puoi sempre cambiarlo più tardi nelle Impostazioni.",
+      mode_support_label:"Ho bisogno di supporto adesso", mode_support_desc:"Lo spazio calmo che già conosci — chat, esercizi e supporto in crisi.",
+      mode_growth_label:"Voglio organizzare la mia vita", mode_growth_desc:"Obiettivi, abitudini e strumenti di crescita — il supporto resta sempre a portata di tocco.",
+      mode_settings_label:"La tua modalità",
+      hero_growth_eyebrow:"La tua vita, un passo gentile alla volta", hero_growth_title:"Piccoli passi, seguiti con cura.", hero_growth_lead:"Waha ti aiuta a fissare obiettivi e costruire abitudini — senza pressione, senza giudizio, e il supporto è sempre a portata di tocco.",
       program_eyebrow:"Programma mirato", program_title:"Programma di 7 giorni contro l'ansia",
       program_desc:"Sette esercizi in sequenza, un giorno gratuito, il resto si sblocca con un abbonamento.",
       program_day_prefix:"Giorno", program_locked:"Bloccato 🔒",
@@ -2581,6 +2713,7 @@ function setLang(lang){
   html.setAttribute('dir', meta.dir);
   document.getElementById('langSelect').value = lang;
   applyI18n(lang);
+  applyMode();
   if(recognition) recognition.lang = speechLangTag(lang);
   renderFilters();
   renderExercises();
@@ -3560,14 +3693,23 @@ function showBackupStatus(text){
   setTimeout(()=>{ if(el.textContent === text) el.textContent = ''; }, 5000);
 }
 
-const ONBOARDING_STEPS = ['ob1','ob2','ob3','ob4'];
+const ONBOARDING_STEPS = ['ob1','ob2','ob3','ob4','mode'];
 let obStep = 0;
 function renderOnboardingStep(){
   const dict = I18N[currentLang];
   const key = ONBOARDING_STEPS[obStep];
-  document.getElementById('obIcon').textContent = dict[key+'_icon'];
-  document.getElementById('obTitle').textContent = dict[key+'_title'];
-  document.getElementById('obDesc').textContent = dict[key+'_desc'];
+  const isModeStep = key === 'mode';
+  document.getElementById('obModeChoice').classList.toggle('u-hidden', !isModeStep);
+  document.getElementById('obNextBtn').classList.toggle('u-hidden', isModeStep);
+  if(isModeStep){
+    document.getElementById('obIcon').textContent = '🧭';
+    document.getElementById('obTitle').textContent = dict.mode_prompt_title;
+    document.getElementById('obDesc').textContent = dict.mode_prompt_subtitle;
+  } else {
+    document.getElementById('obIcon').textContent = dict[key+'_icon'];
+    document.getElementById('obTitle').textContent = dict[key+'_title'];
+    document.getElementById('obDesc').textContent = dict[key+'_desc'];
+  }
   const dots = document.getElementById('obDots');
   dots.innerHTML = '';
   ONBOARDING_STEPS.forEach((_, i)=>{
@@ -3576,9 +3718,9 @@ function renderOnboardingStep(){
     dots.appendChild(d);
   });
   const isLast = obStep === ONBOARDING_STEPS.length - 1;
-  document.getElementById('obNextBtn').textContent = isLast ? dict.onboarding_start : dict.onboarding_next;
+  document.getElementById('obNextBtn').textContent = dict.onboarding_next;
   document.getElementById('obSkipBtn').textContent = dict.onboarding_skip;
-  document.getElementById('obSkipBtn').style.visibility = isLast ? 'hidden' : 'visible';
+  document.getElementById('obSkipBtn').style.visibility = 'visible';
 }
 function nextOnboardingStep(){
   if(obStep < ONBOARDING_STEPS.length - 1){
@@ -3588,7 +3730,10 @@ function nextOnboardingStep(){
     closeOnboarding();
   }
 }
-function skipOnboarding(){ closeOnboarding(); }
+function skipOnboarding(){
+  if(!safeGet('mc_mode')) safeSet('mc_mode', 'support');
+  closeOnboarding();
+}
 function closeOnboarding(){
   document.getElementById('onboardingModal').classList.remove('open');
   safeSet('mc_onboarding_seen', '1');
@@ -3598,6 +3743,38 @@ function maybeShowOnboarding(){
   obStep = 0;
   renderOnboardingStep();
   setTimeout(()=>{ document.getElementById('onboardingModal').classList.add('open'); }, 600);
+}
+
+// Entry-flow split: "support" (today's calm, pressure-free Waha, unchanged)
+// vs "growth" (future goals/habits/reviews layer — see the #journey section).
+// Both modes keep every support feature (chat, exercises, crisis button)
+// fully reachable at all times; the mode only changes the hero's framing.
+// Existing users (mc_mode already unset before this shipped) silently stay
+// on "support" until they explicitly switch in Settings — never re-prompted.
+function applyMode(){
+  const mode = safeGet('mc_mode') || 'support';
+  const dict = I18N[currentLang];
+  const eyebrowEl = document.querySelector('.hero .eyebrow');
+  const titleEl = document.querySelector('.hero h1');
+  const leadEl = document.querySelector('.hero .lead');
+  if(mode === 'growth'){
+    if(eyebrowEl) eyebrowEl.innerHTML = dict.hero_growth_eyebrow;
+    if(titleEl) titleEl.innerHTML = dict.hero_growth_title;
+    if(leadEl) leadEl.innerHTML = dict.hero_growth_lead;
+  } else {
+    if(eyebrowEl) eyebrowEl.innerHTML = dict.hero_eyebrow;
+    if(titleEl) titleEl.innerHTML = dict.hero_title;
+    if(leadEl) leadEl.innerHTML = dict.hero_lead;
+  }
+  const supportBtn = document.getElementById('modeSupportBtn');
+  const growthBtn = document.getElementById('modeGrowthBtn');
+  if(supportBtn) supportBtn.classList.toggle('active', mode === 'support');
+  if(growthBtn) growthBtn.classList.toggle('active', mode === 'growth');
+}
+function chooseMode(mode){
+  safeSet('mc_mode', mode);
+  closeOnboarding();
+  applyMode();
 }
 
 // Self-attestation age gate: not verified identity, just a legal minimum —
@@ -4770,6 +4947,7 @@ const ACTIONS = {
   acceptChatConsent,
   answerReliefFeedback,
   backToEditFeeling,
+  chooseMode,
   clearChatMemory,
   closeCalmPlan,
   closeChatConsent,
