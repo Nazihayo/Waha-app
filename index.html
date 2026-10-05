@@ -179,7 +179,7 @@
       <button class="backup-btn u-w-full" data-click="generateFeelingDraft" data-i18n="ef_generate"></button>
     </div>
 
-    <div class="u-hidden" id="efPreviewView">
+    <div class="js-hidden" id="efPreviewView">
       <div class="ef-tone-row">
         <button class="ef-tone-btn active" id="efToneConciseBtn" data-click="setFeelingTone:concise" data-i18n="ef_tone_concise"></button>
         <button class="ef-tone-btn" id="efToneDetailedBtn" data-click="setFeelingTone:detailed" data-i18n="ef_tone_detailed"></button>
@@ -241,7 +241,7 @@
       <button class="backup-btn u-w-full" data-click="saveCalmPlan" data-i18n="calmplan_save"></button>
     </div>
 
-    <div class="u-hidden" id="calmPlanViewMode">
+    <div class="js-hidden" id="calmPlanViewMode">
       <div class="calmplan-view-row" id="cpvExercise"></div>
       <div class="calmplan-view-row" id="cpvSentence"></div>
       <div class="calmplan-view-row" id="cpvPlace"></div>
@@ -305,7 +305,7 @@
   </div>
 </div>
 
-<div id="reminderBanner" class="reminder-banner u-hidden">
+<div id="reminderBanner" class="reminder-banner js-hidden">
   <span class="reminder-icon">🌤️</span>
   <span id="reminderText" class="reminder-text"></span>
   <button class="reminder-cta" data-click="openCheckin" id="reminderCta"></button>
@@ -322,7 +322,7 @@
       <span class="trust-chip">🔒 <span data-i18n="trust_private"></span></span>
       <span class="trust-chip">🧠 <span data-i18n="trust_cbt"></span></span>
       <span class="trust-chip">🌍 <span data-i18n="trust_multilingual"></span></span>
-      <span class="trust-chip u-hidden" id="streakChip">🔥 <span id="streakText"></span></span>
+      <span class="trust-chip js-hidden" id="streakChip">🔥 <span id="streakText"></span></span>
     </div>
     <div class="cta-row">
       <button class="btn btn-primary" data-click="openRelief">⚡ <span data-i18n="relief_cta"></span></button>
@@ -536,7 +536,7 @@
       <div class="relief-grid" id="reliefGrid"></div>
     </div>
 
-    <div class="u-hidden" id="reliefSessionView">
+    <div class="js-hidden" id="reliefSessionView">
       <div class="relief-timer-ring">
         <svg viewBox="0 0 100 100" class="relief-ring-svg">
           <circle cx="50" cy="50" r="45" class="relief-ring-bg"></circle>
@@ -553,7 +553,7 @@
       <button class="relief-stop-link" data-click="stopRelief" data-i18n="relief_stop"></button>
     </div>
 
-    <div class="u-hidden" id="reliefEndView">
+    <div class="js-hidden" id="reliefEndView">
       <div class="sleep-moon">🌤️</div>
       <h2 class="prefs-title u-fs-22" data-i18n="relief_end_title"></h2>
       <div class="relief-feedback-row">
@@ -645,8 +645,8 @@
       <div class="checkin-divider"><span data-i18n="checkin_or"></span></div>
       <textarea id="checkinFreeText" class="checkin-freetext-input" rows="2" data-i18n-placeholder="checkin_freetext_placeholder"></textarea>
       <button class="checkin-freetext-btn" id="checkinFreeTextBtn" data-click="sendCheckinText" data-i18n="checkin_freetext_btn"></button>
-      <div class="checkin-freetext-response u-hidden" id="checkinFreeTextResponse"></div>
-      <button class="why-suggestion-link u-hidden" id="checkinWhyBtn" data-click="explainSuggestion:checkin_ai" data-i18n="why_suggestion_link"></button>
+      <div class="checkin-freetext-response js-hidden" id="checkinFreeTextResponse"></div>
+      <button class="why-suggestion-link js-hidden" id="checkinWhyBtn" data-click="explainSuggestion:checkin_ai" data-i18n="why_suggestion_link"></button>
     </div>
   </div>
 </div>
@@ -693,27 +693,27 @@
     <div class="modal-tag" id="modalTag"></div>
     <h3 id="modalTitle"></h3>
     <p class="modal-desc" id="modalDesc"></p>
-    <div class="modal-locked u-hidden" id="modalLocked">
+    <div class="modal-locked js-hidden" id="modalLocked">
       <div class="modal-locked-icon">🔒</div>
       <p class="modal-locked-text" data-i18n="locked_content_text"></p>
       <button class="modal-locked-btn" data-click="openUpgrade" data-i18n="locked_unlock_btn"></button>
     </div>
     <ul class="modal-steps" id="modalSteps"></ul>
-    <div class="mood-widget u-hidden" id="moodWidget">
+    <div class="mood-widget js-hidden" id="moodWidget">
       <p class="mood-prompt-text" id="moodPrompt"></p>
       <div class="mood-buttons" id="moodButtons"></div>
       <div class="mood-chart" id="moodChart"></div>
       <p class="mood-empty" id="moodEmptyMsg"></p>
-      <div class="mood-suggest-box u-hidden" id="moodSuggestBox">
+      <div class="mood-suggest-box js-hidden" id="moodSuggestBox">
         <p class="mood-suggest-text" id="moodSuggestText"></p>
         <button class="mood-suggest-btn" id="moodSuggestBtn" data-click="startMoodSuggestion"></button>
         <button class="why-suggestion-link" data-click="explainSuggestion:mood_pattern" data-i18n="why_suggestion_link"></button>
       </div>
     </div>
-    <div class="journal-widget u-hidden" id="journalWidget">
+    <div class="journal-widget js-hidden" id="journalWidget">
       <textarea id="journalInput" class="journal-textarea" rows="4"></textarea>
       <button class="journal-save-btn" id="journalSaveBtn" data-click="saveJournalEntry"></button>
-      <div id="journalSavedMsg" class="journal-saved-msg u-hidden"></div>
+      <div id="journalSavedMsg" class="journal-saved-msg js-hidden"></div>
       <div id="journalEntries" class="journal-entries"></div>
     </div>
     <div class="modal-actions">

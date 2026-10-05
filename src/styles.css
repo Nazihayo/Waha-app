@@ -431,6 +431,18 @@
    in English).
    --------------------------------------------------------------------- */
   .u-hidden{display:none !important;}
+  /* Plain (non-!important) hidden-by-default for elements whose visibility
+     is toggled at runtime via el.style.display (mood/journal widgets, the
+     relief/calm-plan step views, reminder banner, etc.) rather than by
+     adding/removing a class. .u-hidden's !important was added so a static
+     utility class always beats a leftover inline style — but that same
+     !important also permanently defeats later `el.style.display = 'block'`
+     calls from JS on the same element, since inline style can no longer
+     out-rank it. Real bug found this way: moodWidget/journalWidget and
+     several other elements carried .u-hidden AND were toggled via
+     style.display, so they could never actually be shown — fixed by
+     switching those specific elements to this class instead. */
+  .js-hidden{display:none;}
   .u-w-full{width:100% !important;}
   .u-mt-3{margin-top:3px !important;}
   .u-mt-10{margin-top:10px !important;}

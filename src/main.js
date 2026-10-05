@@ -3581,6 +3581,54 @@ function loadMoodLog(){
 }
 function saveMoodLog(){ safeSet('mc_moodlog', JSON.stringify(moodLog)); }
 
+// ---------------------------------------------------------------------
+// Unified entries log (LifeOS integration, step 2 of the agreed order).
+// Every life-domain event Waha records — exercise done, mood logged,
+// journal written — also gets appended here, additive only: the
+// existing mc_streak/mc_moodlog/mc_journal_* storage and everything
+// currently displayed is untouched and keeps working exactly as before.
+// This is the shared spine future modules (goals, habits, Life Score,
+// insight engine) will query across life domains, instead of each one
+// inventing its own log shape. Schema mirrors the one planned for
+// LifeOS itself: id (UUID v7, time-sortable), entity_type, entity_id,
+// occurred_at, created_at, deleted_at (soft delete), payload.
+// ---------------------------------------------------------------------
+function uuidV7(){
+  const ts = Date.now();
+  const tsHex = ts.toString(16).padStart(12, '0');
+  const rand = crypto.getRandomValues(new Uint8Array(10));
+  rand[0] = (rand[0] & 0x0f) | 0x70; // version 7
+  rand[2] = (rand[2] & 0x3f) | 0x80; // variant 10
+  const randHex = Array.from(rand).map(b => b.toString(16).padStart(2, '0')).join('');
+  return tsHex.slice(0,8) + '-' + tsHex.slice(8,12) + '-' + randHex.slice(0,4) + '-' + randHex.slice(4,8) + '-' + randHex.slice(8,20);
+}
+function getEntries(){
+  try{ const raw = safeGet('mc_entries'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function addEntry(entityType, payload, entityId){
+  const entries = getEntries();
+  const now = Date.now();
+  entries.push({
+    id: uuidV7(),
+    entity_type: entityType,
+    entity_id: entityId || null,
+    occurred_at: now,
+    created_at: now,
+    deleted_at: null,
+    payload: payload || {},
+  });
+  // Client-only store — cap growth by keeping the most recent 2000 events.
+  if(entries.length > 2000) entries.splice(0, entries.length - 2000);
+  safeSet('mc_entries', JSON.stringify(entries));
+}
+function getEntriesByType(entityType){
+  return getEntries().filter(e => e.entity_type === entityType && !e.deleted_at);
+}
+function removeEntriesByType(entityType){
+  const remaining = getEntries().filter(e => e.entity_type !== entityType);
+  safeSet('mc_entries', JSON.stringify(remaining));
+}
+
 function renderMoodWidget(){
   const dict = I18N[currentLang];
   document.getElementById('moodPrompt').textContent = dict.mood_prompt;
@@ -3591,7 +3639,7 @@ function renderMoodWidget(){
     const b = document.createElement('button');
     b.textContent = f;
     b.setAttribute('aria-label', dict.mood_prompt + ' ' + (i+1) + '/5');
-    b.onclick = ()=>{ moodLog.push(i+1); saveMoodLog(); renderMoodChart(); updateProgressStats(); maybeSuggestFromMood(); };
+    b.onclick = ()=>{ moodLog.push(i+1); saveMoodLog(); addEntry('mood_log', { score: i+1 }); renderMoodChart(); updateProgressStats(); maybeSuggestFromMood(); };
     btnBox.appendChild(b);
   });
   renderMoodChart();
@@ -3618,7 +3666,7 @@ function renderMoodChart(){
 let currentJournalExId = null;
 function journalKey(exId){ return 'mc_journal_' + exId; }
 
-const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count'];
+const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count','mc_entries','mc_mode'];
 const BACKUP_JOURNAL_IDS = ['ex-gratitude','ex-feelings','ex-reframe'];
 
 function exportBackup(){
@@ -3871,6 +3919,7 @@ function saveJournalEntry(){
   const entries = getJournalEntries(currentJournalExId);
   entries.push({ date: todayKey(), text: text });
   safeSet(journalKey(currentJournalExId), JSON.stringify(entries));
+  addEntry('journal_entry', { text: text }, currentJournalExId);
   input.value = '';
   const msg = document.getElementById('journalSavedMsg');
   msg.textContent = I18N[currentLang].journal_saved;
@@ -4004,7 +4053,7 @@ function markExerciseDone(){
   const last = safeGet('mc_last_done');
   const today = todayKey();
   const doneId = currentExercise ? currentExercise.id : (currentLibItem ? currentLibItem.id : null);
-  if(doneId) addTriedExercise(doneId);
+  if(doneId){ addTriedExercise(doneId); addEntry('exercise_completion', { exerciseId: doneId }, doneId); }
   if(last === today){ updateProgressStats(); return; } // already counted today
   const yesterdayKey = dateKeyOffset(1);
   const twoDaysAgoKey = dateKeyOffset(2);
@@ -4484,6 +4533,7 @@ function deleteChatHistoryOnly(){
 function deleteMoodDataOnly(){
   moodLog = [];
   safeSet('mc_moodlog', '[]');
+  removeEntriesByType('mood_log');
   renderMoodChart();
   showPassportStatus(I18N[currentLang].passport_done);
 }
@@ -4493,6 +4543,7 @@ function deleteExerciseHistoryOnly(){
   safeSet('mc_streak', '0');
   safeSet('mc_last_done', '');
   safeSet('mc_last_celebrated', '');
+  removeEntriesByType('exercise_completion');
   updateStreakDisplay();
   updateProgressStats();
   showPassportStatus(I18N[currentLang].passport_done);
