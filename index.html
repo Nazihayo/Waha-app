@@ -436,6 +436,11 @@
       <p data-i18n="journey_item_health_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
+    <div class="journey-card journey-card-active" data-click="openFinance">
+      <h3 data-i18n="journey_item_finance_title"></h3>
+      <p data-i18n="journey_item_finance_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
+    </div>
   </div>
 </section>
 
@@ -494,6 +499,29 @@
     <div class="review-history-label" data-i18n="health_history_label"></div>
     <div id="healthHistory"></div>
     <p class="tracker-empty u-hidden" id="healthEmptyMsg" data-i18n="health_empty"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="financeModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeFinance" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="finance_modal_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="finance_modal_title"></h2>
+    <p class="prefs-subtitle" data-i18n="finance_modal_subtitle"></p>
+    <div class="health-fields-grid">
+      <div class="health-field">
+        <label data-i18n="finance_spent_label" for="financeSpentInput"></label>
+        <input type="number" id="financeSpentInput" min="0" step="0.01">
+      </div>
+      <div class="health-field">
+        <label data-i18n="finance_saved_label" for="financeSavedInput"></label>
+        <input type="number" id="financeSavedInput" min="0" step="0.01">
+      </div>
+    </div>
+    <button class="journal-save-btn" data-click="saveFinanceLog" data-i18n="reviews_save_btn"></button>
+    <div class="review-history-label" data-i18n="finance_history_label"></div>
+    <div id="financeHistory"></div>
+    <p class="tracker-empty u-hidden" id="financeEmptyMsg" data-i18n="finance_empty"></p>
   </div>
 </div>
 

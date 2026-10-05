@@ -379,7 +379,7 @@
   .dashboard-bar{flex:1;height:100%;display:flex;align-items:flex-end;background:rgba(var(--ink-rgb),0.06);border-radius:4px;overflow:hidden;}
   .dashboard-bar-fill{width:100%;background:var(--gold);border-radius:4px;}
 
-  .health-fields-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+  .health-fields-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:12px;}
   .health-field label{display:block;font-size:11px;color:rgba(var(--ink-rgb),0.6);margin-bottom:4px;}
   .health-field input{width:100%;font-family:inherit;font-size:13px;color:var(--ink);background:var(--paper-dim);border:1px solid var(--line);border-radius:10px;padding:0 10px;height:42px;box-sizing:border-box;}
   @media (max-width:420px){ .health-fields-grid{grid-template-columns:1fr;} }
