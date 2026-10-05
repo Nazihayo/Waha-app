@@ -411,15 +411,15 @@
     <p data-i18n="journey_desc"></p>
   </div>
   <div class="journey-grid">
-    <div class="journey-card">
-      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+    <div class="journey-card journey-card-active" data-click="openGoals">
       <h3 data-i18n="journey_item_goals_title"></h3>
       <p data-i18n="journey_item_goals_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
     </div>
-    <div class="journey-card">
-      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+    <div class="journey-card journey-card-active" data-click="openHabits">
       <h3 data-i18n="journey_item_habits_title"></h3>
       <p data-i18n="journey_item_habits_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
     </div>
     <div class="journey-card">
       <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
@@ -433,6 +433,37 @@
     </div>
   </div>
 </section>
+
+<div class="prefs-overlay" id="goalsModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeGoals" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="goals_modal_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="goals_modal_title"></h2>
+    <p class="prefs-subtitle" data-i18n="goals_modal_subtitle"></p>
+    <div class="tracker-add-row">
+      <input type="text" id="goalInput" class="journal-textarea tracker-input" data-i18n-placeholder="goals_input_placeholder">
+      <input type="date" id="goalDateInput" class="tracker-date-input">
+      <button class="journal-save-btn" data-click="addGoal" data-i18n="goals_add_btn"></button>
+    </div>
+    <div class="tracker-list" id="goalsList"></div>
+    <p class="tracker-empty u-hidden" id="goalsEmptyMsg" data-i18n="goals_empty"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="habitsModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeHabits" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="habits_modal_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="habits_modal_title"></h2>
+    <p class="prefs-subtitle" data-i18n="habits_modal_subtitle"></p>
+    <div class="tracker-add-row">
+      <input type="text" id="habitInput" class="journal-textarea tracker-input" data-i18n-placeholder="habits_input_placeholder">
+      <button class="journal-save-btn" data-click="addHabit" data-i18n="habits_add_btn"></button>
+    </div>
+    <div class="tracker-list" id="habitsList"></div>
+    <p class="tracker-empty u-hidden" id="habitsEmptyMsg" data-i18n="habits_empty"></p>
+  </div>
+</div>
 
 <section id="program">
   <div class="section-head">

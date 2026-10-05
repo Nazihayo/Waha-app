@@ -34,6 +34,13 @@ const I18N = {
     lib3_tag:"العلاقات", lib3_title:"حدود صحية دون شعور بالذنب", lib3_desc:"كيف تقول \"لا\" وتحافظ على علاقاتك المهمة.",
     exercises_eyebrow:"تمارين يومية", exercises_title:"مكتبة تمارين الصحة النفسية",
     daily_practice_eyebrow:"ممارسة اليوم", daily_practice_cta:"ابدأ التمرين", daily_practice_browse:"تصفّح كل الفئات",
+    journey_open_link:"فتح ←",
+    goals_modal_eyebrow:"الأهداف", goals_modal_title:"أهدافك", goals_modal_subtitle:"أهداف صغيرة قابلة للتتبع — بلا ضغط، فقط مكان تحفظها فيه.",
+    goals_input_placeholder:"مثال: تعلّم الألمانية B2 خلال سنة", goals_add_btn:"إضافة", goals_empty:"لا توجد أهداف بعد. أضف أول هدف أعلاه.",
+    goals_mark_done_aria:"وضع الهدف كمُنجز", goals_delete_aria:"حذف الهدف",
+    habits_modal_eyebrow:"العادات", habits_modal_title:"عاداتك", habits_modal_subtitle:"روتين يومي يُبنى بلطف — سجّل حضورك مرة كل يوم.",
+    habits_input_placeholder:"مثال: 10 دقائق قراءة", habits_add_btn:"إضافة", habits_empty:"لا توجد عادات بعد. أضف أول عادة أعلاه.",
+    habits_check_today_aria:"تسجيل إنجاز اليوم", habits_delete_aria:"حذف العادة",
     exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
     footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
     title:"Waha — مساحتك الآمنة",
@@ -188,6 +195,13 @@ const I18N = {
     lib3_tag:"Beziehungen", lib3_title:"Gesunde Grenzen ohne Schuldgefühle", lib3_desc:"Wie du Nein sagst und Beziehungen bewahrst.",
     exercises_eyebrow:"Tägliche Übungen", exercises_title:"Bibliothek für mentale Gesundheit",
     daily_practice_eyebrow:"Übung des Tages", daily_practice_cta:"Übung starten", daily_practice_browse:"Alle Kategorien ansehen",
+    journey_open_link:"Öffnen →",
+    goals_modal_eyebrow:"Ziele", goals_modal_title:"Deine Ziele", goals_modal_subtitle:"Kleine, nachverfolgbare Ziele — ohne Druck, nur ein Ort, um sie festzuhalten.",
+    goals_input_placeholder:"z. B. Deutsch B2 in einem Jahr lernen", goals_add_btn:"Hinzufügen", goals_empty:"Noch keine Ziele. Füge oben dein erstes hinzu.",
+    goals_mark_done_aria:"Ziel als erledigt markieren", goals_delete_aria:"Ziel löschen",
+    habits_modal_eyebrow:"Gewohnheiten", habits_modal_title:"Deine Gewohnheiten", habits_modal_subtitle:"Tägliche Routinen, sanft aufgebaut — einmal am Tag einchecken.",
+    habits_input_placeholder:"z. B. 10 Minuten lesen", habits_add_btn:"Hinzufügen", habits_empty:"Noch keine Gewohnheiten. Füge oben deine erste hinzu.",
+    habits_check_today_aria:"Heute als erledigt markieren", habits_delete_aria:"Gewohnheit löschen",
     exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
     footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
     title:"Waha — Dein sicherer Raum",
@@ -342,6 +356,13 @@ const I18N = {
     lib3_tag:"Relationships", lib3_title:"Healthy boundaries without guilt", lib3_desc:"How to say \"no\" while still keeping the relationships that matter.",
     exercises_eyebrow:"Daily exercises", exercises_title:"Mental health exercise library",
     daily_practice_eyebrow:"Today's practice", daily_practice_cta:"Start the practice", daily_practice_browse:"Browse all categories",
+    journey_open_link:"Open →",
+    goals_modal_eyebrow:"Goals", goals_modal_title:"Your goals", goals_modal_subtitle:"Small, trackable goals — no pressure, just a place to hold them.",
+    goals_input_placeholder:"e.g. Learn German B2 this year", goals_add_btn:"Add", goals_empty:"No goals yet. Add your first one above.",
+    goals_mark_done_aria:"Mark goal done", goals_delete_aria:"Delete goal",
+    habits_modal_eyebrow:"Habits", habits_modal_title:"Your habits", habits_modal_subtitle:"Daily routines, built gently — check in once a day.",
+    habits_input_placeholder:"e.g. 10 minutes of reading", habits_add_btn:"Add", habits_empty:"No habits yet. Add your first one above.",
+    habits_check_today_aria:"Mark done today", habits_delete_aria:"Delete habit",
     exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
     footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
     title:"Waha — Your safe space",
@@ -496,6 +517,13 @@ const I18N = {
     lib3_tag:"Relations", lib3_title:"Des limites saines sans culpabilité", lib3_desc:"Comment dire \"non\" tout en préservant les relations importantes.",
     exercises_eyebrow:"Exercices quotidiens", exercises_title:"Bibliothèque d'exercices de santé mentale",
     daily_practice_eyebrow:"Pratique du jour", daily_practice_cta:"Commencer la pratique", daily_practice_browse:"Parcourir toutes les catégories",
+    journey_open_link:"Ouvrir →",
+    goals_modal_eyebrow:"Objectifs", goals_modal_title:"Tes objectifs", goals_modal_subtitle:"De petits objectifs suivables — sans pression, juste un endroit pour les garder.",
+    goals_input_placeholder:"ex. Apprendre l'allemand B2 cette année", goals_add_btn:"Ajouter", goals_empty:"Pas encore d'objectifs. Ajoute le premier ci-dessus.",
+    goals_mark_done_aria:"Marquer l'objectif comme atteint", goals_delete_aria:"Supprimer l'objectif",
+    habits_modal_eyebrow:"Habitudes", habits_modal_title:"Tes habitudes", habits_modal_subtitle:"Des routines quotidiennes, construites en douceur — pointe une fois par jour.",
+    habits_input_placeholder:"ex. 10 minutes de lecture", habits_add_btn:"Ajouter", habits_empty:"Pas encore d'habitudes. Ajoute la première ci-dessus.",
+    habits_check_today_aria:"Marquer comme fait aujourd'hui", habits_delete_aria:"Supprimer l'habitude",
     exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
     footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
     title:"Waha — Ton espace sûr",
@@ -650,6 +678,13 @@ const I18N = {
     lib3_tag:"İlişkiler", lib3_title:"Suçluluk duymadan sağlıklı sınırlar", lib3_desc:"Önemli ilişkileri korurken nasıl \"hayır\" denir.",
     exercises_eyebrow:"Günlük egzersizler", exercises_title:"Ruh sağlığı egzersiz kütüphanesi",
     daily_practice_eyebrow:"Günün pratiği", daily_practice_cta:"Pratiğe başla", daily_practice_browse:"Tüm kategorilere göz at",
+    journey_open_link:"Aç →",
+    goals_modal_eyebrow:"Hedefler", goals_modal_title:"Hedeflerin", goals_modal_subtitle:"Küçük, takip edilebilir hedefler — baskı yok, sadece onları tutacak bir yer.",
+    goals_input_placeholder:"örn. Bu yıl Almanca B2 öğren", goals_add_btn:"Ekle", goals_empty:"Henüz hedef yok. Yukarıdan ilkini ekle.",
+    goals_mark_done_aria:"Hedefi tamamlandı olarak işaretle", goals_delete_aria:"Hedefi sil",
+    habits_modal_eyebrow:"Alışkanlıklar", habits_modal_title:"Alışkanlıkların", habits_modal_subtitle:"Nazikçe oluşturulan günlük rutinler — günde bir kez işaretle.",
+    habits_input_placeholder:"örn. 10 dakika kitap okuma", habits_add_btn:"Ekle", habits_empty:"Henüz alışkanlık yok. Yukarıdan ilkini ekle.",
+    habits_check_today_aria:"Bugün tamamlandı olarak işaretle", habits_delete_aria:"Alışkanlığı sil",
     exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
     footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
     title:"Waha — Güvenli alanın",
@@ -804,6 +839,13 @@ const I18N = {
     lib3_tag:"Têkilî", lib3_title:"Sînorên tenduristî bêyî sûcdarî", lib3_desc:"Çawa 'na' bêje û di heman demê de têkiliyên girîng biparêze.",
     exercises_eyebrow:"Ezmûnên rojane", exercises_title:"Pirtûkxaneya ezmûnên tenduristiya derûnî",
     daily_practice_eyebrow:"Peywira îro", daily_practice_cta:"Dest bi peywirê bike", daily_practice_browse:"Li hemû kategoriyan binêre",
+    journey_open_link:"Veke ←",
+    goals_modal_eyebrow:"Armanc", goals_modal_title:"Armancên te", goals_modal_subtitle:"Armancên piçûk ên ku tên şopandin — bêyî zext, tenê cihek ji bo hilgirtina wan.",
+    goals_input_placeholder:"mînak: Vê salê Almanî B2 fêr bibe", goals_add_btn:"Zêde bike", goals_empty:"Hêj armancek tune ye. Ya pêşî li jor zêde bike.",
+    goals_mark_done_aria:"Armancê wekî qediyayî nîşan bike", goals_delete_aria:"Armancê jê bibe",
+    habits_modal_eyebrow:"Adet", habits_modal_title:"Adetên te", habits_modal_subtitle:"Rûtînên rojane, bi nermî ava bûne — carekê di rojê de qeyd bike.",
+    habits_input_placeholder:"mînak: 10 deqîqe xwendin", habits_add_btn:"Zêde bike", habits_empty:"Hêj adetek tune ye. Ya pêşî li jor zêde bike.",
+    habits_check_today_aria:"Îro wekî qediyayî nîşan bike", habits_delete_aria:"Adetê jê bibe",
     exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
     footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
     title:"Waha — Cihê te yê ewle",
@@ -958,6 +1000,13 @@ const I18N = {
     lib3_tag:"Relaciones", lib3_title:"Límites sanos sin culpa", lib3_desc:"Cómo decir \"no\" y mantener las relaciones importantes.",
     exercises_eyebrow:"Ejercicios diarios", exercises_title:"Biblioteca de ejercicios de salud mental",
     daily_practice_eyebrow:"Práctica de hoy", daily_practice_cta:"Empezar la práctica", daily_practice_browse:"Explorar todas las categorías",
+    journey_open_link:"Abrir →",
+    goals_modal_eyebrow:"Metas", goals_modal_title:"Tus metas", goals_modal_subtitle:"Metas pequeñas y rastreables — sin presión, solo un lugar para guardarlas.",
+    goals_input_placeholder:"p. ej. Aprender alemán B2 este año", goals_add_btn:"Añadir", goals_empty:"Aún no hay metas. Añade la primera arriba.",
+    goals_mark_done_aria:"Marcar meta como completada", goals_delete_aria:"Eliminar meta",
+    habits_modal_eyebrow:"Hábitos", habits_modal_title:"Tus hábitos", habits_modal_subtitle:"Rutinas diarias, construidas con suavidad — marca una vez al día.",
+    habits_input_placeholder:"p. ej. 10 minutos de lectura", habits_add_btn:"Añadir", habits_empty:"Aún no hay hábitos. Añade el primero arriba.",
+    habits_check_today_aria:"Marcar como hecho hoy", habits_delete_aria:"Eliminar hábito",
     exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
     footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
     title:"Waha — Tu espacio seguro",
@@ -1112,6 +1161,13 @@ const I18N = {
       lib3_tag:"روابط", lib3_title:"مرزهای سالم بدون احساس گناه", lib3_desc:"چگونه \"نه\" بگویی و روابط مهم را حفظ کنی.",
       exercises_eyebrow:"تمرین‌های روزانه", exercises_title:"کتابخانه تمرین‌های سلامت روان",
       daily_practice_eyebrow:"تمرین امروز", daily_practice_cta:"شروع تمرین", daily_practice_browse:"مرور همه دسته‌ها",
+      journey_open_link:"باز کردن ←",
+      goals_modal_eyebrow:"اهداف", goals_modal_title:"اهداف تو", goals_modal_subtitle:"اهدافی کوچک و قابل‌پیگیری — بدون فشار، فقط جایی برای نگه‌داشتن آن‌ها.",
+      goals_input_placeholder:"مثلاً: امسال آلمانی B2 یاد بگیر", goals_add_btn:"افزودن", goals_empty:"هنوز هدفی نیست. اولین هدف را بالا اضافه کن.",
+      goals_mark_done_aria:"علامت‌گذاری هدف به‌عنوان انجام‌شده", goals_delete_aria:"حذف هدف",
+      habits_modal_eyebrow:"عادت‌ها", habits_modal_title:"عادت‌های تو", habits_modal_subtitle:"روتین‌های روزانه، به‌آرامی ساخته‌شده — یک بار در روز ثبت کن.",
+      habits_input_placeholder:"مثلاً: ۱۰ دقیقه مطالعه", habits_add_btn:"افزودن", habits_empty:"هنوز عادتی نیست. اولین عادت را بالا اضافه کن.",
+      habits_check_today_aria:"علامت‌گذاری انجام‌شده برای امروز", habits_delete_aria:"حذف عادت",
       exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
       footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
       title:"Waha — فضای امن تو",
@@ -1266,6 +1322,13 @@ const I18N = {
       lib3_tag:"تعلقات", lib3_title:"جرم کے بغیر صحت مند حدود", lib3_desc:"اہم تعلقات برقرار رکھتے ہوئے \"نہیں\" کیسے کہیں۔",
       exercises_eyebrow:"روزانہ مشقیں", exercises_title:"ذہنی صحت کی مشقوں کی لائبریری",
       daily_practice_eyebrow:"آج کی مشق", daily_practice_cta:"مشق شروع کریں", daily_practice_browse:"تمام زمرہ جات دیکھیں",
+      journey_open_link:"کھولیں ←",
+      goals_modal_eyebrow:"اہداف", goals_modal_title:"آپ کے اہداف", goals_modal_subtitle:"چھوٹے، قابلِ پیگیری اہداف — بغیر دباؤ کے، بس انہیں رکھنے کی ایک جگہ۔",
+      goals_input_placeholder:"مثلاً: اس سال جرمن B2 سیکھیں", goals_add_btn:"شامل کریں", goals_empty:"ابھی تک کوئی ہدف نہیں۔ اوپر اپنا پہلا ہدف شامل کریں۔",
+      goals_mark_done_aria:"ہدف کو مکمل نشان زد کریں", goals_delete_aria:"ہدف حذف کریں",
+      habits_modal_eyebrow:"عادات", habits_modal_title:"آپ کی عادات", habits_modal_subtitle:"روزانہ معمولات، نرمی سے بنائے گئے — دن میں ایک بار نشان زد کریں۔",
+      habits_input_placeholder:"مثلاً: 10 منٹ مطالعہ", habits_add_btn:"شامل کریں", habits_empty:"ابھی تک کوئی عادت نہیں۔ اوپر اپنی پہلی عادت شامل کریں۔",
+      habits_check_today_aria:"آج مکمل نشان زد کریں", habits_delete_aria:"عادت حذف کریں",
       exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
       footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
       title:"Waha — آپ کی محفوظ جگہ",
@@ -1420,6 +1483,13 @@ const I18N = {
       lib3_tag:"Отношения", lib3_title:"Здоровые границы без чувства вины", lib3_desc:"Как говорить \"нет\" и сохранять важные отношения.",
       exercises_eyebrow:"Ежедневные упражнения", exercises_title:"Библиотека упражнений для психического здоровья",
       daily_practice_eyebrow:"Практика дня", daily_practice_cta:"Начать практику", daily_practice_browse:"Просмотреть все категории",
+      journey_open_link:"Открыть →",
+      goals_modal_eyebrow:"Цели", goals_modal_title:"Твои цели", goals_modal_subtitle:"Небольшие, отслеживаемые цели — без давления, просто место, чтобы их хранить.",
+      goals_input_placeholder:"напр. Выучить немецкий B2 за этот год", goals_add_btn:"Добавить", goals_empty:"Целей пока нет. Добавь первую выше.",
+      goals_mark_done_aria:"Отметить цель как выполненную", goals_delete_aria:"Удалить цель",
+      habits_modal_eyebrow:"Привычки", habits_modal_title:"Твои привычки", habits_modal_subtitle:"Ежедневные ритуалы, формируемые мягко — отмечай раз в день.",
+      habits_input_placeholder:"напр. 10 минут чтения", habits_add_btn:"Добавить", habits_empty:"Привычек пока нет. Добавь первую выше.",
+      habits_check_today_aria:"Отметить выполненным сегодня", habits_delete_aria:"Удалить привычку",
       exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
       footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
       title:"Waha — Твоё безопасное пространство",
@@ -1574,6 +1644,13 @@ const I18N = {
       lib3_tag:"Relações", lib3_title:"Limites saudáveis sem culpa", lib3_desc:"Como dizer \"não\" e ainda manter as relações importantes.",
       exercises_eyebrow:"Exercícios diários", exercises_title:"Biblioteca de exercícios de saúde mental",
       daily_practice_eyebrow:"Prática de hoje", daily_practice_cta:"Começar a prática", daily_practice_browse:"Ver todas as categorias",
+      journey_open_link:"Abrir →",
+      goals_modal_eyebrow:"Objetivos", goals_modal_title:"Os teus objetivos", goals_modal_subtitle:"Objetivos pequenos e rastreáveis — sem pressão, só um lugar para os guardar.",
+      goals_input_placeholder:"ex. Aprender alemão B2 este ano", goals_add_btn:"Adicionar", goals_empty:"Ainda não há objetivos. Adiciona o primeiro acima.",
+      goals_mark_done_aria:"Marcar objetivo como concluído", goals_delete_aria:"Eliminar objetivo",
+      habits_modal_eyebrow:"Hábitos", habits_modal_title:"Os teus hábitos", habits_modal_subtitle:"Rotinas diárias, construídas com suavidade — marca uma vez por dia.",
+      habits_input_placeholder:"ex. 10 minutos de leitura", habits_add_btn:"Adicionar", habits_empty:"Ainda não há hábitos. Adiciona o primeiro acima.",
+      habits_check_today_aria:"Marcar como feito hoje", habits_delete_aria:"Eliminar hábito",
       exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
       footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
       title:"Waha — O teu espaço seguro",
@@ -1728,6 +1805,13 @@ const I18N = {
       lib3_tag:"Relazioni", lib3_title:"Confini sani senza sensi di colpa", lib3_desc:"Come dire \"no\" mantenendo comunque le relazioni importanti.",
       exercises_eyebrow:"Esercizi quotidiani", exercises_title:"Biblioteca di esercizi per la salute mentale",
       daily_practice_eyebrow:"Pratica di oggi", daily_practice_cta:"Inizia la pratica", daily_practice_browse:"Sfoglia tutte le categorie",
+      journey_open_link:"Apri →",
+      goals_modal_eyebrow:"Obiettivi", goals_modal_title:"I tuoi obiettivi", goals_modal_subtitle:"Piccoli obiettivi tracciabili — senza pressione, solo un posto per custodirli.",
+      goals_input_placeholder:"es. Imparare il tedesco B2 quest'anno", goals_add_btn:"Aggiungi", goals_empty:"Ancora nessun obiettivo. Aggiungi il primo qui sopra.",
+      goals_mark_done_aria:"Segna obiettivo come completato", goals_delete_aria:"Elimina obiettivo",
+      habits_modal_eyebrow:"Abitudini", habits_modal_title:"Le tue abitudini", habits_modal_subtitle:"Routine quotidiane, costruite con dolcezza — segna una volta al giorno.",
+      habits_input_placeholder:"es. 10 minuti di lettura", habits_add_btn:"Aggiungi", habits_empty:"Ancora nessuna abitudine. Aggiungi la prima qui sopra.",
+      habits_check_today_aria:"Segna come fatto oggi", habits_delete_aria:"Elimina abitudine",
       exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
       footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
       title:"Waha — Il tuo spazio sicuro",
@@ -3628,6 +3712,197 @@ function removeEntriesByType(entityType){
   const remaining = getEntries().filter(e => e.entity_type !== entityType);
   safeSet('mc_entries', JSON.stringify(remaining));
 }
+function dateKeyFromTs(ts){
+  const d = new Date(ts);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+// ---------------------------------------------------------------------
+// Goals & habits (LifeOS integration, step 3). Deliberately lean — no
+// milestones, no categories, no due-date logic beyond an optional plain
+// date — ship this, see if it gets used, before building more. Goals
+// and habits are real mutable records (own localStorage arrays), but
+// every create/complete/delete also logs to the shared `entries` store
+// from step 2, and habit completions are read entirely FROM entries
+// (no separate per-habit log) — exactly the cross-module query the
+// unified log exists for.
+// ---------------------------------------------------------------------
+function getGoals(){
+  try{ const raw = safeGet('mc_goals'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function saveGoalsList(list){ safeSet('mc_goals', JSON.stringify(list)); }
+function addGoal(){
+  const input = document.getElementById('goalInput');
+  const dateInput = document.getElementById('goalDateInput');
+  const title = input.value.trim();
+  if(!title) return;
+  const goals = getGoals();
+  const goal = { id: uuidV7(), title, targetDate: dateInput.value || null, done: false, createdAt: Date.now() };
+  goals.push(goal);
+  saveGoalsList(goals);
+  addEntry('goal_created', { title, targetDate: goal.targetDate }, goal.id);
+  input.value = '';
+  dateInput.value = '';
+  renderGoals();
+}
+function toggleGoalDone(id){
+  const goals = getGoals();
+  const goal = goals.find(g => g.id === id);
+  if(!goal) return;
+  goal.done = !goal.done;
+  saveGoalsList(goals);
+  addEntry(goal.done ? 'goal_completed' : 'goal_reopened', { title: goal.title }, id);
+  renderGoals();
+}
+function deleteGoal(id){
+  const goals = getGoals().filter(g => g.id !== id);
+  saveGoalsList(goals);
+  addEntry('goal_deleted', {}, id);
+  renderGoals();
+}
+function renderGoals(){
+  const dict = I18N[currentLang];
+  const list = document.getElementById('goalsList');
+  const empty = document.getElementById('goalsEmptyMsg');
+  const goals = getGoals();
+  list.innerHTML = '';
+  empty.classList.toggle('u-hidden', goals.length > 0);
+  goals.slice().reverse().forEach(g=>{
+    const row = document.createElement('div');
+    row.className = 'tracker-item' + (g.done ? ' is-done' : '');
+    const main = document.createElement('div');
+    main.className = 'tracker-item-main';
+    const titleEl = document.createElement('span');
+    titleEl.className = 'tracker-item-title';
+    titleEl.textContent = g.title;
+    main.appendChild(titleEl);
+    if(g.targetDate){
+      const meta = document.createElement('span');
+      meta.className = 'tracker-item-meta';
+      meta.textContent = g.targetDate;
+      main.appendChild(meta);
+    }
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'tracker-item-btn' + (g.done ? ' is-active' : '');
+    doneBtn.textContent = '✓';
+    doneBtn.setAttribute('aria-label', dict.goals_mark_done_aria);
+    doneBtn.onclick = ()=> toggleGoalDone(g.id);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'tracker-item-btn';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.goals_delete_aria);
+    delBtn.onclick = ()=> deleteGoal(g.id);
+    row.appendChild(main);
+    row.appendChild(doneBtn);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+function openGoals(){
+  renderGoals();
+  document.getElementById('goalsModal').classList.add('open');
+}
+function closeGoals(){
+  document.getElementById('goalsModal').classList.remove('open');
+}
+
+function getHabits(){
+  try{ const raw = safeGet('mc_habits'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function saveHabitsList(list){ safeSet('mc_habits', JSON.stringify(list)); }
+function addHabit(){
+  const input = document.getElementById('habitInput');
+  const title = input.value.trim();
+  if(!title) return;
+  const habits = getHabits();
+  const habit = { id: uuidV7(), title, createdAt: Date.now() };
+  habits.push(habit);
+  saveHabitsList(habits);
+  addEntry('habit_created', { title }, habit.id);
+  input.value = '';
+  renderHabits();
+}
+function deleteHabit(id){
+  const habits = getHabits().filter(h => h.id !== id);
+  saveHabitsList(habits);
+  addEntry('habit_deleted', {}, id);
+  renderHabits();
+}
+function isHabitDoneToday(id){
+  const today = dateKeyFromTs(Date.now());
+  return getEntriesByType('habit_completion').some(e => e.entity_id === id && dateKeyFromTs(e.occurred_at) === today);
+}
+function getHabitStreak(id){
+  const days = new Set(getEntriesByType('habit_completion').filter(e => e.entity_id === id).map(e => dateKeyFromTs(e.occurred_at)));
+  let streak = 0;
+  const cursor = new Date();
+  // Today not done yet is still a "pending" day, not a break — start
+  // counting from yesterday so the streak doesn't visibly drop to 0
+  // before the day is even over.
+  if(!days.has(dateKeyFromTs(cursor.getTime()))) cursor.setDate(cursor.getDate() - 1);
+  while(days.has(dateKeyFromTs(cursor.getTime()))){
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+function toggleHabitToday(id){
+  if(isHabitDoneToday(id)){
+    const today = dateKeyFromTs(Date.now());
+    const remaining = getEntries().filter(e => !(e.entity_type === 'habit_completion' && e.entity_id === id && dateKeyFromTs(e.occurred_at) === today));
+    safeSet('mc_entries', JSON.stringify(remaining));
+  } else {
+    addEntry('habit_completion', {}, id);
+  }
+  renderHabits();
+}
+function renderHabits(){
+  const dict = I18N[currentLang];
+  const list = document.getElementById('habitsList');
+  const empty = document.getElementById('habitsEmptyMsg');
+  const habits = getHabits();
+  list.innerHTML = '';
+  empty.classList.toggle('u-hidden', habits.length > 0);
+  habits.slice().reverse().forEach(h=>{
+    const doneToday = isHabitDoneToday(h.id);
+    const streak = getHabitStreak(h.id);
+    const row = document.createElement('div');
+    row.className = 'tracker-item' + (doneToday ? ' is-done' : '');
+    const main = document.createElement('div');
+    main.className = 'tracker-item-main';
+    const titleEl = document.createElement('span');
+    titleEl.className = 'tracker-item-title';
+    titleEl.textContent = h.title;
+    main.appendChild(titleEl);
+    if(streak > 0){
+      const meta = document.createElement('span');
+      meta.className = 'tracker-item-meta';
+      meta.textContent = streak + ' ' + dict.streak_label;
+      main.appendChild(meta);
+    }
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'tracker-item-btn' + (doneToday ? ' is-active' : '');
+    doneBtn.textContent = '✓';
+    doneBtn.setAttribute('aria-label', dict.habits_check_today_aria);
+    doneBtn.onclick = ()=> toggleHabitToday(h.id);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'tracker-item-btn';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.habits_delete_aria);
+    delBtn.onclick = ()=> deleteHabit(h.id);
+    row.appendChild(main);
+    row.appendChild(doneBtn);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+function openHabits(){
+  renderHabits();
+  document.getElementById('habitsModal').classList.add('open');
+}
+function closeHabits(){
+  document.getElementById('habitsModal').classList.remove('open');
+}
 
 function renderMoodWidget(){
   const dict = I18N[currentLang];
@@ -4996,6 +5271,8 @@ function sendMsgOnEnter(e){
 
 const ACTIONS = {
   acceptChatConsent,
+  addGoal,
+  addHabit,
   answerReliefFeedback,
   backToEditFeeling,
   chooseMode,
@@ -5007,6 +5284,8 @@ const ACTIONS = {
   closeDailyBrief,
   closeExercise,
   closeExplainFeeling,
+  closeGoals,
+  closeHabits,
   closePrefs,
   closePrivacyPassport,
   closeRelief,
@@ -5042,6 +5321,8 @@ const ACTIONS = {
   openPrivacyPassport,
   openRelief,
   openSleepMode,
+  openGoals,
+  openHabits,
   openSounds,
   openUpgrade,
   printCalmPlan,

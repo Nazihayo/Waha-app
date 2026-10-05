@@ -338,7 +338,23 @@
   .journey-soon-badge{display:inline-block;font-size:10.5px;letter-spacing:0.6px;text-transform:uppercase;color:var(--gold);background:rgba(201,166,107,0.14);border-radius:100px;padding:3px 10px;margin-bottom:10px;}
   .journey-card h3{font-size:16px;color:var(--ink);margin:0 0 6px;}
   .journey-card p{font-size:13px;color:rgba(var(--ink-rgb),0.68);line-height:1.6;margin:0;}
+  .journey-card-active{cursor:pointer;transition:border-color .15s ease;}
+  .journey-card-active:hover{border-color:var(--gold);}
+  .journey-card-active .go{display:inline-block;margin-top:9px;font-size:12px;color:var(--gold);font-weight:600;}
   @media (max-width:820px){ .journey-grid{grid-template-columns:1fr;} }
+
+  .tracker-add-row{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;margin-bottom:16px;}
+  .tracker-input{flex:1 1 200px;min-width:0;resize:none;}
+  .tracker-date-input{font-family:inherit;font-size:13px;color:var(--ink);background:var(--paper-dim);border:1px solid var(--line);border-radius:10px;padding:0 10px;height:42px;}
+  .tracker-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;}
+  .tracker-item{display:flex;align-items:center;gap:10px;background:var(--paper-dim);border-radius:10px;padding:10px 12px;}
+  .tracker-item.is-done .tracker-item-title{text-decoration:line-through;opacity:0.55;}
+  .tracker-item-main{flex:1;min-width:0;}
+  .tracker-item-title{font-size:13.5px;color:var(--ink);display:block;}
+  .tracker-item-meta{font-size:11px;color:var(--gold);font-weight:600;margin-top:2px;}
+  .tracker-item-btn{background:transparent;border:1px solid var(--line);border-radius:100px;width:30px;height:30px;flex:0 0 auto;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--ink);}
+  .tracker-item-btn.is-active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .tracker-empty{font-size:13px;color:rgba(var(--ink-rgb),0.55);text-align:center;padding:12px 0;}
 
   body.text-large .modal-steps li{font-size:17px;line-height:1.65;}
   body.text-large .card p{font-size:16px;line-height:1.6;}
