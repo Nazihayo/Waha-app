@@ -451,7 +451,7 @@
     <h2 class="prefs-title u-fs-24" data-i18n="goals_modal_title"></h2>
     <p class="prefs-subtitle" data-i18n="goals_modal_subtitle"></p>
     <div class="tracker-add-row">
-      <input type="text" id="goalInput" class="journal-textarea tracker-input" data-i18n-placeholder="goals_input_placeholder">
+      <input type="text" id="goalInput" class="journal-textarea tracker-input" data-i18n-placeholder="goals_input_placeholder" data-i18n-aria-label="goals_input_placeholder">
       <input type="date" id="goalDateInput" class="tracker-date-input">
       <button class="journal-save-btn" data-click="addGoal" data-i18n="goals_add_btn"></button>
     </div>
@@ -467,7 +467,7 @@
     <h2 class="prefs-title u-fs-24" data-i18n="habits_modal_title"></h2>
     <p class="prefs-subtitle" data-i18n="habits_modal_subtitle"></p>
     <div class="tracker-add-row">
-      <input type="text" id="habitInput" class="journal-textarea tracker-input" data-i18n-placeholder="habits_input_placeholder">
+      <input type="text" id="habitInput" class="journal-textarea tracker-input" data-i18n-placeholder="habits_input_placeholder" data-i18n-aria-label="habits_input_placeholder">
       <button class="journal-save-btn" data-click="addHabit" data-i18n="habits_add_btn"></button>
     </div>
     <div class="tracker-list" id="habitsList"></div>
@@ -536,9 +536,9 @@
       <button class="review-tab-btn" id="reviewTabWeeklyBtn" data-click="setReviewTab:weekly" data-i18n="reviews_tab_weekly"></button>
     </div>
     <div class="review-view" id="reviewDailyView">
-      <textarea id="reviewDailyWell" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_well_placeholder"></textarea>
-      <textarea id="reviewDailyHard" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_hard_placeholder"></textarea>
-      <textarea id="reviewDailyTomorrow" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_tomorrow_placeholder"></textarea>
+      <textarea id="reviewDailyWell" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_well_placeholder" data-i18n-aria-label="reviews_daily_well_placeholder"></textarea>
+      <textarea id="reviewDailyHard" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_hard_placeholder" data-i18n-aria-label="reviews_daily_hard_placeholder"></textarea>
+      <textarea id="reviewDailyTomorrow" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_tomorrow_placeholder" data-i18n-aria-label="reviews_daily_tomorrow_placeholder"></textarea>
       <button class="journal-save-btn" data-click="saveDailyReview" data-i18n="reviews_save_btn"></button>
       <div class="review-history-label" data-i18n="reviews_daily_history_label"></div>
       <div id="reviewDailyHistory"></div>
@@ -546,8 +546,8 @@
     </div>
     <div class="review-view u-hidden" id="reviewWeeklyView">
       <div class="review-stats-grid" id="reviewWeeklyStats"></div>
-      <textarea id="reviewWeeklyWin" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_weekly_win_placeholder"></textarea>
-      <textarea id="reviewWeeklyFocus" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_weekly_focus_placeholder"></textarea>
+      <textarea id="reviewWeeklyWin" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_weekly_win_placeholder" data-i18n-aria-label="reviews_weekly_win_placeholder"></textarea>
+      <textarea id="reviewWeeklyFocus" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_weekly_focus_placeholder" data-i18n-aria-label="reviews_weekly_focus_placeholder"></textarea>
       <button class="journal-save-btn" data-click="saveWeeklyReview" data-i18n="reviews_save_btn"></button>
       <div class="review-history-label" data-i18n="reviews_weekly_history_label"></div>
       <div id="reviewWeeklyHistory"></div>

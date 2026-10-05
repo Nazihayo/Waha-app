@@ -3073,6 +3073,10 @@ function applyI18n(lang){
     const key = el.getAttribute('data-i18n-placeholder');
     if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
   });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-aria-label');
+    if(dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+  });
   document.getElementById('pageTitle').textContent = dict.title;
   document.title = dict.title;
   document.getElementById('voiceLabel').textContent = voiceEnabled ? dict.voice_on : dict.voice_off;
@@ -3978,8 +3982,17 @@ function uuidV7(){
 function getEntries(){
   try{ const raw = safeGet('mc_entries'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
 }
+const ENTRIES_CAP = 2000;
+// getHabitStreak() walks habit_completion rows backward with no time bound,
+// so a plain FIFO cap across all entry types could silently evict a genuinely
+// unbroken streak's older rows just because the user was active elsewhere in
+// the app (mood logs, journal entries, etc. all share this same array). A
+// habit's own completion history is inherently low-volume (at most one row
+// per habit per day), so it's cheap to always keep in full; only the
+// higher-volume, short-memory entry types get trimmed to fit the cap.
+const ENTRIES_PRESERVE_TYPES = new Set(['habit_completion']);
 function addEntry(entityType, payload, entityId){
-  const entries = getEntries();
+  let entries = getEntries();
   const now = Date.now();
   entries.push({
     id: uuidV7(),
@@ -3990,8 +4003,12 @@ function addEntry(entityType, payload, entityId){
     deleted_at: null,
     payload: payload || {},
   });
-  // Client-only store — cap growth by keeping the most recent 2000 events.
-  if(entries.length > 2000) entries.splice(0, entries.length - 2000);
+  if(entries.length > ENTRIES_CAP){
+    const preserved = entries.filter(e => ENTRIES_PRESERVE_TYPES.has(e.entity_type));
+    const trimmable = entries.filter(e => !ENTRIES_PRESERVE_TYPES.has(e.entity_type));
+    const keep = Math.max(0, ENTRIES_CAP - preserved.length);
+    entries = preserved.concat(trimmable.slice(-keep)).sort((a, b) => a.created_at - b.created_at);
+  }
   safeSet('mc_entries', JSON.stringify(entries));
 }
 function getEntriesByType(entityType){
