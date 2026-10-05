@@ -356,6 +356,20 @@
   .tracker-item-btn.is-active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
   .tracker-empty{font-size:13px;color:rgba(var(--ink-rgb),0.55);text-align:center;padding:12px 0;}
 
+  .review-tabs{display:flex;gap:8px;margin-bottom:18px;}
+  .review-tab-btn{flex:1;background:var(--paper-dim);border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;font-family:inherit;font-size:13px;font-weight:600;color:rgba(var(--ink-rgb),0.7);cursor:pointer;transition:border-color .15s ease,color .15s ease;}
+  .review-tab-btn.active{border-color:var(--gold);color:var(--ink);}
+  .review-view textarea{margin-bottom:8px;}
+  .review-stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
+  .review-stat{background:var(--paper-dim);border-radius:10px;padding:10px 12px;text-align:center;}
+  .review-stat-value{font-size:19px;font-weight:700;color:var(--gold);}
+  .review-stat-label{font-size:10.5px;color:rgba(var(--ink-rgb),0.6);margin-top:2px;}
+  .review-history-label{font-size:12px;font-weight:700;color:var(--ink);margin:16px 0 8px;}
+  .review-history-item{background:var(--paper-dim);border-radius:10px;padding:10px 12px;margin-bottom:8px;}
+  .review-history-date{font-size:10.5px;color:var(--gold);font-weight:700;display:block;margin-bottom:4px;}
+  .review-history-text{font-size:12.5px;color:rgba(var(--ink-rgb),0.75);line-height:1.5;margin:2px 0;}
+  .review-history-delete{background:transparent;border:none;color:rgba(var(--ink-rgb),0.45);font-size:12px;cursor:pointer;margin-top:4px;padding:0;}
+
   body.text-large .modal-steps li{font-size:17px;line-height:1.65;}
   body.text-large .card p{font-size:16px;line-height:1.6;}
   body.text-large .card h3{font-size:19px;}

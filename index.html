@@ -421,10 +421,10 @@
       <p data-i18n="journey_item_habits_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
-    <div class="journey-card">
-      <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
+    <div class="journey-card journey-card-active" data-click="openReviews">
       <h3 data-i18n="journey_item_reviews_title"></h3>
       <p data-i18n="journey_item_reviews_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
     </div>
     <div class="journey-card">
       <span class="journey-soon-badge" data-i18n="journey_soon_badge"></span>
@@ -462,6 +462,37 @@
     </div>
     <div class="tracker-list" id="habitsList"></div>
     <p class="tracker-empty u-hidden" id="habitsEmptyMsg" data-i18n="habits_empty"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="reviewsModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeReviews" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="reviews_modal_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="reviews_modal_title"></h2>
+    <p class="prefs-subtitle" data-i18n="reviews_modal_subtitle"></p>
+    <div class="review-tabs">
+      <button class="review-tab-btn" id="reviewTabDailyBtn" data-click="setReviewTab:daily" data-i18n="reviews_tab_daily"></button>
+      <button class="review-tab-btn" id="reviewTabWeeklyBtn" data-click="setReviewTab:weekly" data-i18n="reviews_tab_weekly"></button>
+    </div>
+    <div class="review-view" id="reviewDailyView">
+      <textarea id="reviewDailyWell" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_well_placeholder"></textarea>
+      <textarea id="reviewDailyHard" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_hard_placeholder"></textarea>
+      <textarea id="reviewDailyTomorrow" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_daily_tomorrow_placeholder"></textarea>
+      <button class="journal-save-btn" data-click="saveDailyReview" data-i18n="reviews_save_btn"></button>
+      <div class="review-history-label" data-i18n="reviews_daily_history_label"></div>
+      <div id="reviewDailyHistory"></div>
+      <p class="tracker-empty u-hidden" id="reviewDailyEmptyMsg" data-i18n="reviews_daily_empty"></p>
+    </div>
+    <div class="review-view u-hidden" id="reviewWeeklyView">
+      <div class="review-stats-grid" id="reviewWeeklyStats"></div>
+      <textarea id="reviewWeeklyWin" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_weekly_win_placeholder"></textarea>
+      <textarea id="reviewWeeklyFocus" class="journal-textarea" rows="2" data-i18n-placeholder="reviews_weekly_focus_placeholder"></textarea>
+      <button class="journal-save-btn" data-click="saveWeeklyReview" data-i18n="reviews_save_btn"></button>
+      <div class="review-history-label" data-i18n="reviews_weekly_history_label"></div>
+      <div id="reviewWeeklyHistory"></div>
+      <p class="tracker-empty u-hidden" id="reviewWeeklyEmptyMsg" data-i18n="reviews_weekly_empty"></p>
+    </div>
   </div>
 </div>
 

@@ -41,6 +41,14 @@ const I18N = {
     habits_modal_eyebrow:"العادات", habits_modal_title:"عاداتك", habits_modal_subtitle:"روتين يومي يُبنى بلطف — سجّل حضورك مرة كل يوم.",
     habits_input_placeholder:"مثال: 10 دقائق قراءة", habits_add_btn:"إضافة", habits_empty:"لا توجد عادات بعد. أضف أول عادة أعلاه.",
     habits_check_today_aria:"تسجيل إنجاز اليوم", habits_delete_aria:"حذف العادة",
+    reviews_modal_eyebrow:"تأمّل", reviews_modal_title:"مراجعاتك", reviews_modal_subtitle:"لحظة هادئة لملاحظة أسبوعك — بلا تقييم، فقط وعي.",
+    reviews_tab_daily:"يومية", reviews_tab_weekly:"أسبوعية",
+    reviews_daily_well_placeholder:"ما الذي سار بشكل جيد اليوم؟", reviews_daily_hard_placeholder:"ما الذي كان صعباً؟", reviews_daily_tomorrow_placeholder:"شيء واحد لغد",
+    reviews_save_btn:"حفظ", reviews_daily_history_label:"الأيام الأخيرة", reviews_daily_empty:"لا توجد مراجعات يومية بعد.",
+    reviews_weekly_stats_label:"أسبوعك بلمحة", reviews_weekly_habits_label:"تسجيلات العادات", reviews_weekly_goals_label:"أهداف مُنجزة",
+    reviews_weekly_exercises_label:"تمارين مُنجزة", reviews_weekly_mood_label:"متوسط المزاج", reviews_weekly_mood_empty:"لا توجد بيانات مزاج بعد",
+    reviews_weekly_win_placeholder:"أكبر إنجاز هذا الأسبوع", reviews_weekly_focus_placeholder:"تركيز واحد للأسبوع القادم",
+    reviews_weekly_history_label:"الأسابيع الماضية", reviews_weekly_empty:"لا توجد مراجعات أسبوعية بعد.", reviews_delete_aria:"حذف المراجعة",
     exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
     footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
     title:"Waha — مساحتك الآمنة",
@@ -202,6 +210,14 @@ const I18N = {
     habits_modal_eyebrow:"Gewohnheiten", habits_modal_title:"Deine Gewohnheiten", habits_modal_subtitle:"Tägliche Routinen, sanft aufgebaut — einmal am Tag einchecken.",
     habits_input_placeholder:"z. B. 10 Minuten lesen", habits_add_btn:"Hinzufügen", habits_empty:"Noch keine Gewohnheiten. Füge oben deine erste hinzu.",
     habits_check_today_aria:"Heute als erledigt markieren", habits_delete_aria:"Gewohnheit löschen",
+    reviews_modal_eyebrow:"Reflexion", reviews_modal_title:"Deine Rückblicke", reviews_modal_subtitle:"Ein ruhiger Moment, um deine Woche wahrzunehmen — keine Bewertung, nur Achtsamkeit.",
+    reviews_tab_daily:"Täglich", reviews_tab_weekly:"Wöchentlich",
+    reviews_daily_well_placeholder:"Was lief heute gut?", reviews_daily_hard_placeholder:"Was war schwer?", reviews_daily_tomorrow_placeholder:"Eine Sache für morgen",
+    reviews_save_btn:"Speichern", reviews_daily_history_label:"Letzte Tage", reviews_daily_empty:"Noch keine täglichen Rückblicke.",
+    reviews_weekly_stats_label:"Deine Woche im Überblick", reviews_weekly_habits_label:"Gewohnheiten erledigt", reviews_weekly_goals_label:"Ziele erreicht",
+    reviews_weekly_exercises_label:"Übungen gemacht", reviews_weekly_mood_label:"Durchschnittliche Stimmung", reviews_weekly_mood_empty:"Noch keine Stimmungsdaten",
+    reviews_weekly_win_placeholder:"Größter Erfolg dieser Woche", reviews_weekly_focus_placeholder:"Ein Fokus für nächste Woche",
+    reviews_weekly_history_label:"Vergangene Wochen", reviews_weekly_empty:"Noch keine wöchentlichen Rückblicke.", reviews_delete_aria:"Rückblick löschen",
     exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
     footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
     title:"Waha — Dein sicherer Raum",
@@ -363,6 +379,14 @@ const I18N = {
     habits_modal_eyebrow:"Habits", habits_modal_title:"Your habits", habits_modal_subtitle:"Daily routines, built gently — check in once a day.",
     habits_input_placeholder:"e.g. 10 minutes of reading", habits_add_btn:"Add", habits_empty:"No habits yet. Add your first one above.",
     habits_check_today_aria:"Mark done today", habits_delete_aria:"Delete habit",
+    reviews_modal_eyebrow:"Reflection", reviews_modal_title:"Your reviews", reviews_modal_subtitle:"A quiet moment to notice your week — no grading, just awareness.",
+    reviews_tab_daily:"Daily", reviews_tab_weekly:"Weekly",
+    reviews_daily_well_placeholder:"What went well today?", reviews_daily_hard_placeholder:"What felt hard?", reviews_daily_tomorrow_placeholder:"One thing for tomorrow",
+    reviews_save_btn:"Save", reviews_daily_history_label:"Recent days", reviews_daily_empty:"No daily reviews yet.",
+    reviews_weekly_stats_label:"This week at a glance", reviews_weekly_habits_label:"Habit check-ins", reviews_weekly_goals_label:"Goals completed",
+    reviews_weekly_exercises_label:"Exercises done", reviews_weekly_mood_label:"Average mood", reviews_weekly_mood_empty:"No mood data yet",
+    reviews_weekly_win_placeholder:"Biggest win this week", reviews_weekly_focus_placeholder:"One focus for next week",
+    reviews_weekly_history_label:"Past weeks", reviews_weekly_empty:"No weekly reviews yet.", reviews_delete_aria:"Delete review",
     exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
     footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
     title:"Waha — Your safe space",
@@ -524,6 +548,14 @@ const I18N = {
     habits_modal_eyebrow:"Habitudes", habits_modal_title:"Tes habitudes", habits_modal_subtitle:"Des routines quotidiennes, construites en douceur — pointe une fois par jour.",
     habits_input_placeholder:"ex. 10 minutes de lecture", habits_add_btn:"Ajouter", habits_empty:"Pas encore d'habitudes. Ajoute la première ci-dessus.",
     habits_check_today_aria:"Marquer comme fait aujourd'hui", habits_delete_aria:"Supprimer l'habitude",
+    reviews_modal_eyebrow:"Réflexion", reviews_modal_title:"Tes bilans", reviews_modal_subtitle:"Un moment calme pour observer ta semaine — sans jugement, juste de la conscience.",
+    reviews_tab_daily:"Quotidien", reviews_tab_weekly:"Hebdomadaire",
+    reviews_daily_well_placeholder:"Qu'est-ce qui s'est bien passé aujourd'hui ?", reviews_daily_hard_placeholder:"Qu'est-ce qui a été difficile ?", reviews_daily_tomorrow_placeholder:"Une chose pour demain",
+    reviews_save_btn:"Enregistrer", reviews_daily_history_label:"Jours récents", reviews_daily_empty:"Aucun bilan quotidien pour l'instant.",
+    reviews_weekly_stats_label:"Ta semaine en un coup d'œil", reviews_weekly_habits_label:"Habitudes validées", reviews_weekly_goals_label:"Objectifs atteints",
+    reviews_weekly_exercises_label:"Exercices faits", reviews_weekly_mood_label:"Humeur moyenne", reviews_weekly_mood_empty:"Pas encore de données d'humeur",
+    reviews_weekly_win_placeholder:"Plus grande réussite de la semaine", reviews_weekly_focus_placeholder:"Un objectif pour la semaine prochaine",
+    reviews_weekly_history_label:"Semaines passées", reviews_weekly_empty:"Aucun bilan hebdomadaire pour l'instant.", reviews_delete_aria:"Supprimer le bilan",
     exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
     footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
     title:"Waha — Ton espace sûr",
@@ -685,6 +717,14 @@ const I18N = {
     habits_modal_eyebrow:"Alışkanlıklar", habits_modal_title:"Alışkanlıkların", habits_modal_subtitle:"Nazikçe oluşturulan günlük rutinler — günde bir kez işaretle.",
     habits_input_placeholder:"örn. 10 dakika kitap okuma", habits_add_btn:"Ekle", habits_empty:"Henüz alışkanlık yok. Yukarıdan ilkini ekle.",
     habits_check_today_aria:"Bugün tamamlandı olarak işaretle", habits_delete_aria:"Alışkanlığı sil",
+    reviews_modal_eyebrow:"Yansıma", reviews_modal_title:"Değerlendirmelerin", reviews_modal_subtitle:"Haftanı fark etmek için sakin bir an — yargı yok, sadece farkındalık.",
+    reviews_tab_daily:"Günlük", reviews_tab_weekly:"Haftalık",
+    reviews_daily_well_placeholder:"Bugün ne iyi gitti?", reviews_daily_hard_placeholder:"Ne zor geldi?", reviews_daily_tomorrow_placeholder:"Yarın için bir şey",
+    reviews_save_btn:"Kaydet", reviews_daily_history_label:"Son günler", reviews_daily_empty:"Henüz günlük değerlendirme yok.",
+    reviews_weekly_stats_label:"Bir bakışta haftan", reviews_weekly_habits_label:"Tamamlanan alışkanlıklar", reviews_weekly_goals_label:"Tamamlanan hedefler",
+    reviews_weekly_exercises_label:"Yapılan egzersizler", reviews_weekly_mood_label:"Ortalama ruh hali", reviews_weekly_mood_empty:"Henüz ruh hali verisi yok",
+    reviews_weekly_win_placeholder:"Bu haftanın en büyük kazanımı", reviews_weekly_focus_placeholder:"Gelecek hafta için bir odak",
+    reviews_weekly_history_label:"Geçmiş haftalar", reviews_weekly_empty:"Henüz haftalık değerlendirme yok.", reviews_delete_aria:"Değerlendirmeyi sil",
     exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
     footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
     title:"Waha — Güvenli alanın",
@@ -846,6 +886,14 @@ const I18N = {
     habits_modal_eyebrow:"Adet", habits_modal_title:"Adetên te", habits_modal_subtitle:"Rûtînên rojane, bi nermî ava bûne — carekê di rojê de qeyd bike.",
     habits_input_placeholder:"mînak: 10 deqîqe xwendin", habits_add_btn:"Zêde bike", habits_empty:"Hêj adetek tune ye. Ya pêşî li jor zêde bike.",
     habits_check_today_aria:"Îro wekî qediyayî nîşan bike", habits_delete_aria:"Adetê jê bibe",
+    reviews_modal_eyebrow:"Nerîn", reviews_modal_title:"Nirxandinên te", reviews_modal_subtitle:"Kêliyeke aram ji bo tomarkirina heftiya te — bêyî nirxandin, tenê haydarî.",
+    reviews_tab_daily:"Rojane", reviews_tab_weekly:"Heftane",
+    reviews_daily_well_placeholder:"Îro çi baş çû?", reviews_daily_hard_placeholder:"Çi dijwar bû?", reviews_daily_tomorrow_placeholder:"Tiştek ji sibê re",
+    reviews_save_btn:"Tomar bike", reviews_daily_history_label:"Rojên dawî", reviews_daily_empty:"Hêj tu nirxandinên rojane tune ne.",
+    reviews_weekly_stats_label:"Heftiya te bi yek nêrînê", reviews_weekly_habits_label:"Adetên qedandî", reviews_weekly_goals_label:"Armancên qedandî",
+    reviews_weekly_exercises_label:"Temrînên qedandî", reviews_weekly_mood_label:"Rewşa giyanî ya navîn", reviews_weekly_mood_empty:"Hêj daneyên rewşa giyanî tune ne",
+    reviews_weekly_win_placeholder:"Serkeftina herî mezin a vê heftiyê", reviews_weekly_focus_placeholder:"Armancek ji bo heftiya pêş",
+    reviews_weekly_history_label:"Heftiyên borî", reviews_weekly_empty:"Hêj tu nirxandinên heftane tune ne.", reviews_delete_aria:"Nirxandinê jê bibe",
     exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
     footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
     title:"Waha — Cihê te yê ewle",
@@ -1007,6 +1055,14 @@ const I18N = {
     habits_modal_eyebrow:"Hábitos", habits_modal_title:"Tus hábitos", habits_modal_subtitle:"Rutinas diarias, construidas con suavidad — marca una vez al día.",
     habits_input_placeholder:"p. ej. 10 minutos de lectura", habits_add_btn:"Añadir", habits_empty:"Aún no hay hábitos. Añade el primero arriba.",
     habits_check_today_aria:"Marcar como hecho hoy", habits_delete_aria:"Eliminar hábito",
+    reviews_modal_eyebrow:"Reflexión", reviews_modal_title:"Tus revisiones", reviews_modal_subtitle:"Un momento tranquilo para observar tu semana — sin juicio, solo conciencia.",
+    reviews_tab_daily:"Diaria", reviews_tab_weekly:"Semanal",
+    reviews_daily_well_placeholder:"¿Qué salió bien hoy?", reviews_daily_hard_placeholder:"¿Qué fue difícil?", reviews_daily_tomorrow_placeholder:"Una cosa para mañana",
+    reviews_save_btn:"Guardar", reviews_daily_history_label:"Días recientes", reviews_daily_empty:"Aún no hay revisiones diarias.",
+    reviews_weekly_stats_label:"Tu semana de un vistazo", reviews_weekly_habits_label:"Hábitos completados", reviews_weekly_goals_label:"Metas completadas",
+    reviews_weekly_exercises_label:"Ejercicios hechos", reviews_weekly_mood_label:"Estado de ánimo promedio", reviews_weekly_mood_empty:"Aún no hay datos de ánimo",
+    reviews_weekly_win_placeholder:"Mayor logro de esta semana", reviews_weekly_focus_placeholder:"Un enfoque para la próxima semana",
+    reviews_weekly_history_label:"Semanas pasadas", reviews_weekly_empty:"Aún no hay revisiones semanales.", reviews_delete_aria:"Eliminar revisión",
     exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
     footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
     title:"Waha — Tu espacio seguro",
@@ -1168,6 +1224,14 @@ const I18N = {
       habits_modal_eyebrow:"عادت‌ها", habits_modal_title:"عادت‌های تو", habits_modal_subtitle:"روتین‌های روزانه، به‌آرامی ساخته‌شده — یک بار در روز ثبت کن.",
       habits_input_placeholder:"مثلاً: ۱۰ دقیقه مطالعه", habits_add_btn:"افزودن", habits_empty:"هنوز عادتی نیست. اولین عادت را بالا اضافه کن.",
       habits_check_today_aria:"علامت‌گذاری انجام‌شده برای امروز", habits_delete_aria:"حذف عادت",
+      reviews_modal_eyebrow:"تأمل", reviews_modal_title:"مرورهای تو", reviews_modal_subtitle:"لحظه‌ای آرام برای مشاهده‌ی هفته‌ات — بدون قضاوت، فقط آگاهی.",
+      reviews_tab_daily:"روزانه", reviews_tab_weekly:"هفتگی",
+      reviews_daily_well_placeholder:"امروز چه چیزی خوب پیش رفت؟", reviews_daily_hard_placeholder:"چه چیزی سخت بود؟", reviews_daily_tomorrow_placeholder:"یک چیز برای فردا",
+      reviews_save_btn:"ذخیره", reviews_daily_history_label:"روزهای اخیر", reviews_daily_empty:"هنوز مرور روزانه‌ای ثبت نشده.",
+      reviews_weekly_stats_label:"نگاهی به هفته‌ات", reviews_weekly_habits_label:"عادت‌های ثبت‌شده", reviews_weekly_goals_label:"هدف‌های تکمیل‌شده",
+      reviews_weekly_exercises_label:"تمرین‌های انجام‌شده", reviews_weekly_mood_label:"میانگین خلق‌وخو", reviews_weekly_mood_empty:"هنوز داده‌ای از خلق‌وخو نیست",
+      reviews_weekly_win_placeholder:"بزرگ‌ترین موفقیت این هفته", reviews_weekly_focus_placeholder:"یک تمرکز برای هفته‌ی آینده",
+      reviews_weekly_history_label:"هفته‌های گذشته", reviews_weekly_empty:"هنوز مرور هفتگی‌ای ثبت نشده.", reviews_delete_aria:"حذف مرور",
       exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
       footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
       title:"Waha — فضای امن تو",
@@ -1329,6 +1393,14 @@ const I18N = {
       habits_modal_eyebrow:"عادات", habits_modal_title:"آپ کی عادات", habits_modal_subtitle:"روزانہ معمولات، نرمی سے بنائے گئے — دن میں ایک بار نشان زد کریں۔",
       habits_input_placeholder:"مثلاً: 10 منٹ مطالعہ", habits_add_btn:"شامل کریں", habits_empty:"ابھی تک کوئی عادت نہیں۔ اوپر اپنی پہلی عادت شامل کریں۔",
       habits_check_today_aria:"آج مکمل نشان زد کریں", habits_delete_aria:"عادت حذف کریں",
+      reviews_modal_eyebrow:"تدبر", reviews_modal_title:"آپ کے جائزے", reviews_modal_subtitle:"اپنے ہفتے کو محسوس کرنے کا ایک پرسکون لمحہ — بغیر کسی فیصلے کے، صرف آگاہی۔",
+      reviews_tab_daily:"روزانہ", reviews_tab_weekly:"ہفتہ وار",
+      reviews_daily_well_placeholder:"آج کیا اچھا رہا؟", reviews_daily_hard_placeholder:"کیا مشکل محسوس ہوا؟", reviews_daily_tomorrow_placeholder:"کل کے لیے ایک بات",
+      reviews_save_btn:"محفوظ کریں", reviews_daily_history_label:"حالیہ دن", reviews_daily_empty:"ابھی تک کوئی روزانہ جائزہ نہیں۔",
+      reviews_weekly_stats_label:"ایک نظر میں آپ کا ہفتہ", reviews_weekly_habits_label:"مکمل شدہ عادات", reviews_weekly_goals_label:"مکمل شدہ اہداف",
+      reviews_weekly_exercises_label:"مکمل شدہ مشقیں", reviews_weekly_mood_label:"اوسط موڈ", reviews_weekly_mood_empty:"ابھی تک موڈ کا ڈیٹا نہیں",
+      reviews_weekly_win_placeholder:"اس ہفتے کی سب سے بڑی کامیابی", reviews_weekly_focus_placeholder:"اگلے ہفتے کے لیے ایک توجہ",
+      reviews_weekly_history_label:"گزشتہ ہفتے", reviews_weekly_empty:"ابھی تک کوئی ہفتہ وار جائزہ نہیں۔", reviews_delete_aria:"جائزہ حذف کریں",
       exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
       footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
       title:"Waha — آپ کی محفوظ جگہ",
@@ -1490,6 +1562,14 @@ const I18N = {
       habits_modal_eyebrow:"Привычки", habits_modal_title:"Твои привычки", habits_modal_subtitle:"Ежедневные ритуалы, формируемые мягко — отмечай раз в день.",
       habits_input_placeholder:"напр. 10 минут чтения", habits_add_btn:"Добавить", habits_empty:"Привычек пока нет. Добавь первую выше.",
       habits_check_today_aria:"Отметить выполненным сегодня", habits_delete_aria:"Удалить привычку",
+      reviews_modal_eyebrow:"Рефлексия", reviews_modal_title:"Твои обзоры", reviews_modal_subtitle:"Спокойный момент, чтобы заметить свою неделю — без оценок, только осознанность.",
+      reviews_tab_daily:"Ежедневно", reviews_tab_weekly:"Еженедельно",
+      reviews_daily_well_placeholder:"Что сегодня прошло хорошо?", reviews_daily_hard_placeholder:"Что было тяжело?", reviews_daily_tomorrow_placeholder:"Одна вещь на завтра",
+      reviews_save_btn:"Сохранить", reviews_daily_history_label:"Последние дни", reviews_daily_empty:"Пока нет ежедневных обзоров.",
+      reviews_weekly_stats_label:"Твоя неделя одним взглядом", reviews_weekly_habits_label:"Выполненные привычки", reviews_weekly_goals_label:"Достигнутые цели",
+      reviews_weekly_exercises_label:"Выполненные упражнения", reviews_weekly_mood_label:"Среднее настроение", reviews_weekly_mood_empty:"Пока нет данных о настроении",
+      reviews_weekly_win_placeholder:"Главное достижение этой недели", reviews_weekly_focus_placeholder:"Фокус на следующую неделю",
+      reviews_weekly_history_label:"Прошедшие недели", reviews_weekly_empty:"Пока нет еженедельных обзоров.", reviews_delete_aria:"Удалить обзор",
       exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
       footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
       title:"Waha — Твоё безопасное пространство",
@@ -1651,6 +1731,14 @@ const I18N = {
       habits_modal_eyebrow:"Hábitos", habits_modal_title:"Os teus hábitos", habits_modal_subtitle:"Rotinas diárias, construídas com suavidade — marca uma vez por dia.",
       habits_input_placeholder:"ex. 10 minutos de leitura", habits_add_btn:"Adicionar", habits_empty:"Ainda não há hábitos. Adiciona o primeiro acima.",
       habits_check_today_aria:"Marcar como feito hoje", habits_delete_aria:"Eliminar hábito",
+      reviews_modal_eyebrow:"Reflexão", reviews_modal_title:"As tuas revisões", reviews_modal_subtitle:"Um momento calmo para observar a tua semana — sem julgamento, só consciência.",
+      reviews_tab_daily:"Diária", reviews_tab_weekly:"Semanal",
+      reviews_daily_well_placeholder:"O que correu bem hoje?", reviews_daily_hard_placeholder:"O que foi difícil?", reviews_daily_tomorrow_placeholder:"Uma coisa para amanhã",
+      reviews_save_btn:"Guardar", reviews_daily_history_label:"Dias recentes", reviews_daily_empty:"Ainda sem revisões diárias.",
+      reviews_weekly_stats_label:"A tua semana num relance", reviews_weekly_habits_label:"Hábitos concluídos", reviews_weekly_goals_label:"Metas concluídas",
+      reviews_weekly_exercises_label:"Exercícios feitos", reviews_weekly_mood_label:"Humor médio", reviews_weekly_mood_empty:"Ainda sem dados de humor",
+      reviews_weekly_win_placeholder:"Maior conquista desta semana", reviews_weekly_focus_placeholder:"Um foco para a próxima semana",
+      reviews_weekly_history_label:"Semanas passadas", reviews_weekly_empty:"Ainda sem revisões semanais.", reviews_delete_aria:"Eliminar revisão",
       exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
       footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
       title:"Waha — O teu espaço seguro",
@@ -1812,6 +1900,14 @@ const I18N = {
       habits_modal_eyebrow:"Abitudini", habits_modal_title:"Le tue abitudini", habits_modal_subtitle:"Routine quotidiane, costruite con dolcezza — segna una volta al giorno.",
       habits_input_placeholder:"es. 10 minuti di lettura", habits_add_btn:"Aggiungi", habits_empty:"Ancora nessuna abitudine. Aggiungi la prima qui sopra.",
       habits_check_today_aria:"Segna come fatto oggi", habits_delete_aria:"Elimina abitudine",
+      reviews_modal_eyebrow:"Riflessione", reviews_modal_title:"Le tue revisioni", reviews_modal_subtitle:"Un momento tranquillo per osservare la tua settimana — senza giudizio, solo consapevolezza.",
+      reviews_tab_daily:"Giornaliera", reviews_tab_weekly:"Settimanale",
+      reviews_daily_well_placeholder:"Cosa è andato bene oggi?", reviews_daily_hard_placeholder:"Cosa è stato difficile?", reviews_daily_tomorrow_placeholder:"Una cosa per domani",
+      reviews_save_btn:"Salva", reviews_daily_history_label:"Giorni recenti", reviews_daily_empty:"Ancora nessuna revisione giornaliera.",
+      reviews_weekly_stats_label:"La tua settimana in breve", reviews_weekly_habits_label:"Abitudini completate", reviews_weekly_goals_label:"Obiettivi completati",
+      reviews_weekly_exercises_label:"Esercizi fatti", reviews_weekly_mood_label:"Umore medio", reviews_weekly_mood_empty:"Ancora nessun dato sull'umore",
+      reviews_weekly_win_placeholder:"Il più grande successo di questa settimana", reviews_weekly_focus_placeholder:"Un focus per la prossima settimana",
+      reviews_weekly_history_label:"Settimane passate", reviews_weekly_empty:"Ancora nessuna revisione settimanale.", reviews_delete_aria:"Elimina revisione",
       exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
       footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
       title:"Waha — Il tuo spazio sicuro",
@@ -3904,6 +4000,190 @@ function closeHabits(){
   document.getElementById('habitsModal').classList.remove('open');
 }
 
+function startOfWeekTs(ts){
+  const d = new Date(ts);
+  const day = d.getDay();
+  const diff = (day === 0 ? -6 : 1 - day);
+  d.setDate(d.getDate() + diff);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+}
+function weekKeyFromTs(ts){ return dateKeyFromTs(startOfWeekTs(ts)); }
+
+function getDailyReviews(){
+  try{ const raw = safeGet('mc_daily_reviews'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function saveDailyReviewsList(list){ safeSet('mc_daily_reviews', JSON.stringify(list)); }
+function saveDailyReview(){
+  const wellEl = document.getElementById('reviewDailyWell');
+  const hardEl = document.getElementById('reviewDailyHard');
+  const tomorrowEl = document.getElementById('reviewDailyTomorrow');
+  const wentWell = wellEl.value.trim();
+  const hard = hardEl.value.trim();
+  const tomorrow = tomorrowEl.value.trim();
+  if(!wentWell && !hard && !tomorrow) return;
+  const todayKey = dateKeyFromTs(Date.now());
+  const reviews = getDailyReviews().filter(r => r.id !== todayKey);
+  reviews.push({ id: todayKey, wentWell, hard, tomorrow, updatedAt: Date.now() });
+  saveDailyReviewsList(reviews);
+  addEntry('daily_review', { wentWell, hard, tomorrow }, todayKey);
+  renderDailyReviews();
+}
+function deleteDailyReview(id){
+  const reviews = getDailyReviews().filter(r => r.id !== id);
+  saveDailyReviewsList(reviews);
+  addEntry('daily_review_deleted', {}, id);
+  renderDailyReviews();
+}
+function renderDailyReviews(){
+  const dict = I18N[currentLang];
+  const list = document.getElementById('reviewDailyHistory');
+  const empty = document.getElementById('reviewDailyEmptyMsg');
+  const reviews = getDailyReviews().slice().sort((a, b) => b.id.localeCompare(a.id));
+  list.innerHTML = '';
+  empty.classList.toggle('u-hidden', reviews.length > 0);
+  const todayKey = dateKeyFromTs(Date.now());
+  const todayReview = reviews.find(r => r.id === todayKey);
+  document.getElementById('reviewDailyWell').value = todayReview ? todayReview.wentWell : '';
+  document.getElementById('reviewDailyHard').value = todayReview ? todayReview.hard : '';
+  document.getElementById('reviewDailyTomorrow').value = todayReview ? todayReview.tomorrow : '';
+  reviews.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'review-history-item';
+    const dateEl = document.createElement('span');
+    dateEl.className = 'review-history-date';
+    dateEl.textContent = r.id;
+    row.appendChild(dateEl);
+    [r.wentWell, r.hard, r.tomorrow].forEach(text => {
+      if(!text) return;
+      const p = document.createElement('p');
+      p.className = 'review-history-text';
+      p.textContent = text;
+      row.appendChild(p);
+    });
+    const delBtn = document.createElement('button');
+    delBtn.className = 'review-history-delete';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.reviews_delete_aria);
+    delBtn.onclick = () => deleteDailyReview(r.id);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+
+function getWeeklyReviews(){
+  try{ const raw = safeGet('mc_weekly_reviews'); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+}
+function saveWeeklyReviewsList(list){ safeSet('mc_weekly_reviews', JSON.stringify(list)); }
+function computeWeeklyStats(){
+  const weekStart = startOfWeekTs(Date.now());
+  const entries = getEntries().filter(e => !e.deleted_at && e.occurred_at >= weekStart);
+  const habitCompletions = entries.filter(e => e.entity_type === 'habit_completion').length;
+  const goalsCompleted = entries.filter(e => e.entity_type === 'goal_completed').length;
+  const exercisesDone = entries.filter(e => e.entity_type === 'exercise_completion').length;
+  const moodEntries = entries.filter(e => e.entity_type === 'mood_log');
+  const avgMood = moodEntries.length ? (moodEntries.reduce((s, e) => s + (e.payload.score || 0), 0) / moodEntries.length) : null;
+  return { habitCompletions, goalsCompleted, exercisesDone, avgMood, weekKey: dateKeyFromTs(weekStart) };
+}
+function renderWeeklyStats(){
+  const dict = I18N[currentLang];
+  const stats = computeWeeklyStats();
+  const grid = document.getElementById('reviewWeeklyStats');
+  grid.innerHTML = '';
+  const items = [
+    [dict.reviews_weekly_habits_label, String(stats.habitCompletions)],
+    [dict.reviews_weekly_goals_label, String(stats.goalsCompleted)],
+    [dict.reviews_weekly_exercises_label, String(stats.exercisesDone)],
+    [dict.reviews_weekly_mood_label, stats.avgMood !== null ? stats.avgMood.toFixed(1) : dict.reviews_weekly_mood_empty]
+  ];
+  items.forEach(([label, value]) => {
+    const cell = document.createElement('div');
+    cell.className = 'review-stat';
+    const valEl = document.createElement('div');
+    valEl.className = 'review-stat-value';
+    valEl.textContent = value;
+    const labelEl = document.createElement('div');
+    labelEl.className = 'review-stat-label';
+    labelEl.textContent = label;
+    cell.appendChild(valEl);
+    cell.appendChild(labelEl);
+    grid.appendChild(cell);
+  });
+  return stats;
+}
+function saveWeeklyReview(){
+  const winEl = document.getElementById('reviewWeeklyWin');
+  const focusEl = document.getElementById('reviewWeeklyFocus');
+  const win = winEl.value.trim();
+  const focus = focusEl.value.trim();
+  if(!win && !focus) return;
+  const stats = computeWeeklyStats();
+  const weekKey = stats.weekKey;
+  const reviews = getWeeklyReviews().filter(r => r.id !== weekKey);
+  reviews.push({ id: weekKey, win, focus, updatedAt: Date.now() });
+  saveWeeklyReviewsList(reviews);
+  addEntry('weekly_review', { win, focus }, weekKey);
+  renderWeeklyReviews();
+}
+function deleteWeeklyReview(id){
+  const reviews = getWeeklyReviews().filter(r => r.id !== id);
+  saveWeeklyReviewsList(reviews);
+  addEntry('weekly_review_deleted', {}, id);
+  renderWeeklyReviews();
+}
+function renderWeeklyReviews(){
+  const dict = I18N[currentLang];
+  const stats = renderWeeklyStats();
+  const weekKey = stats.weekKey;
+  const list = document.getElementById('reviewWeeklyHistory');
+  const empty = document.getElementById('reviewWeeklyEmptyMsg');
+  const reviews = getWeeklyReviews().slice().sort((a, b) => b.id.localeCompare(a.id));
+  list.innerHTML = '';
+  empty.classList.toggle('u-hidden', reviews.length > 0);
+  const thisWeekReview = reviews.find(r => r.id === weekKey);
+  document.getElementById('reviewWeeklyWin').value = thisWeekReview ? thisWeekReview.win : '';
+  document.getElementById('reviewWeeklyFocus').value = thisWeekReview ? thisWeekReview.focus : '';
+  reviews.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'review-history-item';
+    const dateEl = document.createElement('span');
+    dateEl.className = 'review-history-date';
+    dateEl.textContent = r.id;
+    row.appendChild(dateEl);
+    [r.win, r.focus].forEach(text => {
+      if(!text) return;
+      const p = document.createElement('p');
+      p.className = 'review-history-text';
+      p.textContent = text;
+      row.appendChild(p);
+    });
+    const delBtn = document.createElement('button');
+    delBtn.className = 'review-history-delete';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.reviews_delete_aria);
+    delBtn.onclick = () => deleteWeeklyReview(r.id);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+
+function setReviewTab(tab){
+  safeSet('mc_review_tab', tab);
+  document.getElementById('reviewDailyView').classList.toggle('u-hidden', tab !== 'daily');
+  document.getElementById('reviewWeeklyView').classList.toggle('u-hidden', tab !== 'weekly');
+  document.getElementById('reviewTabDailyBtn').classList.toggle('active', tab === 'daily');
+  document.getElementById('reviewTabWeeklyBtn').classList.toggle('active', tab === 'weekly');
+  if(tab === 'weekly') renderWeeklyReviews();
+}
+function openReviews(){
+  renderDailyReviews();
+  setReviewTab(safeGet('mc_review_tab') || 'daily');
+  document.getElementById('reviewsModal').classList.add('open');
+}
+function closeReviews(){
+  document.getElementById('reviewsModal').classList.remove('open');
+}
+
 function renderMoodWidget(){
   const dict = I18N[currentLang];
   document.getElementById('moodPrompt').textContent = dict.mood_prompt;
@@ -3941,7 +4221,7 @@ function renderMoodChart(){
 let currentJournalExId = null;
 function journalKey(exId){ return 'mc_journal_' + exId; }
 
-const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count','mc_entries','mc_mode'];
+const BACKUP_KEYS = ['mc_streak','mc_last_done','mc_last_celebrated','mc_moodlog','mc_lang','mc_calm','mc_dark','mc_text_large','mc_chat_memory','mc_free_chat_count','mc_entries','mc_mode','mc_goals','mc_habits','mc_daily_reviews','mc_weekly_reviews'];
 const BACKUP_JOURNAL_IDS = ['ex-gratitude','ex-feelings','ex-reframe'];
 
 function exportBackup(){
@@ -5289,6 +5569,7 @@ const ACTIONS = {
   closePrefs,
   closePrivacyPassport,
   closeRelief,
+  closeReviews,
   closeSleepMode,
   closeSounds,
   closeUpgrade,
@@ -5323,6 +5604,7 @@ const ACTIONS = {
   openSleepMode,
   openGoals,
   openHabits,
+  openReviews,
   openSounds,
   openUpgrade,
   printCalmPlan,
@@ -5331,13 +5613,16 @@ const ACTIONS = {
   restartRelief,
   rewriteFeelingWithAI,
   saveCalmPlan,
+  saveDailyReview,
   saveJournalEntry,
+  saveWeeklyReview,
   scrollToSection,
   sendCheckinText,
   sendMsg,
   sendMsgOnEnter,
   setFeelingTone,
   setLang,
+  setReviewTab,
   setSoundTimer,
   setSoundVolume,
   setUserGender,
