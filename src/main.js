@@ -54,6 +54,9 @@ const I18N = {
     dashboard_band_early:"أنت في البداية فقط — وهذا يكفي لليوم.", dashboard_band_steady:"إيقاع ثابت يتشكّل. استمر في الحضور.", dashboard_band_thriving:"زخم قوي ومستمر هذا الأسبوع.",
     dashboard_stat_streak_label:"أيام متتالية", dashboard_stat_goals_label:"أهداف نشطة", dashboard_stat_habits_label:"عادات متابَعة", dashboard_stat_mood_label:"مزاج هذا الأسبوع",
     dashboard_activity_label:"آخر 7 أيام",
+    coach_consent_eyebrow:"قبل أن نكمل", coach_consent_title:"مشاركة ملخص مع مدرّبك؟",
+    coach_consent_text:"لتقديم تأمل شخصي لك، يُرسَل ملخص لأهدافك وعاداتك وأيامك المتتالية ومزاج هذا الأسبوع — وليس كتاباتك الخاصة — إلى Anthropic (مزوّد الذكاء الاصطناعي) عبر خادم التطبيق. لا يُحفظ. هل توافق على المتابعة؟",
+    dashboard_coach_label:"مدرّبك", dashboard_coach_cta:"احصل على تأمل",
     exercises_desc:"اختر تمريناً حسب حالتك الآن — كلها بضع دقائق فقط.",
     footer_disclaimer:"Waha أداة إرشاد نفسي عام لتحسين العادات والسلوك، وليست بديلاً عن التشخيص أو العلاج الطبي. إذا كنت تمر بأزمة نفسية حادة أو أفكار لإيذاء النفس، يرجى التواصل فوراً مع جهة طوارئ محلية أو خط دعم نفسي مختص.",
     title:"Waha — مساحتك الآمنة",
@@ -228,6 +231,9 @@ const I18N = {
     dashboard_band_early:"Du fängst gerade erst an — das ist heute genug.", dashboard_band_steady:"Ein stetiger Rhythmus entsteht. Bleib dran.", dashboard_band_thriving:"Starke, beständige Dynamik diese Woche.",
     dashboard_stat_streak_label:"Tage in Folge", dashboard_stat_goals_label:"Aktive Ziele", dashboard_stat_habits_label:"Verfolgte Gewohnheiten", dashboard_stat_mood_label:"Stimmung dieser Woche",
     dashboard_activity_label:"Letzte 7 Tage",
+    coach_consent_eyebrow:"Bevor wir fortfahren", coach_consent_title:"Eine Zusammenfassung mit deinem Coach teilen?",
+    coach_consent_text:"Um dir eine persönliche Reflexion zu geben, wird eine Zusammenfassung deiner Ziele, Gewohnheiten, Serien und der Stimmung dieser Woche — nicht deine privaten Tagebucheinträge — über den Server der App an Anthropic (KI-Anbieter) gesendet. Sie wird nicht gespeichert. Stimmst du zu, fortzufahren?",
+    dashboard_coach_label:"Dein Coach", dashboard_coach_cta:"Reflexion erhalten",
     exercises_desc:"Wähle eine Übung passend zu deinem Zustand — alle nur wenige Minuten.",
     footer_disclaimer:"Waha ersetzt keine medizinische Diagnose oder Behandlung. Bei akuter Krise wende dich an einen lokalen Notdienst.",
     title:"Waha — Dein sicherer Raum",
@@ -402,6 +408,9 @@ const I18N = {
     dashboard_band_early:"You're just getting started — that's enough for today.", dashboard_band_steady:"A steady rhythm is forming. Keep showing up.", dashboard_band_thriving:"Strong, consistent momentum this week.",
     dashboard_stat_streak_label:"Day streak", dashboard_stat_goals_label:"Active goals", dashboard_stat_habits_label:"Habits tracked", dashboard_stat_mood_label:"This week's mood",
     dashboard_activity_label:"Last 7 days",
+    coach_consent_eyebrow:"Before we continue", coach_consent_title:"Share a summary with your coach?",
+    coach_consent_text:"To give you a personalized reflection, a summary of your goals, habits, streaks and this week's mood — not your private journal entries — is sent to Anthropic (the AI provider) through the app's server. It isn't saved. Do you agree to continue?",
+    dashboard_coach_label:"Your coach", dashboard_coach_cta:"Get a reflection",
     exercises_desc:"Pick an exercise that fits how you feel right now — all just a few minutes.",
     footer_disclaimer:"Waha is a general tool for psychological guidance and behavior improvement, and is not a substitute for diagnosis or medical treatment. If you're in an acute crisis or having thoughts of self-harm, please contact a local emergency service or a mental health helpline right away.",
     title:"Waha — Your safe space",
@@ -576,6 +585,9 @@ const I18N = {
     dashboard_band_early:"Tu commences tout juste — c'est suffisant pour aujourd'hui.", dashboard_band_steady:"Un rythme stable se met en place. Continue.", dashboard_band_thriving:"Un élan fort et régulier cette semaine.",
     dashboard_stat_streak_label:"Jours de suite", dashboard_stat_goals_label:"Objectifs actifs", dashboard_stat_habits_label:"Habitudes suivies", dashboard_stat_mood_label:"Humeur de la semaine",
     dashboard_activity_label:"7 derniers jours",
+    coach_consent_eyebrow:"Avant de continuer", coach_consent_title:"Partager un résumé avec ton coach ?",
+    coach_consent_text:"Pour te donner une réflexion personnalisée, un résumé de tes objectifs, habitudes, séries et de l'humeur de cette semaine — pas tes écrits privés — est envoyé à Anthropic (le fournisseur d'IA) via le serveur de l'application. Il n'est pas enregistré. Acceptes-tu de continuer ?",
+    dashboard_coach_label:"Ton coach", dashboard_coach_cta:"Obtenir une réflexion",
     exercises_desc:"Choisis un exercice adapté à ton état — quelques minutes suffisent.",
     footer_disclaimer:"Waha est un outil général d'orientation psychologique et d'amélioration du comportement, et ne remplace pas un diagnostic ou un traitement médical. En cas de crise aiguë ou de pensées suicidaires, contacte immédiatement un service d'urgence local ou une ligne d'aide spécialisée.",
     title:"Waha — Ton espace sûr",
@@ -750,6 +762,9 @@ const I18N = {
     dashboard_band_early:"Daha yeni başlıyorsun — bugün için bu yeterli.", dashboard_band_steady:"İstikrarlı bir ritim oluşuyor. Devam et.", dashboard_band_thriving:"Bu hafta güçlü, istikrarlı bir ivme var.",
     dashboard_stat_streak_label:"Gün üst üste", dashboard_stat_goals_label:"Aktif hedefler", dashboard_stat_habits_label:"Takip edilen alışkanlıklar", dashboard_stat_mood_label:"Bu haftanın ruh hali",
     dashboard_activity_label:"Son 7 gün",
+    coach_consent_eyebrow:"Devam etmeden önce", coach_consent_title:"Koçunla bir özet paylaşılsın mı?",
+    coach_consent_text:"Sana kişiselleştirilmiş bir yansıma sunmak için hedeflerinin, alışkanlıklarının, serilerinin ve bu haftaki ruh halinin özeti — özel yazıların değil — uygulamanın sunucusu üzerinden Anthropic'e (yapay zeka sağlayıcısı) gönderilir. Kaydedilmez. Devam etmeyi kabul ediyor musun?",
+    dashboard_coach_label:"Koçun", dashboard_coach_cta:"Yansıma al",
     exercises_desc:"Şu anki haline uygun bir egzersiz seç — hepsi sadece birkaç dakika.",
     footer_disclaimer:"Waha, alışkanlık ve davranış geliştirmeye yönelik genel bir psikolojik rehberlik aracıdır; tanı veya tıbbi tedavinin yerini tutmaz. Akut bir kriz yaşıyorsan veya kendine zarar verme düşüncelerin varsa, lütfen hemen yerel bir acil servisle veya bir ruh sağlığı yardım hattıyla iletişime geç.",
     title:"Waha — Güvenli alanın",
@@ -924,6 +939,9 @@ const I18N = {
     dashboard_band_early:"Tu hêj dest pê dikî — ev ji bo îro bes e.", dashboard_band_steady:"Rîtmek domdar tê avakirin. Berdewam be.", dashboard_band_thriving:"Vê heftiyê xwedî lezgîniyeke bihêz û domdar î.",
     dashboard_stat_streak_label:"Roj li dû hev", dashboard_stat_goals_label:"Armancên çalak", dashboard_stat_habits_label:"Adetên tên şopandin", dashboard_stat_mood_label:"Rewşa giyanî ya vê heftiyê",
     dashboard_activity_label:"7 rojên dawî",
+    coach_consent_eyebrow:"Berî ku em berdewam bikin", coach_consent_title:"Kurtahiyek bi rahênerê te re parve bike?",
+    coach_consent_text:"Ji bo ku nerînek kesane bide te, kurtahiyek ji armanc, adet, rêzefîlm û rewşa giyanî ya vê heftiyê — ne nivîsên te yên taybet — li ser rajekarê sepanê ji Anthropic (dabînkerê AI) re tê şandin. Nayê tomarkirin. Tu dizanî berdewam bikî?",
+    dashboard_coach_label:"Rahênerê te", dashboard_coach_cta:"Nerînek bistîne",
     exercises_desc:"Ezmûnek li gorî rewşa xwe ya niha hilbijêre — hemû tenê çend deqeyan digirin.",
     footer_disclaimer:"Waha amûrek giştî ya rênîşandana psîkolojîk û baştirkirina kirdarê ye, û şûna teşxîs an dermankirina bijîjkî nagire. Heke tu di krîzek tûj de yî an raman li ser zerarê xwe hene, ji kerema xwe zû bi karûbarek acîl a herêmî an xeta alîkariya derûnî re têkilî daynin.",
     title:"Waha — Cihê te yê ewle",
@@ -1098,6 +1116,9 @@ const I18N = {
     dashboard_band_early:"Apenas estás empezando — con eso basta por hoy.", dashboard_band_steady:"Se está formando un ritmo constante. Sigue así.", dashboard_band_thriving:"Un impulso fuerte y constante esta semana.",
     dashboard_stat_streak_label:"Días seguidos", dashboard_stat_goals_label:"Metas activas", dashboard_stat_habits_label:"Hábitos seguidos", dashboard_stat_mood_label:"Ánimo de esta semana",
     dashboard_activity_label:"Últimos 7 días",
+    coach_consent_eyebrow:"Antes de continuar", coach_consent_title:"¿Compartir un resumen con tu coach?",
+    coach_consent_text:"Para darte una reflexión personalizada, se envía un resumen de tus metas, hábitos, rachas y el ánimo de esta semana — no tus escritos privados — a Anthropic (el proveedor de IA) a través del servidor de la app. No se guarda. ¿Aceptas continuar?",
+    dashboard_coach_label:"Tu coach", dashboard_coach_cta:"Obtener una reflexión",
     exercises_desc:"Elige un ejercicio según cómo te sientas ahora — todos toman solo minutos.",
     footer_disclaimer:"Waha es una herramienta general de orientación psicológica y mejora del comportamiento, y no sustituye un diagnóstico o tratamiento médico. Si estás en una crisis aguda o tienes pensamientos de autolesión, contacta de inmediato a un servicio de emergencia local o a una línea de ayuda en salud mental.",
     title:"Waha — Tu espacio seguro",
@@ -1272,6 +1293,9 @@ const I18N = {
       dashboard_band_early:"تازه شروع کرده‌ای — همین برای امروز کافی‌ست.", dashboard_band_steady:"ریتمی پایدار در حال شکل‌گیری است. ادامه بده.", dashboard_band_thriving:"این هفته شتابی قوی و پیوسته داشتی.",
       dashboard_stat_streak_label:"روز متوالی", dashboard_stat_goals_label:"هدف‌های فعال", dashboard_stat_habits_label:"عادت‌های دنبال‌شده", dashboard_stat_mood_label:"خلق‌وخوی این هفته",
       dashboard_activity_label:"۷ روز اخیر",
+      coach_consent_eyebrow:"پیش از ادامه", coach_consent_title:"خلاصه‌ای با مربی‌ات به اشتراک بگذاری؟",
+      coach_consent_text:"برای ارائه‌ی یک تأمل شخصی‌سازی‌شده، خلاصه‌ای از هدف‌ها، عادت‌ها، روزهای متوالی و خلق‌وخوی این هفته‌ات — نه نوشته‌های خصوصی‌ات — از طریق سرور اپ برای Anthropic (ارائه‌دهنده‌ی هوش مصنوعی) ارسال می‌شود. ذخیره نمی‌شود. آیا با ادامه موافقی؟",
+      dashboard_coach_label:"مربی تو", dashboard_coach_cta:"دریافت تأمل",
       exercises_desc:"تمرینی متناسب با حال الان خود انتخاب کن — همه فقط چند دقیقه.",
       footer_disclaimer:"Waha ابزاری عمومی برای راهنمایی روان‌شناختی و بهبود رفتار است و جایگزین تشخیص یا درمان پزشکی نیست. اگر در بحران حاد هستی یا افکار آسیب به خود داری، لطفاً فوراً با اورژانس محلی یا خط کمک روانی تماس بگیر.",
       title:"Waha — فضای امن تو",
@@ -1446,6 +1470,9 @@ const I18N = {
       dashboard_band_early:"آپ ابھی شروع کر رہے ہیں — آج کے لیے یہی کافی ہے۔", dashboard_band_steady:"ایک مستقل تال بن رہی ہے۔ آتے رہیں۔", dashboard_band_thriving:"اس ہفتے مضبوط اور مستقل رفتار رہی۔",
       dashboard_stat_streak_label:"لگاتار دن", dashboard_stat_goals_label:"فعال اہداف", dashboard_stat_habits_label:"ٹریک کی گئی عادات", dashboard_stat_mood_label:"اس ہفتے کا موڈ",
       dashboard_activity_label:"پچھلے 7 دن",
+      coach_consent_eyebrow:"آگے بڑھنے سے پہلے", coach_consent_title:"اپنے کوچ کے ساتھ خلاصہ شیئر کریں؟",
+      coach_consent_text:"آپ کو ایک ذاتی نوعیت کا جائزہ دینے کے لیے، آپ کے اہداف، عادات، لگاتار دنوں اور اس ہفتے کے موڈ کا خلاصہ — آپ کی نجی تحریریں نہیں — ایپ کے سرور کے ذریعے Anthropic (AI فراہم کنندہ) کو بھیجا جاتا ہے۔ یہ محفوظ نہیں کیا جاتا۔ کیا آپ جاری رکھنے پر راضی ہیں؟",
+      dashboard_coach_label:"آپ کا کوچ", dashboard_coach_cta:"جائزہ حاصل کریں",
       exercises_desc:"اپنی موجودہ حالت کے مطابق مشق منتخب کریں — سب صرف چند منٹ کی ہیں۔",
       footer_disclaimer:"Waha نفسیاتی رہنمائی اور رویے کی بہتری کا ایک عمومی آلہ ہے، اور طبی تشخیص یا علاج کا متبادل نہیں ہے۔ اگر آپ شدید بحران میں ہیں یا خود کو نقصان پہنچانے کے خیالات آ رہے ہیں تو براہ کرم فوراً مقامی ایمرجنسی سروس یا ذہنی صحت ہیلپ لائن سے رابطہ کریں۔",
       title:"Waha — آپ کی محفوظ جگہ",
@@ -1620,6 +1647,9 @@ const I18N = {
       dashboard_band_early:"Ты только начинаешь — этого достаточно на сегодня.", dashboard_band_steady:"Формируется устойчивый ритм. Продолжай в том же духе.", dashboard_band_thriving:"Сильный, стабильный импульс на этой неделе.",
       dashboard_stat_streak_label:"Дней подряд", dashboard_stat_goals_label:"Активные цели", dashboard_stat_habits_label:"Отслеживаемые привычки", dashboard_stat_mood_label:"Настроение этой недели",
       dashboard_activity_label:"Последние 7 дней",
+      coach_consent_eyebrow:"Прежде чем продолжить", coach_consent_title:"Поделиться сводкой с твоим коучем?",
+      coach_consent_text:"Чтобы дать тебе персональную рефлексию, сводка твоих целей, привычек, серий и настроения за эту неделю — не твои личные записи — отправляется в Anthropic (поставщик ИИ) через сервер приложения. Она не сохраняется. Согласен(на) продолжить?",
+      dashboard_coach_label:"Твой коуч", dashboard_coach_cta:"Получить рефлексию",
       exercises_desc:"Выбери упражнение под своё текущее состояние — все занимают всего пару минут.",
       footer_disclaimer:"Waha — это общий инструмент психологической поддержки и улучшения поведения, не заменяющий медицинскую диагностику или лечение. Если ты переживаешь острый кризис или мысли о самоповреждении, немедленно обратись в местную службу экстренной помощи или на линию психологической поддержки.",
       title:"Waha — Твоё безопасное пространство",
@@ -1794,6 +1824,9 @@ const I18N = {
       dashboard_band_early:"Estás apenas a começar — isso já chega por hoje.", dashboard_band_steady:"Está a formar-se um ritmo constante. Continua assim.", dashboard_band_thriving:"Um impulso forte e constante esta semana.",
       dashboard_stat_streak_label:"Dias seguidos", dashboard_stat_goals_label:"Metas ativas", dashboard_stat_habits_label:"Hábitos acompanhados", dashboard_stat_mood_label:"Humor desta semana",
       dashboard_activity_label:"Últimos 7 dias",
+      coach_consent_eyebrow:"Antes de continuar", coach_consent_title:"Partilhar um resumo com o teu coach?",
+      coach_consent_text:"Para te dar uma reflexão personalizada, um resumo das tuas metas, hábitos, sequências e do humor desta semana — não os teus escritos privados — é enviado para a Anthropic (o fornecedor de IA) através do servidor da app. Não é guardado. Aceitas continuar?",
+      dashboard_coach_label:"O teu coach", dashboard_coach_cta:"Obter uma reflexão",
       exercises_desc:"Escolhe um exercício que combine com o que sentes agora — todos levam só alguns minutos.",
       footer_disclaimer:"O Waha é uma ferramenta geral de orientação psicológica e melhoria de comportamento, e não substitui um diagnóstico ou tratamento médico. Se estás numa crise aguda ou com pensamentos de autoagressão, contacta imediatamente um serviço de emergência local ou uma linha de apoio em saúde mental.",
       title:"Waha — O teu espaço seguro",
@@ -1968,6 +2001,9 @@ const I18N = {
       dashboard_band_early:"Stai solo iniziando — per oggi va bene così.", dashboard_band_steady:"Si sta formando un ritmo costante. Continua così.", dashboard_band_thriving:"Slancio forte e costante questa settimana.",
       dashboard_stat_streak_label:"Giorni consecutivi", dashboard_stat_goals_label:"Obiettivi attivi", dashboard_stat_habits_label:"Abitudini monitorate", dashboard_stat_mood_label:"Umore di questa settimana",
       dashboard_activity_label:"Ultimi 7 giorni",
+      coach_consent_eyebrow:"Prima di continuare", coach_consent_title:"Condividere un riepilogo con il tuo coach?",
+      coach_consent_text:"Per darti una riflessione personalizzata, un riepilogo dei tuoi obiettivi, abitudini, serie e dell'umore di questa settimana — non i tuoi scritti privati — viene inviato ad Anthropic (il fornitore di IA) tramite il server dell'app. Non viene salvato. Accetti di continuare?",
+      dashboard_coach_label:"Il tuo coach", dashboard_coach_cta:"Ottieni una riflessione",
       exercises_desc:"Scegli un esercizio adatto a come ti senti ora — tutti richiedono solo pochi minuti.",
       footer_disclaimer:"Waha è uno strumento generale di orientamento psicologico e miglioramento del comportamento, e non sostituisce una diagnosi o un trattamento medico. Se stai vivendo una crisi acuta o hai pensieri di autolesionismo, contatta immediatamente un servizio di emergenza locale o una linea di supporto per la salute mentale.",
       title:"Waha — Il tuo spazio sicuro",
@@ -2911,6 +2947,7 @@ let chatHistory = [];
 const MAX_CHAT_HISTORY = 12;
 let pendingChatMessage = null;
 let pendingCheckinText = null;
+let pendingCoachAsk = false;
 let voiceEnabled = false;
 let recognizing = false;
 let recognition = null;
@@ -4350,6 +4387,80 @@ function closeDashboard(){
   document.getElementById('dashboardModal').classList.remove('open');
 }
 
+function buildCoachSummary(){
+  const streak = parseInt(safeGet('mc_streak') || '0', 10);
+  const goals = getGoals();
+  const habits = getHabits();
+  const cutoff = Date.now() - 7 * DASH_DAY_MS;
+  const recentMood = getEntries().filter(e => !e.deleted_at && e.entity_type === 'mood_log' && e.occurred_at >= cutoff);
+  const exercisesThisWeek = getEntries().filter(e => !e.deleted_at && e.entity_type === 'exercise_completion' && e.occurred_at >= cutoff).length;
+  const lines = [];
+  lines.push('Day streak: ' + streak);
+  lines.push(goals.length
+    ? ('Goals (' + goals.filter(g => g.done).length + ' of ' + goals.length + ' completed): ' + goals.map(g => g.title + (g.done ? ' [done]' : ' [active]')).join('; '))
+    : 'Goals: none set yet');
+  lines.push(habits.length
+    ? ('Habits: ' + habits.map(h => h.title + ' (' + getHabitStreak(h.id) + '-day streak)').join('; '))
+    : 'Habits: none set yet');
+  lines.push(recentMood.length
+    ? ("This week's average mood (1-5 scale): " + (recentMood.reduce((s, e) => s + (e.payload.score || 0), 0) / recentMood.length).toFixed(1) + ' from ' + recentMood.length + ' log(s)')
+    : "This week's mood: no logs yet");
+  lines.push('Exercises completed this week: ' + exercisesThisWeek);
+  lines.push('Reply language code: ' + currentLang);
+  return lines.join('\n');
+}
+function askCoach(){
+  if(safeGet('mc_coach_consent') !== '1'){
+    pendingCoachAsk = true;
+    document.getElementById('dashboardModal').classList.remove('open');
+    document.getElementById('coachConsentModal').classList.add('open');
+    return;
+  }
+  const dict = I18N[currentLang];
+  const btn = document.getElementById('dashboardCoachBtn');
+  const respBox = document.getElementById('dashboardCoachResponse');
+  btn.disabled = true;
+  respBox.classList.remove('u-hidden');
+  respBox.textContent = dict.checkin_thinking;
+
+  fetch(CHAT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: buildCoachSummary(), history: [], lang: currentLang, mode: 'coach' }),
+  })
+  .then(res => {
+    if(res.status === 429){
+      const err = new Error('rate limited');
+      err.rateLimited = true;
+      throw err;
+    }
+    if(!res.ok) throw new Error('bad status ' + res.status);
+    return res.json();
+  })
+  .then(data => {
+    if(!data.reply) throw new Error('empty reply');
+    respBox.textContent = data.reply;
+    btn.disabled = false;
+  })
+  .catch((err) => {
+    respBox.textContent = (err && err.rateLimited) ? dict.rate_limit_msg : dict.checkin_error;
+    btn.disabled = false;
+  });
+}
+function acceptCoachConsent(){
+  safeSet('mc_coach_consent', '1');
+  document.getElementById('coachConsentModal').classList.remove('open');
+  if(pendingCoachAsk){
+    pendingCoachAsk = false;
+    openDashboard();
+    askCoach();
+  }
+}
+function closeCoachConsent(){
+  document.getElementById('coachConsentModal').classList.remove('open');
+  pendingCoachAsk = false;
+}
+
 function renderMoodWidget(){
   const dict = I18N[currentLang];
   document.getElementById('moodPrompt').textContent = dict.mood_prompt;
@@ -5717,15 +5828,18 @@ function sendMsgOnEnter(e){
 
 const ACTIONS = {
   acceptChatConsent,
+  acceptCoachConsent,
   addGoal,
   addHabit,
   answerReliefFeedback,
+  askCoach,
   backToEditFeeling,
   chooseMode,
   clearChatMemory,
   closeCalmPlan,
   closeChatConsent,
   closeCheckin,
+  closeCoachConsent,
   closeCrisis,
   closeDailyBrief,
   closeDashboard,

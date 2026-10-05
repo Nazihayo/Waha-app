@@ -511,6 +511,22 @@
     <div class="review-stats-grid" id="dashboardStatsGrid"></div>
     <div class="dashboard-activity-label" data-i18n="dashboard_activity_label"></div>
     <div class="dashboard-activity-bars" id="dashboardActivityBars"></div>
+    <hr class="prefs-divider">
+    <div class="dashboard-activity-label" data-i18n="dashboard_coach_label"></div>
+    <button class="journal-save-btn" id="dashboardCoachBtn" data-click="askCoach" data-i18n="dashboard_coach_cta"></button>
+    <p class="review-history-text u-hidden" id="dashboardCoachResponse"></p>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="coachConsentModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <div class="prefs-eyebrow" data-i18n="coach_consent_eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" data-i18n="coach_consent_title"></h2>
+    <p class="prefs-subtitle u-mb-24" data-i18n="coach_consent_text"></p>
+    <div class="onboarding-actions">
+      <button class="onboarding-next" data-click="acceptCoachConsent" data-i18n="consent_accept"></button>
+      <button class="onboarding-skip" data-click="closeCoachConsent" data-i18n="consent_later"></button>
+    </div>
   </div>
 </div>
 
