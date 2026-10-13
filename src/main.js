@@ -5673,6 +5673,9 @@ function deleteExerciseHistoryOnly(){
   safeSet('mc_last_done', '');
   safeSet('mc_last_celebrated', '');
   removeEntriesByType('exercise_completion');
+  removeEntriesByType('agent_feedback');
+  safeSet('mc_agent_feedback', '[]');
+  safeSet('mc_agent_plan', '');
   updateStreakDisplay();
   updateProgressStats();
   showPassportStatus(I18N[currentLang].passport_done);
@@ -6404,7 +6407,9 @@ function agentRenderSetup(){
   document.getElementById('agentShiftTo').value = agentState.shiftTo;
   const consent = document.getElementById('agentConsent');
   const stored = safeGet('mc_agent_ai_consent');
-  consent.checked = stored === null ? (safeGet('mc_chat_consent') === '1' || safeGet('mc_coach_consent') === '1') : stored === '1';
+  // Never pre-ticked: sending this summary needs its own explicit opt-in,
+  // separate from the chat consent.
+  consent.checked = stored === '1';
   document.getElementById('agentSetupMsg').textContent = '';
 }
 function agentToggleShift(on){
