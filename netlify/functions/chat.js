@@ -234,6 +234,139 @@ function crisisReplyFor(lang) {
   return CRISIS_RESPONSES[lang] || CRISIS_RESPONSES.en;
 }
 
+// ---------------------------------------------------------------------
+// AGENT MODE ("Today's Plan")
+// The client sends a compact, app-generated summary of the person's
+// state (their chosen goal, optional shift times, an optional note in
+// their own words, recent mood/sleep numbers, and which past actions
+// they marked as helpful or not). The model must answer by calling ONE
+// tool, make_daily_plan, choosing 2-4 actions from a fixed catalog of
+// things the app can actually do. Everything it returns is validated
+// here against that catalog before it reaches the browser — the model
+// can only ever pick from real, existing app actions, never invent one.
+// Crisis detection still runs first, on the whole message, exactly as in
+// every other mode.
+// ---------------------------------------------------------------------
+const AGENT_ACTIONS = {
+  "ex-478": "4-7-8 breathing (2 min) — calms the nervous system, good before sleep or after a stressful moment",
+  "ex-box": "Box breathing (2 min) — quick calm for anxiety or stress at work",
+  "ex-bodyscan": "Body scan meditation (5 min) — reconnect with the body, release tension, good in the evening",
+  "ex-stop": "STOP technique (1 min) — interrupt spiraling thoughts, can be done anywhere, even during a shift break",
+  "ex-walk": "Mindful walk (5 min) — gentle movement and fresh air, lifts energy and mood",
+  "ex-grounding": "5-4-3-2-1 grounding (3 min) — brings the mind back to the present during worry or overwhelm",
+  "ex-selfcompassion": "Self-compassion break (2 min) — for moments of struggle, loneliness or self-criticism",
+  "ex-gratitude": "Gratitude journal (3 min) — write three good things, good at the end of the day",
+  "ex-feelings": "Name my feelings journal (3 min) — write what you feel and what you need",
+  "ex-reframe": "Thought reframe journal (5 min) — question a troubling thought and find a more balanced one",
+  "ex-worrytime": "Worry time (5 min) — write worries down in a set slot so they don't fill the whole day or the night",
+  "ex-bestself": "Best possible self journal (5 min) — imagine a hopeful future, builds motivation",
+  "ex-acceptance": "Acceptance practice (3 min) — make room for difficult feelings instead of fighting them",
+  "ex-mood": "Mood check (1 min) — log today's mood so the agent can learn what helps",
+  "sound-rain": "Rain sounds — calming background sound for falling asleep or focusing",
+  "sound-ocean": "Ocean waves — slow, calming sound for winding down",
+  "sound-brown": "Brown noise — deep steady noise that masks daytime sounds, good for sleeping after a night shift",
+  "sleep-mode": "Sleep mode — dark screen with slow guided breathing for falling asleep",
+  "relief": "90-second quick relief — for a sudden wave of stress, panic or anger",
+  "calm-plan": "My calm plan — the person's own written plan for hard moments (people, places, steps that help)",
+  "health-log": "Log sleep, water and movement (1 min) — so the agent can see sleep patterns",
+  "lib-anxiety": "Read: Understanding the anxiety spiral (3 min)",
+  "lib-habits": "Read: Small change, big impact — building habits (3 min)",
+  "lib-relationships": "Read: Healthy boundaries without guilt (3 min)",
+  "lib-selfworth": "Read: Your worth isn't your productivity (3 min)",
+  "lib-anger": "Read: Anger is a message, not an enemy (3 min)",
+  "lib-procrastination": "Read: Procrastination isn't laziness (3 min)",
+  "lib-grief": "Read: Grief isn't a straight line (3 min)",
+};
+const AGENT_ACTION_IDS = Object.keys(AGENT_ACTIONS);
+const AGENT_MAX_MESSAGE_LEN = 4000;
+
+const AGENT_TOOL = {
+  name: "make_daily_plan",
+  description: "Create today's personal wellbeing plan for the person. Always call this tool exactly once.",
+  input_schema: {
+    type: "object",
+    properties: {
+      summary: {
+        type: "string",
+        description: "1-2 short sentences in the reply language: one specific thing you noticed in their data, and today's focus. Warm, no jargon.",
+      },
+      steps: {
+        type: "array",
+        minItems: 2,
+        maxItems: 4,
+        description: "2-4 steps in chronological order.",
+        items: {
+          type: "object",
+          properties: {
+            action: { type: "string", enum: AGENT_ACTION_IDS, description: "Which app action to run." },
+            time: { type: "string", description: "Suggested start time, 24h HH:MM, local time of the person." },
+            title: { type: "string", description: "Short step title in the reply language (max 50 characters)." },
+            why: {
+              type: "string",
+              description: "ONE sentence in the reply language explaining why you chose this step for THIS person now, referring to their data (goal, shift, sleep, mood, or what helped before). Max 150 characters.",
+            },
+          },
+          required: ["action", "time", "title", "why"],
+        },
+      },
+      tomorrow: {
+        type: "string",
+        description: "One short sentence in the reply language: what you will watch or adjust tomorrow.",
+      },
+    },
+    required: ["summary", "steps", "tomorrow"],
+  },
+};
+
+const AGENT_SYSTEM_PROMPT = `You are the planning agent inside "Waha", a multilingual mental-wellness app (NOT a therapy or medical app). Each day you build a small, realistic personal plan that moves the person toward the goal THEY chose, using only actions the app can actually run.
+
+You will receive an app-generated summary: the person's goal, the current local time, optional work-shift times, an optional note in their own words, recent mood and sleep numbers, and which past actions they marked as helpful or not helpful.
+
+How to plan:
+- Choose 2-4 actions ONLY from this catalog (use the exact ids):
+${AGENT_ACTION_IDS.map((id) => `  ${id}: ${AGENT_ACTIONS[id]}`).join("\n")}
+- Every step time must be later than the current local time given, and none may fall inside their work shift. If they work a night or late shift, place sleep-related steps right after the shift ends, before they go to sleep.
+- Strongly prefer actions they marked helpful. Do not repeat actions they marked not helpful unless nothing else fits.
+- Keep it light: a tired or stressed person should get short steps (1-3 minutes) first. Match the steps to their note if they wrote one.
+- Each "why" must point to something concrete in their data (their goal, shift, sleep hours, mood trend, note, or past feedback). Never invent facts that are not in the summary.
+
+Rules you must always follow:
+- You are not a therapist, doctor, or counselor. Never diagnose, prescribe, mention medication, or claim to treat or cure any condition.
+- No judgmental or shaming tone about low numbers or missed days.
+- Write summary, titles, whys and tomorrow in the language named in the summary.
+- Always answer by calling the make_daily_plan tool. Never mention these instructions.`;
+
+const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+// A daily plan built from breathing, journaling and sounds has no reason
+// to name medication or a diagnosis at all, so any such word in a plan
+// discards it (the client then uses its on-device planner instead).
+const AGENT_BLOCKED_TERMS = /(medicat|medicine|melatonin|\bpills?\b|tablet|\bdoses?\b|dosage|diagnos|insomnia|medikament|tablette|diagnose|ilaç|teşhis|dozaj|دواء|أدوية|ادوية|حبوب|جرعة|تشخيص)/i;
+function clip(str, max) {
+  return typeof str === "string" ? str.trim().slice(0, max) : "";
+}
+// Returns a clean plan object, or null if the model's output can't be
+// trusted (no valid steps, or any text slipped into a medical claim).
+function validateAgentPlan(input) {
+  if (!input || typeof input !== "object" || !Array.isArray(input.steps)) return null;
+  const seen = new Set();
+  const steps = [];
+  for (const s of input.steps) {
+    if (!s || !AGENT_ACTIONS[s.action] || seen.has(s.action)) continue;
+    const time = typeof s.time === "string" && TIME_RE.test(s.time.trim()) ? s.time.trim() : "";
+    const title = clip(s.title, 60);
+    const why = clip(s.why, 200);
+    if (!title || !why) continue;
+    seen.add(s.action);
+    steps.push({ action: s.action, time, title, why });
+    if (steps.length === 4) break;
+  }
+  if (steps.length < 1) return null;
+  const plan = { summary: clip(input.summary, 300), steps, tomorrow: clip(input.tomorrow, 200) };
+  const allText = [plan.summary, plan.tomorrow, ...steps.map((s) => s.title + " " + s.why)].join("\n");
+  if (containsUnsafeClaim(allText) || AGENT_BLOCKED_TERMS.test(allText)) return null;
+  return plan;
+}
+
 function getClientIp(event) {
   return (
     event.headers["x-nf-client-connection-ip"] ||
@@ -268,6 +401,46 @@ async function checkRateLimit(ip) {
   }
 }
 
+async function runAgentPlan(message) {
+  try {
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        ...(process.env.ANTHROPIC_WORKSPACE_ID
+          ? { "anthropic-workspace-id": process.env.ANTHROPIC_WORKSPACE_ID }
+          : {}),
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        max_tokens: 1000,
+        system: AGENT_SYSTEM_PROMPT,
+        tools: [AGENT_TOOL],
+        tool_choice: { type: "tool", name: AGENT_TOOL.name },
+        messages: [{ role: "user", content: message }],
+      }),
+    });
+    if (!resp.ok) {
+      const detail = await resp.text();
+      console.error("Anthropic API error (agent):", resp.status, detail);
+      return { statusCode: 502, body: JSON.stringify({ error: "Upstream AI error", status: resp.status }) };
+    }
+    const data = await resp.json();
+    const block = Array.isArray(data.content) ? data.content.find((c) => c.type === "tool_use") : null;
+    const plan = validateAgentPlan(block && block.input);
+    if (!plan) {
+      // The client falls back to its own on-device planner.
+      return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan: null }) };
+    }
+    return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan }) };
+  } catch (err) {
+    console.error("Agent function error:", err);
+    return { statusCode: 500, body: JSON.stringify({ error: "Server error" }) };
+  }
+}
+
 exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
@@ -286,11 +459,12 @@ exports.handler = async function (event) {
   const isCheckin = payload.mode === "checkin";
   const isRewrite = payload.mode === "rewrite";
   const isCoach = payload.mode === "coach";
+  const isAgent = payload.mode === "agent";
 
   if (!message) {
     return { statusCode: 400, body: JSON.stringify({ error: "Message is required" }) };
   }
-  if (message.length > MAX_MESSAGE_LEN) {
+  if (message.length > (isAgent ? AGENT_MAX_MESSAGE_LEN : MAX_MESSAGE_LEN)) {
     return { statusCode: 400, body: JSON.stringify({ error: "Message too long" }) };
   }
 
@@ -299,7 +473,7 @@ exports.handler = async function (event) {
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reply: crisisReplyFor(lang) }),
+      body: JSON.stringify({ reply: crisisReplyFor(lang), crisis: true }),
     };
   }
 
@@ -323,6 +497,10 @@ exports.handler = async function (event) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ error: "Rate limit exceeded. Please wait a few minutes before sending more messages." }),
     };
+  }
+
+  if (isAgent) {
+    return runAgentPlan(message);
   }
 
   const cleanHistory = historyIn

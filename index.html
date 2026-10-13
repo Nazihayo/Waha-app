@@ -312,6 +312,14 @@
   <button class="reminder-dismiss" data-click="dismissReminder" aria-label="Close">✕</button>
 </div>
 
+<div class="agent-home-card" id="agentHomeCard">
+  <div class="agent-home-text">
+    <div class="agent-home-title" id="agentHomeTitle"></div>
+    <div class="agent-home-next" id="agentHomeNext"></div>
+  </div>
+  <button class="btn btn-primary agent-home-btn" id="agentHomeBtn" data-click="openAgent"></button>
+</div>
+
 <div class="hero">
   <div class="ambient"><div class="blob blob1"></div><div class="blob blob2"></div></div>
   <div>
@@ -891,6 +899,64 @@
     <a class="u-link-inherit" href="impressum.html">Impressum</a>
   </p>
 </footer>
+
+<div class="prefs-overlay" id="agentModal" role="dialog" aria-modal="true" aria-labelledby="agentTitle">
+  <div class="prefs-box agent-box">
+    <button class="prefs-close aria-close-btn" data-click="closeAgent" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-agent-i18n="eyebrow"></div>
+    <h2 class="prefs-title u-fs-26" id="agentTitle" data-agent-i18n="title"></h2>
+
+    <div id="agentSetup">
+      <p class="prefs-subtitle" data-agent-i18n="subtitle"></p>
+      <div class="prefs-section-label" data-agent-i18n="goal_label"></div>
+      <div class="agent-goals" id="agentGoals"></div>
+      <label class="agent-shift-row">
+        <input type="checkbox" id="agentShiftOn" data-change="agentToggleShift">
+        <span data-agent-i18n="shift_label"></span>
+      </label>
+      <div class="agent-shift-times u-hidden" id="agentShiftTimes">
+        <label><span data-agent-i18n="shift_from"></span> <input type="time" id="agentShiftFrom" data-change="agentSetShiftFrom"></label>
+        <label><span data-agent-i18n="shift_to"></span> <input type="time" id="agentShiftTo" data-change="agentSetShiftTo"></label>
+      </div>
+      <label class="prefs-section-label agent-note-label" for="agentNote" data-agent-i18n="note_label"></label>
+      <textarea id="agentNote" class="agent-note" rows="2" maxlength="500" data-agent-i18n-ph="note_ph"></textarea>
+      <label class="agent-consent">
+        <input type="checkbox" id="agentConsent" data-change="agentSetConsent">
+        <span data-agent-i18n="consent"></span>
+      </label>
+      <button class="onboarding-next agent-build-btn" data-click="agentBuildPlan" data-agent-i18n="build"></button>
+      <p class="agent-setup-msg" id="agentSetupMsg" role="alert"></p>
+    </div>
+
+    <div id="agentThinking" class="u-hidden" aria-live="polite">
+      <ul class="agent-think" id="agentThinkList"></ul>
+    </div>
+
+    <div id="agentPlanView" class="u-hidden">
+      <div class="agent-meta-row">
+        <span class="agent-source" id="agentSource"></span>
+        <span class="agent-progress-text" id="agentProgress"></span>
+      </div>
+      <div class="agent-progress"><div class="agent-progress-bar" id="agentProgressBar"></div></div>
+      <p class="agent-summary" id="agentSummary"></p>
+      <p class="agent-notice u-hidden" id="agentNotice" role="status"></p>
+      <div class="agent-steps" id="agentSteps"></div>
+      <p class="agent-all-done u-hidden" id="agentAllDone"></p>
+      <p class="agent-tomorrow" id="agentTomorrow"></p>
+      <div class="agent-learned" id="agentLearned"></div>
+      <div class="agent-footer">
+        <button class="backup-btn" id="agentRemindBtn" data-click="agentToggleReminders"></button>
+        <button class="backup-btn" data-click="agentNewPlan" data-agent-i18n="new_plan"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="agent-toast u-hidden" id="agentToast" role="status">
+  <span class="agent-toast-icon">🧭</span>
+  <span class="agent-toast-text" id="agentToastText"></span>
+  <button class="reminder-cta" data-click="agentToastOpen" data-agent-i18n="open_plan"></button>
+</div>
 
 <script type="module" src="/src/main.js"></script>
 </body>

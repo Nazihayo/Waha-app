@@ -3109,6 +3109,13 @@ function setLang(lang){
   if(micBtn) micBtn.setAttribute('aria-label', I18N[lang].aria_mic);
   safeSet('mc_lang', lang);
   updateFreeChatCounter();
+  if(typeof agentRenderHomeCard === 'function' && document.getElementById('agentHomeCard')){
+    try{
+      agentRenderHomeCard();
+      const am = document.getElementById('agentModal');
+      if(am && am.classList.contains('open')){ const p = agentLoadPlan(); p ? agentRenderPlan(p) : agentRenderSetup(); }
+    }catch(e){}
+  }
 }
 
 function speechLangTag(lang){
@@ -6012,6 +6019,719 @@ if(isIOS() && !isStandalone()){
 
 populateLangSelect();
 const restoredLang = restorePreferences();
+// ---------------------------------------------------------------------
+// WAHA AGENT — "Today's Plan"
+// A small planning agent on top of the app's existing tools. The loop:
+//   goal (chosen by the person) -> context (mood, sleep, shift, note,
+//   past feedback) -> safety check -> plan (2-4 steps chosen from real
+//   app actions, each with a "why") -> act (each step launches the real
+//   exercise / sound / sleep mode / ...) -> feedback ("did it help?") ->
+//   the feedback is fed into tomorrow's plan.
+// The plan comes from the AI (netlify/functions/chat.js, mode "agent",
+// tool use against a fixed action catalog) when the person has agreed to
+// send an anonymous summary; otherwise, or if the AI is unreachable, an
+// on-device planner builds it from the same data with the same rules.
+// Crisis keywords in the note stop everything and open the crisis panel.
+// Strings: ar / en / de / tr; other languages fall back to English.
+// ---------------------------------------------------------------------
+const AGENT_I18N = {
+  ar: {
+    cta:'وكيل Waha — خطة اليوم', eyebrow:'وكيلك الشخصي', title:'خطة اليوم',
+    subtitle:'اختر هدفاً واحداً. سيقرأ Waha حالتك، ويختار خطوات قصيرة من أدوات التطبيق، ويرتّبها حول يومك.',
+    goal_label:'ما هدفك هذه الفترة؟',
+    goal_sleep:'😴 أنام أفضل', goal_stress:'🌿 توتر أقل', goal_lonely:'🤝 وحدة أقل', goal_energy:'⚡ طاقة ومزاج أفضل',
+    shift_label:'أعمل اليوم بنظام وردية', shift_from:'من', shift_to:'إلى',
+    note_label:'كيف حالك اليوم؟ (اختياري)', note_ph:'مثلاً: نمت قليلاً بعد وردية متأخرة وأشعر بتعب',
+    consent:'أوافق على إرسال ملخص مجهول (بدون اسم) إلى الذكاء الاصطناعي لصنع خطة أدق. بدون موافقة تُصنع الخطة على جهازك.',
+    build:'اصنع خطتي', pick_goal_first:'اختر هدفاً أولاً.',
+    think_1:'أقرأ بياناتك: النوم، المزاج، وما ساعدك من قبل', think_2:'فحص الأمان', think_3:'أختار الأدوات المناسبة لهدفك', think_4:'أرتّب الخطوات حول يومك',
+    why:'لماذا؟', start:'ابدأ', started:'بدأت ✓', helped_q:'هل ساعدك؟', yes:'👍 نعم', no:'👎 لا', thanks_yes:'رائع، سأعطي هذه الخطوة أولوية في خططك القادمة.', thanks_no:'شكراً لصراحتك، سأجرّب شيئاً مختلفاً غداً.',
+    tomorrow:'غداً', source_ai:'خطة من الذكاء الاصطناعي', source_local:'خطة من جهازك',
+    new_plan:'خطة جديدة', remind_on:'🔔 ذكّرني بالخطوات', remind_active:'🔔 التذكير مفعّل', remind_denied:'الإشعارات مرفوضة في المتصفح، سأذكّرك داخل التطبيق فقط.',
+    next_label:'الخطوة التالية', open_plan:'افتح الخطة', all_done:'أنهيت خطة اليوم 🌿 أحسنت.',
+    reminder_now:'حان وقت:', learned:'تعلّمت منك', learned_none:'كلما قيّمت خطوة، تصبح خططك أدق.',
+    helped_before:'ساعدك من قبل', progress:'من', done_word:'خطوات',
+    summary_local:'هدفك: {goal}. اخترت لك {n} خطوات قصيرة{shift}.', summary_shift:' حول ورديتك ({from}–{to})',
+    tomorrow_local:'سأراقب تقييمك لكل خطوة وأعدّل خطة الغد بناءً عليه.',
+    error:'تعذّر الوصول للذكاء الاصطناعي الآن، فصنعت الخطة على جهازك.',
+  },
+  en: {
+    cta:"Waha Agent — Today's plan", eyebrow:'Your personal agent', title:"Today's plan",
+    subtitle:'Pick one goal. Waha reads how you are doing, chooses short steps from the app\'s tools, and fits them around your day.',
+    goal_label:'What is your goal right now?',
+    goal_sleep:'😴 Sleep better', goal_stress:'🌿 Less stress', goal_lonely:'🤝 Feel less alone', goal_energy:'⚡ More energy & mood',
+    shift_label:'I work a shift today', shift_from:'From', shift_to:'To',
+    note_label:'How are you today? (optional)', note_ph:'e.g. slept little after a late shift and feel tired',
+    consent:'I agree to send an anonymous summary (no name) to the AI for a more precise plan. Without it, the plan is made on your device.',
+    build:'Make my plan', pick_goal_first:'Pick a goal first.',
+    think_1:'Reading your data: sleep, mood, and what helped before', think_2:'Safety check', think_3:'Choosing the right tools for your goal', think_4:'Fitting the steps around your day',
+    why:'Why?', start:'Start', started:'Started ✓', helped_q:'Did it help?', yes:'👍 Yes', no:'👎 No', thanks_yes:"Great — I'll prioritise this step in your next plans.", thanks_no:"Thanks for being honest — I'll try something different tomorrow.",
+    tomorrow:'Tomorrow', source_ai:'Plan made by AI', source_local:'Plan made on your device',
+    new_plan:'New plan', remind_on:'🔔 Remind me', remind_active:'🔔 Reminders on', remind_denied:"Notifications are blocked in your browser, so I'll remind you inside the app only.",
+    next_label:'Next step', open_plan:'Open plan', all_done:"You finished today's plan 🌿 Well done.",
+    reminder_now:'Time for:', learned:'Learned from you', learned_none:'Every step you rate makes your plans more precise.',
+    helped_before:'helped you before', progress:'of', done_word:'steps',
+    summary_local:'Your goal: {goal}. I picked {n} short steps for you{shift}.', summary_shift:' around your shift ({from}–{to})',
+    tomorrow_local:"I'll watch how you rate each step and adjust tomorrow's plan.",
+    error:"Couldn't reach the AI right now, so I made the plan on your device.",
+  },
+  de: {
+    cta:'Waha-Agent — Plan für heute', eyebrow:'Dein persönlicher Agent', title:'Plan für heute',
+    subtitle:'Wähle ein Ziel. Waha schaut, wie es dir geht, wählt kurze Schritte aus den Werkzeugen der App und plant sie um deinen Tag herum.',
+    goal_label:'Was ist gerade dein Ziel?',
+    goal_sleep:'😴 Besser schlafen', goal_stress:'🌿 Weniger Stress', goal_lonely:'🤝 Weniger allein fühlen', goal_energy:'⚡ Mehr Energie & Stimmung',
+    shift_label:'Ich arbeite heute Schicht', shift_from:'Von', shift_to:'Bis',
+    note_label:'Wie geht es dir heute? (optional)', note_ph:'z. B. wenig geschlafen nach einer Spätschicht, bin müde',
+    consent:'Ich bin einverstanden, eine anonyme Zusammenfassung (ohne Namen) an die KI zu senden, für einen genaueren Plan. Ohne Zustimmung entsteht der Plan auf deinem Gerät.',
+    build:'Plan erstellen', pick_goal_first:'Wähle zuerst ein Ziel.',
+    think_1:'Lese deine Daten: Schlaf, Stimmung und was dir geholfen hat', think_2:'Sicherheitsprüfung', think_3:'Wähle passende Werkzeuge für dein Ziel', think_4:'Plane die Schritte um deinen Tag',
+    why:'Warum?', start:'Starten', started:'Gestartet ✓', helped_q:'Hat es geholfen?', yes:'👍 Ja', no:'👎 Nein', thanks_yes:'Super — ich gebe diesem Schritt in deinen nächsten Plänen Vorrang.', thanks_no:'Danke für deine Ehrlichkeit — morgen probiere ich etwas anderes.',
+    tomorrow:'Morgen', source_ai:'Plan von der KI', source_local:'Plan auf deinem Gerät',
+    new_plan:'Neuer Plan', remind_on:'🔔 Erinnere mich', remind_active:'🔔 Erinnerungen an', remind_denied:'Benachrichtigungen sind im Browser blockiert, ich erinnere dich nur in der App.',
+    next_label:'Nächster Schritt', open_plan:'Plan öffnen', all_done:'Du hast den Plan für heute geschafft 🌿 Gut gemacht.',
+    reminder_now:'Zeit für:', learned:'Von dir gelernt', learned_none:'Jeder bewertete Schritt macht deine Pläne genauer.',
+    helped_before:'hat dir schon geholfen', progress:'von', done_word:'Schritten',
+    summary_local:'Dein Ziel: {goal}. Ich habe {n} kurze Schritte für dich gewählt{shift}.', summary_shift:' rund um deine Schicht ({from}–{to})',
+    tomorrow_local:'Ich achte darauf, wie du jeden Schritt bewertest, und passe den Plan für morgen an.',
+    error:'Die KI ist gerade nicht erreichbar, daher habe ich den Plan auf deinem Gerät erstellt.',
+  },
+  tr: {
+    cta:'Waha Ajanı — Bugünün planı', eyebrow:'Kişisel ajanın', title:'Bugünün planı',
+    subtitle:'Bir hedef seç. Waha nasıl olduğunu okur, uygulamanın araçlarından kısa adımlar seçer ve gününe göre yerleştirir.',
+    goal_label:'Şu anki hedefin ne?',
+    goal_sleep:'😴 Daha iyi uyumak', goal_stress:'🌿 Daha az stres', goal_lonely:'🤝 Daha az yalnızlık', goal_energy:'⚡ Daha fazla enerji ve iyi ruh hali',
+    shift_label:'Bugün vardiyalı çalışıyorum', shift_from:'Başlangıç', shift_to:'Bitiş',
+    note_label:'Bugün nasılsın? (isteğe bağlı)', note_ph:'ör. geç vardiyadan sonra az uyudum, yorgunum',
+    consent:'Daha doğru bir plan için anonim bir özetin (isimsiz) yapay zekâya gönderilmesini kabul ediyorum. Onay olmadan plan cihazında hazırlanır.',
+    build:'Planımı yap', pick_goal_first:'Önce bir hedef seç.',
+    think_1:'Verilerini okuyorum: uyku, ruh hali ve daha önce işe yarayanlar', think_2:'Güvenlik kontrolü', think_3:'Hedefin için doğru araçları seçiyorum', think_4:'Adımları gününe yerleştiriyorum',
+    why:'Neden?', start:'Başla', started:'Başladı ✓', helped_q:'İşe yaradı mı?', yes:'👍 Evet', no:'👎 Hayır', thanks_yes:'Harika — bu adıma sonraki planlarında öncelik vereceğim.', thanks_no:'Dürüstlüğün için teşekkürler — yarın farklı bir şey deneyeceğim.',
+    tomorrow:'Yarın', source_ai:'Yapay zekâ planı', source_local:'Cihazında hazırlanan plan',
+    new_plan:'Yeni plan', remind_on:'🔔 Bana hatırlat', remind_active:'🔔 Hatırlatma açık', remind_denied:'Tarayıcıda bildirimler engelli, sana yalnızca uygulama içinde hatırlatacağım.',
+    next_label:'Sıradaki adım', open_plan:'Planı aç', all_done:'Bugünün planını tamamladın 🌿 Aferin.',
+    reminder_now:'Şimdi zamanı:', learned:'Senden öğrendiklerim', learned_none:'Değerlendirdiğin her adım planlarını daha isabetli yapar.',
+    helped_before:'daha önce işine yaradı', progress:'/', done_word:'adım',
+    summary_local:'Hedefin: {goal}. Senin için {n} kısa adım seçtim{shift}.', summary_shift:' vardiyana göre ({from}–{to})',
+    tomorrow_local:'Her adımı nasıl değerlendirdiğine bakıp yarının planını ayarlayacağım.',
+    error:'Şu anda yapay zekâya ulaşılamadı, bu yüzden planı cihazında hazırladım.',
+  },
+};
+function agentT(key){
+  const d = AGENT_I18N[currentLang] || AGENT_I18N.en;
+  return d[key] !== undefined ? d[key] : AGENT_I18N.en[key];
+}
+
+// Why-texts for the on-device planner (the AI writes its own).
+const AGENT_LOCAL_WHY = {
+  ar: {
+    'ex-478':'تنفّس بطيء قبل النوم يهدّئ الجسم ويساعدك على النوم أسرع.',
+    'ex-box':'أربع ثوانٍ لكل مرحلة تعيد لك الهدوء بسرعة في يوم مزدحم.',
+    'ex-stop':'دقيقة واحدة تكفي لإيقاف دوامة الأفكار، حتى في استراحة العمل.',
+    'ex-bodyscan':'يساعد جسمك على ترك توتر اليوم قبل المساء.',
+    'ex-walk':'خمس دقائق من الحركة والهواء ترفع الطاقة والمزاج.',
+    'ex-grounding':'يعيد ذهنك إلى اللحظة الحالية عندما يكثر القلق.',
+    'ex-selfcompassion':'لحظة لطف مع نفسك تخفف ثقل الوحدة.',
+    'ex-gratitude':'كتابة ثلاثة أشياء جيدة تنهي يومك بشعور أخف.',
+    'ex-worrytime':'تفريغ المخاوف على الورق قبل النوم يريح رأسك في الليل.',
+    'ex-feelings':'تسمية ما تشعر به أول خطوة لتخفيفه.',
+    'ex-bestself':'تخيّل مستقبل أفضل يعطيك دافعاً لليوم.',
+    'sound-brown':'ضجيج عميق ثابت يحجب أصوات النهار، مفيد إذا نمت بعد وردية.',
+    'sound-rain':'صوت المطر الهادئ يساعدك على الاسترخاء والنوم.',
+    'sleep-mode':'شاشة مظلمة وتنفّس موجّه لتنام دون تصفّح الهاتف.',
+    'lib-relationships':'قراءة قصيرة عن العلاقات الصحية تساعدك على التواصل.',
+    'lib-stress':'',
+    'health-log':'تسجيل نومك يساعدني على فهم نمطك وتحسين خطتك.',
+    'ex-mood':'تسجيل مزاجك يساعدني على معرفة ما يناسبك.',
+  },
+  en: {
+    'ex-478':'Slow breathing before bed calms your body and helps you fall asleep faster.',
+    'ex-box':'Four seconds per phase brings calm back quickly on a busy day.',
+    'ex-stop':'One minute is enough to stop a thought spiral, even on a work break.',
+    'ex-bodyscan':"Helps your body let go of the day's tension before the evening.",
+    'ex-walk':'Five minutes of movement and fresh air lifts energy and mood.',
+    'ex-grounding':'Brings your mind back to the present when worry builds up.',
+    'ex-selfcompassion':'A moment of kindness to yourself eases the weight of loneliness.',
+    'ex-gratitude':'Writing three good things ends your day on a lighter note.',
+    'ex-worrytime':'Putting worries on paper before bed quiets your head at night.',
+    'ex-feelings':'Naming what you feel is the first step to easing it.',
+    'ex-bestself':'Picturing a better future gives you drive for today.',
+    'sound-brown':'Deep steady noise masks daytime sounds — useful if you sleep after a shift.',
+    'sound-rain':'Gentle rain helps you relax and drift off.',
+    'sleep-mode':'A dark screen and guided breathing so you fall asleep without scrolling.',
+    'lib-relationships':'A short read on healthy connection to help you reach out.',
+    'health-log':'Logging your sleep helps me understand your pattern and improve your plan.',
+    'ex-mood':'Logging your mood helps me learn what works for you.',
+  },
+  de: {
+    'ex-478':'Langsames Atmen vor dem Schlafen beruhigt den Körper und hilft beim Einschlafen.',
+    'ex-box':'Vier Sekunden pro Phase bringen an einem vollen Tag schnell Ruhe zurück.',
+    'ex-stop':'Eine Minute reicht, um ein Gedankenkarussell zu stoppen, auch in der Arbeitspause.',
+    'ex-bodyscan':'Hilft deinem Körper, die Anspannung des Tages loszulassen.',
+    'ex-walk':'Fünf Minuten Bewegung an der frischen Luft heben Energie und Stimmung.',
+    'ex-grounding':'Holt deine Gedanken zurück ins Jetzt, wenn Sorgen wachsen.',
+    'ex-selfcompassion':'Ein Moment Freundlichkeit mit dir selbst macht Einsamkeit leichter.',
+    'ex-gratitude':'Drei gute Dinge aufschreiben lässt den Tag leichter enden.',
+    'ex-worrytime':'Sorgen vor dem Schlafen aufschreiben beruhigt den Kopf in der Nacht.',
+    'ex-feelings':'Gefühle zu benennen ist der erste Schritt, sie zu lindern.',
+    'ex-bestself':'Eine bessere Zukunft vorzustellen gibt dir Antrieb für heute.',
+    'sound-brown':'Tiefes, gleichmäßiges Rauschen überdeckt Tagesgeräusche — gut, wenn du nach der Schicht schläfst.',
+    'sound-rain':'Sanfter Regen hilft dir, zu entspannen und einzuschlafen.',
+    'sleep-mode':'Dunkler Bildschirm und geführtes Atmen, damit du ohne Scrollen einschläfst.',
+    'lib-relationships':'Kurzer Text über gesunde Beziehungen, der dir hilft, auf andere zuzugehen.',
+    'health-log':'Wenn du deinen Schlaf einträgst, verstehe ich dein Muster und verbessere den Plan.',
+    'ex-mood':'Deine Stimmung einzutragen hilft mir zu lernen, was dir guttut.',
+  },
+  tr: {
+    'ex-478':'Yatmadan önce yavaş nefes bedenini sakinleştirir ve daha çabuk uyumana yardım eder.',
+    'ex-box':'Her aşama için dört saniye, yoğun bir günde sakinliği hızla geri getirir.',
+    'ex-stop':'Düşünce sarmalını durdurmak için bir dakika yeter, iş molasında bile.',
+    'ex-bodyscan':'Bedeninin günün gerginliğini akşamdan önce bırakmasına yardım eder.',
+    'ex-walk':'Beş dakikalık hareket ve temiz hava enerjiyi ve ruh halini yükseltir.',
+    'ex-grounding':'Endişe arttığında zihnini şimdiki ana geri getirir.',
+    'ex-selfcompassion':'Kendine kısa bir şefkat anı yalnızlığın yükünü hafifletir.',
+    'ex-gratitude':'Üç güzel şeyi yazmak günü daha hafif bitirmeni sağlar.',
+    'ex-worrytime':'Yatmadan önce endişeleri kâğıda dökmek geceleri zihnini sakinleştirir.',
+    'ex-feelings':'Hissettiğini adlandırmak onu hafifletmenin ilk adımıdır.',
+    'ex-bestself':'Daha iyi bir gelecek hayal etmek bugün için motivasyon verir.',
+    'sound-brown':'Derin ve sabit ses gündüz seslerini bastırır — vardiyadan sonra uyuyorsan faydalı.',
+    'sound-rain':'Yumuşak yağmur sesi rahatlamana ve uykuya dalmana yardım eder.',
+    'sleep-mode':'Karanlık ekran ve rehberli nefesle telefonda gezinmeden uyu.',
+    'lib-relationships':'Sağlıklı bağlar üzerine kısa bir okuma, insanlara ulaşmana yardım eder.',
+    'health-log':'Uykunu kaydetmek düzenini anlamama ve planını iyileştirmeme yardım eder.',
+    'ex-mood':'Ruh halini kaydetmek sana neyin iyi geldiğini öğrenmeme yardım eder.',
+  },
+};
+
+// Candidate actions per goal for the on-device planner: [action, slot, base score].
+// Slots: 'soon' (next free moment), 'midday', 'evening', 'bedtime'.
+const AGENT_LOCAL_CANDIDATES = {
+  sleep:  [['ex-worrytime','evening',3],['ex-478','bedtime',4],['sleep-mode','bedtime',3],['sound-rain','bedtime',2],['ex-bodyscan','evening',2],['health-log','soon',1]],
+  stress: [['ex-box','soon',4],['ex-stop','midday',3],['ex-grounding','midday',2],['ex-worrytime','evening',3],['ex-bodyscan','evening',2],['ex-478','bedtime',1]],
+  lonely: [['ex-selfcompassion','soon',4],['ex-walk','midday',3],['lib-relationships','evening',2],['ex-feelings','evening',3],['ex-gratitude','bedtime',2]],
+  energy: [['ex-walk','soon',4],['ex-bestself','midday',3],['ex-box','midday',2],['ex-gratitude','evening',2],['ex-mood','evening',2],['ex-478','bedtime',1]],
+};
+const AGENT_GOALS = ['sleep','stress','lonely','energy'];
+
+let agentState = { goal:null, shiftOn:false, shiftFrom:'16:00', shiftTo:'23:30' };
+let agentPendingFeedbackIdx = null;
+let agentReminderTimer = null;
+
+function agentTodayKey(){ return todayKey(); }
+function agentLoadPlan(){
+  try{ const p = JSON.parse(safeGet('mc_agent_plan') || 'null'); return (p && p.date === agentTodayKey()) ? p : null; }catch(e){ return null; }
+}
+function agentSavePlan(p){ safeSet('mc_agent_plan', JSON.stringify(p)); }
+function agentLoadFeedback(){
+  try{ const f = JSON.parse(safeGet('mc_agent_feedback') || '[]'); return Array.isArray(f) ? f : []; }catch(e){ return []; }
+}
+function agentSaveFeedback(list){ safeSet('mc_agent_feedback', JSON.stringify(list.slice(-200))); }
+function agentFeedbackScores(){
+  const scores = {};
+  agentLoadFeedback().forEach(f=>{
+    if(!scores[f.action]) scores[f.action] = { yes:0, no:0 };
+    f.helped ? scores[f.action].yes++ : scores[f.action].no++;
+  });
+  return scores;
+}
+function agentLoadPrefs(){
+  try{
+    const p = JSON.parse(safeGet('mc_agent_prefs') || 'null');
+    if(p){ agentState.goal = AGENT_GOALS.includes(p.goal) ? p.goal : null; agentState.shiftOn = !!p.shiftOn; if(p.shiftFrom) agentState.shiftFrom = p.shiftFrom; if(p.shiftTo) agentState.shiftTo = p.shiftTo; }
+  }catch(e){}
+}
+function agentSavePrefs(){ safeSet('mc_agent_prefs', JSON.stringify(agentState)); }
+
+// ---- time helpers (minutes since midnight) ----
+function agentMin(hhmm){ const m = /^(\d{1,2}):(\d{2})$/.exec(hhmm || ''); return m ? (parseInt(m[1],10) * 60 + parseInt(m[2],10)) : null; }
+function agentHHMM(min){ min = ((Math.round(min) % 1440) + 1440) % 1440; return String(Math.floor(min/60)).padStart(2,'0') + ':' + String(min % 60).padStart(2,'0'); }
+function agentNowMin(){ const d = new Date(); return d.getHours() * 60 + d.getMinutes(); }
+function agentInShift(min){
+  if(!agentState.shiftOn) return false;
+  const a = agentMin(agentState.shiftFrom), b = agentMin(agentState.shiftTo);
+  if(a === null || b === null) return false;
+  return a <= b ? (min >= a && min < b) : (min >= a || min < b);
+}
+
+// ---- action metadata / launching ----
+function agentActionTitle(action){
+  const dict = I18N[currentLang] || I18N.en;
+  if(action.indexOf('ex-') === 0){
+    const ex = (EXERCISES[currentLang] || EXERCISES.en).find(e=>e.id===action);
+    return ex ? ex.title : action;
+  }
+  if(action.indexOf('lib-') === 0){
+    const it = (LIBRARY[currentLang] || LIBRARY.en).find(i=>i.id===action);
+    return it ? it.title : action;
+  }
+  const strip = (s)=> String(s || '').replace(/<[^>]*>/g,'').trim();
+  const map = { 'sleep-mode':'sleep_cta', 'relief':'relief_cta', 'calm-plan':'calmplan_cta', 'health-log':'journey_item_health_title' };
+  if(map[action]) return strip(dict[map[action]]) || action;
+  if(action.indexOf('sound-') === 0) return '🎵 ' + (strip(dict.sounds_cta) || 'Sounds') + ' · ' + action.slice(6);
+  return action;
+}
+function agentActionIcon(action){
+  if(action.indexOf('sound-') === 0) return '🎵';
+  if(action === 'sleep-mode') return '🌙';
+  if(action === 'relief') return '⚡';
+  if(action === 'calm-plan') return '🧭';
+  if(action === 'health-log') return '📝';
+  if(action.indexOf('lib-') === 0) return '📖';
+  const ex = (EXERCISES.en || []).find(e=>e.id===action);
+  if(ex){ return ({breathing:'🌬️', mind:'🧠', write:'✍️', sleep:'😴'})[ex.cat] || '✨'; }
+  return '✨';
+}
+function agentLaunch(action){
+  if(action.indexOf('ex-') === 0) return openExercise(action);
+  if(action.indexOf('lib-') === 0) return openLibraryItem(action);
+  if(action.indexOf('sound-') === 0){ openSounds(); const n = action.slice(6); if(SOUND_STARTERS[n] && !(activeSound && activeSound.name === n)) toggleSound(n); return; }
+  if(action === 'sleep-mode') return openSleepMode();
+  if(action === 'relief') return openRelief();
+  if(action === 'calm-plan') return openCalmPlan();
+  if(action === 'health-log') return openHealth();
+}
+
+// ---- context for the AI (compact, app-generated, no name) ----
+function agentBuildContext(note){
+  const langLabel = (LANGS.find(l=>l.code===currentLang) || {label:'English'}).label;
+  const d = new Date();
+  const lines = [];
+  lines.push('Reply language: ' + langLabel + ' (' + currentLang + ')');
+  lines.push('Current local time: ' + agentHHMM(agentNowMin()) + ', ' + ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()]);
+  lines.push('Goal chosen by the person: ' + ({sleep:'sleep better', stress:'less stress', lonely:'feel less alone', energy:'more energy and better mood'})[agentState.goal]);
+  lines.push('Work shift today: ' + (agentState.shiftOn ? (agentState.shiftFrom + ' to ' + agentState.shiftTo) : 'none'));
+  lines.push('Note from the person (their own words): ' + (note ? '"' + note.slice(0, 500) + '"' : 'none'));
+  const cutoff = Date.now() - 7 * 86400000;
+  const moods = getEntries().filter(e => !e.deleted_at && e.entity_type === 'mood_log' && e.occurred_at >= cutoff).map(e => e.payload && e.payload.score).filter(v => typeof v === 'number');
+  lines.push('Mood last 7 days (1-5): ' + (moods.length ? ('average ' + (moods.reduce((a,b)=>a+b,0) / moods.length).toFixed(1) + ' from ' + moods.length + ' logs, latest ' + moods[moods.length-1]) : 'no logs'));
+  const health = getHealthLogs().filter(l => l.id >= dateKeyFromTs(cutoff));
+  const sleeps = health.map(l => l.sleepHours).filter(v => typeof v === 'number');
+  lines.push('Sleep last 7 days: ' + (sleeps.length ? ('average ' + (sleeps.reduce((a,b)=>a+b,0) / sleeps.length).toFixed(1) + 'h over ' + sleeps.length + ' nights, last night ' + sleeps[sleeps.length-1] + 'h') : 'not logged'));
+  const exDone = getEntries().filter(e => !e.deleted_at && e.entity_type === 'exercise_completion' && e.occurred_at >= cutoff).length;
+  lines.push('Exercises completed this week: ' + exDone);
+  const scores = agentFeedbackScores();
+  const helped = Object.keys(scores).filter(a => scores[a].yes > scores[a].no).map(a => a + ' (' + scores[a].yes + 'x)');
+  const notHelped = Object.keys(scores).filter(a => scores[a].no >= scores[a].yes && scores[a].no > 0).map(a => a + ' (' + scores[a].no + 'x)');
+  lines.push('Marked helpful before: ' + (helped.length ? helped.join(', ') : 'none yet'));
+  lines.push('Marked NOT helpful before: ' + (notHelped.length ? notHelped.join(', ') : 'none yet'));
+  return lines.join('\n');
+}
+
+// ---- on-device planner (same rules as the AI prompt) ----
+function agentLocalPlan(){
+  const goal = agentState.goal;
+  const scores = agentFeedbackScores();
+  const scored = AGENT_LOCAL_CANDIDATES[goal].map(([action, slot, base]) => {
+    const s = scores[action] || { yes:0, no:0 };
+    return { action, slot, score: base + 2 * s.yes - 3 * s.no, helped: s.yes > s.no };
+  }).sort((a,b) => b.score - a.score).slice(0, 3);
+
+  const now = agentNowMin();
+  const shiftEnd = agentState.shiftOn ? agentMin(agentState.shiftTo) : null;
+  const lateShift = agentState.shiftOn && shiftEnd !== null && (shiftEnd >= 21 * 60 || shiftEnd < 6 * 60);
+  const soon = Math.ceil((now + 15) / 5) * 5;
+  const slotMin = {
+    soon: soon,
+    midday: 13 * 60,
+    evening: 20 * 60,
+    bedtime: lateShift ? shiftEnd + 30 : 22 * 60 + 30,
+  };
+  if(lateShift && shiftEnd !== null){ slotMin.evening = shiftEnd + 10; }
+  let steps = scored.map(c => {
+    let t = slotMin[c.slot];
+    if(t <= now) t = soon;
+    let guard = 0;
+    while(agentInShift(t % 1440) && guard < 96){ t += 15; guard++; }
+    return { action:c.action, minute:t, helped:c.helped };
+  }).sort((a,b) => a.minute - b.minute);
+  // keep at least 20 minutes between steps
+  for(let i = 1; i < steps.length; i++){
+    if(steps[i].minute < steps[i-1].minute + 20) steps[i].minute = steps[i-1].minute + 20;
+  }
+  const whyDict = AGENT_LOCAL_WHY[currentLang] || AGENT_LOCAL_WHY.en;
+  const planSteps = steps.map(s => ({
+    action: s.action,
+    time: agentHHMM(s.minute),
+    title: agentActionTitle(s.action),
+    why: (s.helped ? ('✓ ' + agentT('helped_before') + ' — ') : '') + (whyDict[s.action] || AGENT_LOCAL_WHY.en[s.action] || ''),
+  }));
+  const shiftTxt = agentState.shiftOn ? agentT('summary_shift').replace('{from}', agentState.shiftFrom).replace('{to}', agentState.shiftTo) : '';
+  const goalLabel = agentT('goal_' + goal).replace(/^\S+\s/, '');
+  return {
+    summary: agentT('summary_local').replace('{goal}', goalLabel).replace('{n}', String(planSteps.length)).replace('{shift}', shiftTxt),
+    steps: planSteps,
+    tomorrow: agentT('tomorrow_local'),
+  };
+}
+
+// ---- UI ----
+function openAgent(){
+  agentLoadPrefs();
+  const existing = agentLoadPlan();
+  document.getElementById('agentModal').classList.add('open');
+  if(existing) agentRenderPlan(existing); else agentRenderSetup();
+}
+function closeAgent(){
+  document.getElementById('agentModal').classList.remove('open');
+  agentRenderHomeCard();
+}
+function agentShowView(name){
+  ['agentSetup','agentThinking','agentPlanView'].forEach(id => {
+    document.getElementById(id).classList.toggle('u-hidden', id !== name);
+  });
+}
+function agentApplyStaticStrings(){
+  document.querySelectorAll('[data-agent-i18n]').forEach(el => { el.textContent = agentT(el.getAttribute('data-agent-i18n')); });
+  document.querySelectorAll('[data-agent-i18n-ph]').forEach(el => { el.setAttribute('placeholder', agentT(el.getAttribute('data-agent-i18n-ph'))); });
+}
+function agentRenderSetup(){
+  agentApplyStaticStrings();
+  agentShowView('agentSetup');
+  const box = document.getElementById('agentGoals');
+  box.innerHTML = '';
+  AGENT_GOALS.forEach(g => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'agent-goal' + (agentState.goal === g ? ' selected' : '');
+    b.textContent = agentT('goal_' + g);
+    b.setAttribute('aria-pressed', agentState.goal === g ? 'true' : 'false');
+    b.addEventListener('click', () => { agentState.goal = g; agentSavePrefs(); agentRenderSetup(); });
+    box.appendChild(b);
+  });
+  const sh = document.getElementById('agentShiftOn');
+  sh.checked = agentState.shiftOn;
+  document.getElementById('agentShiftTimes').classList.toggle('u-hidden', !agentState.shiftOn);
+  document.getElementById('agentShiftFrom').value = agentState.shiftFrom;
+  document.getElementById('agentShiftTo').value = agentState.shiftTo;
+  const consent = document.getElementById('agentConsent');
+  const stored = safeGet('mc_agent_ai_consent');
+  consent.checked = stored === null ? (safeGet('mc_chat_consent') === '1' || safeGet('mc_coach_consent') === '1') : stored === '1';
+  document.getElementById('agentSetupMsg').textContent = '';
+}
+function agentToggleShift(on){
+  agentState.shiftOn = !!on; agentSavePrefs();
+  document.getElementById('agentShiftTimes').classList.toggle('u-hidden', !agentState.shiftOn);
+}
+function agentSetShiftFrom(v){ if(agentMin(v) !== null){ agentState.shiftFrom = v; agentSavePrefs(); } }
+function agentSetShiftTo(v){ if(agentMin(v) !== null){ agentState.shiftTo = v; agentSavePrefs(); } }
+function agentSetConsent(on){ safeSet('mc_agent_ai_consent', on ? '1' : '0'); }
+
+function agentBuildPlan(){
+  if(!agentState.goal){ document.getElementById('agentSetupMsg').textContent = agentT('pick_goal_first'); return; }
+  const note = document.getElementById('agentNote').value.trim();
+  // Safety first: a crisis note never produces a plan.
+  if(note && detectCrisisClient(note)){ closeAgent(); openCrisis(); return; }
+  const useAI = document.getElementById('agentConsent').checked;
+  agentSetConsent(useAI);
+
+  agentShowView('agentThinking');
+  const list = document.getElementById('agentThinkList');
+  list.innerHTML = '';
+  const lines = ['think_1','think_2','think_3','think_4'].map(k => {
+    const li = document.createElement('li');
+    li.className = 'agent-think-line';
+    li.textContent = agentT(k);
+    list.appendChild(li);
+    return li;
+  });
+  let i = 0;
+  const stepAnim = () => new Promise(res => {
+    const tick = () => {
+      if(i > 0) lines[i-1].classList.add('done');
+      if(i < lines.length){ lines[i].classList.add('active'); i++; setTimeout(tick, 650); }
+      else res();
+    };
+    tick();
+  });
+
+  const request = useAI ? fetch(CHAT_ENDPOINT, {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ message: agentBuildContext(note), history: [], lang: currentLang, mode: 'agent' }),
+    }).then(r => r.ok ? r.json() : { error:true }).catch(() => ({ error:true }))
+    : Promise.resolve(null);
+
+  Promise.all([request, stepAnim()]).then(([data]) => {
+    if(data && data.crisis){ closeAgent(); openCrisis(); return; }
+    let plan = null, source = 'local', notice = '';
+    if(data && data.plan && Array.isArray(data.plan.steps) && data.plan.steps.length){
+      plan = data.plan; source = 'ai';
+      plan.steps = plan.steps.filter(s => agentIsKnownAction(s.action));
+      if(!plan.steps.length){ plan = null; source = 'local'; }
+    }
+    if(!plan){
+      if(useAI) notice = agentT('error');
+      plan = agentLocalPlan();
+    }
+    const stored = { date: agentTodayKey(), goal: agentState.goal, source, notice,
+      summary: plan.summary || '', tomorrow: plan.tomorrow || '',
+      steps: plan.steps.map(s => ({ action:s.action, time:s.time || '', title:s.title || agentActionTitle(s.action), why:s.why || '', started:false, feedback:null, notified:false })) };
+    agentSavePlan(stored);
+    document.getElementById('agentNote').value = '';
+    agentRenderPlan(stored);
+    agentStartReminderLoop();
+  });
+}
+function agentIsKnownAction(a){
+  if(typeof a !== 'string') return false;
+  if(a.indexOf('ex-') === 0) return (EXERCISES.en || []).some(e => e.id === a) && !PREMIUM_EXERCISE_IDS.includes(a);
+  if(a.indexOf('lib-') === 0) return (LIBRARY.en || []).some(i => i.id === a) && !PREMIUM_LIBRARY_IDS.includes(a);
+  if(a.indexOf('sound-') === 0) return !!SOUND_STARTERS[a.slice(6)];
+  return ['sleep-mode','relief','calm-plan','health-log'].includes(a);
+}
+
+function agentRenderPlan(plan){
+  agentApplyStaticStrings();
+  agentShowView('agentPlanView');
+  document.getElementById('agentSummary').textContent = plan.summary;
+  const src = document.getElementById('agentSource');
+  src.textContent = plan.source === 'ai' ? ('✨ ' + agentT('source_ai')) : ('📱 ' + agentT('source_local'));
+  const notice = document.getElementById('agentNotice');
+  notice.textContent = plan.notice || '';
+  notice.classList.toggle('u-hidden', !plan.notice);
+
+  const done = plan.steps.filter(s => s.feedback !== null || s.started).length;
+  document.getElementById('agentProgress').textContent = done + ' ' + agentT('progress') + ' ' + plan.steps.length + ' ' + agentT('done_word');
+  document.getElementById('agentProgressBar').style.width = (plan.steps.length ? Math.round(done / plan.steps.length * 100) : 0) + '%';
+
+  const list = document.getElementById('agentSteps');
+  list.innerHTML = '';
+  plan.steps.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'agent-step' + (s.feedback !== null ? ' finished' : '') + (agentPendingFeedbackIdx === idx ? ' asking' : '');
+    const head = document.createElement('div');
+    head.className = 'agent-step-head';
+    const time = document.createElement('span');
+    time.className = 'agent-step-time';
+    time.textContent = s.time || '—';
+    const title = document.createElement('span');
+    title.className = 'agent-step-title';
+    title.textContent = agentActionIcon(s.action) + ' ' + s.title;
+    head.appendChild(time); head.appendChild(title);
+    card.appendChild(head);
+
+    if(s.why){
+      const why = document.createElement('p');
+      why.className = 'agent-step-why';
+      const lbl = document.createElement('strong');
+      lbl.textContent = agentT('why') + ' ';
+      why.appendChild(lbl);
+      why.appendChild(document.createTextNode(s.why));
+      card.appendChild(why);
+    }
+
+    const row = document.createElement('div');
+    row.className = 'agent-step-actions';
+    if(s.feedback === null){
+      const start = document.createElement('button');
+      start.type = 'button';
+      start.className = 'agent-start-btn';
+      start.textContent = s.started ? agentT('started') : agentT('start');
+      start.addEventListener('click', () => agentStartStep(idx));
+      row.appendChild(start);
+      if(s.started){
+        const q = document.createElement('span');
+        q.className = 'agent-helped-q';
+        q.textContent = agentT('helped_q');
+        const y = document.createElement('button'); y.type = 'button'; y.className = 'agent-fb-btn'; y.textContent = agentT('yes');
+        y.addEventListener('click', () => agentGiveFeedback(idx, true));
+        const n = document.createElement('button'); n.type = 'button'; n.className = 'agent-fb-btn'; n.textContent = agentT('no');
+        n.addEventListener('click', () => agentGiveFeedback(idx, false));
+        row.appendChild(q); row.appendChild(y); row.appendChild(n);
+      }
+    } else {
+      const t = document.createElement('span');
+      t.className = 'agent-fb-thanks';
+      t.textContent = s.feedback ? agentT('thanks_yes') : agentT('thanks_no');
+      row.appendChild(t);
+    }
+    card.appendChild(row);
+    list.appendChild(card);
+  });
+
+  const allDone = plan.steps.every(s => s.feedback !== null);
+  const doneBox = document.getElementById('agentAllDone');
+  doneBox.textContent = agentT('all_done');
+  doneBox.classList.toggle('u-hidden', !allDone);
+
+  const tm = document.getElementById('agentTomorrow');
+  tm.textContent = plan.tomorrow ? (agentT('tomorrow') + ': ' + plan.tomorrow) : '';
+
+  agentRenderLearned();
+  agentUpdateRemindBtn();
+  if(agentPendingFeedbackIdx !== null){
+    const asking = list.querySelector('.agent-step.asking');
+    if(asking) asking.scrollIntoView({ block:'center' });
+  }
+}
+function agentRenderLearned(){
+  const box = document.getElementById('agentLearned');
+  const scores = agentFeedbackScores();
+  const keys = Object.keys(scores);
+  box.innerHTML = '';
+  const label = document.createElement('div');
+  label.className = 'prefs-section-label';
+  label.textContent = agentT('learned');
+  box.appendChild(label);
+  if(!keys.length){
+    const p = document.createElement('p'); p.className = 'agent-learned-none'; p.textContent = agentT('learned_none'); box.appendChild(p); return;
+  }
+  const wrap = document.createElement('div');
+  wrap.className = 'agent-learned-chips';
+  keys.sort((a,b) => (scores[b].yes - scores[b].no) - (scores[a].yes - scores[a].no)).slice(0, 6).forEach(a => {
+    const c = document.createElement('span');
+    const net = scores[a].yes - scores[a].no;
+    c.className = 'agent-chip ' + (net > 0 ? 'good' : 'bad');
+    c.textContent = (net > 0 ? '👍 ' : '👎 ') + agentActionTitle(a);
+    wrap.appendChild(c);
+  });
+  box.appendChild(wrap);
+}
+function agentStartStep(idx){
+  const plan = agentLoadPlan();
+  if(!plan || !plan.steps[idx]) return;
+  plan.steps[idx].started = true;
+  agentSavePlan(plan);
+  agentPendingFeedbackIdx = idx;
+  document.getElementById('agentModal').classList.remove('open');
+  agentLaunch(plan.steps[idx].action);
+}
+function agentGiveFeedback(idx, helped){
+  const plan = agentLoadPlan();
+  if(!plan || !plan.steps[idx]) return;
+  plan.steps[idx].feedback = !!helped;
+  agentSavePlan(plan);
+  const fb = agentLoadFeedback();
+  fb.push({ action: plan.steps[idx].action, helped: !!helped, goal: plan.goal, ts: Date.now() });
+  agentSaveFeedback(fb);
+  addEntry('agent_feedback', { action: plan.steps[idx].action, helped: !!helped, goal: plan.goal });
+  agentPendingFeedbackIdx = null;
+  agentRenderPlan(plan);
+  agentRenderHomeCard();
+}
+function agentNewPlan(){
+  safeSet('mc_agent_plan', '');
+  agentPendingFeedbackIdx = null;
+  agentRenderSetup();
+}
+
+// When the tool a step launched is closed, come back to the plan and ask
+// "did it help?" — that answer is what the agent learns from.
+(function agentWatchToolClose(){
+  ['exModal','soundsModal','sleepModal','reliefModal','calmPlanModal','healthModal'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    new MutationObserver(() => {
+      if(el.classList.contains('open') || agentPendingFeedbackIdx === null) return;
+      if(document.querySelector('.prefs-overlay.open, .modal-overlay.open, .sleep-overlay.open')) return;
+      const plan = agentLoadPlan();
+      if(!plan) { agentPendingFeedbackIdx = null; return; }
+      document.getElementById('agentModal').classList.add('open');
+      agentRenderPlan(plan);
+    }).observe(el, { attributes:true, attributeFilter:['class'] });
+  });
+})();
+
+// ---- home card: the next step, always visible ----
+function agentNextStep(plan){
+  if(!plan) return null;
+  const now = agentNowMin();
+  const open = plan.steps.map((s, i) => ({ s, i })).filter(x => x.s.feedback === null && !x.s.started);
+  if(!open.length) return null;
+  const upcoming = open.filter(x => agentMin(x.s.time) === null || agentMin(x.s.time) >= now - 30);
+  return (upcoming[0] || open[0]);
+}
+function agentRenderHomeCard(){
+  const card = document.getElementById('agentHomeCard');
+  if(!card) return;
+  const plan = agentLoadPlan();
+  const titleEl = document.getElementById('agentHomeTitle');
+  const nextEl = document.getElementById('agentHomeNext');
+  const btn = document.getElementById('agentHomeBtn');
+  titleEl.textContent = '🧭 ' + agentT('cta');
+  const next = agentNextStep(plan);
+  if(plan && next){
+    nextEl.textContent = agentT('next_label') + ': ' + (next.s.time ? next.s.time + ' · ' : '') + next.s.title;
+    btn.textContent = agentT('open_plan');
+  } else if(plan){
+    nextEl.textContent = agentT('all_done');
+    btn.textContent = agentT('open_plan');
+  } else {
+    nextEl.textContent = agentT('subtitle');
+    btn.textContent = agentT('build');
+  }
+}
+
+// ---- reminders (while the app is open; notifications if allowed) ----
+function agentRemindersOn(){ return safeGet('mc_agent_reminders') === '1'; }
+function agentUpdateRemindBtn(){
+  const b = document.getElementById('agentRemindBtn');
+  if(!b) return;
+  b.textContent = agentRemindersOn() ? agentT('remind_active') : agentT('remind_on');
+  b.classList.toggle('active', agentRemindersOn());
+}
+function agentToggleReminders(){
+  if(agentRemindersOn()){ safeSet('mc_agent_reminders', '0'); agentUpdateRemindBtn(); return; }
+  safeSet('mc_agent_reminders', '1');
+  agentUpdateRemindBtn();
+  if('Notification' in window && Notification.permission === 'default'){
+    Notification.requestPermission().then(p => { if(p === 'denied') agentFlashNotice(agentT('remind_denied')); });
+  } else if('Notification' in window && Notification.permission === 'denied'){
+    agentFlashNotice(agentT('remind_denied'));
+  }
+  agentStartReminderLoop();
+}
+function agentFlashNotice(text){
+  const n = document.getElementById('agentNotice');
+  if(!n) return;
+  n.textContent = text; n.classList.remove('u-hidden');
+}
+function agentStartReminderLoop(){
+  if(agentReminderTimer) return;
+  agentReminderTimer = setInterval(agentCheckReminders, 30000);
+  agentCheckReminders();
+}
+function agentCheckReminders(){
+  agentRenderHomeCard();
+  if(!agentRemindersOn()) return;
+  const plan = agentLoadPlan();
+  if(!plan) return;
+  const now = agentNowMin();
+  let changed = false;
+  plan.steps.forEach(s => {
+    const t = agentMin(s.time);
+    if(t === null || s.notified || s.started || s.feedback !== null) return;
+    if(now >= t && now - t <= 20){
+      s.notified = true; changed = true;
+      const body = agentT('reminder_now') + ' ' + s.title;
+      agentShowToast(body);
+      if('Notification' in window && Notification.permission === 'granted'){
+        const opts = { body: s.why || '', icon: '/icon-192.png?v=2', tag: 'waha-agent-' + s.action };
+        if(navigator.serviceWorker && navigator.serviceWorker.ready){
+          navigator.serviceWorker.ready.then(reg => reg.showNotification('Waha · ' + body, opts)).catch(() => { try{ new Notification('Waha · ' + body, opts); }catch(e){} });
+        } else { try{ new Notification('Waha · ' + body, opts); }catch(e){} }
+      }
+    }
+  });
+  if(changed) agentSavePlan(plan);
+}
+function agentShowToast(text){
+  const t = document.getElementById('agentToast');
+  if(!t) return;
+  document.getElementById('agentToastText').textContent = text;
+  t.classList.remove('u-hidden');
+  clearTimeout(agentShowToast._h);
+  agentShowToast._h = setTimeout(() => t.classList.add('u-hidden'), 15000);
+}
+function agentToastOpen(){
+  document.getElementById('agentToast').classList.add('u-hidden');
+  openAgent();
+}
+
+function agentInit(){
+  agentLoadPrefs();
+  agentRenderHomeCard();
+  if(agentLoadPlan()) agentStartReminderLoop();
+}
+
 function detectBrowserLang(){
   try{
     const supported = LANGS.map(l=>l.code);
@@ -6076,6 +6796,7 @@ maybeShowAgeGate();
 maybeShowReminder();
 loadChatMemory();
 setTimeout(maybeShowDailyBrief, 700);
+agentInit();
 
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=>{
@@ -6117,6 +6838,16 @@ function sendMsgOnEnter(e){
 }
 
 const ACTIONS = {
+  agentBuildPlan,
+  agentNewPlan,
+  agentSetConsent,
+  agentSetShiftFrom,
+  agentSetShiftTo,
+  agentToastOpen,
+  agentToggleReminders,
+  agentToggleShift,
+  closeAgent,
+  openAgent,
   acceptChatConsent,
   acceptCoachConsent,
   addGoal,
