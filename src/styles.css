@@ -641,3 +641,11 @@
   .rv-thanks{font-size:15px;line-height:1.7;color:var(--ink);margin:6px 0 18px;}
   .pilot-chip{display:inline-block;background:rgba(201,166,107,0.18);color:var(--accent-text);border:1px solid rgba(201,166,107,0.5);border-radius:100px;padding:1px 8px;font-size:11px;}
 
+  /* ---- anonymous usage stats consent ---- */
+  .stats-consent{position:relative;z-index:2;max-width:992px;width:calc(100% - 48px);margin:14px auto 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--paper-dim);border:1px dashed rgba(201,166,107,0.6);border-radius:16px;padding:14px 18px;}
+  .stats-consent-text{flex:1;min-width:220px;}
+  .stats-consent-title{font-size:14.5px;font-weight:700;color:var(--ink);}
+  .stats-consent-body{font-size:12.5px;line-height:1.6;color:rgba(var(--ink-rgb),0.72);margin-top:2px;}
+  .stats-consent-actions{display:flex;gap:8px;align-items:center;}
+  .stats-consent-no{background:none;border:none;color:rgba(var(--ink-rgb),0.65);font-family:inherit;font-size:13px;text-decoration:underline;cursor:pointer;}
+
