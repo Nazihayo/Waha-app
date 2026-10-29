@@ -5676,6 +5676,7 @@ function deleteExerciseHistoryOnly(){
   removeEntriesByType('agent_feedback');
   safeSet('mc_agent_feedback', '[]');
   safeSet('mc_agent_plan', '');
+  safeSet('mc_agent_memory', '[]');
   updateStreakDisplay();
   updateProgressStats();
   showPassportStatus(I18N[currentLang].passport_done);
@@ -6316,6 +6317,10 @@ function agentBuildContext(note){
   const notHelped = Object.keys(scores).filter(a => scores[a].no >= scores[a].yes && scores[a].no > 0).map(a => a + ' (' + scores[a].no + 'x)');
   lines.push('Marked helpful before: ' + (helped.length ? helped.join(', ') : 'none yet'));
   lines.push('Marked NOT helpful before: ' + (notHelped.length ? notHelped.join(', ') : 'none yet'));
+  const pats = agentDetectPatterns();
+  lines.push('Patterns detected on device from their logs: ' + (pats.length ? pats.map(p => p.fact).join('; ') : 'none'));
+  const mem = agentLoadMemory().filter(m => m.d !== agentTodayKey()).slice(-3).reverse();
+  lines.push('Earlier notes from the person (their own words, newest first): ' + (mem.length ? mem.map(m => m.d + ': "' + m.note.slice(0, 200) + '"').join(' | ') : 'none'));
   return lines.join('\n');
 }
 
@@ -6431,7 +6436,7 @@ function agentBuildPlan(){
   agentShowView('agentThinking');
   const list = document.getElementById('agentThinkList');
   list.innerHTML = '';
-  const lines = ['think_1','think_2','think_3','think_4'].map(k => {
+  const lines = ['think_1','think_mem','think_2','think_3','think_4'].map(k => {
     const li = document.createElement('li');
     li.className = 'agent-think-line';
     li.textContent = agentT(k);
@@ -6470,6 +6475,7 @@ function agentBuildPlan(){
       summary: plan.summary || '', tomorrow: plan.tomorrow || '',
       steps: plan.steps.map(s => ({ action:s.action, time:s.time || '', title:s.title || agentActionTitle(s.action), why:s.why || '', started:false, feedback:null, notified:false })) };
     agentSavePlan(stored);
+    if(note) agentRemember(note);
     document.getElementById('agentNote').value = '';
     agentRenderPlan(stored);
     agentStartReminderLoop();
@@ -6561,6 +6567,7 @@ function agentRenderPlan(plan){
   tm.textContent = plan.tomorrow ? (agentT('tomorrow') + ': ' + plan.tomorrow) : '';
 
   agentRenderLearned();
+  agentRenderMemory();
   agentUpdateRemindBtn();
   if(agentPendingFeedbackIdx !== null){
     const asking = list.querySelector('.agent-step.asking');
@@ -6660,9 +6667,20 @@ function agentRenderHomeCard(){
     nextEl.textContent = agentT('all_done');
     btn.textContent = agentT('open_plan');
   } else {
+    const pro = agentProactiveMessage();
+    agentProactiveGoal = pro ? pro.goal : null;
+    if(pro){
+      card.classList.add('proactive');
+      nextEl.textContent = pro.text;
+      btn.textContent = agentT('pro_btn');
+      btn.setAttribute('data-click', 'agentProactiveGo');
+      return;
+    }
     nextEl.textContent = agentT('subtitle');
     btn.textContent = agentT('build');
   }
+  card.classList.remove('proactive');
+  btn.setAttribute('data-click', 'openAgent');
 }
 
 // ---- reminders (while the app is open; notifications if allowed) ----
@@ -6729,6 +6747,271 @@ function agentShowToast(text){
 function agentToastOpen(){
   document.getElementById('agentToast').classList.add('u-hidden');
   openAgent();
+}
+
+// ---------------------------------------------------------------------
+// AGENT MEMORY, PATTERNS, PROACTIVE CHECK-IN, CALENDAR
+// - Memory: the person's own notes ("how are you today?") are kept ON
+//   THIS DEVICE (mc_agent_memory, last 10), shown to them under "What
+//   Waha remembers", and each one can be forgotten. With AI consent, the
+//   last 3 go into the plan request so the agent can show continuity.
+// - Patterns: deterministic, on-device analysis of mood + sleep logs
+//   (no AI involved) — e.g. lower mood on short-sleep days, a run of
+//   short nights, mood trending down/up. Shown to the person and passed
+//   to the planner as facts.
+// - Proactive check-in: when there is no plan yet today, the home card
+//   speaks first, based on a detected pattern or the last note, and one
+//   tap makes the plan.
+// - Calendar: the plan is exported as a standard .ics file (one event
+//   with a reminder per timed step) that any calendar app can import —
+//   the agent acting outside the app, with the person's tap as consent.
+// Strings: ar / en / de / tr; other languages fall back to English.
+// ---------------------------------------------------------------------
+const AGENT_I18N_EXTRA = {
+  ar: {
+    think_mem:'أتذكّر ما قلته من قبل وأبحث عن أنماط في نومك ومزاجك',
+    mem_label:'ما يتذكّره Waha', mem_none:'عندما تكتب كيف حالك، أتذكّره لأفهمك أكثر في الأيام القادمة. يبقى على جهازك فقط.',
+    mem_forget:'انسَ هذا', mem_forget_all:'انسَ كل شيء', mem_forgotten:'تم الحذف من ذاكرة Waha.',
+    patterns_label:'أنماط لاحظتها', pat_none:'سجّل مزاجك ونومك بضعة أيام، وسأكتشف الأنماط بنفسي.',
+    pat_sleep_mood:'في الأيام التي نمت فيها أقل من 6 ساعات كان مزاجك أقل ({low} مقابل {high} من 5).',
+    pat_short_nights:'عدد الليالي الأخيرة المتتالية التي نمت فيها أقل من 6 ساعات: {n}.',
+    pat_mood_down:'مزاجك في الأيام الأخيرة أقل من الأيام التي قبلها.',
+    pat_mood_up:'مزاجك يتحسّن مقارنة بالأيام السابقة 🌱',
+    pro_sleep:'لاحظت أنك نمت قليلاً في الليالي الأخيرة. هل أصنع لك خطة أخف تساعدك على النوم؟',
+    pro_mood:'لاحظت أن مزاجك أقل هذه الأيام. هل أصنع لك خطة قصيرة ولطيفة لليوم؟',
+    pro_memory:'آخر مرة كتبت: «{note}». كيف حالك اليوم؟ أستطيع أن أصنع لك خطة الآن.',
+    pro_btn:'نعم، اصنعها',
+    ics_btn:'📅 أضف للتقويم', ics_done:'تم تنزيل ملف التقويم. افتحه لإضافة الخطوات إلى تقويمك مع تنبيه لكل خطوة.', ics_none:'لا توجد خطوات بوقت محدد لإضافتها.',
+  },
+  en: {
+    think_mem:'Remembering what you told me and looking for patterns in your sleep and mood',
+    mem_label:'What Waha remembers', mem_none:"When you write how you are, I remember it so I understand you better on the next days. It stays on your device only.",
+    mem_forget:'Forget this', mem_forget_all:'Forget everything', mem_forgotten:"Removed from Waha's memory.",
+    patterns_label:'Patterns I noticed', pat_none:"Log your mood and sleep for a few days and I'll spot patterns by myself.",
+    pat_sleep_mood:'On days you slept under 6 hours, your mood was lower ({low} vs {high} out of 5).',
+    pat_short_nights:'You slept under 6 hours on the last {n} nights.',
+    pat_mood_down:'Your mood over the last few days is lower than the days before.',
+    pat_mood_up:'Your mood is improving compared with the days before 🌱',
+    pro_sleep:"I noticed you've slept little the last few nights. Shall I make you a lighter plan that helps you sleep?",
+    pro_mood:"I noticed your mood has been lower these days. Shall I make you a short, gentle plan for today?",
+    pro_memory:'Last time you wrote: "{note}". How are you today? I can make your plan now.',
+    pro_btn:'Yes, make it',
+    ics_btn:'📅 Add to calendar', ics_done:'Calendar file downloaded. Open it to add the steps to your calendar, each with a reminder.', ics_none:'There are no timed steps to add.',
+  },
+  de: {
+    think_mem:'Erinnere mich an das, was du erzählt hast, und suche Muster in Schlaf und Stimmung',
+    mem_label:'Was Waha sich merkt', mem_none:'Wenn du schreibst, wie es dir geht, merke ich es mir, um dich an den nächsten Tagen besser zu verstehen. Es bleibt nur auf deinem Gerät.',
+    mem_forget:'Vergessen', mem_forget_all:'Alles vergessen', mem_forgotten:'Aus Wahas Gedächtnis gelöscht.',
+    patterns_label:'Muster, die mir auffallen', pat_none:'Trage ein paar Tage Stimmung und Schlaf ein, dann erkenne ich Muster selbst.',
+    pat_sleep_mood:'An Tagen mit weniger als 6 Stunden Schlaf war deine Stimmung niedriger ({low} statt {high} von 5).',
+    pat_short_nights:'Du hast in den letzten {n} Nächten weniger als 6 Stunden geschlafen.',
+    pat_mood_down:'Deine Stimmung ist in den letzten Tagen niedriger als davor.',
+    pat_mood_up:'Deine Stimmung wird besser als in den Tagen davor 🌱',
+    pro_sleep:'Mir ist aufgefallen, dass du die letzten Nächte wenig geschlafen hast. Soll ich dir einen leichteren Plan machen, der beim Schlafen hilft?',
+    pro_mood:'Mir ist aufgefallen, dass deine Stimmung in letzter Zeit niedriger ist. Soll ich dir einen kurzen, sanften Plan für heute machen?',
+    pro_memory:'Letztes Mal hast du geschrieben: „{note}". Wie geht es dir heute? Ich kann dir jetzt deinen Plan machen.',
+    pro_btn:'Ja, mach ihn',
+    ics_btn:'📅 Zum Kalender', ics_done:'Kalenderdatei heruntergeladen. Öffne sie, um die Schritte mit Erinnerung in deinen Kalender zu übernehmen.', ics_none:'Es gibt keine Schritte mit Uhrzeit zum Hinzufügen.',
+  },
+  tr: {
+    think_mem:'Bana anlattıklarını hatırlıyor, uyku ve ruh halinde örüntü arıyorum',
+    mem_label:"Waha'nın hatırladıkları", mem_none:'Nasıl olduğunu yazdığında, sonraki günlerde seni daha iyi anlamak için hatırlarım. Yalnızca cihazında kalır.',
+    mem_forget:'Bunu unut', mem_forget_all:'Hepsini unut', mem_forgotten:"Waha'nın hafızasından silindi.",
+    patterns_label:'Fark ettiğim örüntüler', pat_none:'Birkaç gün ruh halini ve uykunu kaydet, örüntüleri kendim bulayım.',
+    pat_sleep_mood:"6 saatten az uyuduğun günlerde ruh halin daha düşüktü (5 üzerinden {low}'e karşı {high}).",
+    pat_short_nights:'Son {n} gece 6 saatten az uyudun.',
+    pat_mood_down:'Son günlerde ruh halin önceki günlerden daha düşük.',
+    pat_mood_up:'Ruh halin önceki günlere göre iyileşiyor 🌱',
+    pro_sleep:'Son gecelerde az uyuduğunu fark ettim. Uyumana yardım edecek daha hafif bir plan yapayım mı?',
+    pro_mood:'Bu günlerde ruh halinin daha düşük olduğunu fark ettim. Bugün için kısa ve nazik bir plan yapayım mı?',
+    pro_memory:'Geçen sefer şunu yazmıştın: "{note}". Bugün nasılsın? Planını şimdi yapabilirim.',
+    pro_btn:'Evet, yap',
+    ics_btn:'📅 Takvime ekle', ics_done:'Takvim dosyası indirildi. Adımları her biri için hatırlatıcıyla takvimine eklemek için aç.', ics_none:'Eklenecek saatli adım yok.',
+  },
+};
+Object.keys(AGENT_I18N_EXTRA).forEach(l => { if(AGENT_I18N[l]) Object.assign(AGENT_I18N[l], AGENT_I18N_EXTRA[l]); });
+function agentFill(str, vars){ return String(str).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] !== undefined) ? vars[k] : m); }
+
+// ---- memory (on device) ----
+const AGENT_MEMORY_MAX = 10;
+function agentLoadMemory(){
+  try{ const m = JSON.parse(safeGet('mc_agent_memory') || '[]'); return Array.isArray(m) ? m.filter(x => x && typeof x.note === 'string' && typeof x.d === 'string') : []; }catch(e){ return []; }
+}
+function agentSaveMemory(list){ safeSet('mc_agent_memory', JSON.stringify(list.slice(-AGENT_MEMORY_MAX))); }
+function agentRemember(note){
+  const clean = String(note || '').trim().slice(0, 200);
+  if(!clean) return;
+  const list = agentLoadMemory();
+  list.push({ d: agentTodayKey(), note: clean, ts: Date.now() });
+  agentSaveMemory(list);
+}
+function agentForgetMemory(ts){
+  agentSaveMemory(agentLoadMemory().filter(m => m.ts !== ts));
+  agentRenderMemory();
+  agentRenderHomeCard();
+}
+function agentForgetAll(){
+  safeSet('mc_agent_memory', '[]');
+  agentRenderMemory();
+  agentRenderHomeCard();
+  agentFlashNotice(agentT('mem_forgotten'));
+}
+
+// ---- patterns (deterministic, on device) ----
+function agentDailySeries(days){
+  const cutoff = Date.now() - days * 86400000;
+  const moodByDay = {};
+  getEntries().filter(e => !e.deleted_at && e.entity_type === 'mood_log' && e.occurred_at >= cutoff).forEach(e => {
+    const s = e.payload && e.payload.score;
+    if(typeof s !== 'number') return;
+    const k = dateKeyFromTs(e.occurred_at);
+    (moodByDay[k] = moodByDay[k] || []).push(s);
+  });
+  const sleepByDay = {};
+  getHealthLogs().forEach(l => { if(typeof l.sleepHours === 'number' && l.id >= dateKeyFromTs(cutoff)) sleepByDay[l.id] = l.sleepHours; });
+  const mood = {};
+  Object.keys(moodByDay).forEach(k => { mood[k] = moodByDay[k].reduce((a,b)=>a+b,0) / moodByDay[k].length; });
+  return { mood, sleep: sleepByDay };
+}
+function agentAvg(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0) / arr.length : null; }
+// Returns [{ id, text, goal }] — goal is the plan goal this pattern points to.
+function agentDetectPatterns(){
+  const out = [];
+  const { mood, sleep } = agentDailySeries(14);
+  // 1) run of short nights (most recent first)
+  const sleepDays = Object.keys(sleep).sort().reverse();
+  let run = 0;
+  for(const k of sleepDays){ if(sleep[k] < 6) run++; else break; }
+  if(run >= 2) out.push({ id:'short_nights', goal:'sleep', text: agentFill(agentT('pat_short_nights'), { n: run }), fact: 'slept under 6h on the last ' + run + ' logged nights' });
+  // 2) mood on short-sleep days vs. other days
+  const paired = Object.keys(mood).filter(k => sleep[k] !== undefined);
+  const low = paired.filter(k => sleep[k] < 6).map(k => mood[k]);
+  const high = paired.filter(k => sleep[k] >= 6).map(k => mood[k]);
+  if(low.length >= 2 && high.length >= 2){
+    const a = agentAvg(low), b = agentAvg(high);
+    if(b - a >= 0.5) out.push({ id:'sleep_mood', goal:'sleep', text: agentFill(agentT('pat_sleep_mood'), { low: a.toFixed(1), high: b.toFixed(1) }), fact: 'mood averages ' + a.toFixed(1) + '/5 on days after under 6h sleep vs ' + b.toFixed(1) + '/5 otherwise' });
+  }
+  // 3) mood trend: last 3 logged days vs. the logged days before them
+  const moodDays = Object.keys(mood).sort();
+  if(moodDays.length >= 5){
+    const recent = agentAvg(moodDays.slice(-3).map(k => mood[k]));
+    const before = agentAvg(moodDays.slice(0, -3).map(k => mood[k]));
+    if(before - recent >= 0.7) out.push({ id:'mood_down', goal:'stress', text: agentT('pat_mood_down'), fact: 'mood trending down: last 3 logged days ' + recent.toFixed(1) + '/5 vs ' + before.toFixed(1) + '/5 before' });
+    else if(recent - before >= 0.7) out.push({ id:'mood_up', goal:null, text: agentT('pat_mood_up'), fact: 'mood trending up: last 3 logged days ' + recent.toFixed(1) + '/5 vs ' + before.toFixed(1) + '/5 before' });
+  }
+  return out;
+}
+
+// ---- rendering memory + patterns inside the plan view ----
+function agentRenderMemory(){
+  const box = document.getElementById('agentMemory');
+  if(!box) return;
+  box.innerHTML = '';
+  const pats = agentDetectPatterns();
+  const pl = document.createElement('div');
+  pl.className = 'prefs-section-label';
+  pl.textContent = '🔎 ' + agentT('patterns_label');
+  box.appendChild(pl);
+  if(pats.length){
+    const ul = document.createElement('ul');
+    ul.className = 'agent-patterns';
+    pats.forEach(p => { const li = document.createElement('li'); li.textContent = p.text; ul.appendChild(li); });
+    box.appendChild(ul);
+  } else {
+    const p = document.createElement('p'); p.className = 'agent-learned-none'; p.textContent = agentT('pat_none'); box.appendChild(p);
+  }
+  const ml = document.createElement('div');
+  ml.className = 'prefs-section-label agent-mem-label';
+  ml.textContent = '🧠 ' + agentT('mem_label');
+  box.appendChild(ml);
+  const mem = agentLoadMemory().slice().reverse();
+  if(!mem.length){
+    const p = document.createElement('p'); p.className = 'agent-learned-none'; p.textContent = agentT('mem_none'); box.appendChild(p);
+    return;
+  }
+  mem.slice(0, 5).forEach(m => {
+    const row = document.createElement('div');
+    row.className = 'agent-mem-row';
+    const t = document.createElement('span');
+    t.className = 'agent-mem-text';
+    t.textContent = m.d + ' · "' + m.note + '"';
+    const x = document.createElement('button');
+    x.type = 'button';
+    x.className = 'agent-mem-forget';
+    x.textContent = '✕';
+    x.setAttribute('aria-label', agentT('mem_forget'));
+    x.title = agentT('mem_forget');
+    x.addEventListener('click', () => agentForgetMemory(m.ts));
+    row.appendChild(t); row.appendChild(x);
+    box.appendChild(row);
+  });
+  const all = document.createElement('button');
+  all.type = 'button';
+  all.className = 'agent-mem-forget-all';
+  all.textContent = agentT('mem_forget_all');
+  all.addEventListener('click', agentForgetAll);
+  box.appendChild(all);
+}
+
+// ---- proactive check-in (the agent speaks first) ----
+function agentProactiveMessage(){
+  const pats = agentDetectPatterns();
+  const p = pats.find(x => x.id === 'short_nights') || pats.find(x => x.id === 'sleep_mood');
+  if(p) return { text: agentT('pro_sleep'), goal: 'sleep' };
+  if(pats.find(x => x.id === 'mood_down')) return { text: agentT('pro_mood'), goal: 'stress' };
+  const mem = agentLoadMemory();
+  const last = mem[mem.length - 1];
+  if(last && Date.now() - (last.ts || 0) < 7 * 86400000 && last.d !== agentTodayKey()){
+    const note = last.note.length > 70 ? last.note.slice(0, 70) + '…' : last.note;
+    return { text: agentFill(agentT('pro_memory'), { note }), goal: null };
+  }
+  return null;
+}
+let agentProactiveGoal = null;
+function agentProactiveGo(){
+  agentLoadPrefs();
+  if(agentProactiveGoal) { agentState.goal = agentProactiveGoal; agentSavePrefs(); }
+  openAgent();
+  // With a goal known, the agent acts straight away; otherwise the person
+  // picks a goal first in the setup view that openAgent() just showed.
+  if(agentState.goal && !agentLoadPlan()) agentBuildPlan();
+}
+
+// ---- calendar export (.ics) ----
+function agentIcsEscape(s){ return String(s || '').replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;'); }
+function agentExportCalendar(){
+  const plan = agentLoadPlan();
+  const steps = plan ? plan.steps.filter(s => agentMin(s.time) !== null) : [];
+  if(!steps.length){ agentFlashNotice(agentT('ics_none')); return; }
+  const day = agentTodayKey().replace(/-/g, '');
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Waha//Agent plan//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  steps.forEach((s, i) => {
+    const start = agentMin(s.time);
+    const end = start + 10;
+    const hhmm = m => String(Math.floor(m/60) % 24).padStart(2,'0') + String(m % 60).padStart(2,'0') + '00';
+    lines.push('BEGIN:VEVENT',
+      'UID:waha-' + day + '-' + i + '-' + s.action + '@wahaapp',
+      'DTSTAMP:' + stamp,
+      'DTSTART:' + day + 'T' + hhmm(start),
+      'DTEND:' + day + 'T' + hhmm(Math.min(end, 1439)),
+      'SUMMARY:' + agentIcsEscape('Waha · ' + s.title),
+      'DESCRIPTION:' + agentIcsEscape(s.why || ''),
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:' + agentIcsEscape('Waha · ' + s.title),'TRIGGER:-PT0M','END:VALARM',
+      'END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  const blob = new Blob([lines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'waha-plan-' + agentTodayKey() + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  addEntry('agent_calendar_export', { steps: steps.length });
+  agentFlashNotice(agentT('ics_done'));
 }
 
 function agentInit(){
@@ -6844,6 +7127,9 @@ function sendMsgOnEnter(e){
 
 const ACTIONS = {
   agentBuildPlan,
+  agentExportCalendar,
+  agentForgetAll,
+  agentProactiveGo,
   agentNewPlan,
   agentSetConsent,
   agentSetShiftFrom,
