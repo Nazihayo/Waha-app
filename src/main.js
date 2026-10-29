@@ -5529,6 +5529,7 @@ function toggleVoice(){
   document.getElementById('voiceToggle').classList.toggle('active', voiceEnabled);
   document.getElementById('voiceLabel').textContent = voiceEnabled ? I18N[currentLang].voice_on : I18N[currentLang].voice_off;
   if(!voiceEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
+  if(voiceEnabled) speak(chatT('voice_test'), currentLang);
 }
 
 function guessVoiceGender(name){
@@ -5541,29 +5542,85 @@ function guessVoiceGender(name){
   if(knownMale.some(k=>n.includes(k))) return 'male';
   return null;
 }
-function speak(text){
-  if(!voiceEnabled || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = speechLangTag(currentLang);
-  utter.rate = 0.98;
-  const voices = window.speechSynthesis.getVoices();
-  const langVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(currentLang));
-  const userGender = safeGet('mc_user_gender');
-  let match = null;
-  if(userGender === 'male' || userGender === 'female'){
-    const wantGender = userGender === 'male' ? 'female' : 'male';
-    match = langVoices.find(v => guessVoiceGender(v.name) === wantGender);
-  }
-  if(!match) match = langVoices[0];
-  if(match) utter.voice = match;
-  const dot = document.getElementById('statusDot');
-  utter.onstart = ()=> dot.classList.add('speaking');
-  utter.onend = ()=> dot.classList.remove('speaking');
-  utter.onerror = ()=> dot.classList.remove('speaking');
-  window.speechSynthesis.speak(utter);
+// ---------------------------------------------------------------------
+// READ ALOUD
+// Uses the voices built into the browser/OS. Fixes vs. the first version:
+// - reads in the language the REPLY is written in (the server says which,
+//   with a script-based guess as fallback), not the app's UI language;
+// - prefers natural/neural voices (e.g. Edge's "Online (Natural)" voices,
+//   which sound far better in Arabic), then the right region;
+// - splits long replies into sentences (Chrome stops long utterances);
+// - when the device has no voice for that language, says so once in the
+//   chat instead of staying silent.
+// ---------------------------------------------------------------------
+let speakNoVoiceWarned = {};
+function detectTextLang(text){
+  const t = String(text || '');
+  if(/[\u0600-\u06FF]/.test(t)) return ['fa','ur','ku'].includes(currentLang) ? currentLang : 'ar';
+  if(/[\u0400-\u04FF]/.test(t)) return 'ru';
+  if(/[äöüß]/i.test(t)) return 'de';
+  if(/[ğışİ]/.test(t)) return 'tr';
+  if(['ar','fa','ur'].includes(currentLang)) return 'en';
+  return currentLang;
 }
-if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = ()=>{}; }
+function pickVoice(lang){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices() || [];
+  const want = speechLangTag(lang).toLowerCase();
+  const cands = voices.filter(v => v.lang && v.lang.toLowerCase().replace('_','-').startsWith(lang));
+  if(!cands.length) return null;
+  const userGender = safeGet('mc_user_gender');
+  const wantGender = userGender === 'male' ? 'female' : (userGender === 'female' ? 'male' : null);
+  let best = null, bestScore = -1;
+  cands.forEach(v => {
+    const n = (v.name || '').toLowerCase();
+    let sc = 0;
+    if(/natural|neural|online|premium|enhanced/.test(n)) sc += 4;
+    if(v.lang.toLowerCase().replace('_','-') === want) sc += 1;
+    if(wantGender && guessVoiceGender(v.name) === wantGender) sc += 1;
+    if(sc > bestScore){ best = v; bestScore = sc; }
+  });
+  return best;
+}
+function speakChunks(text){
+  const parts = String(text).replace(/\s+/g, ' ').match(/[^.!?؟。\n]+[.!?؟。]*/g) || [String(text)];
+  const out = [];
+  parts.forEach(p => {
+    p = p.trim(); if(!p) return;
+    if(out.length && (out[out.length-1] + ' ' + p).length < 180) out[out.length-1] += ' ' + p; else out.push(p);
+  });
+  return out;
+}
+function speak(text, lang){
+  if(!voiceEnabled || !('speechSynthesis' in window) || !text) return;
+  const l = (typeof lang === 'string' && /^[a-z]{2}$/.test(lang) && lang !== 'ot') ? lang : detectTextLang(text);
+  window.speechSynthesis.cancel();
+  const voice = pickVoice(l);
+  if(!voice && !speakNoVoiceWarned[l]){
+    speakNoVoiceWarned[l] = true;
+    try{
+      const log = document.getElementById('chatLog');
+      const n = document.createElement('div');
+      n.className = 'msg system-notice';
+      n.textContent = chatT('no_voice');
+      log.appendChild(n);
+      log.scrollTop = log.scrollHeight;
+    }catch(e){}
+  }
+  const dot = document.getElementById('statusDot');
+  const chunks = speakChunks(text);
+  chunks.forEach((c, i) => {
+    const utter = new SpeechSynthesisUtterance(c);
+    utter.lang = voice ? voice.lang : speechLangTag(l);
+    if(voice) utter.voice = voice;
+    utter.rate = 0.98;
+    if(i === 0) utter.onstart = ()=> dot && dot.classList.add('speaking');
+    if(i === chunks.length - 1){ utter.onend = ()=> dot && dot.classList.remove('speaking'); }
+    utter.onerror = ()=> dot && dot.classList.remove('speaking');
+    window.speechSynthesis.speak(utter);
+  });
+}
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = ()=>{}; try{ window.speechSynthesis.getVoices(); }catch(e){} }
 
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 if(SR){
@@ -5887,10 +5944,10 @@ function updateFreeChatCounter(){
 // Strings: ar / en / de / tr; other languages fall back to English.
 // ---------------------------------------------------------------------
 const CHAT_X = {
-  ar: { ai_banner:'🤖 Waha ذكاء اصطناعي، وليس إنساناً أو معالجاً.', thinking:'Waha يفكّر', start:'ابدأ', mood_log:'📊 سجّل مزاجي: {n}/5', mood_done:'✓ سُجّل مزاجك', remember:'🧠 تذكّر: «{note}»', remember_done:'✓ سأتذكّر ذلك', help_text:'يبدو أن الأمور ثقيلة عليك الآن. لست وحدك، والمساعدة متاحة في أي وقت.', help_btn:'أرقام المساعدة', nudge:'تذكير لطيف: أنا ذكاء اصطناعي، ولست بديلاً عن الناس. هل هناك شخص تثق به تستطيع أن تحكي له اليوم؟' },
-  en: { ai_banner:'🤖 Waha is an AI, not a person or a therapist.', thinking:'Waha is thinking', start:'Start', mood_log:'📊 Log my mood: {n}/5', mood_done:'✓ Mood logged', remember:'🧠 Remember: "{note}"', remember_done:"✓ I'll remember that", help_text:"It sounds like things are heavy right now. You're not alone, and help is available any time.", help_btn:'Helpline numbers', nudge:"A gentle reminder: I'm an AI and no replacement for people. Is there someone you trust you could talk to today?" },
-  de: { ai_banner:'🤖 Waha ist eine KI, kein Mensch und keine Therapeutin.', thinking:'Waha denkt nach', start:'Starten', mood_log:'📊 Stimmung eintragen: {n}/5', mood_done:'✓ Stimmung eingetragen', remember:'🧠 Merken: „{note}"', remember_done:'✓ Ich merke es mir', help_text:'Es klingt, als wäre gerade vieles schwer. Du bist nicht allein, und Hilfe ist jederzeit erreichbar.', help_btn:'Hilfe-Nummern', nudge:'Kleine Erinnerung: Ich bin eine KI und kein Ersatz für Menschen. Gibt es jemanden, dem du vertraust und mit dem du heute sprechen könntest?' },
-  tr: { ai_banner:'🤖 Waha bir yapay zekâdır; insan ya da terapist değildir.', thinking:'Waha düşünüyor', start:'Başla', mood_log:'📊 Ruh halimi kaydet: {n}/5', mood_done:'✓ Ruh halin kaydedildi', remember:'🧠 Hatırla: "{note}"', remember_done:'✓ Bunu hatırlayacağım', help_text:'Şu an her şey ağır geliyor gibi. Yalnız değilsin, yardım her zaman ulaşılabilir.', help_btn:'Yardım hatları', nudge:'Küçük bir hatırlatma: Ben bir yapay zekâyım, insanların yerini tutamam. Bugün konuşabileceğin güvendiğin biri var mı?' },
+  ar: { voice_test:'تم تفعيل الصوت. سأقرأ لك الردود.', no_voice:'لا يوجد صوت لهذه اللغة في هذا المتصفح، لذلك لا أستطيع القراءة بصوت. جرّب متصفح Microsoft Edge، أو أضف اللغة العربية مع ميزة تحويل النص إلى كلام من إعدادات Windows ← الوقت واللغة ← اللغة والمنطقة.', ai_banner:'🤖 Waha ذكاء اصطناعي، وليس إنساناً أو معالجاً.', thinking:'Waha يفكّر', start:'ابدأ', mood_log:'📊 سجّل مزاجي: {n}/5', mood_done:'✓ سُجّل مزاجك', remember:'🧠 تذكّر: «{note}»', remember_done:'✓ سأتذكّر ذلك', help_text:'يبدو أن الأمور ثقيلة عليك الآن. لست وحدك، والمساعدة متاحة في أي وقت.', help_btn:'أرقام المساعدة', nudge:'تذكير لطيف: أنا ذكاء اصطناعي، ولست بديلاً عن الناس. هل هناك شخص تثق به تستطيع أن تحكي له اليوم؟' },
+  en: { voice_test:"Voice is on. I'll read the replies to you.", no_voice:"This browser has no voice for this language, so I can't read it aloud. Try Microsoft Edge, or add the language with text-to-speech in your device's language settings.", ai_banner:'🤖 Waha is an AI, not a person or a therapist.', thinking:'Waha is thinking', start:'Start', mood_log:'📊 Log my mood: {n}/5', mood_done:'✓ Mood logged', remember:'🧠 Remember: "{note}"', remember_done:"✓ I'll remember that", help_text:"It sounds like things are heavy right now. You're not alone, and help is available any time.", help_btn:'Helpline numbers', nudge:"A gentle reminder: I'm an AI and no replacement for people. Is there someone you trust you could talk to today?" },
+  de: { voice_test:'Sprachausgabe ist an. Ich lese dir die Antworten vor.', no_voice:'Dieser Browser hat keine Stimme für diese Sprache, daher kann ich nicht vorlesen. Probiere Microsoft Edge oder füge die Sprache mit Sprachausgabe in den Spracheinstellungen deines Geräts hinzu.', ai_banner:'🤖 Waha ist eine KI, kein Mensch und keine Therapeutin.', thinking:'Waha denkt nach', start:'Starten', mood_log:'📊 Stimmung eintragen: {n}/5', mood_done:'✓ Stimmung eingetragen', remember:'🧠 Merken: „{note}"', remember_done:'✓ Ich merke es mir', help_text:'Es klingt, als wäre gerade vieles schwer. Du bist nicht allein, und Hilfe ist jederzeit erreichbar.', help_btn:'Hilfe-Nummern', nudge:'Kleine Erinnerung: Ich bin eine KI und kein Ersatz für Menschen. Gibt es jemanden, dem du vertraust und mit dem du heute sprechen könntest?' },
+  tr: { voice_test:'Ses açık. Yanıtları sana okuyacağım.', no_voice:"Bu tarayıcıda bu dil için ses yok, bu yüzden sesli okuyamıyorum. Microsoft Edge'i dene ya da cihazının dil ayarlarından metin okuma özellikli dili ekle.", ai_banner:'🤖 Waha bir yapay zekâdır; insan ya da terapist değildir.', thinking:'Waha düşünüyor', start:'Başla', mood_log:'📊 Ruh halimi kaydet: {n}/5', mood_done:'✓ Ruh halin kaydedildi', remember:'🧠 Hatırla: "{note}"', remember_done:'✓ Bunu hatırlayacağım', help_text:'Şu an her şey ağır geliyor gibi. Yalnız değilsin, yardım her zaman ulaşılabilir.', help_btn:'Yardım hatları', nudge:'Küçük bir hatırlatma: Ben bir yapay zekâyım, insanların yerini tutamam. Bugün konuşabileceğin güvendiğin biri var mı?' },
 };
 function chatT(key){ const d = CHAT_X[currentLang] || CHAT_X.en; return d[key] !== undefined ? d[key] : CHAT_X.en[key]; }
 function chatXApplyStrings(){
@@ -6034,7 +6091,7 @@ function sendMsg(){
     bot.className = 'msg bot';
     log.appendChild(bot);
     chatShowTyping(false);
-    speak(reply);
+    speak(reply, extras && extras.lang);
     updateFreeChatCounter();
     const finish = () => {
       if(extras) chatRenderExtras(extras);
