@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Waha · آراء المجربين</title>
+<title>Waha · لوحة التحكم</title>
 <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
 <main>
-  <h1>آراء المجربين</h1>
+  <h1>لوحة واحة</h1>
   <p class="hint">هذه الصفحة لك وحدك. لا تشارك كلمة السر مع أحد.</p>
 
   <form id="login">
@@ -18,6 +18,25 @@
     <button type="submit">دخول</button>
     <p id="loginMsg" class="err" role="alert"></p>
   </form>
+
+  <nav class="tabs" id="tabs" hidden>
+    <button type="button" data-tab="panel" class="on">الآراء</button>
+    <button type="button" data-tab="usagePanel">الاستخدام</button>
+  </nav>
+
+  <section id="usagePanel" hidden>
+    <p class="hint">أرقام مجهولة فقط من الأشخاص الذين وافقوا. لا أسماء ولا رقم تعريف لأي شخص.</p>
+    <div class="stats" id="uStats"></div>
+    <h2 class="h2">النشطون يومياً (آخر 30 يوماً)</h2>
+    <div class="bars" id="uBars"></div>
+    <h2 class="h2">كم شخصاً يعود؟</h2>
+    <div id="uRet"></div>
+    <h2 class="h2">أكثر الميزات استخداماً (آخر 30 يوماً)</h2>
+    <div id="uFeat"></div>
+    <h2 class="h2">اللغات</h2>
+    <div id="uLang"></div>
+    <p id="uMsg" class="err"></p>
+  </section>
 
   <section id="panel" hidden>
     <div class="stats" id="stats"></div>

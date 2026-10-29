@@ -293,6 +293,17 @@
       </label>
     </div>
 
+    <div class="passport-temp-row">
+      <div>
+        <p class="passport-temp-label" data-st-i18n="toggle_label"></p>
+        <p class="passport-temp-desc" data-st-i18n="toggle_desc"></p>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="anonStatsToggle" data-change="statsSetEnabled">
+        <span class="switch-track"></span>
+      </label>
+    </div>
+
     <div class="prefs-section-label" data-i18n="passport_controls_label"></div>
     <div class="passport-btn-grid">
       <button class="backup-btn" data-click="deleteChatHistoryOnly" data-i18n="passport_del_chat"></button>
@@ -318,6 +329,17 @@
     <div class="agent-home-next" id="agentHomeNext"></div>
   </div>
   <button class="btn btn-primary agent-home-btn" id="agentHomeBtn" data-click="openAgent"></button>
+</div>
+
+<div class="stats-consent u-hidden" id="statsConsent" role="region" aria-labelledby="statsConsentTitle">
+  <div class="stats-consent-text">
+    <div class="stats-consent-title" id="statsConsentTitle" data-st-i18n="card_title"></div>
+    <div class="stats-consent-body" data-st-i18n="card_body"></div>
+  </div>
+  <div class="stats-consent-actions">
+    <button class="btn btn-primary" data-click="statsAccept" data-st-i18n="yes"></button>
+    <button class="stats-consent-no" data-click="statsDecline" data-st-i18n="no"></button>
+  </div>
 </div>
 
 <div class="hero">

@@ -3111,6 +3111,7 @@ function setLang(lang){
   updateFreeChatCounter();
   try{ chatXApplyStrings(); }catch(e){}
   try{ rvApplyStrings(); loadReviews(); }catch(e){}
+  try{ statsApplyStrings(); statsMaybeAsk(); statsPing(); }catch(e){}
   if(typeof agentRenderHomeCard === 'function' && document.getElementById('agentHomeCard')){
     try{
       agentRenderHomeCard();
@@ -4001,6 +4002,7 @@ const ENTRIES_CAP = 2000;
 // higher-volume, short-memory entry types get trimmed to fit the cap.
 const ENTRIES_PRESERVE_TYPES = new Set(['habit_completion']);
 function addEntry(entityType, payload, entityId){
+  if(typeof statsCount === 'function') statsCount(entityType);
   let entries = getEntries();
   const now = Date.now();
   entries.push({
@@ -5931,6 +5933,80 @@ function setPilotCode(c){
 })();
 function chatLimit(){ return pilotCode() ? PILOT_CHAT_LIMIT : FREE_CHAT_LIMIT; }
 
+// ---------------------------------------------------------------------
+// ANONYMOUS USAGE STATS (opt-in)
+// Asked once with a clear yes/no; changeable any time in the Privacy
+// Passport. When on, the device sends at most one small ping per day to
+// netlify/functions/stats.js: the date it opted in, how many days since,
+// counts of features used since the last ping, the UI language and
+// whether it is in the pilot. No id, no content, no name — the server
+// only adds the numbers to daily totals (see stats.js).
+// Until the person says yes, nothing is counted or sent.
+// ---------------------------------------------------------------------
+const STATS_ENDPOINT = API_BASE + '/.netlify/functions/stats';
+const STATS_FEATURES = ['chat_message','agent_plan','agent_feedback','exercise_completion','mood_log','health_log','agent_calendar_export','chat_action_started','opinion_sent','habit_completion'];
+const ST_I18N = {
+  ar: { card_title:'📊 ساعد واحة على التحسّن', card_body:'هل توافق على إرسال أرقام مجهولة مرة في اليوم، مثل عدد مرات استخدام كل ميزة؟ بدون اسمك، وبدون رقم يعرّفك، وبدون أي شيء كتبته. تستطيع إيقافها في أي وقت من «جواز الخصوصية».', yes:'نعم، أوافق', no:'لا، شكراً', toggle_label:'أرقام استخدام مجهولة', toggle_desc:'مرة في اليوم: عدد مرات استخدام الميزات فقط. بدون اسم، وبدون رقم يعرّفك، وبدون أي محتوى.' },
+  en: { card_title:'📊 Help Waha get better', card_body:"May Waha send anonymous numbers once a day, like how often each feature is used? No name, no ID that identifies you, nothing you wrote. You can turn it off any time in the Privacy Passport.", yes:'Yes, I agree', no:'No, thanks', toggle_label:'Anonymous usage numbers', toggle_desc:'Once a day: feature usage counts only. No name, no identifying ID, no content.' },
+  de: { card_title:'📊 Hilf Waha, besser zu werden', card_body:'Darf Waha einmal am Tag anonyme Zahlen senden, z. B. wie oft jede Funktion genutzt wird? Kein Name, keine ID, die dich erkennt, nichts, was du geschrieben hast. Jederzeit im Privatsphäre-Pass abschaltbar.', yes:'Ja, einverstanden', no:'Nein, danke', toggle_label:'Anonyme Nutzungszahlen', toggle_desc:'Einmal am Tag: nur Nutzungszahlen der Funktionen. Kein Name, keine ID, kein Inhalt.' },
+  tr: { card_title:"📊 Waha'nın gelişmesine yardım et", card_body:'Waha günde bir kez anonim sayılar gönderebilir mi, örneğin her özelliğin ne sıklıkla kullanıldığı? Adın yok, seni tanıtan bir kimlik yok, yazdığın hiçbir şey yok. Gizlilik Pasaportu\'ndan istediğin zaman kapatabilirsin.', yes:'Evet, kabul ediyorum', no:'Hayır, teşekkürler', toggle_label:'Anonim kullanım sayıları', toggle_desc:'Günde bir kez: yalnızca özellik kullanım sayıları. Ad yok, kimlik yok, içerik yok.' },
+};
+function stT(key){ const d = ST_I18N[currentLang] || ST_I18N.en; return d[key] !== undefined ? d[key] : ST_I18N.en[key]; }
+function statsApplyStrings(){
+  document.querySelectorAll('[data-st-i18n]').forEach(el => { el.textContent = stT(el.getAttribute('data-st-i18n')); });
+  const tg = document.getElementById('anonStatsToggle');
+  if(tg) tg.checked = statsEnabled();
+}
+function statsEnabled(){ return safeGet('mc_anon_stats') === '1'; }
+function statsLocalDate(){ return todayKey(); }
+function statsDaysBetween(a, b){ return Math.round((Date.parse(b + 'T12:00:00') - Date.parse(a + 'T12:00:00')) / 86400000); }
+function statsCount(entityType){
+  try{
+    if(!statsEnabled() || STATS_FEATURES.indexOf(entityType) === -1) return;
+    const c = JSON.parse(safeGet('mc_anon_pending') || '{}');
+    c[entityType] = (c[entityType] || 0) + 1;
+    safeSet('mc_anon_pending', JSON.stringify(c));
+  }catch(e){}
+}
+function statsPing(){
+  if(!statsEnabled()) return;
+  const t = statsLocalDate();
+  if(safeGet('mc_anon_last') === t) return;
+  const since = safeGet('mc_anon_since') || t;
+  if(!safeGet('mc_anon_since')) safeSet('mc_anon_since', since);
+  let counts = {};
+  try{ counts = JSON.parse(safeGet('mc_anon_pending') || '{}'); }catch(e){}
+  const dayN = Math.max(0, statsDaysBetween(since, t));
+  fetch(STATS_ENDPOINT, { method:'POST', headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify({ action:'ping', since, dayN, counts, lang: currentLang, pilot: !!pilotCode() }) })
+    .then(r => { if(r.ok){ safeSet('mc_anon_last', t); safeSet('mc_anon_pending', '{}'); } })
+    .catch(() => {});
+}
+function statsSetEnabled(on){
+  if(on){
+    safeSet('mc_anon_stats', '1');
+    if(!safeGet('mc_anon_since')) safeSet('mc_anon_since', statsLocalDate());
+    statsPing();
+  } else {
+    safeSet('mc_anon_stats', '0');
+    ['mc_anon_since','mc_anon_last','mc_anon_pending'].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
+  }
+  const card = document.getElementById('statsConsent');
+  if(card) card.classList.add('u-hidden');
+  statsApplyStrings();
+}
+function statsAccept(){ statsSetEnabled(true); }
+function statsDecline(){ statsSetEnabled(false); }
+// Ask once, only after the person has actually used something (or at
+// once in the pilot, where helping is the point), never on first sight.
+function statsMaybeAsk(){
+  const card = document.getElementById('statsConsent');
+  if(!card) return;
+  const decided = safeGet('mc_anon_stats') === '1' || safeGet('mc_anon_stats') === '0';
+  const used = getEntries().some(e => !e.deleted_at);
+  card.classList.toggle('u-hidden', decided || !(used || pilotCode()));
+}
+
 const RV_I18N = {
   ar: { eyebrow:'آراء حقيقية', title:'ماذا يقول من جرّبوا واحة', desc:'تقييمات من أشخاص جرّبوا التطبيق. كل تقييم محسوب في المتوسط، والنصوص تُنشر فقط بموافقة أصحابها.', write:'✍️ اكتب رأيك', form_title:'رأيك يهمّنا', stars_label:'كم تقيّم واحة؟', text_label:'ماذا أعجبك؟ وما الذي يمكن تحسينه؟ (اختياري)', text_ph:'اكتب بصراحة، حتى النقد يساعدنا…', public_ok:'أوافق على نشر رأيي داخل التطبيق وفي عرض مسابقة دبي، بدون اسمي.', share_usage:'أرفق أرقام استخدامي (أعداد فقط، بدون أي كلام شخصي).', pilot_label:'رمز التجربة (إن كان لديك)', send:'أرسل رأيي', need_stars:'اختر عدد النجوم أولاً.', sending:'جارٍ الإرسال…', thanks:'شكراً جزيلاً! وصل رأيك 🌿 سيظهر نصه بعد المراجعة إن وافقت على نشره.', close:'إغلاق', error:'تعذّر الإرسال الآن. حاول مرة أخرى بعد قليل.', too_many:'أرسلت عدة آراء اليوم. شكراً لك، جرّب غداً.', crisis_note:'شكراً لصراحتك. ما كتبته يبدو ثقيلاً، ولست وحدك: المساعدة متاحة الآن.', score_note:'من {n} تقييماً حقيقياً · تجربة أولية', empty:'لا توجد آراء منشورة بعد. كن أول من يكتب رأيه.', pilot_member:'مشارك في التجربة', usage_line:'أيام الاستخدام {days} · رسائل {chat} · خطط {plans} · تمارين {ex} · «ساعدتني» {helped}', pilot_chip:'🧪 التجربة: {code}' },
   en: { eyebrow:'Real opinions', title:'What people who tried Waha say', desc:'Ratings from people who tried the app. Every rating counts in the average; texts are only shown with their authors\' consent.', write:'✍️ Write your opinion', form_title:'Your opinion matters', stars_label:'How do you rate Waha?', text_label:'What did you like? What could be better? (optional)', text_ph:'Be honest, criticism helps too…', public_ok:'I agree that my opinion may be shown in the app and in the Dubai competition pitch, without my name.', share_usage:'Attach my usage numbers (counts only, nothing personal).', pilot_label:'Pilot code (if you have one)', send:'Send my opinion', need_stars:'Choose a number of stars first.', sending:'Sending…', thanks:'Thank you so much! Your opinion arrived 🌿 Its text appears after review if you agreed to share it.', close:'Close', error:"Couldn't send right now. Please try again in a moment.", too_many:"You've sent several opinions today. Thank you, try again tomorrow.", crisis_note:"Thank you for being honest. What you wrote sounds heavy, and you're not alone: help is available now.", score_note:'from {n} real ratings · pilot', empty:'No published opinions yet. Be the first to write one.', pilot_member:'Pilot participant', usage_line:'Days active {days} · messages {chat} · plans {plans} · exercises {ex} · "helped" {helped}', pilot_chip:'🧪 Pilot: {code}' },
@@ -7494,6 +7570,9 @@ function sendMsgOnEnter(e){
 }
 
 const ACTIONS = {
+  statsAccept,
+  statsDecline,
+  statsSetEnabled,
   openReviewForm,
   closeReviewForm,
   submitReview,
