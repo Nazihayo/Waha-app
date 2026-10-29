@@ -3109,6 +3109,7 @@ function setLang(lang){
   if(micBtn) micBtn.setAttribute('aria-label', I18N[lang].aria_mic);
   safeSet('mc_lang', lang);
   updateFreeChatCounter();
+  try{ chatXApplyStrings(); }catch(e){}
   if(typeof agentRenderHomeCard === 'function' && document.getElementById('agentHomeCard')){
     try{
       agentRenderHomeCard();
@@ -5676,6 +5677,7 @@ function deleteExerciseHistoryOnly(){
   removeEntriesByType('agent_feedback');
   safeSet('mc_agent_feedback', '[]');
   safeSet('mc_agent_plan', '');
+  safeSet('mc_agent_memory', '[]');
   updateStreakDisplay();
   updateProgressStats();
   showPassportStatus(I18N[currentLang].passport_done);
@@ -5834,7 +5836,8 @@ function confirmDeleteCalmPlan(){
 
 const FREE_CHAT_LIMIT = 10;
 const CLIENT_CRISIS_KEYWORDS = {
-  ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش"],
+  ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش",
+       "بدي انتحر", "رح انتحر", "نفسي اموت", "عايز اموت", "عاوز اموت", "ابي اموت", "ابغى اموت", "ابغي اموت", "ودي اموت", "اريد اموت", "بغيت نموت", "نبغي نموت", "اتمنى اموت", "اتمنى الموت", "ما بدي عيش", "مابدي عيش", "بدي خلص من حياتي", "اقطع شراييني", "اذبح نفسي", "اشنق نفسي"],
   en: ["suicide", "kill myself", "end my life", "hurt myself", "self harm", "self-harm", "want to die", "don't want to live"],
   de: ["selbstmord", "mich umbringen", "mir etwas antun", "nicht mehr leben", "ich will sterben", "mich verletzen", "suizid"],
   fr: ["suicide", "me tuer", "me faire du mal", "je veux mourir", "je ne veux plus vivre"],
@@ -5873,6 +5876,133 @@ function updateFreeChatCounter(){
   el.textContent = '· ' + remaining + ' ' + dict.free_chat_remaining;
 }
 
+// ---------------------------------------------------------------------
+// CHAT THAT ACTS (client side)
+// The server may return, next to the reply: quick replies, ONE real app
+// action, a mood score and a note to remember. Each is shown as a button
+// the person taps — nothing is logged, saved or started without that tap.
+// A "moderate" result from the server's risk classifier shows a gentle
+// help card. Replies carry a signature (sig) that is stored with the
+// history so the server can reject forged assistant turns.
+// Strings: ar / en / de / tr; other languages fall back to English.
+// ---------------------------------------------------------------------
+const CHAT_X = {
+  ar: { ai_banner:'🤖 Waha ذكاء اصطناعي، وليس إنساناً أو معالجاً.', thinking:'Waha يفكّر', start:'ابدأ', mood_log:'📊 سجّل مزاجي: {n}/5', mood_done:'✓ سُجّل مزاجك', remember:'🧠 تذكّر: «{note}»', remember_done:'✓ سأتذكّر ذلك', help_text:'يبدو أن الأمور ثقيلة عليك الآن. لست وحدك، والمساعدة متاحة في أي وقت.', help_btn:'أرقام المساعدة', nudge:'تذكير لطيف: أنا ذكاء اصطناعي، ولست بديلاً عن الناس. هل هناك شخص تثق به تستطيع أن تحكي له اليوم؟' },
+  en: { ai_banner:'🤖 Waha is an AI, not a person or a therapist.', thinking:'Waha is thinking', start:'Start', mood_log:'📊 Log my mood: {n}/5', mood_done:'✓ Mood logged', remember:'🧠 Remember: "{note}"', remember_done:"✓ I'll remember that", help_text:"It sounds like things are heavy right now. You're not alone, and help is available any time.", help_btn:'Helpline numbers', nudge:"A gentle reminder: I'm an AI and no replacement for people. Is there someone you trust you could talk to today?" },
+  de: { ai_banner:'🤖 Waha ist eine KI, kein Mensch und keine Therapeutin.', thinking:'Waha denkt nach', start:'Starten', mood_log:'📊 Stimmung eintragen: {n}/5', mood_done:'✓ Stimmung eingetragen', remember:'🧠 Merken: „{note}"', remember_done:'✓ Ich merke es mir', help_text:'Es klingt, als wäre gerade vieles schwer. Du bist nicht allein, und Hilfe ist jederzeit erreichbar.', help_btn:'Hilfe-Nummern', nudge:'Kleine Erinnerung: Ich bin eine KI und kein Ersatz für Menschen. Gibt es jemanden, dem du vertraust und mit dem du heute sprechen könntest?' },
+  tr: { ai_banner:'🤖 Waha bir yapay zekâdır; insan ya da terapist değildir.', thinking:'Waha düşünüyor', start:'Başla', mood_log:'📊 Ruh halimi kaydet: {n}/5', mood_done:'✓ Ruh halin kaydedildi', remember:'🧠 Hatırla: "{note}"', remember_done:'✓ Bunu hatırlayacağım', help_text:'Şu an her şey ağır geliyor gibi. Yalnız değilsin, yardım her zaman ulaşılabilir.', help_btn:'Yardım hatları', nudge:'Küçük bir hatırlatma: Ben bir yapay zekâyım, insanların yerini tutamam. Bugün konuşabileceğin güvendiğin biri var mı?' },
+};
+function chatT(key){ const d = CHAT_X[currentLang] || CHAT_X.en; return d[key] !== undefined ? d[key] : CHAT_X.en[key]; }
+function chatXApplyStrings(){
+  const b = document.getElementById('chatAiBanner');
+  if(b) b.textContent = chatT('ai_banner');
+}
+let chatSessionReplies = 0;
+let chatNudgeShown = false;
+const CHAT_NUDGE_AFTER = 10;
+
+function chatShowTyping(on){
+  const typing = document.getElementById('typingIndicator');
+  typing.textContent = '';
+  if(!on) return;
+  const label = document.createElement('span');
+  label.className = 'typing-label';
+  label.textContent = chatT('thinking');
+  const dots = document.createElement('span');
+  dots.className = 'typing-dots';
+  for(let i=0;i<3;i++){ dots.appendChild(document.createElement('i')); }
+  typing.appendChild(label); typing.appendChild(dots);
+}
+function chatPrefersReducedMotion(){
+  try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; }
+}
+// Reveals a finished, already safety-checked reply word by word.
+function chatTypeInto(el, text, done){
+  const log = document.getElementById('chatLog');
+  if(chatPrefersReducedMotion() || text.length > 700){ el.textContent = text; log.scrollTop = log.scrollHeight; done && done(); return; }
+  const parts = text.split(/(\s+)/);
+  let i = 0;
+  el.textContent = '';
+  const step = () => {
+    if(i >= parts.length){ done && done(); return; }
+    el.textContent += parts[i] + (parts[i+1] || '');
+    i += 2;
+    log.scrollTop = log.scrollHeight;
+    setTimeout(step, 38);
+  };
+  step();
+}
+function chatRemoveQuickReplies(){
+  document.querySelectorAll('#chatLog .chat-chips').forEach(el => el.remove());
+}
+function chatRenderExtras(data){
+  const log = document.getElementById('chatLog');
+  if(data.safety === 'moderate'){
+    const card = document.createElement('div');
+    card.className = 'chat-help-card';
+    const p = document.createElement('p'); p.textContent = chatT('help_text');
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'chat-help-btn'; btn.textContent = '🤍 ' + chatT('help_btn');
+    btn.addEventListener('click', openCrisis);
+    card.appendChild(p); card.appendChild(btn);
+    log.appendChild(card);
+  }
+  if(data.action && typeof agentIsKnownAction === 'function' && agentIsKnownAction(data.action)){
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'chat-action-card';
+    const t = document.createElement('span'); t.className = 'chat-action-title'; t.textContent = agentActionIcon(data.action) + ' ' + agentActionTitle(data.action);
+    const go = document.createElement('span'); go.className = 'chat-action-go'; go.textContent = chatT('start') + ' ▸';
+    card.appendChild(t); card.appendChild(go);
+    card.addEventListener('click', () => { addEntry('chat_action_started', { action: data.action }); agentLaunch(data.action); });
+    log.appendChild(card);
+  }
+  const offers = [];
+  if(Number.isInteger(data.mood) && data.mood >= 1 && data.mood <= 5){
+    offers.push({ text: agentFill(chatT('mood_log'), { n: data.mood }), run: () => {
+      moodLog.push(data.mood); saveMoodLog(); addEntry('mood_log', { score: data.mood, source: 'chat' });
+      try{ renderMoodChart(); updateProgressStats(); }catch(e){}
+      return chatT('mood_done');
+    }});
+  }
+  if(typeof data.remember === 'string' && data.remember.trim()){
+    const note = data.remember.trim().slice(0, 120);
+    offers.push({ text: agentFill(chatT('remember'), { note }), run: () => { agentRemember(note); return chatT('remember_done'); } });
+  }
+  if(offers.length){
+    const row = document.createElement('div');
+    row.className = 'chat-offers';
+    offers.forEach(o => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chat-offer'; b.textContent = o.text;
+      b.addEventListener('click', () => { b.textContent = o.run(); b.disabled = true; b.classList.add('done'); });
+      row.appendChild(b);
+    });
+    log.appendChild(row);
+  }
+  if(Array.isArray(data.chips) && data.chips.length){
+    const row = document.createElement('div');
+    row.className = 'chat-chips';
+    data.chips.slice(0, 3).forEach(c => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chat-chip'; b.textContent = c;
+      b.addEventListener('click', () => { document.getElementById('chatInput').value = c; sendMsg(); });
+      row.appendChild(b);
+    });
+    log.appendChild(row);
+  }
+  log.scrollTop = log.scrollHeight;
+}
+function chatMaybeNudge(){
+  if(chatNudgeShown || chatSessionReplies < CHAT_NUDGE_AFTER) return;
+  chatNudgeShown = true;
+  const log = document.getElementById('chatLog');
+  const n = document.createElement('div');
+  n.className = 'msg system-notice';
+  n.textContent = chatT('nudge');
+  log.appendChild(n);
+  log.scrollTop = log.scrollHeight;
+}
+
 function sendMsg(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
@@ -5890,24 +6020,30 @@ function sendMsg(){
   }
   const log = document.getElementById('chatLog');
   const typing = document.getElementById('typingIndicator');
+  chatRemoveQuickReplies();
   const me = document.createElement('div');
   me.className = 'msg me';
   me.textContent = text;
   log.appendChild(me);
   input.value = '';
   log.scrollTop = log.scrollHeight;
-  const typingLabels = { ar:'يكتب الآن…', de:'Schreibt gerade…', en:'Typing…', fr:'Écrit…', tr:'Yazıyor…', ku:'Dinivîse…', es:'Escribiendo…', fa:'در حال نوشتن…', ur:'لکھ رہا ہے…', ru:'Печатает…', pt:'A escrever…', it:'Sta scrivendo…' };
-  typing.textContent = typingLabels[currentLang] || typingLabels.en;
+  chatShowTyping(true);
 
-  function showReply(reply){
+  function showReply(reply, extras){
     const bot = document.createElement('div');
     bot.className = 'msg bot';
-    bot.textContent = reply;
     log.appendChild(bot);
-    typing.textContent = '';
-    log.scrollTop = log.scrollHeight;
+    chatShowTyping(false);
     speak(reply);
     updateFreeChatCounter();
+    const finish = () => {
+      if(extras) chatRenderExtras(extras);
+      chatSessionReplies++;
+      chatMaybeNudge();
+    };
+    // Crisis replies appear at once — never delayed by an animation.
+    if(extras && extras.crisis){ bot.textContent = reply; log.scrollTop = log.scrollHeight; finish(); }
+    else chatTypeInto(bot, reply, finish);
   }
   function showSystemNotice(noticeText){
     const notice = document.createElement('div');
@@ -5927,7 +6063,8 @@ function sendMsg(){
   fetch(CHAT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang }),
+    body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang,
+      memory: (typeof agentLoadMemory === 'function' ? agentLoadMemory().slice(-5).map(m => ({ d: m.d, note: m.note })) : []) }),
   })
   .then(res => {
     if(res.status === 429){
@@ -5940,15 +6077,15 @@ function sendMsg(){
   })
   .then(data => {
     if(!data.reply) throw new Error('empty reply');
-    chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply });
+    chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply, sig: typeof data.sig === 'string' ? data.sig : undefined });
     if(chatHistory.length > MAX_CHAT_HISTORY) chatHistory = chatHistory.slice(-MAX_CHAT_HISTORY);
     saveChatMemory();
     if(!isCrisisMsg) safeSet('mc_free_chat_count', String(getFreeChatCount() + 1));
-    showReply(data.reply);
+    showReply(data.reply, data);
   })
   .catch((err)=>{
     if(err && err.rateLimited){
-      typing.textContent = '';
+      chatShowTyping(false);
       showReply(I18N[currentLang].rate_limit_msg);
       return;
     }
@@ -6316,6 +6453,10 @@ function agentBuildContext(note){
   const notHelped = Object.keys(scores).filter(a => scores[a].no >= scores[a].yes && scores[a].no > 0).map(a => a + ' (' + scores[a].no + 'x)');
   lines.push('Marked helpful before: ' + (helped.length ? helped.join(', ') : 'none yet'));
   lines.push('Marked NOT helpful before: ' + (notHelped.length ? notHelped.join(', ') : 'none yet'));
+  const pats = agentDetectPatterns();
+  lines.push('Patterns detected on device from their logs: ' + (pats.length ? pats.map(p => p.fact).join('; ') : 'none'));
+  const mem = agentLoadMemory().filter(m => m.d !== agentTodayKey()).slice(-3).reverse();
+  lines.push('Earlier notes from the person (their own words, newest first): ' + (mem.length ? mem.map(m => m.d + ': "' + m.note.slice(0, 200) + '"').join(' | ') : 'none'));
   return lines.join('\n');
 }
 
@@ -6431,7 +6572,7 @@ function agentBuildPlan(){
   agentShowView('agentThinking');
   const list = document.getElementById('agentThinkList');
   list.innerHTML = '';
-  const lines = ['think_1','think_2','think_3','think_4'].map(k => {
+  const lines = ['think_1','think_mem','think_2','think_3','think_4'].map(k => {
     const li = document.createElement('li');
     li.className = 'agent-think-line';
     li.textContent = agentT(k);
@@ -6470,6 +6611,7 @@ function agentBuildPlan(){
       summary: plan.summary || '', tomorrow: plan.tomorrow || '',
       steps: plan.steps.map(s => ({ action:s.action, time:s.time || '', title:s.title || agentActionTitle(s.action), why:s.why || '', started:false, feedback:null, notified:false })) };
     agentSavePlan(stored);
+    if(note) agentRemember(note);
     document.getElementById('agentNote').value = '';
     agentRenderPlan(stored);
     agentStartReminderLoop();
@@ -6561,6 +6703,7 @@ function agentRenderPlan(plan){
   tm.textContent = plan.tomorrow ? (agentT('tomorrow') + ': ' + plan.tomorrow) : '';
 
   agentRenderLearned();
+  agentRenderMemory();
   agentUpdateRemindBtn();
   if(agentPendingFeedbackIdx !== null){
     const asking = list.querySelector('.agent-step.asking');
@@ -6660,9 +6803,20 @@ function agentRenderHomeCard(){
     nextEl.textContent = agentT('all_done');
     btn.textContent = agentT('open_plan');
   } else {
+    const pro = agentProactiveMessage();
+    agentProactiveGoal = pro ? pro.goal : null;
+    if(pro){
+      card.classList.add('proactive');
+      nextEl.textContent = pro.text;
+      btn.textContent = agentT('pro_btn');
+      btn.setAttribute('data-click', 'agentProactiveGo');
+      return;
+    }
     nextEl.textContent = agentT('subtitle');
     btn.textContent = agentT('build');
   }
+  card.classList.remove('proactive');
+  btn.setAttribute('data-click', 'openAgent');
 }
 
 // ---- reminders (while the app is open; notifications if allowed) ----
@@ -6729,6 +6883,271 @@ function agentShowToast(text){
 function agentToastOpen(){
   document.getElementById('agentToast').classList.add('u-hidden');
   openAgent();
+}
+
+// ---------------------------------------------------------------------
+// AGENT MEMORY, PATTERNS, PROACTIVE CHECK-IN, CALENDAR
+// - Memory: the person's own notes ("how are you today?") are kept ON
+//   THIS DEVICE (mc_agent_memory, last 10), shown to them under "What
+//   Waha remembers", and each one can be forgotten. With AI consent, the
+//   last 3 go into the plan request so the agent can show continuity.
+// - Patterns: deterministic, on-device analysis of mood + sleep logs
+//   (no AI involved) — e.g. lower mood on short-sleep days, a run of
+//   short nights, mood trending down/up. Shown to the person and passed
+//   to the planner as facts.
+// - Proactive check-in: when there is no plan yet today, the home card
+//   speaks first, based on a detected pattern or the last note, and one
+//   tap makes the plan.
+// - Calendar: the plan is exported as a standard .ics file (one event
+//   with a reminder per timed step) that any calendar app can import —
+//   the agent acting outside the app, with the person's tap as consent.
+// Strings: ar / en / de / tr; other languages fall back to English.
+// ---------------------------------------------------------------------
+const AGENT_I18N_EXTRA = {
+  ar: {
+    think_mem:'أتذكّر ما قلته من قبل وأبحث عن أنماط في نومك ومزاجك',
+    mem_label:'ما يتذكّره Waha', mem_none:'عندما تكتب كيف حالك، أتذكّره لأفهمك أكثر في الأيام القادمة. يبقى على جهازك فقط.',
+    mem_forget:'انسَ هذا', mem_forget_all:'انسَ كل شيء', mem_forgotten:'تم الحذف من ذاكرة Waha.',
+    patterns_label:'أنماط لاحظتها', pat_none:'سجّل مزاجك ونومك بضعة أيام، وسأكتشف الأنماط بنفسي.',
+    pat_sleep_mood:'في الأيام التي نمت فيها أقل من 6 ساعات كان مزاجك أقل ({low} مقابل {high} من 5).',
+    pat_short_nights:'عدد الليالي الأخيرة المتتالية التي نمت فيها أقل من 6 ساعات: {n}.',
+    pat_mood_down:'مزاجك في الأيام الأخيرة أقل من الأيام التي قبلها.',
+    pat_mood_up:'مزاجك يتحسّن مقارنة بالأيام السابقة 🌱',
+    pro_sleep:'لاحظت أنك نمت قليلاً في الليالي الأخيرة. هل أصنع لك خطة أخف تساعدك على النوم؟',
+    pro_mood:'لاحظت أن مزاجك أقل هذه الأيام. هل أصنع لك خطة قصيرة ولطيفة لليوم؟',
+    pro_memory:'آخر مرة كتبت: «{note}». كيف حالك اليوم؟ أستطيع أن أصنع لك خطة الآن.',
+    pro_btn:'نعم، اصنعها',
+    ics_btn:'📅 أضف للتقويم', ics_done:'تم تنزيل ملف التقويم. افتحه لإضافة الخطوات إلى تقويمك مع تنبيه لكل خطوة.', ics_none:'لا توجد خطوات بوقت محدد لإضافتها.',
+  },
+  en: {
+    think_mem:'Remembering what you told me and looking for patterns in your sleep and mood',
+    mem_label:'What Waha remembers', mem_none:"When you write how you are, I remember it so I understand you better on the next days. It stays on your device only.",
+    mem_forget:'Forget this', mem_forget_all:'Forget everything', mem_forgotten:"Removed from Waha's memory.",
+    patterns_label:'Patterns I noticed', pat_none:"Log your mood and sleep for a few days and I'll spot patterns by myself.",
+    pat_sleep_mood:'On days you slept under 6 hours, your mood was lower ({low} vs {high} out of 5).',
+    pat_short_nights:'You slept under 6 hours on the last {n} nights.',
+    pat_mood_down:'Your mood over the last few days is lower than the days before.',
+    pat_mood_up:'Your mood is improving compared with the days before 🌱',
+    pro_sleep:"I noticed you've slept little the last few nights. Shall I make you a lighter plan that helps you sleep?",
+    pro_mood:"I noticed your mood has been lower these days. Shall I make you a short, gentle plan for today?",
+    pro_memory:'Last time you wrote: "{note}". How are you today? I can make your plan now.',
+    pro_btn:'Yes, make it',
+    ics_btn:'📅 Add to calendar', ics_done:'Calendar file downloaded. Open it to add the steps to your calendar, each with a reminder.', ics_none:'There are no timed steps to add.',
+  },
+  de: {
+    think_mem:'Erinnere mich an das, was du erzählt hast, und suche Muster in Schlaf und Stimmung',
+    mem_label:'Was Waha sich merkt', mem_none:'Wenn du schreibst, wie es dir geht, merke ich es mir, um dich an den nächsten Tagen besser zu verstehen. Es bleibt nur auf deinem Gerät.',
+    mem_forget:'Vergessen', mem_forget_all:'Alles vergessen', mem_forgotten:'Aus Wahas Gedächtnis gelöscht.',
+    patterns_label:'Muster, die mir auffallen', pat_none:'Trage ein paar Tage Stimmung und Schlaf ein, dann erkenne ich Muster selbst.',
+    pat_sleep_mood:'An Tagen mit weniger als 6 Stunden Schlaf war deine Stimmung niedriger ({low} statt {high} von 5).',
+    pat_short_nights:'Du hast in den letzten {n} Nächten weniger als 6 Stunden geschlafen.',
+    pat_mood_down:'Deine Stimmung ist in den letzten Tagen niedriger als davor.',
+    pat_mood_up:'Deine Stimmung wird besser als in den Tagen davor 🌱',
+    pro_sleep:'Mir ist aufgefallen, dass du die letzten Nächte wenig geschlafen hast. Soll ich dir einen leichteren Plan machen, der beim Schlafen hilft?',
+    pro_mood:'Mir ist aufgefallen, dass deine Stimmung in letzter Zeit niedriger ist. Soll ich dir einen kurzen, sanften Plan für heute machen?',
+    pro_memory:'Letztes Mal hast du geschrieben: „{note}". Wie geht es dir heute? Ich kann dir jetzt deinen Plan machen.',
+    pro_btn:'Ja, mach ihn',
+    ics_btn:'📅 Zum Kalender', ics_done:'Kalenderdatei heruntergeladen. Öffne sie, um die Schritte mit Erinnerung in deinen Kalender zu übernehmen.', ics_none:'Es gibt keine Schritte mit Uhrzeit zum Hinzufügen.',
+  },
+  tr: {
+    think_mem:'Bana anlattıklarını hatırlıyor, uyku ve ruh halinde örüntü arıyorum',
+    mem_label:"Waha'nın hatırladıkları", mem_none:'Nasıl olduğunu yazdığında, sonraki günlerde seni daha iyi anlamak için hatırlarım. Yalnızca cihazında kalır.',
+    mem_forget:'Bunu unut', mem_forget_all:'Hepsini unut', mem_forgotten:"Waha'nın hafızasından silindi.",
+    patterns_label:'Fark ettiğim örüntüler', pat_none:'Birkaç gün ruh halini ve uykunu kaydet, örüntüleri kendim bulayım.',
+    pat_sleep_mood:"6 saatten az uyuduğun günlerde ruh halin daha düşüktü (5 üzerinden {low}'e karşı {high}).",
+    pat_short_nights:'Son {n} gece 6 saatten az uyudun.',
+    pat_mood_down:'Son günlerde ruh halin önceki günlerden daha düşük.',
+    pat_mood_up:'Ruh halin önceki günlere göre iyileşiyor 🌱',
+    pro_sleep:'Son gecelerde az uyuduğunu fark ettim. Uyumana yardım edecek daha hafif bir plan yapayım mı?',
+    pro_mood:'Bu günlerde ruh halinin daha düşük olduğunu fark ettim. Bugün için kısa ve nazik bir plan yapayım mı?',
+    pro_memory:'Geçen sefer şunu yazmıştın: "{note}". Bugün nasılsın? Planını şimdi yapabilirim.',
+    pro_btn:'Evet, yap',
+    ics_btn:'📅 Takvime ekle', ics_done:'Takvim dosyası indirildi. Adımları her biri için hatırlatıcıyla takvimine eklemek için aç.', ics_none:'Eklenecek saatli adım yok.',
+  },
+};
+Object.keys(AGENT_I18N_EXTRA).forEach(l => { if(AGENT_I18N[l]) Object.assign(AGENT_I18N[l], AGENT_I18N_EXTRA[l]); });
+function agentFill(str, vars){ return String(str).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] !== undefined) ? vars[k] : m); }
+
+// ---- memory (on device) ----
+const AGENT_MEMORY_MAX = 10;
+function agentLoadMemory(){
+  try{ const m = JSON.parse(safeGet('mc_agent_memory') || '[]'); return Array.isArray(m) ? m.filter(x => x && typeof x.note === 'string' && typeof x.d === 'string') : []; }catch(e){ return []; }
+}
+function agentSaveMemory(list){ safeSet('mc_agent_memory', JSON.stringify(list.slice(-AGENT_MEMORY_MAX))); }
+function agentRemember(note){
+  const clean = String(note || '').trim().slice(0, 200);
+  if(!clean) return;
+  const list = agentLoadMemory();
+  list.push({ d: agentTodayKey(), note: clean, ts: Date.now() });
+  agentSaveMemory(list);
+}
+function agentForgetMemory(ts){
+  agentSaveMemory(agentLoadMemory().filter(m => m.ts !== ts));
+  agentRenderMemory();
+  agentRenderHomeCard();
+}
+function agentForgetAll(){
+  safeSet('mc_agent_memory', '[]');
+  agentRenderMemory();
+  agentRenderHomeCard();
+  agentFlashNotice(agentT('mem_forgotten'));
+}
+
+// ---- patterns (deterministic, on device) ----
+function agentDailySeries(days){
+  const cutoff = Date.now() - days * 86400000;
+  const moodByDay = {};
+  getEntries().filter(e => !e.deleted_at && e.entity_type === 'mood_log' && e.occurred_at >= cutoff).forEach(e => {
+    const s = e.payload && e.payload.score;
+    if(typeof s !== 'number') return;
+    const k = dateKeyFromTs(e.occurred_at);
+    (moodByDay[k] = moodByDay[k] || []).push(s);
+  });
+  const sleepByDay = {};
+  getHealthLogs().forEach(l => { if(typeof l.sleepHours === 'number' && l.id >= dateKeyFromTs(cutoff)) sleepByDay[l.id] = l.sleepHours; });
+  const mood = {};
+  Object.keys(moodByDay).forEach(k => { mood[k] = moodByDay[k].reduce((a,b)=>a+b,0) / moodByDay[k].length; });
+  return { mood, sleep: sleepByDay };
+}
+function agentAvg(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0) / arr.length : null; }
+// Returns [{ id, text, goal }] — goal is the plan goal this pattern points to.
+function agentDetectPatterns(){
+  const out = [];
+  const { mood, sleep } = agentDailySeries(14);
+  // 1) run of short nights (most recent first)
+  const sleepDays = Object.keys(sleep).sort().reverse();
+  let run = 0;
+  for(const k of sleepDays){ if(sleep[k] < 6) run++; else break; }
+  if(run >= 2) out.push({ id:'short_nights', goal:'sleep', text: agentFill(agentT('pat_short_nights'), { n: run }), fact: 'slept under 6h on the last ' + run + ' logged nights' });
+  // 2) mood on short-sleep days vs. other days
+  const paired = Object.keys(mood).filter(k => sleep[k] !== undefined);
+  const low = paired.filter(k => sleep[k] < 6).map(k => mood[k]);
+  const high = paired.filter(k => sleep[k] >= 6).map(k => mood[k]);
+  if(low.length >= 2 && high.length >= 2){
+    const a = agentAvg(low), b = agentAvg(high);
+    if(b - a >= 0.5) out.push({ id:'sleep_mood', goal:'sleep', text: agentFill(agentT('pat_sleep_mood'), { low: a.toFixed(1), high: b.toFixed(1) }), fact: 'mood averages ' + a.toFixed(1) + '/5 on days after under 6h sleep vs ' + b.toFixed(1) + '/5 otherwise' });
+  }
+  // 3) mood trend: last 3 logged days vs. the logged days before them
+  const moodDays = Object.keys(mood).sort();
+  if(moodDays.length >= 5){
+    const recent = agentAvg(moodDays.slice(-3).map(k => mood[k]));
+    const before = agentAvg(moodDays.slice(0, -3).map(k => mood[k]));
+    if(before - recent >= 0.7) out.push({ id:'mood_down', goal:'stress', text: agentT('pat_mood_down'), fact: 'mood trending down: last 3 logged days ' + recent.toFixed(1) + '/5 vs ' + before.toFixed(1) + '/5 before' });
+    else if(recent - before >= 0.7) out.push({ id:'mood_up', goal:null, text: agentT('pat_mood_up'), fact: 'mood trending up: last 3 logged days ' + recent.toFixed(1) + '/5 vs ' + before.toFixed(1) + '/5 before' });
+  }
+  return out;
+}
+
+// ---- rendering memory + patterns inside the plan view ----
+function agentRenderMemory(){
+  const box = document.getElementById('agentMemory');
+  if(!box) return;
+  box.innerHTML = '';
+  const pats = agentDetectPatterns();
+  const pl = document.createElement('div');
+  pl.className = 'prefs-section-label';
+  pl.textContent = '🔎 ' + agentT('patterns_label');
+  box.appendChild(pl);
+  if(pats.length){
+    const ul = document.createElement('ul');
+    ul.className = 'agent-patterns';
+    pats.forEach(p => { const li = document.createElement('li'); li.textContent = p.text; ul.appendChild(li); });
+    box.appendChild(ul);
+  } else {
+    const p = document.createElement('p'); p.className = 'agent-learned-none'; p.textContent = agentT('pat_none'); box.appendChild(p);
+  }
+  const ml = document.createElement('div');
+  ml.className = 'prefs-section-label agent-mem-label';
+  ml.textContent = '🧠 ' + agentT('mem_label');
+  box.appendChild(ml);
+  const mem = agentLoadMemory().slice().reverse();
+  if(!mem.length){
+    const p = document.createElement('p'); p.className = 'agent-learned-none'; p.textContent = agentT('mem_none'); box.appendChild(p);
+    return;
+  }
+  mem.slice(0, 5).forEach(m => {
+    const row = document.createElement('div');
+    row.className = 'agent-mem-row';
+    const t = document.createElement('span');
+    t.className = 'agent-mem-text';
+    t.textContent = m.d + ' · "' + m.note + '"';
+    const x = document.createElement('button');
+    x.type = 'button';
+    x.className = 'agent-mem-forget';
+    x.textContent = '✕';
+    x.setAttribute('aria-label', agentT('mem_forget'));
+    x.title = agentT('mem_forget');
+    x.addEventListener('click', () => agentForgetMemory(m.ts));
+    row.appendChild(t); row.appendChild(x);
+    box.appendChild(row);
+  });
+  const all = document.createElement('button');
+  all.type = 'button';
+  all.className = 'agent-mem-forget-all';
+  all.textContent = agentT('mem_forget_all');
+  all.addEventListener('click', agentForgetAll);
+  box.appendChild(all);
+}
+
+// ---- proactive check-in (the agent speaks first) ----
+function agentProactiveMessage(){
+  const pats = agentDetectPatterns();
+  const p = pats.find(x => x.id === 'short_nights') || pats.find(x => x.id === 'sleep_mood');
+  if(p) return { text: agentT('pro_sleep'), goal: 'sleep' };
+  if(pats.find(x => x.id === 'mood_down')) return { text: agentT('pro_mood'), goal: 'stress' };
+  const mem = agentLoadMemory();
+  const last = mem[mem.length - 1];
+  if(last && Date.now() - (last.ts || 0) < 7 * 86400000 && last.d !== agentTodayKey()){
+    const note = last.note.length > 70 ? last.note.slice(0, 70) + '…' : last.note;
+    return { text: agentFill(agentT('pro_memory'), { note }), goal: null };
+  }
+  return null;
+}
+let agentProactiveGoal = null;
+function agentProactiveGo(){
+  agentLoadPrefs();
+  if(agentProactiveGoal) { agentState.goal = agentProactiveGoal; agentSavePrefs(); }
+  openAgent();
+  // With a goal known, the agent acts straight away; otherwise the person
+  // picks a goal first in the setup view that openAgent() just showed.
+  if(agentState.goal && !agentLoadPlan()) agentBuildPlan();
+}
+
+// ---- calendar export (.ics) ----
+function agentIcsEscape(s){ return String(s || '').replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;'); }
+function agentExportCalendar(){
+  const plan = agentLoadPlan();
+  const steps = plan ? plan.steps.filter(s => agentMin(s.time) !== null) : [];
+  if(!steps.length){ agentFlashNotice(agentT('ics_none')); return; }
+  const day = agentTodayKey().replace(/-/g, '');
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Waha//Agent plan//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  steps.forEach((s, i) => {
+    const start = agentMin(s.time);
+    const end = start + 10;
+    const hhmm = m => String(Math.floor(m/60) % 24).padStart(2,'0') + String(m % 60).padStart(2,'0') + '00';
+    lines.push('BEGIN:VEVENT',
+      'UID:waha-' + day + '-' + i + '-' + s.action + '@wahaapp',
+      'DTSTAMP:' + stamp,
+      'DTSTART:' + day + 'T' + hhmm(start),
+      'DTEND:' + day + 'T' + hhmm(Math.min(end, 1439)),
+      'SUMMARY:' + agentIcsEscape('Waha · ' + s.title),
+      'DESCRIPTION:' + agentIcsEscape(s.why || ''),
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:' + agentIcsEscape('Waha · ' + s.title),'TRIGGER:-PT0M','END:VALARM',
+      'END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  const blob = new Blob([lines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'waha-plan-' + agentTodayKey() + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  addEntry('agent_calendar_export', { steps: steps.length });
+  agentFlashNotice(agentT('ics_done'));
 }
 
 function agentInit(){
@@ -6844,6 +7263,9 @@ function sendMsgOnEnter(e){
 
 const ACTIONS = {
   agentBuildPlan,
+  agentExportCalendar,
+  agentForgetAll,
+  agentProactiveGo,
   agentNewPlan,
   agentSetConsent,
   agentSetShiftFrom,
