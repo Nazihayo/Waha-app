@@ -3109,6 +3109,7 @@ function setLang(lang){
   if(micBtn) micBtn.setAttribute('aria-label', I18N[lang].aria_mic);
   safeSet('mc_lang', lang);
   updateFreeChatCounter();
+  try{ chatXApplyStrings(); }catch(e){}
   if(typeof agentRenderHomeCard === 'function' && document.getElementById('agentHomeCard')){
     try{
       agentRenderHomeCard();
@@ -5835,7 +5836,8 @@ function confirmDeleteCalmPlan(){
 
 const FREE_CHAT_LIMIT = 10;
 const CLIENT_CRISIS_KEYWORDS = {
-  ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش"],
+  ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش",
+       "بدي انتحر", "رح انتحر", "نفسي اموت", "عايز اموت", "عاوز اموت", "ابي اموت", "ابغى اموت", "ابغي اموت", "ودي اموت", "اريد اموت", "بغيت نموت", "نبغي نموت", "اتمنى اموت", "اتمنى الموت", "ما بدي عيش", "مابدي عيش", "بدي خلص من حياتي", "اقطع شراييني", "اذبح نفسي", "اشنق نفسي"],
   en: ["suicide", "kill myself", "end my life", "hurt myself", "self harm", "self-harm", "want to die", "don't want to live"],
   de: ["selbstmord", "mich umbringen", "mir etwas antun", "nicht mehr leben", "ich will sterben", "mich verletzen", "suizid"],
   fr: ["suicide", "me tuer", "me faire du mal", "je veux mourir", "je ne veux plus vivre"],
@@ -5874,6 +5876,133 @@ function updateFreeChatCounter(){
   el.textContent = '· ' + remaining + ' ' + dict.free_chat_remaining;
 }
 
+// ---------------------------------------------------------------------
+// CHAT THAT ACTS (client side)
+// The server may return, next to the reply: quick replies, ONE real app
+// action, a mood score and a note to remember. Each is shown as a button
+// the person taps — nothing is logged, saved or started without that tap.
+// A "moderate" result from the server's risk classifier shows a gentle
+// help card. Replies carry a signature (sig) that is stored with the
+// history so the server can reject forged assistant turns.
+// Strings: ar / en / de / tr; other languages fall back to English.
+// ---------------------------------------------------------------------
+const CHAT_X = {
+  ar: { ai_banner:'🤖 Waha ذكاء اصطناعي، وليس إنساناً أو معالجاً.', thinking:'Waha يفكّر', start:'ابدأ', mood_log:'📊 سجّل مزاجي: {n}/5', mood_done:'✓ سُجّل مزاجك', remember:'🧠 تذكّر: «{note}»', remember_done:'✓ سأتذكّر ذلك', help_text:'يبدو أن الأمور ثقيلة عليك الآن. لست وحدك، والمساعدة متاحة في أي وقت.', help_btn:'أرقام المساعدة', nudge:'تذكير لطيف: أنا ذكاء اصطناعي، ولست بديلاً عن الناس. هل هناك شخص تثق به تستطيع أن تحكي له اليوم؟' },
+  en: { ai_banner:'🤖 Waha is an AI, not a person or a therapist.', thinking:'Waha is thinking', start:'Start', mood_log:'📊 Log my mood: {n}/5', mood_done:'✓ Mood logged', remember:'🧠 Remember: "{note}"', remember_done:"✓ I'll remember that", help_text:"It sounds like things are heavy right now. You're not alone, and help is available any time.", help_btn:'Helpline numbers', nudge:"A gentle reminder: I'm an AI and no replacement for people. Is there someone you trust you could talk to today?" },
+  de: { ai_banner:'🤖 Waha ist eine KI, kein Mensch und keine Therapeutin.', thinking:'Waha denkt nach', start:'Starten', mood_log:'📊 Stimmung eintragen: {n}/5', mood_done:'✓ Stimmung eingetragen', remember:'🧠 Merken: „{note}"', remember_done:'✓ Ich merke es mir', help_text:'Es klingt, als wäre gerade vieles schwer. Du bist nicht allein, und Hilfe ist jederzeit erreichbar.', help_btn:'Hilfe-Nummern', nudge:'Kleine Erinnerung: Ich bin eine KI und kein Ersatz für Menschen. Gibt es jemanden, dem du vertraust und mit dem du heute sprechen könntest?' },
+  tr: { ai_banner:'🤖 Waha bir yapay zekâdır; insan ya da terapist değildir.', thinking:'Waha düşünüyor', start:'Başla', mood_log:'📊 Ruh halimi kaydet: {n}/5', mood_done:'✓ Ruh halin kaydedildi', remember:'🧠 Hatırla: "{note}"', remember_done:'✓ Bunu hatırlayacağım', help_text:'Şu an her şey ağır geliyor gibi. Yalnız değilsin, yardım her zaman ulaşılabilir.', help_btn:'Yardım hatları', nudge:'Küçük bir hatırlatma: Ben bir yapay zekâyım, insanların yerini tutamam. Bugün konuşabileceğin güvendiğin biri var mı?' },
+};
+function chatT(key){ const d = CHAT_X[currentLang] || CHAT_X.en; return d[key] !== undefined ? d[key] : CHAT_X.en[key]; }
+function chatXApplyStrings(){
+  const b = document.getElementById('chatAiBanner');
+  if(b) b.textContent = chatT('ai_banner');
+}
+let chatSessionReplies = 0;
+let chatNudgeShown = false;
+const CHAT_NUDGE_AFTER = 10;
+
+function chatShowTyping(on){
+  const typing = document.getElementById('typingIndicator');
+  typing.textContent = '';
+  if(!on) return;
+  const label = document.createElement('span');
+  label.className = 'typing-label';
+  label.textContent = chatT('thinking');
+  const dots = document.createElement('span');
+  dots.className = 'typing-dots';
+  for(let i=0;i<3;i++){ dots.appendChild(document.createElement('i')); }
+  typing.appendChild(label); typing.appendChild(dots);
+}
+function chatPrefersReducedMotion(){
+  try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; }
+}
+// Reveals a finished, already safety-checked reply word by word.
+function chatTypeInto(el, text, done){
+  const log = document.getElementById('chatLog');
+  if(chatPrefersReducedMotion() || text.length > 700){ el.textContent = text; log.scrollTop = log.scrollHeight; done && done(); return; }
+  const parts = text.split(/(\s+)/);
+  let i = 0;
+  el.textContent = '';
+  const step = () => {
+    if(i >= parts.length){ done && done(); return; }
+    el.textContent += parts[i] + (parts[i+1] || '');
+    i += 2;
+    log.scrollTop = log.scrollHeight;
+    setTimeout(step, 38);
+  };
+  step();
+}
+function chatRemoveQuickReplies(){
+  document.querySelectorAll('#chatLog .chat-chips').forEach(el => el.remove());
+}
+function chatRenderExtras(data){
+  const log = document.getElementById('chatLog');
+  if(data.safety === 'moderate'){
+    const card = document.createElement('div');
+    card.className = 'chat-help-card';
+    const p = document.createElement('p'); p.textContent = chatT('help_text');
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'chat-help-btn'; btn.textContent = '🤍 ' + chatT('help_btn');
+    btn.addEventListener('click', openCrisis);
+    card.appendChild(p); card.appendChild(btn);
+    log.appendChild(card);
+  }
+  if(data.action && typeof agentIsKnownAction === 'function' && agentIsKnownAction(data.action)){
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'chat-action-card';
+    const t = document.createElement('span'); t.className = 'chat-action-title'; t.textContent = agentActionIcon(data.action) + ' ' + agentActionTitle(data.action);
+    const go = document.createElement('span'); go.className = 'chat-action-go'; go.textContent = chatT('start') + ' ▸';
+    card.appendChild(t); card.appendChild(go);
+    card.addEventListener('click', () => { addEntry('chat_action_started', { action: data.action }); agentLaunch(data.action); });
+    log.appendChild(card);
+  }
+  const offers = [];
+  if(Number.isInteger(data.mood) && data.mood >= 1 && data.mood <= 5){
+    offers.push({ text: agentFill(chatT('mood_log'), { n: data.mood }), run: () => {
+      moodLog.push(data.mood); saveMoodLog(); addEntry('mood_log', { score: data.mood, source: 'chat' });
+      try{ renderMoodChart(); updateProgressStats(); }catch(e){}
+      return chatT('mood_done');
+    }});
+  }
+  if(typeof data.remember === 'string' && data.remember.trim()){
+    const note = data.remember.trim().slice(0, 120);
+    offers.push({ text: agentFill(chatT('remember'), { note }), run: () => { agentRemember(note); return chatT('remember_done'); } });
+  }
+  if(offers.length){
+    const row = document.createElement('div');
+    row.className = 'chat-offers';
+    offers.forEach(o => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chat-offer'; b.textContent = o.text;
+      b.addEventListener('click', () => { b.textContent = o.run(); b.disabled = true; b.classList.add('done'); });
+      row.appendChild(b);
+    });
+    log.appendChild(row);
+  }
+  if(Array.isArray(data.chips) && data.chips.length){
+    const row = document.createElement('div');
+    row.className = 'chat-chips';
+    data.chips.slice(0, 3).forEach(c => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chat-chip'; b.textContent = c;
+      b.addEventListener('click', () => { document.getElementById('chatInput').value = c; sendMsg(); });
+      row.appendChild(b);
+    });
+    log.appendChild(row);
+  }
+  log.scrollTop = log.scrollHeight;
+}
+function chatMaybeNudge(){
+  if(chatNudgeShown || chatSessionReplies < CHAT_NUDGE_AFTER) return;
+  chatNudgeShown = true;
+  const log = document.getElementById('chatLog');
+  const n = document.createElement('div');
+  n.className = 'msg system-notice';
+  n.textContent = chatT('nudge');
+  log.appendChild(n);
+  log.scrollTop = log.scrollHeight;
+}
+
 function sendMsg(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
@@ -5891,24 +6020,30 @@ function sendMsg(){
   }
   const log = document.getElementById('chatLog');
   const typing = document.getElementById('typingIndicator');
+  chatRemoveQuickReplies();
   const me = document.createElement('div');
   me.className = 'msg me';
   me.textContent = text;
   log.appendChild(me);
   input.value = '';
   log.scrollTop = log.scrollHeight;
-  const typingLabels = { ar:'يكتب الآن…', de:'Schreibt gerade…', en:'Typing…', fr:'Écrit…', tr:'Yazıyor…', ku:'Dinivîse…', es:'Escribiendo…', fa:'در حال نوشتن…', ur:'لکھ رہا ہے…', ru:'Печатает…', pt:'A escrever…', it:'Sta scrivendo…' };
-  typing.textContent = typingLabels[currentLang] || typingLabels.en;
+  chatShowTyping(true);
 
-  function showReply(reply){
+  function showReply(reply, extras){
     const bot = document.createElement('div');
     bot.className = 'msg bot';
-    bot.textContent = reply;
     log.appendChild(bot);
-    typing.textContent = '';
-    log.scrollTop = log.scrollHeight;
+    chatShowTyping(false);
     speak(reply);
     updateFreeChatCounter();
+    const finish = () => {
+      if(extras) chatRenderExtras(extras);
+      chatSessionReplies++;
+      chatMaybeNudge();
+    };
+    // Crisis replies appear at once — never delayed by an animation.
+    if(extras && extras.crisis){ bot.textContent = reply; log.scrollTop = log.scrollHeight; finish(); }
+    else chatTypeInto(bot, reply, finish);
   }
   function showSystemNotice(noticeText){
     const notice = document.createElement('div');
@@ -5928,7 +6063,8 @@ function sendMsg(){
   fetch(CHAT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang }),
+    body: JSON.stringify({ message: text, history: chatHistory, lang: currentLang,
+      memory: (typeof agentLoadMemory === 'function' ? agentLoadMemory().slice(-5).map(m => ({ d: m.d, note: m.note })) : []) }),
   })
   .then(res => {
     if(res.status === 429){
@@ -5941,15 +6077,15 @@ function sendMsg(){
   })
   .then(data => {
     if(!data.reply) throw new Error('empty reply');
-    chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply });
+    chatHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply, sig: typeof data.sig === 'string' ? data.sig : undefined });
     if(chatHistory.length > MAX_CHAT_HISTORY) chatHistory = chatHistory.slice(-MAX_CHAT_HISTORY);
     saveChatMemory();
     if(!isCrisisMsg) safeSet('mc_free_chat_count', String(getFreeChatCount() + 1));
-    showReply(data.reply);
+    showReply(data.reply, data);
   })
   .catch((err)=>{
     if(err && err.rateLimited){
-      typing.textContent = '';
+      chatShowTyping(false);
       showReply(I18N[currentLang].rate_limit_msg);
       return;
     }
