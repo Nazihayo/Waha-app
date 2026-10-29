@@ -537,6 +537,11 @@ const RESPOND_TOOL = {
     type: "object",
     properties: {
       reply: { type: "string", description: "Your message to the person: 1-4 short sentences in their language and dialect." },
+      language: {
+        type: "string",
+        enum: ["ar", "en", "de", "fr", "tr", "ku", "es", "fa", "ur", "ru", "pt", "it", "other"],
+        description: "The language your reply is written in (so the app can read it aloud with the right voice).",
+      },
       quick_replies: {
         type: "array",
         items: { type: "string" },
@@ -557,12 +562,13 @@ const RESPOND_TOOL = {
         description: "Only if they asked you to remember something, or shared a lasting fact about their life that will help later (e.g. works night shifts, exams in May): a short note in their language, max 120 characters. Never a health condition or anything they did not say. Otherwise empty.",
       },
     },
-    required: ["reply", "quick_replies", "suggested_action", "mood_score", "remember"],
+    required: ["reply", "language", "quick_replies", "suggested_action", "mood_score", "remember"],
   },
 };
 function validateRespond(input) {
   if (!input || typeof input.reply !== "string" || !input.reply.trim()) return null;
   const out = { reply: input.reply.trim().slice(0, 1500), chips: [], action: null, mood: null, remember: "" };
+  if (typeof input.language === "string" && /^[a-z]{2}$/.test(input.language)) out.lang = input.language;
   if (Array.isArray(input.quick_replies)) {
     out.chips = input.quick_replies
       .filter((c) => typeof c === "string" && c.trim())
