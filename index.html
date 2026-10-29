@@ -383,6 +383,19 @@
   </div>
 </section>
 
+<section id="reviews">
+  <div class="section-head">
+    <div class="tag" data-rv-i18n="eyebrow"></div>
+    <h2 data-rv-i18n="title"></h2>
+    <p data-rv-i18n="desc"></p>
+  </div>
+  <div class="rv-wrap">
+    <div class="rv-summary" id="rvSummary"></div>
+    <div class="rv-list" id="rvList"></div>
+    <button class="btn btn-primary rv-write-btn" data-click="openReviewForm" data-rv-i18n="write"></button>
+  </div>
+</section>
+
 <section id="library">
   <div class="section-head">
     <div class="tag" data-i18n="library_eyebrow"></div>
@@ -674,6 +687,37 @@
     <div class="onboarding-actions" id="obActions">
       <button class="onboarding-skip" id="obSkipBtn" data-click="skipOnboarding"></button>
       <button class="onboarding-next" id="obNextBtn" data-click="nextOnboardingStep"></button>
+    </div>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="rvFormTitle">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeReviewForm" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-rv-i18n="eyebrow"></div>
+    <h2 class="prefs-title u-fs-24" id="rvFormTitle" data-rv-i18n="form_title"></h2>
+    <div id="rvFormBody">
+      <div class="prefs-section-label" data-rv-i18n="stars_label"></div>
+      <div class="rv-stars" id="rvStars" role="radiogroup"></div>
+      <label class="prefs-section-label rv-label" for="rvText" data-rv-i18n="text_label"></label>
+      <textarea id="rvText" class="agent-note" rows="4" maxlength="600" data-rv-i18n-ph="text_ph"></textarea>
+      <label class="agent-consent">
+        <input type="checkbox" id="rvPublic">
+        <span data-rv-i18n="public_ok"></span>
+      </label>
+      <label class="agent-consent">
+        <input type="checkbox" id="rvUsage">
+        <span data-rv-i18n="share_usage"></span>
+      </label>
+      <p class="rv-usage" id="rvUsagePreview"></p>
+      <label class="prefs-section-label rv-label" for="rvPilot" data-rv-i18n="pilot_label"></label>
+      <input id="rvPilot" class="rv-pilot-input" type="text" maxlength="16" autocomplete="off" placeholder="W07">
+      <button class="onboarding-next agent-build-btn" data-click="submitReview" data-rv-i18n="send"></button>
+      <p class="agent-setup-msg" id="rvMsg" role="alert"></p>
+    </div>
+    <div id="rvDone" class="u-hidden">
+      <p class="rv-thanks" data-rv-i18n="thanks"></p>
+      <button class="onboarding-next agent-build-btn" data-click="closeReviewForm" data-rv-i18n="close"></button>
     </div>
   </div>
 </div>

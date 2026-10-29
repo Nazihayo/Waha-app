@@ -617,3 +617,27 @@
     .agent-home-card{width:auto;margin:14px 16px 0;flex-direction:column;align-items:stretch;text-align:center;}
     .agent-goals{grid-template-columns:1fr;}
   }
+
+  /* ---- pilot opinions (reviews) ---- */
+  .rv-wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .rv-summary{text-align:center;color:var(--ink);}
+  .rv-score{font-size:30px;font-weight:700;color:var(--ink);}
+  .rv-score-stars{color:var(--gold);font-size:20px;letter-spacing:2px;margin:0 8px;}
+  .rv-score-note{font-size:13px;color:rgba(var(--ink-rgb),0.65);margin-top:4px;line-height:1.6;}
+  .rv-list{width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+  .rv-item{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:start;}
+  .rv-item-stars{color:var(--gold);letter-spacing:2px;font-size:14px;}
+  .rv-item-text{font-size:14px;line-height:1.65;color:var(--ink);margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere;}
+  .rv-item-meta{font-size:12px;color:rgba(var(--ink-rgb),0.55);}
+  .rv-empty{font-size:14px;color:rgba(var(--ink-rgb),0.65);text-align:center;}
+  .rv-write-btn{margin-top:4px;}
+  .rv-stars{display:flex;gap:6px;margin-bottom:14px;direction:ltr;justify-content:flex-start;}
+  [dir="rtl"] .rv-stars{justify-content:flex-end;}
+  .rv-star{font-size:30px;line-height:1;background:none;border:none;cursor:pointer;color:var(--line);padding:2px;}
+  .rv-star.on{color:var(--gold);}
+  .rv-label{display:block;margin-top:4px;}
+  .rv-usage{font-size:12px;color:rgba(var(--ink-rgb),0.65);background:var(--paper-dim);border-radius:10px;padding:8px 10px;margin:-6px 0 14px;line-height:1.6;}
+  .rv-pilot-input{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--paper-dim);color:var(--ink);margin-bottom:16px;direction:ltr;}
+  .rv-thanks{font-size:15px;line-height:1.7;color:var(--ink);margin:6px 0 18px;}
+  .pilot-chip{display:inline-block;background:rgba(201,166,107,0.18);color:var(--accent-text);border:1px solid rgba(201,166,107,0.5);border-radius:100px;padding:1px 8px;font-size:11px;}
+

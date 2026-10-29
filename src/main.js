@@ -3110,6 +3110,7 @@ function setLang(lang){
   safeSet('mc_lang', lang);
   updateFreeChatCounter();
   try{ chatXApplyStrings(); }catch(e){}
+  try{ rvApplyStrings(); loadReviews(); }catch(e){}
   if(typeof agentRenderHomeCard === 'function' && document.getElementById('agentHomeCard')){
     try{
       agentRenderHomeCard();
@@ -5892,6 +5893,176 @@ function confirmDeleteCalmPlan(){
 }
 
 const FREE_CHAT_LIMIT = 10;
+
+// ---------------------------------------------------------------------
+// PILOT MODE + PILOT OPINIONS
+// - A pilot link (wahaapp.netlify.app/?pilot=W07) stores the participant
+//   code on this device and lifts the free-message limit for the pilot.
+//   The code can also be typed into the opinion form (an iPhone Home
+//   Screen app has its own storage and loses the link's code).
+// - Opinions: stars + optional text, sent to netlify/functions/feedback.js.
+//   Text is only shown after the person agreed AND the owner approved it;
+//   every real rating counts in the average (see feedback.js).
+// - Usage numbers attached to an opinion are counts only (days active,
+//   plans, exercises...), never content, and only if the person ticks it.
+// Strings: ar / en / de / tr; other languages fall back to English.
+// ---------------------------------------------------------------------
+const FEEDBACK_ENDPOINT = API_BASE + '/.netlify/functions/feedback';
+const PILOT_CHAT_LIMIT = 1000;
+function pilotCode(){
+  const c = safeGet('mc_pilot');
+  return c && /^[A-Za-z0-9-]{2,16}$/.test(c) ? c.toUpperCase() : null;
+}
+function setPilotCode(c){
+  if(!c || !/^[A-Za-z0-9-]{2,16}$/.test(c)) return false;
+  safeSet('mc_pilot', c.toUpperCase());
+  if(!safeGet('mc_pilot_since')) safeSet('mc_pilot_since', String(Date.now()));
+  return true;
+}
+(function readPilotParam(){
+  try{
+    const u = new URL(window.location.href);
+    const c = u.searchParams.get('pilot');
+    if(c && setPilotCode(c)){
+      u.searchParams.delete('pilot');
+      window.history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    }
+  }catch(e){}
+})();
+function chatLimit(){ return pilotCode() ? PILOT_CHAT_LIMIT : FREE_CHAT_LIMIT; }
+
+const RV_I18N = {
+  ar: { eyebrow:'آراء حقيقية', title:'ماذا يقول من جرّبوا واحة', desc:'تقييمات من أشخاص جرّبوا التطبيق. كل تقييم محسوب في المتوسط، والنصوص تُنشر فقط بموافقة أصحابها.', write:'✍️ اكتب رأيك', form_title:'رأيك يهمّنا', stars_label:'كم تقيّم واحة؟', text_label:'ماذا أعجبك؟ وما الذي يمكن تحسينه؟ (اختياري)', text_ph:'اكتب بصراحة، حتى النقد يساعدنا…', public_ok:'أوافق على نشر رأيي داخل التطبيق وفي عرض مسابقة دبي، بدون اسمي.', share_usage:'أرفق أرقام استخدامي (أعداد فقط، بدون أي كلام شخصي).', pilot_label:'رمز التجربة (إن كان لديك)', send:'أرسل رأيي', need_stars:'اختر عدد النجوم أولاً.', sending:'جارٍ الإرسال…', thanks:'شكراً جزيلاً! وصل رأيك 🌿 سيظهر نصه بعد المراجعة إن وافقت على نشره.', close:'إغلاق', error:'تعذّر الإرسال الآن. حاول مرة أخرى بعد قليل.', too_many:'أرسلت عدة آراء اليوم. شكراً لك، جرّب غداً.', crisis_note:'شكراً لصراحتك. ما كتبته يبدو ثقيلاً، ولست وحدك: المساعدة متاحة الآن.', score_note:'من {n} تقييماً حقيقياً · تجربة أولية', empty:'لا توجد آراء منشورة بعد. كن أول من يكتب رأيه.', pilot_member:'مشارك في التجربة', usage_line:'أيام الاستخدام {days} · رسائل {chat} · خطط {plans} · تمارين {ex} · «ساعدتني» {helped}', pilot_chip:'🧪 التجربة: {code}' },
+  en: { eyebrow:'Real opinions', title:'What people who tried Waha say', desc:'Ratings from people who tried the app. Every rating counts in the average; texts are only shown with their authors\' consent.', write:'✍️ Write your opinion', form_title:'Your opinion matters', stars_label:'How do you rate Waha?', text_label:'What did you like? What could be better? (optional)', text_ph:'Be honest, criticism helps too…', public_ok:'I agree that my opinion may be shown in the app and in the Dubai competition pitch, without my name.', share_usage:'Attach my usage numbers (counts only, nothing personal).', pilot_label:'Pilot code (if you have one)', send:'Send my opinion', need_stars:'Choose a number of stars first.', sending:'Sending…', thanks:'Thank you so much! Your opinion arrived 🌿 Its text appears after review if you agreed to share it.', close:'Close', error:"Couldn't send right now. Please try again in a moment.", too_many:"You've sent several opinions today. Thank you, try again tomorrow.", crisis_note:"Thank you for being honest. What you wrote sounds heavy, and you're not alone: help is available now.", score_note:'from {n} real ratings · pilot', empty:'No published opinions yet. Be the first to write one.', pilot_member:'Pilot participant', usage_line:'Days active {days} · messages {chat} · plans {plans} · exercises {ex} · "helped" {helped}', pilot_chip:'🧪 Pilot: {code}' },
+  de: { eyebrow:'Echte Meinungen', title:'Was Menschen sagen, die Waha ausprobiert haben', desc:'Bewertungen von Menschen, die die App ausprobiert haben. Jede Bewertung zählt im Durchschnitt; Texte erscheinen nur mit Zustimmung.', write:'✍️ Meinung schreiben', form_title:'Deine Meinung zählt', stars_label:'Wie bewertest du Waha?', text_label:'Was hat dir gefallen? Was könnte besser sein? (optional)', text_ph:'Sei ehrlich, auch Kritik hilft…', public_ok:'Ich bin einverstanden, dass meine Meinung ohne Namen in der App und im Pitch für den Wettbewerb in Dubai gezeigt wird.', share_usage:'Meine Nutzungszahlen anhängen (nur Zahlen, nichts Persönliches).', pilot_label:'Pilot-Code (falls vorhanden)', send:'Meinung senden', need_stars:'Wähle zuerst die Sterne.', sending:'Wird gesendet…', thanks:'Vielen Dank! Deine Meinung ist angekommen 🌿 Der Text erscheint nach Prüfung, wenn du zugestimmt hast.', close:'Schließen', error:'Senden gerade nicht möglich. Bitte gleich noch einmal versuchen.', too_many:'Du hast heute schon mehrere Meinungen gesendet. Danke, versuch es morgen wieder.', crisis_note:'Danke für deine Ehrlichkeit. Was du schreibst, klingt schwer, und du bist nicht allein: Hilfe ist jetzt erreichbar.', score_note:'aus {n} echten Bewertungen · Pilotphase', empty:'Noch keine veröffentlichten Meinungen. Sei die erste Person.', pilot_member:'Pilot-Teilnehmer:in', usage_line:'Aktive Tage {days} · Nachrichten {chat} · Pläne {plans} · Übungen {ex} · „hat geholfen" {helped}', pilot_chip:'🧪 Pilot: {code}' },
+  tr: { eyebrow:'Gerçek görüşler', title:"Waha'yı deneyenler ne diyor", desc:'Uygulamayı deneyenlerin puanları. Her puan ortalamaya dahildir; yazılar yalnızca sahibinin onayıyla gösterilir.', write:'✍️ Görüşünü yaz', form_title:'Görüşün önemli', stars_label:"Waha'ya kaç puan verirsin?", text_label:'Neyi beğendin? Ne daha iyi olabilir? (isteğe bağlı)', text_ph:'Dürüst ol, eleştiri de yardımcı olur…', public_ok:'Görüşümün adım olmadan uygulamada ve Dubai yarışması sunumunda gösterilmesini kabul ediyorum.', share_usage:'Kullanım sayılarımı ekle (yalnızca sayılar, kişisel hiçbir şey yok).', pilot_label:'Pilot kodu (varsa)', send:'Görüşümü gönder', need_stars:'Önce yıldız sayısını seç.', sending:'Gönderiliyor…', thanks:'Çok teşekkürler! Görüşün ulaştı 🌿 Paylaşmayı kabul ettiysen yazın incelemeden sonra görünecek.', close:'Kapat', error:'Şu an gönderilemedi. Biraz sonra tekrar dene.', too_many:'Bugün birkaç görüş gönderdin. Teşekkürler, yarın tekrar dene.', crisis_note:'Dürüstlüğün için teşekkürler. Yazdıkların ağır görünüyor ve yalnız değilsin: yardım şu an ulaşılabilir.', score_note:'{n} gerçek puandan · pilot', empty:'Henüz yayınlanan görüş yok. İlk yazan sen ol.', pilot_member:'Pilot katılımcısı', usage_line:'Aktif gün {days} · mesaj {chat} · plan {plans} · egzersiz {ex} · "yardımcı oldu" {helped}', pilot_chip:'🧪 Pilot: {code}' },
+};
+function rvT(key){ const d = RV_I18N[currentLang] || RV_I18N.en; return d[key] !== undefined ? d[key] : RV_I18N.en[key]; }
+function rvFill(str, vars){ return String(str).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] !== undefined) ? vars[k] : m); }
+function rvApplyStrings(){
+  document.querySelectorAll('[data-rv-i18n]').forEach(el => { el.textContent = rvT(el.getAttribute('data-rv-i18n')); });
+  document.querySelectorAll('[data-rv-i18n-ph]').forEach(el => { el.setAttribute('placeholder', rvT(el.getAttribute('data-rv-i18n-ph'))); });
+}
+let rvRating = 0;
+let rvLoaded = false;
+
+function pilotUsage(){
+  const entries = getEntries().filter(e => !e.deleted_at);
+  const days = new Set(entries.map(e => dateKeyFromTs(e.occurred_at)));
+  const fb = (typeof agentLoadFeedback === 'function') ? agentLoadFeedback() : [];
+  const count = t => entries.filter(e => e.entity_type === t).length;
+  return {
+    daysActive: days.size,
+    chatMessages: getFreeChatCount(),
+    plansMade: count('agent_plan'),
+    stepsHelped: fb.filter(f => f.helped).length,
+    stepsNotHelped: fb.filter(f => !f.helped).length,
+    exercisesDone: count('exercise_completion'),
+    moodLogs: count('mood_log'),
+  };
+}
+function rvStarsText(n){ return '★'.repeat(n) + '☆'.repeat(5 - n); }
+function rvRenderStars(){
+  const box = document.getElementById('rvStars');
+  if(!box) return;
+  box.innerHTML = '';
+  for(let i = 1; i <= 5; i++){
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'rv-star' + (i <= rvRating ? ' on' : '');
+    b.textContent = '★';
+    b.setAttribute('role', 'radio');
+    b.setAttribute('aria-checked', i === rvRating ? 'true' : 'false');
+    b.setAttribute('aria-label', i + '/5');
+    b.addEventListener('click', () => { rvRating = i; rvRenderStars(); });
+    box.appendChild(b);
+  }
+}
+function rvUpdateUsagePreview(){
+  const el = document.getElementById('rvUsagePreview');
+  const on = document.getElementById('rvUsage').checked;
+  el.classList.toggle('u-hidden', !on);
+  if(!on) return;
+  const u = pilotUsage();
+  el.textContent = rvFill(rvT('usage_line'), { days: u.daysActive, chat: u.chatMessages, plans: u.plansMade, ex: u.exercisesDone, helped: u.stepsHelped });
+}
+function openReviewForm(){
+  rvApplyStrings();
+  rvRating = 0;
+  rvRenderStars();
+  document.getElementById('rvText').value = '';
+  document.getElementById('rvPublic').checked = false;
+  const usage = document.getElementById('rvUsage');
+  usage.checked = !!pilotCode();
+  usage.onchange = rvUpdateUsagePreview;
+  rvUpdateUsagePreview();
+  document.getElementById('rvPilot').value = pilotCode() || '';
+  document.getElementById('rvMsg').textContent = '';
+  document.getElementById('rvFormBody').classList.remove('u-hidden');
+  document.getElementById('rvDone').classList.add('u-hidden');
+  document.getElementById('reviewModal').classList.add('open');
+}
+function closeReviewForm(){ document.getElementById('reviewModal').classList.remove('open'); }
+function submitReview(){
+  const msg = document.getElementById('rvMsg');
+  if(!rvRating){ msg.textContent = rvT('need_stars'); return; }
+  const text = document.getElementById('rvText').value.trim().slice(0, 600);
+  if(text && detectCrisisClient(text)){
+    // Never shown publicly; the person gets help first.
+    closeReviewForm();
+    openCrisis();
+  }
+  const typed = document.getElementById('rvPilot').value.trim();
+  if(typed) setPilotCode(typed);
+  const shareUsage = document.getElementById('rvUsage').checked;
+  msg.textContent = rvT('sending');
+  fetch(FEEDBACK_ENDPOINT, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'submit', rating: rvRating, text, publicOk: document.getElementById('rvPublic').checked,
+      shareUsage, usage: shareUsage ? pilotUsage() : null, pilot: pilotCode(), lang: currentLang }),
+  }).then(r => r.json().then(d => ({ ok: r.ok, status: r.status, d }))).then(({ ok, status }) => {
+    if(status === 429){ msg.textContent = rvT('too_many'); return; }
+    if(!ok){ msg.textContent = rvT('error'); return; }
+    addEntry('opinion_sent', { rating: rvRating });
+    document.getElementById('rvFormBody').classList.add('u-hidden');
+    document.getElementById('rvDone').classList.remove('u-hidden');
+    updateFreeChatCounter();
+    loadReviews(true);
+  }).catch(() => { msg.textContent = rvT('error'); });
+}
+function loadReviews(force){
+  if(rvLoaded && !force) return renderReviews(loadReviews._data);
+  rvLoaded = true;
+  fetch(FEEDBACK_ENDPOINT).then(r => r.ok ? r.json() : null).then(d => { loadReviews._data = d; renderReviews(d); }).catch(() => renderReviews(null));
+}
+function renderReviews(d){
+  const sum = document.getElementById('rvSummary');
+  const list = document.getElementById('rvList');
+  if(!sum || !list) return;
+  sum.innerHTML = ''; list.innerHTML = '';
+  const st = d && d.stats;
+  if(st && st.count){
+    const line = document.createElement('div');
+    const score = document.createElement('span'); score.className = 'rv-score'; score.textContent = String(st.average);
+    const stars = document.createElement('span'); stars.className = 'rv-score-stars'; stars.textContent = rvStarsText(Math.round(st.average));
+    line.appendChild(score); line.appendChild(stars);
+    const note = document.createElement('div'); note.className = 'rv-score-note'; note.textContent = rvFill(rvT('score_note'), { n: st.count });
+    sum.appendChild(line); sum.appendChild(note);
+  }
+  const items = (d && Array.isArray(d.items)) ? d.items : [];
+  if(!items.length){
+    const p = document.createElement('p'); p.className = 'rv-empty'; p.textContent = rvT('empty'); list.appendChild(p);
+    return;
+  }
+  items.slice(0, 12).forEach(i => {
+    const card = document.createElement('div'); card.className = 'rv-item';
+    const s1 = document.createElement('div'); s1.className = 'rv-item-stars'; s1.textContent = rvStarsText(i.rating);
+    const t = document.createElement('p'); t.className = 'rv-item-text'; t.textContent = i.text;
+    const m = document.createElement('div'); m.className = 'rv-item-meta'; m.textContent = (i.pilot ? rvT('pilot_member') + ' · ' : '') + i.date;
+    card.appendChild(s1); card.appendChild(t); card.appendChild(m);
+    list.appendChild(card);
+  });
+}
 const CLIENT_CRISIS_KEYWORDS = {
   ar: ["انتحار", "اقتل نفسي", "أقتل نفسي", "اؤذي نفسي", "أؤذي نفسي", "إيذاء نفسي", "ايذاء نفسي", "انهي حياتي", "أنهي حياتي", "بدي اموت", "أريد الموت", "اريد الموت", "لا اريد العيش", "لا أريد أن أعيش",
        "بدي انتحر", "رح انتحر", "نفسي اموت", "عايز اموت", "عاوز اموت", "ابي اموت", "ابغى اموت", "ابغي اموت", "ودي اموت", "اريد اموت", "بغيت نموت", "نبغي نموت", "اتمنى اموت", "اتمنى الموت", "ما بدي عيش", "مابدي عيش", "بدي خلص من حياتي", "اقطع شراييني", "اذبح نفسي", "اشنق نفسي"],
@@ -5928,6 +6099,8 @@ function getFreeChatCount(){ return parseInt(safeGet('mc_free_chat_count') || '0
 function updateFreeChatCounter(){
   const el = document.getElementById('freeChatCounter');
   if(!el) return;
+  const pc = pilotCode();
+  if(pc){ el.textContent = '· ' + rvFill(rvT('pilot_chip'), { code: pc }); return; }
   const remaining = Math.max(0, FREE_CHAT_LIMIT - getFreeChatCount());
   const dict = I18N[currentLang];
   el.textContent = '· ' + remaining + ' ' + dict.free_chat_remaining;
@@ -6070,7 +6243,7 @@ function sendMsg(){
     return;
   }
   const isCrisisMsg = detectCrisisClient(text);
-  if(!isCrisisMsg && getFreeChatCount() >= FREE_CHAT_LIMIT){
+  if(!isCrisisMsg && getFreeChatCount() >= chatLimit()){
     input.value = '';
     openUpgrade();
     return;
@@ -6138,6 +6311,7 @@ function sendMsg(){
     if(chatHistory.length > MAX_CHAT_HISTORY) chatHistory = chatHistory.slice(-MAX_CHAT_HISTORY);
     saveChatMemory();
     if(!isCrisisMsg) safeSet('mc_free_chat_count', String(getFreeChatCount() + 1));
+    addEntry('chat_message', {}); // a count for 'days active' only, never the content
     showReply(data.reply, data);
   })
   .catch((err)=>{
@@ -6668,6 +6842,7 @@ function agentBuildPlan(){
       summary: plan.summary || '', tomorrow: plan.tomorrow || '',
       steps: plan.steps.map(s => ({ action:s.action, time:s.time || '', title:s.title || agentActionTitle(s.action), why:s.why || '', started:false, feedback:null, notified:false })) };
     agentSavePlan(stored);
+    addEntry('agent_plan', { source, goal: agentState.goal });
     if(note) agentRemember(note);
     document.getElementById('agentNote').value = '';
     agentRenderPlan(stored);
@@ -7319,6 +7494,9 @@ function sendMsgOnEnter(e){
 }
 
 const ACTIONS = {
+  openReviewForm,
+  closeReviewForm,
+  submitReview,
   agentBuildPlan,
   agentExportCalendar,
   agentForgetAll,
