@@ -661,6 +661,7 @@
           <div class="upgrade-tier-price" data-i18n="upgrade_monthly_price"></div>
         </div>
         <div class="upgrade-tier-desc" data-i18n="upgrade_monthly_desc"></div>
+        <button class="upgrade-tier-btn u-hidden" id="upgradeMonthlyBtn" data-click="purchaseTier:monthly" data-i18n="upgrade_subscribe_btn"></button>
       </div>
       <div class="upgrade-tier featured">
         <div class="upgrade-tier-badge" data-i18n="upgrade_yearly_badge"></div>
@@ -670,8 +671,12 @@
         </div>
         <div class="upgrade-tier-desc" data-i18n="upgrade_yearly_desc"></div>
         <div class="upgrade-tier-note" data-i18n="upgrade_yearly_note"></div>
+        <button class="upgrade-tier-btn u-hidden" id="upgradeYearlyBtn" data-click="purchaseTier:yearly" data-i18n="upgrade_subscribe_btn"></button>
       </div>
     </div>
+    <p class="upgrade-native-note u-hidden" id="upgradeNativeNote" data-i18n="upgrade_native_only_note"></p>
+    <button class="upgrade-restore-link u-hidden" id="upgradeRestoreBtn" data-click="restorePurchases" data-i18n="upgrade_restore_btn"></button>
+    <p class="upgrade-status-msg" id="upgradeStatusMsg"></p>
     <button class="prefs-maybe-later" data-click="closeUpgrade" data-i18n="upgrade_maybe_later"></button>
   </div>
 </div>

@@ -61,6 +61,67 @@ script refuses to run without it rather than silently shipping a native app
 whose chat feature is quietly broken. It also refuses to run if `dist/`
 doesn't exist yet, since it packages the build, it doesn't produce one.
 
+## Subscriptions (RevenueCat — optional until you set it up)
+
+Monthly/yearly pricing is shown in the app already (`src/main.js`'s
+`upgrade_*` strings), but there's no payment processor wired up yet. Apple
+and Google both require digital subscriptions *sold inside a native app* to
+go through their own billing (StoreKit / Play Billing) — a web checkout
+(Stripe etc.) would get the app rejected, so this only covers the native
+path. The web build has no purchase UI at all; it isn't in scope here.
+
+This uses [RevenueCat](https://www.revenuecat.com/) rather than raw
+StoreKit/Play Billing calls, since it handles receipt validation and
+subscription-state tracking for both stores through one API, instead of
+you maintaining your own server-side verification against both Apple's and
+Google's APIs.
+
+**Setup (in RevenueCat's dashboard, not here):**
+1. Create a RevenueCat project, connect it to your App Store Connect and
+   Play Console apps.
+2. Create your monthly/yearly products in App Store Connect / Play
+   Console first, then import them into a RevenueCat **Offering** using
+   its standard package identifiers (`$rc_monthly`, `$rc_annual`) — or
+   update `MONTHLY_PACKAGE_ID`/`YEARLY_PACKAGE_ID` near the top of the
+   purchases code in `src/main.js` if you use different ones.
+3. Create an **Entitlement** named `premium` (or update
+   `PREMIUM_ENTITLEMENT_ID` in `src/main.js` to whatever you name it) and
+   attach both products to it.
+4. Copy your iOS and Android **public** API keys from Project settings →
+   API keys.
+
+**Build with them set:**
+```bash
+CAPACITOR_API_BASE=https://YOUR-SITE.netlify.app \
+REVENUECAT_IOS_API_KEY=appl_xxx \
+REVENUECAT_ANDROID_API_KEY=goog_xxx \
+npm run sync
+```
+Leaving the RevenueCat keys unset still builds fine — the app just keeps
+the subscribe/restore buttons hidden (shows the existing pricing info plus
+a note instead) until you set them.
+
+**Not yet verified against a real build**: this was wired up against
+`@revenuecat/purchases-capacitor@9.2.2`'s actual published TypeScript
+definitions and its `@revenuecat/purchases-typescript-internal-esm@13.26.0`
+dependency (read directly, not from a documentation summary — so the
+`configure`/`getOfferings`/`purchasePackage`/`restorePurchases`/
+`getCustomerInfo`/`addCustomerInfoUpdateListener` calls and the
+`entitlements.active[id]` map shape in `src/main.js` are confirmed
+correct for that exact version), but there was no actual RevenueCat
+account, Xcode, or Android Studio to run a real purchase against. Before
+relying on it in production, still confirm `MONTHLY_PACKAGE_ID` /
+`YEARLY_PACKAGE_ID` / `PREMIUM_ENTITLEMENT_ID` in `src/main.js` match
+what you actually name things in your RevenueCat dashboard — that part
+is configuration on your end, not something any source read can verify.
+
+**Capacitor 6, not the plugin's latest**: `@revenuecat/purchases-capacitor`
+jumped to requiring Capacitor ≥8 starting at its v10 release. This repo's
+native scaffold is pinned to Capacitor 6 (`mobile/package.json`), so this
+uses the last 6.x-compatible release (9.2.2) rather than latest. Upgrading
+the whole Capacitor major version to pick up newer RevenueCat releases is
+a separate, bigger decision — not done as part of this.
+
 ## iOS (Mac + Xcode only)
 
 ```bash

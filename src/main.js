@@ -80,6 +80,8 @@ const I18N = {
     upgrade_monthly_title:"اشتراك شهري", upgrade_monthly_desc:"محادثات غير محدودة، مكتبة كاملة، برامج متقدمة",
     upgrade_programs_title:"برامج داخلية", upgrade_programs_desc:"دورات وبرامج متخصصة قصيرة", upgrade_monthly_price:"9.99€ / شهريًا", upgrade_yearly_title:"سنوي", upgrade_yearly_price:"99.90€ / سنويًا", upgrade_yearly_desc:"كل مزايا الاشتراك الشهري، بفاتورة سنوية واحدة", upgrade_yearly_badge:"وفّر 17%", upgrade_yearly_note:"≈ 8.33€ شهريًا",
     upgrade_maybe_later:"ربما لاحقاً",
+    upgrade_subscribe_btn:"اشترك", upgrade_restore_btn:"استعادة المشتريات", upgrade_native_only_note:"الاشتراكات متاحة داخل تطبيق iOS/Android.",
+    upgrade_error_generic:"حدث خطأ ما. حاول مرة أخرى.", upgrade_restore_success:"تم استعادة اشتراكك.", upgrade_restore_nothing:"لم يُعثر على اشتراك نشط لهذا الحساب.",
     progress_label:"تقدّمك", progress_streak:"أيام متتالية", progress_journal:"كتابات محفوظة", progress_mood:"تسجيلات مزاج",
     progress_exercises:"تمارين مكتملة", progress_helped:"مرات ساعدت",
     progress_disable_streaks_title:"تعطيل السلاسل", progress_disable_streaks_desc:"أخفِ عدّاد الأيام المتتالية إن كان يشعرك بالضغط بدل التحفيز.",
@@ -265,6 +267,8 @@ const I18N = {
     upgrade_monthly_title:"Monatsabo", upgrade_monthly_desc:"Unbegrenzte Chats, vollständige Bibliothek, fortgeschrittene Programme",
     upgrade_programs_title:"Zusatzprogramme", upgrade_programs_desc:"Spezialisierte Kurzprogramme und Kurse", upgrade_monthly_price:"9,99€ / Monat", upgrade_yearly_title:"Jährlich", upgrade_yearly_price:"99,90€ / Jahr", upgrade_yearly_desc:"Alle Vorteile des Monatsabos, einmal jährlich abgerechnet", upgrade_yearly_badge:"17% sparen", upgrade_yearly_note:"≈ 8,33€ / Monat",
     upgrade_maybe_later:"Vielleicht später",
+    upgrade_subscribe_btn:"Abonnieren", upgrade_restore_btn:"Käufe wiederherstellen", upgrade_native_only_note:"Abos sind in der iOS-/Android-App verfügbar.",
+    upgrade_error_generic:"Etwas ist schiefgelaufen. Bitte versuche es erneut.", upgrade_restore_success:"Dein Abo wurde wiederhergestellt.", upgrade_restore_nothing:"Für dieses Konto wurde kein aktives Abo gefunden.",
     progress_label:"Dein Fortschritt", progress_streak:"Tage in Folge", progress_journal:"Gespeicherte Einträge", progress_mood:"Stimmungseinträge",
     progress_exercises:"Abgeschlossene Übungen", progress_helped:"Mal geholfen",
     progress_disable_streaks_title:"Serien deaktivieren", progress_disable_streaks_desc:"Blende den Tage-Zähler aus, falls er dich eher unter Druck setzt als motiviert.",
@@ -450,6 +454,8 @@ const I18N = {
     upgrade_monthly_title:"Monthly plan", upgrade_monthly_desc:"Unlimited chats, full library, advanced programs",
     upgrade_programs_title:"Add-on programs", upgrade_programs_desc:"Specialized short courses and programs", upgrade_monthly_price:"€9.99 / mo", upgrade_yearly_title:"Yearly", upgrade_yearly_price:"€99.90 / yr", upgrade_yearly_desc:"Everything in Monthly, billed once a year", upgrade_yearly_badge:"Save 17%", upgrade_yearly_note:"≈ €8.33 / month",
     upgrade_maybe_later:"Maybe later",
+    upgrade_subscribe_btn:"Subscribe", upgrade_restore_btn:"Restore purchases", upgrade_native_only_note:"Subscriptions are available in the iOS/Android app.",
+    upgrade_error_generic:"Something went wrong. Please try again.", upgrade_restore_success:"Your subscription was restored.", upgrade_restore_nothing:"No active subscription was found for this account.",
     progress_label:"Your progress", progress_streak:"day streak", progress_journal:"saved entries", progress_mood:"mood logs",
     progress_exercises:"exercises completed", progress_helped:"times it helped",
     progress_disable_streaks_title:"Disable streaks", progress_disable_streaks_desc:"Hide the day-streak counter if it feels more like pressure than motivation.",
@@ -635,6 +641,8 @@ const I18N = {
     upgrade_monthly_title:"Abonnement mensuel", upgrade_monthly_desc:"Chats illimités, bibliothèque complète, programmes avancés",
     upgrade_programs_title:"Programmes additionnels", upgrade_programs_desc:"Cours et programmes courts spécialisés", upgrade_monthly_price:"9,99€ / mois", upgrade_yearly_title:"Annuel", upgrade_yearly_price:"99,90€ / an", upgrade_yearly_desc:"Tous les avantages du mensuel, facturé une fois par an", upgrade_yearly_badge:"Économise 17 %", upgrade_yearly_note:"≈ 8,33€ / mois",
     upgrade_maybe_later:"Peut-être plus tard",
+    upgrade_subscribe_btn:"S'abonner", upgrade_restore_btn:"Restaurer les achats", upgrade_native_only_note:"Les abonnements sont disponibles dans l'application iOS/Android.",
+    upgrade_error_generic:"Une erreur s'est produite. Réessaie.", upgrade_restore_success:"Ton abonnement a été restauré.", upgrade_restore_nothing:"Aucun abonnement actif trouvé pour ce compte.",
     progress_label:"Ta progression", progress_streak:"jours de suite", progress_journal:"écrits enregistrés", progress_mood:"suivis d'humeur",
     progress_exercises:"exercices terminés", progress_helped:"fois où ça a aidé",
     progress_disable_streaks_title:"Désactiver les séries", progress_disable_streaks_desc:"Masque le compteur de jours s'il te met plus de pression qu'il ne te motive.",
@@ -820,6 +828,8 @@ const I18N = {
     upgrade_monthly_title:"Aylık plan", upgrade_monthly_desc:"Sınırsız sohbet, tam kütüphane, gelişmiş programlar",
     upgrade_programs_title:"Ek programlar", upgrade_programs_desc:"Özel kısa kurslar ve programlar", upgrade_monthly_price:"9,99€ / ay", upgrade_yearly_title:"Yıllık", upgrade_yearly_price:"99,90€ / yıl", upgrade_yearly_desc:"Aylık plandaki her şey, yılda bir kez faturalandırılır", upgrade_yearly_badge:"%17 tasarruf", upgrade_yearly_note:"≈ 8,33€ / ay",
     upgrade_maybe_later:"Belki sonra",
+    upgrade_subscribe_btn:"Abone ol", upgrade_restore_btn:"Satın alımları geri yükle", upgrade_native_only_note:"Abonelikler iOS/Android uygulamasında kullanılabilir.",
+    upgrade_error_generic:"Bir şeyler ters gitti. Lütfen tekrar dene.", upgrade_restore_success:"Aboneliğin geri yüklendi.", upgrade_restore_nothing:"Bu hesap için aktif abonelik bulunamadı.",
     progress_label:"İlerlemen", progress_streak:"gün üst üste", progress_journal:"kaydedilen yazı", progress_mood:"ruh hali kaydı",
     progress_exercises:"tamamlanan egzersiz", progress_helped:"yardımcı olduğu kez",
     progress_disable_streaks_title:"Serileri devre dışı bırak", progress_disable_streaks_desc:"Gün sayacı motive etmek yerine baskı hissettiriyorsa gizle.",
@@ -1005,6 +1015,8 @@ const I18N = {
     upgrade_monthly_title:"Abonetiya mehane", upgrade_monthly_desc:"Sohbetên bêsînor, pirtûkxaneya tevahî, bernameyên pêşketî",
     upgrade_programs_title:"Bernameyên zêde", upgrade_programs_desc:"Kurs û bernameyên kurt ên taybet", upgrade_monthly_price:"9.99€ / mehane", upgrade_yearly_title:"Salane", upgrade_yearly_price:"99.90€ / sal", upgrade_yearly_desc:"Hemû tiştên plana mehane, carekê di salê de tê fatûrekirin", upgrade_yearly_badge:"17% tasarûf", upgrade_yearly_note:"≈ 8.33€ / meh",
     upgrade_maybe_later:"Dibe ku paşê",
+    upgrade_subscribe_btn:"Endam bibe", upgrade_restore_btn:"Kirînan vegerîne", upgrade_native_only_note:"Endamtî di sepana iOS/Android de berdest in.",
+    upgrade_error_generic:"Tiştek xelet çû. Ji kerema xwe dîsa biceribîne.", upgrade_restore_success:"Endamtiya te hat vegerandin.", upgrade_restore_nothing:"Ji bo vê hesabê endamtiyek çalak nehat dîtin.",
     progress_label:"Pêşketina te", progress_streak:"roj li dû hev", progress_journal:"nivîsên tomarkirî", progress_mood:"tomarên rewşê",
     progress_exercises:"ezmûnên qedandî", progress_helped:"caran alîkar bûye",
     progress_disable_streaks_title:"Rêzefîlman neçalak bike", progress_disable_streaks_desc:"Jimareya rojan veşêre eger ew zêdetir zext bide te ji teşwîqê.",
@@ -1190,6 +1202,8 @@ const I18N = {
     upgrade_monthly_title:"Plan mensual", upgrade_monthly_desc:"Chats ilimitados, biblioteca completa, programas avanzados",
     upgrade_programs_title:"Programas adicionales", upgrade_programs_desc:"Cursos y programas cortos especializados", upgrade_monthly_price:"9,99€ / mes", upgrade_yearly_title:"Anual", upgrade_yearly_price:"99,90€ / año", upgrade_yearly_desc:"Todo lo del plan mensual, facturado una vez al año", upgrade_yearly_badge:"Ahorra 17%", upgrade_yearly_note:"≈ 8,33€ / mes",
     upgrade_maybe_later:"Quizás más tarde",
+    upgrade_subscribe_btn:"Suscribirse", upgrade_restore_btn:"Restaurar compras", upgrade_native_only_note:"Las suscripciones están disponibles en la app de iOS/Android.",
+    upgrade_error_generic:"Algo salió mal. Inténtalo de nuevo.", upgrade_restore_success:"Tu suscripción fue restaurada.", upgrade_restore_nothing:"No se encontró ninguna suscripción activa para esta cuenta.",
     progress_label:"Tu progreso", progress_streak:"días seguidos", progress_journal:"escritos guardados", progress_mood:"registros de ánimo",
     progress_exercises:"ejercicios completados", progress_helped:"veces que ayudó",
     progress_disable_streaks_title:"Desactivar rachas", progress_disable_streaks_desc:"Oculta el contador de días si te genera más presión que motivación.",
@@ -1395,6 +1409,8 @@ const I18N = {
       upgrade_monthly_title:"اشتراک ماهانه", upgrade_monthly_desc:"گفتگوی نامحدود، کتابخانه کامل، برنامه‌های پیشرفته",
       upgrade_programs_title:"برنامه‌های افزوده", upgrade_programs_desc:"دوره‌ها و برنامه‌های کوتاه تخصصی", upgrade_monthly_price:"۹.۹۹€ / ماهانه", upgrade_yearly_title:"سالانه", upgrade_yearly_price:"۹۹.۹۰€ / سالانه", upgrade_yearly_desc:"همه مزایای طرح ماهانه، با یک صورت‌حساب سالانه", upgrade_yearly_badge:"۱۷٪ صرفه‌جویی", upgrade_yearly_note:"≈ ۸.۳۳€ در ماه",
       upgrade_maybe_later:"شاید بعداً",
+      upgrade_subscribe_btn:"اشتراک", upgrade_restore_btn:"بازیابی خریدها", upgrade_native_only_note:"اشتراک‌ها در اپ iOS/Android در دسترس‌اند.",
+      upgrade_error_generic:"مشکلی پیش آمد. دوباره امتحان کن.", upgrade_restore_success:"اشتراک تو بازیابی شد.", upgrade_restore_nothing:"هیچ اشتراک فعالی برای این حساب پیدا نشد.",
       progress_label:"پیشرفت تو", progress_streak:"روز متوالی", progress_journal:"نوشته ذخیره‌شده", progress_mood:"ثبت حال روحی",
       progress_exercises:"تمرین‌های تکمیل‌شده", progress_helped:"دفعاتی که کمک کرد",
       progress_disable_streaks_title:"غیرفعال کردن سلسله‌ها", progress_disable_streaks_desc:"اگر شمارنده روزها به‌جای انگیزه، فشار ایجاد می‌کند، آن را پنهان کن.",
@@ -1580,6 +1596,8 @@ const I18N = {
       upgrade_monthly_title:"ماہانہ پلان", upgrade_monthly_desc:"لامحدود چیٹ، مکمل لائبریری، جدید پروگرام",
       upgrade_programs_title:"اضافی پروگرام", upgrade_programs_desc:"مخصوص مختصر کورسز اور پروگرام", upgrade_monthly_price:"9.99€ / ماہانہ", upgrade_yearly_title:"سالانہ", upgrade_yearly_price:"99.90€ / سالانہ", upgrade_yearly_desc:"ماہانہ پلان کی تمام سہولیات، ایک سالانہ بل کے ساتھ", upgrade_yearly_badge:"17% بچت", upgrade_yearly_note:"≈ 8.33€ ماہانہ",
       upgrade_maybe_later:"شاید بعد میں",
+      upgrade_subscribe_btn:"سبسکرائب کریں", upgrade_restore_btn:"خریداری بحال کریں", upgrade_native_only_note:"سبسکرپشنز iOS/Android ایپ میں دستیاب ہیں۔",
+      upgrade_error_generic:"کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔", upgrade_restore_success:"آپ کی سبسکرپشن بحال ہو گئی۔", upgrade_restore_nothing:"اس اکاؤنٹ کے لیے کوئی فعال سبسکرپشن نہیں ملی۔",
       progress_label:"آپ کی پیشرفت", progress_streak:"لگاتار دن", progress_journal:"محفوظ شدہ تحریریں", progress_mood:"موڈ ریکارڈز",
       progress_exercises:"مکمل شدہ مشقیں", progress_helped:"مدد ملنے کی تعداد",
       progress_disable_streaks_title:"سلسلے غیر فعال کریں", progress_disable_streaks_desc:"اگر دنوں کا شمار حوصلہ افزائی کے بجائے دباؤ محسوس ہو تو اسے چھپا دیں۔",
@@ -1765,6 +1783,8 @@ const I18N = {
       upgrade_monthly_title:"Месячная подписка", upgrade_monthly_desc:"Безлимитные чаты, полная библиотека, продвинутые программы",
       upgrade_programs_title:"Дополнительные программы", upgrade_programs_desc:"Специализированные короткие курсы и программы", upgrade_monthly_price:"9,99€ / мес", upgrade_yearly_title:"Годовой", upgrade_yearly_price:"99,90€ / год", upgrade_yearly_desc:"Всё из месячного плана, с оплатой раз в год", upgrade_yearly_badge:"Экономия 17%", upgrade_yearly_note:"≈ 8,33€ / мес",
       upgrade_maybe_later:"Может быть позже",
+      upgrade_subscribe_btn:"Подписаться", upgrade_restore_btn:"Восстановить покупки", upgrade_native_only_note:"Подписки доступны в приложении iOS/Android.",
+      upgrade_error_generic:"Что-то пошло не так. Попробуй ещё раз.", upgrade_restore_success:"Твоя подписка восстановлена.", upgrade_restore_nothing:"Активная подписка для этого аккаунта не найдена.",
       progress_label:"Твой прогресс", progress_streak:"дней подряд", progress_journal:"сохранённых записей", progress_mood:"записей настроения",
       progress_exercises:"выполненных упражнений", progress_helped:"раз помогло",
       progress_disable_streaks_title:"Отключить серии", progress_disable_streaks_desc:"Скройте счётчик дней, если он больше давит, чем мотивирует.",
@@ -1950,6 +1970,8 @@ const I18N = {
       upgrade_monthly_title:"Plano mensal", upgrade_monthly_desc:"Chats ilimitados, biblioteca completa, programas avançados",
       upgrade_programs_title:"Programas adicionais", upgrade_programs_desc:"Cursos e programas curtos especializados", upgrade_monthly_price:"9,99€ / mês", upgrade_yearly_title:"Anual", upgrade_yearly_price:"99,90€ / ano", upgrade_yearly_desc:"Tudo do plano mensal, faturado uma vez por ano", upgrade_yearly_badge:"Poupa 17%", upgrade_yearly_note:"≈ 8,33€ / mês",
       upgrade_maybe_later:"Talvez mais tarde",
+      upgrade_subscribe_btn:"Subscrever", upgrade_restore_btn:"Restaurar compras", upgrade_native_only_note:"As subscrições estão disponíveis na app iOS/Android.",
+      upgrade_error_generic:"Algo correu mal. Tenta novamente.", upgrade_restore_success:"A tua subscrição foi restaurada.", upgrade_restore_nothing:"Não foi encontrada nenhuma subscrição ativa para esta conta.",
       progress_label:"O teu progresso", progress_streak:"dias seguidos", progress_journal:"registos guardados", progress_mood:"registos de humor",
       progress_exercises:"exercícios concluídos", progress_helped:"vezes que ajudou",
       progress_disable_streaks_title:"Desativar sequências", progress_disable_streaks_desc:"Oculta o contador de dias se te causar mais pressão do que motivação.",
@@ -2135,6 +2157,8 @@ const I18N = {
       upgrade_monthly_title:"Piano mensile", upgrade_monthly_desc:"Chat illimitate, biblioteca completa, programmi avanzati",
       upgrade_programs_title:"Programmi aggiuntivi", upgrade_programs_desc:"Corsi e programmi brevi specializzati", upgrade_monthly_price:"9,99€ / mese", upgrade_yearly_title:"Annuale", upgrade_yearly_price:"99,90€ / anno", upgrade_yearly_desc:"Tutto del piano mensile, fatturato una volta all'anno", upgrade_yearly_badge:"Risparmia 17%", upgrade_yearly_note:"≈ 8,33€ / mese",
       upgrade_maybe_later:"Forse più tardi",
+      upgrade_subscribe_btn:"Abbonati", upgrade_restore_btn:"Ripristina acquisti", upgrade_native_only_note:"Gli abbonamenti sono disponibili nell'app iOS/Android.",
+      upgrade_error_generic:"Qualcosa è andato storto. Riprova.", upgrade_restore_success:"Il tuo abbonamento è stato ripristinato.", upgrade_restore_nothing:"Nessun abbonamento attivo trovato per questo account.",
       progress_label:"I tuoi progressi", progress_streak:"giorni consecutivi", progress_journal:"scritti salvati", progress_mood:"registrazioni dell'umore",
       progress_exercises:"esercizi completati", progress_helped:"volte che ha aiutato",
       progress_disable_streaks_title:"Disattiva le serie", progress_disable_streaks_desc:"Nascondi il contatore dei giorni se ti mette più pressione che motivazione.",
@@ -3168,7 +3192,7 @@ function openExercise(id){
   document.getElementById('modalTag').textContent = ex.tag;
   document.getElementById('modalTitle').textContent = ex.title;
   document.getElementById('modalDesc').textContent = ex.desc;
-  const isLocked = PREMIUM_EXERCISE_IDS.includes(ex.id);
+  const isLocked = PREMIUM_EXERCISE_IDS.includes(ex.id) && !hasPremiumEntitlement();
   document.getElementById('modalLocked').style.display = isLocked ? 'block' : 'none';
   const stepsBox = document.getElementById('modalSteps');
   stepsBox.style.display = isLocked ? 'none' : '';
@@ -5296,7 +5320,7 @@ function openLibraryItem(id){
   document.getElementById('modalTag').textContent = item.tag;
   document.getElementById('modalTitle').textContent = item.title;
   document.getElementById('modalDesc').textContent = item.desc || '';
-  const isLocked = PREMIUM_LIBRARY_IDS.includes(item.id);
+  const isLocked = PREMIUM_LIBRARY_IDS.includes(item.id) && !hasPremiumEntitlement();
   document.getElementById('modalLocked').style.display = isLocked ? 'block' : 'none';
   const stepsBox = document.getElementById('modalSteps');
   stepsBox.style.display = isLocked ? 'none' : '';
@@ -5316,6 +5340,131 @@ function openLibraryItem(id){
   doneBtn.textContent = doneToday ? I18N[currentLang].done_btn_done : I18N[currentLang].done_btn;
   doneBtn.style.display = isLocked ? 'none' : '';
   document.getElementById('exModal').classList.add('open');
+}
+
+// ---------------------------------------------------------------------
+// IN-APP PURCHASES (RevenueCat, native only)
+// Subscriptions can only be sold through Apple/Google's own billing inside
+// a native app — building a separate web checkout was explicitly out of
+// scope, so on plain web these buttons stay hidden and a note points
+// people to the app instead. Entitlement state is read via the Capacitor
+// plugin bridge (window.Capacitor.Plugins.Purchases) — no npm import
+// needed in this web bundle, same pattern as CAPACITOR_API_BASE: the
+// native shell injects the real plugin at runtime, this file only ever
+// touches the global.
+//
+// THINGS TO CONFIRM AGAINST YOUR OWN REVENUECAT DASHBOARD (the API calls
+// themselves — configure/getOfferings/purchasePackage/restorePurchases/
+// getCustomerInfo/addCustomerInfoUpdateListener and the entitlements.active
+// map shape — were verified directly against @revenuecat/purchases-
+// capacitor@9.2.2's own published type definitions, the version this repo
+// is pinned to; these two are dashboard configuration, not API shape, so
+// no source read can confirm them for you):
+// 1. PREMIUM_ENTITLEMENT_ID ('premium') must match the entitlement
+//    identifier you name in the RevenueCat dashboard.
+// 2. MONTHLY_PACKAGE_ID / YEARLY_PACKAGE_ID ('$rc_monthly' / '$rc_annual')
+//    are RevenueCat's standard package identifiers for those durations —
+//    confirm they match your actual configured Offering's packages.
+// ---------------------------------------------------------------------
+const PREMIUM_ENTITLEMENT_ID = 'premium';
+const MONTHLY_PACKAGE_ID = '$rc_monthly';
+const YEARLY_PACKAGE_ID = '$rc_annual';
+
+function hasPremiumEntitlement(){ return safeGet('mc_premium_active') === '1'; }
+function setPremiumEntitlement(active){ safeSet('mc_premium_active', active ? '1' : '0'); }
+
+function purchasesPlugin(){
+  return (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform() && window.Capacitor.Plugins)
+    ? window.Capacitor.Plugins.Purchases
+    : null;
+}
+
+function applyCustomerInfo(customerInfo){
+  const active = customerInfo && customerInfo.entitlements && customerInfo.entitlements.active;
+  const wasActive = hasPremiumEntitlement();
+  const isActive = !!(active && active[PREMIUM_ENTITLEMENT_ID]);
+  setPremiumEntitlement(isActive);
+  if(isActive !== wasActive){
+    renderExercises();
+    renderLibrary();
+  }
+}
+
+async function initPurchases(){
+  const Purchases = purchasesPlugin();
+  if(!Purchases) return; // web, or native without the plugin configured yet
+  const platform = window.Capacitor.getPlatform();
+  const apiKey = platform === 'ios' ? window.CAPACITOR_REVENUECAT_IOS_KEY : window.CAPACITOR_REVENUECAT_ANDROID_KEY;
+  if(!apiKey) return; // not configured for this build yet — purchases UI stays hidden
+  try{
+    await Purchases.configure({ apiKey });
+    const { customerInfo } = await Purchases.getCustomerInfo();
+    applyCustomerInfo(customerInfo);
+    await Purchases.addCustomerInfoUpdateListener((info) => applyCustomerInfo(info));
+  }catch(e){ console.error('Purchases init failed:', e); }
+}
+
+function showUpgradeStatus(key){
+  const el = document.getElementById('upgradeStatusMsg');
+  if(el) el.textContent = I18N[currentLang][key] || '';
+}
+
+async function purchaseTier(tier){
+  const Purchases = purchasesPlugin();
+  if(!Purchases) return;
+  const btnId = tier === 'monthly' ? 'upgradeMonthlyBtn' : 'upgradeYearlyBtn';
+  const btn = document.getElementById(btnId);
+  if(btn) btn.disabled = true;
+  showUpgradeStatus('');
+  try{
+    const offerings = await Purchases.getOfferings();
+    const offering = offerings && offerings.current;
+    const wantId = tier === 'monthly' ? MONTHLY_PACKAGE_ID : YEARLY_PACKAGE_ID;
+    const pkg = offering && Array.isArray(offering.availablePackages)
+      ? offering.availablePackages.find(p => p.identifier === wantId)
+      : null;
+    if(!pkg){ showUpgradeStatus('upgrade_error_generic'); return; }
+    const result = await Purchases.purchasePackage({ aPackage: pkg });
+    applyCustomerInfo(result.customerInfo);
+    closeUpgrade();
+  }catch(e){
+    if(e && e.userCancelled) return; // silent — they backed out, not an error
+    console.error('Purchase failed:', e);
+    showUpgradeStatus('upgrade_error_generic');
+  }finally{
+    if(btn) btn.disabled = false;
+  }
+}
+
+async function restorePurchases(){
+  const Purchases = purchasesPlugin();
+  if(!Purchases) return;
+  const btn = document.getElementById('upgradeRestoreBtn');
+  if(btn) btn.disabled = true;
+  showUpgradeStatus('');
+  try{
+    const { customerInfo } = await Purchases.restorePurchases();
+    applyCustomerInfo(customerInfo);
+    showUpgradeStatus(hasPremiumEntitlement() ? 'upgrade_restore_success' : 'upgrade_restore_nothing');
+  }catch(e){
+    console.error('Restore failed:', e);
+    showUpgradeStatus('upgrade_error_generic');
+  }finally{
+    if(btn) btn.disabled = false;
+  }
+}
+
+// Shows the real subscribe/restore buttons only where they can actually do
+// something (native, with the plugin configured); plain web (and native
+// before RevenueCat is configured) gets the existing pricing info plus a
+// note instead, never a button that would silently do nothing on tap.
+function updateUpgradeModalForPlatform(){
+  const available = !!purchasesPlugin() && !!(window.CAPACITOR_REVENUECAT_IOS_KEY || window.CAPACITOR_REVENUECAT_ANDROID_KEY);
+  document.getElementById('upgradeMonthlyBtn').classList.toggle('u-hidden', !available);
+  document.getElementById('upgradeYearlyBtn').classList.toggle('u-hidden', !available);
+  document.getElementById('upgradeRestoreBtn').classList.toggle('u-hidden', !available);
+  document.getElementById('upgradeNativeNote').classList.toggle('u-hidden', available);
+  showUpgradeStatus('');
 }
 
 const PREMIUM_EXERCISE_IDS = ['ex-pmr','ex-safe','ex-sleep7'];
@@ -5345,7 +5494,7 @@ function startDailyPractice(){
 const PREMIUM_LIBRARY_IDS = ['lib-emoreg','lib-stress'];
 const PROGRAM_DAYS = ['ex-478','ex-bodyscan','ex-gratitude','ex-box','ex-reframe','ex-walk','ex-mood'];
 
-function openUpgrade(){ document.getElementById('upgradeModal').classList.add('open'); }
+function openUpgrade(){ updateUpgradeModalForPlatform(); document.getElementById('upgradeModal').classList.add('open'); }
 function closeUpgrade(){ document.getElementById('upgradeModal').classList.remove('open'); }
 
 const CHECKIN_MAP = { opt1:'ex-478', opt2:'ex-feelings', opt3:'ex-stop', opt4:'ex-walk' };
@@ -6466,6 +6615,7 @@ if(isIOS() && !isStandalone()){
 
 populateLangSelect();
 const restoredLang = restorePreferences();
+initPurchases();
 // ---------------------------------------------------------------------
 // WAHA AGENT — "Today's Plan"
 // A small planning agent on top of the app's existing tools. The loop:
@@ -7657,8 +7807,10 @@ const ACTIONS = {
   openUpgrade,
   printCalmPlan,
   printFeelingDraft,
+  purchaseTier,
   readModalAloud,
   restartRelief,
+  restorePurchases,
   rewriteFeelingWithAI,
   saveCalmPlan,
   saveDailyReview,

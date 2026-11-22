@@ -10,7 +10,8 @@
     "open:android": "npx cap open android"
   },
   "dependencies": {
-    "@capacitor/core": "^6.1.2"
+    "@capacitor/core": "^6.1.2",
+    "@revenuecat/purchases-capacitor": "^9.2.2"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.1.2",
