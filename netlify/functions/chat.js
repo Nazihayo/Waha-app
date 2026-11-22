@@ -721,12 +721,27 @@ exports.handler = async function (event) {
   if (isChat) return runChat(cleanHistory, message, lang, payload.memory);
 
   const messages = withMessage(cleanHistory, message);
+  // Checkin and rewrite are also free-text descriptions of how someone
+  // feels, so they get the same layer-2 risk classifier as chat (in
+  // parallel with the real reply, same as runChat — no added latency).
+  // Coach's "message" is an app-generated data summary, not something the
+  // person wrote, so there's nothing for a risk classifier to read there.
+  const needsRiskCheck = isCheckin || isRewrite;
   try {
-    const resp = await callClaude({
-      max_tokens: isRewrite ? 450 : (isCheckin ? 300 : 450),
-      system: isRewrite ? REWRITE_SYSTEM_PROMPT : (isCheckin ? CHECKIN_SYSTEM_PROMPT : COACH_SYSTEM_PROMPT),
-      messages: isRewrite || isCheckin || isCoach ? [{ role: "user", content: message }] : messages,
-    });
+    const [risk, resp] = await Promise.all([
+      needsRiskCheck ? runRiskCheck(cleanHistory, message) : Promise.resolve(null),
+      callClaude({
+        max_tokens: isRewrite ? 450 : (isCheckin ? 300 : 450),
+        system: isRewrite ? REWRITE_SYSTEM_PROMPT : (isCheckin ? CHECKIN_SYSTEM_PROMPT : COACH_SYSTEM_PROMPT),
+        messages: isRewrite || isCheckin || isCoach ? [{ role: "user", content: message }] : messages,
+      }),
+    ]);
+
+    if (risk && (risk.level === "high" || risk.level === "imminent")) {
+      const reply = crisisReplyFor(lang);
+      return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reply, crisis: true, sig: signReply(reply) }) };
+    }
+
     if (!resp.ok) {
       const detail = await resp.text();
       console.error("Anthropic API error:", resp.status, detail);
