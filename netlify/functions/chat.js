@@ -626,15 +626,28 @@ async function checkRateLimit(ip) {
   }
 }
 
-async function runAgentPlan(message) {
+async function runAgentPlan(message, lang) {
   try {
-    const resp = await callClaude({
-      max_tokens: 1300,
-      system: AGENT_SYSTEM_PROMPT,
-      tools: [AGENT_TOOL],
-      tool_choice: { type: "tool", name: AGENT_TOOL.name },
-      messages: [{ role: "user", content: message }],
-    });
+    // The agent context embeds the person's own free-text note ("their
+    // own words") verbatim, which is exactly the kind of organic
+    // disclosure the layer-2 risk classifier exists for (see runChat) —
+    // it was missing here even though runChat/checkin/rewrite all have
+    // it. Layer 1 (detectCrisis) already covers this path too, via the
+    // unconditional check before mode branching above.
+    const [risk, resp] = await Promise.all([
+      runRiskCheck([], message),
+      callClaude({
+        max_tokens: 1300,
+        system: AGENT_SYSTEM_PROMPT,
+        tools: [AGENT_TOOL],
+        tool_choice: { type: "tool", name: AGENT_TOOL.name },
+        messages: [{ role: "user", content: message }],
+      }),
+    ]);
+    if (risk && (risk.level === "high" || risk.level === "imminent")) {
+      const reply = crisisReplyFor(lang);
+      return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reply, crisis: true, sig: signReply(reply) }) };
+    }
     if (!resp.ok) {
       const detail = await resp.text();
       console.error("Anthropic API error (agent):", resp.status, detail);
@@ -712,7 +725,7 @@ exports.handler = async function (event) {
   }
 
   if (isAgent) {
-    return runAgentPlan(message);
+    return runAgentPlan(message, lang);
   }
 
   const cleanHistory = cleanHistoryOf(historyIn);
