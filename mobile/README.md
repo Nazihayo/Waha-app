@@ -122,6 +122,36 @@ uses the last 6.x-compatible release (9.2.2) rather than latest. Upgrading
 the whole Capacitor major version to pick up newer RevenueCat releases is
 a separate, bigger decision — not done as part of this.
 
+## App icons & splash screens
+
+`mobile/resources/` has the master source images already prepared from the
+app's own icon (`public/icon-512.png`), using
+[`@capacitor/assets`](https://github.com/ionic-team/capacitor-assets)'s
+expected file names/sizes:
+
+- `icon.png` (1024×1024) — the full-bleed icon, same design as the web icon.
+- `icon-foreground.png` / `icon-background.png` (1024×1024) — the compass
+  mark alone (transparent) and the solid brand navy (`#1B2B36`), for
+  Android's adaptive icon, which composites the two separately.
+- `splash.png` / `splash-dark.png` (2732×2732) — the mark centered on the
+  brand navy with generous padding so it isn't cropped on any device aspect
+  ratio; both files are identical since the app's own theme is already dark,
+  so the same splash suits light and dark system mode.
+
+Once you've run `npx cap add ios`/`npx cap add android` below (needs Xcode /
+Android Studio, so not run in this environment), generate every
+platform-specific size into both native projects with:
+
+```bash
+npm run assets
+```
+
+This was dry-run here with no `ios/`/`android/` folders present — it
+correctly reported "platform not found, skipping" for both rather than
+generating anything incomplete, so verified only to the extent possible
+without those native projects actually existing. Re-run it any time you
+replace the source images in `resources/`.
+
 ## iOS (Mac + Xcode only)
 
 ```bash
@@ -147,11 +177,11 @@ Build → Generate Signed Bundle/APK from there.
 
 - **`appId`** (`com.waha.app`) is a placeholder — pick your real reverse-DNS
   identifier before the first store submission.
-- **App icons / splash screens**: Capacitor needs platform-specific icon
-  sizes beyond the web `icon-192.png`/`icon-512.png` here. Use
-  [`@capacitor/assets`](https://github.com/ionic-team/capacitor-assets) to
-  generate the full set from a single source image once you have final
-  branding.
+- **App icons / splash screens**: source images are ready in
+  `mobile/resources/` and `npm run assets` is wired up — see "App icons &
+  splash screens" above. It still needs the native `ios`/`android` projects
+  to exist (Xcode/Android Studio) before it has anywhere to write the
+  generated sizes to.
 - **Service worker in a native WebView**: `sw.js` registers fine, but
   `serviceWorker` support inside Capacitor's WebView varies by iOS/Android
   version — the offline app-shell caching this repo's `sw.js` does may not

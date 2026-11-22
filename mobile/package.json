@@ -6,6 +6,7 @@
   "scripts": {
     "build:www": "node scripts/build-www.js",
     "sync": "npm run build:www && npx cap sync",
+    "assets": "capacitor-assets generate",
     "open:ios": "npx cap open ios",
     "open:android": "npx cap open android"
   },
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@capacitor/cli": "^6.1.2",
     "@capacitor/ios": "^6.1.2",
-    "@capacitor/android": "^6.1.2"
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/assets": "^4.0.0"
   }
 }
