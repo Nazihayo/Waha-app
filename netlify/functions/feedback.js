@@ -16,14 +16,15 @@
 // - Nothing is public until approved: people sometimes write private
 //   details or something worrying, and that must never appear on a page.
 //
-// ADMIN KEY: the repository is public, so only a SHA-256 hash of the key is
-// in the code. WAHA_ADMIN_KEY_SHA256 (Netlify environment variable)
-// overrides it if the owner ever wants to change the key.
+// ADMIN KEY: the repository is public, so there is no hardcoded fallback
+// hash — a default baked into public source would be a known, crackable
+// value with no rate limit on an offline guess against it the moment it's
+// committed. WAHA_ADMIN_KEY_SHA256 (Netlify environment variable) is the
+// only way in; access fails closed until the owner sets their own key.
 
 const { connectLambda, getStore } = require("@netlify/blobs");
 const crypto = require("crypto");
 
-const DEFAULT_ADMIN_HASH = "e669a6968de9d0f76ff2d2756572025e512e04576a17bfb1c3d2dd71369742d8";
 const STORE = "waha-feedback";
 const MAX_TEXT = 600;
 const SUBMITS_PER_DAY = 3; // per visitor (IP), against spam
@@ -43,10 +44,11 @@ function looksLikeCrisis(text) {
 const json = (code, obj) => ({ statusCode: code, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }, body: JSON.stringify(obj) });
 
 function isAdmin(key) {
-  if (typeof key !== "string" || key.length < 12 || key.length > 200) return false;
-  const want = (process.env.WAHA_ADMIN_KEY_SHA256 || DEFAULT_ADMIN_HASH).toLowerCase();
+  const want = process.env.WAHA_ADMIN_KEY_SHA256;
+  if (!want || typeof key !== "string" || key.length < 12 || key.length > 200) return false;
   const got = crypto.createHash("sha256").update(key).digest("hex");
-  return want.length === got.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(want));
+  const wantLower = want.toLowerCase();
+  return wantLower.length === got.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(wantLower));
 }
 function clientIp(event) {
   return event.headers["x-nf-client-connection-ip"] || (event.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";

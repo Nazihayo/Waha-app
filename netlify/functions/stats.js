@@ -14,13 +14,18 @@
 // which features are used — what investors and judges ask for — without
 // being able to follow any single person.
 //
-// Owner only: POST {action:"admin_stats", key} with the same admin key as
-// the opinions page (hash in code; WAHA_ADMIN_KEY_SHA256 overrides).
+// Owner only: POST {action:"admin_stats", key} checked against
+// WAHA_ADMIN_KEY_SHA256 (Netlify environment variable — see
+// mobile/README.md's sibling note in feedback.js for how to set it).
+// There is deliberately no hardcoded fallback hash: this repo is public,
+// so any default baked into the source would be a known, crackable value
+// the moment it's committed, with no rate limit on an offline guess
+// against it. Fails closed (admin access refused) until the owner sets
+// their own key — never falls back to a publicly-known one.
 
 const { connectLambda, getStore } = require("@netlify/blobs");
 const crypto = require("crypto");
 
-const DEFAULT_ADMIN_HASH = "e669a6968de9d0f76ff2d2756572025e512e04576a17bfb1c3d2dd71369742d8";
 const STORE = "waha-stats";
 const FEATURES = ["chat_message", "agent_plan", "agent_feedback", "exercise_completion", "mood_log", "health_log",
   "agent_calendar_export", "chat_action_started", "opinion_sent", "habit_completion"];
@@ -32,10 +37,11 @@ const json = (code, obj) => ({ statusCode: code, headers: { "Content-Type": "app
 const today = () => new Date().toISOString().slice(0, 10);
 
 function isAdmin(key) {
-  if (typeof key !== "string" || key.length < 12 || key.length > 200) return false;
-  const want = (process.env.WAHA_ADMIN_KEY_SHA256 || DEFAULT_ADMIN_HASH).toLowerCase();
+  const want = process.env.WAHA_ADMIN_KEY_SHA256;
+  if (!want || typeof key !== "string" || key.length < 12 || key.length > 200) return false;
   const got = crypto.createHash("sha256").update(key).digest("hex");
-  return want.length === got.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(want));
+  const wantLower = want.toLowerCase();
+  return wantLower.length === got.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(wantLower));
 }
 function clientIp(event) {
   return event.headers["x-nf-client-connection-ip"] || (event.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
