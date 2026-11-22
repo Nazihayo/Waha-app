@@ -28,6 +28,7 @@ const crypto = require("crypto");
 const STORE = "waha-feedback";
 const MAX_TEXT = 600;
 const SUBMITS_PER_DAY = 3; // per visitor (IP), against spam
+const READS_PER_DAY = 120; // per visitor (IP); GET re-reads every stored item, unlike submit
 const STATUSES = ["pending", "approved", "hidden", "spam"];
 
 // Same idea as the chat's crisis net: a worrying opinion is never shown
@@ -52,6 +53,21 @@ function isAdmin(key) {
 }
 function clientIp(event) {
   return event.headers["x-nf-client-connection-ip"] || (event.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
+}
+// Fails OPEN (allows the request) if Blobs is unavailable, same philosophy
+// as the chat function's rate limiter — a storage hiccup must never break
+// the app for everyone.
+async function underDailyLimit(store, bucket, ip, max) {
+  const dayKey = bucket + "-" + crypto.createHash("sha256").update(ip).digest("hex").slice(0, 24) + "-" + new Date().toISOString().slice(0, 10);
+  try {
+    const n = Number(await store.get(dayKey)) || 0;
+    if (n >= max) return false;
+    await store.set(dayKey, String(n + 1));
+    return true;
+  } catch (e) {
+    console.error("Feedback rate limit check failed, allowing:", e);
+    return true;
+  }
 }
 function cleanUsage(u) {
   if (!u || typeof u !== "object") return null;
@@ -88,6 +104,12 @@ exports.handler = async function (event) {
   }
 
   if (event.httpMethod === "GET") {
+    // This re-reads every stored item on each call (see loadAll), unlike
+    // submit's lighter cost, and this route needs no auth — so it gets its
+    // own, more generous daily cap per visitor against repeat-call abuse.
+    if (!(await underDailyLimit(store, "rlread", clientIp(event), READS_PER_DAY))) {
+      return json(429, { error: "Too many requests today" });
+    }
     try {
       const items = await loadAll(store);
       return json(200, { stats: statsOf(items), items: items.filter((i) => i.status === "approved").slice(0, 50).map(publicView) });
@@ -109,13 +131,9 @@ exports.handler = async function (event) {
     const lang = typeof p.lang === "string" && /^[a-z]{2}$/.test(p.lang) ? p.lang : "ar";
 
     // Anti-spam: a few submissions per visitor per day.
-    const ip = clientIp(event);
-    const dayKey = "rl-" + crypto.createHash("sha256").update(ip).digest("hex").slice(0, 24) + "-" + new Date().toISOString().slice(0, 10);
-    try {
-      const n = Number(await store.get(dayKey)) || 0;
-      if (n >= SUBMITS_PER_DAY) return json(429, { error: "Too many submissions today" });
-      await store.set(dayKey, String(n + 1));
-    } catch (e) { console.error("Feedback rate limit failed, allowing:", e); }
+    if (!(await underDailyLimit(store, "rl", clientIp(event), SUBMITS_PER_DAY))) {
+      return json(429, { error: "Too many submissions today" });
+    }
 
     const crisis = looksLikeCrisis(text);
     const item = {
