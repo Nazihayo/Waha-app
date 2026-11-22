@@ -61,7 +61,7 @@ in sync with `CRISIS_RESPONSES` in `netlify/functions/chat.js`.)
   claims are made; this is enforced in code (Safe Claims Layer), not just
   asserted in the privacy policy.
 - **Does the app collect health information?** Yes, optionally — see
-  `PRIVACY_LABELS.md` (same folder level as this file, at the repo root)
+  `PRIVACY_LABELS.md` at the repo root (one level up from `mobile/`)
   for the exact, current list of what's collected, with whom it's shared,
   and the consent gate in front of each category.
 

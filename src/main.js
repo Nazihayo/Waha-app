@@ -146,6 +146,8 @@ const I18N = {
     passport_ai_title:"ما يُرسل للذكاء الاصطناعي", passport_ai_text:"فقط النص الذي تكتبه في المحادثة أو الفحص السريع يُرسل لـ Anthropic (مزوّد الذكاء الاصطناعي) لتوليد رد. لا شيء آخر — لا سجل مزاجك، لا يومياتك، لا سجل تمارينك — يُرسل تلقائياً.",
     passport_logs_title:"السجلات التقنية", passport_logs_text:"قد يسجّل خادمنا نجاح أو فشل الطلب، وهل استُبدل رد لأسباب أمان — لكن أبداً محتوى رسائلك الفعلي.",
     passport_temp_label:"محادثة مؤقتة", passport_temp_desc:"عند التفعيل، لا تُحفظ رسائل المحادثة الجديدة على جهازك. تنتهي عند إيقافها أو إغلاق التطبيق.",
+    passport_ai_chat_consent_label:"مشاركة الرسائل مع الذكاء الاصطناعي", passport_ai_chat_consent_desc:"يتيح للمحادثة والفحص السريع وإعادة صياغة المشاعر إرسال ما تكتبه إلى Anthropic لتوليد رد. أوقفه في أي وقت لسحب هذه الموافقة — لن يحذف أي شيء محفوظ مسبقًا.",
+    passport_ai_coach_consent_label:"مشاركة ملخص الأهداف/الصحة/المال مع مدرّب AI", passport_ai_coach_consent_desc:"يتيح لمدرّب اللوحة إرسال ملخص لأهدافك وعاداتك وملاحظات الصحة والمال ومزاجك. أوقفه في أي وقت لسحب هذه الموافقة.",
     passport_temp_active:"🕶️ وضع مؤقت — هذه المحادثة لا تُحفظ",
     passport_controls_label:"أدواتك", passport_del_chat:"حذف سجل المحادثة", passport_del_mood:"حذف بيانات المزاج",
     passport_del_exercises:"حذف سجل التمارين", passport_export_all:"تصدير كل بياناتي", passport_del_all:"حذف كل شيء",
@@ -333,6 +335,8 @@ const I18N = {
     passport_ai_title:"Was an die KI gesendet wird", passport_ai_text:"Nur der Text, den du im Chat oder im Schnell-Check-in eingibst, wird an Anthropic (unseren KI-Anbieter) gesendet, um eine Antwort zu erzeugen. Nichts anderes — kein Stimmungsprotokoll, kein Journal, kein Übungsverlauf — wird automatisch gesendet.",
     passport_logs_title:"Technische Protokolle", passport_logs_text:"Unser Server kann protokollieren, ob eine Anfrage erfolgreich war oder fehlschlug, und ob eine Antwort aus Sicherheitsgründen ersetzt wurde — niemals den Inhalt deiner Nachrichten.",
     passport_temp_label:"Temporäres Gespräch", passport_temp_desc:"Solange aktiv, werden neue Chat-Nachrichten nicht auf diesem Gerät gespeichert. Endet, wenn du es ausschaltest oder die App schließt.",
+    passport_ai_chat_consent_label:"Nachrichten mit KI teilen", passport_ai_chat_consent_desc:"Erlaubt Chat, Schnell-Check-in und Gefühls-Umformulierung, das Geschriebene an Anthropic zu senden, um eine Antwort zu erzeugen. Jederzeit ausschaltbar, um dies zurückzuziehen — löscht nichts bereits Gespeichertes.",
+    passport_ai_coach_consent_label:"Zusammenfassung von Zielen/Gesundheit/Geld mit KI-Coach teilen", passport_ai_coach_consent_desc:"Erlaubt dem Dashboard-Coach, eine Zusammenfassung deiner Ziele, Gewohnheiten, Gesundheits- und Geldnotizen sowie deiner Stimmung zu senden. Jederzeit ausschaltbar.",
     passport_temp_active:"🕶️ Temporärer Modus — dieses Gespräch wird nicht gespeichert",
     passport_controls_label:"Deine Kontrollen", passport_del_chat:"Chat-Verlauf löschen", passport_del_mood:"Stimmungsdaten löschen",
     passport_del_exercises:"Übungsverlauf löschen", passport_export_all:"Alle meine Daten exportieren", passport_del_all:"Alles löschen",
@@ -520,6 +524,8 @@ const I18N = {
     passport_ai_title:"What is sent to the AI", passport_ai_text:"Only the text you type in the chat or quick check-in is sent to Anthropic (our AI provider) to generate a reply. Nothing else — no mood log, no journal, no exercise history — is sent automatically.",
     passport_logs_title:"Technical logs", passport_logs_text:"Our server may log whether a request succeeded or failed, and whether a reply was rewritten for safety — never the content of your messages.",
     passport_temp_label:"Temporary conversation", passport_temp_desc:"While active, new chat messages aren't saved to this device. Ends when you turn it off or close the app.",
+    passport_ai_chat_consent_label:"Share messages with AI", passport_ai_chat_consent_desc:"Lets chat, quick check-in and feeling-rewrite send what you type to Anthropic to generate a reply. Turn off anytime to withdraw this — it won't delete anything already saved.",
+    passport_ai_coach_consent_label:"Share goals/health/money summary with AI coach", passport_ai_coach_consent_desc:"Lets the dashboard's AI coach send a summary of your goals, habits, health and money notes, and mood. Turn off anytime to withdraw this.",
     passport_temp_active:"🕶️ Temporary mode — this conversation isn't being saved",
     passport_controls_label:"Your controls", passport_del_chat:"Delete chat history", passport_del_mood:"Delete mood data",
     passport_del_exercises:"Delete exercise history", passport_export_all:"Export all my data", passport_del_all:"Delete everything",
@@ -707,6 +713,8 @@ const I18N = {
     passport_ai_title:"Ce qui est envoyé à l'IA", passport_ai_text:"Seul le texte que tu tapes dans le chat ou le check-in rapide est envoyé à Anthropic (notre fournisseur d'IA) pour générer une réponse. Rien d'autre — ni journal d'humeur, ni journal, ni historique d'exercices — n'est envoyé automatiquement.",
     passport_logs_title:"Journaux techniques", passport_logs_text:"Notre serveur peut enregistrer si une requête a réussi ou échoué, et si une réponse a été réécrite pour des raisons de sécurité — jamais le contenu de tes messages.",
     passport_temp_label:"Conversation temporaire", passport_temp_desc:"Tant qu'elle est active, les nouveaux messages du chat ne sont pas enregistrés sur cet appareil. Se termine quand tu la désactives ou fermes l'application.",
+    passport_ai_chat_consent_label:"Partager les messages avec l'IA", passport_ai_chat_consent_desc:"Permet au chat, au check-in rapide et à la reformulation des sentiments d'envoyer ce que tu écris à Anthropic pour générer une réponse. Désactive à tout moment pour retirer ce consentement — cela ne supprime rien de déjà enregistré.",
+    passport_ai_coach_consent_label:"Partager le résumé objectifs/santé/argent avec le coach IA", passport_ai_coach_consent_desc:"Permet au coach du tableau de bord d'envoyer un résumé de tes objectifs, habitudes, notes de santé et d'argent, et de ton humeur. Désactive à tout moment pour retirer ce consentement.",
     passport_temp_active:"🕶️ Mode temporaire — cette conversation n'est pas enregistrée",
     passport_controls_label:"Tes contrôles", passport_del_chat:"Supprimer l'historique du chat", passport_del_mood:"Supprimer les données d'humeur",
     passport_del_exercises:"Supprimer l'historique d'exercices", passport_export_all:"Exporter toutes mes données", passport_del_all:"Tout supprimer",
@@ -894,6 +902,8 @@ const I18N = {
     passport_ai_title:"Yapay zekaya gönderilenler", passport_ai_text:"Yalnızca sohbette veya hızlı kontrolde yazdığın metin, bir yanıt üretmek için Anthropic'e (yapay zeka sağlayıcımız) gönderilir. Başka hiçbir şey — ruh hali kaydın, günlüğün, egzersiz geçmişin — otomatik olarak gönderilmez.",
     passport_logs_title:"Teknik kayıtlar", passport_logs_text:"Sunucumuz bir isteğin başarılı olup olmadığını ve bir yanıtın güvenlik nedeniyle değiştirilip değiştirilmediğini kaydedebilir — asla mesajlarının içeriğini değil.",
     passport_temp_label:"Geçici sohbet", passport_temp_desc:"Etkinken, yeni sohbet mesajları bu cihaza kaydedilmez. Kapattığında veya uygulamayı kapattığında sona erer.",
+    passport_ai_chat_consent_label:"Mesajları yapay zekâyla paylaş", passport_ai_chat_consent_desc:"Sohbet, hızlı check-in ve duygu yeniden yazımının yazdığını Anthropic'e göndererek yanıt üretmesini sağlar. Bunu geri çekmek için istediğin zaman kapat — kayıtlı hiçbir şeyi silmez.",
+    passport_ai_coach_consent_label:"Hedef/sağlık/para özetini yapay zekâ koçuyla paylaş", passport_ai_coach_consent_desc:"Panodaki yapay zekâ koçunun hedeflerinin, alışkanlıklarının, sağlık ve para notlarının ve ruh halinin özetini göndermesini sağlar. İstediğin zaman kapatarak geri çekebilirsin.",
     passport_temp_active:"🕶️ Geçici mod — bu sohbet kaydedilmiyor",
     passport_controls_label:"Kontrollerin", passport_del_chat:"Sohbet geçmişini sil", passport_del_mood:"Ruh hali verilerini sil",
     passport_del_exercises:"Egzersiz geçmişini sil", passport_export_all:"Tüm verilerimi dışa aktar", passport_del_all:"Her şeyi sil",
@@ -1081,6 +1091,8 @@ const I18N = {
     passport_ai_title:"Çi ji AI re tê şandin", passport_ai_text:"Tenê nivîsa ku tu di chatê an lêpirsîna lezgîn de dinivîsî ji Anthropic re (peydakerê me yê AI) tê şandin da ku bersivek biafirîne. Tiştek din — ne tomara hesta te, ne rojnivîsk, ne dîroka ezmûnan — bixweber nayê şandin.",
     passport_logs_title:"Tomarên teknîkî", passport_logs_text:"Servera me dikare tomar bike ka daxwazek serkeftî bû an sernekeftî, û ka bersivek ji ber sedemên ewlehiyê hate guhertin — çu carî naveroka peyamên te.",
     passport_temp_label:"Chata demkî", passport_temp_desc:"Dema çalak be, peyamên chatê yên nû li ser vê amûrê nayên tomarkirin. Dema tu wê bigirî an sepan bigirî diqede.",
+    passport_ai_chat_consent_label:"Peyaman bi AI re parve bike", passport_ai_chat_consent_desc:"Dihêle ku chat, kontrola zû, û ji nû ve nivîsandina hestan tiştê tu dinivîsî ji Anthropic re bişîne da bersivek çêbibe. Her gav vemirîne da vê betal bikî — tiştê berê hatiye tomarkirin jê nabe.",
+    passport_ai_coach_consent_label:"Kurtahiya armanc/tenduristî/pere bi rahênerê AI re parve bike", passport_ai_coach_consent_desc:"Dihêle rahênerê panelê kurtahiyek ji armanc, adet, nîşeyên tenduristî û pereyî, û rewşa giyanî ya te bişîne. Her gav vemirîne da vê betal bikî.",
     passport_temp_active:"🕶️ Moda demkî — ev chat nayê tomarkirin",
     passport_controls_label:"Kontrolên te", passport_del_chat:"Dîroka chatê jê bibe", passport_del_mood:"Daneyên hestê jê bibe",
     passport_del_exercises:"Dîroka ezmûnan jê bibe", passport_export_all:"Hemû daneyên min derxîne", passport_del_all:"Her tiştî jê bibe",
@@ -1268,6 +1280,8 @@ const I18N = {
     passport_ai_title:"Qué se envía a la IA", passport_ai_text:"Solo el texto que escribes en el chat o en el check-in rápido se envía a Anthropic (nuestro proveedor de IA) para generar una respuesta. Nada más — ni registro de ánimo, ni diario, ni historial de ejercicios — se envía automáticamente.",
     passport_logs_title:"Registros técnicos", passport_logs_text:"Nuestro servidor puede registrar si una solicitud tuvo éxito o falló, y si una respuesta fue reescrita por seguridad — nunca el contenido de tus mensajes.",
     passport_temp_label:"Conversación temporal", passport_temp_desc:"Mientras esté activa, los nuevos mensajes de chat no se guardan en este dispositivo. Termina cuando la desactivas o cierras la app.",
+    passport_ai_chat_consent_label:"Compartir mensajes con la IA", passport_ai_chat_consent_desc:"Permite que el chat, el check-in rápido y la reescritura de sentimientos envíen lo que escribes a Anthropic para generar una respuesta. Desactívalo en cualquier momento para retirar esto — no borra nada ya guardado.",
+    passport_ai_coach_consent_label:"Compartir resumen de metas/salud/dinero con el coach IA", passport_ai_coach_consent_desc:"Permite que el coach del panel envíe un resumen de tus metas, hábitos, notas de salud y dinero, y tu ánimo. Desactívalo en cualquier momento para retirar esto.",
     passport_temp_active:"🕶️ Modo temporal — esta conversación no se está guardando",
     passport_controls_label:"Tus controles", passport_del_chat:"Eliminar historial de chat", passport_del_mood:"Eliminar datos de ánimo",
     passport_del_exercises:"Eliminar historial de ejercicios", passport_export_all:"Exportar todos mis datos", passport_del_all:"Eliminar todo",
@@ -1475,6 +1489,8 @@ const I18N = {
       passport_ai_title:"چه چیزی برای هوش مصنوعی ارسال می‌شود", passport_ai_text:"فقط متنی که در گفتگو یا فحص سریع می‌نویسی برای Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌شود تا پاسخی تولید شود. هیچ چیز دیگری — نه سابقه خلق‌وخو، نه یادداشت روزانه، نه سابقه تمرین‌ها — به‌طور خودکار ارسال نمی‌شود.",
       passport_logs_title:"گزارش‌های فنی", passport_logs_text:"سرور ما ممکن است ثبت کند که آیا درخواستی موفق بوده یا نه، و آیا پاسخی به دلایل ایمنی بازنویسی شده — اما هرگز محتوای پیام‌هایت را ثبت نمی‌کند.",
       passport_temp_label:"گفتگوی موقت", passport_temp_desc:"وقتی فعال باشد، پیام‌های جدید گفتگو روی این دستگاه ذخیره نمی‌شوند. با خاموش کردنش یا بستن برنامه پایان می‌یابد.",
+      passport_ai_chat_consent_label:"اشتراک‌گذاری پیام‌ها با هوش مصنوعی", passport_ai_chat_consent_desc:"به گفتگو، بررسی سریع و بازنویسی احساسات اجازه می‌دهد آنچه می‌نویسی را برای تولید پاسخ به Anthropic بفرستند. هر زمان خاموش کن تا این را پس بگیری — چیزی که قبلاً ذخیره شده حذف نمی‌شود.",
+      passport_ai_coach_consent_label:"اشتراک‌گذاری خلاصه هدف/سلامت/مال با مربی هوش مصنوعی", passport_ai_coach_consent_desc:"به مربی داشبورد اجازه می‌دهد خلاصه‌ای از هدف‌ها، عادت‌ها، یادداشت‌های سلامت و مالی، و خلق‌وخوی تو را بفرستد. هر زمان خاموش کن تا این را پس بگیری.",
       passport_temp_active:"🕶️ حالت موقت — این گفتگو ذخیره نمی‌شود",
       passport_controls_label:"کنترل‌های تو", passport_del_chat:"حذف سابقه گفتگو", passport_del_mood:"حذف داده‌های خلق‌وخو",
       passport_del_exercises:"حذف سابقه تمرین‌ها", passport_export_all:"صادر کردن همه داده‌هایم", passport_del_all:"حذف همه چیز",
@@ -1662,6 +1678,8 @@ const I18N = {
       passport_ai_title:"AI کو کیا بھیجا جاتا ہے", passport_ai_text:"صرف وہ متن جو آپ چیٹ یا فوری چیک ان میں لکھتے ہیں Anthropic (ہمارے AI فراہم کنندہ) کو جواب تیار کرنے کے لیے بھیجا جاتا ہے۔ کچھ اور نہیں — نہ موڈ لاگ، نہ جرنل، نہ ورزش کی تاریخ — خودکار طور پر نہیں بھیجا جاتا۔",
       passport_logs_title:"تکنیکی لاگز", passport_logs_text:"ہمارا سرور یہ ریکارڈ کر سکتا ہے کہ کوئی درخواست کامیاب ہوئی یا ناکام، اور کیا کوئی جواب حفاظتی وجوہات کی بنا پر دوبارہ لکھا گیا — کبھی بھی آپ کے پیغامات کا مواد نہیں۔",
       passport_temp_label:"عارضی گفتگو", passport_temp_desc:"فعال ہونے پر، نئے چیٹ پیغامات اس ڈیوائس پر محفوظ نہیں ہوتے۔ اسے بند کرنے یا ایپ بند کرنے پر ختم ہو جاتا ہے۔",
+      passport_ai_chat_consent_label:"پیغامات AI کے ساتھ شیئر کریں", passport_ai_chat_consent_desc:"چیٹ، فوری چیک ان اور احساسات دوبارہ لکھنے کو اجازت دیتا ہے کہ آپ جو لکھیں وہ جواب بنانے کے لیے Anthropic کو بھیجا جائے۔ اسے کسی بھی وقت بند کریں تاکہ یہ واپس لیں — پہلے سے محفوظ شدہ کچھ بھی حذف نہیں ہوگا۔",
+      passport_ai_coach_consent_label:"اہداف/صحت/پیسے کا خلاصہ AI کوچ کے ساتھ شیئر کریں", passport_ai_coach_consent_desc:"ڈیش بورڈ کے AI کوچ کو اجازت دیتا ہے کہ وہ آپ کے اہداف، عادات، صحت اور مالی نوٹس، اور موڈ کا خلاصہ بھیجے۔ اسے کسی بھی وقت بند کرکے واپس لیں۔",
       passport_temp_active:"🕶️ عارضی موڈ — یہ گفتگو محفوظ نہیں ہو رہی",
       passport_controls_label:"آپ کے کنٹرولز", passport_del_chat:"چیٹ کی تاریخ حذف کریں", passport_del_mood:"موڈ ڈیٹا حذف کریں",
       passport_del_exercises:"ورزش کی تاریخ حذف کریں", passport_export_all:"میرا سارا ڈیٹا برآمد کریں", passport_del_all:"سب کچھ حذف کریں",
@@ -1849,6 +1867,8 @@ const I18N = {
       passport_ai_title:"Что отправляется в ИИ", passport_ai_text:"Только текст, который вы вводите в чате или быстрой проверке, отправляется в Anthropic (наш поставщик ИИ) для генерации ответа. Ничего другого — ни журнал настроения, ни дневник, ни история упражнений — не отправляется автоматически.",
       passport_logs_title:"Технические журналы", passport_logs_text:"Наш сервер может фиксировать, был ли запрос успешным или неудачным, и был ли ответ переписан из соображений безопасности — но никогда содержание ваших сообщений.",
       passport_temp_label:"Временный разговор", passport_temp_desc:"Пока активен, новые сообщения чата не сохраняются на этом устройстве. Заканчивается, когда вы его отключаете или закрываете приложение.",
+      passport_ai_chat_consent_label:"Делиться сообщениями с ИИ", passport_ai_chat_consent_desc:"Позволяет чату, быстрому чек-ину и переформулировке чувств отправлять написанное тобой в Anthropic для генерации ответа. Отключи в любой момент, чтобы отозвать это — уже сохранённое не удалится.",
+      passport_ai_coach_consent_label:"Делиться сводкой целей/здоровья/денег с ИИ-коучем", passport_ai_coach_consent_desc:"Позволяет ИИ-коучу на панели отправлять сводку твоих целей, привычек, заметок о здоровье и деньгах, и настроения. Отключи в любой момент, чтобы отозвать это.",
       passport_temp_active:"🕶️ Временный режим — этот разговор не сохраняется",
       passport_controls_label:"Ваши элементы управления", passport_del_chat:"Удалить историю чата", passport_del_mood:"Удалить данные настроения",
       passport_del_exercises:"Удалить историю упражнений", passport_export_all:"Экспортировать все мои данные", passport_del_all:"Удалить всё",
@@ -2036,6 +2056,8 @@ const I18N = {
       passport_ai_title:"O que é enviado à IA", passport_ai_text:"Apenas o texto que escreves no chat ou no check-in rápido é enviado à Anthropic (o nosso fornecedor de IA) para gerar uma resposta. Nada mais — nem registo de humor, nem diário, nem histórico de exercícios — é enviado automaticamente.",
       passport_logs_title:"Registos técnicos", passport_logs_text:"O nosso servidor pode registar se um pedido foi bem-sucedido ou falhou, e se uma resposta foi reescrita por segurança — nunca o conteúdo das tuas mensagens.",
       passport_temp_label:"Conversa temporária", passport_temp_desc:"Enquanto ativa, novas mensagens de chat não são guardadas neste dispositivo. Termina quando a desativas ou fechas a app.",
+      passport_ai_chat_consent_label:"Partilhar mensagens com a IA", passport_ai_chat_consent_desc:"Permite que o chat, o check-in rápido e a reescrita de sentimentos enviem o que escreves para a Anthropic para gerar uma resposta. Desativa a qualquer momento para retirar isto — não apaga nada já guardado.",
+      passport_ai_coach_consent_label:"Partilhar resumo de metas/saúde/dinheiro com o coach de IA", passport_ai_coach_consent_desc:"Permite que o coach do painel envie um resumo das tuas metas, hábitos, notas de saúde e dinheiro, e do teu humor. Desativa a qualquer momento para retirar isto.",
       passport_temp_active:"🕶️ Modo temporário — esta conversa não está a ser guardada",
       passport_controls_label:"Os teus controlos", passport_del_chat:"Eliminar histórico de chat", passport_del_mood:"Eliminar dados de humor",
       passport_del_exercises:"Eliminar histórico de exercícios", passport_export_all:"Exportar todos os meus dados", passport_del_all:"Eliminar tudo",
@@ -2223,6 +2245,8 @@ const I18N = {
       passport_ai_title:"Cosa viene inviato all'IA", passport_ai_text:"Solo il testo che scrivi nella chat o nel check-in rapido viene inviato ad Anthropic (il nostro fornitore di IA) per generare una risposta. Nient'altro — né registro dell'umore, né diario, né cronologia degli esercizi — viene inviato automaticamente.",
       passport_logs_title:"Registri tecnici", passport_logs_text:"Il nostro server può registrare se una richiesta è riuscita o fallita, e se una risposta è stata riscritta per motivi di sicurezza — mai il contenuto dei tuoi messaggi.",
       passport_temp_label:"Conversazione temporanea", passport_temp_desc:"Mentre è attiva, i nuovi messaggi della chat non vengono salvati su questo dispositivo. Termina quando la disattivi o chiudi l'app.",
+      passport_ai_chat_consent_label:"Condividi messaggi con l'IA", passport_ai_chat_consent_desc:"Permette a chat, check-in rapido e riscrittura dei sentimenti di inviare ciò che scrivi ad Anthropic per generare una risposta. Disattiva in qualsiasi momento per ritirarlo — non elimina nulla già salvato.",
+      passport_ai_coach_consent_label:"Condividi riepilogo obiettivi/salute/denaro con il coach IA", passport_ai_coach_consent_desc:"Permette al coach della dashboard di inviare un riepilogo dei tuoi obiettivi, abitudini, note di salute e denaro, e del tuo umore. Disattiva in qualsiasi momento per ritirarlo.",
       passport_temp_active:"🕶️ Modalità temporanea — questa conversazione non viene salvata",
       passport_controls_label:"I tuoi controlli", passport_del_chat:"Elimina cronologia chat", passport_del_mood:"Elimina dati dell'umore",
       passport_del_exercises:"Elimina cronologia esercizi", passport_export_all:"Esporta tutti i miei dati", passport_del_all:"Elimina tutto",
@@ -5850,12 +5874,21 @@ function clearChatMemory(){
 // ---------------------------------------------------------------------
 function openPrivacyPassport(){
   document.getElementById('tempModeToggle').checked = tempConversationMode;
+  document.getElementById('chatConsentToggle').checked = safeGet('mc_chat_consent') === '1';
+  document.getElementById('coachConsentToggle').checked = safeGet('mc_coach_consent') === '1';
   document.getElementById('passportStatus').textContent = '';
   document.getElementById('passportModal').classList.add('open');
 }
 function closePrivacyPassport(){
   document.getElementById('passportModal').classList.remove('open');
 }
+// GDPR Art. 7(3): withdrawing consent must be as easy as giving it. Giving
+// either of these is one tap (the consent modals); before this, the only
+// way to undo it was confirmDeleteEverything() — wiping ALL local data,
+// not just the one permission. These toggles revoke (or re-grant) each
+// one independently, with no other side effects.
+function setChatConsentEnabled(checked){ safeSet('mc_chat_consent', checked ? '1' : '0'); }
+function setCoachConsentEnabled(checked){ safeSet('mc_coach_consent', checked ? '1' : '0'); }
 function toggleTempConversationMode(checked){
   tempConversationMode = checked;
   document.getElementById('tempModeBanner').classList.toggle('active', checked);
@@ -7822,6 +7855,8 @@ const ACTIONS = {
   sendCheckinText,
   sendMsg,
   sendMsgOnEnter,
+  setChatConsentEnabled,
+  setCoachConsentEnabled,
   setFeelingTone,
   setLang,
   setReviewTab,
