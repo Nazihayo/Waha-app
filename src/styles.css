@@ -559,6 +559,8 @@
   .support-card-list{grid-template-columns:1fr;margin-bottom:14px;}
   .rehearse-chat-box{background:var(--accent-surface);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;height:360px;}
   .rehearse-chat-box .chat-log{max-height:none;}
+  #burnInput.burning{transition:opacity .9s ease, filter .9s ease, transform .9s ease, color .9s ease;opacity:0;filter:blur(6px);transform:scale(.94) translateY(8px);color:#9aa1a9;}
+  @media (prefers-reduced-motion: reduce){ #burnInput.burning{transition:opacity .3s ease;filter:none;transform:none;} }
   .agent-shift-row,.agent-consent{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--ink);cursor:pointer;margin-bottom:12px;line-height:1.5;}
   .agent-consent{font-size:12.5px;color:rgba(var(--ink-rgb),0.72);margin:6px 0 16px;}
   .agent-shift-row input,.agent-consent input{margin-top:4px;flex:none;width:16px;height:16px;accent-color:var(--gold);}

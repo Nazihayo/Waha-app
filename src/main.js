@@ -110,6 +110,14 @@ const I18N = {
     rehearse_placeholder:"قل ما تريد أن تقوله له...", rehearse_send:"إرسال", rehearse_thinking:"يفكر...", rehearse_turn_limit_msg:"هذه نقطة جيدة لإنهاء جولة التدريب.", rehearse_end_btn:"إنهاء والتأمل",
     rehearse_reflect_title:"كيف شعرت بهذا؟", rehearse_reflect_body:"لاحظ أي الكلمات شعرت أنها صادقة بالنسبة لك. يمكنك قولها فعليًا متى كنت مستعدًا — ويمكنك دائمًا العودة للتدرّب مجددًا.", rehearse_reflect_new_btn:"تدرّب مجددًا",
     rehearse_error:"تعذّر الوصول للذكاء الاصطناعي الآن. حاول بعد قليل.", rehearse_consent_needed:"فعّل موافقة محادثة الذكاء الاصطناعي من جواز الخصوصية أولًا.",
+    journey_item_burn_title:"فرّغ وأحرق أفكارك", journey_item_burn_desc:"اكتب فكرة تزعجك، ثم شاهدها تحترق وتختفي — لا يُحفظ شيء، ولا حتى على جهازك.",
+    burn_eyebrow:"لا شيء يُحفظ، ولا حتى هنا", burn_title:"فرّغ وأحرق أفكارك", burn_intro:"اكتب كل ما يدور في ذهنك. وعندما تكون جاهزًا، أحرقه. يختفي تمامًا — هذا التطبيق لا يخزّنه أبدًا، ولا حتى للحظة أطول مما تحتاج.",
+    burn_placeholder:"اكتب كل شيء هنا...", burn_empty_first:"اكتب شيئًا أولًا.", burn_btn:"🔥 أحرقه", burn_done_msg:"اختفى. لم يُحفظ شيء.", burn_again_btn:"اكتب شيئًا آخر",
+    journey_item_capsule_title:"كبسولة المستقبل", journey_item_capsule_desc:"اكتب رسالة قصيرة لنفسك المستقبلية، واختر متى تصلك مجددًا.",
+    capsule_eyebrow:"رسالة منك، إليك", capsule_title:"كبسولة المستقبل", capsule_intro:"اكتب شيئًا لنفسك المستقبلية — تشجيع، تذكير، أي شيء. اختر تاريخًا، وستنتظرك عنده. يبقى على جهازك فقط.",
+    capsule_write_label:"رسالتك", capsule_placeholder:"عزيزي نفسي المستقبلية...", capsule_date_label:"تصل في", capsule_save_btn:"اختمها", capsule_empty_first:"اكتب رسالة أولًا.", capsule_date_first:"اختر تاريخًا مستقبليًا أولًا.",
+    capsule_pending_label:"في انتظار الوصول", capsule_pending_item:"رسالة تصل خلال {n} يوم", capsule_pending_item_today:"رسالة جاهزة لك اليوم", capsule_pending_empty:"لا توجد رسائل في الانتظار بعد.",
+    capsule_delivered_label:"وصلتك", capsule_delivered_empty:"لم تصلك أي رسالة بعد.", capsule_delete_btn:"حذف", capsule_reveal_title:"وصلتك رسالة", capsule_reveal_close_btn:"إغلاق",
     ef_ai_rewrite:"أعد الصياغة بالذكاء الاصطناعي", ef_ai_note:"هذا يرسل مسودتك لمزوّد الذكاء الاصطناعي لإعادة صياغتها فقط. لا شيء آخر يُرسل.",
     ef_ai_confirm:"سيُرسل هذا مسودتك خارج جهازك إلى Anthropic (مزوّد الذكاء الاصطناعي) لإعادة صياغتها. هل تريد المتابعة؟",
     ef_ai_needs_consent:"يرجى إرسال رسالة محادثة واحدة أولاً لتفعيل ميزات الذكاء الاصطناعي.",
@@ -312,6 +320,14 @@ const I18N = {
     rehearse_placeholder:"Sag, was du ihm/ihr sagen würdest…", rehearse_send:"Senden", rehearse_thinking:"Denkt nach…", rehearse_turn_limit_msg:"Das ist ein guter Punkt, um diese Übungsrunde zu beenden.", rehearse_end_btn:"Beenden & nachdenken",
     rehearse_reflect_title:"Wie hat sich das angefühlt?", rehearse_reflect_body:"Achte darauf, welche Worte sich für dich richtig angefühlt haben. Du kannst sie sagen, wenn du bereit bist — und jederzeit zurückkommen und wieder üben.", rehearse_reflect_new_btn:"Nochmal üben",
     rehearse_error:"Die KI war gerade nicht erreichbar. Versuch es gleich noch einmal.", rehearse_consent_needed:"Aktiviere zuerst die KI-Chat-Zustimmung in deinem Datenschutz-Pass.",
+    journey_item_burn_title:"Gedanken loswerden & verbrennen", journey_item_burn_desc:"Schreib einen Gedanken auf, der dich beschäftigt, und sieh zu, wie er verbrennt — nichts wird gespeichert, nicht einmal auf deinem Gerät.",
+    burn_eyebrow:"Nichts wird gespeichert, auch nicht hier", burn_title:"Gedanken loswerden & verbrennen", burn_intro:"Schreib auf, was dir durch den Kopf geht. Wenn du bereit bist, verbrenne es. Es verschwindet vollständig — diese App speichert es nie, nicht einmal für einen Moment länger als nötig.",
+    burn_placeholder:"Schreib alles auf…", burn_empty_first:"Schreib zuerst etwas.", burn_btn:"🔥 Verbrennen", burn_done_msg:"Weg. Nichts wurde gespeichert.", burn_again_btn:"Noch etwas schreiben",
+    journey_item_capsule_title:"Zeitkapsel", journey_item_capsule_desc:"Schreib eine kurze Nachricht an dein zukünftiges Ich und wähle, wann sie dich wieder erreicht.",
+    capsule_eyebrow:"Eine Nachricht von dir, an dich", capsule_title:"Zeitkapsel", capsule_intro:"Schreib etwas für dein zukünftiges Ich — Ermutigung, eine Erinnerung, irgendetwas. Wähle ein Datum, und sie wartet dann auf dich. Bleibt nur auf deinem Gerät.",
+    capsule_write_label:"Deine Nachricht", capsule_placeholder:"Liebes zukünftiges Ich…", capsule_date_label:"Zustellen am", capsule_save_btn:"Versiegeln", capsule_empty_first:"Schreib zuerst eine Nachricht.", capsule_date_first:"Wähle zuerst ein zukünftiges Datum.",
+    capsule_pending_label:"Wartet auf Zustellung", capsule_pending_item:"Eine Nachricht kommt in {n} Tagen an", capsule_pending_item_today:"Eine Nachricht ist heute für dich bereit", capsule_pending_empty:"Noch keine Nachrichten in Wartestellung.",
+    capsule_delivered_label:"An dich zugestellt", capsule_delivered_empty:"Noch nichts zugestellt.", capsule_delete_btn:"Löschen", capsule_reveal_title:"Eine Nachricht ist angekommen", capsule_reveal_close_btn:"Schließen",
     ef_ai_rewrite:"Mit KI umformulieren", ef_ai_note:"Dies sendet deinen Entwurf an unseren KI-Anbieter, um ihn umzuformulieren. Nichts anderes wird gesendet.",
     ef_ai_confirm:"Dies sendet deinen Entwurf außerhalb deines Geräts an Anthropic (unseren KI-Anbieter), um ihn umzuformulieren. Fortfahren?",
     ef_ai_needs_consent:"Bitte sende zuerst eine Chat-Nachricht, um KI-Funktionen zu aktivieren.",
@@ -514,6 +530,14 @@ const I18N = {
     rehearse_placeholder:"Say what you'd say to them…", rehearse_send:"Send", rehearse_thinking:"Thinking…", rehearse_turn_limit_msg:"That's a good stopping point for one practice round.", rehearse_end_btn:"End & reflect",
     rehearse_reflect_title:"How did that feel?", rehearse_reflect_body:"Notice which words felt true to you. You can say those for real whenever you're ready — and you can always come back and practice again.", rehearse_reflect_new_btn:"Practice again",
     rehearse_error:"Couldn't reach the AI right now. Try again in a moment.", rehearse_consent_needed:"Turn on AI chat consent in your Privacy Passport first.",
+    journey_item_burn_title:"Brain dump & burn", journey_item_burn_desc:"Write down a thought that's bothering you, then watch it burn away — nothing is saved, not even on your device.",
+    burn_eyebrow:"Nothing is saved, not even here", burn_title:"Brain dump & burn", burn_intro:"Write whatever is on your mind. When you're ready, burn it. It disappears completely — this app never stores it, not even for a second longer than you need.",
+    burn_placeholder:"Write it all out…", burn_empty_first:"Write something first.", burn_btn:"🔥 Burn it", burn_done_msg:"Gone. Nothing was saved.", burn_again_btn:"Write another",
+    journey_item_capsule_title:"Future capsule", journey_item_capsule_desc:"Write a short message to your future self, and choose when it finds you again.",
+    capsule_eyebrow:"A message from you, to you", capsule_title:"Future capsule", capsule_intro:"Write something for your future self — encouragement, a reminder, anything. Pick a date, and it'll be waiting for you then. Stays on your device only.",
+    capsule_write_label:"Your message", capsule_placeholder:"Dear future me…", capsule_date_label:"Deliver on", capsule_save_btn:"Seal it", capsule_empty_first:"Write a message first.", capsule_date_first:"Pick a future date first.",
+    capsule_pending_label:"Waiting to be delivered", capsule_pending_item:"A message arrives in {n} days", capsule_pending_item_today:"A message is ready for you today", capsule_pending_empty:"No messages waiting yet.",
+    capsule_delivered_label:"Delivered to you", capsule_delivered_empty:"Nothing delivered yet.", capsule_delete_btn:"Delete", capsule_reveal_title:"A message arrived for you", capsule_reveal_close_btn:"Close",
     ef_ai_rewrite:"Rewrite with AI", ef_ai_note:"This sends your draft to our AI provider to rewrite it. Nothing else is sent.",
     ef_ai_confirm:"This will send your draft outside your device to Anthropic (our AI provider) to rewrite it. Continue?",
     ef_ai_needs_consent:"Please send one chat message first to enable AI features.",
@@ -716,6 +740,14 @@ const I18N = {
     rehearse_placeholder:"Dis ce que tu voudrais lui dire…", rehearse_send:"Envoyer", rehearse_thinking:"Réfléchit…", rehearse_turn_limit_msg:"C'est un bon moment pour terminer ce tour d'entraînement.", rehearse_end_btn:"Terminer et réfléchir",
     rehearse_reflect_title:"Comment t'es-tu senti(e) ?", rehearse_reflect_body:"Remarque quels mots t'ont semblé justes. Tu peux les dire pour de vrai quand tu seras prêt(e) — et tu peux toujours revenir t'entraîner à nouveau.", rehearse_reflect_new_btn:"S'entraîner à nouveau",
     rehearse_error:"Impossible de contacter l'IA pour le moment. Réessaie dans un instant.", rehearse_consent_needed:"Active d'abord le consentement de chat IA dans ton Passeport de confidentialité.",
+    journey_item_burn_title:"Vide et brûle tes pensées", journey_item_burn_desc:"Écris une pensée qui te dérange, puis regarde-la brûler et disparaître — rien n'est enregistré, même pas sur ton appareil.",
+    burn_eyebrow:"Rien n'est enregistré, même pas ici", burn_title:"Vide et brûle tes pensées", burn_intro:"Écris ce que tu as en tête. Quand tu es prêt(e), brûle-le. Ça disparaît complètement — cette appli ne le stocke jamais, pas même un instant de plus que nécessaire.",
+    burn_placeholder:"Écris tout ici…", burn_empty_first:"Écris d'abord quelque chose.", burn_btn:"🔥 Brûler", burn_done_msg:"Disparu. Rien n'a été enregistré.", burn_again_btn:"Écrire autre chose",
+    journey_item_capsule_title:"Capsule du futur", journey_item_capsule_desc:"Écris un court message à ton futur toi, et choisis quand il te retrouve.",
+    capsule_eyebrow:"Un message de toi, pour toi", capsule_title:"Capsule du futur", capsule_intro:"Écris quelque chose pour ton futur toi — encouragement, un rappel, n'importe quoi. Choisis une date, il t'attendra alors. Reste uniquement sur ton appareil.",
+    capsule_write_label:"Ton message", capsule_placeholder:"Cher futur moi…", capsule_date_label:"Livrer le", capsule_save_btn:"Sceller", capsule_empty_first:"Écris d'abord un message.", capsule_date_first:"Choisis d'abord une date future.",
+    capsule_pending_label:"En attente de livraison", capsule_pending_item:"Un message arrive dans {n} jours", capsule_pending_item_today:"Un message est prêt pour toi aujourd'hui", capsule_pending_empty:"Aucun message en attente pour l'instant.",
+    capsule_delivered_label:"Livré pour toi", capsule_delivered_empty:"Rien n'a encore été livré.", capsule_delete_btn:"Supprimer", capsule_reveal_title:"Un message est arrivé pour toi", capsule_reveal_close_btn:"Fermer",
     ef_ai_rewrite:"Reformuler avec l'IA", ef_ai_note:"Ceci envoie ton brouillon à notre fournisseur d'IA pour le reformuler. Rien d'autre n'est envoyé.",
     ef_ai_confirm:"Ceci enverra ton brouillon hors de ton appareil à Anthropic (notre fournisseur d'IA) pour le reformuler. Continuer ?",
     ef_ai_needs_consent:"Merci d'envoyer d'abord un message dans le chat pour activer les fonctionnalités d'IA.",
@@ -918,6 +950,14 @@ const I18N = {
     rehearse_placeholder:"Ona söylemek istediğini söyle…", rehearse_send:"Gönder", rehearse_thinking:"Düşünüyor…", rehearse_turn_limit_msg:"Bu prova turunu bitirmek için iyi bir nokta.", rehearse_end_btn:"Bitir ve düşün",
     rehearse_reflect_title:"Bu nasıl hissettirdi?", rehearse_reflect_body:"Hangi sözlerin sana doğru geldiğine dikkat et. Hazır olduğunda bunları gerçekten söyleyebilirsin — ve her zaman geri gelip tekrar prova yapabilirsin.", rehearse_reflect_new_btn:"Tekrar prova yap",
     rehearse_error:"Yapay zekâya şu an ulaşılamadı. Biraz sonra tekrar dene.", rehearse_consent_needed:"Önce Gizlilik Pasaportundan yapay zekâ sohbet onayını aç.",
+    journey_item_burn_title:"Düşünceleri boşalt ve yak", journey_item_burn_desc:"Seni rahatsız eden bir düşünceyi yaz, sonra yanıp yok olmasını izle — hiçbir şey kaydedilmez, cihazında bile.",
+    burn_eyebrow:"Hiçbir şey kaydedilmez, burada bile", burn_title:"Düşünceleri boşalt ve yak", burn_intro:"Aklından ne geçiyorsa yaz. Hazır olduğunda yak. Tamamen yok olur — bu uygulama onu asla saklamaz, ihtiyacından bir an bile fazla değil.",
+    burn_placeholder:"Her şeyi buraya yaz…", burn_empty_first:"Önce bir şey yaz.", burn_btn:"🔥 Yak", burn_done_msg:"Gitti. Hiçbir şey kaydedilmedi.", burn_again_btn:"Başka bir şey yaz",
+    journey_item_capsule_title:"Gelecek kapsülü", journey_item_capsule_desc:"Gelecekteki kendine kısa bir mesaj yaz ve sana ne zaman ulaşacağını seç.",
+    capsule_eyebrow:"Senden sana bir mesaj", capsule_title:"Gelecek kapsülü", capsule_intro:"Gelecekteki kendin için bir şey yaz — cesaretlendirme, bir hatırlatma, ne olursa olsun. Bir tarih seç, o zaman seni bekliyor olacak. Sadece cihazında kalır.",
+    capsule_write_label:"Mesajın", capsule_placeholder:"Sevgili gelecekteki ben…", capsule_date_label:"Ulaşma tarihi", capsule_save_btn:"Mühürle", capsule_empty_first:"Önce bir mesaj yaz.", capsule_date_first:"Önce gelecekte bir tarih seç.",
+    capsule_pending_label:"Ulaşmayı bekliyor", capsule_pending_item:"Bir mesaj {n} gün içinde ulaşacak", capsule_pending_item_today:"Bugün senin için hazır bir mesaj var", capsule_pending_empty:"Henüz bekleyen mesaj yok.",
+    capsule_delivered_label:"Sana ulaştı", capsule_delivered_empty:"Henüz hiçbir şey ulaşmadı.", capsule_delete_btn:"Sil", capsule_reveal_title:"Sana bir mesaj ulaştı", capsule_reveal_close_btn:"Kapat",
     ef_ai_rewrite:"Yapay zeka ile yeniden yaz", ef_ai_note:"Bu, taslağını yeniden yazması için yapay zeka sağlayıcımıza gönderir. Başka hiçbir şey gönderilmez.",
     ef_ai_confirm:"Bu, taslağını yeniden yazması için Anthropic'e (yapay zeka sağlayıcımız) cihazının dışına gönderecek. Devam edilsin mi?",
     ef_ai_needs_consent:"Yapay zeka özelliklerini etkinleştirmek için lütfen önce bir sohbet mesajı gönder.",
@@ -1120,6 +1160,14 @@ const I18N = {
     rehearse_placeholder:"Bibêje tiştê tu dixwazî jê re bibêjî…", rehearse_send:"Bişîne", rehearse_thinking:"Difikire…", rehearse_turn_limit_msg:"Ev xaleke baş e ji bo dawîlêanîna vê dewra temrînê.", rehearse_end_btn:"Biqedîne û raman bike",
     rehearse_reflect_title:"Vê yekê çawa hîs kir?", rehearse_reflect_body:"Bala xwe bide ka kîjan peyv ji te re rast xuya bûn. Tu dikarî wan bi rastî bibêjî çi gav tu amade bî — û her gav dikarî vegerî û dîsa temrîn bikî.", rehearse_reflect_new_btn:"Dîsa temrîn bike",
     rehearse_error:"Niha nehat gihîştin bi AI re. Piştî demek dîsa biceribîne.", rehearse_consent_needed:"Pêşî razîbûna sohbeta AI ji Pasaporta Nihêniyê veke.",
+    journey_item_burn_title:"Ramanan vala bike û bişewitîne", journey_item_burn_desc:"Ramanek ku te aciz dike binivîse, paşê temaşe bike ka çawa dişewite û winda dibe — tiştek nayê tomarkirin, tewra li ser amûra te jî.",
+    burn_eyebrow:"Tiştek nayê tomarkirin, tewra vir jî", burn_title:"Ramanan vala bike û bişewitîne", burn_intro:"Tiştê di hişê te de ye binivîse. Dema tu amade bî, wê bişewitîne. Bi tevahî winda dibe — ev sepan qet wê tomar nake, tewra ne ji bo kêliyek zêdetir ji ya ku pêwîst e.",
+    burn_placeholder:"Her tiştî li vir binivîse…", burn_empty_first:"Pêşî tiştek binivîse.", burn_btn:"🔥 Bişewitîne", burn_done_msg:"Çû. Tiştek nehat tomarkirin.", burn_again_btn:"Tiştek din binivîse",
+    journey_item_capsule_title:"Kapsula pêşerojê", journey_item_capsule_desc:"Peyamek kurt ji xwe ya pêşerojê re binivîse, û hilbijêre kengî dîsa digihîje te.",
+    capsule_eyebrow:"Peyamek ji te, ji bo te", capsule_title:"Kapsula pêşerojê", capsule_intro:"Tiştek ji bo xwe ya pêşerojê binivîse — teşwîq, bîranîn, her tişt. Dîrokek hilbijêre, û ew ê li benda te be. Tenê li ser amûra te dimîne.",
+    capsule_write_label:"Peyama te", capsule_placeholder:"Xoşewista min a pêşerojê…", capsule_date_label:"Di vê rojê de bigihîje", capsule_save_btn:"Mohr bike", capsule_empty_first:"Pêşî peyamek binivîse.", capsule_date_first:"Pêşî dîrokeke pêşerojê hilbijêre.",
+    capsule_pending_label:"Li benda gihîştinê", capsule_pending_item:"Peyamek di {n} rojan de digihîje", capsule_pending_item_today:"Peyamek îro ji te re amade ye", capsule_pending_empty:"Hêj tu peyam li benda nîne.",
+    capsule_delivered_label:"Gihîşte te", capsule_delivered_empty:"Hêj tu tişt negihîştiye.", capsule_delete_btn:"Jê bibe", capsule_reveal_title:"Peyamek gihîşte te", capsule_reveal_close_btn:"Bigire",
     ef_ai_rewrite:"Bi AI ve dîsa binivîse", ef_ai_note:"Ev reçeta te ji bo dîsa nivîsandinê ji peydakerê me yê AI re dişîne. Tiştek din nayê şandin.",
     ef_ai_confirm:"Ev ê reçeta te ji amûra te derkeve û here Anthropic (peydakerê me yê AI) da ku dîsa binivîse. Berdewam bike?",
     ef_ai_needs_consent:"Ji kerema xwe pêşî peyamek chatê bişîne da ku taybetmendiyên AI çalak bikî.",
@@ -1322,6 +1370,14 @@ const I18N = {
     rehearse_placeholder:"Di lo que le dirías…", rehearse_send:"Enviar", rehearse_thinking:"Pensando…", rehearse_turn_limit_msg:"Este es un buen punto para terminar esta ronda de práctica.", rehearse_end_btn:"Terminar y reflexionar",
     rehearse_reflect_title:"¿Cómo te sentiste?", rehearse_reflect_body:"Fíjate en qué palabras sentiste como verdaderas. Puedes decirlas de verdad cuando estés listo/a — y siempre puedes volver a practicar.", rehearse_reflect_new_btn:"Practicar de nuevo",
     rehearse_error:"No se pudo contactar con la IA ahora mismo. Inténtalo de nuevo en un momento.", rehearse_consent_needed:"Activa primero el consentimiento de chat con IA en tu Pasaporte de Privacidad.",
+    journey_item_burn_title:"Vacía y quema tus pensamientos", journey_item_burn_desc:"Escribe un pensamiento que te molesta, luego míralo quemarse y desaparecer — no se guarda nada, ni siquiera en tu dispositivo.",
+    burn_eyebrow:"Nada se guarda, ni siquiera aquí", burn_title:"Vacía y quema tus pensamientos", burn_intro:"Escribe lo que tengas en mente. Cuando estés listo/a, quémalo. Desaparece por completo — esta app nunca lo guarda, ni siquiera un instante más de lo necesario.",
+    burn_placeholder:"Escríbelo todo aquí…", burn_empty_first:"Escribe algo primero.", burn_btn:"🔥 Quemarlo", burn_done_msg:"Se fue. No se guardó nada.", burn_again_btn:"Escribir otra cosa",
+    journey_item_capsule_title:"Cápsula del futuro", journey_item_capsule_desc:"Escribe un mensaje corto para tu yo futuro, y elige cuándo te vuelve a encontrar.",
+    capsule_eyebrow:"Un mensaje de ti, para ti", capsule_title:"Cápsula del futuro", capsule_intro:"Escribe algo para tu yo futuro — ánimo, un recordatorio, lo que sea. Elige una fecha, y te estará esperando entonces. Se queda solo en tu dispositivo.",
+    capsule_write_label:"Tu mensaje", capsule_placeholder:"Querido yo futuro…", capsule_date_label:"Entregar el", capsule_save_btn:"Sellarla", capsule_empty_first:"Escribe un mensaje primero.", capsule_date_first:"Elige primero una fecha futura.",
+    capsule_pending_label:"Esperando ser entregado", capsule_pending_item:"Un mensaje llega en {n} días", capsule_pending_item_today:"Hoy hay un mensaje listo para ti", capsule_pending_empty:"Aún no hay mensajes esperando.",
+    capsule_delivered_label:"Entregado a ti", capsule_delivered_empty:"Aún no se ha entregado nada.", capsule_delete_btn:"Eliminar", capsule_reveal_title:"Te ha llegado un mensaje", capsule_reveal_close_btn:"Cerrar",
     ef_ai_rewrite:"Reescribir con IA", ef_ai_note:"Esto envía tu borrador a nuestro proveedor de IA para reescribirlo. No se envía nada más.",
     ef_ai_confirm:"Esto enviará tu borrador fuera de tu dispositivo a Anthropic (nuestro proveedor de IA) para reescribirlo. ¿Continuar?",
     ef_ai_needs_consent:"Envía primero un mensaje de chat para habilitar las funciones de IA.",
@@ -1544,6 +1600,14 @@ const I18N = {
       rehearse_placeholder:"بگو چه می‌خواهی به او بگویی…", rehearse_send:"ارسال", rehearse_thinking:"در حال فکر کردن…", rehearse_turn_limit_msg:"این نقطه خوبی برای پایان این دور تمرین است.", rehearse_end_btn:"پایان و تأمل",
       rehearse_reflect_title:"این چه حسی داشت؟", rehearse_reflect_body:"توجه کن کدام کلمات برایت واقعی‌تر بودند. هر وقت آماده بودی می‌توانی واقعاً بگویی‌شان — و همیشه می‌توانی برگردی و دوباره تمرین کنی.", rehearse_reflect_new_btn:"دوباره تمرین کن",
       rehearse_error:"الان نتوانستم به هوش مصنوعی وصل شوم. کمی بعد دوباره امتحان کن.", rehearse_consent_needed:"اول موافقت گفتگوی هوش مصنوعی را از پاسپورت حریم خصوصی فعال کن.",
+      journey_item_burn_title:"افکارت را خالی کن و بسوزان", journey_item_burn_desc:"فکری که اذیتت می‌کند را بنویس، بعد ببین چطور می‌سوزد و ناپدید می‌شود — هیچ چیز ذخیره نمی‌شود، حتی روی دستگاهت.",
+      burn_eyebrow:"هیچ چیز ذخیره نمی‌شود، حتی اینجا", burn_title:"افکارت را خالی کن و بسوزان", burn_intro:"هرچه در ذهنت است بنویس. وقتی آماده بودی، بسوزانش. کاملاً ناپدید می‌شود — این اپ هرگز آن را ذخیره نمی‌کند، حتی یک لحظه بیشتر از لازم.",
+      burn_placeholder:"همه چیز را اینجا بنویس…", burn_empty_first:"اول چیزی بنویس.", burn_btn:"🔥 بسوزانش", burn_done_msg:"رفت. هیچ چیز ذخیره نشد.", burn_again_btn:"چیز دیگری بنویس",
+      journey_item_capsule_title:"کپسول آینده", journey_item_capsule_desc:"پیامی کوتاه برای خودِ آینده‌ات بنویس و انتخاب کن چه زمانی دوباره به تو برسد.",
+      capsule_eyebrow:"پیامی از تو، برای تو", capsule_title:"کپسول آینده", capsule_intro:"چیزی برای خودِ آینده‌ات بنویس — دلگرمی، یادآوری، هر چیزی. تاریخی انتخاب کن، و آن زمان منتظرت خواهد بود. فقط روی دستگاهت باقی می‌ماند.",
+      capsule_write_label:"پیام تو", capsule_placeholder:"خودِ آینده عزیزم…", capsule_date_label:"تاریخ رسیدن", capsule_save_btn:"مهر و موم کن", capsule_empty_first:"اول یک پیام بنویس.", capsule_date_first:"اول یک تاریخ آینده انتخاب کن.",
+      capsule_pending_label:"در انتظار رسیدن", capsule_pending_item:"یک پیام تا {n} روز دیگر می‌رسد", capsule_pending_item_today:"امروز یک پیام برایت آماده است", capsule_pending_empty:"هنوز پیامی در انتظار نیست.",
+      capsule_delivered_label:"به تو رسید", capsule_delivered_empty:"هنوز چیزی نرسیده است.", capsule_delete_btn:"حذف", capsule_reveal_title:"پیامی برایت رسید", capsule_reveal_close_btn:"بستن",
       ef_ai_rewrite:"بازنویسی با هوش مصنوعی", ef_ai_note:"این پیش‌نویس تو را برای بازنویسی به ارائه‌دهنده هوش مصنوعی ما ارسال می‌کند. چیز دیگری ارسال نمی‌شود.",
       ef_ai_confirm:"این کار پیش‌نویس تو را خارج از دستگاهت برای بازنویسی به Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌کند. ادامه می‌دهی؟",
       ef_ai_needs_consent:"لطفاً ابتدا یک پیام گفتگو ارسال کن تا ویژگی‌های هوش مصنوعی فعال شوند.",
@@ -1746,6 +1810,14 @@ const I18N = {
       rehearse_placeholder:"وہ کہیں جو آپ انہیں کہنا چاہتے ہیں…", rehearse_send:"بھیجیں", rehearse_thinking:"سوچ رہا ہے…", rehearse_turn_limit_msg:"یہ اس مشقی دور کو ختم کرنے کے لیے اچھا مقام ہے۔", rehearse_end_btn:"ختم کریں اور سوچیں",
       rehearse_reflect_title:"یہ کیسا محسوس ہوا؟", rehearse_reflect_body:"دیکھیں کون سے الفاظ آپ کو سچے لگے۔ جب تیار ہوں تو انہیں حقیقت میں کہہ سکتے ہیں — اور آپ ہمیشہ واپس آ کر دوبارہ مشق کر سکتے ہیں۔", rehearse_reflect_new_btn:"دوبارہ مشق کریں",
       rehearse_error:"ابھی AI سے رابطہ نہیں ہو سکا۔ تھوڑی دیر بعد دوبارہ کوشش کریں۔", rehearse_consent_needed:"پہلے اپنے پرائیویسی پاسپورٹ میں AI چیٹ کی رضامندی فعال کریں۔",
+      journey_item_burn_title:"خیالات خالی کریں اور جلا دیں", journey_item_burn_desc:"ایک پریشان کن خیال لکھیں، پھر دیکھیں کہ یہ کیسے جل کر غائب ہو جاتا ہے — کچھ بھی محفوظ نہیں ہوتا، آپ کے ڈیوائس پر بھی نہیں۔",
+      burn_eyebrow:"کچھ بھی محفوظ نہیں ہوتا، یہاں بھی نہیں", burn_title:"خیالات خالی کریں اور جلا دیں", burn_intro:"جو کچھ آپ کے ذہن میں ہے لکھ دیں۔ جب تیار ہوں، اسے جلا دیں۔ یہ مکمل طور پر غائب ہو جاتا ہے — یہ ایپ اسے کبھی محفوظ نہیں کرتی، ضرورت سے ایک لمحہ زیادہ بھی نہیں۔",
+      burn_placeholder:"سب کچھ یہاں لکھیں…", burn_empty_first:"پہلے کچھ لکھیں۔", burn_btn:"🔥 جلا دیں", burn_done_msg:"چلا گیا۔ کچھ بھی محفوظ نہیں ہوا۔", burn_again_btn:"کچھ اور لکھیں",
+      journey_item_capsule_title:"مستقبل کیپسول", journey_item_capsule_desc:"اپنے مستقبل کے خود کو ایک مختصر پیغام لکھیں، اور منتخب کریں کہ یہ آپ کو دوبارہ کب ملے۔",
+      capsule_eyebrow:"آپ کی طرف سے، آپ کے لیے ایک پیغام", capsule_title:"مستقبل کیپسول", capsule_intro:"اپنے مستقبل کے خود کے لیے کچھ لکھیں — حوصلہ افزائی، یاد دہانی، کچھ بھی۔ ایک تاریخ منتخب کریں، اور یہ اس وقت آپ کا انتظار کرے گا۔ صرف آپ کے ڈیوائس پر رہتا ہے۔",
+      capsule_write_label:"آپ کا پیغام", capsule_placeholder:"پیارے مستقبل کے میں…", capsule_date_label:"پہنچنے کی تاریخ", capsule_save_btn:"محفوظ کریں", capsule_empty_first:"پہلے ایک پیغام لکھیں۔", capsule_date_first:"پہلے مستقبل کی تاریخ منتخب کریں۔",
+      capsule_pending_label:"پہنچنے کا انتظار", capsule_pending_item:"ایک پیغام {n} دنوں میں پہنچے گا", capsule_pending_item_today:"آج آپ کے لیے ایک پیغام تیار ہے", capsule_pending_empty:"ابھی تک کوئی پیغام منتظر نہیں۔",
+      capsule_delivered_label:"آپ تک پہنچ گیا", capsule_delivered_empty:"ابھی تک کچھ نہیں پہنچا۔", capsule_delete_btn:"حذف کریں", capsule_reveal_title:"آپ کے لیے ایک پیغام آیا", capsule_reveal_close_btn:"بند کریں",
       ef_ai_rewrite:"AI کے ساتھ دوبارہ لکھیں", ef_ai_note:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے ہمارے AI فراہم کنندہ کو بھیجتا ہے۔ کچھ اور نہیں بھیجا جاتا۔",
       ef_ai_confirm:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے آپ کے آلے سے باہر Anthropic (ہمارے AI فراہم کنندہ) کو بھیجے گا۔ جاری رکھیں؟",
       ef_ai_needs_consent:"AI خصوصیات کو فعال کرنے کے لیے براہ کرم پہلے ایک چیٹ پیغام بھیجیں۔",
@@ -1948,6 +2020,14 @@ const I18N = {
       rehearse_placeholder:"Скажи то, что сказал(а) бы ему/ей…", rehearse_send:"Отправить", rehearse_thinking:"Думает…", rehearse_turn_limit_msg:"Это хороший момент, чтобы завершить этот раунд тренировки.", rehearse_end_btn:"Завершить и подумать",
       rehearse_reflect_title:"Какие были ощущения?", rehearse_reflect_body:"Обрати внимание, какие слова показались тебе искренними. Ты можешь сказать их по-настоящему, когда будешь готов(а) — и всегда можешь вернуться и потренироваться снова.", rehearse_reflect_new_btn:"Потренироваться снова",
       rehearse_error:"Не удалось связаться с ИИ прямо сейчас. Попробуй ещё раз через момент.", rehearse_consent_needed:"Сначала включи согласие на чат с ИИ в твоём Паспорте приватности.",
+      journey_item_burn_title:"Выгрузи и сожги мысли", journey_item_burn_desc:"Напиши беспокоящую тебя мысль, а потом смотри, как она сгорает и исчезает — ничего не сохраняется, даже на твоём устройстве.",
+      burn_eyebrow:"Ничего не сохраняется, даже здесь", burn_title:"Выгрузи и сожги мысли", burn_intro:"Напиши всё, что у тебя на уме. Когда будешь готов(а), сожги это. Оно исчезает полностью — это приложение никогда это не сохраняет, ни на мгновение дольше, чем нужно.",
+      burn_placeholder:"Напиши здесь всё…", burn_empty_first:"Сначала что-нибудь напиши.", burn_btn:"🔥 Сжечь", burn_done_msg:"Исчезло. Ничего не сохранено.", burn_again_btn:"Написать ещё",
+      journey_item_capsule_title:"Капсула будущего", journey_item_capsule_desc:"Напиши короткое сообщение своему будущему «я» и выбери, когда оно снова тебя найдёт.",
+      capsule_eyebrow:"Сообщение от тебя — тебе", capsule_title:"Капсула будущего", capsule_intro:"Напиши что-нибудь для своего будущего «я» — ободрение, напоминание, что угодно. Выбери дату, и оно будет ждать тебя тогда. Остаётся только на твоём устройстве.",
+      capsule_write_label:"Твоё сообщение", capsule_placeholder:"Дорогой будущий я…", capsule_date_label:"Доставить", capsule_save_btn:"Запечатать", capsule_empty_first:"Сначала напиши сообщение.", capsule_date_first:"Сначала выбери будущую дату.",
+      capsule_pending_label:"Ждёт доставки", capsule_pending_item:"Сообщение придёт через {n} дн.", capsule_pending_item_today:"Сегодня для тебя готово сообщение", capsule_pending_empty:"Пока нет ожидающих сообщений.",
+      capsule_delivered_label:"Доставлено тебе", capsule_delivered_empty:"Пока ничего не доставлено.", capsule_delete_btn:"Удалить", capsule_reveal_title:"Тебе пришло сообщение", capsule_reveal_close_btn:"Закрыть",
       ef_ai_rewrite:"Переписать с ИИ", ef_ai_note:"Это отправляет ваш черновик нашему поставщику ИИ для переписывания. Больше ничего не отправляется.",
       ef_ai_confirm:"Это отправит ваш черновик за пределы устройства в Anthropic (наш поставщик ИИ) для переписывания. Продолжить?",
       ef_ai_needs_consent:"Пожалуйста, сначала отправьте одно сообщение в чате, чтобы включить функции ИИ.",
@@ -2150,6 +2230,14 @@ const I18N = {
       rehearse_placeholder:"Diz o que lhe dirias…", rehearse_send:"Enviar", rehearse_thinking:"A pensar…", rehearse_turn_limit_msg:"Este é um bom ponto para terminar esta ronda de prática.", rehearse_end_btn:"Terminar e refletir",
       rehearse_reflect_title:"Como te sentiste?", rehearse_reflect_body:"Repara em que palavras te pareceram verdadeiras. Podes dizê-las a sério quando estiveres pronto/a — e podes sempre voltar a praticar.", rehearse_reflect_new_btn:"Praticar de novo",
       rehearse_error:"Não foi possível contactar a IA agora. Tenta novamente daqui a pouco.", rehearse_consent_needed:"Ativa primeiro o consentimento de chat com IA no teu Passaporte de Privacidade.",
+      journey_item_burn_title:"Esvazia e queima pensamentos", journey_item_burn_desc:"Escreve um pensamento que te incomoda, depois vê-o arder e desaparecer — nada é guardado, nem sequer no teu dispositivo.",
+      burn_eyebrow:"Nada é guardado, nem aqui", burn_title:"Esvazia e queima pensamentos", burn_intro:"Escreve o que tiveres na cabeça. Quando estiveres pronto/a, queima-o. Desaparece completamente — esta app nunca o guarda, nem por um instante a mais do que precisas.",
+      burn_placeholder:"Escreve tudo aqui…", burn_empty_first:"Escreve algo primeiro.", burn_btn:"🔥 Queimar", burn_done_msg:"Desapareceu. Nada foi guardado.", burn_again_btn:"Escrever outra coisa",
+      journey_item_capsule_title:"Cápsula do futuro", journey_item_capsule_desc:"Escreve uma mensagem curta para o teu eu futuro, e escolhe quando ela te encontra de novo.",
+      capsule_eyebrow:"Uma mensagem de ti, para ti", capsule_title:"Cápsula do futuro", capsule_intro:"Escreve algo para o teu eu futuro — incentivo, um lembrete, qualquer coisa. Escolhe uma data, e estará à tua espera nessa altura. Fica só no teu dispositivo.",
+      capsule_write_label:"A tua mensagem", capsule_placeholder:"Querido eu futuro…", capsule_date_label:"Entregar em", capsule_save_btn:"Selar", capsule_empty_first:"Escreve uma mensagem primeiro.", capsule_date_first:"Escolhe primeiro uma data futura.",
+      capsule_pending_label:"À espera de ser entregue", capsule_pending_item:"Uma mensagem chega em {n} dias", capsule_pending_item_today:"Hoje há uma mensagem pronta para ti", capsule_pending_empty:"Ainda não há mensagens à espera.",
+      capsule_delivered_label:"Entregue a ti", capsule_delivered_empty:"Ainda nada foi entregue.", capsule_delete_btn:"Eliminar", capsule_reveal_title:"Chegou-te uma mensagem", capsule_reveal_close_btn:"Fechar",
       ef_ai_rewrite:"Reescrever com IA", ef_ai_note:"Isto envia o teu rascunho ao nosso fornecedor de IA para o reescrever. Nada mais é enviado.",
       ef_ai_confirm:"Isto enviará o teu rascunho para fora do teu dispositivo à Anthropic (o nosso fornecedor de IA) para o reescrever. Continuar?",
       ef_ai_needs_consent:"Por favor envia primeiro uma mensagem de chat para ativar as funcionalidades de IA.",
@@ -2352,6 +2440,14 @@ const I18N = {
       rehearse_placeholder:"Di' quello che vorresti dirgli/dirle…", rehearse_send:"Invia", rehearse_thinking:"Sta pensando…", rehearse_turn_limit_msg:"Questo è un buon punto per terminare questo turno di pratica.", rehearse_end_btn:"Termina e rifletti",
       rehearse_reflect_title:"Come ti sei sentito/a?", rehearse_reflect_body:"Nota quali parole ti sono sembrate vere. Puoi dirle davvero quando sei pronto/a — e puoi sempre tornare a fare pratica di nuovo.", rehearse_reflect_new_btn:"Fai di nuovo pratica",
       rehearse_error:"Non è stato possibile contattare l'IA ora. Riprova tra un momento.", rehearse_consent_needed:"Attiva prima il consenso alla chat IA nel tuo Passaporto Privacy.",
+      journey_item_burn_title:"Svuota e brucia i pensieri", journey_item_burn_desc:"Scrivi un pensiero che ti disturba, poi guardalo bruciare e sparire — niente viene salvato, nemmeno sul tuo dispositivo.",
+      burn_eyebrow:"Niente viene salvato, nemmeno qui", burn_title:"Svuota e brucia i pensieri", burn_intro:"Scrivi quello che hai in mente. Quando sei pronto/a, bruciarlo. Sparisce completamente — questa app non lo salva mai, nemmeno per un istante più del necessario.",
+      burn_placeholder:"Scrivi tutto qui…", burn_empty_first:"Scrivi prima qualcosa.", burn_btn:"🔥 Bruciarlo", burn_done_msg:"Sparito. Niente è stato salvato.", burn_again_btn:"Scrivi un'altra cosa",
+      journey_item_capsule_title:"Capsula del futuro", journey_item_capsule_desc:"Scrivi un breve messaggio al tuo io futuro, e scegli quando ti ritrova.",
+      capsule_eyebrow:"Un messaggio da te, per te", capsule_title:"Capsula del futuro", capsule_intro:"Scrivi qualcosa per il tuo io futuro — incoraggiamento, un promemoria, qualsiasi cosa. Scegli una data, e ti aspetterà allora. Resta solo sul tuo dispositivo.",
+      capsule_write_label:"Il tuo messaggio", capsule_placeholder:"Caro io futuro…", capsule_date_label:"Consegna il", capsule_save_btn:"Sigillala", capsule_empty_first:"Scrivi prima un messaggio.", capsule_date_first:"Scegli prima una data futura.",
+      capsule_pending_label:"In attesa di consegna", capsule_pending_item:"Un messaggio arriva tra {n} giorni", capsule_pending_item_today:"Oggi c'è un messaggio pronto per te", capsule_pending_empty:"Ancora nessun messaggio in attesa.",
+      capsule_delivered_label:"Consegnato a te", capsule_delivered_empty:"Ancora niente consegnato.", capsule_delete_btn:"Elimina", capsule_reveal_title:"Ti è arrivato un messaggio", capsule_reveal_close_btn:"Chiudi",
       ef_ai_rewrite:"Riscrivi con l'IA", ef_ai_note:"Questo invia la tua bozza al nostro fornitore di IA per riscriverla. Nient'altro viene inviato.",
       ef_ai_confirm:"Questo invierà la tua bozza fuori dal tuo dispositivo ad Anthropic (il nostro fornitore di IA) per riscriverla. Continuare?",
       ef_ai_needs_consent:"Invia prima un messaggio in chat per abilitare le funzionalità IA.",
@@ -3896,6 +3992,158 @@ function endRehearse(){
 }
 function newRehearse(){
   openRehearse();
+}
+
+// ---------------------------------------------------------------------
+// BRAIN DUMP & BURN: write a bothersome thought, then watch it visually
+// "burn away". Nothing is ever saved — not to localStorage, not sent
+// anywhere — the catharsis is in the disposal, so there is nothing to
+// persist. No stats entry either, for the same reason.
+// ---------------------------------------------------------------------
+function openBurn(){
+  document.getElementById('burnInput').value = '';
+  document.getElementById('burnInput').classList.remove('burning');
+  document.getElementById('burnMsg').textContent = '';
+  document.getElementById('burnWriteView').style.display = 'block';
+  document.getElementById('burnDoneView').classList.add('u-hidden');
+  document.getElementById('burnModal').classList.add('open');
+}
+function closeBurn(){
+  document.getElementById('burnModal').classList.remove('open');
+}
+function burnIt(){
+  const dict = I18N[currentLang];
+  const input = document.getElementById('burnInput');
+  if(!input.value.trim()){ document.getElementById('burnMsg').textContent = dict.burn_empty_first; return; }
+  input.classList.add('burning');
+  setTimeout(() => {
+    input.value = '';
+    input.classList.remove('burning');
+    document.getElementById('burnDoneMsg').textContent = dict.burn_done_msg;
+    document.getElementById('burnWriteView').style.display = 'none';
+    document.getElementById('burnDoneView').classList.remove('u-hidden');
+  }, 900);
+}
+function burnAgain(){
+  openBurn();
+}
+
+// ---------------------------------------------------------------------
+// FUTURE CAPSULE: a short message to one's future self, sealed with a
+// delivery date. Stored on-device only (mc_future_capsules); the content
+// of a pending (not-yet-due) capsule is never shown, only a day count,
+// to keep the surprise. Checked for due capsules every time it's opened.
+// ---------------------------------------------------------------------
+function getCapsules(){
+  try{ const raw = safeGet('mc_future_capsules'); const arr = raw ? JSON.parse(raw) : []; return Array.isArray(arr) ? arr : []; }catch(e){ return []; }
+}
+function saveCapsulesList(list){ safeSet('mc_future_capsules', JSON.stringify(list)); }
+function openCapsule(){
+  document.getElementById('capsuleInput').value = '';
+  document.getElementById('capsuleDateInput').value = '';
+  document.getElementById('capsuleMsg').textContent = '';
+  const due = getCapsules().find(c => !c.delivered && c.unlockDate <= todayKey());
+  if(due){
+    showCapsuleReveal(due);
+  } else {
+    document.getElementById('capsuleMainView').style.display = 'block';
+    document.getElementById('capsuleRevealView').classList.add('u-hidden');
+    renderCapsules();
+  }
+  document.getElementById('capsuleModal').classList.add('open');
+}
+function closeCapsule(){
+  document.getElementById('capsuleModal').classList.remove('open');
+}
+function showCapsuleReveal(capsule){
+  capsule.delivered = true;
+  saveCapsulesList(getCapsules().map(c => c.id === capsule.id ? capsule : c));
+  document.getElementById('capsuleRevealText').textContent = capsule.text;
+  document.getElementById('capsuleMainView').style.display = 'none';
+  document.getElementById('capsuleRevealView').classList.remove('u-hidden');
+}
+function closeCapsuleReveal(){
+  document.getElementById('capsuleRevealView').classList.add('u-hidden');
+  document.getElementById('capsuleMainView').style.display = 'block';
+  const next = getCapsules().find(c => !c.delivered && c.unlockDate <= todayKey());
+  if(next) showCapsuleReveal(next);
+  else renderCapsules();
+}
+function saveCapsule(){
+  const dict = I18N[currentLang];
+  const text = document.getElementById('capsuleInput').value.trim();
+  const date = document.getElementById('capsuleDateInput').value;
+  if(!text){ document.getElementById('capsuleMsg').textContent = dict.capsule_empty_first; return; }
+  if(!date || date <= todayKey()){ document.getElementById('capsuleMsg').textContent = dict.capsule_date_first; return; }
+  const capsule = { id: uuidV7(), text, unlockDate: date, createdAt: Date.now(), delivered: false };
+  const list = getCapsules();
+  list.push(capsule);
+  saveCapsulesList(list);
+  addEntry('capsule_created', { unlockDate: date }, capsule.id);
+  document.getElementById('capsuleInput').value = '';
+  document.getElementById('capsuleDateInput').value = '';
+  document.getElementById('capsuleMsg').textContent = '';
+  renderCapsules();
+}
+function deleteCapsule(id){
+  saveCapsulesList(getCapsules().filter(c => c.id !== id));
+  renderCapsules();
+}
+function renderCapsules(){
+  const dict = I18N[currentLang];
+  const list = getCapsules();
+  const today = todayKey();
+  const pending = list.filter(c => !c.delivered).sort((a,b) => a.unlockDate.localeCompare(b.unlockDate));
+  const delivered = list.filter(c => c.delivered).sort((a,b) => b.createdAt - a.createdAt);
+
+  const pendingBox = document.getElementById('capsulePendingList');
+  pendingBox.innerHTML = '';
+  document.getElementById('capsulePendingEmpty').classList.toggle('u-hidden', pending.length > 0);
+  pending.forEach(c => {
+    const days = Math.max(0, Math.round((new Date(c.unlockDate) - new Date(today)) / 86400000));
+    const row = document.createElement('div');
+    row.className = 'tracker-item';
+    const main = document.createElement('div');
+    main.className = 'tracker-item-main';
+    const titleEl = document.createElement('span');
+    titleEl.className = 'tracker-item-title';
+    titleEl.textContent = days <= 0 ? dict.capsule_pending_item_today : agentFill(dict.capsule_pending_item, { n: days });
+    main.appendChild(titleEl);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'tracker-item-btn';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.capsule_delete_btn);
+    delBtn.onclick = () => deleteCapsule(c.id);
+    row.appendChild(main);
+    row.appendChild(delBtn);
+    pendingBox.appendChild(row);
+  });
+
+  const deliveredBox = document.getElementById('capsuleDeliveredList');
+  deliveredBox.innerHTML = '';
+  document.getElementById('capsuleDeliveredEmpty').classList.toggle('u-hidden', delivered.length > 0);
+  delivered.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'tracker-item';
+    const main = document.createElement('div');
+    main.className = 'tracker-item-main';
+    const titleEl = document.createElement('span');
+    titleEl.className = 'tracker-item-title';
+    titleEl.textContent = c.text;
+    main.appendChild(titleEl);
+    const meta = document.createElement('span');
+    meta.className = 'tracker-item-meta';
+    meta.textContent = c.unlockDate;
+    main.appendChild(meta);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'tracker-item-btn';
+    delBtn.textContent = '🗑';
+    delBtn.setAttribute('aria-label', dict.capsule_delete_btn);
+    delBtn.onclick = () => deleteCapsule(c.id);
+    row.appendChild(main);
+    row.appendChild(delBtn);
+    deliveredBox.appendChild(row);
+  });
 }
 
 function explainSuggestion(key){
@@ -8578,9 +8826,14 @@ const ACTIONS = {
   askCoach,
   backToEditFeeling,
   backToEditSupportCard,
+  burnAgain,
+  burnIt,
   chooseMode,
   clearChatMemory,
+  closeBurn,
   closeCalmPlan,
+  closeCapsule,
+  closeCapsuleReveal,
   closeChatConsent,
   closeCheckin,
   closeCoachConsent,
@@ -8627,7 +8880,9 @@ const ACTIONS = {
   markExerciseDone,
   newRehearse,
   nextOnboardingStep,
+  openBurn,
   openCalmPlan,
+  openCapsule,
   openCheckin,
   openCrisis,
   openDashboard,
@@ -8653,6 +8908,7 @@ const ACTIONS = {
   restorePurchases,
   rewriteFeelingWithAI,
   saveCalmPlan,
+  saveCapsule,
   saveDailyReview,
   saveFinanceLog,
   saveHealthLog,

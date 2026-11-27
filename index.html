@@ -263,6 +263,62 @@
   </div>
 </div>
 
+<div class="prefs-overlay" id="burnModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeBurn" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="burn_eyebrow"></div>
+    <h2 class="prefs-title u-fs-22" data-i18n="burn_title"></h2>
+    <p class="prefs-subtitle" data-i18n="burn_intro"></p>
+
+    <div id="burnWriteView">
+      <textarea id="burnInput" class="journal-textarea u-w-full" rows="5" data-i18n-placeholder="burn_placeholder"></textarea>
+      <p class="calmplan-hint" id="burnMsg"></p>
+      <button class="backup-btn u-w-full u-mt-10" data-click="burnIt" data-i18n="burn_btn"></button>
+    </div>
+
+    <div class="u-hidden" id="burnDoneView">
+      <div class="ef-preview-box" id="burnDoneMsg"></div>
+      <button class="backup-btn u-w-full" data-click="burnAgain" data-i18n="burn_again_btn"></button>
+    </div>
+  </div>
+</div>
+
+<div class="prefs-overlay" id="capsuleModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeCapsule" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="capsule_eyebrow"></div>
+    <h2 class="prefs-title u-fs-22" data-i18n="capsule_title"></h2>
+
+    <div id="capsuleMainView">
+      <p class="prefs-subtitle" data-i18n="capsule_intro"></p>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="capsule_write_label"></label>
+        <textarea id="capsuleInput" class="journal-textarea" rows="3" data-i18n-placeholder="capsule_placeholder"></textarea>
+      </div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="capsule_date_label"></label>
+        <input type="date" id="capsuleDateInput" class="tracker-date-input">
+      </div>
+      <p class="calmplan-hint" id="capsuleMsg"></p>
+      <button class="backup-btn u-w-full" data-click="saveCapsule" data-i18n="capsule_save_btn"></button>
+
+      <h3 class="prefs-eyebrow u-mt-10" data-i18n="capsule_pending_label"></h3>
+      <div class="tracker-list" id="capsulePendingList"></div>
+      <p class="tracker-empty" id="capsulePendingEmpty" data-i18n="capsule_pending_empty"></p>
+
+      <h3 class="prefs-eyebrow u-mt-10" data-i18n="capsule_delivered_label"></h3>
+      <div class="tracker-list" id="capsuleDeliveredList"></div>
+      <p class="tracker-empty" id="capsuleDeliveredEmpty" data-i18n="capsule_delivered_empty"></p>
+    </div>
+
+    <div class="u-hidden" id="capsuleRevealView">
+      <h3 class="prefs-title u-fs-22" data-i18n="capsule_reveal_title"></h3>
+      <div class="ef-preview-box" id="capsuleRevealText"></div>
+      <button class="backup-btn u-w-full" data-click="closeCapsuleReveal" data-i18n="capsule_reveal_close_btn"></button>
+    </div>
+  </div>
+</div>
+
 <div class="prefs-overlay" id="whyExplainModal" role="dialog" aria-modal="true">
   <div class="prefs-box u-max-w-340">
     <button class="prefs-close aria-close-btn" data-click="closeWhyExplain" aria-label="Close">✕</button>
@@ -580,6 +636,16 @@
     <div class="journey-card journey-card-active" data-click="openRehearse">
       <h3 data-i18n="journey_item_rehearse_title"></h3>
       <p data-i18n="journey_item_rehearse_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
+    </div>
+    <div class="journey-card journey-card-active" data-click="openBurn">
+      <h3 data-i18n="journey_item_burn_title"></h3>
+      <p data-i18n="journey_item_burn_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
+    </div>
+    <div class="journey-card journey-card-active" data-click="openCapsule">
+      <h3 data-i18n="journey_item_capsule_title"></h3>
+      <p data-i18n="journey_item_capsule_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
   </div>
