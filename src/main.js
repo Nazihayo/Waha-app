@@ -102,6 +102,14 @@ const I18N = {
     supc_item_ask_dont_assume:"اسألني إن كنت أريد الكلام، لا تفترض أي شيء", supc_item_no_unsolicited_advice:"لا تعطني نصيحة إلا إذا طلبتها", supc_item_just_sit:"فقط اجلس معي، لا تحاول إصلاح الأمر",
     supc_item_not_alone:"ذكّرني أني لست وحدي", supc_item_checkin_later:"تحقق مني لاحقًا، حتى لو قلت إني بخير", supc_item_gentle_nudge:"اقترح عليّ بلطف الحركة أو الخروج، لكن لا تجبرني",
     supc_pick_one_first:"اختر واحدًا على الأقل.", supc_generate:"اصنع بطاقتي", supc_copy:"نسخ", supc_share:"مشاركة", supc_copied:"تم النسخ ✓", supc_card_title:"كيف تساندني:",
+    journey_item_rehearse_title:"تدرّب على محادثة صعبة", journey_item_rehearse_desc:"تدرّب على ما تريد قوله مع ذكاء اصطناعي يمثّل طرفًا معقولًا — قبل أن تقولها فعليًا.",
+    rehearse_eyebrow:"تدريب آمن، وليس الواقع", rehearse_title:"تدرّب على محادثة صعبة", rehearse_intro:"اختر ما تتدرّب عليه. يمثّل واحة شخصًا عاديًا ومعقولًا في الطرف الآخر — ليس شخصًا حقيقيًا أبدًا، وليس قاسيًا أبدًا — لتجرّب ماذا تقول.",
+    rehearse_scenario_label:"على ماذا تتدرّب؟", rehearse_scenario_difficult_conversation:"🗣️ محادثة صعبة مع شخص مقرّب مني", rehearse_scenario_say_no:"🙅 قول لا لشيء", rehearse_scenario_ask_for_something:"🙋 طلب شيء يصعب عليّ طلبه", rehearse_scenario_address_upset:"💬 إخبار شخص أن شيئًا أزعجني",
+    rehearse_context_label:"جملة عن الموقف الحقيقي (اختياري)", rehearse_context_ph:"فقط ما يكفي ليكون التدريب منطقيًا — يبقى على جهازك", rehearse_pick_scenario_first:"اختر أولًا على ماذا تتدرّب.", rehearse_start_btn:"ابدأ التدريب",
+    rehearse_safety_note:"هذا تدريب فقط، وليس نصيحة عن علاقتك الحقيقية. إذا شعرت أن الأمر غير آمن أو خطير، تحدّث مع شخص تثق به أو مختص.",
+    rehearse_placeholder:"قل ما تريد أن تقوله له...", rehearse_send:"إرسال", rehearse_thinking:"يفكر...", rehearse_turn_limit_msg:"هذه نقطة جيدة لإنهاء جولة التدريب.", rehearse_end_btn:"إنهاء والتأمل",
+    rehearse_reflect_title:"كيف شعرت بهذا؟", rehearse_reflect_body:"لاحظ أي الكلمات شعرت أنها صادقة بالنسبة لك. يمكنك قولها فعليًا متى كنت مستعدًا — ويمكنك دائمًا العودة للتدرّب مجددًا.", rehearse_reflect_new_btn:"تدرّب مجددًا",
+    rehearse_error:"تعذّر الوصول للذكاء الاصطناعي الآن. حاول بعد قليل.", rehearse_consent_needed:"فعّل موافقة محادثة الذكاء الاصطناعي من جواز الخصوصية أولًا.",
     ef_ai_rewrite:"أعد الصياغة بالذكاء الاصطناعي", ef_ai_note:"هذا يرسل مسودتك لمزوّد الذكاء الاصطناعي لإعادة صياغتها فقط. لا شيء آخر يُرسل.",
     ef_ai_confirm:"سيُرسل هذا مسودتك خارج جهازك إلى Anthropic (مزوّد الذكاء الاصطناعي) لإعادة صياغتها. هل تريد المتابعة؟",
     ef_ai_needs_consent:"يرجى إرسال رسالة محادثة واحدة أولاً لتفعيل ميزات الذكاء الاصطناعي.",
@@ -296,6 +304,14 @@ const I18N = {
     supc_item_ask_dont_assume:"Frag mich, ob ich reden möchte — geh nicht einfach davon aus", supc_item_no_unsolicited_advice:"Gib mir keine Ratschläge, außer ich bitte darum", supc_item_just_sit:"Sei einfach da — du musst nichts lösen",
     supc_item_not_alone:"Erinnere mich daran, dass ich nicht allein bin", supc_item_checkin_later:"Frag später noch einmal nach, auch wenn ich sage, es geht mir gut", supc_item_gentle_nudge:"Lad mich sanft ein, mich zu bewegen oder rauszugehen — dränge mich aber nie",
     supc_pick_one_first:"Wähle mindestens eine Option.", supc_generate:"Meine Karte erstellen", supc_copy:"Kopieren", supc_share:"Teilen", supc_copied:"Kopiert ✓", supc_card_title:"Wie du mich unterstützen kannst:",
+    journey_item_rehearse_title:"Ein schwieriges Gespräch üben", journey_item_rehearse_desc:"Übe, was du sagen möchtest, mit einer KI, die einen vernünftigen Gesprächspartner spielt — bevor du es wirklich sagst.",
+    rehearse_eyebrow:"Eine sichere Probe, nicht das Echte", rehearse_title:"Ein schwieriges Gespräch üben", rehearse_intro:"Wähle, wofür du übst. Waha spielt eine gewöhnliche, vernünftige Person auf der anderen Seite — nie jemand Echtes, nie jemand Grausames — damit du ausprobieren kannst, was du sagen möchtest.",
+    rehearse_scenario_label:"Wofür übst du?", rehearse_scenario_difficult_conversation:"🗣️ Ein schwieriges Gespräch mit jemandem, der mir nahesteht", rehearse_scenario_say_no:"🙅 Zu etwas Nein sagen", rehearse_scenario_ask_for_something:"🙋 Um etwas bitten, das mir schwerfällt", rehearse_scenario_address_upset:"💬 Jemandem sagen, dass mich etwas gestört hat",
+    rehearse_context_label:"Ein Satz zur echten Situation (optional)", rehearse_context_ph:"Nur so viel, dass die Übung Sinn ergibt — bleibt auf deinem Gerät", rehearse_pick_scenario_first:"Wähle zuerst, wofür du übst.", rehearse_start_btn:"Übung starten",
+    rehearse_safety_note:"Das ist nur eine Übung, kein Ratschlag zu deiner echten Beziehung. Wenn sich etwas unsicher oder ernst anfühlt, sprich bitte mit jemandem, dem du vertraust, oder einer Fachperson.",
+    rehearse_placeholder:"Sag, was du ihm/ihr sagen würdest…", rehearse_send:"Senden", rehearse_thinking:"Denkt nach…", rehearse_turn_limit_msg:"Das ist ein guter Punkt, um diese Übungsrunde zu beenden.", rehearse_end_btn:"Beenden & nachdenken",
+    rehearse_reflect_title:"Wie hat sich das angefühlt?", rehearse_reflect_body:"Achte darauf, welche Worte sich für dich richtig angefühlt haben. Du kannst sie sagen, wenn du bereit bist — und jederzeit zurückkommen und wieder üben.", rehearse_reflect_new_btn:"Nochmal üben",
+    rehearse_error:"Die KI war gerade nicht erreichbar. Versuch es gleich noch einmal.", rehearse_consent_needed:"Aktiviere zuerst die KI-Chat-Zustimmung in deinem Datenschutz-Pass.",
     ef_ai_rewrite:"Mit KI umformulieren", ef_ai_note:"Dies sendet deinen Entwurf an unseren KI-Anbieter, um ihn umzuformulieren. Nichts anderes wird gesendet.",
     ef_ai_confirm:"Dies sendet deinen Entwurf außerhalb deines Geräts an Anthropic (unseren KI-Anbieter), um ihn umzuformulieren. Fortfahren?",
     ef_ai_needs_consent:"Bitte sende zuerst eine Chat-Nachricht, um KI-Funktionen zu aktivieren.",
@@ -490,6 +506,14 @@ const I18N = {
     supc_item_ask_dont_assume:"Ask me if I want to talk — don't assume either way", supc_item_no_unsolicited_advice:"Don't give me advice unless I ask for it", supc_item_just_sit:"Just sit with me — you don't have to fix anything",
     supc_item_not_alone:"Remind me I'm not alone", supc_item_checkin_later:"Check on me again later, even if I say I'm fine", supc_item_gentle_nudge:"Gently invite me to move or go outside — never push",
     supc_pick_one_first:"Pick at least one.", supc_generate:"Make my card", supc_copy:"Copy", supc_share:"Share", supc_copied:"Copied ✓", supc_card_title:"How to support me:",
+    journey_item_rehearse_title:"Practice a hard conversation", journey_item_rehearse_desc:"Rehearse what you want to say with an AI playing a reasonable stand-in — before you say it for real.",
+    rehearse_eyebrow:"A safe rehearsal, not the real thing", rehearse_title:"Practice a hard conversation", rehearse_intro:"Pick what you're practicing for. Waha plays an ordinary, reasonable person on the other side — never someone real, and never anyone cruel — so you can try out what to say.",
+    rehearse_scenario_label:"What are you practicing?", rehearse_scenario_difficult_conversation:"🗣️ A hard conversation with someone close to me", rehearse_scenario_say_no:"🙅 Saying no to something", rehearse_scenario_ask_for_something:"🙋 Asking for something that's hard to ask", rehearse_scenario_address_upset:"💬 Telling someone something bothered me",
+    rehearse_context_label:"A sentence about the real situation (optional)", rehearse_context_ph:"Just enough for the practice to make sense — stays on your device", rehearse_pick_scenario_first:"Pick what you're practicing for first.", rehearse_start_btn:"Start practicing",
+    rehearse_safety_note:"This is practice only, not advice about your real relationship. If things feel unsafe or serious, please talk to someone you trust or a professional.",
+    rehearse_placeholder:"Say what you'd say to them…", rehearse_send:"Send", rehearse_thinking:"Thinking…", rehearse_turn_limit_msg:"That's a good stopping point for one practice round.", rehearse_end_btn:"End & reflect",
+    rehearse_reflect_title:"How did that feel?", rehearse_reflect_body:"Notice which words felt true to you. You can say those for real whenever you're ready — and you can always come back and practice again.", rehearse_reflect_new_btn:"Practice again",
+    rehearse_error:"Couldn't reach the AI right now. Try again in a moment.", rehearse_consent_needed:"Turn on AI chat consent in your Privacy Passport first.",
     ef_ai_rewrite:"Rewrite with AI", ef_ai_note:"This sends your draft to our AI provider to rewrite it. Nothing else is sent.",
     ef_ai_confirm:"This will send your draft outside your device to Anthropic (our AI provider) to rewrite it. Continue?",
     ef_ai_needs_consent:"Please send one chat message first to enable AI features.",
@@ -684,6 +708,14 @@ const I18N = {
     supc_item_ask_dont_assume:"Demande-moi si je veux parler — ne suppose rien", supc_item_no_unsolicited_advice:"Ne me donne pas de conseils sauf si je les demande", supc_item_just_sit:"Reste simplement avec moi — tu n'as rien à régler",
     supc_item_not_alone:"Rappelle-moi que je ne suis pas seul(e)", supc_item_checkin_later:"Prends de mes nouvelles plus tard, même si je dis que ça va", supc_item_gentle_nudge:"Invite-moi doucement à bouger ou sortir — ne force jamais",
     supc_pick_one_first:"Choisis-en au moins un.", supc_generate:"Créer ma carte", supc_copy:"Copier", supc_share:"Partager", supc_copied:"Copié ✓", supc_card_title:"Comment me soutenir :",
+    journey_item_rehearse_title:"Pratique une conversation difficile", journey_item_rehearse_desc:"Répète ce que tu veux dire avec une IA qui joue un interlocuteur raisonnable — avant de le dire pour de vrai.",
+    rehearse_eyebrow:"Une répétition sûre, pas la réalité", rehearse_title:"Pratique une conversation difficile", rehearse_intro:"Choisis pour quoi tu t'entraînes. Waha joue une personne ordinaire et raisonnable en face — jamais quelqu'un de réel, jamais quelqu'un de cruel — pour que tu puisses essayer ce que tu veux dire.",
+    rehearse_scenario_label:"Pour quoi t'entraînes-tu ?", rehearse_scenario_difficult_conversation:"🗣️ Une conversation difficile avec un proche", rehearse_scenario_say_no:"🙅 Dire non à quelque chose", rehearse_scenario_ask_for_something:"🙋 Demander quelque chose de difficile à demander", rehearse_scenario_address_upset:"💬 Dire à quelqu'un que quelque chose m'a dérangé(e)",
+    rehearse_context_label:"Une phrase sur la situation réelle (facultatif)", rehearse_context_ph:"Juste assez pour que l'entraînement ait du sens — reste sur ton appareil", rehearse_pick_scenario_first:"Choisis d'abord pour quoi tu t'entraînes.", rehearse_start_btn:"Commencer l'entraînement",
+    rehearse_safety_note:"Ceci est seulement un entraînement, pas un conseil sur ta relation réelle. Si quelque chose semble dangereux ou grave, parle à quelqu'un de confiance ou à un professionnel.",
+    rehearse_placeholder:"Dis ce que tu voudrais lui dire…", rehearse_send:"Envoyer", rehearse_thinking:"Réfléchit…", rehearse_turn_limit_msg:"C'est un bon moment pour terminer ce tour d'entraînement.", rehearse_end_btn:"Terminer et réfléchir",
+    rehearse_reflect_title:"Comment t'es-tu senti(e) ?", rehearse_reflect_body:"Remarque quels mots t'ont semblé justes. Tu peux les dire pour de vrai quand tu seras prêt(e) — et tu peux toujours revenir t'entraîner à nouveau.", rehearse_reflect_new_btn:"S'entraîner à nouveau",
+    rehearse_error:"Impossible de contacter l'IA pour le moment. Réessaie dans un instant.", rehearse_consent_needed:"Active d'abord le consentement de chat IA dans ton Passeport de confidentialité.",
     ef_ai_rewrite:"Reformuler avec l'IA", ef_ai_note:"Ceci envoie ton brouillon à notre fournisseur d'IA pour le reformuler. Rien d'autre n'est envoyé.",
     ef_ai_confirm:"Ceci enverra ton brouillon hors de ton appareil à Anthropic (notre fournisseur d'IA) pour le reformuler. Continuer ?",
     ef_ai_needs_consent:"Merci d'envoyer d'abord un message dans le chat pour activer les fonctionnalités d'IA.",
@@ -878,6 +910,14 @@ const I18N = {
     supc_item_ask_dont_assume:"Konuşmak isteyip istemediğimi sor — varsayma", supc_item_no_unsolicited_advice:"İstemedikçe bana tavsiye verme", supc_item_just_sit:"Sadece yanımda ol — bir şeyi düzeltmek zorunda değilsin",
     supc_item_not_alone:"Yalnız olmadığımı hatırlat", supc_item_checkin_later:"İyi olduğumu söylesem bile sonra tekrar sor", supc_item_gentle_nudge:"Hareket etmem ya da dışarı çıkmam için nazikçe davet et — asla zorlama",
     supc_pick_one_first:"En az birini seç.", supc_generate:"Kartımı oluştur", supc_copy:"Kopyala", supc_share:"Paylaş", supc_copied:"Kopyalandı ✓", supc_card_title:"Bana nasıl destek olabilirsin:",
+    journey_item_rehearse_title:"Zor bir konuşmayı provala", journey_item_rehearse_desc:"Gerçekten söylemeden önce, makul bir karşı tarafı canlandıran bir yapay zekâ ile ne söylemek istediğini provala.",
+    rehearse_eyebrow:"Güvenli bir prova, gerçeği değil", rehearse_title:"Zor bir konuşmayı provala", rehearse_intro:"Ne için prova yaptığını seç. Waha karşı tarafta sıradan, makul bir kişiyi canlandırır — asla gerçek biri değil, asla acımasız biri değil — böylece ne söyleyeceğini deneyebilirsin.",
+    rehearse_scenario_label:"Ne için prova yapıyorsun?", rehearse_scenario_difficult_conversation:"🗣️ Yakın birimle zor bir konuşma", rehearse_scenario_say_no:"🙅 Bir şeye hayır demek", rehearse_scenario_ask_for_something:"🙋 İstemesi zor bir şey istemek", rehearse_scenario_address_upset:"💬 Birine bir şeyin beni rahatsız ettiğini söylemek",
+    rehearse_context_label:"Gerçek durum hakkında bir cümle (isteğe bağlı)", rehearse_context_ph:"Provanın anlamlı olması için yeterince — cihazında kalır", rehearse_pick_scenario_first:"Önce ne için prova yaptığını seç.", rehearse_start_btn:"Provaya başla",
+    rehearse_safety_note:"Bu sadece bir prova, gerçek ilişkin hakkında tavsiye değil. Bir şey güvensiz ya da ciddi hissettiriyorsa, lütfen güvendiğin biriyle ya da bir uzmanla konuş.",
+    rehearse_placeholder:"Ona söylemek istediğini söyle…", rehearse_send:"Gönder", rehearse_thinking:"Düşünüyor…", rehearse_turn_limit_msg:"Bu prova turunu bitirmek için iyi bir nokta.", rehearse_end_btn:"Bitir ve düşün",
+    rehearse_reflect_title:"Bu nasıl hissettirdi?", rehearse_reflect_body:"Hangi sözlerin sana doğru geldiğine dikkat et. Hazır olduğunda bunları gerçekten söyleyebilirsin — ve her zaman geri gelip tekrar prova yapabilirsin.", rehearse_reflect_new_btn:"Tekrar prova yap",
+    rehearse_error:"Yapay zekâya şu an ulaşılamadı. Biraz sonra tekrar dene.", rehearse_consent_needed:"Önce Gizlilik Pasaportundan yapay zekâ sohbet onayını aç.",
     ef_ai_rewrite:"Yapay zeka ile yeniden yaz", ef_ai_note:"Bu, taslağını yeniden yazması için yapay zeka sağlayıcımıza gönderir. Başka hiçbir şey gönderilmez.",
     ef_ai_confirm:"Bu, taslağını yeniden yazması için Anthropic'e (yapay zeka sağlayıcımız) cihazının dışına gönderecek. Devam edilsin mi?",
     ef_ai_needs_consent:"Yapay zeka özelliklerini etkinleştirmek için lütfen önce bir sohbet mesajı gönder.",
@@ -1072,6 +1112,14 @@ const I18N = {
     supc_item_ask_dont_assume:"Ji min bipirse ka ez dixwazim biaxivim — texmîn neke", supc_item_no_unsolicited_advice:"Heta ez nexwazim şîretan nede min", supc_item_just_sit:"Tenê li cem min rûne — ne hewce ye tiştek çareser bikî",
     supc_item_not_alone:"Bîne bîra min ku ez ne bi tenê me", supc_item_checkin_later:"Paşê dîsa min bipirse, tewra heke min got ez baş im", supc_item_gentle_nudge:"Bi nermî min vexwîne ku tevbigerim an derkevim — lê qet neçikîne min",
     supc_pick_one_first:"Bi kêmanî yekê hilbijêre.", supc_generate:"Karta min çêke", supc_copy:"Kopî bike", supc_share:"Parve bike", supc_copied:"Hate kopîkirin ✓", supc_card_title:"Çawa min piştgirî bike:",
+    journey_item_rehearse_title:"Axaftineke dijwar temrîn bike", journey_item_rehearse_desc:"Berî ku tu wê bi rastî bibêjî, bi alîkariya AI ya alîyekî maqûl temsîl dike, temrîna tiştê tu dixwazî bibêjî bike.",
+    rehearse_eyebrow:"Temrînek ewle, ne rastî", rehearse_title:"Axaftineke dijwar temrîn bike", rehearse_intro:"Hilbijêre ka ji bo çi temrîn dikî. Waha li aliyê din kesekî asayî û maqûl temsîl dike — qet ne kesek rastî, qet ne hovane — da ku tu karibî biceribînî çi dibêjî.",
+    rehearse_scenario_label:"Tu ji bo çi temrîn dikî?", rehearse_scenario_difficult_conversation:"🗣️ Axaftineke dijwar bi kesekî nêzîkê min re", rehearse_scenario_say_no:"🙅 Na gotina tiştekî", rehearse_scenario_ask_for_something:"🙋 Daxwaza tiştekî ku dijwar e ji min re bixwazim", rehearse_scenario_address_upset:"💬 Ji kesekî re bibêjim tiştek min aciz kir",
+    rehearse_context_label:"Hevokek li ser rewşa rastî (bijarte)", rehearse_context_ph:"Tenê ewqas ku temrîn watedar be — li ser amûra te dimîne", rehearse_pick_scenario_first:"Pêşî hilbijêre ka ji bo çi temrîn dikî.", rehearse_start_btn:"Dest bi temrînê bike",
+    rehearse_safety_note:"Ev tenê temrîn e, ne şîret li ser têkiliya te ya rastî. Heke tiştek ne ewle an giran xuya dike, ji kerema xwe bi kesekî ku pê bawer î an pispor re biaxive.",
+    rehearse_placeholder:"Bibêje tiştê tu dixwazî jê re bibêjî…", rehearse_send:"Bişîne", rehearse_thinking:"Difikire…", rehearse_turn_limit_msg:"Ev xaleke baş e ji bo dawîlêanîna vê dewra temrînê.", rehearse_end_btn:"Biqedîne û raman bike",
+    rehearse_reflect_title:"Vê yekê çawa hîs kir?", rehearse_reflect_body:"Bala xwe bide ka kîjan peyv ji te re rast xuya bûn. Tu dikarî wan bi rastî bibêjî çi gav tu amade bî — û her gav dikarî vegerî û dîsa temrîn bikî.", rehearse_reflect_new_btn:"Dîsa temrîn bike",
+    rehearse_error:"Niha nehat gihîştin bi AI re. Piştî demek dîsa biceribîne.", rehearse_consent_needed:"Pêşî razîbûna sohbeta AI ji Pasaporta Nihêniyê veke.",
     ef_ai_rewrite:"Bi AI ve dîsa binivîse", ef_ai_note:"Ev reçeta te ji bo dîsa nivîsandinê ji peydakerê me yê AI re dişîne. Tiştek din nayê şandin.",
     ef_ai_confirm:"Ev ê reçeta te ji amûra te derkeve û here Anthropic (peydakerê me yê AI) da ku dîsa binivîse. Berdewam bike?",
     ef_ai_needs_consent:"Ji kerema xwe pêşî peyamek chatê bişîne da ku taybetmendiyên AI çalak bikî.",
@@ -1266,6 +1314,14 @@ const I18N = {
     supc_item_ask_dont_assume:"Pregúntame si quiero hablar — no supongas nada", supc_item_no_unsolicited_advice:"No me des consejos a menos que los pida", supc_item_just_sit:"Solo quédate conmigo — no tienes que arreglar nada",
     supc_item_not_alone:"Recuérdame que no estoy solo/a", supc_item_checkin_later:"Pregúntame de nuevo más tarde, aunque diga que estoy bien", supc_item_gentle_nudge:"Invítame con suavidad a moverme o salir — nunca me presiones",
     supc_pick_one_first:"Elige al menos una.", supc_generate:"Crear mi tarjeta", supc_copy:"Copiar", supc_share:"Compartir", supc_copied:"Copiado ✓", supc_card_title:"Cómo apoyarme:",
+    journey_item_rehearse_title:"Practica una conversación difícil", journey_item_rehearse_desc:"Ensaya lo que quieres decir con una IA que representa a una persona razonable — antes de decirlo de verdad.",
+    rehearse_eyebrow:"Un ensayo seguro, no lo real", rehearse_title:"Practica una conversación difícil", rehearse_intro:"Elige para qué te estás preparando. Waha representa a una persona normal y razonable al otro lado — nunca alguien real, nunca alguien cruel — para que puedas probar qué decir.",
+    rehearse_scenario_label:"¿Para qué te preparas?", rehearse_scenario_difficult_conversation:"🗣️ Una conversación difícil con alguien cercano", rehearse_scenario_say_no:"🙅 Decir que no a algo", rehearse_scenario_ask_for_something:"🙋 Pedir algo que te cuesta pedir", rehearse_scenario_address_upset:"💬 Decirle a alguien que algo te molestó",
+    rehearse_context_label:"Una frase sobre la situación real (opcional)", rehearse_context_ph:"Solo lo suficiente para que el ensayo tenga sentido — se queda en tu dispositivo", rehearse_pick_scenario_first:"Elige primero para qué te preparas.", rehearse_start_btn:"Empezar a practicar",
+    rehearse_safety_note:"Esto es solo práctica, no un consejo sobre tu relación real. Si algo se siente inseguro o grave, por favor habla con alguien de confianza o un profesional.",
+    rehearse_placeholder:"Di lo que le dirías…", rehearse_send:"Enviar", rehearse_thinking:"Pensando…", rehearse_turn_limit_msg:"Este es un buen punto para terminar esta ronda de práctica.", rehearse_end_btn:"Terminar y reflexionar",
+    rehearse_reflect_title:"¿Cómo te sentiste?", rehearse_reflect_body:"Fíjate en qué palabras sentiste como verdaderas. Puedes decirlas de verdad cuando estés listo/a — y siempre puedes volver a practicar.", rehearse_reflect_new_btn:"Practicar de nuevo",
+    rehearse_error:"No se pudo contactar con la IA ahora mismo. Inténtalo de nuevo en un momento.", rehearse_consent_needed:"Activa primero el consentimiento de chat con IA en tu Pasaporte de Privacidad.",
     ef_ai_rewrite:"Reescribir con IA", ef_ai_note:"Esto envía tu borrador a nuestro proveedor de IA para reescribirlo. No se envía nada más.",
     ef_ai_confirm:"Esto enviará tu borrador fuera de tu dispositivo a Anthropic (nuestro proveedor de IA) para reescribirlo. ¿Continuar?",
     ef_ai_needs_consent:"Envía primero un mensaje de chat para habilitar las funciones de IA.",
@@ -1480,6 +1536,14 @@ const I18N = {
       supc_item_ask_dont_assume:"از من بپرس آیا می‌خواهم حرف بزنم — فرض نکن", supc_item_no_unsolicited_advice:"مگر بخواهم، نصیحتم نکن", supc_item_just_sit:"فقط کنارم بنشین — لازم نیست چیزی را حل کنی",
       supc_item_not_alone:"به من یادآوری کن که تنها نیستم", supc_item_checkin_later:"بعداً دوباره حالم را بپرس، حتی اگر بگویم خوبم", supc_item_gentle_nudge:"با ملایمت دعوتم کن حرکت کنم یا بیرون بروم — هرگز مجبورم نکن",
       supc_pick_one_first:"حداقل یکی را انتخاب کن.", supc_generate:"کارتم را بساز", supc_copy:"کپی", supc_share:"اشتراک‌گذاری", supc_copied:"کپی شد ✓", supc_card_title:"چطور از من حمایت کنی:",
+      journey_item_rehearse_title:"تمرین یک گفتگوی سخت", journey_item_rehearse_desc:"قبل از اینکه واقعاً بگویی، با هوش مصنوعی که نقش طرف مقابلی معقول را بازی می‌کند، تمرین کن چه بگویی.",
+      rehearse_eyebrow:"تمرینی امن، نه واقعیت", rehearse_title:"تمرین یک گفتگوی سخت", rehearse_intro:"انتخاب کن برای چه چیزی تمرین می‌کنی. واحه نقش یک آدم معمولی و معقول را در طرف مقابل بازی می‌کند — هرگز یک شخص واقعی، هرگز بی‌رحم — تا بتوانی امتحان کنی چه بگویی.",
+      rehearse_scenario_label:"برای چه چیزی تمرین می‌کنی؟", rehearse_scenario_difficult_conversation:"🗣️ یک گفتگوی سخت با کسی نزدیک به من", rehearse_scenario_say_no:"🙅 نه گفتن به چیزی", rehearse_scenario_ask_for_something:"🙋 خواستن چیزی که خواستنش سخت است", rehearse_scenario_address_upset:"💬 گفتن به کسی که چیزی ناراحتم کرد",
+      rehearse_context_label:"یک جمله درباره موقعیت واقعی (اختیاری)", rehearse_context_ph:"فقط به اندازه‌ای که تمرین معنا داشته باشد — روی دستگاهت باقی می‌ماند", rehearse_pick_scenario_first:"اول انتخاب کن برای چه چیزی تمرین می‌کنی.", rehearse_start_btn:"شروع تمرین",
+      rehearse_safety_note:"این فقط تمرین است، نه نصیحت درباره رابطه واقعی‌ات. اگر چیزی ناامن یا جدی به نظر رسید، لطفاً با کسی که به او اعتماد داری یا یک متخصص صحبت کن.",
+      rehearse_placeholder:"بگو چه می‌خواهی به او بگویی…", rehearse_send:"ارسال", rehearse_thinking:"در حال فکر کردن…", rehearse_turn_limit_msg:"این نقطه خوبی برای پایان این دور تمرین است.", rehearse_end_btn:"پایان و تأمل",
+      rehearse_reflect_title:"این چه حسی داشت؟", rehearse_reflect_body:"توجه کن کدام کلمات برایت واقعی‌تر بودند. هر وقت آماده بودی می‌توانی واقعاً بگویی‌شان — و همیشه می‌توانی برگردی و دوباره تمرین کنی.", rehearse_reflect_new_btn:"دوباره تمرین کن",
+      rehearse_error:"الان نتوانستم به هوش مصنوعی وصل شوم. کمی بعد دوباره امتحان کن.", rehearse_consent_needed:"اول موافقت گفتگوی هوش مصنوعی را از پاسپورت حریم خصوصی فعال کن.",
       ef_ai_rewrite:"بازنویسی با هوش مصنوعی", ef_ai_note:"این پیش‌نویس تو را برای بازنویسی به ارائه‌دهنده هوش مصنوعی ما ارسال می‌کند. چیز دیگری ارسال نمی‌شود.",
       ef_ai_confirm:"این کار پیش‌نویس تو را خارج از دستگاهت برای بازنویسی به Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌کند. ادامه می‌دهی؟",
       ef_ai_needs_consent:"لطفاً ابتدا یک پیام گفتگو ارسال کن تا ویژگی‌های هوش مصنوعی فعال شوند.",
@@ -1674,6 +1738,14 @@ const I18N = {
       supc_item_ask_dont_assume:"مجھ سے پوچھیں کہ کیا میں بات کرنا چاہتا/چاہتی ہوں — فرض نہ کریں", supc_item_no_unsolicited_advice:"جب تک میں نہ مانگوں، مشورہ نہ دیں", supc_item_just_sit:"بس میرے ساتھ بیٹھیں — آپ کو کچھ ٹھیک کرنے کی ضرورت نہیں",
       supc_item_not_alone:"مجھے یاد دلائیں کہ میں اکیلا/اکیلی نہیں ہوں", supc_item_checkin_later:"بعد میں دوبارہ میرا حال پوچھیں، چاہے میں کہوں کہ ٹھیک ہوں", supc_item_gentle_nudge:"نرمی سے مجھے حرکت کرنے یا باہر جانے کی دعوت دیں — کبھی زبردستی نہ کریں",
       supc_pick_one_first:"کم از کم ایک منتخب کریں۔", supc_generate:"میرا کارڈ بنائیں", supc_copy:"کاپی کریں", supc_share:"شیئر کریں", supc_copied:"کاپی ہو گیا ✓", supc_card_title:"میری مدد کیسے کریں:",
+      journey_item_rehearse_title:"ایک مشکل بات چیت کی مشق کریں", journey_item_rehearse_desc:"حقیقت میں کہنے سے پہلے، ایک معقول فریقِ ثانی کا کردار ادا کرنے والے AI کے ساتھ مشق کریں کہ آپ کیا کہنا چاہتے ہیں۔",
+      rehearse_eyebrow:"ایک محفوظ مشق، حقیقت نہیں", rehearse_title:"ایک مشکل بات چیت کی مشق کریں", rehearse_intro:"منتخب کریں کہ آپ کس چیز کی مشق کر رہے ہیں۔ واحہ دوسری طرف ایک عام، معقول شخص کا کردار ادا کرتا ہے — کبھی کوئی حقیقی شخص نہیں، کبھی ظالم نہیں — تاکہ آپ آزما سکیں کہ کیا کہنا ہے۔",
+      rehearse_scenario_label:"آپ کس چیز کی مشق کر رہے ہیں؟", rehearse_scenario_difficult_conversation:"🗣️ کسی قریبی شخص کے ساتھ مشکل بات چیت", rehearse_scenario_say_no:"🙅 کسی بات پر نہ کہنا", rehearse_scenario_ask_for_something:"🙋 کوئی مشکل چیز مانگنا", rehearse_scenario_address_upset:"💬 کسی کو بتانا کہ کسی بات نے مجھے پریشان کیا",
+      rehearse_context_label:"حقیقی صورتحال کے بارے میں ایک جملہ (اختیاری)", rehearse_context_ph:"بس اتنا کہ مشق معنی خیز ہو — آپ کے ڈیوائس پر رہتا ہے", rehearse_pick_scenario_first:"پہلے منتخب کریں کہ آپ کس چیز کی مشق کر رہے ہیں۔", rehearse_start_btn:"مشق شروع کریں",
+      rehearse_safety_note:"یہ صرف مشق ہے، آپ کے حقیقی رشتے کے بارے میں مشورہ نہیں۔ اگر کچھ غیر محفوظ یا سنگین محسوس ہو تو براہ کرم کسی قابلِ اعتماد شخص یا ماہر سے بات کریں۔",
+      rehearse_placeholder:"وہ کہیں جو آپ انہیں کہنا چاہتے ہیں…", rehearse_send:"بھیجیں", rehearse_thinking:"سوچ رہا ہے…", rehearse_turn_limit_msg:"یہ اس مشقی دور کو ختم کرنے کے لیے اچھا مقام ہے۔", rehearse_end_btn:"ختم کریں اور سوچیں",
+      rehearse_reflect_title:"یہ کیسا محسوس ہوا؟", rehearse_reflect_body:"دیکھیں کون سے الفاظ آپ کو سچے لگے۔ جب تیار ہوں تو انہیں حقیقت میں کہہ سکتے ہیں — اور آپ ہمیشہ واپس آ کر دوبارہ مشق کر سکتے ہیں۔", rehearse_reflect_new_btn:"دوبارہ مشق کریں",
+      rehearse_error:"ابھی AI سے رابطہ نہیں ہو سکا۔ تھوڑی دیر بعد دوبارہ کوشش کریں۔", rehearse_consent_needed:"پہلے اپنے پرائیویسی پاسپورٹ میں AI چیٹ کی رضامندی فعال کریں۔",
       ef_ai_rewrite:"AI کے ساتھ دوبارہ لکھیں", ef_ai_note:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے ہمارے AI فراہم کنندہ کو بھیجتا ہے۔ کچھ اور نہیں بھیجا جاتا۔",
       ef_ai_confirm:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے آپ کے آلے سے باہر Anthropic (ہمارے AI فراہم کنندہ) کو بھیجے گا۔ جاری رکھیں؟",
       ef_ai_needs_consent:"AI خصوصیات کو فعال کرنے کے لیے براہ کرم پہلے ایک چیٹ پیغام بھیجیں۔",
@@ -1868,6 +1940,14 @@ const I18N = {
       supc_item_ask_dont_assume:"Спроси, хочу ли я говорить — не предполагай", supc_item_no_unsolicited_advice:"Не давай советов, если я не прошу", supc_item_just_sit:"Просто побудь рядом — тебе не нужно ничего решать",
       supc_item_not_alone:"Напомни мне, что я не один/одна", supc_item_checkin_later:"Спроси меня снова позже, даже если я скажу, что всё хорошо", supc_item_gentle_nudge:"Мягко предложи мне подвигаться или выйти — никогда не дави",
       supc_pick_one_first:"Выбери хотя бы один пункт.", supc_generate:"Создать мою карточку", supc_copy:"Копировать", supc_share:"Поделиться", supc_copied:"Скопировано ✓", supc_card_title:"Как меня поддержать:",
+      journey_item_rehearse_title:"Потренироваться перед трудным разговором", journey_item_rehearse_desc:"Прорепетируй, что хочешь сказать, с ИИ, который играет роль разумного собеседника — прежде чем сказать это по-настоящему.",
+      rehearse_eyebrow:"Безопасная репетиция, не реальность", rehearse_title:"Потренироваться перед трудным разговором", rehearse_intro:"Выбери, к чему ты готовишься. Waha играет роль обычного, разумного человека на другой стороне — никогда не реального человека, никогда не жестокого — чтобы ты мог(ла) попробовать, что сказать.",
+      rehearse_scenario_label:"К чему ты готовишься?", rehearse_scenario_difficult_conversation:"🗣️ Трудный разговор с близким человеком", rehearse_scenario_say_no:"🙅 Сказать «нет» на что-то", rehearse_scenario_ask_for_something:"🙋 Попросить о чём-то, о чём трудно просить", rehearse_scenario_address_upset:"💬 Сказать кому-то, что меня что-то задело",
+      rehearse_context_label:"Предложение о реальной ситуации (необязательно)", rehearse_context_ph:"Ровно столько, чтобы репетиция имела смысл — остаётся на твоём устройстве", rehearse_pick_scenario_first:"Сначала выбери, к чему ты готовишься.", rehearse_start_btn:"Начать тренировку",
+      rehearse_safety_note:"Это только тренировка, а не совет о твоих реальных отношениях. Если что-то кажется небезопасным или серьёзным, пожалуйста, поговори с тем, кому доверяешь, или со специалистом.",
+      rehearse_placeholder:"Скажи то, что сказал(а) бы ему/ей…", rehearse_send:"Отправить", rehearse_thinking:"Думает…", rehearse_turn_limit_msg:"Это хороший момент, чтобы завершить этот раунд тренировки.", rehearse_end_btn:"Завершить и подумать",
+      rehearse_reflect_title:"Какие были ощущения?", rehearse_reflect_body:"Обрати внимание, какие слова показались тебе искренними. Ты можешь сказать их по-настоящему, когда будешь готов(а) — и всегда можешь вернуться и потренироваться снова.", rehearse_reflect_new_btn:"Потренироваться снова",
+      rehearse_error:"Не удалось связаться с ИИ прямо сейчас. Попробуй ещё раз через момент.", rehearse_consent_needed:"Сначала включи согласие на чат с ИИ в твоём Паспорте приватности.",
       ef_ai_rewrite:"Переписать с ИИ", ef_ai_note:"Это отправляет ваш черновик нашему поставщику ИИ для переписывания. Больше ничего не отправляется.",
       ef_ai_confirm:"Это отправит ваш черновик за пределы устройства в Anthropic (наш поставщик ИИ) для переписывания. Продолжить?",
       ef_ai_needs_consent:"Пожалуйста, сначала отправьте одно сообщение в чате, чтобы включить функции ИИ.",
@@ -2062,6 +2142,14 @@ const I18N = {
       supc_item_ask_dont_assume:"Pergunta-me se quero falar — não presumas nada", supc_item_no_unsolicited_advice:"Não me dês conselhos a menos que eu peça", supc_item_just_sit:"Fica só comigo — não precisas de resolver nada",
       supc_item_not_alone:"Lembra-me que não estou sozinho/a", supc_item_checkin_later:"Pergunta-me outra vez mais tarde, mesmo que eu diga que estou bem", supc_item_gentle_nudge:"Convida-me com calma a mexer-me ou sair — nunca insistas",
       supc_pick_one_first:"Escolhe pelo menos um.", supc_generate:"Criar o meu cartão", supc_copy:"Copiar", supc_share:"Partilhar", supc_copied:"Copiado ✓", supc_card_title:"Como me apoiar:",
+      journey_item_rehearse_title:"Pratica uma conversa difícil", journey_item_rehearse_desc:"Ensaia o que queres dizer com uma IA que representa um interlocutor razoável — antes de o dizeres a sério.",
+      rehearse_eyebrow:"Um ensaio seguro, não a realidade", rehearse_title:"Pratica uma conversa difícil", rehearse_intro:"Escolhe para que te estás a preparar. O Waha representa uma pessoa comum e razoável do outro lado — nunca alguém real, nunca alguém cruel — para que possas experimentar o que dizer.",
+      rehearse_scenario_label:"Para que te estás a preparar?", rehearse_scenario_difficult_conversation:"🗣️ Uma conversa difícil com alguém próximo", rehearse_scenario_say_no:"🙅 Dizer não a algo", rehearse_scenario_ask_for_something:"🙋 Pedir algo que custa pedir", rehearse_scenario_address_upset:"💬 Dizer a alguém que algo me incomodou",
+      rehearse_context_label:"Uma frase sobre a situação real (opcional)", rehearse_context_ph:"Só o suficiente para o ensaio fazer sentido — fica no teu dispositivo", rehearse_pick_scenario_first:"Escolhe primeiro para que te estás a preparar.", rehearse_start_btn:"Começar a praticar",
+      rehearse_safety_note:"Isto é só prática, não um conselho sobre a tua relação real. Se algo parecer inseguro ou sério, por favor fala com alguém de confiança ou um profissional.",
+      rehearse_placeholder:"Diz o que lhe dirias…", rehearse_send:"Enviar", rehearse_thinking:"A pensar…", rehearse_turn_limit_msg:"Este é um bom ponto para terminar esta ronda de prática.", rehearse_end_btn:"Terminar e refletir",
+      rehearse_reflect_title:"Como te sentiste?", rehearse_reflect_body:"Repara em que palavras te pareceram verdadeiras. Podes dizê-las a sério quando estiveres pronto/a — e podes sempre voltar a praticar.", rehearse_reflect_new_btn:"Praticar de novo",
+      rehearse_error:"Não foi possível contactar a IA agora. Tenta novamente daqui a pouco.", rehearse_consent_needed:"Ativa primeiro o consentimento de chat com IA no teu Passaporte de Privacidade.",
       ef_ai_rewrite:"Reescrever com IA", ef_ai_note:"Isto envia o teu rascunho ao nosso fornecedor de IA para o reescrever. Nada mais é enviado.",
       ef_ai_confirm:"Isto enviará o teu rascunho para fora do teu dispositivo à Anthropic (o nosso fornecedor de IA) para o reescrever. Continuar?",
       ef_ai_needs_consent:"Por favor envia primeiro uma mensagem de chat para ativar as funcionalidades de IA.",
@@ -2256,6 +2344,14 @@ const I18N = {
       supc_item_ask_dont_assume:"Chiedimi se voglio parlare — non dare nulla per scontato", supc_item_no_unsolicited_advice:"Non darmi consigli a meno che non te lo chieda", supc_item_just_sit:"Resta semplicemente con me — non devi risolvere nulla",
       supc_item_not_alone:"Ricordami che non sono solo/a", supc_item_checkin_later:"Richiedimi come sto più tardi, anche se dico che sto bene", supc_item_gentle_nudge:"Invitami con dolcezza a muovermi o uscire — non insistere mai",
       supc_pick_one_first:"Scegline almeno una.", supc_generate:"Crea la mia scheda", supc_copy:"Copia", supc_share:"Condividi", supc_copied:"Copiato ✓", supc_card_title:"Come sostenermi:",
+      journey_item_rehearse_title:"Fai pratica per una conversazione difficile", journey_item_rehearse_desc:"Provi cosa vuoi dire con un'IA che interpreta un interlocutore ragionevole — prima di dirlo davvero.",
+      rehearse_eyebrow:"Una prova sicura, non la realtà", rehearse_title:"Fai pratica per una conversazione difficile", rehearse_intro:"Scegli per cosa ti stai preparando. Waha interpreta una persona normale e ragionevole dall'altra parte — mai qualcuno reale, mai qualcuno crudele — così puoi provare cosa dire.",
+      rehearse_scenario_label:"Per cosa ti stai preparando?", rehearse_scenario_difficult_conversation:"🗣️ Una conversazione difficile con qualcuno a me vicino", rehearse_scenario_say_no:"🙅 Dire di no a qualcosa", rehearse_scenario_ask_for_something:"🙋 Chiedere qualcosa che è difficile chiedere", rehearse_scenario_address_upset:"💬 Dire a qualcuno che qualcosa mi ha infastidito",
+      rehearse_context_label:"Una frase sulla situazione reale (facoltativo)", rehearse_context_ph:"Solo quanto basta perché la prova abbia senso — resta sul tuo dispositivo", rehearse_pick_scenario_first:"Scegli prima per cosa ti stai preparando.", rehearse_start_btn:"Inizia a fare pratica",
+      rehearse_safety_note:"Questa è solo pratica, non un consiglio sulla tua relazione reale. Se qualcosa sembra pericoloso o serio, parlane con qualcuno di cui ti fidi o con un professionista.",
+      rehearse_placeholder:"Di' quello che vorresti dirgli/dirle…", rehearse_send:"Invia", rehearse_thinking:"Sta pensando…", rehearse_turn_limit_msg:"Questo è un buon punto per terminare questo turno di pratica.", rehearse_end_btn:"Termina e rifletti",
+      rehearse_reflect_title:"Come ti sei sentito/a?", rehearse_reflect_body:"Nota quali parole ti sono sembrate vere. Puoi dirle davvero quando sei pronto/a — e puoi sempre tornare a fare pratica di nuovo.", rehearse_reflect_new_btn:"Fai di nuovo pratica",
+      rehearse_error:"Non è stato possibile contattare l'IA ora. Riprova tra un momento.", rehearse_consent_needed:"Attiva prima il consenso alla chat IA nel tuo Passaporto Privacy.",
       ef_ai_rewrite:"Riscrivi con l'IA", ef_ai_note:"Questo invia la tua bozza al nostro fornitore di IA per riscriverla. Nient'altro viene inviato.",
       ef_ai_confirm:"Questo invierà la tua bozza fuori dal tuo dispositivo ad Anthropic (il nostro fornitore di IA) per riscriverla. Continuare?",
       ef_ai_needs_consent:"Invia prima un messaggio in chat per abilitare le funzionalità IA.",
@@ -3673,6 +3769,133 @@ function shareSupportCard(){
   } else {
     copySupportCard();
   }
+}
+
+// ---------------------------------------------------------------------
+// REHEARSE: practice a hard conversation with the AI playing a reasonable
+// stand-in for the other person, in a short, turn-limited role-play.
+// Same safety net as the main chat (deterministic crisis keywords checked
+// unconditionally server-side before anything else; layer-2 risk
+// classifier runs every turn and, like every other mode, breaks character
+// and returns the fixed crisis reply instead of continuing the role-play).
+// ---------------------------------------------------------------------
+const REHEARSE_SCENARIOS = ['difficult_conversation', 'say_no', 'ask_for_something', 'address_upset'];
+const REHEARSE_MAX_TURNS = 6;
+let rehearseScenario = null;
+let rehearseHistory = [];
+let rehearseTurnCount = 0;
+
+function openRehearse(){
+  rehearseScenario = null;
+  rehearseHistory = [];
+  rehearseTurnCount = 0;
+  document.getElementById('rehearseContext').value = '';
+  document.getElementById('rehearseSetupMsg').textContent = '';
+  document.getElementById('rehearseSetupView').style.display = 'block';
+  document.getElementById('rehearseChatView').classList.add('u-hidden');
+  document.getElementById('rehearseReflectView').classList.add('u-hidden');
+  document.getElementById('rehearseLog').innerHTML = '';
+  document.getElementById('rehearseStatus').textContent = '';
+  renderRehearseScenarios();
+  document.getElementById('rehearseModal').classList.add('open');
+}
+function closeRehearse(){
+  document.getElementById('rehearseModal').classList.remove('open');
+}
+function renderRehearseScenarios(){
+  const dict = I18N[currentLang];
+  const box = document.getElementById('rehearseScenarios');
+  box.innerHTML = '';
+  REHEARSE_SCENARIOS.forEach(id => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'agent-goal' + (rehearseScenario === id ? ' selected' : '');
+    b.textContent = dict['rehearse_scenario_' + id];
+    b.setAttribute('aria-pressed', rehearseScenario === id ? 'true' : 'false');
+    b.addEventListener('click', () => { rehearseScenario = id; renderRehearseScenarios(); });
+    box.appendChild(b);
+  });
+}
+function startRehearse(){
+  const dict = I18N[currentLang];
+  if(!rehearseScenario){ document.getElementById('rehearseSetupMsg').textContent = dict.rehearse_pick_scenario_first; return; }
+  if(safeGet('mc_chat_consent') !== '1'){ document.getElementById('rehearseSetupMsg').textContent = dict.rehearse_consent_needed; return; }
+  const context = document.getElementById('rehearseContext').value.trim();
+  if(context && detectCrisisClient(context)){ closeRehearse(); openCrisis(); return; }
+  rehearseHistory = [];
+  rehearseTurnCount = 0;
+  document.getElementById('rehearseLog').innerHTML = '';
+  if(context){
+    const note = document.createElement('div');
+    note.className = 'msg system-notice';
+    note.textContent = context;
+    document.getElementById('rehearseLog').appendChild(note);
+  }
+  document.getElementById('rehearseSetupView').style.display = 'none';
+  document.getElementById('rehearseChatView').classList.remove('u-hidden');
+  document.getElementById('rehearseInput').focus();
+}
+function rehearseShowTyping(on){
+  const el = document.getElementById('rehearseTyping');
+  el.textContent = on ? I18N[currentLang].rehearse_thinking : '';
+}
+function sendRehearseMsgOnEnter(e){
+  if(e.key === 'Enter') sendRehearseMsg();
+}
+function sendRehearseMsg(){
+  const dict = I18N[currentLang];
+  const input = document.getElementById('rehearseInput');
+  const text = input.value.trim();
+  if(!text) return;
+  if(rehearseTurnCount >= REHEARSE_MAX_TURNS){
+    document.getElementById('rehearseStatus').textContent = dict.rehearse_turn_limit_msg;
+    return;
+  }
+  const log = document.getElementById('rehearseLog');
+  const me = document.createElement('div');
+  me.className = 'msg me';
+  me.textContent = text;
+  log.appendChild(me);
+  input.value = '';
+  log.scrollTop = log.scrollHeight;
+  rehearseShowTyping(true);
+  document.getElementById('rehearseStatus').textContent = '';
+
+  fetch(CHAT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: rehearseHistory, lang: currentLang, mode: 'rehearse', scenario: rehearseScenario }),
+  })
+  .then(res => {
+    if(res.status === 429){ const e = new Error('rl'); e.rateLimited = true; throw e; }
+    if(!res.ok) throw new Error('bad status');
+    return res.json();
+  })
+  .then(data => {
+    rehearseShowTyping(false);
+    if(!data.reply) throw new Error('empty');
+    if(data.crisis){ closeRehearse(); openCrisis(); return; }
+    const bot = document.createElement('div');
+    bot.className = 'msg bot';
+    bot.textContent = data.reply;
+    log.appendChild(bot);
+    log.scrollTop = log.scrollHeight;
+    rehearseHistory.push({ role:'user', content:text }, { role:'assistant', content:data.reply, sig: typeof data.sig === 'string' ? data.sig : undefined });
+    if(rehearseHistory.length > MAX_CHAT_HISTORY) rehearseHistory = rehearseHistory.slice(-MAX_CHAT_HISTORY);
+    rehearseTurnCount++;
+    if(rehearseTurnCount >= REHEARSE_MAX_TURNS) document.getElementById('rehearseStatus').textContent = dict.rehearse_turn_limit_msg;
+  })
+  .catch((err)=>{
+    rehearseShowTyping(false);
+    document.getElementById('rehearseStatus').textContent = err && err.rateLimited ? dict.rate_limit_msg : dict.rehearse_error;
+  });
+}
+function endRehearse(){
+  document.getElementById('rehearseChatView').classList.add('u-hidden');
+  document.getElementById('rehearseReflectView').classList.remove('u-hidden');
+}
+function newRehearse(){
+  openRehearse();
 }
 
 function explainSuggestion(key){
@@ -8372,6 +8595,7 @@ const ACTIONS = {
   closeHealth,
   closePrefs,
   closePrivacyPassport,
+  closeRehearse,
   closeRelief,
   closeReviews,
   closeSleepMode,
@@ -8390,6 +8614,7 @@ const ACTIONS = {
   dismissInstallBanner,
   dismissReminder,
   editCalmPlan,
+  endRehearse,
   explainSuggestion,
   exportAllPassportData,
   exportBackup,
@@ -8400,6 +8625,7 @@ const ACTIONS = {
   handleInstallClick,
   importBackup,
   markExerciseDone,
+  newRehearse,
   nextOnboardingStep,
   openCalmPlan,
   openCheckin,
@@ -8409,6 +8635,7 @@ const ACTIONS = {
   openFinance,
   openPrefs,
   openPrivacyPassport,
+  openRehearse,
   openRelief,
   openSleepMode,
   openGoals,
@@ -8435,6 +8662,8 @@ const ACTIONS = {
   sendCheckinText,
   sendMsg,
   sendMsgOnEnter,
+  sendRehearseMsg,
+  sendRehearseMsgOnEnter,
   setChatConsentEnabled,
   setCoachConsentEnabled,
   setFeelingTone,
@@ -8450,6 +8679,7 @@ const ACTIONS = {
   startDailyPractice,
   startModalTimer,
   startMoodSuggestion,
+  startRehearse,
   startSleepBreathing,
   stopRelief,
   toggleBreathe,

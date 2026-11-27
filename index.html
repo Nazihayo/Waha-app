@@ -223,6 +223,46 @@
   </div>
 </div>
 
+<div class="prefs-overlay" id="rehearseModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeRehearse" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="rehearse_eyebrow"></div>
+    <h2 class="prefs-title u-fs-22" data-i18n="rehearse_title"></h2>
+
+    <div id="rehearseSetupView">
+      <p class="prefs-subtitle" data-i18n="rehearse_intro"></p>
+      <label class="calmplan-label" data-i18n="rehearse_scenario_label"></label>
+      <div class="agent-goals" id="rehearseScenarios"></div>
+      <div class="calmplan-field">
+        <label class="calmplan-label" data-i18n="rehearse_context_label"></label>
+        <textarea id="rehearseContext" class="journal-textarea" rows="2" data-i18n-placeholder="rehearse_context_ph"></textarea>
+      </div>
+      <p class="calmplan-hint" id="rehearseSetupMsg"></p>
+      <p class="ef-ai-note" data-i18n="rehearse_safety_note"></p>
+      <button class="backup-btn u-w-full" data-click="startRehearse" data-i18n="rehearse_start_btn"></button>
+    </div>
+
+    <div class="u-hidden" id="rehearseChatView">
+      <div class="rehearse-chat-box">
+        <div class="chat-log" id="rehearseLog"></div>
+        <div class="typing" id="rehearseTyping"></div>
+        <div class="chat-input">
+          <input id="rehearseInput" type="text" data-i18n-placeholder="rehearse_placeholder" data-keydown="sendRehearseMsgOnEnter">
+          <button class="send-btn" data-click="sendRehearseMsg" data-i18n="rehearse_send"></button>
+        </div>
+      </div>
+      <button class="backup-btn u-w-full u-mt-10" data-click="endRehearse" data-i18n="rehearse_end_btn"></button>
+    </div>
+
+    <div class="u-hidden" id="rehearseReflectView">
+      <h3 class="prefs-title u-fs-22" data-i18n="rehearse_reflect_title"></h3>
+      <p class="prefs-subtitle" data-i18n="rehearse_reflect_body"></p>
+      <button class="backup-btn u-w-full" data-click="newRehearse" data-i18n="rehearse_reflect_new_btn"></button>
+    </div>
+    <p class="backup-status" id="rehearseStatus"></p>
+  </div>
+</div>
+
 <div class="prefs-overlay" id="whyExplainModal" role="dialog" aria-modal="true">
   <div class="prefs-box u-max-w-340">
     <button class="prefs-close aria-close-btn" data-click="closeWhyExplain" aria-label="Close">✕</button>
@@ -535,6 +575,11 @@
     <div class="journey-card journey-card-active" data-click="openSupportCard">
       <h3 data-i18n="journey_item_support_title"></h3>
       <p data-i18n="journey_item_support_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
+    </div>
+    <div class="journey-card journey-card-active" data-click="openRehearse">
+      <h3 data-i18n="journey_item_rehearse_title"></h3>
+      <p data-i18n="journey_item_rehearse_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
   </div>
