@@ -198,6 +198,31 @@
   </div>
 </div>
 
+<div class="prefs-overlay" id="supportCardModal" role="dialog" aria-modal="true">
+  <div class="prefs-box">
+    <button class="prefs-close aria-close-btn" data-click="closeSupportCard" aria-label="Close">✕</button>
+    <div class="prefs-eyebrow" data-i18n="supc_eyebrow"></div>
+    <h2 class="prefs-title u-fs-22" data-i18n="supc_title"></h2>
+    <p class="prefs-subtitle" data-i18n="supc_intro"></p>
+
+    <div id="supportCardFormView">
+      <div class="agent-goals support-card-list" id="supportCardItems"></div>
+      <p class="calmplan-hint" id="supportCardMsg"></p>
+      <button class="backup-btn u-w-full" data-click="generateSupportCard" data-i18n="supc_generate"></button>
+    </div>
+
+    <div class="u-hidden" id="supportCardPreviewView">
+      <div class="ef-preview-box" id="supportCardPreviewText"></div>
+      <div class="passport-btn-grid">
+        <button class="backup-btn" data-click="copySupportCard" data-i18n="supc_copy"></button>
+        <button class="backup-btn" data-click="shareSupportCard" data-i18n="supc_share"></button>
+        <button class="backup-btn u-w-full u-mt-10" data-click="backToEditSupportCard" data-i18n="ef_back_edit"></button>
+      </div>
+    </div>
+    <p class="backup-status" id="supportCardStatus"></p>
+  </div>
+</div>
+
 <div class="prefs-overlay" id="whyExplainModal" role="dialog" aria-modal="true">
   <div class="prefs-box u-max-w-340">
     <button class="prefs-close aria-close-btn" data-click="closeWhyExplain" aria-label="Close">✕</button>
@@ -505,6 +530,11 @@
     <div class="journey-card journey-card-active" data-click="openFinance">
       <h3 data-i18n="journey_item_finance_title"></h3>
       <p data-i18n="journey_item_finance_desc"></p>
+      <span class="go" data-i18n="journey_open_link"></span>
+    </div>
+    <div class="journey-card journey-card-active" data-click="openSupportCard">
+      <h3 data-i18n="journey_item_support_title"></h3>
+      <p data-i18n="journey_item_support_desc"></p>
       <span class="go" data-i18n="journey_open_link"></span>
     </div>
   </div>

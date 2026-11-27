@@ -97,6 +97,11 @@ const I18N = {
     ef_empty_hint:"أي حقل تتركه فارغاً سيُستبعد ببساطة من مسودتك.", ef_generate:"أنشئ مسودتي",
     ef_tone_concise:"مختصر", ef_tone_detailed:"مفصّل",
     ef_copy:"نسخ", ef_copied:"تم النسخ ✓", ef_back_edit:"العودة للتعديل",
+    journey_item_support_title:"كيف تساندني", journey_item_support_desc:"اصنع بطاقة قصيرة قابلة للمشاركة تخبر المقربين منك بالضبط كيف يساعدونك — بكلماتك أنت.",
+    supc_eyebrow:"لمن يهتمون بك", supc_title:"كيف تساندني", supc_intro:"اختر ما يصفك الآن. يحوّله واحة إلى بطاقة قصيرة تشاركها مع شخص قريب منك — لا يُرسل شيء لأي أحد إلا إذا اخترت إرساله بنفسك.",
+    supc_item_ask_dont_assume:"اسألني إن كنت أريد الكلام، لا تفترض أي شيء", supc_item_no_unsolicited_advice:"لا تعطني نصيحة إلا إذا طلبتها", supc_item_just_sit:"فقط اجلس معي، لا تحاول إصلاح الأمر",
+    supc_item_not_alone:"ذكّرني أني لست وحدي", supc_item_checkin_later:"تحقق مني لاحقًا، حتى لو قلت إني بخير", supc_item_gentle_nudge:"اقترح عليّ بلطف الحركة أو الخروج، لكن لا تجبرني",
+    supc_pick_one_first:"اختر واحدًا على الأقل.", supc_generate:"اصنع بطاقتي", supc_copy:"نسخ", supc_share:"مشاركة", supc_copied:"تم النسخ ✓", supc_card_title:"كيف تساندني:",
     ef_ai_rewrite:"أعد الصياغة بالذكاء الاصطناعي", ef_ai_note:"هذا يرسل مسودتك لمزوّد الذكاء الاصطناعي لإعادة صياغتها فقط. لا شيء آخر يُرسل.",
     ef_ai_confirm:"سيُرسل هذا مسودتك خارج جهازك إلى Anthropic (مزوّد الذكاء الاصطناعي) لإعادة صياغتها. هل تريد المتابعة؟",
     ef_ai_needs_consent:"يرجى إرسال رسالة محادثة واحدة أولاً لتفعيل ميزات الذكاء الاصطناعي.",
@@ -286,6 +291,11 @@ const I18N = {
     ef_empty_hint:"Jedes leer gelassene Feld wird einfach aus deinem Entwurf ausgelassen.", ef_generate:"Meinen Entwurf erstellen",
     ef_tone_concise:"Kurz", ef_tone_detailed:"Ausführlich",
     ef_copy:"Kopieren", ef_copied:"Kopiert ✓", ef_back_edit:"Zurück zum Bearbeiten",
+    journey_item_support_title:"Wie du mich unterstützen kannst", journey_item_support_desc:"Erstelle eine kurze, teilbare Karte, die den Menschen in deiner Nähe genau sagt, wie sie dir helfen können — in deinen eigenen Worten.",
+    supc_eyebrow:"Für die Menschen, denen du wichtig bist", supc_title:"Wie du mich unterstützen kannst", supc_intro:"Wähle aus, was gerade auf dich zutrifft. Waha macht daraus eine kurze Karte, die du mit jemandem teilen kannst, der dir nahesteht — nichts wird verschickt, außer du entscheidest dich dafür.",
+    supc_item_ask_dont_assume:"Frag mich, ob ich reden möchte — geh nicht einfach davon aus", supc_item_no_unsolicited_advice:"Gib mir keine Ratschläge, außer ich bitte darum", supc_item_just_sit:"Sei einfach da — du musst nichts lösen",
+    supc_item_not_alone:"Erinnere mich daran, dass ich nicht allein bin", supc_item_checkin_later:"Frag später noch einmal nach, auch wenn ich sage, es geht mir gut", supc_item_gentle_nudge:"Lad mich sanft ein, mich zu bewegen oder rauszugehen — dränge mich aber nie",
+    supc_pick_one_first:"Wähle mindestens eine Option.", supc_generate:"Meine Karte erstellen", supc_copy:"Kopieren", supc_share:"Teilen", supc_copied:"Kopiert ✓", supc_card_title:"Wie du mich unterstützen kannst:",
     ef_ai_rewrite:"Mit KI umformulieren", ef_ai_note:"Dies sendet deinen Entwurf an unseren KI-Anbieter, um ihn umzuformulieren. Nichts anderes wird gesendet.",
     ef_ai_confirm:"Dies sendet deinen Entwurf außerhalb deines Geräts an Anthropic (unseren KI-Anbieter), um ihn umzuformulieren. Fortfahren?",
     ef_ai_needs_consent:"Bitte sende zuerst eine Chat-Nachricht, um KI-Funktionen zu aktivieren.",
@@ -475,6 +485,11 @@ const I18N = {
     ef_empty_hint:"Any field you leave blank is simply left out of your draft.", ef_generate:"Create my draft",
     ef_tone_concise:"Concise", ef_tone_detailed:"Detailed",
     ef_copy:"Copy", ef_copied:"Copied ✓", ef_back_edit:"Back to edit",
+    journey_item_support_title:"How to support me", journey_item_support_desc:"Make a short, shareable card that tells the people close to you exactly how to help — in your own words.",
+    supc_eyebrow:"For the people who care about you", supc_title:"How to support me", supc_intro:"Pick what's true for you right now. Waha turns it into a short card you can share with someone close to you — nothing is sent anywhere unless you choose to send it.",
+    supc_item_ask_dont_assume:"Ask me if I want to talk — don't assume either way", supc_item_no_unsolicited_advice:"Don't give me advice unless I ask for it", supc_item_just_sit:"Just sit with me — you don't have to fix anything",
+    supc_item_not_alone:"Remind me I'm not alone", supc_item_checkin_later:"Check on me again later, even if I say I'm fine", supc_item_gentle_nudge:"Gently invite me to move or go outside — never push",
+    supc_pick_one_first:"Pick at least one.", supc_generate:"Make my card", supc_copy:"Copy", supc_share:"Share", supc_copied:"Copied ✓", supc_card_title:"How to support me:",
     ef_ai_rewrite:"Rewrite with AI", ef_ai_note:"This sends your draft to our AI provider to rewrite it. Nothing else is sent.",
     ef_ai_confirm:"This will send your draft outside your device to Anthropic (our AI provider) to rewrite it. Continue?",
     ef_ai_needs_consent:"Please send one chat message first to enable AI features.",
@@ -664,6 +679,11 @@ const I18N = {
     ef_empty_hint:"Tout champ laissé vide sera simplement omis de ton brouillon.", ef_generate:"Créer mon brouillon",
     ef_tone_concise:"Concis", ef_tone_detailed:"Détaillé",
     ef_copy:"Copier", ef_copied:"Copié ✓", ef_back_edit:"Retour à l'édition",
+    journey_item_support_title:"Comment me soutenir", journey_item_support_desc:"Crée une courte carte à partager qui dit à tes proches exactement comment t'aider — avec tes propres mots.",
+    supc_eyebrow:"Pour ceux qui tiennent à toi", supc_title:"Comment me soutenir", supc_intro:"Choisis ce qui te correspond en ce moment. Waha en fait une courte carte que tu peux partager avec un proche — rien n'est envoyé sauf si tu choisis de l'envoyer toi-même.",
+    supc_item_ask_dont_assume:"Demande-moi si je veux parler — ne suppose rien", supc_item_no_unsolicited_advice:"Ne me donne pas de conseils sauf si je les demande", supc_item_just_sit:"Reste simplement avec moi — tu n'as rien à régler",
+    supc_item_not_alone:"Rappelle-moi que je ne suis pas seul(e)", supc_item_checkin_later:"Prends de mes nouvelles plus tard, même si je dis que ça va", supc_item_gentle_nudge:"Invite-moi doucement à bouger ou sortir — ne force jamais",
+    supc_pick_one_first:"Choisis-en au moins un.", supc_generate:"Créer ma carte", supc_copy:"Copier", supc_share:"Partager", supc_copied:"Copié ✓", supc_card_title:"Comment me soutenir :",
     ef_ai_rewrite:"Reformuler avec l'IA", ef_ai_note:"Ceci envoie ton brouillon à notre fournisseur d'IA pour le reformuler. Rien d'autre n'est envoyé.",
     ef_ai_confirm:"Ceci enverra ton brouillon hors de ton appareil à Anthropic (notre fournisseur d'IA) pour le reformuler. Continuer ?",
     ef_ai_needs_consent:"Merci d'envoyer d'abord un message dans le chat pour activer les fonctionnalités d'IA.",
@@ -853,6 +873,11 @@ const I18N = {
     ef_empty_hint:"Boş bıraktığın her alan taslağından çıkarılır.", ef_generate:"Taslağımı oluştur",
     ef_tone_concise:"Kısa", ef_tone_detailed:"Ayrıntılı",
     ef_copy:"Kopyala", ef_copied:"Kopyalandı ✓", ef_back_edit:"Düzenlemeye dön",
+    journey_item_support_title:"Bana nasıl destek olabilirsin", journey_item_support_desc:"Yakınlarına sana tam olarak nasıl yardımcı olabileceklerini anlatan, kısa ve paylaşılabilir bir kart oluştur — kendi sözlerinle.",
+    supc_eyebrow:"Seni önemseyen insanlar için", supc_title:"Bana nasıl destek olabilirsin", supc_intro:"Şu an senin için doğru olanı seç. Waha bunu, yakın birine gönderebileceğin kısa bir karta dönüştürür — sen göndermeyi seçmedikçe hiçbir şey kimseye gönderilmez.",
+    supc_item_ask_dont_assume:"Konuşmak isteyip istemediğimi sor — varsayma", supc_item_no_unsolicited_advice:"İstemedikçe bana tavsiye verme", supc_item_just_sit:"Sadece yanımda ol — bir şeyi düzeltmek zorunda değilsin",
+    supc_item_not_alone:"Yalnız olmadığımı hatırlat", supc_item_checkin_later:"İyi olduğumu söylesem bile sonra tekrar sor", supc_item_gentle_nudge:"Hareket etmem ya da dışarı çıkmam için nazikçe davet et — asla zorlama",
+    supc_pick_one_first:"En az birini seç.", supc_generate:"Kartımı oluştur", supc_copy:"Kopyala", supc_share:"Paylaş", supc_copied:"Kopyalandı ✓", supc_card_title:"Bana nasıl destek olabilirsin:",
     ef_ai_rewrite:"Yapay zeka ile yeniden yaz", ef_ai_note:"Bu, taslağını yeniden yazması için yapay zeka sağlayıcımıza gönderir. Başka hiçbir şey gönderilmez.",
     ef_ai_confirm:"Bu, taslağını yeniden yazması için Anthropic'e (yapay zeka sağlayıcımız) cihazının dışına gönderecek. Devam edilsin mi?",
     ef_ai_needs_consent:"Yapay zeka özelliklerini etkinleştirmek için lütfen önce bir sohbet mesajı gönder.",
@@ -1042,6 +1067,11 @@ const I18N = {
     ef_empty_hint:"Her qadeke ku tu vala bihêlî tenê ji reçeta te tê derxistin.", ef_generate:"Reçeta min biafirîne",
     ef_tone_concise:"Kurt", ef_tone_detailed:"Berfireh",
     ef_copy:"Kopî bike", ef_copied:"Hate kopîkirin ✓", ef_back_edit:"Vegere sererastkirinê",
+    journey_item_support_title:"Çawa min piştgirî bike", journey_item_support_desc:"Kartek kurt û parvekirî çêke ku ji nêzîkên te re bi awayekî zelal dibêje ka çawa alîkariya te bikin — bi peyvên xwe.",
+    supc_eyebrow:"Ji bo kesên ku bi te re eleqedar in", supc_title:"Çawa min piştgirî bike", supc_intro:"Tiştê niha ji te re rast e hilbijêre. Waha wê dike kartek kurt ku tu dikarî bi kesek nêzîk parve bikî — tiştek ji kesî re nayê şandin heta ku tu bixwe biryar bidî wê bişînî.",
+    supc_item_ask_dont_assume:"Ji min bipirse ka ez dixwazim biaxivim — texmîn neke", supc_item_no_unsolicited_advice:"Heta ez nexwazim şîretan nede min", supc_item_just_sit:"Tenê li cem min rûne — ne hewce ye tiştek çareser bikî",
+    supc_item_not_alone:"Bîne bîra min ku ez ne bi tenê me", supc_item_checkin_later:"Paşê dîsa min bipirse, tewra heke min got ez baş im", supc_item_gentle_nudge:"Bi nermî min vexwîne ku tevbigerim an derkevim — lê qet neçikîne min",
+    supc_pick_one_first:"Bi kêmanî yekê hilbijêre.", supc_generate:"Karta min çêke", supc_copy:"Kopî bike", supc_share:"Parve bike", supc_copied:"Hate kopîkirin ✓", supc_card_title:"Çawa min piştgirî bike:",
     ef_ai_rewrite:"Bi AI ve dîsa binivîse", ef_ai_note:"Ev reçeta te ji bo dîsa nivîsandinê ji peydakerê me yê AI re dişîne. Tiştek din nayê şandin.",
     ef_ai_confirm:"Ev ê reçeta te ji amûra te derkeve û here Anthropic (peydakerê me yê AI) da ku dîsa binivîse. Berdewam bike?",
     ef_ai_needs_consent:"Ji kerema xwe pêşî peyamek chatê bişîne da ku taybetmendiyên AI çalak bikî.",
@@ -1231,6 +1261,11 @@ const I18N = {
     ef_empty_hint:"Cualquier campo que dejes en blanco simplemente se omite de tu borrador.", ef_generate:"Crear mi borrador",
     ef_tone_concise:"Conciso", ef_tone_detailed:"Detallado",
     ef_copy:"Copiar", ef_copied:"Copiado ✓", ef_back_edit:"Volver a editar",
+    journey_item_support_title:"Cómo apoyarme", journey_item_support_desc:"Crea una tarjeta corta y compartible que diga a tus allegados exactamente cómo ayudarte — con tus propias palabras.",
+    supc_eyebrow:"Para quienes se preocupan por ti", supc_title:"Cómo apoyarme", supc_intro:"Elige lo que es cierto para ti ahora mismo. Waha lo convierte en una tarjeta corta que puedes compartir con alguien cercano — nada se envía a nadie a menos que tú decidas enviarlo.",
+    supc_item_ask_dont_assume:"Pregúntame si quiero hablar — no supongas nada", supc_item_no_unsolicited_advice:"No me des consejos a menos que los pida", supc_item_just_sit:"Solo quédate conmigo — no tienes que arreglar nada",
+    supc_item_not_alone:"Recuérdame que no estoy solo/a", supc_item_checkin_later:"Pregúntame de nuevo más tarde, aunque diga que estoy bien", supc_item_gentle_nudge:"Invítame con suavidad a moverme o salir — nunca me presiones",
+    supc_pick_one_first:"Elige al menos una.", supc_generate:"Crear mi tarjeta", supc_copy:"Copiar", supc_share:"Compartir", supc_copied:"Copiado ✓", supc_card_title:"Cómo apoyarme:",
     ef_ai_rewrite:"Reescribir con IA", ef_ai_note:"Esto envía tu borrador a nuestro proveedor de IA para reescribirlo. No se envía nada más.",
     ef_ai_confirm:"Esto enviará tu borrador fuera de tu dispositivo a Anthropic (nuestro proveedor de IA) para reescribirlo. ¿Continuar?",
     ef_ai_needs_consent:"Envía primero un mensaje de chat para habilitar las funciones de IA.",
@@ -1440,6 +1475,11 @@ const I18N = {
       ef_empty_hint:"هر فیلدی که خالی بگذاری، به‌سادگی از پیش‌نویس تو حذف می‌شود.", ef_generate:"پیش‌نویسم را بساز",
       ef_tone_concise:"مختصر", ef_tone_detailed:"مفصل",
       ef_copy:"کپی", ef_copied:"کپی شد ✓", ef_back_edit:"بازگشت به ویرایش",
+      journey_item_support_title:"چطور از من حمایت کنی", journey_item_support_desc:"یک کارت کوتاه و قابل‌اشتراک بساز که دقیقاً به اطرافیانت بگوید چطور کمکت کنند — با کلمات خودت.",
+      supc_eyebrow:"برای کسانی که برایت اهمیت دارند", supc_title:"چطور از من حمایت کنی", supc_intro:"آنچه الان برایت درست است را انتخاب کن. واحه آن را به کارتی کوتاه تبدیل می‌کند که می‌توانی با کسی نزدیک به خودت به اشتراک بگذاری — هیچ چیز برای کسی فرستاده نمی‌شود مگر خودت بخواهی بفرستی.",
+      supc_item_ask_dont_assume:"از من بپرس آیا می‌خواهم حرف بزنم — فرض نکن", supc_item_no_unsolicited_advice:"مگر بخواهم، نصیحتم نکن", supc_item_just_sit:"فقط کنارم بنشین — لازم نیست چیزی را حل کنی",
+      supc_item_not_alone:"به من یادآوری کن که تنها نیستم", supc_item_checkin_later:"بعداً دوباره حالم را بپرس، حتی اگر بگویم خوبم", supc_item_gentle_nudge:"با ملایمت دعوتم کن حرکت کنم یا بیرون بروم — هرگز مجبورم نکن",
+      supc_pick_one_first:"حداقل یکی را انتخاب کن.", supc_generate:"کارتم را بساز", supc_copy:"کپی", supc_share:"اشتراک‌گذاری", supc_copied:"کپی شد ✓", supc_card_title:"چطور از من حمایت کنی:",
       ef_ai_rewrite:"بازنویسی با هوش مصنوعی", ef_ai_note:"این پیش‌نویس تو را برای بازنویسی به ارائه‌دهنده هوش مصنوعی ما ارسال می‌کند. چیز دیگری ارسال نمی‌شود.",
       ef_ai_confirm:"این کار پیش‌نویس تو را خارج از دستگاهت برای بازنویسی به Anthropic (ارائه‌دهنده هوش مصنوعی ما) ارسال می‌کند. ادامه می‌دهی؟",
       ef_ai_needs_consent:"لطفاً ابتدا یک پیام گفتگو ارسال کن تا ویژگی‌های هوش مصنوعی فعال شوند.",
@@ -1629,6 +1669,11 @@ const I18N = {
       ef_empty_hint:"جو بھی فیلڈ آپ خالی چھوڑیں گے وہ آپ کے مسودے سے نکال دی جائے گی۔", ef_generate:"میرا مسودہ بنائیں",
       ef_tone_concise:"مختصر", ef_tone_detailed:"تفصیلی",
       ef_copy:"کاپی کریں", ef_copied:"کاپی ہو گیا ✓", ef_back_edit:"ترمیم پر واپس جائیں",
+      journey_item_support_title:"میری مدد کیسے کریں", journey_item_support_desc:"ایک مختصر، قابلِ اشتراک کارڈ بنائیں جو آپ کے قریبی لوگوں کو بالکل بتائے کہ وہ آپ کی کیسے مدد کریں — آپ کے اپنے الفاظ میں۔",
+      supc_eyebrow:"ان لوگوں کے لیے جو آپ کی پرواہ کرتے ہیں", supc_title:"میری مدد کیسے کریں", supc_intro:"ابھی جو آپ کے لیے درست ہے اسے منتخب کریں۔ واحہ اسے ایک مختصر کارڈ میں بدل دیتا ہے جسے آپ کسی قریبی شخص کے ساتھ شیئر کر سکتے ہیں — جب تک آپ خود نہ بھیجیں، کسی کو کچھ نہیں بھیجا جاتا۔",
+      supc_item_ask_dont_assume:"مجھ سے پوچھیں کہ کیا میں بات کرنا چاہتا/چاہتی ہوں — فرض نہ کریں", supc_item_no_unsolicited_advice:"جب تک میں نہ مانگوں، مشورہ نہ دیں", supc_item_just_sit:"بس میرے ساتھ بیٹھیں — آپ کو کچھ ٹھیک کرنے کی ضرورت نہیں",
+      supc_item_not_alone:"مجھے یاد دلائیں کہ میں اکیلا/اکیلی نہیں ہوں", supc_item_checkin_later:"بعد میں دوبارہ میرا حال پوچھیں، چاہے میں کہوں کہ ٹھیک ہوں", supc_item_gentle_nudge:"نرمی سے مجھے حرکت کرنے یا باہر جانے کی دعوت دیں — کبھی زبردستی نہ کریں",
+      supc_pick_one_first:"کم از کم ایک منتخب کریں۔", supc_generate:"میرا کارڈ بنائیں", supc_copy:"کاپی کریں", supc_share:"شیئر کریں", supc_copied:"کاپی ہو گیا ✓", supc_card_title:"میری مدد کیسے کریں:",
       ef_ai_rewrite:"AI کے ساتھ دوبارہ لکھیں", ef_ai_note:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے ہمارے AI فراہم کنندہ کو بھیجتا ہے۔ کچھ اور نہیں بھیجا جاتا۔",
       ef_ai_confirm:"یہ آپ کے مسودے کو دوبارہ لکھنے کے لیے آپ کے آلے سے باہر Anthropic (ہمارے AI فراہم کنندہ) کو بھیجے گا۔ جاری رکھیں؟",
       ef_ai_needs_consent:"AI خصوصیات کو فعال کرنے کے لیے براہ کرم پہلے ایک چیٹ پیغام بھیجیں۔",
@@ -1818,6 +1863,11 @@ const I18N = {
       ef_empty_hint:"Любое оставленное пустым поле просто не войдёт в черновик.", ef_generate:"Создать мой черновик",
       ef_tone_concise:"Кратко", ef_tone_detailed:"Подробно",
       ef_copy:"Копировать", ef_copied:"Скопировано ✓", ef_back_edit:"Вернуться к редактированию",
+      journey_item_support_title:"Как меня поддержать", journey_item_support_desc:"Создай короткую карточку, которой можно поделиться, рассказывающую близким, как именно тебе помочь — твоими словами.",
+      supc_eyebrow:"Для тех, кому ты небезразличен(на)", supc_title:"Как меня поддержать", supc_intro:"Выбери, что верно для тебя прямо сейчас. Waha превратит это в короткую карточку, которой можно поделиться с близким человеком — ничего никому не отправляется, пока ты сам(а) не решишь это сделать.",
+      supc_item_ask_dont_assume:"Спроси, хочу ли я говорить — не предполагай", supc_item_no_unsolicited_advice:"Не давай советов, если я не прошу", supc_item_just_sit:"Просто побудь рядом — тебе не нужно ничего решать",
+      supc_item_not_alone:"Напомни мне, что я не один/одна", supc_item_checkin_later:"Спроси меня снова позже, даже если я скажу, что всё хорошо", supc_item_gentle_nudge:"Мягко предложи мне подвигаться или выйти — никогда не дави",
+      supc_pick_one_first:"Выбери хотя бы один пункт.", supc_generate:"Создать мою карточку", supc_copy:"Копировать", supc_share:"Поделиться", supc_copied:"Скопировано ✓", supc_card_title:"Как меня поддержать:",
       ef_ai_rewrite:"Переписать с ИИ", ef_ai_note:"Это отправляет ваш черновик нашему поставщику ИИ для переписывания. Больше ничего не отправляется.",
       ef_ai_confirm:"Это отправит ваш черновик за пределы устройства в Anthropic (наш поставщик ИИ) для переписывания. Продолжить?",
       ef_ai_needs_consent:"Пожалуйста, сначала отправьте одно сообщение в чате, чтобы включить функции ИИ.",
@@ -2007,6 +2057,11 @@ const I18N = {
       ef_empty_hint:"Qualquer campo que deixes em branco é simplesmente omitido do teu rascunho.", ef_generate:"Criar o meu rascunho",
       ef_tone_concise:"Conciso", ef_tone_detailed:"Detalhado",
       ef_copy:"Copiar", ef_copied:"Copiado ✓", ef_back_edit:"Voltar a editar",
+      journey_item_support_title:"Como me apoiar", journey_item_support_desc:"Cria um cartão curto e partilhável que diz exatamente às pessoas próximas de ti como ajudar — com as tuas próprias palavras.",
+      supc_eyebrow:"Para quem se importa contigo", supc_title:"Como me apoiar", supc_intro:"Escolhe o que é verdade para ti agora. O Waha transforma isso num cartão curto que podes partilhar com alguém próximo — nada é enviado a ninguém a menos que decidas enviá-lo.",
+      supc_item_ask_dont_assume:"Pergunta-me se quero falar — não presumas nada", supc_item_no_unsolicited_advice:"Não me dês conselhos a menos que eu peça", supc_item_just_sit:"Fica só comigo — não precisas de resolver nada",
+      supc_item_not_alone:"Lembra-me que não estou sozinho/a", supc_item_checkin_later:"Pergunta-me outra vez mais tarde, mesmo que eu diga que estou bem", supc_item_gentle_nudge:"Convida-me com calma a mexer-me ou sair — nunca insistas",
+      supc_pick_one_first:"Escolhe pelo menos um.", supc_generate:"Criar o meu cartão", supc_copy:"Copiar", supc_share:"Partilhar", supc_copied:"Copiado ✓", supc_card_title:"Como me apoiar:",
       ef_ai_rewrite:"Reescrever com IA", ef_ai_note:"Isto envia o teu rascunho ao nosso fornecedor de IA para o reescrever. Nada mais é enviado.",
       ef_ai_confirm:"Isto enviará o teu rascunho para fora do teu dispositivo à Anthropic (o nosso fornecedor de IA) para o reescrever. Continuar?",
       ef_ai_needs_consent:"Por favor envia primeiro uma mensagem de chat para ativar as funcionalidades de IA.",
@@ -2196,6 +2251,11 @@ const I18N = {
       ef_empty_hint:"Qualsiasi campo lasciato vuoto viene semplicemente omesso dalla tua bozza.", ef_generate:"Crea la mia bozza",
       ef_tone_concise:"Conciso", ef_tone_detailed:"Dettagliato",
       ef_copy:"Copia", ef_copied:"Copiato ✓", ef_back_edit:"Torna a modificare",
+      journey_item_support_title:"Come sostenermi", journey_item_support_desc:"Crea una breve scheda condivisibile che dice alle persone a te vicine esattamente come aiutarti — con le tue parole.",
+      supc_eyebrow:"Per chi tiene a te", supc_title:"Come sostenermi", supc_intro:"Scegli ciò che è vero per te in questo momento. Waha lo trasforma in una breve scheda che puoi condividere con una persona vicina — niente viene inviato a nessuno finché non decidi tu di farlo.",
+      supc_item_ask_dont_assume:"Chiedimi se voglio parlare — non dare nulla per scontato", supc_item_no_unsolicited_advice:"Non darmi consigli a meno che non te lo chieda", supc_item_just_sit:"Resta semplicemente con me — non devi risolvere nulla",
+      supc_item_not_alone:"Ricordami che non sono solo/a", supc_item_checkin_later:"Richiedimi come sto più tardi, anche se dico che sto bene", supc_item_gentle_nudge:"Invitami con dolcezza a muovermi o uscire — non insistere mai",
+      supc_pick_one_first:"Scegline almeno una.", supc_generate:"Crea la mia scheda", supc_copy:"Copia", supc_share:"Condividi", supc_copied:"Copiato ✓", supc_card_title:"Come sostenermi:",
       ef_ai_rewrite:"Riscrivi con l'IA", ef_ai_note:"Questo invia la tua bozza al nostro fornitore di IA per riscriverla. Nient'altro viene inviato.",
       ef_ai_confirm:"Questo invierà la tua bozza fuori dal tuo dispositivo ad Anthropic (il nostro fornitore di IA) per riscriverla. Continuare?",
       ef_ai_needs_consent:"Invia prima un messaggio in chat per abilitare le funzionalità IA.",
@@ -3530,6 +3590,89 @@ function rewriteFeelingWithAI(){
     btn.disabled = false;
     showEfStatus(err && err.rateLimited ? dict.rate_limit_msg : dict.checkin_error);
   });
+}
+
+// ---------------------------------------------------------------------
+// SUPPORT CARD: a short, evergreen "how to support me" card the person
+// builds from a fixed set of preference statements and shares with
+// someone close to them. Unlike "Explain My Feeling" (a one-off draft
+// about a specific situation), this is meant to be made once and kept —
+// nothing is sent anywhere until the person taps Share themselves, same
+// principle as the rest of the app (the agent prepares, the person acts).
+// ---------------------------------------------------------------------
+const SUPPORT_CARD_ITEMS = ['ask_dont_assume', 'no_unsolicited_advice', 'just_sit', 'not_alone', 'checkin_later', 'gentle_nudge'];
+function supportCardSelected(){
+  try{ const raw = safeGet('mc_support_card_items'); const arr = raw ? JSON.parse(raw) : []; return Array.isArray(arr) ? arr.filter(x => SUPPORT_CARD_ITEMS.includes(x)) : []; }catch(e){ return []; }
+}
+function saveSupportCardSelected(arr){ safeSet('mc_support_card_items', JSON.stringify(arr)); }
+function openSupportCard(){
+  document.getElementById('supportCardFormView').style.display = 'block';
+  document.getElementById('supportCardPreviewView').classList.add('u-hidden');
+  document.getElementById('supportCardStatus').textContent = '';
+  renderSupportCardItems();
+  document.getElementById('supportCardModal').classList.add('open');
+}
+function closeSupportCard(){
+  document.getElementById('supportCardModal').classList.remove('open');
+}
+function renderSupportCardItems(){
+  const dict = I18N[currentLang];
+  const selected = supportCardSelected();
+  const box = document.getElementById('supportCardItems');
+  box.innerHTML = '';
+  SUPPORT_CARD_ITEMS.forEach(id => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'agent-goal' + (selected.includes(id) ? ' selected' : '');
+    b.textContent = dict['supc_item_' + id];
+    b.setAttribute('aria-pressed', selected.includes(id) ? 'true' : 'false');
+    b.addEventListener('click', () => toggleSupportCardItem(id));
+    box.appendChild(b);
+  });
+  document.getElementById('supportCardMsg').textContent = '';
+}
+function toggleSupportCardItem(id){
+  const selected = supportCardSelected();
+  const i = selected.indexOf(id);
+  if(i === -1) selected.push(id); else selected.splice(i, 1);
+  saveSupportCardSelected(selected);
+  renderSupportCardItems();
+}
+function generateSupportCard(){
+  const dict = I18N[currentLang];
+  const selected = supportCardSelected();
+  if(!selected.length){ document.getElementById('supportCardMsg').textContent = dict.supc_pick_one_first; return; }
+  const lines = selected.map(id => '- ' + dict['supc_item_' + id]);
+  const text = dict.supc_card_title + '\n' + lines.join('\n');
+  document.getElementById('supportCardPreviewText').textContent = text;
+  document.getElementById('supportCardFormView').style.display = 'none';
+  document.getElementById('supportCardPreviewView').classList.remove('u-hidden');
+}
+function backToEditSupportCard(){
+  document.getElementById('supportCardFormView').style.display = 'block';
+  document.getElementById('supportCardPreviewView').classList.add('u-hidden');
+}
+function showSupportCardStatus(msg){
+  const el = document.getElementById('supportCardStatus');
+  el.textContent = msg;
+  setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 4000);
+}
+function copySupportCard(){
+  const dict = I18N[currentLang];
+  const text = document.getElementById('supportCardPreviewText').textContent;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=> showSupportCardStatus(dict.supc_copied)).catch(()=> showSupportCardStatus(dict.passport_error));
+  } else {
+    showSupportCardStatus(dict.passport_error);
+  }
+}
+function shareSupportCard(){
+  const text = document.getElementById('supportCardPreviewText').textContent;
+  if(navigator.share){
+    navigator.share({ text }).catch(()=>{});
+  } else {
+    copySupportCard();
+  }
 }
 
 function explainSuggestion(key){
@@ -8211,6 +8354,7 @@ const ACTIONS = {
   answerReliefFeedback,
   askCoach,
   backToEditFeeling,
+  backToEditSupportCard,
   chooseMode,
   clearChatMemory,
   closeCalmPlan,
@@ -8232,12 +8376,14 @@ const ACTIONS = {
   closeReviews,
   closeSleepMode,
   closeSounds,
+  closeSupportCard,
   closeUpgrade,
   closeWhyExplain,
   confirmAgeGate,
   confirmDeleteCalmPlan,
   confirmDeleteEverything,
   copyFeelingDraft,
+  copySupportCard,
   deleteChatHistoryOnly,
   deleteExerciseHistoryOnly,
   deleteMoodDataOnly,
@@ -8250,6 +8396,7 @@ const ACTIONS = {
   exportCalmPlan,
   exportFeelingDraft,
   generateFeelingDraft,
+  generateSupportCard,
   handleInstallClick,
   importBackup,
   markExerciseDone,
@@ -8269,6 +8416,7 @@ const ACTIONS = {
   openHealth,
   openReviews,
   openSounds,
+  openSupportCard,
   openUpgrade,
   printCalmPlan,
   printFeelingDraft,
@@ -8296,6 +8444,7 @@ const ACTIONS = {
   setSoundVolume,
   setUserGender,
   shareApp,
+  shareSupportCard,
   skipOnboarding,
   startBriefSuggestion,
   startDailyPractice,
@@ -8311,6 +8460,7 @@ const ACTIONS = {
   toggleReliefPause,
   toggleSound,
   toggleStreaksDisabled,
+  toggleSupportCardItem,
   toggleTempConversationMode,
   toggleTextLarge,
   toggleVoice,

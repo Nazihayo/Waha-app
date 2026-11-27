@@ -556,6 +556,7 @@
   .agent-goal{font-family:inherit;font-size:14px;font-weight:600;text-align:start;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper-dim);color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;}
   .agent-goal:hover{border-color:rgba(201,166,107,0.6);}
   .agent-goal.selected{border-color:var(--gold);background:rgba(201,166,107,0.16);}
+  .support-card-list{grid-template-columns:1fr;margin-bottom:14px;}
   .agent-shift-row,.agent-consent{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--ink);cursor:pointer;margin-bottom:12px;line-height:1.5;}
   .agent-consent{font-size:12.5px;color:rgba(var(--ink-rgb),0.72);margin:6px 0 16px;}
   .agent-shift-row input,.agent-consent input{margin-top:4px;flex:none;width:16px;height:16px;accent-color:var(--gold);}
